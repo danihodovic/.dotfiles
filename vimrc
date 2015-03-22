@@ -111,6 +111,7 @@ filetype plugin indent on
 let g:EasyMotion_smartcase = 1
 " Find one char one line
 map f <Plug>(easymotion-sl)
+map t <Plug>(easymotion-bd-t)
 " Find two chars multiple lines
 map F <Plug>(easymotion-s2)
 " j,k: Line motions
