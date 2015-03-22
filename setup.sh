@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+DIR="`dirname $0`"
+
+# Todo rewrite with array
+if [ ! -L ~/.vimrc ]; then
+  ln -s $DIR/vimrc ~/.vimrc
+fi
+
+if [ ! -L ~/.inputrc ]; then 
+  ln -s $DIR/inputrc ~/.inputrc
+fi
+
+if [ ! -L ~/.sqliterc ]; then 
+  ln -s $DIR/specific-rcfiles/sqliterc ~/.sqliterc
+fi
+
+if [ ! -L ~/.jshintrc ]; then 
+  ln -s $DIR/specific-rcfiles/jshintrc ~/.jshintrc
+fi
+
+sh $DIR/gitconfig/setup-git.sh

@@ -1,0 +1,48 @@
+{
+//Restrictive
+"bitwise": true,
+"curly": true,
+"eqeqeq": true,
+"immed": true,
+"indent": 2,
+"latedef": "func",
+"newcap": true,
+"noarg": true,
+"noempty": false,
+"nonbsp": false,
+"nonew": true,
+"plusplus": false,
+"quotmark": false,
+"undef": true,
+"unused": "vars",
+"strict": false,
+"maxparams": 6,
+"maxdepth": false,
+"maxstatements": false,
+"maxcomplexity": 20,
+"maxlen": 100,
+
+
+//Relaxing, didn't include all most are dumb
+"asi": true,
+"debug": false,
+"esnext": true,
+
+
+//Environment
+"browser": true,
+"couch": false,
+"devel": true,
+"dojo": false,
+"jquery": true,
+"mootools": false,
+"node": true,
+"nonstandard": false,
+"phantom": false,
+"prototypejs": false,
+"rhino": false,
+"worker": true,
+"wsh": false,
+"yui": false
+
+}

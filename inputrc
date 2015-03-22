@@ -1,0 +1,20 @@
+$include /etc/inputrc
+set completion-ignore-case on
+set completion-map-case on
+set blink-matching-paren on
+set editing-mode vi
+
+$if mode=vi
+
+set keymap vi-command
+##################################
+Control-l: clear-screen
+"q": vi-backward-word
+##################################
+set keymap vi-insert
+##################################
+Control-l: clear-screen 
+
+
+$endif
+
