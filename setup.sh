@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 DIR="`dirname $0`"
-
-# Todo rewrite with array
+DIR=~/.bash
 if [ ! -L ~/.vimrc ]; then
   ln -s $DIR/vimrc ~/.vimrc
 fi
