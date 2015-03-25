@@ -186,7 +186,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['pylint']
 
 "Pylint syntastic
-let g:syntastic_python_pylint_args='-E -d C0301,C0111,C0103,R0903,W0614,W0611'
+let g:syntastic_python_pylint_args='-E -d C0301,C0111,C0103,R0903,W0614,W0611,E1601'
 "Typescript syntastic
 let g:syntastic_typescript_tsc_args = '--module commonjs --target ES5'
 
