@@ -1,4 +1,4 @@
-DIR="~/.dotfiles"
+DIR="~/.bash"
 ##################################
 
 #source $DIR/git/git-completion.bash
