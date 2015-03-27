@@ -37,11 +37,6 @@ call vundle#end()
 " Silences C-Q, C-S and allows vim to catch them
 silent !stty -ixon > /dev/null 2>/dev/null
 set number
-" Indentation
-set smartindent
-set tabstop=2
-set shiftwidth=2
-set expandtab
 " Highlight search
 set hlsearch
 " Show search while typing
