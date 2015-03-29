@@ -95,7 +95,14 @@ nnoremap <CR> :noh<CR><CR>
 "Make sure to place color schemes after the vundle runtime has been declared
 syntax enable
 colorscheme Monokai
+set guifont=Monaco
 filetype plugin indent on
+"-----------------------------------------
+"Indentation settings
+"-----------------------------------------
+autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
+autocmd FileType typescript setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType html setlocal expandtab shiftwidth=4 tabstop=4
 "-----------------------------------------
 "Plugin specific settings
 "-----------------------------------------
@@ -157,10 +164,9 @@ let g:ycm_semantic_triggers =  {
 "-----------------------------------------
 autocmd FileType typescript map <F2> :TSSdefpreview<CR>
 autocmd FileType typescript map <F3> :TSSdef<CR>
-autocmd FileType typescript setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType python map <F2> <CR>
 autocmd FileType python map <F3> :YcmCompleter GoToDefinition<CR>
-autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
+"Eclim scalasearch
 autocmd FileType scala map <F3> :ScalaSearch<cr>
 "Ycm Erlang completion shouldn't close on typing
 autocmd FileType erlang let g:ycm_cache_omnifunc = 0
@@ -212,7 +218,6 @@ endfun
 "NERDTree
 "-----------------------------------------
 let NERDTreeIgnore = ['\.pyc$', '\.db$']
-
 noremap <F5> :NERDTreeToggle<CR>
 "Strip trailing whitespace
 autocmd FileType c,cpp,java,php,ruby,python,typescript,erlang autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
