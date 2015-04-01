@@ -63,8 +63,11 @@ nnoremap <C-w> :bp<bar>sp<bar>bn<bar>bd<CR>
 let mapleader = ","
 " System clipboard c/p
 vnoremap <leader>y "+y
+vnoremap <leader>Y "+Y
 vnoremap <leader>p "+p
+vnoremap <leader>P "+P
 nnoremap <leader>p "+p
+nnoremap <leader>P "+P
 " Movement
 map q b
 map g gg
