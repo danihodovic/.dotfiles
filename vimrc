@@ -75,9 +75,9 @@ map g gg
 imap <C-BS> <C-W>
 " Firefox like tab switching
 if has("gui_running")
-  nnoremap <C-tab> :call Next_buffer()<cr>
-  nnoremap <C-S-tab> :call Previous_buffer()<cr>
-  nnoremap <C-t> :enew<CR>
+  noremap <C-tab> :call Next_buffer()<cr>
+  noremap <C-S-tab> :call Previous_buffer()<cr>
+  noremap <C-t> :enew<CR>
 else
   nnoremap <leader>w :call Next_buffer()<cr>
   nnoremap <leader>q :call Previous_buffer()<cr>
