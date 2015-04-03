@@ -104,7 +104,7 @@ filetype plugin indent on
 "Indentation settings
 "-----------------------------------------
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
-autocmd FileType typescript,javascript,css,scss setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType typescript,javascript,css,scss,vim setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType html setlocal expandtab shiftwidth=4 tabstop=4
 "-----------------------------------------
 "Plugin specific settings
@@ -240,3 +240,10 @@ fu! Previous_buffer()
     bprevious
   endif
 endfunction
+
+"-----------------------------------------
+"Nvim
+"-----------------------------------------
+if has("nvim")
+  set backspace=indent,eol,start
+endif
