@@ -1,4 +1,4 @@
-git config --global core.editor vim
+git config --global core.editor nvim
 
 git config --global pull.rebase true
 # With this, "git pull --rebase" is the default form of pull FOR NEWLY CREATED

@@ -73,8 +73,16 @@ map q b
 map g gg
 " map control-backspace to delete the previous word
 imap <C-BS> <C-W>
-" Firefox like tab switching
+"Window movement
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+" Clear highlight with enter
+nnoremap <CR> :noh<CR><CR>
+
 if has("gui_running")
+" Firefox like tab switching
   noremap <C-tab> :call Next_buffer()<cr>
   noremap <C-S-tab> :call Previous_buffer()<cr>
   noremap <C-t> :enew<CR>
@@ -83,13 +91,12 @@ else
   nnoremap <leader>q :call Previous_buffer()<cr>
   nnoremap <leader>t :enew()<cr>
 endif
-"Window movement
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-" Clear highlight with enter
-nnoremap <CR> :noh<CR><CR>
+"-----------------------------------------
+"Nvim
+"-----------------------------------------
+if has("nvim")
+  set backspace=indent,eol,start
+endif
 
 
 "-----------------------------------------
@@ -127,17 +134,24 @@ map <Leader>k <Plug>(easymotion-k)
 "-----------------------------------------
 "CtrlP/CtrlPFunky
 "-----------------------------------------
-"CtrlP Sets the current working path to a .git path
+" Cache dir
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" Use ag (faster ack) for searching files
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+" CtrlP Sets the current working path to a .git path
 let g:ctrlp_working_path_mode = 'ra'
-"CtrlP remap
-let g:ctrlp_map = '<C-p>'
-nnoremap <C-A-p> :execute 'CtrlPFunky'<CR>
+" Methods in file
+nnoremap <A-p> :execute 'CtrlPFunky'<CR>
+" Previous files
 nnoremap <leader>b :CtrlPMRU<cr>
+" Ignore
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn)$',
     \ 'file': '\v\.(exe|so|dll|pyc|patch)$',
-      \ 'link': 'some_bad_symbolic_links',
-      \ }
+    \ 'link': 'some_bad_symbolic_links',
+    \ }
 "-----------------------------------------
 "YouCompleteMe
 "-----------------------------------------
@@ -241,9 +255,3 @@ fu! Previous_buffer()
   endif
 endfunction
 
-"-----------------------------------------
-"Nvim
-"-----------------------------------------
-if has("nvim")
-  set backspace=indent,eol,start
-endif
