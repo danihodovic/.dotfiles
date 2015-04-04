@@ -24,6 +24,10 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'bling/vim-airline'
 Plugin 'Lokaltog/vim-easymotion'
+
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
 "-----------------------------------------
 "Temporary plugins that can be disabled
 "-----------------------------------------
@@ -50,7 +54,7 @@ set hidden
 " Paste mode
 set pastetoggle=<F9>
 " Smart search. If uppercase chars search case sensitive.
-set smartcase
+set ignorecase smartcase
 " Resets search
 autocmd InsertEnter * set cursorline
 autocmd InsertLeave * set nocursorline
@@ -87,9 +91,9 @@ if has("gui_running")
   noremap <C-S-tab> :call Previous_buffer()<cr>
   noremap <C-t> :enew<CR>
 else
-  nnoremap <leader>w :call Next_buffer()<cr>
-  nnoremap <leader>q :call Previous_buffer()<cr>
-  nnoremap <leader>t :enew()<cr>
+  nnoremap <M-w> :call Next_buffer()<cr>
+  nnoremap <M-q> :call Previous_buffer()<cr>
+  nnoremap <M-t> :enew()<cr>
 endif
 "-----------------------------------------
 "Nvim
@@ -188,6 +192,12 @@ autocmd FileType scala map <F3> :ScalaSearch<cr>
 "Ycm Erlang completion shouldn't close on typing
 autocmd FileType erlang let g:ycm_cache_omnifunc = 0
 autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript let g:ycm_cache_omnifunc = 1
+"-----------------------------------------
+" UltiSnips
+"-----------------------------------------
+let g:UltiSnipsExpandTrigger="<leader><tab>"
+let g:UltiSnipsJumpForwardTrigger="<leader>w"
+let g:UltiSnipsJumpBackwardTrigger="<leader>q"
 "GitGutter
 hi SignColumn guibg=black ctermbg=black
 
