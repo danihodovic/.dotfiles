@@ -96,7 +96,7 @@ else
   nnoremap <M-t> :enew()<cr>
 endif
 "-----------------------------------------
-"Nvim
+" Nvim
 "-----------------------------------------
 if has("nvim")
   set backspace=indent,eol,start
@@ -104,7 +104,7 @@ endif
 
 
 "-----------------------------------------
-"Color scheme settings
+" Color scheme settings
 "-----------------------------------------
 "Make sure to place color schemes after the vundle runtime has been declared
 syntax enable
@@ -112,15 +112,15 @@ colorscheme Monokai
 set guifont=Monaco
 filetype plugin indent on
 "-----------------------------------------
-"Indentation settings
+" Indentation settings
 "-----------------------------------------
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
 autocmd FileType typescript,javascript,css,scss,vim setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType html setlocal expandtab shiftwidth=4 tabstop=4
 "-----------------------------------------
-"Plugin specific settings
+" Plugin specific settings
 "-----------------------------------------
-"EasyMotion
+" EasyMotion
 "-----------------------------------------
 " Disable default mappings
 "let g:EasyMotion_do_mapping = 0 
@@ -136,7 +136,7 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
 "-----------------------------------------
-"CtrlP/CtrlPFunky
+" CtrlP/CtrlPFunky
 "-----------------------------------------
 " Cache dir
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
@@ -157,11 +157,11 @@ let g:ctrlp_custom_ignore = {
     \ 'link': 'some_bad_symbolic_links',
     \ }
 "-----------------------------------------
-"YouCompleteMe
+" YouCompleteMe
 "-----------------------------------------
-"YCM shows completions opts in the preview window
+" YCM shows completions opts in the preview window
 let g:ycm_add_preview_to_completeopt = 1
-"YCM closes preview window on esc
+" YCM closes preview window on esc
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 let g:EclimCompletionMethod = 'omnifunc'
@@ -181,15 +181,15 @@ let g:ycm_semantic_triggers =  {
       \ }
 
 "-----------------------------------------
-"Collection of GoToDef for plugins
+" Collection of GoToDef for plugins
 "-----------------------------------------
 autocmd FileType typescript map <buffer><F2> :TSSdefpreview<CR>
 autocmd FileType typescript map <buffer><F3> :TSSdef<CR>
 autocmd FileType python map <buffer><F2> <CR>
 autocmd FileType python map <buffer><F3> :YcmCompleter GoToDefinition<CR>
-"Eclim scalasearch
+" Eclim scalasearch
 autocmd FileType scala map <F3> :ScalaSearch<cr>
-"Ycm Erlang completion shouldn't close on typing
+" Ycm Erlang completion shouldn't close on typing
 autocmd FileType erlang let g:ycm_cache_omnifunc = 0
 autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript let g:ycm_cache_omnifunc = 1
 "-----------------------------------------
@@ -198,9 +198,10 @@ autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript let g:ycm_cach
 let g:UltiSnipsExpandTrigger="<leader><tab>"
 let g:UltiSnipsJumpForwardTrigger="<leader>w"
 let g:UltiSnipsJumpBackwardTrigger="<leader>q"
+"-----------------------------------------
 "GitGutter
+"-----------------------------------------
 hi SignColumn guibg=black ctermbg=black
-
 "-----------------------------------------
 "Syntastic
 "-----------------------------------------
@@ -214,13 +215,13 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['pylint']
 
-"Pylint syntastic
+" Pylint syntastic
 let g:syntastic_python_pylint_args='-E -d C0301,C0111,C0103,R0903,W0614,W0611,E1601'
 "Typescript syntastic
 let g:syntastic_typescript_tsc_args = '--module commonjs --target ES5'
 
 "-----------------------------------------
-"VimAirline
+" VimAirline
 "-----------------------------------------
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
@@ -230,7 +231,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#quickfix#location_text = 'Location'
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 "-----------------------------------------
-"NERDCommenter
+" NERDCommenter
 "-----------------------------------------
 nnoremap <leader>c :call NERDComment(0, "toggle")<CR>
 vnoremap <leader>c :call NERDComment(0, "toggle")<CR>
@@ -242,11 +243,11 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 
 "-----------------------------------------
-"NERDTree
+" NERDTree
 "-----------------------------------------
 let NERDTreeIgnore = ['\.pyc$', '\.db$']
 noremap <F5> :NERDTreeToggle<CR>
-"Strip trailing whitespace
+" Strip trailing whitespace
 autocmd FileType c,cpp,java,php,ruby,python,typescript,erlang autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 " Only cycle between files, not location lists. Does not work recursively, but
