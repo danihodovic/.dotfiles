@@ -101,8 +101,6 @@ endif
 if has("nvim")
   set backspace=indent,eol,start
 endif
-
-
 "-----------------------------------------
 " Color scheme settings
 "-----------------------------------------
@@ -123,17 +121,14 @@ autocmd FileType html setlocal expandtab shiftwidth=4 tabstop=4
 " EasyMotion
 "-----------------------------------------
 " Disable default mappings
-"let g:EasyMotion_do_mapping = 0 
+let g:EasyMotion_do_mapping = 0 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
-" Find one char one line
-map f <Plug>(easymotion-sl)
-map t <Plug>(easymotion-bd-tl)
-" Find two chars multiple lines
-map F <Plug>(easymotion-s2)
-" j,k: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+map f <Plug>(easymotion-fl)
+map F <Plug>(easymotion-Fl)
+map t <Plug>(easymotion-tl)
+map T <Plug>(easymotion-Tl)
+map <leader>f <Plug>(easymotion-f2)
 
 "-----------------------------------------
 " CtrlP/CtrlPFunky
