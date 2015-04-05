@@ -16,5 +16,3 @@ fi
 if [ ! -L ~/.jshintrc ]; then 
   ln -s $DIR/specific-rcfiles/jshintrc ~/.jshintrc
 fi
-
-sh $DIR/gitconfig/setup-git.sh
