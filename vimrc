@@ -24,10 +24,9 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'bling/vim-airline'
 Plugin 'Lokaltog/vim-easymotion'
-
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-
+Plugin 'freeo/vim-kalisi'
 "-----------------------------------------
 "Temporary plugins that can be disabled
 "-----------------------------------------
@@ -106,7 +105,7 @@ endif
 "-----------------------------------------
 "Make sure to place color schemes after the vundle runtime has been declared
 syntax enable
-colorscheme Monokai
+colorscheme kalisi
 set guifont=Monaco
 filetype plugin indent on
 "-----------------------------------------
