@@ -111,6 +111,7 @@ filetype plugin indent on
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
 autocmd FileType typescript,javascript,css,scss,vim setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType html setlocal expandtab shiftwidth=4 tabstop=4
+autocmd FileType html,snippets setlocal expandtab shiftwidth=4 tabstop=4
 "-----------------------------------------
 " Plugin specific settings
 "-----------------------------------------
@@ -189,13 +190,15 @@ autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript let g:ycm_cach
 fu! Return_Or_Snippet()
   if pumvisible()
     call UltiSnips#ExpandSnippet()
-    return ""
-  else
-    return "\<cr>"
+    if g:ulti_expand_res
+      return ""
+    endif
   endif
+  return "\<cr>"
 endfunction
 
 inoremap <return> <C-R>=Return_Or_Snippet()<cr>
+
 let g:UltiSnipsJumpForwardTrigger  = "<leader>w"
 let g:UltiSnipsJumpBackwardTrigger = "<leader>q"
 "-----------------------------------------
