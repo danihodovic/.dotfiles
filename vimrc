@@ -55,8 +55,6 @@ set pastetoggle=<F9>
 set ignorecase smartcase
 " Resets search
 autocmd InsertEnter * set cursorline
-autocmd InsertLeave * set nocursorline
-
 " Close buffer without closing window
 nnoremap <C-w> :bp<bar>sp<bar>bn<bar>bd<CR>
 "-----------------------------------------
@@ -188,43 +186,18 @@ autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript let g:ycm_cach
 "-----------------------------------------
 " UltiSnips
 "-----------------------------------------
-" Hack from Github to allow YCM and UltiSnips to play nice
-let g:UltiSnipsExpandTrigger       ="<c-tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-" Enable tabbing through list of results
-function! g:UltiSnips_Complete()
+fu! Return_Or_Snippet()
+  if pumvisible()
     call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips#JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
-            endif
-        endif
-    endif
     return ""
+  else
+    return "\<cr>"
+  endif
 endfunction
 
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-
-" Expand snippet or return
-let g:ulti_expand_res = 0
-function! Ulti_ExpandOrEnter()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res
-        return ''
-    else
-        return "\<return>"
-endfunction
-
-" Set <space> as primary trigger
-inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
-" /Endhack
-
+inoremap <return> <C-R>=Return_Or_Snippet()<cr>
+let g:UltiSnipsJumpForwardTrigger  = "<leader>w"
+let g:UltiSnipsJumpBackwardTrigger = "<leader>q"
 "-----------------------------------------
 "GitGutter
 "-----------------------------------------
