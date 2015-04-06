@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=dual-monitor-lxde
+Exec=/home/dani/.bash/scripts/dual-monitor-lxde.sh
+Type=Application
+Terminal=false

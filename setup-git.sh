@@ -1,3 +1,5 @@
+git config --global user.name "Dani Hodovic"
+
 git config --global core.editor nvim
 
 git config --global pull.rebase true
