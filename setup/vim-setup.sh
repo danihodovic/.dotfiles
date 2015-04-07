@@ -11,6 +11,11 @@
 # Ripped from:
 # https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
 
+# Note, named this anything other than vim and the .deb package will be
+# installed as that. So when removing vim you will have to
+# apt-get remove <tempdir-name>
+TEMP=vim
+
 sudo apt-get remove vim vim-runtime gvim vim-tiny vim-common vim-gui-common -y
 
 # Dependencies
@@ -20,8 +25,9 @@ sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
 
 sudo apt-get install checkinstall -y
 
-hg clone https://vim.googlecode.com/hg/ temp
-cd temp
+
+hg clone https://vim.googlecode.com/hg/ $TEMP
+cd $TEMP
 ./configure --with-features=huge \
             --enable-multibyte \
             --enable-rubyinterp \
@@ -34,7 +40,8 @@ cd temp
 make VIMRUNTIMEDIR=/usr/share/vim/vim74
 sudo checkinstall -y
 cd ..
-sudo rm -rf temp
+
+sudo rm -rf $TEMP
 
 git clone https://github.com/gmarik/Vundle ~/.vim/bundle/Vundle.vim
 vim +BundleInstall +qa
