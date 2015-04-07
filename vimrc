@@ -49,7 +49,9 @@ set wildignorecase
 set autochdir
 " Can switch buffers without saving
 set hidden
-" Paste mode
+" Seems like backspace doesn't work for nvim and source compiled
+" new vim versions
+set backspace=indent,eol,start
 set pastetoggle=<F9>
 " Smart search. If uppercase chars search case sensitive.
 set ignorecase smartcase
@@ -95,7 +97,7 @@ endif
 " Nvim
 "-----------------------------------------
 if has("nvim")
-  set backspace=indent,eol,start
+  "
 endif
 "-----------------------------------------
 " Color scheme settings
