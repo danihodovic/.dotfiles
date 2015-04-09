@@ -14,5 +14,6 @@ apt-get install neovim -y
 
 apt-get install python -y
 wget -O - https://bootstrap.pypa.io/get-pip.py | python
+pip install neovim
 
 # apt-get update && apt-get dist-upgrade
