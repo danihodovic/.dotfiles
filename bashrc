@@ -13,7 +13,8 @@ alias cd.="cd .."
 alias cd..="cd ../.."
 alias cd...="cd ../../.."
 alias ls='ls --color=auto --classify'
-alias vi=vim
+alias vi=nvim
+alias gvi=pynvim
 if [ $DESKTOP_SESSION == "xubuntu" ]; then
     alias sleepnow="xfce4-session-logout -s"
 fi

@@ -29,7 +29,7 @@ Plugin 'honza/vim-snippets'
 "-----------------------------------------
 "Temporary plugins that can be disabled
 "-----------------------------------------
-Plugin 'jimenezrick/vimerl'
+Plugin 'vim-erlang/vim-erlang-omnicomplete'
 "-----------------------------------------
 call vundle#end()
 "End required by vundle
