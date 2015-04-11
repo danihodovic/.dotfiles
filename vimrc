@@ -181,7 +181,7 @@ autocmd FileType typescript map <buffer><F3> :TSSdef<CR>
 autocmd FileType python map <buffer><F2> <CR>
 autocmd FileType python map <buffer><F3> :YcmCompleter GoToDefinition<CR>
 " Eclim scalasearch
-autocmd FileType scala map <F3> :ScalaSearch<cr>
+autocmd FileType scala map <buffer> <F3> :ScalaSearch<cr>
 " Ycm Erlang completion shouldn't close on typing
 autocmd FileType erlang let g:ycm_cache_omnifunc = 0
 autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript let g:ycm_cache_omnifunc = 1
