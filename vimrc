@@ -116,7 +116,8 @@ filetype plugin indent on
 "-----------------------------------------
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
 autocmd FileType typescript,javascript,css,scss,vim setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType html,erlang,sh,php,snippets setlocal expandtab shiftwidth=4 tabstop=4
+autocmd FileType html,erlang,sh,make,php,snippets setlocal expandtab shiftwidth=4 tabstop=4
+autocmd FileType make setlocal noexpandtab shiftwidth=4 tabstop=4
 "-----------------------------------------
 " Plugin specific settings
 "-----------------------------------------

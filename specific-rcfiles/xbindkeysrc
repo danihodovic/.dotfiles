@@ -69,5 +69,5 @@
 # End of xbindkeys configuration #
 ##################################
 
-"dmenu_run -b -i -l 5"
+"dmenu_run -b -i -l 15"
   Alt + section
