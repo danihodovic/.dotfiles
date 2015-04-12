@@ -1,8 +1,4 @@
 DIR="~/.bash"
-##################################
-
-#source $DIR/git/git-completion.bash
-#source $DIR/git/git-prompt.sh
 
 ##################################
 
@@ -19,21 +15,18 @@ if [ $DESKTOP_SESSION == "xubuntu" ]; then
     alias sleepnow="xfce4-session-logout -s"
 fi
 
-##################################
 
-export EDITOR=gvim
+##################################
+export EDITOR=gvi
 
 export PYTHONSTARTUP=$DIR/specific-rcfiles/pythonrc
 export SCALA_HOME=/opt/scala-2.11.5
 export PATH=$PATH:$SCALA_HOME/bin
-export NODE_PATH=/opt/node/bin
-export PATH=$NODE_PATH:$PATH
 
 export PATH=$PATH:/opt/webstorm/bin
 export PATH=$PATH:/opt/idea/bin
 export PATH=$PATH:/opt/pycharm/bin
 export PATH=$PATH:/opt/eclipse
-
 ##################################
 
 function cd() {
@@ -46,3 +39,7 @@ function cd() {
 
 # Git show branch colored
 PS1="\[$GREEN\]\t\[$RED\]-\[$BLUE\]\u\[$YELLOW\]\[$YELLOW\]\w\[\033[m\]\[$MAGENTA\]\$(__git_ps1)\[$WHITE\]\$ "
+
+# nvi bash completion
+[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+

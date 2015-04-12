@@ -14,8 +14,6 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'dani-h/typescript-vim'
-Plugin 'clausreinke/typescript-tools'
 Plugin 'scrooloose/syntastic'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tacahiroy/ctrlp-funky'
@@ -27,9 +25,11 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 "-----------------------------------------
-"Temporary plugins that can be disabled
+" Lang specific
 "-----------------------------------------
 Plugin 'vim-erlang/vim-erlang-omnicomplete'
+Plugin 'dani-h/typescript-vim'
+Plugin 'clausreinke/typescript-tools.vim'
 "-----------------------------------------
 call vundle#end()
 "End required by vundle
@@ -96,8 +96,12 @@ endif
 "-----------------------------------------
 " Nvim
 "-----------------------------------------
+" has("gui_running") doesn't work using nvim, but we'll have cli mappings
+" <M-keys> anyway
 if has("nvim")
-  "
+  noremap <C-tab> :call Next_buffer()<cr>
+  noremap <C-S-tab> :call Previous_buffer()<cr>
+  noremap <C-t> :enew<CR>
 endif
 "-----------------------------------------
 " Color scheme settings

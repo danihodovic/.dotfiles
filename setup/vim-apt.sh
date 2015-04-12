@@ -9,3 +9,6 @@ sudo apt-get install neovim -y
 
 sudo wget -O - https://bootstrap.pypa.io/get-pip.py | python
 sudo pip install neovim
+
+# c&p for neovim
+sudo apt-get install xclip
