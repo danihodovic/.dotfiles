@@ -72,7 +72,6 @@ nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 " Movement
 map q b
-map g gg
 " map control-backspace to delete the previous word
 imap <C-BS> <C-W>
 "Window movement
