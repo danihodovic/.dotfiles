@@ -13,7 +13,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'scrooloose/syntastic'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tacahiroy/ctrlp-funky'
@@ -30,6 +29,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'vim-erlang/vim-erlang-omnicomplete'
 Plugin 'dani-h/typescript-vim'
 Plugin 'clausreinke/typescript-tools.vim'
+Plugin 'mustache/vim-mustache-handlebars'
 "-----------------------------------------
 call vundle#end()
 "End required by vundle
