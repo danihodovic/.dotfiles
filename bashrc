@@ -20,8 +20,6 @@ fi
 export EDITOR=gvi
 
 export PYTHONSTARTUP=$DIR/specific-rcfiles/pythonrc
-export SCALA_HOME=/opt/scala-2.11.5
-export PATH=$PATH:$SCALA_HOME/bin
 
 export PATH=$PATH:/opt/webstorm/bin
 export PATH=$PATH:/opt/idea/bin
