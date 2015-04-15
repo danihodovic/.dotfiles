@@ -68,6 +68,5 @@
 ##################################
 # End of xbindkeys configuration #
 ##################################
-
-"dmenu_run -b -i -l 15"
+'dmenu_run -fn "Monaco-16:bold" -l 5 -i -b -nb "#000" -nf "#FFF" -sb "#FF3399"'
   Alt + section
