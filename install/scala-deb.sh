@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
+read -p "Install Scala? [y/n]" PARAM_SCALA
+read -p "Install SBT? [y/n]" PARAM_SBT
 #-------------------
 # Scala
 #-------------------
 
-read -p "Install Scala? [y/n]" PARAM_SCALA
 
 case $PARAM_SCALA in
     [yY])
@@ -28,7 +29,6 @@ esac
 # SBT
 #-------------------
 
-read -p "Install SBT? [y/n]" PARAM_SBT
 
 case $PARAM_SBT in
     [yY])
