@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 DIR=~/.bash
+RCFILES=$DIR/rcfiles
+
 if [ ! -L ~/.vimrc ]; then
   ln -s $DIR/vimrc ~/.vimrc
 fi
@@ -13,13 +15,13 @@ if [ ! -L ~/.inputrc ]; then
 fi
 
 if [ ! -L ~/.xbindkeysrc ]; then
-  ln -s $DIR/specific-rcfiles/xbindkeysrc ~/.xbindkeysrc
+  ln -s $RCFILES/xbindkeysrc ~/.xbindkeysrc
 fi
 
 if [ ! -L ~/.sqliterc ]; then 
-  ln -s $DIR/specific-rcfiles/sqliterc ~/.sqliterc
+  ln -s $RCFILES/sqliterc ~/.sqliterc
 fi
 
 if [ ! -L ~/.jshintrc ]; then 
-  ln -s $DIR/specific-rcfiles/jshintrc ~/.jshintrc
+  ln -s $RCFILES/jshintrc ~/.jshintrc
 fi
