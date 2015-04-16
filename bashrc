@@ -1,4 +1,4 @@
-DIR="~/.bash"
+DIR=~/.bash
 
 ##################################
 
@@ -18,8 +18,7 @@ fi
 
 ##################################
 export EDITOR=gvi
-
-export PYTHONSTARTUP=$DIR/specific-rcfiles/pythonrc
+export PYTHONSTARTUP=$DIR/rcfiles/pythonrc
 
 export PATH=$PATH:/opt/webstorm/bin
 export PATH=$PATH:/opt/idea/bin
