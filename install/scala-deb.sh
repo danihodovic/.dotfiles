@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-read -p "Install Scala? [y/n]" PARAM_SCALA
-read -p "Install SBT? [y/n]" PARAM_SBT
+read -p "Install Scala? [y/n]"  PARAM_SCALA
+read -p "Install SBT? [y/n]"    PARAM_SBT
 #-------------------
 # Scala
 #-------------------
