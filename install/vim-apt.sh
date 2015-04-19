@@ -10,7 +10,6 @@ case $REMOVE_VIM in
         echo "Removing vim libs"
         sudo apt-get remove vim vim-runtime gvim vim-tiny vim-common vim-gui-common -y
         ;;
-    *)  ;;
 esac
 
 case $INSTALL_VIM in
@@ -20,7 +19,6 @@ case $INSTALL_VIM in
         sudo apt-get update
         sudo apt-get install vim vim-gtk -y
         ;;
-    *)  ;;
 esac
 
 case $INSTALL_NEOVIM in
@@ -32,7 +30,6 @@ case $INSTALL_NEOVIM in
         wget -O - https://bootstrap.pypa.io/get-pip.py | sudo python
         sudo pip install neovim
         ;;
-    *)  ;;
 esac
 
 case $INSTALL_VUNDLE in
@@ -41,7 +38,6 @@ case $INSTALL_VUNDLE in
         git clone https://github.com/gmarik/Vundle ~/.vim/bundle/Vundle.vim
         vim +BundleInstall +qa
         ;;
-    *)  ;;
 esac
 
 case $INSTALL_YCM_DEPS in
@@ -56,5 +52,4 @@ case $INSTALL_YCM_DEPS in
             echo "YCM dir already exists, skipping install"
         fi
         ;;
-    *)  ;;
 esac
