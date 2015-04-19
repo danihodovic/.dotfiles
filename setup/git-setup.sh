@@ -1,3 +1,5 @@
+echo "Setting global git settings"
+
 git config --global user.name "Dani Hodovic"
 
 git config --global core.editor nvim

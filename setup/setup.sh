@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 DIR=~/.bash
 RCFILES=$DIR/rcfiles
+bash "`dirname $0`/git-setup.sh"
+
+echo "Setting up symlinks"
 
 if [ ! -L ~/.vimrc ]; then
   ln -s $DIR/vimrc ~/.vimrc

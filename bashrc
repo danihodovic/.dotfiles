@@ -1,7 +1,8 @@
-DIR=~/.bash
+DIR=`dirname $0`
 
 ##################################
 
+alias sh="bash"
 alias gno="gnome-open"
 alias poweroff="sudo poweroff -f"
 alias reboot="sudo reboot"

@@ -2,6 +2,7 @@
 read -p "Remove existing vim?"              REMOVE_VIM
 read -p "Install daily vim ppa?"            INSTALL_VIM
 read -p "Install NeoVim?"                   INSTALL_NEOVIM
+read -p "Install Vundle + Plugins?"         INSTALL_VUNDLE
 read -p "Install YCM dependencies?"         INSTALL_YCM_DEPS
 
 case $REMOVE_VIM in
@@ -34,10 +35,26 @@ case $INSTALL_NEOVIM in
     *)  ;;
 esac
 
+case $INSTALL_VUNDLE in
+    [yY])
+        echo "Installing Vundle + Plugins..."
+        git clone https://github.com/gmarik/Vundle ~/.vim/bundle/Vundle.vim
+        vim +BundleInstall +qa
+        ;;
+    *)  ;;
+esac
+
 case $INSTALL_YCM_DEPS in
     [yY])
         echo "Installing YCM dependencies..."
-        sudo apt-get install cmake g++ -y
+        YCM_DIR=~/.vim/bundle/YouCompleteMe
+        if [[ ! -d "$YCM_DIR" ]]; then
+            cd "$YCM_DIR"
+            sudo apt-get install cmake g++ -y
+            sh install.sh
+        else 
+            echo "YCM dir already exists, skipping install"
+        fi
         ;;
     *)  ;;
 esac
