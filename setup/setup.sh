@@ -14,7 +14,7 @@ if [ ! -L ~/.nvimrc ]; then
 fi
 
 if [ ! -L ~/.inputrc ]; then 
-  ln -s $DIR/inputrc ~/.inputrc
+  ln -s $RCFILES/inputrc ~/.inputrc
 fi
 
 if [ ! -L ~/.xbindkeysrc ]; then
