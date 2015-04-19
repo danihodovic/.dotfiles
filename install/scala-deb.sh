@@ -6,7 +6,6 @@ read -p "Install SBT? [y/n]"    PARAM_SBT
 # Scala
 #-------------------
 
-
 case $PARAM_SCALA in
     [yY])
         echo "Installing scala..."
@@ -20,15 +19,11 @@ case $PARAM_SCALA in
         sudo dpkg -i $DEBFILE
         rm $DEBFILE
         ;;
-    *)
-        echo "Skipping Scala install..."
-        ;;
 esac
 
 #-------------------
 # SBT
 #-------------------
-
 
 case $PARAM_SBT in
     [yY])
@@ -36,9 +31,6 @@ case $PARAM_SBT in
         echo "deb http://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
         sudo apt-get update
         sudo apt-get install sbt --force-yes
-        ;;
-    *)
-        echo "Skipping SBT install..."
         ;;
 esac
 
