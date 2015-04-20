@@ -4,6 +4,7 @@ read -p "Install daily vim ppa?"            INSTALL_VIM
 read -p "Install NeoVim?"                   INSTALL_NEOVIM
 read -p "Install Vundle + Plugins?"         INSTALL_VUNDLE
 read -p "Install YCM dependencies?"         INSTALL_YCM_DEPS
+read -p "Install extra (ag)?"               INSTALL_EXTRA
 
 case $REMOVE_VIM in
     [yY])
@@ -51,5 +52,12 @@ case $INSTALL_YCM_DEPS in
         else 
             echo "YCM dir already exists, skipping install"
         fi
+        ;;
+esac
+
+case $INSTALL_EXTRA in
+    [yY])
+        echo "Installing Ag"
+        sudo apt-get install silversearcher-ag
         ;;
 esac
