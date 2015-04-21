@@ -21,6 +21,7 @@ fi
 export EDITOR=gvi
 export PYTHONSTARTUP=$DIR/rcfiles/pythonrc
 
+export PATH=$PATH:/opt/node/bin
 export PATH=$PATH:/opt/webstorm/bin
 export PATH=$PATH:/opt/idea/bin
 export PATH=$PATH:/opt/pycharm/bin

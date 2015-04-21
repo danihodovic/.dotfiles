@@ -2,6 +2,7 @@
 
 read -p "Install Scala? [y/n]"  PARAM_SCALA
 read -p "Install SBT? [y/n]"    PARAM_SBT
+read -p "Enter Scala version:"  VERSION
 #-------------------
 # Scala
 #-------------------
@@ -11,8 +12,6 @@ case $PARAM_SCALA in
         echo "Installing scala..."
         sudo apt-get remove scala scala-library -y
         SITE="http://www.scala-lang.org/files/archive/"
-        echo "Enter version:"
-        read VERSION
         DEBFILE="scala-$VERSION.deb"
 
         wget "$SITE$DEBFILE"
