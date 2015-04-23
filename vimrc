@@ -1,38 +1,33 @@
 "-----------------------------------------
-"Vundle
+"Vim Plug
 "-----------------------------------------
-"Requred by vundle
 set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-"Plugins need to be between vundle begin/end
+call plug#begin('~/.vim/plugged')
 "-----------------------------------------
-Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'scrooloose/syntastic'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'bling/vim-airline'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plug 'gmarik/Vundle.vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'flazz/vim-colorschemes'
+Plug 'scrooloose/syntastic'
+Plug 'airblade/vim-gitgutter'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Chiel92/vim-autoformat'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'bling/vim-airline'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
-Plugin 'vim-erlang/vim-erlang-omnicomplete'
-Plugin 'dani-h/typescript-vim'
-Plugin 'clausreinke/typescript-tools.vim'
-Plugin 'mustache/vim-mustache-handlebars'
+Plug 'vim-erlang/vim-erlang-omnicomplete'
+Plug 'dani-h/typescript-vim'
+Plug 'clausreinke/typescript-tools.vim'
+Plug 'mustache/vim-mustache-handlebars'
 "-----------------------------------------
-call vundle#end()
-"End required by vundle
+call plug#end()
 "-----------------------------------------
 "General settings
 "-----------------------------------------
