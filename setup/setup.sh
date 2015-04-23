@@ -13,6 +13,10 @@ if [ ! -L ~/.nvimrc ]; then
   ln -s $DIR/vimrc ~/.nvimrc
 fi
 
+if [ ! -L ~/.nvim ]; then
+  ln -s ~/.vim ~/.nvim
+fi
+
 if [ ! -L ~/.inputrc ]; then 
   ln -s $RCFILES/inputrc ~/.inputrc
 fi

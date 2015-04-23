@@ -36,7 +36,9 @@ esac
 case $INSTALL_VIM_PLUG in
     [yY])
         echo "Installing Vim Plug + Plugins..."
-        wget -O ~/.vim/autoload/plug.vim --force-directories https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        PLUG_DIR=~/.vim/autoload/
+        mkdir -p $PLUG_DIR
+        wget -O $PLUG_DIR/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         vim +PlugInstall +qa
         ;;
 esac
