@@ -2,7 +2,7 @@
 read -p "Remove existing vim?"              REMOVE_VIM
 read -p "Install daily vim ppa?"            INSTALL_VIM
 read -p "Install NeoVim?"                   INSTALL_NEOVIM
-read -p "Install Vundle + Plugins?"         INSTALL_VUNDLE
+read -p "Install Plug + Plugins?"         INSTALL_VIM_PLUG
 read -p "Install YCM dependencies?"         INSTALL_YCM_DEPS
 read -p "Install extra (ag)?"               INSTALL_EXTRA
 
@@ -33,11 +33,11 @@ case $INSTALL_NEOVIM in
         ;;
 esac
 
-case $INSTALL_VUNDLE in
+case $INSTALL_VIM_PLUG in
     [yY])
-        echo "Installing Vundle + Plugins..."
-        git clone https://github.com/gmarik/Vundle ~/.vim/bundle/Vundle.vim
-        vim +BundleInstall +qa
+        echo "Installing Vim Plug + Plugins..."
+        wget -O ~/.vim/autoload/plug.vim --force-directories https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        vim +PlugInstall +qa
         ;;
 esac
 
