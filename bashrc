@@ -10,13 +10,15 @@ alias cd.="cd .."
 alias cd..="cd ../.."
 alias cd...="cd ../../.."
 alias ls='ls --color=auto --classify'
-alias vi=nvim
-alias gvi=pynvim
 if [ $DESKTOP_SESSION == "xubuntu" ]; then
     alias sleepnow="xfce4-session-logout -s"
 fi
 
 
+alias vi=nvim
+alias gvi=pynvim
+# Allows 256 colors as background in terminal, used for Vi
+alias tmux="tmux -2"
 ##################################
 export EDITOR=gvi
 export PYTHONSTARTUP=$DIR/rcfiles/pythonrc
