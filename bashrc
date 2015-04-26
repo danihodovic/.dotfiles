@@ -1,7 +1,3 @@
-DIR=`dirname $0`
-
-##################################
-
 alias sh="bash"
 alias gno="gnome-open"
 alias poweroff="sudo poweroff -f"
@@ -14,20 +10,22 @@ if [ $DESKTOP_SESSION == "xubuntu" ]; then
     alias sleepnow="xfce4-session-logout -s"
 fi
 
-
 alias vi=nvim
 alias gvi=pynvim
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
+
 ##################################
+
 export EDITOR=gvi
-export PYTHONSTARTUP=$DIR/rcfiles/pythonrc
+export PYTHONSTARTUP=~/.bash/rcfiles/pythonrc
 
 export PATH=$PATH:/opt/node/bin
 export PATH=$PATH:/opt/webstorm/bin
 export PATH=$PATH:/opt/idea/bin
 export PATH=$PATH:/opt/pycharm/bin
 export PATH=$PATH:/opt/eclipse
+
 ##################################
 
 function cd() {
