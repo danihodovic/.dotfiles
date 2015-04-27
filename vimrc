@@ -19,6 +19,7 @@ Plug 'bling/vim-airline'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'Raimondi/delimitMate'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
