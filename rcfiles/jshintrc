@@ -27,6 +27,7 @@
 "asi": true,
 "debug": false,
 "esnext": true,
+"newcap": false,
 
 
 //Environment

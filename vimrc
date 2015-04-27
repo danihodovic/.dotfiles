@@ -19,7 +19,7 @@ Plug 'bling/vim-airline'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
@@ -27,6 +27,7 @@ Plug 'vim-erlang/vim-erlang-omnicomplete'
 Plug 'dani-h/typescript-vim'
 Plug 'clausreinke/typescript-tools.vim'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
 "-----------------------------------------
 call plug#end()
 "-----------------------------------------
@@ -234,6 +235,11 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 let g:airline#extensions#quickfix#location_text = 'Location'
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+"-----------------------------------------
+" Autopairs
+"-----------------------------------------
+let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
+let g:AutoPairsFlyMode = 1
 "-----------------------------------------
 " NERDCommenter
 "-----------------------------------------
