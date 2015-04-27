@@ -75,7 +75,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " Clear highlight with enter
-nnoremap <CR> :noh<CR><CR>
+nnoremap <esc> :noh<cr><esc>
 
 if has("gui_running")
 " Firefox like tab switching
