@@ -239,6 +239,8 @@ let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 "-----------------------------------------
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
 let g:AutoPairsFlyMode = 1
+" Don't jump to the next bracket when closing
+let g:AutoPairsMultilineClose = 0
 "-----------------------------------------
 " NERDCommenter
 "-----------------------------------------
