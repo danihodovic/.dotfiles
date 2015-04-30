@@ -4,7 +4,6 @@
 set nocompatible
 call plug#begin('~/.vim/plugged')
 "-----------------------------------------
-Plug 'gmarik/Vundle.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
@@ -71,10 +70,10 @@ map q b
 " map control-backspace to delete the previous word
 imap <C-BS> <C-W>
 "Window movement
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <C-a>h <C-w>h
+nnoremap <C-a>j <C-w>j
+nnoremap <C-a>k <C-w>k
+nnoremap <C-a>l <C-w>l
 " Clear highlight with enter
 nnoremap <esc> :noh<cr><esc>
 
@@ -111,7 +110,7 @@ filetype plugin indent on
 "-----------------------------------------
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
 autocmd FileType typescript,javascript,css,scss,vim setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType html,erlang,sh,make,php,snippets setlocal expandtab shiftwidth=4 tabstop=4
+autocmd FileType html,htmldjango,erlang,sh,make,php,snippets setlocal expandtab shiftwidth=4 tabstop=4
 autocmd FileType make setlocal noexpandtab shiftwidth=4 tabstop=4
 "-----------------------------------------
 " Plugin specific settings
@@ -238,7 +237,7 @@ let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 " Autopairs
 "-----------------------------------------
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
-let g:AutoPairsFlyMode = 1
+let g:AutoPairsFlyMode = 0
 " Don't jump to the next bracket when closing
 let g:AutoPairsMultilineClose = 0
 "-----------------------------------------
