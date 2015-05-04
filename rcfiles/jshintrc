@@ -20,7 +20,7 @@
 "maxdepth": false,
 "maxstatements": false,
 "maxcomplexity": 20,
-"maxlen": 100,
+"maxlen": 120,
 
 
 //Relaxing, didn't include all most are dumb
