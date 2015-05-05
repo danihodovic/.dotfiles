@@ -6,6 +6,7 @@ read -p "Install suckless-tools?"   INSTALL_SUCKLESS
 sudo apt-get install xbindkeys -y
 sudo apt-get install cmake -y
 sudo apt-get install python-dev -y
+sudo apt-get install sshfs -y
 
 case $INSTALL_CHROME in
     y|Y) sudo apt-get install chromium-browser -y ;;
