@@ -6,7 +6,12 @@ alias cd.="cd .."
 alias cd..="cd ../.."
 alias cd...="cd ../../.."
 alias ls='ls --color=auto --classify'
+
 alias updateupgrade="sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade"
+alias xkbmapcaps="setxkbmap -option caps:swapescape"
+alias ddmenu="dmenu_run -fn '-*-fixed-*-*-*-*-20-*-*-*-*-*-*-*' -l 5 -i"
+
+
 if [ $DESKTOP_SESSION == "xubuntu" ]; then
     alias sleepnow="xfce4-session-logout -s"
 fi

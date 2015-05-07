@@ -75,7 +75,7 @@ nnoremap <C-a>j <C-w>j
 nnoremap <C-a>k <C-w>k
 nnoremap <C-a>l <C-w>l
 " Clear highlight with enter
-nnoremap <esc> :noh<cr><esc>
+nnoremap <esc><esc> :noh<cr><esc>
 
 if has("gui_running")
 " Firefox like tab switching
@@ -198,9 +198,8 @@ fu! Return_Or_Snippet()
 endfunction
 
 inoremap <return> <C-R>=Return_Or_Snippet()<cr>
-
-let g:UltiSnipsJumpForwardTrigger  = "<leader>w"
-let g:UltiSnipsJumpBackwardTrigger = "<leader>q"
+let g:UltiSnipsJumpForwardTrigger  = "ww"
+let g:UltiSnipsJumpBackwardTrigger = "qq"
 "-----------------------------------------
 "GitGutter
 "-----------------------------------------

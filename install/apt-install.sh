@@ -43,7 +43,7 @@ esac
 
 case $INSTALL_SUCKLESS in
     y|Y)
-        sudo add-apt-repository ppa:chilicuil/sucklesstools -y
+        sudo add-apt-repository ppa:minos-archive/main -y 
         sudo apt-get update
         sudo apt-get install suckless-tools
         ;;
