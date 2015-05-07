@@ -4,7 +4,7 @@
 set nocompatible
 call plug#begin('~/.vim/plugged')
 "-----------------------------------------
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'flazz/vim-colorschemes'

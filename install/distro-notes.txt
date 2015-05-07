@@ -1,0 +1,11 @@
+Lubuntu:
+openbox --reconfigure
+Add to `.conf/openbox/lubuntu-rc.xml` in keyboard entries
+Example:
+`
+<keybind key="A-section">
+  <action name="Execute">
+    <command>dmenu_run -fn "Monaco-16:bold" -l 5 -i -b -nb "#000" -nf "#FFF" -sb "#FF3399"</command>
+  </action>
+</keybind>
+`

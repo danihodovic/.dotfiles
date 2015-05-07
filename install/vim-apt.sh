@@ -46,14 +46,7 @@ esac
 case $INSTALL_YCM_DEPS in
     [yY])
         echo "Installing YCM dependencies..."
-        YCM_DIR=~/.vim/bundle/YouCompleteMe
-        if [[ ! -d "$YCM_DIR" ]]; then
-            cd "$YCM_DIR"
-            sudo apt-get install cmake g++ -y
-            sh install.sh
-        else 
-            echo "YCM dir already exists, skipping install"
-        fi
+        sudo apt-get install cmake g++ -y
         ;;
 esac
 
