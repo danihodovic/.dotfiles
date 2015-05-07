@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
 "-----------------------------------------
 Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
 Plug 'kien/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
 Plug 'scrooloose/nerdtree'
 Plug 'flazz/vim-colorschemes'
 Plug 'scrooloose/syntastic'
@@ -138,8 +139,8 @@ if executable('ag')
 endif
 " CtrlP Sets the current working path to a .git path
 let g:ctrlp_working_path_mode = 'ra'
-" Methods in file
-nnoremap <A-p> :execute 'CtrlPFunky'<CR>
+" CtrlPFunky key
+nnoremap pp :execute 'CtrlPFunky'<CR>
 " Previous files
 nnoremap <leader>b :CtrlPMRU<cr>
 " Ignore
@@ -155,9 +156,10 @@ let g:ctrlp_custom_ignore = {
 let g:ycm_add_preview_to_completeopt = 1
 " YCM closes preview window on esc
 let g:ycm_autoclose_preview_window_after_insertion = 1
-
+" Ycm Erlang completion shouldn't close on typing
+autocmd FileType erlang let g:ycm_cache_omnifunc = 0
+autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript let g:ycm_cache_omnifunc = 1
 let g:EclimCompletionMethod = 'omnifunc'
-
 let g:ycm_semantic_triggers =  {
       \   'c' : ['->', '.'],
       \   'objc' : ['->', '.'],
@@ -171,7 +173,6 @@ let g:ycm_semantic_triggers =  {
       \   'lua' : ['.', ':'],
       \   'erlang' : [':'],
       \ }
-
 "-----------------------------------------
 " Collection of GoToDef for plugins
 "-----------------------------------------
@@ -181,9 +182,6 @@ autocmd FileType python map <buffer><F2> <CR>
 autocmd FileType python map <buffer><F3> :YcmCompleter GoToDefinition<CR>
 " Eclim scalasearch
 autocmd FileType scala map <buffer> <F3> :ScalaSearch<cr>
-" Ycm Erlang completion shouldn't close on typing
-autocmd FileType erlang let g:ycm_cache_omnifunc = 0
-autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript let g:ycm_cache_omnifunc = 1
 "-----------------------------------------
 " UltiSnips
 "-----------------------------------------
@@ -227,9 +225,25 @@ let g:syntastic_typescript_tsc_args = '--module commonjs --target ES5'
 "-----------------------------------------
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
+
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#show_tab_type = 1
+
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+
 " Show the filename or parent/filename if filename is same
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-
 let g:airline#extensions#quickfix#location_text = 'Location'
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 "-----------------------------------------
