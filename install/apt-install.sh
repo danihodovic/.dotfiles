@@ -3,6 +3,7 @@ read -p "Install Chromium?"         INSTALL_CHROME
 read -p "Install Oracle java?"      INSTALL_JAVA
 read -p "Install python+pip?"       INSTALL_PYTHON
 read -p "Install suckless-tools?"   INSTALL_SUCKLESS
+read -p "Install numix?"            INSTALL_NUMIX
 
 sudo apt-get install xbindkeys -y
 sudo apt-get install cmake -y
@@ -38,6 +39,14 @@ case $INSTALL_PYTHON in
     y|Y)
         sudo apt-get install python -y
         sudo wget -O - https://bootstrap.pypa.io/get-pip.py | python
+        ;;
+esac
+
+case $INSTALL_NUMIX in
+    y|Y)
+        sudo add-apt-repository ppa:numix/ppa
+        sudo apt-get update
+        sudo apt-get install numix-gtk-theme numix-icon-theme-circle
         ;;
 esac
 
