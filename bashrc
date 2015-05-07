@@ -22,7 +22,8 @@ alias gvi=pynvim
 alias tmux="tmux -2"
 
 ##################################
-
+# Fixes colors for lxde-terminal
+export TERM="xterm-256color"
 export EDITOR=gvi
 export PYTHONSTARTUP=~/.bash/rcfiles/pythonrc
 
