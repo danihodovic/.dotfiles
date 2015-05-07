@@ -1,6 +1,7 @@
 Lubuntu:
-openbox --reconfigure
+Run `openbox --reconfigure` to generate the xml file.
 Add to `.conf/openbox/lubuntu-rc.xml` in keyboard entries
+
 Example:
 `
 <keybind key="A-section">
@@ -9,3 +10,5 @@ Example:
   </action>
 </keybind>
 `
+
+Rerun `openbox --reconfigure`
