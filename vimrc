@@ -1,8 +1,10 @@
 "-----------------------------------------
-"Vim Plug
+" Vim Plug
 "-----------------------------------------
 set nocompatible
 call plug#begin('~/.vim/plugged')
+"-----------------------------------------
+" General plugins
 "-----------------------------------------
 Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
 Plug 'kien/ctrlp.vim'
@@ -30,7 +32,7 @@ Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
 "-----------------------------------------
 call plug#end()
 "-----------------------------------------
-"General settings
+" General settings
 "-----------------------------------------
 " Silences C-Q, C-S and allows vim to catch them
 silent !stty -ixon > /dev/null 2>/dev/null
@@ -270,9 +272,11 @@ endfun
 "-----------------------------------------
 let NERDTreeIgnore = ['\.pyc$', '\.db$']
 noremap <F5> :NERDTreeToggle<CR>
+"-----------------------------------------
+" Random funcs
+"-----------------------------------------
 " Strip trailing whitespace
 autocmd FileType c,cpp,java,php,ruby,python,typescript,erlang autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-
 " Only cycle between files, not location lists. Does not work recursively, but
 " it seems like there is only one quickfix/location window at a time
 fu! Next_buffer()
