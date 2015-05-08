@@ -60,6 +60,8 @@ nnoremap <C-w> :bp<bar>sp<bar>bn<bar>bd<CR>
 "-----------------------------------------
 " General remappings
 "-----------------------------------------
+" 200ms for key mappings interval
+set timeoutlen=200
 let mapleader = ","
 " System clipboard c/p
 vnoremap <leader>y "+y
@@ -142,7 +144,7 @@ endif
 " CtrlP Sets the current working path to a .git path
 let g:ctrlp_working_path_mode = 'ra'
 " CtrlPFunky key
-nnoremap pp :execute 'CtrlPFunky'<CR>
+nnoremap <leader>p :execute 'CtrlPFunky'<CR>
 " Previous files
 nnoremap <leader>b :CtrlPMRU<cr>
 " Ignore
@@ -252,21 +254,16 @@ let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 " Autopairs
 "-----------------------------------------
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
-let g:AutoPairsFlyMode = 0
 " Don't jump to the next bracket when closing
+let g:AutoPairsFlyMode = 0
 let g:AutoPairsMultilineClose = 0
+
+let g:AutoPairsShortcutFastWrap = "<leader>k"
 "-----------------------------------------
 " NERDCommenter
 "-----------------------------------------
 nnoremap <leader>c :call NERDComment(0, "toggle")<CR>
 vnoremap <leader>c :call NERDComment(0, "toggle")<CR>
-fun! <SID>StripTrailingWhitespaces()
-  let l = line(".")
-  let c = col(".")
-  %s/\s\+$//e
-  call cursor(l, c)
-endfun
-
 "-----------------------------------------
 " NERDTree
 "-----------------------------------------
@@ -275,6 +272,12 @@ noremap <F5> :NERDTreeToggle<CR>
 "-----------------------------------------
 " Random funcs
 "-----------------------------------------
+fun! <SID>StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfun
 " Strip trailing whitespace
 autocmd FileType c,cpp,java,php,ruby,python,typescript,erlang autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 " Only cycle between files, not location lists. Does not work recursively, but
