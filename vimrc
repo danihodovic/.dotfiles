@@ -61,7 +61,7 @@ nnoremap <C-w> :bp<bar>sp<bar>bn<bar>bd<CR>
 " General remappings
 "-----------------------------------------
 " 200ms for key mappings interval
-set timeoutlen=200
+set timeoutlen=500
 let mapleader = ","
 " System clipboard c/p
 vnoremap <leader>y "+y
@@ -138,16 +138,16 @@ map <leader>f <Plug>(easymotion-f2)
 " Cache dir
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 " Use ag (faster ack) for searching files
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
+"if executable('ag')
+  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"endif
 " CtrlP Sets the current working path to a .git path
 let g:ctrlp_working_path_mode = 'ra'
 " CtrlPFunky key
 nnoremap <leader>p :execute 'CtrlPFunky'<CR>
 " Previous files
 nnoremap <leader>b :CtrlPMRU<cr>
-" Ignore
+" Ignore, not does not work with `ag`
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn)$',
     \ 'file': '\v\.(exe|so|dll|pyc|patch)$',
