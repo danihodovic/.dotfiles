@@ -42,3 +42,7 @@ fi
 if [ ! -L ~/.jsbeautifyrc ]; then 
     ln -s $RCFILES/jsbeautifyrc ~/.jsbeautifyrc
 fi
+
+if [ ! -L ~/.tern-config ]; then 
+    ln -s $ROOT_DIR/conf/tern-config ~/.tern-config
+fi

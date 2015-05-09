@@ -130,7 +130,7 @@ map f <Plug>(easymotion-fl)
 map F <Plug>(easymotion-Fl)
 map t <Plug>(easymotion-tl)
 map T <Plug>(easymotion-Tl)
-map <leader>f <Plug>(easymotion-f2)
+map <leader>s <Plug>(easymotion-f2)
 
 "-----------------------------------------
 " CtrlP/CtrlPFunky
@@ -144,7 +144,7 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 " CtrlP Sets the current working path to a .git path
 let g:ctrlp_working_path_mode = 'ra'
 " CtrlPFunky key
-nnoremap <leader>p :execute 'CtrlPFunky'<CR>
+nnoremap <leader>f :execute 'CtrlPFunky'<CR>
 " Previous files
 nnoremap <leader>b :CtrlPMRU<cr>
 " Ignore, not does not work with `ag`
@@ -156,14 +156,19 @@ let g:ctrlp_custom_ignore = {
 "-----------------------------------------
 " YouCompleteMe
 "-----------------------------------------
+" Opts: menu, menuone, longest, preview
+" Avoid preview to use completion  engine lookups, otherwise it tends to lag.
+" Avoid longest as it disables you from typing
+set completeopt=menuone
 " YCM shows completions opts in the preview window
-let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_add_preview_to_completeopt = 0
 " YCM closes preview window on esc
 let g:ycm_autoclose_preview_window_after_insertion = 1
-" Ycm Erlang completion shouldn't close on typing
+
+" Ycm Erlang hack: completion shouldn't close on typing
 autocmd FileType erlang let g:ycm_cache_omnifunc = 0
 autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript let g:ycm_cache_omnifunc = 1
-let g:EclimCompletionMethod = 'omnifunc'
+
 let g:ycm_semantic_triggers =  {
       \   'c' : ['->', '.'],
       \   'objc' : ['->', '.'],
@@ -178,14 +183,29 @@ let g:ycm_semantic_triggers =  {
       \   'erlang' : [':'],
       \ }
 "-----------------------------------------
-" Collection of GoToDef for plugins
+" Collection of GoToDef, Completion, Lang support for plugins
+"-----------------------------------------
+" Typescript
 "-----------------------------------------
 autocmd FileType typescript map <buffer><F2> :TSSdefpreview<CR>
 autocmd FileType typescript map <buffer><F3> :TSSdef<CR>
+"-----------------------------------------
+" Python
+"-----------------------------------------
 autocmd FileType python map <buffer><F2> <CR>
 autocmd FileType python map <buffer><F3> :YcmCompleter GoToDefinition<CR>
-" Eclim scalasearch
+" Eclim Java, Scala
 autocmd FileType scala map <buffer> <F3> :ScalaSearch<cr>
+let g:EclimCompletionMethod = 'omnifunc'
+"-----------------------------------------
+" TernJS
+"-----------------------------------------
+autocmd FileType javascript map <buffer><F3> :TernDef<cr>
+autocmd FileType javascript map <buffer><leader><F3> :TernRefs<cr>
+" 'no', 'on_move', 'on_hold'
+let g:tern_show_argument_hints = 'no'
+" Shows args in completion menu
+let g:tern_show_signature_in_pum = 1
 "-----------------------------------------
 " UltiSnips
 "-----------------------------------------
