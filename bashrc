@@ -26,7 +26,7 @@ alias tmux="tmux -2"
 export TERM="xterm-256color"
 export EDITOR=gvi
 export PYTHONSTARTUP=~/.bash/rcfiles/pythonrc
-export BASHDANI=~/.bash
+export dotfiles=~/.bash
 
 export PATH=$PATH:/opt/node/bin
 export PATH=$PATH:/opt/webstorm/bin
