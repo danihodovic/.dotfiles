@@ -237,12 +237,14 @@ set statusline+=%*
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['pylint']
 
-" Pylint syntastic
+" Pylint
+let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_python_pylint_args='-E -d C0301,C0111,C0103,R0903,W0614,W0611,E1601'
-"Typescript syntastic
+"Typescript 
 let g:syntastic_typescript_tsc_args = '--module commonjs --target ES5'
+" Javascript
+let g:syntastic_javascript_checkers = ['eslint']
 
 "-----------------------------------------
 " VimAirline

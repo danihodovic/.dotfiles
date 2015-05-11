@@ -7,7 +7,7 @@ alias cd..="cd ../.."
 alias cd...="cd ../../.."
 alias ls='ls --color=auto --classify'
 
-alias updateupgrade="sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade"
+alias aptupgrade="sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade"
 alias xkbmapcaps="setxkbmap -option caps:swapescape"
 alias ddmenu="dmenu_run -fn '-*-fixed-*-*-*-*-20-*-*-*-*-*-*-*' -l 5 -i"
 
@@ -26,6 +26,7 @@ alias tmux="tmux -2"
 export TERM="xterm-256color"
 export EDITOR=gvi
 export PYTHONSTARTUP=~/.bash/rcfiles/pythonrc
+export BASHDANI=~/.bash
 
 export PATH=$PATH:/opt/node/bin
 export PATH=$PATH:/opt/webstorm/bin
