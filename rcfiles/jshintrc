@@ -27,6 +27,7 @@
 "debug": false,
 "esnext": true,
 "newcap": false,
+"sub": true,
 
 
 //Environment
