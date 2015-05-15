@@ -12,3 +12,6 @@ Example:
 `
 
 Rerun `openbox --reconfigure`
+
+Software:
+xfce4-screenshooter-plugin
