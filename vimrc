@@ -24,6 +24,7 @@ Plug 'jiangmiao/auto-pairs'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
+Plug 'davidhalter/jedi-vim'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
 Plug 'dani-h/typescript-vim'
 Plug 'clausreinke/typescript-tools.vim'
@@ -208,6 +209,14 @@ autocmd FileType javascript map <buffer><leader><F3> :TernRefs<cr>
 let g:tern_show_argument_hints = 'no'
 " Shows args in completion menu
 let g:tern_show_signature_in_pum = 1
+"-----------------------------------------
+" Jedi Python
+"-----------------------------------------
+let g:jedi#use_tabs_not_buffers = 0
+" Do not select the first popup option and complete it
+let g:jedi#popup_select_first = 0
+" Autocomplete the function params
+let g:jedi#show_call_signatures = "1"
 "-----------------------------------------
 " UltiSnips
 "-----------------------------------------

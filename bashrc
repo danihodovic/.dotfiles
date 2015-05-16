@@ -33,7 +33,7 @@ export PATH=$PATH:/opt/idea/bin
 export PATH=$PATH:/opt/pycharm/bin
 export PATH=$PATH:/opt/eclipse
 
-export dotfiles=~/.bash
+export dotfiles=~/.dotfiles
 ##################################
 
 function cd() {
