@@ -39,6 +39,10 @@ if [ ! -L ~/.jshintrc ]; then
     ln -s $RCFILES/jshintrc ~/.jshintrc
 fi
 
+if [ ! -L ~/.eslintrc ]; then 
+    ln -s $RCFILES/eslintrc ~/.eslintrc
+fi
+
 if [ ! -L ~/.jsbeautifyrc ]; then 
     ln -s $RCFILES/jsbeautifyrc ~/.jsbeautifyrc
 fi
