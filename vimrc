@@ -142,6 +142,7 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 "if executable('ag')
   "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 "endif
+let g:ctrlp_match_window = 'top,order:ttb,min:1,max:15,results:15'
 " CtrlP Sets the current working path to a .git path
 let g:ctrlp_working_path_mode = 'ra'
 " CtrlPFunky key

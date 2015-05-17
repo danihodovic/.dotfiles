@@ -26,11 +26,6 @@ if [ ! -L ~/.tmux.conf ]; then
     ln -s $ROOT_DIR/conf/tmux.conf ~/.tmux.conf
 fi
 
-# Unused, conflicts with distro keybindings usually
-#if [ ! -L ~/.xbindkeysrc ]; then
-    #ln -s $RCFILES/xbindkeysrc ~/.xbindkeysrc
-#fi
-
 if [ ! -L ~/.sqliterc ]; then 
     ln -s $RCFILES/sqliterc ~/.sqliterc
 fi
