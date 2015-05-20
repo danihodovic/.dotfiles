@@ -6,7 +6,8 @@ call plug#begin('~/.vim/plugged')
 "-----------------------------------------
 " General plugins
 "-----------------------------------------
-Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
+" Don't automatically compile the YCM engine...
+Plug 'Valloric/YouCompleteMe'
 Plug 'kien/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 Plug 'scrooloose/nerdtree'
