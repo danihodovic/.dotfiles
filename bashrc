@@ -25,7 +25,7 @@ alias tmux="tmux -2"
 # Fixes colors for lxde-terminal
 export TERM="xterm-256color"
 export EDITOR=gvi
-export PYTHONSTARTUP=~/.bash/rcfiles/pythonrc
+export PYTHONSTARTUP=~/.dotfiles/rcfiles/pythonrc
 
 export PATH=$PATH:/opt/npm/bin
 export PATH=$PATH:/opt/webstorm/bin
