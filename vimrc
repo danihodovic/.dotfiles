@@ -112,6 +112,7 @@ syntax enable
 colorscheme Monokai
 set guifont=Monaco
 filetype plugin indent on
+set relativenumber
 "-----------------------------------------
 " Indentation settings
 "-----------------------------------------
@@ -257,7 +258,7 @@ let g:syntastic_python_pylint_args='-E -d C0301,C0111,C0103,R0903,W0614,W0611,E1
 "Typescript 
 let g:syntastic_typescript_tsc_args = '--module commonjs --target ES5'
 " Javascript
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['jshint']
 
 "-----------------------------------------
 " VimAirline

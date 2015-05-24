@@ -1,6 +1,6 @@
 {
 	"env": {
-	}
+	},
 	"rules": {
 		"semi": 0,
 		"camelcase": 0,

@@ -27,12 +27,6 @@ export TERM="xterm-256color"
 export EDITOR=gvi
 export PYTHONSTARTUP=~/.dotfiles/rcfiles/pythonrc
 
-export PATH=$PATH:/opt/npm/bin
-export PATH=$PATH:/opt/webstorm/bin
-export PATH=$PATH:/opt/idea/bin
-export PATH=$PATH:/opt/pycharm/bin
-export PATH=$PATH:/opt/eclipse
-
 export dotfiles=~/.dotfiles
 ##################################
 
