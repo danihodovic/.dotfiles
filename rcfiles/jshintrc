@@ -28,6 +28,7 @@
 "esnext": true,
 "newcap": false,
 "sub": true,
+"loopfunc": true,
 
 
 //Environment
