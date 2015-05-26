@@ -1,4 +1,8 @@
 Lubuntu:
+
+-------------------------
+How to add shortkeys:
+-------------------------
 Run `openbox --reconfigure` to generate the xml file.
 Add to `.conf/openbox/lubuntu-rc.xml` in keyboard entries
 
@@ -10,8 +14,14 @@ Example:
   </action>
 </keybind>
 `
-
 Rerun `openbox --reconfigure`
+
+-------------------------
+How to fix Skype:
+-------------------------
+Turn PulseAudio autospawn off, normally: $ echo "autospawn = no" > ~/.pulse/client.conf
+Kill PulseAudio: $ killall pulseaudio
+Shut down and restart Skype
 
 Software:
 xfce4-screenshooter-plugin
