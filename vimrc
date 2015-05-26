@@ -133,7 +133,7 @@ map f <Plug>(easymotion-fl)
 map F <Plug>(easymotion-Fl)
 map t <Plug>(easymotion-tl)
 map T <Plug>(easymotion-Tl)
-map <leader>s <Plug>(easymotion-f2)
+map <leader>s <Plug>(easymotion-sn)
 
 "-----------------------------------------
 " CtrlP/CtrlPFunky
