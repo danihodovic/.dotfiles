@@ -58,7 +58,8 @@ set ignorecase smartcase
 " Resets search
 autocmd InsertEnter * set cursorline
 " Close buffer without closing window
-nnoremap <C-w> :bp<bar>sp<bar>bn<bar>bd<CR>
+"nnoremap <C-w> :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <C-w> :bd!<CR>
 "-----------------------------------------
 " General remappings
 "-----------------------------------------
