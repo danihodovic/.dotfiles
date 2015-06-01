@@ -16,8 +16,8 @@ if [ $DESKTOP_SESSION == "xubuntu" ]; then
     alias sleepnow="xfce4-session-logout -s"
 fi
 
-alias vi=nvim
-alias gvi=pynvim
+alias vi='nvim'
+alias gvi='/opt/nvim-qt/nvim-qt'
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
 
