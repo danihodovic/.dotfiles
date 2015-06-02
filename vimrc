@@ -75,8 +75,10 @@ nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 " Movement
 map q b
-" map control-backspace to delete the previous word
+" ctrl-backspace to delete the previous word
 imap <C-BS> <C-W>
+" map ctrl+del to delete next work
+imap <C-Del> <C-O>dw
 "Window movement
 nnoremap <C-a>h <C-w>h
 nnoremap <C-a>j <C-w>j
