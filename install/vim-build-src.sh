@@ -1,19 +1,15 @@
 #!/usr/bin/env bash
-# This script
-# - installs vim from source using `checkinstall` for dep managment
-# - installs dependencies
-# - installs Vundle
-# - installs .vimrc plugins
+# Note: Outdated, don't use. Why? 
+# - checkinstall is incompatible with apt sometimes
+# - neovim is a better option than vim
+# - vim-plugged is a better option than Vundle
 #
-# Don't run this command with su and use it sparsely,
-# otherwise you will end up with su permissions in .vim/
-#
-# Ripped from:
+# Taken from from:
 # https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
-
-# Note, named this anything other than vim and the .deb package will be
-# installed as that. So when removing vim you will have to
+#
+# Uninstall using:
 # apt-get remove <tempdir-name>
+#
 TEMP=vim
 
 sudo apt-get remove vim vim-runtime gvim vim-tiny vim-common vim-gui-common -y

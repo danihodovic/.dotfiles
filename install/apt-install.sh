@@ -58,6 +58,3 @@ case $INSTALL_SUCKLESS in
         ;;
 esac
 
-
-# apt-get update && apt-get dist-upgrade
-
