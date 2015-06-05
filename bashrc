@@ -22,11 +22,22 @@ alias gvi='/opt/nvim-qt/nvim-qt'
 alias tmux="tmux -2"
 
 ##################################
+# Terminal crap
+##################################
 # Fixes colors for lxde-terminal
 export TERM="xterm-256color"
 export EDITOR=gvi
 export PYTHONSTARTUP=~/.dotfiles/rcfiles/pythonrc
 
+##################################
+# Custom installations
+##################################
+export GOROOT=/opt/go
+export PATH=$PATH:$GOROOT/bin
+
+##################################
+# Own ease of use paths
+##################################
 export dotfiles=~/.dotfiles
 ##################################
 
