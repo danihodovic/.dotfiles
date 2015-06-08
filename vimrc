@@ -25,12 +25,21 @@ Plug 'jiangmiao/auto-pairs'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
+" Python
 Plug 'davidhalter/jedi-vim'
+" Erlang
 Plug 'vim-erlang/vim-erlang-omnicomplete'
+" Js/Ts
+Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
 Plug 'dani-h/typescript-vim'
 Plug 'clausreinke/typescript-tools.vim'
+" Vim
+Plug 'fatih/vim-go'
+" Rust 
+Plug 'rust-lang/rust.vim'
+Plug 'phildawes/racer'
+" Other
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
 "-----------------------------------------
 call plug#end()
 "-----------------------------------------
