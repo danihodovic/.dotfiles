@@ -38,6 +38,8 @@ Plug 'fatih/vim-go'
 " Rust 
 Plug 'rust-lang/rust.vim'
 Plug 'phildawes/racer'
+" Nim
+Plug 'zah/nim.vim'
 " Other
 Plug 'mustache/vim-mustache-handlebars'
 "-----------------------------------------
