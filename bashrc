@@ -33,7 +33,8 @@ export PYTHONSTARTUP=~/.dotfiles/rcfiles/pythonrc
 # Custom installations
 ##################################
 export GOROOT=/opt/go
-export PATH=$PATH:$GOROOT/bin
+export GOPATH=/opt/go_pkg
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 ##################################
 # Own ease of use paths
