@@ -125,7 +125,7 @@ set relativenumber
 "-----------------------------------------
 autocmd FileType typescript,javascript  setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType python                 setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
-autocmd FileType go                     setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=8
+autocmd FileType go                     setlocal noexpandtab shiftwidth=4 tabstop=4
 autocmd FileType erlang                 setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=8
 autocmd FileType css,scss               setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType html,htmldjango        setlocal expandtab shiftwidth=4 tabstop=4
