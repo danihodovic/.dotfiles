@@ -25,22 +25,15 @@ Plug 'jiangmiao/auto-pairs'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
-" Python
-Plug 'davidhalter/jedi-vim'
-" Erlang
+Plug 'davidhalter/jedi-vim' "Python
 Plug 'vim-erlang/vim-erlang-omnicomplete'
-" Js/Ts
 Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
-Plug 'dani-h/typescript-vim'
-Plug 'clausreinke/typescript-tools.vim'
-" Vim
+Plug 'dani-h/typescript-vim' "Syntax
+Plug 'clausreinke/typescript-tools.vim' "Autocomplete
 Plug 'fatih/vim-go'
-" Rust 
 Plug 'rust-lang/rust.vim'
-Plug 'phildawes/racer'
-" Nim
+"Plug 'phildawes/racer' "Rust autocomplete
 Plug 'zah/nim.vim'
-" Other
 Plug 'mustache/vim-mustache-handlebars'
 "-----------------------------------------
 call plug#end()
@@ -130,10 +123,15 @@ set relativenumber
 "-----------------------------------------
 " Indentation settings
 "-----------------------------------------
-autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
-autocmd FileType typescript,javascript,css,scss,vim,tex setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType html,htmldjango,erlang,sh,make,php,snippets setlocal expandtab shiftwidth=4 tabstop=4
-autocmd FileType make setlocal noexpandtab shiftwidth=4 tabstop=4
+autocmd FileType typescript,javascript  setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType python                 setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
+autocmd FileType go                     setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=8
+autocmd FileType erlang                 setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=8
+autocmd FileType css,scss               setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType html,htmldjango        setlocal expandtab shiftwidth=4 tabstop=4
+autocmd FileType make                   setlocal noexpandtab shiftwidth=4 tabstop=4
+autocmd FileType vim,tex                setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType sh,php,snippets        setlocal expandtab shiftwidth=4 tabstop=4
 "-----------------------------------------
 " Plugin specific settings
 "-----------------------------------------
