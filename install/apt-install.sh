@@ -10,6 +10,7 @@ sudo apt-get install cmake -y
 sudo apt-get install python-dev -y
 sudo apt-get install sshfs -y
 sudo apt-get install tmux -y
+sudo apt-get install curl
 
 # Move to next monitor scripts
 sudo apt-get install xdotool wmctrl -y
