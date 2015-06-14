@@ -68,7 +68,7 @@ nnoremap <C-w> :bd!<CR>
 "-----------------------------------------
 " General remappings
 "-----------------------------------------
-" 200ms for key mappings interval
+" timeout in ms for key mappings interval
 set timeoutlen=500
 let mapleader = ","
 " System clipboard c/p
@@ -300,14 +300,15 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#quickfix#location_text = 'Location'
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 "-----------------------------------------
-" Autopairs
+" Auto-pairs
 "-----------------------------------------
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
 " Don't jump to the next bracket when closing
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsMultilineClose = 0
 
-let g:AutoPairsShortcutFastWrap = "<leader>k"
+" Shortcut to quickly wrap a world, i.e ''hello + key => 'hello'
+let g:AutoPairsShortcutFastWrap = "<leader>w"
 "-----------------------------------------
 " NERDCommenter
 "-----------------------------------------
