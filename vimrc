@@ -26,10 +26,11 @@ Plug 'jiangmiao/auto-pairs'
 " Lang specific
 "-----------------------------------------
 Plug 'davidhalter/jedi-vim' "Python
+Plug 'derekwyatt/vim-scala'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
-Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
-Plug 'dani-h/typescript-vim' "Syntax
-Plug 'clausreinke/typescript-tools.vim' "Autocomplete
+Plug 'marijnh/tern_for_vim', {'do': 'npm install'} "Javascript
+Plug 'dani-h/typescript-vim' " Typescript Syntax
+Plug 'clausreinke/typescript-tools.vim' "Typescript Autocomplete
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
 "Plug 'phildawes/racer' "Rust autocomplete
