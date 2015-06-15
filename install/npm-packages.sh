@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-read -p "Install Typescript? [y/n]" PARAM_TYPESCRIPT
-read -p "Install clausreinke/typescript-tools? [y/n]"  PARAM_TS_TOOLS
-read -p "Install vvakame/typescript-formatter? [y/n]"  PARAM_TS_FORMATTER
+read -p "Install Typescript? [y/n]"                     PARAM_TYPESCRIPT
+read -p "Install clausreinke/typescript-tools? [y/n]"   PARAM_TS_TOOLS
+read -p "Install vvakame/typescript-formatter? [y/n]"   PARAM_TS_FORMATTER
 
 case $PARAM_TYPESCRIPT in
     y|Y )
