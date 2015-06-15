@@ -36,6 +36,7 @@ export GOROOT=/opt/go
 export GOPATH=/opt/go_pkg
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+export PATH=$PATH:/opt/eclipse
 ##################################
 # Own ease of use paths
 ##################################
