@@ -62,14 +62,16 @@ set pastetoggle=<F9>
 set ignorecase smartcase
 " Resets search
 autocmd InsertEnter * set cursorline
-" Close buffer without closing window
-"nnoremap <C-w> :bp<bar>sp<bar>bn<bar>bd<CR>
-nnoremap <C-w> :bd!<CR>
+" timeout in ms for key mappings interval
+set timeoutlen=500
+"-----------------------------------------
+" User defined commands 
+"-----------------------------------------
+" Resize vertically easier. `res` is built in, `vres` is not
+command -nargs=? Vres vertical resize <args>
 "-----------------------------------------
 " General remappings
 "-----------------------------------------
-" timeout in ms for key mappings interval
-set timeoutlen=500
 let mapleader = ","
 " System clipboard c/p
 vnoremap <leader>y "+y
@@ -78,6 +80,8 @@ vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
+" Close buffer without closing window
+nnoremap <C-w> :bd!<CR>
 " Movement
 map q b
 " ctrl-backspace to delete the previous word
@@ -133,6 +137,7 @@ autocmd FileType html,htmldjango        setlocal expandtab shiftwidth=4 tabstop=
 autocmd FileType make                   setlocal noexpandtab shiftwidth=4 tabstop=4
 autocmd FileType vim,tex                setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType sh,php,snippets        setlocal expandtab shiftwidth=4 tabstop=4
+autocmd FileType markdown               setlocal expandtab shiftwidth=4 tabstop=4
 "-----------------------------------------
 " Plugin specific settings
 "-----------------------------------------
