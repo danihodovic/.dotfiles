@@ -334,7 +334,7 @@ fun! <SID>StripTrailingWhitespaces()
   call cursor(l, c)
 endfun
 " Strip trailing whitespace
-autocmd FileType c,cpp,java,php,ruby,python,typescript,erlang autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 " Only cycle between files, not location lists. Does not work recursively, but
 " it seems like there is only one quickfix/location window at a time
 fu! Next_buffer()
