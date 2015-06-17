@@ -10,7 +10,7 @@ sudo apt-get install cmake -y
 sudo apt-get install python-dev -y
 sudo apt-get install sshfs -y
 sudo apt-get install tmux -y
-sudo apt-get install curl
+sudo apt-get install curl -y
 
 # Move to next monitor scripts
 sudo apt-get install xdotool wmctrl -y
@@ -45,9 +45,9 @@ esac
 
 case $INSTALL_NUMIX in
     y|Y)
-        sudo add-apt-repository ppa:numix/ppa
+        sudo add-apt-repository ppa:numix/ppa -y
         sudo apt-get update
-        sudo apt-get install numix-gtk-theme numix-icon-theme-circle
+        sudo apt-get install numix-gtk-theme numix-icon-theme-circle -y
         ;;
 esac
 
