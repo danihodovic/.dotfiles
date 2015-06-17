@@ -65,7 +65,7 @@ autocmd InsertEnter * set cursorline
 " timeout in ms for key mappings interval
 set timeoutlen=500
 "-----------------------------------------
-" User defined commands 
+" User defined commands
 "-----------------------------------------
 " Resize vertically easier. `res` is built in, `vres` is not
 command -nargs=? Vres vertical resize <args>
@@ -89,10 +89,10 @@ imap <C-BS> <C-W>
 " map ctrl+del to delete next work
 imap <C-Del> <C-O>dw
 "Window movement
-nnoremap <C-a>h <C-w>h
-nnoremap <C-a>j <C-w>j
-nnoremap <C-a>k <C-w>k
-nnoremap <C-a>l <C-w>l
+nnoremap <C>h <C-w>h
+nnoremap <C>j <C-w>j
+nnoremap <C>k <C-w>k
+nnoremap <C>l <C-w>l
 " Clear highlight with enter
 nnoremap <esc><esc> :noh<cr><esc>
 
@@ -144,7 +144,7 @@ autocmd FileType markdown               setlocal expandtab shiftwidth=4 tabstop=
 " EasyMotion
 "-----------------------------------------
 " Disable default mappings
-let g:EasyMotion_do_mapping = 0 
+let g:EasyMotion_do_mapping = 0
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
 map f <Plug>(easymotion-fl)
@@ -178,7 +178,7 @@ let g:ctrlp_custom_ignore = {
 "-----------------------------------------
 " YouCompleteMe
 "-----------------------------------------
-let g:ycm_filetype_blacklist = {'notes': 1, 'markdown': 0, 'unite': 1, 'tagbar': 1, 
+let g:ycm_filetype_blacklist = {'notes': 1, 'markdown': 0, 'unite': 1, 'tagbar': 1,
       \'pandoc': 1, 'qf': 1, 'vimwiki': 1, 'text': 0, 'infolog': 1, 'mail': 1}
 " Opts: menu, menuone, longest, preview
 " Avoid preview to use completion  engine lookups, otherwise it tends to lag.
@@ -273,7 +273,7 @@ let g:syntastic_check_on_wq = 0
 " Pylint
 let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_python_pylint_args='-E -d C0301,C0111,C0103,R0903,W0614,W0611,E1601'
-"Typescript 
+"Typescript
 let g:syntastic_typescript_tsc_args = '--module commonjs --target ES5'
 " Javascript
 let g:syntastic_javascript_checkers = ['jshint']
@@ -340,7 +340,7 @@ autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 fu! Next_buffer()
   bnext
   if &filetype == 'qf'
-    bnext 
+    bnext
   endif
 endfunction
 
