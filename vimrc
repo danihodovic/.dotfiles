@@ -12,7 +12,8 @@ Plug 'kien/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 Plug 'scrooloose/nerdtree'
 Plug 'flazz/vim-colorschemes'
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
+Plug 'benekastah/neomake'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Chiel92/vim-autoformat'
@@ -255,29 +256,26 @@ inoremap <return> <C-R>=Return_Or_Snippet()<cr>
 let g:UltiSnipsJumpForwardTrigger  = "ww"
 let g:UltiSnipsJumpBackwardTrigger = "qq"
 "-----------------------------------------
-"GitGutter
+" GitGutter
 "-----------------------------------------
 hi SignColumn guibg=black ctermbg=black
 "-----------------------------------------
-"Syntastic
+" Neomake
 "-----------------------------------------
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+let g:neomake_typescript_tsc_maker = {
+    \ 'args': [
+        \ '--module', 'commonjs', '--noEmit', '--target', 'ES5'
+    \ ],
+    \ 'errorformat':
+        \ '%E%f %#(%l\,%c): error %m,' .
+        \ '%E%f %#(%l\,%c): %m,' .
+        \ '%Eerror %m,' .
+        \ '%C%\s%\+%m'
+    \ }
+" Show the neomake error list on bottom
+let g:neomake_open_list = 1
 
-"let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" Pylint
-let g:syntastic_python_checkers = ['pylint']
-let g:syntastic_python_pylint_args='-E -d C0301,C0111,C0103,R0903,W0614,W0611,E1601'
-"Typescript
-let g:syntastic_typescript_tsc_args = '--module commonjs --target ES5'
-" Javascript
-let g:syntastic_javascript_checkers = ['jshint']
-
+autocmd BufWritePost * Neomake
 "-----------------------------------------
 " VimAirline
 "-----------------------------------------
