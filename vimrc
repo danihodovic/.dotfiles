@@ -12,7 +12,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 Plug 'scrooloose/nerdtree'
 Plug 'flazz/vim-colorschemes'
-"Plug 'scrooloose/syntastic'
+Plug 'kchmck/vim-coffee-script'
 Plug 'benekastah/neomake'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdcommenter'
@@ -128,8 +128,10 @@ filetype plugin indent on
 set relativenumber
 "-----------------------------------------
 " Indentation settings
+" See http://tedlogan.com/techblog3.html
 "-----------------------------------------
 autocmd FileType typescript,javascript  setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType coffee                 setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType python                 setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
 autocmd FileType go                     setlocal noexpandtab shiftwidth=4 tabstop=4
 autocmd FileType erlang                 setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=8
