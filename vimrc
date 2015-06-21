@@ -44,8 +44,6 @@ call plug#end()
 "-----------------------------------------
 " Silences C-Q, C-S and allows vim to catch them
 silent !stty -ixon > /dev/null 2>/dev/null
-
-set textwidth=120
 " Line number
 set number
 " Highlight search
@@ -129,6 +127,11 @@ colorscheme Monokai
 set guifont=Monaco
 filetype plugin indent on
 set relativenumber
+"-----------------------------------------
+" Text width settings
+"-----------------------------------------
+set textwidth=120
+autocmd FileType gitcommit setlocal textwidth=72
 "-----------------------------------------
 " Indentation settings
 " See http://tedlogan.com/techblog3.html
