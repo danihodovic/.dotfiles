@@ -44,6 +44,9 @@ call plug#end()
 "-----------------------------------------
 " Silences C-Q, C-S and allows vim to catch them
 silent !stty -ixon > /dev/null 2>/dev/null
+
+set textwidth=120
+" Line number
 set number
 " Highlight search
 set hlsearch
