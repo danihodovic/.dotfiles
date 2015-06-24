@@ -136,17 +136,20 @@ autocmd FileType gitcommit setlocal textwidth=72
 " Indentation settings
 " See http://tedlogan.com/techblog3.html
 "-----------------------------------------
-autocmd FileType typescript,javascript  setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType coffee                 setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType python                 setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
-autocmd FileType go                     setlocal noexpandtab shiftwidth=4 tabstop=4
-autocmd FileType erlang                 setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=8
-autocmd FileType css,scss               setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType html,htmldjango        setlocal expandtab shiftwidth=4 tabstop=4
-autocmd FileType make                   setlocal noexpandtab shiftwidth=4 tabstop=4
-autocmd FileType vim,tex                setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType sh,php,snippets        setlocal expandtab shiftwidth=4 tabstop=4
-autocmd FileType markdown               setlocal expandtab shiftwidth=4 tabstop=4
+autocmd FileType typescript,javascript  setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType coffee                 setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType css,scss               setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType vim                    setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType tex                    setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType snippets               setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType python                 setlocal  shiftwidth=4 tabstop=4 expandtab
+autocmd FileType html,htmldjango        setlocal  shiftwidth=4 tabstop=4 expandtab
+autocmd FileType go                     setlocal  shiftwidth=4 tabstop=4 noexpandtab
+autocmd FileType erlang                 setlocal  shiftwidth=4 tabstop=4 noexpandtab
+autocmd FileType make                   setlocal  shiftwidth=4 tabstop=4 noexpandtab
+autocmd FileType sh                     setlocal  shiftwidth=4 tabstop=4 expandtab
+autocmd FileType php                    setlocal  shiftwidth=4 tabstop=4 expandtab
+autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandtab
 "-----------------------------------------
 " Plugin specific settings
 "-----------------------------------------
@@ -261,8 +264,8 @@ fu! Return_Or_Snippet()
 endfunction
 
 inoremap <return> <C-R>=Return_Or_Snippet()<cr>
-let g:UltiSnipsJumpForwardTrigger  = "ww"
-let g:UltiSnipsJumpBackwardTrigger = "qq"
+let g:UltiSnipsJumpForwardTrigger  = "<leader>w"
+let g:UltiSnipsJumpBackwardTrigger = "<leader>q"
 "-----------------------------------------
 " GitGutter
 "-----------------------------------------
@@ -319,7 +322,7 @@ let g:AutoPairsFlyMode = 0
 let g:AutoPairsMultilineClose = 0
 
 " Shortcut to quickly wrap a world, i.e ''hello + key => 'hello'
-let g:AutoPairsShortcutFastWrap = "<leader>w"
+let g:AutoPairsShortcutFastWrap = "<leader>r"
 "-----------------------------------------
 " NERDCommenter
 "-----------------------------------------
