@@ -21,7 +21,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'bling/vim-airline'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
 "-----------------------------------------
 " Lang specific
@@ -266,6 +266,7 @@ endfunction
 inoremap <return> <C-R>=Return_Or_Snippet()<cr>
 let g:UltiSnipsJumpForwardTrigger  = "<leader>w"
 let g:UltiSnipsJumpBackwardTrigger = "<leader>q"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/plugged/vim-dsnippets']
 "-----------------------------------------
 " GitGutter
 "-----------------------------------------
