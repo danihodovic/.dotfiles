@@ -12,7 +12,6 @@ Plug 'kien/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 Plug 'scrooloose/nerdtree'
 Plug 'flazz/vim-colorschemes'
-Plug 'kchmck/vim-coffee-script'
 Plug 'benekastah/neomake'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdcommenter'
@@ -31,12 +30,14 @@ Plug 'derekwyatt/vim-scala'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
 Plug 'marijnh/tern_for_vim', {'do': 'npm install'} "Javascript
 Plug 'dani-h/typescript-vim' " Typescript Syntax
+Plug 'kchmck/vim-coffee-script'
 Plug 'clausreinke/typescript-tools.vim' "Typescript Autocomplete
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
 "Plug 'phildawes/racer' "Rust autocomplete
 Plug 'zah/nim.vim'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'digitaltoad/vim-jade'
 "-----------------------------------------
 call plug#end()
 "-----------------------------------------
