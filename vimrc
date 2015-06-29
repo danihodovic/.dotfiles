@@ -142,6 +142,7 @@ autocmd FileType coffee                 setlocal  shiftwidth=2 tabstop=2 expandt
 autocmd FileType css,scss               setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType vim                    setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType tex                    setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType yaml                   setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType snippets               setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType python                 setlocal  shiftwidth=4 tabstop=4 expandtab
 autocmd FileType html,htmldjango        setlocal  shiftwidth=4 tabstop=4 expandtab
@@ -338,7 +339,7 @@ noremap <F5> :NERDTreeToggle<CR>
 "-----------------------------------------
 " Random funcs
 "-----------------------------------------
-fun! <SID>StripTrailingWhitespaces()
+fun! s:StripTrailingWhitespaces()
   let l = line(".")
   let c = col(".")
   %s/\s\+$//e
