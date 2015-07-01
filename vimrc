@@ -38,6 +38,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'zah/nim.vim'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'digitaltoad/vim-jade'
+Plug 'wavded/vim-stylus'
 "-----------------------------------------
 call plug#end()
 "-----------------------------------------
@@ -139,13 +140,14 @@ autocmd FileType gitcommit setlocal textwidth=72
 "-----------------------------------------
 autocmd FileType typescript,javascript  setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType coffee                 setlocal  shiftwidth=2 tabstop=2 expandtab
-autocmd FileType css,scss               setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType css,scss,stylus        setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType vim                    setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType tex                    setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType yaml                   setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType snippets               setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType python                 setlocal  shiftwidth=4 tabstop=4 expandtab
 autocmd FileType html,htmldjango        setlocal  shiftwidth=4 tabstop=4 expandtab
+autocmd FileType jade                   setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType go                     setlocal  shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType erlang                 setlocal  shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType make                   setlocal  shiftwidth=4 tabstop=4 noexpandtab
