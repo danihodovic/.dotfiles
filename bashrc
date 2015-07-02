@@ -41,6 +41,7 @@ export PATH=$PATH:/opt/eclipse
 # Own ease of use paths
 ##################################
 export dotfiles=~/.dotfiles
+export plugged=~/.vim/plugged
 ##################################
 
 function cd() {
