@@ -205,6 +205,8 @@ let g:ycm_add_preview_to_completeopt = 0
 " YCM closes preview window on esc
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
+let g:ycm_complete_in_comments = 1
+
 " Ycm Erlang hack: completion shouldn't close on typing
 autocmd FileType erlang let g:ycm_cache_omnifunc = 0
 autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript let g:ycm_cache_omnifunc = 1
