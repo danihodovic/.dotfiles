@@ -12,14 +12,13 @@ alias xkbmapcaps="setxkbmap -option caps:swapescape"
 alias ddmenu="dmenu_run -fn '-*-fixed-*-*-*-*-20-*-*-*-*-*-*-*' -l 5 -i"
 
 
-if [ $DESKTOP_SESSION == "xubuntu" ]; then
-    alias sleepnow="xfce4-session-logout -s"
-fi
-
 alias vi='nvim'
 alias gvi='/opt/nvim-qt/nvim-qt'
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
+if [ $DESKTOP_SESSION == "xubuntu" ]; then
+    alias sleepnow="xfce4-session-logout -s"
+fi
 
 ##################################
 # Terminal crap
@@ -37,6 +36,14 @@ export GOPATH=/opt/go_pkg
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 export PATH=$PATH:/opt/eclipse
+
+##################################
+# Virtualenvwrapper
+##################################
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
+
 ##################################
 # Own ease of use paths
 ##################################
