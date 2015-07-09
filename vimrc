@@ -181,6 +181,12 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_match_window = 'top,order:ttb,min:1,max:15,results:15'
 " CtrlP Sets the current working path to a .git path
 let g:ctrlp_working_path_mode = 'ra'
+" `line`        search line
+" `tag`         search for tag in file
+" `buffertag`   search for tags in buffers, requires ctags
+" `dir`         search for directory and jump to it
+" `changes`     search recent changes
+let g:ctrlp_extensions = ['changes', 'line', 'dir']
 " CtrlPFunky key
 nnoremap <leader>f :execute 'CtrlPFunky'<CR>
 " Previous files
