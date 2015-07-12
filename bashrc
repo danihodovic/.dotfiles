@@ -59,6 +59,15 @@ function cd() {
   fi
 }
 
+function google() {
+    search=""
+    echo "Googling: $@"
+    for term in $@; do
+        search="$search%20$term"
+    done
+    chromium-browser "http://www.google.com/search?q=$search"
+}
+
 # Git show branch colored
 PS1="\[$GREEN\]\t\[$RED\]-\[$BLUE\]\u\[$YELLOW\]\[$YELLOW\]\w\[\033[m\]\[$MAGENTA\]\$(__git_ps1)\[$WHITE\]\$ "
 
