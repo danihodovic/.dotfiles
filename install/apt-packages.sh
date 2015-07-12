@@ -4,6 +4,7 @@ read -p "Install Oracle java?"      INSTALL_JAVA
 read -p "Install python+pip?"       INSTALL_PYTHON
 read -p "Install suckless-tools?"   INSTALL_SUCKLESS
 read -p "Install numix?"            INSTALL_NUMIX
+read -p "Install howdoi?"           INSTALL_HOWDOI
 
 sudo apt-get install xbindkeys -y
 sudo apt-get install cmake -y
@@ -16,7 +17,7 @@ sudo apt-get install curl -y
 sudo apt-get install xdotool wmctrl -y
 
 case $INSTALL_DROPBOX in
-    y|Y) 
+    y|Y)
         sudo apt-get install python-gtk2
         wget -O tempfile https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.02.12_amd64.deb
         sudo dpkg -i tempfile
@@ -29,7 +30,7 @@ case $INSTALL_CHROME in
 esac
 
 case $INSTALL_JAVA in
-    y|Y) 
+    y|Y)
         sudo add-apt-repository ppa:webupd8team/java -y
         sudo apt-get update
         sudo apt-get install oracle-java8-installer --yes
@@ -53,9 +54,16 @@ esac
 
 case $INSTALL_SUCKLESS in
     y|Y)
-        sudo add-apt-repository ppa:minos-archive/main -y 
+        sudo add-apt-repository ppa:minos-archive/main -y
         sudo apt-get update
         sudo apt-get install suckless-tools
         ;;
 esac
 
+
+case $INSTALL_HOWDOI in
+    y|Y)
+        sudo apt-get install libxml2-dev libxslt1-dev
+        sudo pip install howdoi
+        ;;
+esac
