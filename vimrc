@@ -48,24 +48,13 @@ call plug#end()
 silent !stty -ixon > /dev/null 2>/dev/null
 " Line number
 set number
-" Highlight search
-set hlsearch
-" Show search while typing
-set incsearch
-" Ignore case
-set wildignorecase
 " Set pwd to current file
 set autochdir
 " Can switch buffers without saving
 set hidden
-" Seems like backspace doesn't work for nvim and source compiled
-" new vim versions
+" Seems like backspace doesn't work for nvim and source compiled new vim versions
 set backspace=indent,eol,start
 set pastetoggle=<F9>
-" Smart search. If uppercase chars search case sensitive.
-set ignorecase smartcase
-" Resets search
-autocmd InsertEnter * set cursorline
 " timeout in ms for key mappings interval
 set timeoutlen=500
 "-----------------------------------------
@@ -97,9 +86,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-" Clear highlight with enter
-nnoremap <esc><esc> :noh<cr><esc>
-
 if has("gui_running")
 " Firefox like tab switching
   noremap <C-tab> :call Next_buffer()<cr>
@@ -128,7 +114,25 @@ syntax enable
 colorscheme Monokai
 set guifont=Monaco
 filetype plugin indent on
-set relativenumber
+"-----------------------------------------
+" Search 
+"-----------------------------------------
+" Highlight search
+set hlsearch
+" Clear highlight with enter
+nnoremap <esc><esc> :noh<cr><esc>
+" Show search while typing
+set incsearch
+" Ignore case
+set wildignorecase
+" Smart search. If uppercase chars search case sensitive.
+set ignorecase smartcase
+" Resets search
+autocmd InsertEnter * set cursorline
+" Color of search highlight
+" Note, this has to go AFTER the skin settings
+highlight Search ctermfg=red
+highlight Search guifg=red
 "-----------------------------------------
 " Text width settings
 "-----------------------------------------
