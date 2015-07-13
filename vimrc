@@ -115,12 +115,14 @@ colorscheme Monokai
 set guifont=Monaco
 filetype plugin indent on
 "-----------------------------------------
-" Search 
+" Search
 "-----------------------------------------
 " Highlight search
 set hlsearch
 " Clear highlight with enter
 nnoremap <esc><esc> :noh<cr><esc>
+" Search selected text, not only words as with `*`
+vnoremap // y/<C-R>"<CR>
 " Show search while typing
 set incsearch
 " Ignore case
