@@ -22,6 +22,7 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'SirVer/ultisnips'
 Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
+Plug 'majutsushi/tagbar'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
@@ -33,12 +34,13 @@ Plug 'dani-h/typescript-vim' " Typescript Syntax
 Plug 'kchmck/vim-coffee-script'
 Plug 'clausreinke/typescript-tools.vim' "Typescript Autocomplete
 Plug 'fatih/vim-go'
-Plug 'rust-lang/rust.vim'
-"Plug 'phildawes/racer' "Rust autocomplete
 Plug 'zah/nim.vim'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'digitaltoad/vim-jade'
 Plug 'wavded/vim-stylus'
+Plug 'lukaszkorecki/CoffeeTags'
+Plug 'rust-lang/rust.vim'
+"Plug 'phildawes/racer' "Rust autocomplete
 "-----------------------------------------
 call plug#end()
 "-----------------------------------------
@@ -57,6 +59,12 @@ set backspace=indent,eol,start
 set pastetoggle=<F9>
 " timeout in ms for key mappings interval
 set timeoutlen=500
+" Not sure what this does but it will cause Tagbar to show the prototype (bottom) after 50ms when hovering a tag
+set updatetime=50
+" Specify location of tags file
+" 'The last semicolon is the key here. When Vim tries to locate the 'tags' file, it first looks at the current
+" directory, then the parent directory, then the parent of the parent, and so on'
+set tags=./tags;
 "-----------------------------------------
 " User defined commands
 "-----------------------------------------
@@ -192,7 +200,7 @@ let g:ctrlp_working_path_mode = 'ra'
 " `buffertag`   search for tags in buffers, requires ctags
 " `dir`         search for directory and jump to it
 " `changes`     search recent changes
-let g:ctrlp_extensions = ['changes', 'line', 'dir']
+let g:ctrlp_extensions = ['tag', 'line', 'dir']
 " CtrlPFunky key
 nnoremap <leader>f :execute 'CtrlPFunky'<CR>
 " Previous files
@@ -268,6 +276,13 @@ let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#popup_select_first = 0
 " Autocomplete the function params
 let g:jedi#show_call_signatures = "1"
+"-----------------------------------------
+" Tagbar
+"-----------------------------------------
+" On startup start tagbar for supported files
+autocmd VimEnter * nested :call tagbar#autoopen(1)
+" When opening a buffer with a supported filetype, open tagbar
+autocmd FileType * nested :call tagbar#autoopen(0)
 "-----------------------------------------
 " UltiSnips
 "-----------------------------------------
