@@ -82,7 +82,7 @@ vnoremap <leader>P "+P
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 " Close buffer without closing window
-nnoremap <C-w> :bd!<CR>
+nnoremap <C-w> :bd<CR>
 " Movement
 map q b
 " ctrl-backspace to delete the previous word
@@ -368,16 +368,21 @@ vnoremap <leader>c :call NERDComment(0, "toggle")<CR>
 let NERDTreeIgnore = ['\.pyc$', '\.db$']
 noremap <F5> :NERDTreeToggle<CR>
 "-----------------------------------------
+" CoffeeTags
+"-----------------------------------------
+let g:CoffeeAutoTagIncludeVars = 1
+"-----------------------------------------
 " Random funcs
 "-----------------------------------------
-fun! s:StripTrailingWhitespaces()
+fun! <SID>StripTrailingWhitespaces()
   let l = line(".")
   let c = col(".")
   %s/\s\+$//e
   call cursor(l, c)
 endfun
 " Strip trailing whitespace
-autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
 " Only cycle between files, not location lists. Does not work recursively, but
 " it seems like there is only one quickfix/location window at a time
 fu! Next_buffer()
