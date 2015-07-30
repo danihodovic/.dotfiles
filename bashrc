@@ -1,6 +1,5 @@
 alias sh="bash"
 alias gno="gnome-open"
-alias poweroff="sudo poweroff -f"
 alias reboot="sudo reboot"
 alias cd.="cd .."
 alias cd..="cd ../.."
