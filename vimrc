@@ -206,9 +206,9 @@ let g:ctrlp_extensions = ['tag', 'line', 'dir']
 nnoremap <leader>f :execute 'CtrlPFunky'<CR>
 " Previous files
 nnoremap <leader>b :CtrlPMRU<cr>
-" Ignore, not does not work with `ag`
+" Ignore, note does not work if a custom `ctrlp_user_command` is used, i.e `ag`
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+    \ 'dir':  '\v[\/]\.?(git|hg|svn|node_modules)$',
     \ 'file': '\v\.(exe|so|dll|pyc|patch)$',
     \ 'link': 'some_bad_symbolic_links',
     \ }
