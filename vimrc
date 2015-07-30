@@ -152,7 +152,8 @@ autocmd FileType gitcommit setlocal textwidth=72
 " Indentation settings
 " See http://tedlogan.com/techblog3.html
 "-----------------------------------------
-autocmd FileType typescript,javascript  setlocal  shiftwidth=2 tabstop=2 expandtab
+" `nocindent smartindent` will allow us to omit semicolons and jump to the next line without auto indentation
+autocmd FileType typescript,javascript  setlocal  shiftwidth=2 tabstop=2 expandtab nocindent smartindent
 autocmd FileType coffee                 setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType css,scss,stylus        setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType vim                    setlocal  shiftwidth=2 tabstop=2 expandtab
