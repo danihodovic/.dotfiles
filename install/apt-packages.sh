@@ -6,12 +6,14 @@ read -p "Install suckless-tools?"   INSTALL_SUCKLESS
 read -p "Install numix?"            INSTALL_NUMIX
 read -p "Install howdoi?"           INSTALL_HOWDOI
 
+sudo apt-get update
 sudo apt-get install xbindkeys -y
 sudo apt-get install cmake -y
 sudo apt-get install python-dev -y
 sudo apt-get install sshfs -y
 sudo apt-get install tmux -y
 sudo apt-get install curl -y
+sudo apt-get install git-extras
 
 # Move to next monitor scripts
 sudo apt-get install xdotool wmctrl -y
