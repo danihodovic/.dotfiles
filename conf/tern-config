@@ -3,9 +3,9 @@
     "browser",
     "jquery"
   ],
-  "loadEagerly": [
-  ],
+  "loadEagerly": [],
   "plugins": {
-    "node": {}
+    "node": {},
+    "angular": {}
   }
 }
