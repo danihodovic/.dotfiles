@@ -3,6 +3,7 @@ read -p "Install Chromium?"         INSTALL_CHROME
 read -p "Install Oracle java?"      INSTALL_JAVA
 read -p "Install python+pip?"       INSTALL_PYTHON
 read -p "Install suckless-tools?"   INSTALL_SUCKLESS
+read -p "Install bro?"              INSTALL_BRO
 read -p "Install numix?"            INSTALL_NUMIX
 read -p "Install howdoi?"           INSTALL_HOWDOI
 
@@ -59,6 +60,13 @@ case $INSTALL_SUCKLESS in
         sudo add-apt-repository ppa:minos-archive/main -y
         sudo apt-get update
         sudo apt-get install suckless-tools
+        ;;
+esac
+
+case $INSTALL_BRO in
+    y|Y)
+        sudo apt-get install ruby ruby-devel -y
+        gem install bropages
         ;;
 esac
 
