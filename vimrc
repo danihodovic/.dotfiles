@@ -38,9 +38,12 @@ Plug 'zah/nim.vim'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'digitaltoad/vim-jade'
 Plug 'wavded/vim-stylus'
-Plug 'lukaszkorecki/CoffeeTags'
 Plug 'rust-lang/rust.vim'
 "Plug 'phildawes/racer' "Rust autocomplete
+" CoffeeTags requires ruby support which NeoVim doesn't have yet. Only activate CoffeeTags when vim is used
+if !has("nvim")
+  Plug 'lukaszkorecki/CoffeeTags'
+endif
 "-----------------------------------------
 call plug#end()
 "-----------------------------------------
