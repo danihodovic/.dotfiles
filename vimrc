@@ -281,6 +281,10 @@ let g:jedi#popup_select_first = 0
 " Autocomplete the function params
 let g:jedi#show_call_signatures = "1"
 "-----------------------------------------
+" Golang
+"-----------------------------------------
+autocmd FileType go  map <buffer><F3> :GoDef<cr>
+"-----------------------------------------
 " Tagbar
 "-----------------------------------------
 " On startup start tagbar for supported files
