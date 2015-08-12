@@ -53,6 +53,8 @@ call plug#end()
 silent !stty -ixon > /dev/null 2>/dev/null
 " Line number
 set number
+" Relative line numbers for faster movement
+set relativenumber
 " Set pwd to current file
 set autochdir
 " Can switch buffers without saving
@@ -85,7 +87,7 @@ vnoremap <leader>P "+P
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 " Close buffer without closing window
-nnoremap <C-w> :bd<CR>
+nnoremap <C-w> :bd!<CR>
 " Movement
 map q b
 " ctrl-backspace to delete the previous word
@@ -156,6 +158,7 @@ autocmd FileType gitcommit setlocal textwidth=72
 " See http://tedlogan.com/techblog3.html
 "-----------------------------------------
 " `nocindent smartindent` will allow us to omit semicolons and jump to the next line without auto indentation
+" for Javascript/Typescript
 autocmd FileType typescript,javascript  setlocal  shiftwidth=2 tabstop=2 expandtab nocindent smartindent
 autocmd FileType coffee                 setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType css,scss,stylus        setlocal  shiftwidth=2 tabstop=2 expandtab
