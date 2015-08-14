@@ -22,7 +22,7 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'SirVer/ultisnips'
 Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
-Plug 'majutsushi/tagbar'
+"Plug 'majutsushi/tagbar'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
@@ -43,7 +43,7 @@ Plug 'ekalinin/Dockerfile.vim'
 "Plug 'phildawes/racer' "Rust autocomplete
 " CoffeeTags requires ruby support which NeoVim doesn't have yet. Only activate CoffeeTags when vim is used
 if !has("nvim")
-  Plug 'lukaszkorecki/CoffeeTags'
+  "Plug 'lukaszkorecki/CoffeeTags'
 endif
 "-----------------------------------------
 call plug#end()
@@ -291,10 +291,12 @@ autocmd FileType go  map <buffer><F3> :GoDef<cr>
 "-----------------------------------------
 " Tagbar
 "-----------------------------------------
-" On startup start tagbar for supported files
-autocmd VimEnter * nested :call tagbar#autoopen(1)
-" When opening a buffer with a supported filetype, open tagbar
-autocmd FileType * nested :call tagbar#autoopen(0)
+if exists("*GitBranchInfoString")
+  " On startup start tagbar for supported files
+  autocmd VimEnter * nested :call tagbar#autoopen(1)
+  " When opening a buffer with a supported filetype, open tagbar
+  autocmd FileType * nested :call tagbar#autoopen(0)
+endif
 "-----------------------------------------
 " UltiSnips
 "-----------------------------------------
