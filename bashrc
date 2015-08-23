@@ -77,24 +77,8 @@ function google() {
     for term in $@; do
         search="$search%20$term"
     done
-
-    if type "google-chrome" > /dev/null
-    then
-        executable="google-chrome"
-    elif type "chromium-browser" > /dev/null
-    then
-        executable="chromium-browser"
-    elif type "firefox" > /dev/null
-    then
-        executable="firefox"
-    fi
-
-    if $executable
-    then
-        $executable "http://www.google.com/search?q=$search"
-    else
-        echo "Install google-chrome, chromium or firefox to use this command"
-    fi
+    executable="google-chrome"
+    $executable "http://www.google.com/search?q=$search"
 }
 
 # Git show branch colored
