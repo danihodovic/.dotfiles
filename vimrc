@@ -22,6 +22,7 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'SirVer/ultisnips'
 Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
+"Plug 'jondkinney/dragvisuals.vim'
 "Plug 'majutsushi/tagbar'
 "-----------------------------------------
 " Lang specific
@@ -41,6 +42,7 @@ Plug 'wavded/vim-stylus'
 Plug 'rust-lang/rust.vim'
 Plug 'ekalinin/Dockerfile.vim'
 "Plug 'phildawes/racer' "Rust autocomplete
+
 " CoffeeTags requires ruby support which NeoVim doesn't have yet. Only activate CoffeeTags when vim is used
 if !has("nvim")
   "Plug 'lukaszkorecki/CoffeeTags'
@@ -52,6 +54,8 @@ call plug#end()
 "-----------------------------------------
 " Silences C-Q, C-S and allows vim to catch them
 silent !stty -ixon > /dev/null 2>/dev/null
+" Sets the title of the terminal window
+set title
 " Line number
 set number
 " Relative line numbers for faster movement
@@ -62,6 +66,7 @@ set autochdir
 set hidden
 " Seems like backspace doesn't work for nvim and source compiled new vim versions
 set backspace=indent,eol,start
+" Paste mode to paste properly. Is this required?
 set pastetoggle=<F9>
 " timeout in ms for key mappings interval
 set timeoutlen=500
@@ -88,9 +93,16 @@ vnoremap <leader>P "+P
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 " Close buffer without closing window
-nnoremap <C-w> :bd!<CR>
+" See http://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
+nnoremap <C-w> :bp<bar>sp<bar>bn<bar>bd<CR>
 " Movement
 map q b
+" Move to next parens on same line
+nnoremap <tab> %
+vnoremap <tab> %
+" Move to next screen (vim) line instead of file line. Useful for long lines that span over two vim lines
+nnoremap j gj
+nnoremap k gk
 " ctrl-backspace to delete the previous word
 imap <C-BS> <C-W>
 " map ctrl+del to delete next work
@@ -133,6 +145,9 @@ filetype plugin indent on
 "-----------------------------------------
 " Highlight search
 set hlsearch
+" Blink the current word when switching search words
+nnoremap <silent> n   n:call HLNext(0.1)<cr>
+nnoremap <silent> N   N:call HLNext(0.1)<cr>
 " Clear highlight with enter
 nnoremap <esc><esc> :noh<cr><esc>
 " Search selected text, not only words as with `*`
@@ -143,6 +158,8 @@ set incsearch
 set wildignorecase
 " Smart search. If uppercase chars search case sensitive.
 set ignorecase smartcase
+" Highlight the current line under the cursor
+set cursorline
 " Resets search
 autocmd InsertEnter * set cursorline
 " Color of search highlight
@@ -287,7 +304,10 @@ let g:jedi#show_call_signatures = "1"
 "-----------------------------------------
 " Golang
 "-----------------------------------------
-autocmd FileType go  map <buffer><F3> :GoDef<cr>
+autocmd FileType go map <buffer><F3> <Plug>(go-def-split)
+autocmd FileType go map <buffer><F4> <Plug>(go-doc)
+" Show the type info at the bottom bar when hovering over word
+let g:go_auto_type_info = 1
 "-----------------------------------------
 " Tagbar
 "-----------------------------------------
@@ -413,3 +433,16 @@ fu! Previous_buffer()
   endif
 endfunction
 
+" Highlights the current search word as soon as you switch words
+"https://www.youtube.com/watch?v=aHm36-na4-4
+highlight BlackWhite guibg=black ctermbg=white
+fu! HLNext (blinktime)
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#'.@/
+    let ring = matchadd('BlackWhite', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
