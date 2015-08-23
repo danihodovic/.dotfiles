@@ -22,8 +22,6 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'SirVer/ultisnips'
 Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
-"Plug 'jondkinney/dragvisuals.vim'
-"Plug 'majutsushi/tagbar'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
@@ -41,12 +39,7 @@ Plug 'digitaltoad/vim-jade'
 Plug 'wavded/vim-stylus'
 Plug 'rust-lang/rust.vim'
 Plug 'ekalinin/Dockerfile.vim'
-"Plug 'phildawes/racer' "Rust autocomplete
 
-" CoffeeTags requires ruby support which NeoVim doesn't have yet. Only activate CoffeeTags when vim is used
-if !has("nvim")
-  "Plug 'lukaszkorecki/CoffeeTags'
-endif
 "-----------------------------------------
 call plug#end()
 "-----------------------------------------
@@ -401,10 +394,6 @@ vnoremap <leader>c :call NERDComment(0, "toggle")<CR>
 "-----------------------------------------
 let NERDTreeIgnore = ['\.pyc$', '\.db$']
 noremap <F5> :NERDTreeToggle<CR>
-"-----------------------------------------
-" CoffeeTags
-"-----------------------------------------
-let g:CoffeeAutoTagIncludeVars = 1
 "-----------------------------------------
 " Random funcs
 "-----------------------------------------
