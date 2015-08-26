@@ -162,7 +162,7 @@ highlight Search guifg=red
 "-----------------------------------------
 " Text width settings
 "-----------------------------------------
-set textwidth=120
+set textwidth=100
 autocmd FileType gitcommit setlocal textwidth=72
 "-----------------------------------------
 " Indentation settings
@@ -298,6 +298,7 @@ let g:jedi#show_call_signatures = "1"
 " Golang
 "-----------------------------------------
 autocmd FileType go map <buffer><F3> <Plug>(go-def-split)
+autocmd FileType go map <buffer><leader><F3> <Plug>(go-def)
 autocmd FileType go map <buffer><F4> <Plug>(go-doc)
 " Show the type info at the bottom bar when hovering over word
 let g:go_auto_type_info = 1
