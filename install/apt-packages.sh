@@ -15,7 +15,7 @@ sudo apt-get install python-dev -y
 sudo apt-get install sshfs -y
 sudo apt-get install tmux -y
 sudo apt-get install curl -y
-sudo apt-get install git-extras
+sudo apt-get install git-extras -y
 
 # Move to next monitor scripts
 sudo apt-get install xdotool wmctrl -y
@@ -73,8 +73,8 @@ esac
 
 case $INSTALL_BRO in
     y|Y)
-        sudo apt-get install ruby ruby-devel -y
-        gem install bropages
+        sudo apt-get install ruby ruby-dev -y
+        sudo gem install bropages
         ;;
 esac
 
