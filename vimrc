@@ -22,6 +22,7 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'SirVer/ultisnips'
 Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
+Plug 'Valloric/MatchTagAlways'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
@@ -90,9 +91,6 @@ vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
-" Close buffer without closing window
-" See http://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
-nnoremap <C-w> :bp<bar>sp<bar>bn<bar>bd<CR>
 " Movement
 map q b
 " Move to next parens on same line
@@ -101,10 +99,14 @@ vnoremap <tab> %
 " Move to next screen (vim) line instead of file line. Useful for long lines that span over two vim lines
 nnoremap j gj
 nnoremap k gk
+" Stay in visual mode when indenting
+vnoremap < <gv
+vnoremap > >gv
 " ctrl-backspace to delete the previous word
 imap <C-BS> <C-W>
 " map ctrl+del to delete next work
 imap <C-Del> <C-O>dw
+
 "Window movement
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -114,22 +116,23 @@ if has("gui_running")
 " Firefox like tab switching
   noremap <C-tab> :call Next_buffer()<cr>
   noremap <C-S-tab> :call Previous_buffer()<cr>
-  noremap <C-t> :enew<CR>
 else
   nnoremap <M-w> :call Next_buffer()<cr>
   nnoremap <M-q> :call Previous_buffer()<cr>
-  nnoremap <M-t> :enew()<cr>
 endif
-"-----------------------------------------
-" Nvim
-"-----------------------------------------
-" has("gui_running") doesn't work using nvim, but we'll have cli mappings
-" <M-keys> anyway
-if has("nvim")
-  noremap <C-tab> :call Next_buffer()<cr>
-  noremap <C-S-tab> :call Previous_buffer()<cr>
-  noremap <C-t> :enew<CR>
-endif
+"Create a new buffer
+noremap <C-t> :enew<CR>
+" Close buffer without closing window
+" See http://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
+"nnoremap <C-w> :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <C-w> :call DeleteBufferVisitPrevious()<CR>
+" Unlike bd, this function will visit the previous buffer in the list (as seen in on the tab order).
+" The drawback of bd is that it will simply visit the last edited buffer.
+function! DeleteBufferVisitPrevious()
+  bprev
+  let prevBufName = bufname("#")
+  execute "bd!" prevBufName
+endfunction
 "-----------------------------------------
 " Color scheme settings
 "-----------------------------------------
