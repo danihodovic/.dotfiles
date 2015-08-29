@@ -29,7 +29,7 @@
 "newcap": false,
 "sub": true,
 "loopfunc": true,
-
+"bitwise": false,
 
 //Environment
 "browser": true,
