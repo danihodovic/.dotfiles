@@ -40,7 +40,7 @@ fi
 # Fixes colors for lxde-terminal
 export TERM="xterm-256color"
 export EDITOR=gvi
-export PYTHONSTARTUP=~/.dotfiles/rcfiles/pythonrc
+export PYTHONSTARTUP=~/.pythonrc
 
 ##################################
 # Custom installations
