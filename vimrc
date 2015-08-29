@@ -53,6 +53,11 @@ set title
 set number
 " Relative line numbers for faster movement
 set relativenumber
+" Disables the bottom bar which shows modes and allows plugins (tern - types) to display information
+" See https://github.com/marijnh/tern_for_vim/blob/master/doc/tern.txt#L135
+" This only displays in insert and visual mode and is useless anyway because Airline displays the
+" same information
+set noshowmode
 " Set pwd to current file
 set autochdir
 " Can switch buffers without saving
@@ -176,6 +181,7 @@ autocmd FileType css,scss,stylus        setlocal  shiftwidth=2 tabstop=2 expandt
 autocmd FileType vim                    setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType tex                    setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType yaml                   setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType json                   setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType snippets               setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType python                 setlocal  shiftwidth=4 tabstop=4 expandtab
 autocmd FileType html,htmldjango        setlocal  shiftwidth=4 tabstop=4 expandtab
@@ -283,7 +289,7 @@ let g:EclimCompletionMethod = 'omnifunc'
 autocmd FileType javascript map <buffer><F3> :TernDef<cr>
 autocmd FileType javascript map <buffer><leader><F3> :TernRefs<cr>
 " 'no', 'on_move', 'on_hold'
-let g:tern_show_argument_hints = 'no'
+let g:tern_show_argument_hints = 'on_move'
 " Shows args in completion menu
 let g:tern_show_signature_in_pum = 1
 "-----------------------------------------
@@ -335,6 +341,11 @@ hi SignColumn guibg=black ctermbg=black
 "-----------------------------------------
 " Neomake
 "-----------------------------------------
+autocmd BufWritePost * Neomake
+" The value 2 means that we'll open the bottom tab, but keep the cursor position
+let g:neomake_open_list = 2
+
+" Avoid specifying all maker options here due to conflicts. Instead use conf files
 let g:neomake_typescript_tsc_maker = {
     \ 'args': [
         \ '--module', 'commonjs', '--noEmit', '--target', 'ES5'
@@ -345,20 +356,26 @@ let g:neomake_typescript_tsc_maker = {
         \ '%Eerror %m,' .
         \ '%C%\s%\+%m'
     \ }
-" Show the neomake error list on bottom
-let g:neomake_open_list = 1
 
-autocmd BufWritePost * Neomake
 "-----------------------------------------
 " VimAirline
 "-----------------------------------------
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+" Airline extension Tabline
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = '▶'
 
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#show_tab_type = 1
+
+" Show the filename or parent/filename if filename is same
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#quickfix#location_text = 'Location'
+let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
@@ -371,10 +388,7 @@ nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
-" Show the filename or parent/filename if filename is same
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#quickfix#location_text = 'Location'
-let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+
 "-----------------------------------------
 " Auto-pairs
 "-----------------------------------------
@@ -407,25 +421,35 @@ endfun
 " Strip trailing whitespace
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-" Only cycle between files, not location lists. Does not work recursively, but
-" it seems like there is only one quickfix/location window at a time
+" This function does two things:
+" 1) Do not switch window if you're on a NERDTree window
+" 2) If you switch to a quickfix/location list window, just skip that one. Can't be called
+" recursively
 fu! Next_buffer()
-  bnext
-  if &filetype == 'qf'
+  if bufname("%") =~#"^NERD_tree_[0-9]"
+    echo "I won't switch buffers in a NERDTree window"
+  else
     bnext
+    if &filetype == 'qf'
+      bnext
+    endif
   endif
 endfunction
 
 fu! Previous_buffer()
-  bprevious
-  if &filetype == 'qf'
+  if bufname("%") =~#"^NERD_tree_[0-9]"
+    echo "I won't switch buffers in a NERDTree window"
+  else
     bprevious
+    if &filetype == 'qf'
+      bprevious
+    endif
   endif
 endfunction
 
 " Highlights the current search word as soon as you switch words
 "https://www.youtube.com/watch?v=aHm36-na4-4
-highlight BlackWhite guibg=black ctermbg=white
+highlight BlackWhite guibg=red ctermbg=red
 fu! HLNext (blinktime)
     let [bufnum, lnum, col, off] = getpos('.')
     let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
