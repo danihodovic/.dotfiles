@@ -23,6 +23,7 @@ Plug 'SirVer/ultisnips'
 Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Valloric/MatchTagAlways'
+Plug 'ap/vim-css-color'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
