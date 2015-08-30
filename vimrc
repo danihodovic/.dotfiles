@@ -139,7 +139,7 @@ endfunction
 "-----------------------------------------
 "Make sure to place color schemes after the vundle runtime has been declared
 syntax enable
-colorscheme Monokai
+colorscheme badwolf "Monokai
 set guifont=Monaco
 filetype plugin indent on
 "-----------------------------------------
