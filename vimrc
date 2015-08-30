@@ -80,7 +80,7 @@ set tags=./tags;
 " User defined commands
 "-----------------------------------------
 " Resize vertically easier. `res` is built in, `vres` is not
-command -nargs=? Vres vertical resize <args>
+command! -nargs=? Vres vertical resize <args>
 "-----------------------------------------
 " General remappings
 "-----------------------------------------
@@ -92,37 +92,42 @@ vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
+" Mappings that are bad for you. Stop getting used to them
+nnoremap <C-7> <Nop>
+" Copy til end of line (default is entire line - use `Y` for that)
+nnoremap yy y$
 " Movement
-map q b
-" Move to next parens on same line
-nnoremap <tab> %
-vnoremap <tab> %
+nnoremap q b
 " Move to next screen (vim) line instead of file line. Useful for long lines that span over two vim lines
 nnoremap j gj
 nnoremap k gk
+" Don't map this to tab since it blocks the jumplist. There is no way to remap <C-i> or <tab>
+" programatically
+" seems
+nnoremap <space> %
+vnoremap <space> %
 " Stay in visual mode when indenting
 vnoremap < <gv
 vnoremap > >gv
 " ctrl-backspace to delete the previous word
-imap <C-BS> <C-W>
+inoremap <C-BS> <C-W>
 " map ctrl+del to delete next work
-imap <C-Del> <C-O>dw
-
+inoremap <C-Del> <C-O>dw
 "Window movement
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-if has("gui_running")
-" Firefox like tab switching
-  noremap <C-tab> :call Next_buffer()<cr>
-  noremap <C-S-tab> :call Previous_buffer()<cr>
-else
-  nnoremap <M-w> :call Next_buffer()<cr>
-  nnoremap <M-q> :call Previous_buffer()<cr>
-endif
+" Default mapping for switching
+nnoremap <M-q> :call Switch_buffer("left")<cr>
+nnoremap <M-w> :call Switch_buffer("right")<cr>
 "Create a new buffer
 noremap <C-t> :enew<CR>
+if has("gui_running")
+" Firefox like tab switching
+  noremap <C-S-tab> :call Switch_buffer("left")()<cr>
+  noremap <C-tab> :call Switch_buffer("right")()<cr>
+endif
 " Close buffer without closing window
 " See http://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
 "nnoremap <C-w> :bp<bar>sp<bar>bn<bar>bd<CR>
@@ -130,9 +135,10 @@ nnoremap <C-w> :call DeleteBufferVisitPrevious()<CR>
 " Unlike bd, this function will visit the previous buffer in the list (as seen in on the tab order).
 " The drawback of bd is that it will simply visit the last edited buffer.
 function! DeleteBufferVisitPrevious()
-  bprev
-  let prevBufName = bufname("#")
-  execute "bd!" prevBufName
+  if Previous_buffer() == 1
+    let prevBufName = bufname("#")
+    execute "bd!" prevBufName
+  endif
 endfunction
 "-----------------------------------------
 " Color scheme settings
@@ -166,8 +172,9 @@ set cursorline
 autocmd InsertEnter * set cursorline
 " Color of search highlight
 " Note, this has to go AFTER the skin settings
-highlight Search ctermfg=red
-highlight Search guifg=red
+highlight Search ctermfg=30 ctermbg=black
+highlight Search guifg=red guibg=black
+highlight SearchFlash guibg=red ctermfg=yellow ctermbg=black
 "-----------------------------------------
 " Text width settings
 "-----------------------------------------
@@ -429,36 +436,33 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 " 1) Do not switch window if you're on a NERDTree window
 " 2) If you switch to a quickfix/location list window, just skip that one. Can't be called
 " recursively
-fu! Next_buffer()
-  if bufname("%") =~#"^NERD_tree_[0-9]"
-    echo "I won't switch buffers in a NERDTree window"
-  else
-    bnext
-    if &filetype == 'qf'
-      bnext
-    endif
+" If switch is successful return 1 else 0
+fu! Switch_buffer(direction)
+  if a:direction == "left"
+    let cmdDirection = "bprev"
+  elseif a:direction == "right"
+    let cmdDirection = "bnext"
   endif
-endfunction
 
-fu! Previous_buffer()
   if bufname("%") =~#"^NERD_tree_[0-9]"
     echo "I won't switch buffers in a NERDTree window"
+    return 0
   else
-    bprevious
+    execute cmdDirection
     if &filetype == 'qf'
-      bprevious
+      execute cmdDirection
     endif
+    return 1
   endif
-endfunction
+endfu
 
 " Highlights the current search word as soon as you switch words
 "https://www.youtube.com/watch?v=aHm36-na4-4
-highlight BlackWhite guibg=red ctermbg=red
 fu! HLNext (blinktime)
     let [bufnum, lnum, col, off] = getpos('.')
     let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
     let target_pat = '\c\%#'.@/
-    let ring = matchadd('BlackWhite', target_pat, 101)
+    let ring = matchadd('SearchFlash', target_pat, 101)
     redraw
     exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
     call matchdelete(ring)
