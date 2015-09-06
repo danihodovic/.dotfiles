@@ -17,6 +17,7 @@ alias reboot="sudo reboot"
 alias cd.="cd .."
 alias cd..="cd ../.."
 alias cd...="cd ../../.."
+alias cd-="cd -"
 alias ls='ls --color=auto --classify'
 
 alias aptupgrade="sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade"

@@ -123,7 +123,7 @@ nnoremap <M-w> :call Switch_buffer("right")<cr>
 "Create a new buffer
 noremap <C-t> :enew<CR>
 if has("gui_running")
-" Firefox like tab switching
+  " Firefox like tab switching
   noremap <C-S-tab> :call Switch_buffer("left")()<cr>
   noremap <C-tab> :call Switch_buffer("right")()<cr>
 endif
@@ -223,7 +223,7 @@ map s <Plug>(easymotion-sn)
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 " Use ag (faster ack) for searching files
 "if executable('ag')
-  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 "endif
 let g:ctrlp_match_window = 'top,order:ttb,min:1,max:25'
 " CtrlP Sets the current working path to a .git path
@@ -240,10 +240,10 @@ nnoremap <leader>f :execute 'CtrlPFunky'<CR>
 nnoremap <leader>b :CtrlPMRU<cr>
 " Ignore, note does not work if a custom `ctrlp_user_command` is used, i.e `ag`
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.?(git|hg|svn|node_modules)$',
-    \ 'file': '\v\.(exe|so|dll|pyc|patch)$',
-    \ 'link': 'some_bad_symbolic_links',
-    \ }
+      \ 'dir':  '\v[\/]\.?(git|hg|svn|node_modules)$',
+      \ 'file': '\v\.(exe|so|dll|pyc|patch)$',
+      \ 'link': 'some_bad_symbolic_links',
+      \ }
 "-----------------------------------------
 " YouCompleteMe
 "-----------------------------------------
@@ -350,25 +350,27 @@ hi SignColumn guibg=black ctermbg=black
 "-----------------------------------------
 " Neomake
 "-----------------------------------------
-autocmd BufWritePost * Neomake
+" Normal neomake for these. Doesn't work for some others (go)
+autocmd BufWritePost *.py,*.js,*.ts Neomake
+" Seems like neomake only builds one file using `:Neomake` so imports are ignored, `Neomake!` works
+" but builds an executable which can be annoying. Use `:GoLint` from the `vim-go` package instead.
+autocmd BufWritePost *.go Neomake!
 " The value 2 means that we'll open the bottom tab, but keep the cursor position
 let g:neomake_open_list = 2
 
 " Avoid specifying all maker options here due to conflicts. Instead use conf files
 let g:neomake_typescript_tsc_maker = {
-    \ 'args': [
-        \ '--module', 'commonjs', '--noEmit', '--target', 'ES5'
-    \ ],
-    \ 'errorformat':
-        \ '%E%f %#(%l\,%c): error %m,' .
-        \ '%E%f %#(%l\,%c): %m,' .
-        \ '%Eerror %m,' .
-        \ '%C%\s%\+%m'
-    \ }
+      \ 'args': [
+      \ '--module', 'commonjs', '--noEmit', '--target', 'ES5'
+      \ ],
+      \ 'errorformat':
+      \ '%E%f %#(%l\,%c): error %m,' .
+      \ '%E%f %#(%l\,%c): %m,' .
+      \ '%Eerror %m,' .
+      \ '%C%\s%\+%m'
+      \ }
 
 let g:neomake_go_enabled_makers = []
-" When working with multiple files the go neomaker is dumb
-autocmd BufWritePost *.go :Neomake!
 
 "-----------------------------------------
 " VimAirline
@@ -461,14 +463,14 @@ endfu
 " Highlights the current search word as soon as you switch words
 "https://www.youtube.com/watch?v=aHm36-na4-4
 fu! HLNext (blinktime)
-    let [bufnum, lnum, col, off] = getpos('.')
-    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-    let target_pat = '\c\%#'.@/
-    let ring = matchadd('SearchFlash', target_pat, 101)
-    redraw
-    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-    call matchdelete(ring)
-    redraw
+  let [bufnum, lnum, col, off] = getpos('.')
+  let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+  let target_pat = '\c\%#'.@/
+  let ring = matchadd('SearchFlash', target_pat, 101)
+  redraw
+  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  call matchdelete(ring)
+  redraw
 endfunction
 
 " See http://stackoverflow.com/a/6271254
