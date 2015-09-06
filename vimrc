@@ -92,12 +92,11 @@ vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
-" Mappings that are bad for you. Stop getting used to them
-nnoremap <C-7> <Nop>
 " Copy til end of line (default is entire line - use `Y` for that)
-nnoremap yy y$
+nnoremap Y y$
 " Movement
 nnoremap q b
+vnoremap q b
 " Move to next screen (vim) line instead of file line. Useful for long lines that span over two vim lines
 nnoremap j gj
 nnoremap k gk
@@ -135,7 +134,7 @@ nnoremap <C-w> :call DeleteBufferVisitPrevious()<CR>
 " Unlike bd, this function will visit the previous buffer in the list (as seen in on the tab order).
 " The drawback of bd is that it will simply visit the last edited buffer.
 function! DeleteBufferVisitPrevious()
-  if Previous_buffer() == 1
+  if Switch_buffer("left") == 1
     let prevBufName = bufname("#")
     execute "bd!" prevBufName
   endif
@@ -217,7 +216,6 @@ map F <Plug>(easymotion-Fl)
 map t <Plug>(easymotion-tl)
 map T <Plug>(easymotion-Tl)
 map s <Plug>(easymotion-sn)
-
 "-----------------------------------------
 " CtrlP/CtrlPFunky
 "-----------------------------------------
@@ -314,8 +312,8 @@ let g:jedi#show_call_signatures = "1"
 "-----------------------------------------
 " Golang
 "-----------------------------------------
-autocmd FileType go map <buffer><F3> <Plug>(go-def-split)
-autocmd FileType go map <buffer><leader><F3> <Plug>(go-def)
+autocmd FileType go map <buffer><F3> <Plug>(go-def)
+autocmd FileType go map <buffer><leader><F3> <Plug>(go-def-split)
 autocmd FileType go map <buffer><F4> <Plug>(go-doc)
 " Show the type info at the bottom bar when hovering over word
 let g:go_auto_type_info = 1
@@ -367,6 +365,10 @@ let g:neomake_typescript_tsc_maker = {
         \ '%Eerror %m,' .
         \ '%C%\s%\+%m'
     \ }
+
+let g:neomake_go_enabled_makers = []
+" When working with multiple files the go neomaker is dumb
+autocmd BufWritePost *.go :Neomake!
 
 "-----------------------------------------
 " VimAirline
@@ -467,4 +469,15 @@ fu! HLNext (blinktime)
     exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
     call matchdelete(ring)
     redraw
+endfunction
+
+" See http://stackoverflow.com/a/6271254
+function! Get_visual_selection()
+  " Why is this not a built-in Vim script function?!
+  let [lnum1, col1] = getpos("'<")[1:2]
+  let [lnum2, col2] = getpos("'>")[1:2]
+  let lines = getline(lnum1, lnum2)
+  let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+  let lines[0] = lines[0][col1 - 1:]
+  return join(lines, "\n")
 endfunction
