@@ -40,7 +40,6 @@ Plug 'digitaltoad/vim-jade'
 Plug 'wavded/vim-stylus'
 Plug 'rust-lang/rust.vim'
 Plug 'ekalinin/Dockerfile.vim'
-
 Plug 'JamshedVesuna/vim-markdown-preview'
 "-----------------------------------------
 call plug#end()
@@ -118,8 +117,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " Default mapping for switching
-nnoremap <M-q> :call Switch_buffer("left")<cr>
-nnoremap <M-w> :call Switch_buffer("right")<cr>
+nnoremap <M-n> :call Switch_buffer("left")<cr>
+nnoremap <M-m> :call Switch_buffer("right")<cr>
 "Create a new buffer
 noremap <C-t> :enew<CR>
 if has("gui_running")
@@ -415,9 +414,10 @@ let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
 " Don't jump to the next bracket when closing
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsMultilineClose = 0
-
 " Shortcut to quickly wrap a world, i.e ''hello + key => 'hello'
 let g:AutoPairsShortcutFastWrap = "<leader>r"
+" Jump to next closed pair
+let g:AutoPairsShortcutJump = "<leader>n"
 "-----------------------------------------
 " NERDCommenter
 "-----------------------------------------
@@ -433,7 +433,6 @@ noremap <F5> :NERDTreeToggle<CR>
 autocmd vimenter * NERDTree
 " Go to previous (last accessed) window.
 autocmd VimEnter * wincmd p
-
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 " Close all open buffers on entering a window if the only
 " buffer that's left is the NERDTree buffer
