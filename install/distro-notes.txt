@@ -25,3 +25,25 @@ Shut down and restart Skype
 
 Software:
 xfce4-screenshooter-plugin
+
+
+-------------------------
+Fix volume keyboard keys on Lubuntu with pulseaudio cli
+-------------------------
+Edit .config/openbox/lubuntu-rc.xml
+    <keybind key="XF86AudioRaiseVolume">
+      <action name="Execute">
+	<command>pactl set-sink-volume 0 +10%</command>
+	<!--<command>echo "world" > ~/openboxtest</command>-->
+      </action>
+    </keybind>
+    <keybind key="XF86AudioLowerVolume">
+      <action name="Execute">
+        <command>pactl set-sink-volume 0 -10%</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioMute">
+      <action name="Execute">
+        <command>pactl set-sink-mute 0 toggle</command>
+      </action>
+    </keybind>

@@ -6,7 +6,6 @@ call plug#begin('~/.vim/plugged')
 "-----------------------------------------
 " General plugins
 "-----------------------------------------
-" Don't automatically compile the YCM engine...
 Plug 'Valloric/YouCompleteMe'
 Plug 'kien/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
@@ -42,6 +41,7 @@ Plug 'wavded/vim-stylus'
 Plug 'rust-lang/rust.vim'
 Plug 'ekalinin/Dockerfile.vim'
 
+Plug 'JamshedVesuna/vim-markdown-preview'
 "-----------------------------------------
 call plug#end()
 "-----------------------------------------
@@ -178,7 +178,11 @@ highlight SearchFlash guibg=red ctermfg=yellow ctermbg=black
 " Text width settings
 "-----------------------------------------
 set textwidth=100
+set colorcolumn=100
 autocmd FileType gitcommit setlocal textwidth=72
+autocmd FileType gitcommit setlocal colorcolumn=72
+" Wrapping can start 5 chars from right margin
+set wrapmargin=5
 "-----------------------------------------
 " Indentation settings
 " See http://tedlogan.com/techblog3.html
@@ -193,9 +197,9 @@ autocmd FileType tex                    setlocal  shiftwidth=2 tabstop=2 expandt
 autocmd FileType yaml                   setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType json                   setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType snippets               setlocal  shiftwidth=2 tabstop=2 expandtab
-autocmd FileType python                 setlocal  shiftwidth=4 tabstop=4 expandtab
-autocmd FileType html,htmldjango        setlocal  shiftwidth=4 tabstop=4 expandtab
 autocmd FileType jade                   setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType html,htmldjango        setlocal  shiftwidth=4 tabstop=4 expandtab
+autocmd FileType python                 setlocal  shiftwidth=4 tabstop=4 expandtab
 autocmd FileType go                     setlocal  shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType erlang                 setlocal  shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType make                   setlocal  shiftwidth=4 tabstop=4 noexpandtab
@@ -424,6 +428,32 @@ vnoremap <leader>c :call NERDComment(0, "toggle")<CR>
 "-----------------------------------------
 let NERDTreeIgnore = ['\.pyc$', '\.db$']
 noremap <F5> :NERDTreeToggle<CR>
+" Open nerdtree
+" Open nerdtree on start
+autocmd vimenter * NERDTree
+" Go to previous (last accessed) window.
+autocmd VimEnter * wincmd p
+
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+" Close all open buffers on entering a window if the only
+" buffer that's left is the NERDTree buffer
+function! s:CloseIfOnlyNerdTreeLeft()
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
+endfunction
+"-----------------------------------------
+" vim-markdown-preview
+"-----------------------------------------
+" Use github flavored markdown, requires a connection
+let vim_markdown_preview_github=1
+" Dont display images and preview on key
+let vim_markdown_preview_toggle=0
+let vim_markdown_preview_hotkey='<leader>pr'
 "-----------------------------------------
 " Random funcs
 "-----------------------------------------
