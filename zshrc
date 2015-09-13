@@ -11,6 +11,7 @@ bindkey -M vicmd q vi-backward-word
 # Paths
 #--------------------------------
 export dotfiles=~/.dotfiles
+export repos=~/repos
 export plugged=~/.vim/plugged
 export GOROOT=/opt/go
 export GOPATH=/opt/go_pkg
