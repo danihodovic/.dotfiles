@@ -130,6 +130,7 @@ endif
 " See http://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
 "nnoremap <C-w> :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <C-w> :call DeleteBufferVisitPrevious()<CR>
+nnoremap <leader>cp :call CopyBuffer()<CR>
 " Unlike bd, this function will visit the previous buffer in the list (as seen in on the tab order).
 " The drawback of bd is that it will simply visit the last edited buffer.
 function! DeleteBufferVisitPrevious()
@@ -464,6 +465,13 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 " Strip trailing whitespace
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+fun! CopyBuffer()
+  let l = line(".")
+  let c = col(".")
+  execute "normal ggVG\"+y"
+  call cursor(l, c)
+endfun
 
 " This function does two things:
 " 1) Do not switch window if you're on a NERDTree window
