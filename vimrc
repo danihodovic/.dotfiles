@@ -121,24 +121,24 @@ nnoremap <M-n> :call Switch_buffer("left")<cr>
 nnoremap <M-m> :call Switch_buffer("right")<cr>
 "Create a new buffer
 noremap <C-t> :enew<CR>
-if has("gui_running")
+nnoremap <C-w> :call DeleteBufferVisitPrevious()<CR>
+nnoremap <leader>b :call CopyBuffer()<CR>
+" Disable this for now and get used to n-m
+"if has("gui_running")
   " Firefox like tab switching
-  noremap <C-S-tab> :call Switch_buffer("left")()<cr>
-  noremap <C-tab> :call Switch_buffer("right")()<cr>
-endif
+  "noremap <C-S-tab> :call Switch_buffer("left")()<cr>
+  "noremap <C-tab> :call Switch_buffer("right")()<cr>
+"endif
 " Close buffer without closing window
 " See http://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
-"nnoremap <C-w> :bp<bar>sp<bar>bn<bar>bd<CR>
-nnoremap <C-w> :call DeleteBufferVisitPrevious()<CR>
-nnoremap <leader>cp :call CopyBuffer()<CR>
-" Unlike bd, this function will visit the previous buffer in the list (as seen in on the tab order).
-" The drawback of bd is that it will simply visit the last edited buffer.
-function! DeleteBufferVisitPrevious()
-  if Switch_buffer("left") == 1
-    let prevBufName = bufname("#")
-    execute "bd!" prevBufName
-  endif
-endfunction
+if has("nvim")
+  " Mapping for nvim-qt to paste into command line
+  cmap <S-Insert>  <C-R>+
+  nmap <S-Insert>  <C-R>+
+  " Fix this until the nvim-qt guy fixes proper guifont options
+  command -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>")
+  let g:Guifont="Monaco:h10"
+endif
 "-----------------------------------------
 " Color scheme settings
 "-----------------------------------------
@@ -181,6 +181,12 @@ set textwidth=100
 set colorcolumn=100
 autocmd FileType gitcommit setlocal textwidth=72
 autocmd FileType gitcommit setlocal colorcolumn=72
+" Sets the colorcolumn only in active windows
+augroup BgHighlight
+    autocmd!
+    autocmd WinEnter * set cul
+    autocmd WinLeave * set nocul
+augroup END
 " Wrapping can start 5 chars from right margin
 set wrapmargin=5
 "-----------------------------------------
@@ -241,7 +247,7 @@ let g:ctrlp_extensions = ['tag', 'line', 'dir']
 " CtrlPFunky key
 nnoremap <leader>f :execute 'CtrlPFunky'<CR>
 " Previous files
-nnoremap <leader>b :CtrlPMRU<cr>
+nnoremap <leader>bp :CtrlPMRU<cr>
 " Ignore, note does not work if a custom `ctrlp_user_command` is used, i.e `ag`
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.?(git|hg|svn|node_modules)$',
@@ -508,6 +514,15 @@ fu! HLNext (blinktime)
   exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
   call matchdelete(ring)
   redraw
+endfunction
+
+" Unlike bd, this function will visit the previous buffer in the list (as seen in on the tab order).
+" The drawback of bd is that it will simply visit the last edited buffer.
+function! DeleteBufferVisitPrevious()
+  if Switch_buffer("left") == 1
+    let prevBufName = bufname("#")
+    execute "bd!" prevBufName
+  endif
 endfunction
 
 " See http://stackoverflow.com/a/6271254
