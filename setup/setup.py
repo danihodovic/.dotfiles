@@ -13,6 +13,7 @@ confFiles = ['inputrc', 'tmux.conf', 'sqliterc', 'jshintrc', 'pylintrc', 'python
 
 # DONT include ~/.bashrc here. Remember that we use the default bashrc which sources our bashrc
 others = {
+    '~/.dotfiles/zshrc': '~/.zshrc',
     '~/.dotfiles/vimrc' : '~/.vimrc',
     '~/.vimrc': '~/.nvimrc',
     '~/.vim': '~/.nvim'
