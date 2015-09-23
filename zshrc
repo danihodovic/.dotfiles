@@ -41,6 +41,7 @@ alias xkbmapcaps="setxkbmap -option caps:swapescape"
 alias ddmenu="dmenu_run -fn '-*-fixed-*-*-*-*-20-*-*-*-*-*-*-*' -l 5 -i"
 alias vi='nvim'
 alias gvi='/opt/nvim-qt/nvim-qt'
+alias gs="git status"
 alias example=bro
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
