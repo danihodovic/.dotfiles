@@ -23,6 +23,7 @@ Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Valloric/MatchTagAlways'
 Plug 'ap/vim-css-color'
+"Plug 'lfilho/cosco.vim'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
@@ -99,9 +100,20 @@ vnoremap q b
 " Move to next screen (vim) line instead of file line. Useful for long lines that span over two vim lines
 nnoremap j gj
 nnoremap k gk
+" Easier semicolon insertion
+autocmd FileType javascript,typescript,css noremap ,, :call InsertSemicolons()<CR>
+fu! InsertSemicolons()
+  let currentmode = mode()
+  let l = line(".")
+  let c = col(".")
+  " This for some reason works for visual line mode too. Select multiple and it inserts on all
+  if currentmode == 'n'
+    execute "normal! A;\<esc>"
+    call cursor(l, c)
+  endif
+endfu!
 " Don't map this to tab since it blocks the jumplist. There is no way to remap <C-i> or <tab>
-" programatically
-" seems
+" programatically it seems
 nnoremap <space> %
 vnoremap <space> %
 " Stay in visual mode when indenting
@@ -381,7 +393,10 @@ let g:neomake_typescript_tsc_maker = {
       \ }
 
 let g:neomake_go_enabled_makers = []
-
+"-----------------------------------------
+" AutoFormat
+"-----------------------------------------
+autocmd BufWritePost *.js,*.ts Autoformat
 "-----------------------------------------
 " VimAirline
 "-----------------------------------------
