@@ -104,6 +104,7 @@ nnoremap k gk
 vnoremap k gk
 " Easier semicolon insertion
 autocmd FileType javascript,typescript,css noremap ,, :call InsertSemicolons()<CR>
+
 fu! InsertSemicolons()
   let currentmode = mode()
   let l = line(".")
@@ -112,8 +113,8 @@ fu! InsertSemicolons()
   " If we are in normal mode and the last character is not ;
   " This for some reason works for visual line mode too. Select multiple and it inserts on all
   " despite the normal mode check
-  if currentmode == 'n' && currLine !~ ';\s*$'
-    echom currLine
+  " Note: vim has weird regexes. you need to escape '\|' and not '('. See `:h \v`
+  if currentmode == 'n' && currLine !~ '\v(\(|\{|;)\s*$'
     execute "normal! A;\<esc>"
     call cursor(l, c)
   endif
@@ -404,6 +405,7 @@ let g:neomake_go_enabled_makers = []
 "-----------------------------------------
 " AutoFormat
 "-----------------------------------------
+let g:autoformat_javascript_typescript = 1
 autocmd BufWritePost *.js,*.ts Autoformat
 "-----------------------------------------
 " VimAirline
