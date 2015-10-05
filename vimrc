@@ -30,7 +30,7 @@ Plug 'ap/vim-css-color'
 Plug 'davidhalter/jedi-vim' "Python
 Plug 'derekwyatt/vim-scala'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
-Plug 'marijnh/tern_for_vim', {'do': 'npm install'} "Javascript
+Plug 'marijnh/tern_for_vim' "Javascript
 Plug 'dani-h/typescript-vim' " Typescript Syntax
 Plug 'kchmck/vim-coffee-script'
 Plug 'clausreinke/typescript-tools.vim' "Typescript Autocomplete
@@ -70,7 +70,7 @@ set backspace=indent,eol,start
 set pastetoggle=<F9>
 " timeout in ms for key mappings interval
 set timeoutlen=500
-" Not sure what this does but it will cause Tagbar to show the prototype (bottom) after 50ms when hovering a tag
+" Causes ternJS to show the signature at bottom after x ms, same goes for Tagbar
 set updatetime=50
 " Specify location of tags file
 " 'The last semicolon is the key here. When Vim tries to locate the 'tags' file, it first looks at the current
@@ -99,15 +99,21 @@ nnoremap q b
 vnoremap q b
 " Move to next screen (vim) line instead of file line. Useful for long lines that span over two vim lines
 nnoremap j gj
+vnoremap j gj
 nnoremap k gk
+vnoremap k gk
 " Easier semicolon insertion
 autocmd FileType javascript,typescript,css noremap ,, :call InsertSemicolons()<CR>
 fu! InsertSemicolons()
   let currentmode = mode()
   let l = line(".")
   let c = col(".")
+  let currLine = getline('.')
+  " If we are in normal mode and the last character is not ;
   " This for some reason works for visual line mode too. Select multiple and it inserts on all
-  if currentmode == 'n'
+  " despite the normal mode check
+  if currentmode == 'n' && currLine !~ ';\s*$'
+    echom currLine
     execute "normal! A;\<esc>"
     call cursor(l, c)
   endif
@@ -258,6 +264,8 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_extensions = ['tag', 'line', 'dir']
 " CtrlPFunky key
 nnoremap <leader>f :execute 'CtrlPFunky'<CR>
+" Search functions in all open buffers
+let g:ctrlp_funky_multi_buffers = 1
 " Previous files
 nnoremap <leader>bp :CtrlPMRU<cr>
 " Ignore, note does not work if a custom `ctrlp_user_command` is used, i.e `ag`
@@ -319,8 +327,8 @@ let g:EclimCompletionMethod = 'omnifunc'
 "-----------------------------------------
 autocmd FileType javascript map <buffer><F3> :TernDef<cr>
 autocmd FileType javascript map <buffer><leader><F3> :TernRefs<cr>
-" 'no', 'on_move', 'on_hold'
-let g:tern_show_argument_hints = 'on_move'
+" 'no', 'on_move', 'on_hold' - Note: on_move will cause major lag when moving!
+let g:tern_show_argument_hints = 'no'
 " Shows args in completion menu
 let g:tern_show_signature_in_pum = 1
 "-----------------------------------------
