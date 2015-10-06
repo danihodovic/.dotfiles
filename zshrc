@@ -53,6 +53,11 @@ function chpwd() {
     ls
 }
 
+# Let re-use ssh-agent and/or gpg-agent between logins
+# http://www.cyberciti.biz/faq/ssh-passwordless-login-with-keychain-for-scripts/
+keychain --quiet $HOME/.ssh/id_rsa
+source $HOME/.keychain/$HOST-sh
+
 source $ZSH/oh-my-zsh.sh
 source $NVM_DIR/nvm.sh
 source $NVM_DIR/bash_completion
