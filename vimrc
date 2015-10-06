@@ -27,13 +27,15 @@ Plug 'ap/vim-css-color'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
+" JS/TS/CS
+Plug 'ruanyl/vim-fixmyjs'
+Plug 'marijnh/tern_for_vim' "Javascript
+Plug 'dani-h/typescript-vim' " Typescript Syntax
+Plug 'clausreinke/typescript-tools.vim' "Typescript Autocomplete
+Plug 'kchmck/vim-coffee-script'
 Plug 'davidhalter/jedi-vim' "Python
 Plug 'derekwyatt/vim-scala'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
-Plug 'marijnh/tern_for_vim' "Javascript
-Plug 'dani-h/typescript-vim' " Typescript Syntax
-Plug 'kchmck/vim-coffee-script'
-Plug 'clausreinke/typescript-tools.vim' "Typescript Autocomplete
 Plug 'fatih/vim-go'
 Plug 'zah/nim.vim'
 Plug 'mustache/vim-mustache-handlebars'
@@ -114,7 +116,8 @@ fu! InsertSemicolons()
   " This for some reason works for visual line mode too. Select multiple and it inserts on all
   " despite the normal mode check
   " Note: vim has weird regexes. you need to escape '\|' and not '('. See `:h \v`
-  if currentmode == 'n' && currLine !~ '\v(\(|\{|;)\s*$'
+  " Currline is not ( or { or ; or not empty
+  if currentmode == 'n' && currLine !~ '\v(\(|\{|;)\s*$' && currLine !~ '^$'
     execute "normal! A;\<esc>"
     call cursor(l, c)
   endif
@@ -155,7 +158,7 @@ if has("nvim")
   cmap <S-Insert>  <C-R>+
   nmap <S-Insert>  <C-R>+
   " Fix this until the nvim-qt guy fixes proper guifont options
-  command -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>")
+  command! -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>")
   let g:Guifont="Monaco:h10"
 endif
 "-----------------------------------------
@@ -332,6 +335,13 @@ autocmd FileType javascript map <buffer><leader><F3> :TernRefs<cr>
 let g:tern_show_argument_hints = 'no'
 " Shows args in completion menu
 let g:tern_show_signature_in_pum = 1
+"-----------------------------------------
+" FixMyJS
+"-----------------------------------------
+" Eslint or fixmyjs (JSHint)
+let g:fixmyjs_engine = 'fixmyjs'
+let g:fixmyjs_legacy_jshint = 1
+autocmd BufWritePost *.js,*.ts Fixmyjs
 "-----------------------------------------
 " Jedi Python
 "-----------------------------------------
