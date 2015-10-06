@@ -23,7 +23,7 @@
 
 
 //Relaxing, didn't include all most are dumb
-"asi": true,
+"asi": false,
 "debug": false,
 "esnext": true,
 "newcap": false,

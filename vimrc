@@ -338,8 +338,9 @@ let g:tern_show_signature_in_pum = 1
 "-----------------------------------------
 " FixMyJS
 "-----------------------------------------
-" Eslint or fixmyjs (JSHint)
+" Eslint or fixmyjs (JSHint). It uses your defined JSHint settings to fix what it can
 let g:fixmyjs_engine = 'fixmyjs'
+" Legacy needed for es6 for some reason
 let g:fixmyjs_legacy_jshint = 1
 autocmd BufWritePost *.js,*.ts Fixmyjs
 "-----------------------------------------
