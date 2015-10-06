@@ -342,7 +342,7 @@ let g:tern_show_signature_in_pum = 1
 let g:fixmyjs_engine = 'fixmyjs'
 " Legacy needed for es6 for some reason
 let g:fixmyjs_legacy_jshint = 1
-autocmd BufWritePost *.js,*.ts Fixmyjs
+autocmd BufWritePre *.js,*.ts Fixmyjs
 "-----------------------------------------
 " Jedi Python
 "-----------------------------------------
@@ -417,7 +417,7 @@ let g:neomake_go_enabled_makers = []
 " AutoFormat
 "-----------------------------------------
 let g:autoformat_javascript_typescript = 1
-autocmd BufWritePost *.js,*.ts Autoformat
+autocmd BufwritePre *.js,*.ts Autoformat
 "-----------------------------------------
 " VimAirline
 "-----------------------------------------
