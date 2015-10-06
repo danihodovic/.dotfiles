@@ -1,11 +1,10 @@
 {
   "libs": [
-    "browser",
-    "jquery"
+    "browser"
   ],
   "loadEagerly": [],
   "plugins": {
-    "node": {},
-    "angular": {}
-  }
+    "node": {}
+  },
+  "dontLoad": []
 }
