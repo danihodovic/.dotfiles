@@ -1,3 +1,34 @@
+Xubuntu/Lubuntu/Any system that uses xkb:
+-------------------------
+How to customize keyboard/swap keys
+-------------------------
+This can be done using xkb or xmodmap. Ubuntu and most other distros use xkb which is easier to
+setup so that it can be handled on startup and after suspension without having to fiddle with
+scripts.
+
+Many common options are predefined in xkb such as swapping esc and caps. If your options are not
+defined you probably need to fiddle with the pesky config. Here's an example of how to swap curly
+braces and square brackets on an US keyboard.
+
+1. Edit /usr/share/x11/xkb/symbols/us
+2. Find the keys you want to swap, for us it's braceleft, braceright, bracketleft, bracketright.
+   (Key names can be found using xev)
+3. Swap the keys.
+
+By default (line 30ish):
+
+    key <AD11> {	[ bracketleft,	braceleft	]	};
+    key <AD12> {	[ bracketright,	braceright	]	};
+
+After swap:
+
+    key <AD11> {	[ braceleft,	bracketleft	]	};
+    key <AD12> {	[ braceright,	bracketright	]	};
+
+If changing the system wide files you don't have to deal with startup scripts as you have to do with
+-options.
+
+
 Lubuntu:
 
 -------------------------

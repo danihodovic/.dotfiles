@@ -1,0 +1,15 @@
+! Note: Although configuring with xmodmap is easy, permanently saving changes across reboots and
+! suspends is difficult. Use xkb instead
+!
+! http://askubuntu.com/a/24930/232516
+! Swap braces and brackets
+keycode 34 shift = braceleft bracketleft
+keycode 35 shift = braceright bracketright
+
+! Swap caps and escape
+remove Lock = Caps_Lock
+remove Control = Control_L
+keysym Control_L = Caps_Lock
+keysym Caps_Lock = Control_L
+add Lock = Caps_Lock
+add Control = Control_L
