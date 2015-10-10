@@ -97,13 +97,20 @@ nnoremap <leader>P "+P
 " Copy til end of line (default is entire line - use `Y` for that)
 nnoremap Y y$
 " Movement
-nnoremap q b
-vnoremap q b
+noremap q b
+" Movement begin/end of line
+noremap Q ^
+noremap W $
+noremap 0 <nop>
+noremap $ <nop>
+noremap ^ <nop>
 " Move to next screen (vim) line instead of file line. Useful for long lines that span over two vim lines
 nnoremap j gj
 vnoremap j gj
 nnoremap k gk
 vnoremap k gk
+" Quit all
+nnoremap <leader>q qa!
 " Easier semicolon insertion
 autocmd FileType javascript,typescript,css noremap ,, :call InsertSemicolons()<CR>
 
