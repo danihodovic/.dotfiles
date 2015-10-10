@@ -146,8 +146,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " Default mapping for switching
-nnoremap <M-n> :call Switch_buffer("left")<cr>
-nnoremap <M-m> :call Switch_buffer("right")<cr>
+nnoremap <M-q> :call Switch_buffer("left")<cr>
+nnoremap <M-w> :call Switch_buffer("right")<cr>
 "Create a new buffer
 noremap <C-t> :enew<CR>
 nnoremap <C-w> :call DeleteBufferVisitPrevious()<CR>
