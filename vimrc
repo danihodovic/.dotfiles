@@ -221,6 +221,9 @@ set wrapmargin=5
 "-----------------------------------------
 " Indentation settings
 " See http://tedlogan.com/techblog3.html
+" softtabstop - number of spaces in tab character
+" tabstop - number of visual spaces in a tab
+" expandtab - tabs become spaces
 "-----------------------------------------
 " `nocindent smartindent` will allow us to omit semicolons and jump to the next line without auto indentation
 " for Javascript/Typescript
