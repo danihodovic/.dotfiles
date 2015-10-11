@@ -339,7 +339,9 @@ let g:EclimCompletionMethod = 'omnifunc'
 "-----------------------------------------
 " TernJS
 "-----------------------------------------
+autocmd FileType javascript map <buffer><F2> :TernType<cr>
 autocmd FileType javascript map <buffer><F3> :TernDef<cr>
+autocmd FileType javascript map <buffer><F4> :TernDefPreview<cr>
 autocmd FileType javascript map <buffer><leader><F3> :TernRefs<cr>
 " 'no', 'on_move', 'on_hold' - Note: on_move will cause major lag when moving!
 let g:tern_show_argument_hints = 'no'

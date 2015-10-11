@@ -25,7 +25,7 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 # Fixes colors for lxde-terminal. Useful for vim colorschemes
 export TERM="xterm-256color"
-export EDITOR=neovim
+export EDITOR=nvim
 export PYTHONSTARTUP=~/.pythonrc
 
 #--------------------------------
