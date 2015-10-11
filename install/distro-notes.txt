@@ -25,9 +25,16 @@ After swap:
     key <AD11> {	[ braceleft,	bracketleft	]	};
     key <AD12> {	[ braceright,	bracketright	]	};
 
+Clear the cache: `sudo rm /var/lib/xkb/*.xkm`
+
+Reconfigure xkb-data: `sudo  dpkg-reconfigure xkb-data`
+
+Reboot
+
 If changing the system wide files you don't have to deal with startup scripts as you have to do with
 -options.
 
+------------------------
 
 Lubuntu:
 
