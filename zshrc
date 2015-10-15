@@ -6,9 +6,13 @@ plugins=(vi-mode web-search)
 # Bindings
 # See http://www.csse.uwa.edu.au/programming/linux/zsh-doc/zsh_19.html for vi options
 #--------------------------------
+noop() {}
+zle -N noop
 bindkey -M vicmd q vi-backward-word
 bindkey -M vicmd Q vi-beginning-of-line
 bindkey -M vicmd W vi-end-of-line
+bindkey -M vicmd $ noop
+bindkey -M vicmd 0 noop
 
 #--------------------------------
 # Paths
