@@ -151,7 +151,7 @@ nnoremap <M-w> :call Switch_buffer("right")<cr>
 "Create a new buffer
 noremap <C-t> :enew<CR>
 nnoremap <C-w> :call DeleteBufferVisitPrevious()<CR>
-nnoremap <leader>b :call CopyBuffer()<CR>
+nnoremap <leader>bc :call CopyBuffer()<CR>
 " Disable this for now and get used to n-m
 "if has("gui_running")
   " Firefox like tab switching
@@ -267,7 +267,7 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 "if executable('ag')
 "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 "endif
-let g:ctrlp_match_window = 'top,order:ttb,min:1,max:25'
+let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20'
 " CtrlP Sets the current working path to a .git path
 let g:ctrlp_working_path_mode = 'ra'
 " `line`        search line
@@ -276,16 +276,16 @@ let g:ctrlp_working_path_mode = 'ra'
 " `dir`         search for directory and jump to it
 " `changes`     search recent changes
 let g:ctrlp_extensions = ['tag', 'line', 'dir']
+" Previous files
+nnoremap <leader>b :CtrlPMRU<cr>
 " CtrlPFunky key
 nnoremap <leader>f :execute 'CtrlPFunky'<CR>
 " Search functions in all open buffers
 let g:ctrlp_funky_multi_buffers = 1
-" Previous files
-nnoremap <leader>bp :CtrlPMRU<cr>
 " Ignore, note does not work if a custom `ctrlp_user_command` is used, i.e `ag`
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.?(git|hg|svn|node_modules)$',
-      \ 'file': '\v\.(exe|so|dll|pyc|patch)$',
+      \ 'file': '\v\.(exe|so|dll|pyc|patch|db)$',
       \ 'link': 'some_bad_symbolic_links',
       \ }
 "-----------------------------------------
