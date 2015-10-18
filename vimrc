@@ -81,8 +81,9 @@ set tags=./tags;
 "-----------------------------------------
 " User defined commands
 "-----------------------------------------
-" Resize vertically easier. `res` is built in, `vres` is not
-command! -nargs=? Vres vertical resize <args>
+" Resize vertically easier. `res` is built in, `vr` is not
+command! -nargs=? Vr vertical resize <args>
+command! -nargs=? Re resize <args>
 "-----------------------------------------
 " General remappings
 "-----------------------------------------
@@ -394,8 +395,12 @@ fu! Return_Or_Snippet()
 endfunction
 
 inoremap <return> <C-R>=Return_Or_Snippet()<cr>
+" Fix so that snippets show up in the completion menu, see
+" https://github.com/Valloric/YouCompleteMe/issues/1214
+let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsJumpForwardTrigger  = "<leader>w"
 let g:UltiSnipsJumpBackwardTrigger = "<leader>q"
+" Load my own snippets
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/plugged/vim-dsnippets']
 "-----------------------------------------
 " GitGutter
