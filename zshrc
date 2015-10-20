@@ -61,13 +61,24 @@ function chpwd() {
     ls
 }
 
-# Let re-use ssh-agent and/or gpg-agent between logins
-# http://www.cyberciti.biz/faq/ssh-passwordless-login-with-keychain-for-scripts/
-keychain --quiet $HOME/.ssh/id_rsa
-source $HOME/.keychain/$HOST-sh
+if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
+    echo 'Using Linux zshrc settings...'
+     # Let re-use ssh-agent and/or gpg-agent between logins
+     # http://www.cyberciti.biz/faq/ssh-passwordless-login-with-keychain-for-scripts/
+    keychain --quiet $HOME/.ssh/id_rsa
+    source $HOME/.keychain/$HOST-sh
+
+elif [[ "$(uname)" == "Darwin" ]]; then
+    echo 'Using Mac OS zshrc settings...'
+    # Use GNU coreutils instead of bsd ones
+    export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
+else
+    echo 'Unknown OS' $(uname)
+fi
+
 
 source $ZSH/oh-my-zsh.sh
+source $dotfiles/scripts/z.sh
 source $NVM_DIR/nvm.sh
 source $NVM_DIR/bash_completion
-source $dotfiles/scripts/z.sh
 source /usr/local/bin/virtualenvwrapper.sh
