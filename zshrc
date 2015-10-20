@@ -1,4 +1,4 @@
-export ZSH=/home/dani/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 ZSH_THEME="sorin"
 plugins=(vi-mode web-search)
 
