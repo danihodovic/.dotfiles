@@ -1,10 +1,18 @@
 #!/usr/bin/env bash
 
+read -p "Install Neovim ppa?"       INSTALL_NEOVIM
 read -p "Install python+pip?"       INSTALL_PYTHON
 read -p "Install Dropbox?"          INSTALL_DROPBOX
 read -p "Install bro?"              INSTALL_BRO
 read -p "Install howdoi?"           INSTALL_HOWDOI
 read -p "Install commandlinefu?"    INSTALL_CLF
+
+case $INSTALL_NEOVIM in
+    y|Y)
+        sudo apt-add-repository ppa:neovim-ppa/unstable -y
+        sudo apt-get update
+        sudo apt-get install neovim -y
+esac
 
 case $INSTALL_PYTHON in
     y|Y)
