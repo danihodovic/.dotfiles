@@ -24,3 +24,13 @@ brew cask install seil
 brew install bettertouchtool
 
 brew cask install google-chrome
+
+# Neovim with Python
+brew tap neovim/neovim
+brew install --HEAD neovim
+# This python version includes pip
+brew install python
+brew install --HEAD neovim
+pip install neovim
+
+
