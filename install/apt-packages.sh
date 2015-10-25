@@ -1,6 +1,6 @@
 read -p "Install Oracle java?"      INSTALL_JAVA
-read -p "Install suckless-tools?"   INSTALL_SUCKLESS
 read -p "Install numix?"            INSTALL_NUMIX
+read -p "Install suckless-tools?"   INSTALL_SUCKLESS
 
 sudo apt-get update
 sudo apt-get install sshfs -y
@@ -9,7 +9,6 @@ sudo apt-get install curl -y
 sudo apt-get install cmake -y
 sudo apt-get install git-extras -y
 sudo apt-get install python-dev -y
-
 # Move to next monitor scripts
 sudo apt-get install xdotool wmctrl -y
 
@@ -38,6 +37,4 @@ case $INSTALL_SUCKLESS in
         sudo apt-get install suckless-tools
         ;;
 esac
-
-
 
