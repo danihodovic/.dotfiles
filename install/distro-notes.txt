@@ -85,3 +85,14 @@ Edit .config/openbox/lubuntu-rc.xml
         <command>pactl set-sink-mute 0 toggle</command>
       </action>
     </keybind>
+
+-----------------------------------------------------------
+Mac
+-----------------------------------------------------------
+Fix C-h for tmux and Neovim, see https://github.com/neovim/neovim/issues/2048
+
+	infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
+	tic $TERM.ti
+
+-----------------------------------------------------------
+
