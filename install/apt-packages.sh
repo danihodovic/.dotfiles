@@ -3,6 +3,7 @@ read -p "Install numix?"            INSTALL_NUMIX
 read -p "Install suckless-tools?"   INSTALL_SUCKLESS
 
 sudo apt-get update
+sudo apt-get install zsh -y
 sudo apt-get install sshfs -y
 sudo apt-get install tmux -y
 sudo apt-get install curl -y
