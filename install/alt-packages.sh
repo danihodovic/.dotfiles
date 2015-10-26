@@ -1,13 +1,22 @@
 #!/usr/bin/env bash
 
 read -p "Install python+pip?"                   INSTALL_PYTHON
+read -p "Install zsh+oh-my-zsh+tmux?"           INSTALL_ZSH
 read -p "Install Neovim ppa + neovim pip?"      INSTALL_NEOVIM
 read -p "Install Dropbox?"                      INSTALL_DROPBOX
 
 case $INSTALL_PYTHON in
     y|Y)
         sudo apt-get install python -y
-        sudo wget -O - https://bootstrap.pypa.io/get-pip.py | python
+        sudo wget -O - https://bootstrap.pypa.io/get-pip.py | sudo python
+        ;;
+esac
+
+case $INSTALL_ZSH in
+    y|Y)
+        sudo apt-get install zsh -y
+        git clone git@github.com:robbyrussell/oh-my-zsh ~/.oh-my-zsh
+        sudo apt-get install tmux
         ;;
 esac
 
@@ -18,9 +27,12 @@ case $INSTALL_NEOVIM in
         sudo apt-get install neovim -y
         hash pip 2>/dev/null
         if [ $? -eq 1 ]; then
-            sudo wget -O - https://bootstrap.pypa.io/get-pip.py | python
+            sudo wget -O - https://bootstrap.pypa.io/get-pip.py | sudo python
         fi
         sudo pip install neovim
+        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        ;;
 esac
 
 case $INSTALL_DROPBOX in
