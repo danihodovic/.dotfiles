@@ -4,8 +4,10 @@ read -p "Install suckless-tools?"   INSTALL_SUCKLESS
 
 sudo apt-get update
 sudo apt-get install zsh -y
-sudo apt-get install sshfs -y
 sudo apt-get install tmux -y
+# Allows copy from tmux
+sudo apt-get install xclip
+sudo apt-get install sshfs -y
 sudo apt-get install curl -y
 sudo apt-get install cmake -y
 sudo apt-get install git-extras -y
