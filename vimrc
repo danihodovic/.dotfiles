@@ -434,7 +434,7 @@ let g:neomake_go_enabled_makers = []
 " AutoFormat
 "-----------------------------------------
 let g:autoformat_javascript_typescript = 1
-autocmd BufwritePre *.js,*.ts Autoformat
+" autocmd BufwritePre *.js,*.ts Autoformat
 "-----------------------------------------
 " VimAirline
 "-----------------------------------------
