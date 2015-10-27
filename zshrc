@@ -20,6 +20,7 @@ bindkey -M vicmd 0 noop
 export dotfiles=~/.dotfiles
 export repos=~/repos
 export plugged=~/.vim/plugged
+export PATH=$PATH:/opt/nvim-qt
 export GOROOT=/opt/go
 export GOPATH=/opt/go_pkg
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
@@ -35,7 +36,6 @@ export PYTHONSTARTUP=~/.pythonrc
 #--------------------------------
 # Aliases
 #--------------------------------
-alias sh="bash"
 alias gno="gnome-open"
 alias reboot="sudo reboot"
 alias cd.="cd .."
@@ -48,10 +48,9 @@ alias aptupgrade="sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get
 alias xkbmapcaps="setxkbmap -option caps:swapescape"
 alias ddmenu="dmenu_run -fn '-*-fixed-*-*-*-*-20-*-*-*-*-*-*-*' -l 5 -i"
 alias vi='nvim'
-alias gvi='/opt/nvim-qt/nvim-qt'
 alias gs='git status'
 alias g="grep"
-alias example=bro
+alias example='bro'
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
 
@@ -65,8 +64,8 @@ if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     echo 'Using Linux zshrc settings...'
      # Let re-use ssh-agent and/or gpg-agent between logins
      # http://www.cyberciti.biz/faq/ssh-passwordless-login-with-keychain-for-scripts/
-    keychain --quiet $HOME/.ssh/id_rsa
-    source $HOME/.keychain/$HOST-sh
+    #keychain --quiet $HOME/.ssh/id_rsa
+    #source $HOME/.keychain/$HOST-sh
 
 elif [[ "$(uname)" == "Darwin" ]]; then
     echo 'Using Mac OS zshrc settings...'
