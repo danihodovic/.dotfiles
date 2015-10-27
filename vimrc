@@ -113,7 +113,7 @@ vnoremap k gk
 " Quit all
 nnoremap <leader>q qa!
 " Easier semicolon insertion
-autocmd FileType javascript,typescript,css noremap ,, :call InsertSemicolons()<CR>
+autocmd FileType javascript,typescript,css noremap ;; :call InsertSemicolons()<CR>
 
 fu! InsertSemicolons()
   let currentmode = mode()
@@ -154,11 +154,11 @@ noremap <C-t> :enew<CR>
 nnoremap <C-w> :call DeleteBufferVisitPrevious()<CR>
 nnoremap <leader>bc :call CopyBuffer()<CR>
 " Disable this for now and get used to n-m
-"if has("gui_running")
+if has("gui_running")
   " Firefox like tab switching
-  "noremap <C-S-tab> :call Switch_buffer("left")()<cr>
-  "noremap <C-tab> :call Switch_buffer("right")()<cr>
-"endif
+  noremap <C-S-tab> :call Switch_buffer("left")()<cr>
+  noremap <C-tab> :call Switch_buffer("right")()<cr>
+endif
 " Close buffer without closing window
 " See http://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
 if has("nvim")
@@ -355,7 +355,7 @@ let g:tern_show_signature_in_pum = 1
 let g:fixmyjs_engine = 'fixmyjs'
 " Legacy needed for es6 for some reason
 let g:fixmyjs_legacy_jshint = 1
-autocmd BufWritePre *.js,*.ts Fixmyjs
+"autocmd BufWritePre *.js,*.ts Fixmyjs
 "-----------------------------------------
 " Jedi Python
 "-----------------------------------------
