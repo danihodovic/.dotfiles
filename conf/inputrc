@@ -10,10 +10,11 @@ set keymap vi-command
 ##################################
 Control-l: clear-screen
 "q": vi-backward-word
+"v": ""
 ##################################
 set keymap vi-insert
 ##################################
-Control-l: clear-screen 
+Control-l: clear-screen
 
 
 $endif
