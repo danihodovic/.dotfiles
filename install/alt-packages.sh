@@ -30,7 +30,12 @@ case $INSTALL_NEOVIM in
             sudo wget -O - https://bootstrap.pypa.io/get-pip.py | sudo python
         fi
         sudo pip install neovim
-        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        # create the neovim dir
+        mkdir ~/.config/nvim
+        # neovim stores backup files here but that directory isn't created by default
+        mkdir ~/.local/share/nvim/backup
+        ln -s ~/.dotfiles/vimrc ~/.config/nvim/init.vim
+        curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         ;;
 esac
