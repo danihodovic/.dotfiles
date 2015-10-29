@@ -95,13 +95,9 @@ Fix C-h for tmux and Neovim, see https://github.com/neovim/neovim/issues/2048
 	tic $TERM.ti
 
 -----------------------------------------------------------
-Native Xubuntu on Mac
------------------------------------------------------------
-Swapping fn-ctrl
+Vagrant nfs on linux
 ---
-Install https://github.com/free5lot/hid-apple-patched
----
-
+sudo apt-get install nfs-kernel-server
 
 Vagrant issue when copying a Mac setup to Linux
 ---
