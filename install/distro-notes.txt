@@ -95,6 +95,9 @@ Fix C-h for tmux and Neovim, see https://github.com/neovim/neovim/issues/2048
 	tic $TERM.ti
 
 -----------------------------------------------------------
+Vagrant nfs on linux
+---
+sudo apt-get install nfs-kernel-server
 
 Vagrant issue when copying a Mac setup to Linux:
 replace
