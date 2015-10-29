@@ -95,9 +95,18 @@ Fix C-h for tmux and Neovim, see https://github.com/neovim/neovim/issues/2048
 	tic $TERM.ti
 
 -----------------------------------------------------------
+Native Xubuntu on Mac
+-----------------------------------------------------------
+Swapping fn-ctrl
+---
+Install https://github.com/free5lot/hid-apple-patched
+---
 
-Vagrant issue when copying a Mac setup to Linux:
+
+Vagrant issue when copying a Mac setup to Linux
+---
 replace
     config.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['actimeo=1'], nfs_version: 4
 with
     config.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['actimeo=1,v3']
+---
