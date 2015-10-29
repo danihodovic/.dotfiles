@@ -14,9 +14,12 @@ esac
 
 case $INSTALL_ZSH in
     y|Y)
+        echo "Installing zsh and oh-my-zsh"
         sudo apt-get install zsh -y
         git clone git@github.com:robbyrussell/oh-my-zsh ~/.oh-my-zsh
+        echo "Installing tmux and tpm"
         sudo apt-get install tmux
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
         ;;
 esac
 
