@@ -207,8 +207,8 @@ highlight SearchFlash guibg=red ctermfg=yellow ctermbg=black
 "-----------------------------------------
 " Text width settings
 "-----------------------------------------
-set textwidth=100
-set colorcolumn=100
+set textwidth=80
+set colorcolumn=80
 autocmd FileType gitcommit setlocal textwidth=72
 autocmd FileType gitcommit setlocal colorcolumn=72
 " Sets the colorcolumn only in active windows
