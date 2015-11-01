@@ -3,7 +3,6 @@
 read -p "Install python+pip?"                   INSTALL_PYTHON
 read -p "Install zsh+oh-my-zsh+tmux?"           INSTALL_ZSH
 read -p "Install Neovim ppa + neovim pip?"      INSTALL_NEOVIM
-read -p "Install Dropbox?"                      INSTALL_DROPBOX
 
 case $INSTALL_PYTHON in
     y|Y)
@@ -43,11 +42,3 @@ case $INSTALL_NEOVIM in
         ;;
 esac
 
-case $INSTALL_DROPBOX in
-    y|Y)
-        sudo apt-get install python-gtk2
-        wget -O tempfile https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.02.12_amd64.deb
-        sudo dpkg -i tempfile
-        dropbox start -i
-        rm tempfile ;;
-esac
