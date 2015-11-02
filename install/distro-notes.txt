@@ -102,6 +102,30 @@ Swapping fn-ctrl
 Install https://github.com/free5lot/hid-apple-patched
 ---
 
+Swapping command-option
+---
+https://help.ubuntu.com/community/AppleKeyboard#Mapping_keys_.28Insert.2C_Alt.2C_Cmd.2C_etc..29
+
+Taken from help.ubuntu.com
+---
+```
+Methods described in this section will change the behavior permanently. There are several ways to proceed with this modification. Each sub-section describes one way to permanently change the configuration.
+
+With .conf file (Recommended)
+1. Run the following command to append the configuration line to the file /etc/modprobe.d/hid_apple.conf creating it if necessary:
+
+$ echo options hid_apple swap_opt_cmd=1 | sudo tee -a /etc/modprobe.d/hid_apple.conf
+2. Trigger copying the configuration into the initramfs bootfile.
+
+$ sudo update-initramfs -u -k all
+3. Optionally, reboot
+
+$ sudo reboot
+```
+---
+
+
+
 Vagrant nfs on linux
 ---
 sudo apt-get install nfs-kernel-server
