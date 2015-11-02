@@ -64,7 +64,7 @@ alias ddmenu="dmenu_run -fn '-*-fixed-*-*-*-*-20-*-*-*-*-*-*-*' -l 5 -i"
 alias vi='nvim'
 alias gs='git status'
 alias gdiff='git diff'
-alias glog='git log'
+alias gl='git log'
 alias g="grep"
 alias example='bro'
 # Allows 256 colors as background in terminal, used for Vi
