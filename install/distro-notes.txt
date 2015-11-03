@@ -97,6 +97,26 @@ Fix C-h for tmux and Neovim, see https://github.com/neovim/neovim/issues/2048
 -----------------------------------------------------------
 Native Xubuntu on Mac
 -----------------------------------------------------------
+
+macfanctld - Daemon that reads temperature and adjusts the fan speed
+---
+Installing macfanctld to keep it from overheating
+Run it in the foreground
+	sudo apt-get install macfanctld
+	sudo macfanctld -f
+
+---
+
+Reducing brightness
+---
+Run xrandr to find the connected display
+	xrandr -q | grep connected
+Reduce the brightness of the ePS display
+
+	xrandr --ouput <ePS?> --brightness 0.5
+
+
+
 Swapping fn-ctrl
 ---
 Install https://github.com/free5lot/hid-apple-patched
