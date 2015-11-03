@@ -23,7 +23,7 @@ Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Valloric/MatchTagAlways'
 Plug 'ap/vim-css-color'
-"Plug 'lfilho/cosco.vim'
+Plug 'rking/ag.vim'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
@@ -248,6 +248,10 @@ autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandt
 "-----------------------------------------
 " Plugin specific settings
 "-----------------------------------------
+" Ag.vim
+"-----------------------------------------
+let g:ag_working_path_mode="r"
+"-----------------------------------------
 " EasyMotion
 "-----------------------------------------
 " Disable default mappings
@@ -262,6 +266,12 @@ map s <Plug>(easymotion-sn)
 "-----------------------------------------
 " CtrlP/CtrlPFunky
 "-----------------------------------------
+" Ignore, note does not work if a custom `ctrlp_user_command` is used, i.e `ag`
+let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/]\.?(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll|pyc|patch|db)$',
+      \ 'link': 'some_bad_symbolic_links',
+      \ }
 " Cache dir
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 " Use ag (faster ack) for searching files
@@ -277,18 +287,14 @@ let g:ctrlp_working_path_mode = 'ra'
 " `dir`         search for directory and jump to it
 " `changes`     search recent changes
 let g:ctrlp_extensions = ['tag', 'line', 'dir']
-" Previous files
+" Recent files
 nnoremap <leader>mr :CtrlPMRU<cr>
-" CtrlPFunky key
+" Open buffers
+nnoremap <leader>br :CtrlPBuffer<cr>
+" CtrlPFunky function
 nnoremap <leader>f :execute 'CtrlPFunky'<CR>
 " Search functions in all open buffers
 let g:ctrlp_funky_multi_buffers = 1
-" Ignore, note does not work if a custom `ctrlp_user_command` is used, i.e `ag`
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.?(git|hg|svn|node_modules)$',
-      \ 'file': '\v\.(exe|so|dll|pyc|patch|db)$',
-      \ 'link': 'some_bad_symbolic_links',
-      \ }
 "-----------------------------------------
 " YouCompleteMe
 "-----------------------------------------
