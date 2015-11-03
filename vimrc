@@ -56,7 +56,7 @@ set title
 " Line number
 set number
 " Relative line numbers for faster movement
-set relativenumber
+set norelativenumber
 " Disables the bottom bar which shows modes and allows plugins (tern - types) to display information
 " See https://github.com/marijnh/tern_for_vim/blob/master/doc/tern.txt#L135
 " This only displays in insert and visual mode and is useless anyway because Airline displays the
