@@ -251,6 +251,7 @@ autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandt
 " Ag.vim
 "-----------------------------------------
 let g:ag_working_path_mode="r"
+nnoremap <leader>ag :Ag -Q
 "-----------------------------------------
 " EasyMotion
 "-----------------------------------------
