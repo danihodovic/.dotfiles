@@ -291,7 +291,7 @@ let g:ctrlp_extensions = ['tag', 'line', 'dir']
 " Recent files
 nnoremap <leader>mr :CtrlPMRU<cr>
 " Open buffers
-nnoremap <leader>br :CtrlPBuffer<cr>
+nnoremap <C-b> :CtrlPBuffer<cr>
 " CtrlPFunky function
 nnoremap <leader>f :execute 'CtrlPFunky'<CR>
 " Search functions in all open buffers
