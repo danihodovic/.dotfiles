@@ -65,7 +65,7 @@ alias vi='nvim'
 alias gs='git status'
 alias gd='git diff'
 alias gl='git log'
-alias g="grep"
+alias ga='git add'
 alias example='bro'
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
