@@ -288,10 +288,13 @@ let g:ctrlp_working_path_mode = 'ra'
 " `dir`         search for directory and jump to it
 " `changes`     search recent changes
 let g:ctrlp_extensions = ['tag', 'line', 'dir']
+" All files
+"nnoremap <M-p> :CtrlP<cr>
+let g:ctrlp_map = '<M-p>'
+" Open buffers
+nnoremap <C-p> :CtrlPBuffer<cr>
 " Recent files
 nnoremap <leader>mr :CtrlPMRU<cr>
-" Open buffers
-nnoremap <C-b> :CtrlPBuffer<cr>
 " CtrlPFunky function
 nnoremap <leader>f :execute 'CtrlPFunky'<CR>
 " Search functions in all open buffers
@@ -485,6 +488,8 @@ let g:AutoPairsMultilineClose = 0
 let g:AutoPairsShortcutFastWrap = "<leader>r"
 " Jump to next closed pair
 let g:AutoPairsShortcutJump = "<leader>n"
+" Disable this
+let g:AutoPairsShortcutToggle = ''
 "-----------------------------------------
 " NERDCommenter
 "-----------------------------------------
