@@ -242,7 +242,7 @@ autocmd FileType python                 setlocal  shiftwidth=4 tabstop=4 expandt
 autocmd FileType go                     setlocal  shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType erlang                 setlocal  shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType make                   setlocal  shiftwidth=4 tabstop=4 noexpandtab
-autocmd FileType sh                     setlocal  shiftwidth=4 tabstop=4 expandtab
+autocmd FileType sh,bash,zsh            setlocal  shiftwidth=4 tabstop=4 expandtab
 autocmd FileType php                    setlocal  shiftwidth=4 tabstop=4 expandtab
 autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandtab
 "-----------------------------------------
