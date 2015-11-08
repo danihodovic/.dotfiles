@@ -296,6 +296,8 @@ let g:ctrlp_map = '<M-p>'
 nnoremap <C-p> :CtrlPBuffer<cr>
 " Recent files
 nnoremap <leader>mr :CtrlPMRU<cr>
+" CTags
+nnoremap <M-t> :CtrlPTag<cr>
 " CtrlPFunky function
 nnoremap <leader>f :execute 'CtrlPFunky'<CR>
 " Search functions in all open buffers
