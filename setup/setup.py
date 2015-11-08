@@ -8,15 +8,16 @@ import argparse
 home    = os.path.expanduser("~")
 confDir = os.path.expanduser("~/.dotfiles/conf")
 
-confFiles = ['inputrc', 'tmux.conf', 'sqliterc', 'jshintrc', 'pylintrc', 'pythonrc', 'jsbeautifyrc',
-             'tern-config']
+confFiles = ['inputrc', 'tmux.conf', 'sqliterc', 'jshintrc', 'pylintrc',
+    'pythonrc', 'jsbeautifyrc', 'tern-config']
 
-# DONT include ~/.bashrc here. Remember that we use the default bashrc which sources our bashrc
+# DONT include ~/.bashrc here. Remember that we use the default bashrc which
+# sources our bashrc
+# DONT include vim stuff here. Neovim and Vim have different setups nowadays so
+# it's not as easy as slapping on symlinks. The nvim setup is done in the
+# installation scripts and I don't use vim anymore
 others = {
     '~/.dotfiles/zshrc': '~/.zshrc',
-    '~/.dotfiles/vimrc' : '~/.vimrc',
-    '~/.vimrc': '~/.nvimrc',
-    '~/.vim': '~/.nvim'
     }
 
 # Expand the strings to real paths

@@ -2,7 +2,7 @@
 " Vim Plug
 "-----------------------------------------
 set nocompatible
-call plug#begin('~/.vim/plugged')
+call plug#begin('$NVIM_DIR/plugged')
 "-----------------------------------------
 " General plugins
 "-----------------------------------------
