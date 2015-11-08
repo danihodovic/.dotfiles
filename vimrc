@@ -24,6 +24,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'Valloric/MatchTagAlways'
 Plug 'ap/vim-css-color'
 Plug 'rking/ag.vim'
+Plug 'othree/yajs.vim'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
