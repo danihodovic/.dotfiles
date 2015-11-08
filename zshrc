@@ -26,9 +26,19 @@ export PYTHONSTARTUP=~/.pythonrc
 # Source these before our own `bindkeys` so that we can override stuff
 source $ZSH/oh-my-zsh.sh
 source $dotfiles/scripts/z.sh
-source $NVM_DIR/nvm.sh
-source $NVM_DIR/bash_completion
-source /usr/local/bin/virtualenvwrapper.sh
+
+if [ -f $NVM_DIR/nvm.sh ]; then
+    source $NVM_DIR/nvm.sh
+fi
+
+if [ -f $NVM_DIR/bash_completion ]; then
+    source $NVM_DIR/bash_completion
+fi
+
+hash virtualenvwrapper 2>/dev/null
+if [ $? -eq 1 ]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 # Bindings
 # ------------
