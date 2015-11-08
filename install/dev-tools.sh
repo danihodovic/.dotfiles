@@ -6,13 +6,6 @@ read -p "Install Neovim ppa + neovim pip?"      INSTALL_NEOVIM
 
 set -e
 
-case $INSTALL_PYTHON in
-    y|Y)
-        sudo apt-get install python -y
-        sudo wget -O - https://bootstrap.pypa.io/get-pip.py | sudo python
-        ;;
-esac
-
 case $INSTALL_ZSH in
     y|Y)
         echo "Installing zsh and oh-my-zsh"
