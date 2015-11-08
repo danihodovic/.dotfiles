@@ -95,7 +95,7 @@ Fix C-h for tmux and Neovim, see https://github.com/neovim/neovim/issues/2048
 	tic $TERM.ti
 
 -----------------------------------------------------------
-Native Xubuntu on Mac
+Native Xubuntu/Cinnamon on Mac
 -----------------------------------------------------------
 
 macfanctld - Daemon that reads temperature and adjusts the fan speed
@@ -152,3 +152,39 @@ replace
     config.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['actimeo=1'], nfs_version: 4
 with
     config.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['actimeo=1,v3']
+
+---
+HIDPI
+---
+Works by default using cinnamon. Either install Linux mint or install the
+cinnamon ppa - ppa:kranich/cinnamon
+
+
+
+---
+General power management
+---
+Install tlp:
+http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html
+	apt-add-repository ppa:linrunner/tlp
+	tlp start
+Tlp will run on startup by default. In order to check if it's running try
+	sudo tlp-stat
+
+
+-------------------------
+Useful commands for loading/unloading kernel drivers
+-------------------------
+
+identify wifi card
+	# Look for `Kernel driver in use: <here>` on the last line
+	lspci -vvnn | grep -A 9 Network
+list all PCI devices
+	# -vv is very verbose. Prints useful info nicely
+	# Look for the Network category
+	lspci -vv
+remove kernel module
+	sudo modprobe -r <module>
+list loaded kernel modules
+	lsmod
+
