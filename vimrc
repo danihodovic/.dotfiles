@@ -252,7 +252,7 @@ autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandt
 " Ag.vim
 "-----------------------------------------
 let g:ag_working_path_mode="r"
-nnoremap <leader>ag :Ag -Q
+nnoremap <leader>ag :Ag -t -Q
 "-----------------------------------------
 " EasyMotion
 "-----------------------------------------
@@ -274,6 +274,12 @@ let g:ctrlp_custom_ignore = {
       \ 'file': '\v\.(exe|so|dll|pyc|patch|db)$',
       \ 'link': 'some_bad_symbolic_links',
       \ }
+let g:ctrlp_buftag_types = {
+  \ 'javascript' : {
+    \ 'bin': 'jsctags',
+    \ 'args': '-f -',
+    \ },
+  \ }
 " Cache dir
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 " Use ag (faster ack) for searching files

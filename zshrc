@@ -77,6 +77,7 @@ alias gs='git status'
 alias gd='git diff'
 alias gl='git log'
 alias ga='git add'
+alias gf='git fetch'
 alias example='bro'
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
