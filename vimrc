@@ -23,8 +23,10 @@ Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Valloric/MatchTagAlways'
 Plug 'ap/vim-css-color'
-Plug 'rking/ag.vim'
+Plug 'gabesoft/vim-ags'
+" Todo: Make this below work with ctrlp
 Plug 'othree/yajs.vim'
+
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
