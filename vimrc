@@ -420,7 +420,7 @@ let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsJumpForwardTrigger  = "<leader>w"
 let g:UltiSnipsJumpBackwardTrigger = "<leader>q"
 " Load my own snippets
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/plugged/vim-dsnippets']
+let g:UltiSnipsSnippetDirectories=[$NVIM_DIR.'/plugged/vim-dsnippets']
 "-----------------------------------------
 " GitGutter
 "-----------------------------------------
