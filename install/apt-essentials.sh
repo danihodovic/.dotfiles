@@ -10,3 +10,4 @@ sudo apt-get install \
     cmake \
     python-dev \
     xdotool wmctrl \
+    -y
