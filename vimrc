@@ -90,6 +90,8 @@ command! -nargs=? Re resize <args>
 "-----------------------------------------
 " General remappings
 "-----------------------------------------
+"TODO: Add remappings for vim command mode and insert mode for moving around and
+"deleting previous/next.
 let mapleader = ","
 " System clipboard c/p
 vnoremap <leader>y "+y
@@ -117,22 +119,6 @@ vnoremap k gk
 nnoremap <leader>q qa!
 " Easier semicolon insertion
 autocmd FileType javascript,typescript,css noremap ;; :call InsertSemicolons()<CR>
-
-fu! InsertSemicolons()
-  let currentmode = mode()
-  let l = line(".")
-  let c = col(".")
-  let currLine = getline('.')
-  " If we are in normal mode and the last character is not ;
-  " This for some reason works for visual line mode too. Select multiple and it inserts on all
-  " despite the normal mode check
-  " Note: vim has weird regexes. you need to escape '\|' and not '('. See `:h \v`
-  " Currline is not ( or { or ; or not empty
-  if currentmode == 'n' && currLine !~ '\v(\(|\{|;)\s*$' && currLine !~ '^$'
-    execute "normal! A;\<esc>"
-    call cursor(l, c)
-  endif
-endfu!
 " Don't map this to tab since it blocks the jumplist. There is no way to remap <C-i> or <tab>
 " programatically it seems
 nnoremap <space> %
@@ -156,6 +142,13 @@ nnoremap <M-w> :call Switch_buffer("right")<cr>
 noremap <C-t> :enew<CR>
 nnoremap <C-w> :call DeleteBufferVisitPrevious()<CR>
 nnoremap <leader>bc :call CopyBuffer()<CR>
+" Blink the current word when switching search words
+nnoremap <silent> n   n:call HLNext(0.1)<cr>
+nnoremap <silent> N   N:call HLNext(0.1)<cr>
+" Clear highlight with enter
+nnoremap <esc><esc> :noh<cr><esc>
+" Search selected text, not only words as with `*`
+vnoremap // y/<C-R>"<CR>
 " Disable this for now and get used to n-m
 if has("gui_running")
   " Firefox like tab switching
@@ -185,13 +178,6 @@ filetype plugin indent on
 "-----------------------------------------
 " Highlight search
 set hlsearch
-" Blink the current word when switching search words
-nnoremap <silent> n   n:call HLNext(0.1)<cr>
-nnoremap <silent> N   N:call HLNext(0.1)<cr>
-" Clear highlight with enter
-nnoremap <esc><esc> :noh<cr><esc>
-" Search selected text, not only words as with `*`
-vnoremap // y/<C-R>"<CR>
 " Show search while typing
 set incsearch
 " Ignore case
@@ -254,7 +240,7 @@ autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandt
 " Ag.vim
 "-----------------------------------------
 let g:ag_working_path_mode="r"
-nnoremap <leader>ag :Ag -t -Q
+nnoremap <leader>ag :Ags -Qt
 "-----------------------------------------
 " EasyMotion
 "-----------------------------------------
@@ -611,3 +597,19 @@ function! Get_visual_selection()
   let lines[0] = lines[0][col1 - 1:]
   return join(lines, "\n")
 endfunction
+
+fu! InsertSemicolons()
+  let currentmode = mode()
+  let l = line(".")
+  let c = col(".")
+  let currLine = getline('.')
+  " If we are in normal mode and the last character is not ;
+  " This for some reason works for visual line mode too. Select multiple and it inserts on all
+  " despite the normal mode check
+  " Note: vim has weird regexes. you need to escape '\|' and not '('. See `:h \v`
+  " Currline is not ( or { or ; or not empty
+  if currentmode == 'n' && currLine !~ '\v(\(|\{|;)\s*$' && currLine !~ '^$'
+    execute "normal! A;\<esc>"
+    call cursor(l, c)
+  endif
+endfu!
