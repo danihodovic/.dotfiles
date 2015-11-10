@@ -22,11 +22,12 @@ case $INSTALL_NEOVIM in
         # Check so that the env var is set. This probably means our dotfiles are
         # installed. -z checks that the length of the env var is > 0
         if [ -z "$NVIM_DIR" ]; then
-            echo "Setup your dotfiles before attempting to install.."
+            echo "Setup your dotfiles and source zshrc before attempting to install.."
             exit 1
         fi
 
         if [ ! -d "$NVIM_DIR" ]; then
+            echo "...Setting up nvim directories and symlinks..."
             mkdir -p ~/.config/nvim
             # We can assume dotfiles are set because of $NVIM_DIR being set
             ln -s ~/.dotfiles/vimrc ~/.config/init.vim
