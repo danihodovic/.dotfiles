@@ -7,7 +7,7 @@ call plug#begin('$NVIM_DIR/plugged')
 " General plugins
 "-----------------------------------------
 Plug 'Valloric/YouCompleteMe'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 Plug 'scrooloose/nerdtree'
 Plug 'flazz/vim-colorschemes'
@@ -26,7 +26,6 @@ Plug 'ap/vim-css-color'
 Plug 'gabesoft/vim-ags'
 " Todo: Make this below work with ctrlp
 Plug 'othree/yajs.vim'
-
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
@@ -264,8 +263,7 @@ let g:ctrlp_custom_ignore = {
       \ }
 let g:ctrlp_buftag_types = {
   \ 'javascript' : {
-    \ 'bin': 'jsctags',
-    \ 'args': '-f -',
+    \ 'args': '--language-force=JavaScript --javascript-types=fcmp',
     \ },
   \ }
 " Cache dir
