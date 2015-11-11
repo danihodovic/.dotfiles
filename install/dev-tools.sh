@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-read -p "Install python+pip?"                   INSTALL_PYTHON
 read -p "Install zsh+oh-my-zsh+tmux?"           INSTALL_ZSH
 read -p "Install Neovim ppa + neovim pip?"      INSTALL_NEOVIM
 
