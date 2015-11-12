@@ -43,11 +43,32 @@ fi
 
 # Bindings
 # ------------
-# See http://www.csse.uwa.edu.au/programming/linux/zsh-doc/zsh_19.html
-# for vi options
-# See http://sgeb.io/articles/zsh-zle-closer-look-custom-widgets/ for how to
-# write widgets
+# General vi-options:
+# zle -la
+# http://www.csse.uwa.edu.au/programming/linux/zsh-doc/zsh_19.html
+#
+# How to make custom widgets:
+# http://sgeb.io/articles/zsh-zle-closer-look-custom-widgets/
+# http://dougblack.io/words/zsh-vi-mode.html
+#
+# Also for visual vi-mode see http://stackoverflow.com/a/13881077/2966951
+#
 # Modes: viins, vicmd
+
+# By default, there is a 0.4 second delay after you hit the <ESC>
+# key and when the mode change is registered. This results in a
+# very jarring and frustrating transition between modes. Let's reduce
+# this delay to 0.1 seconds.
+export KEYTIMEOUT=1
+
+# Show the vi mode you're in
+function zle-line-init zle-keymap-select {
+    RPS1="${${KEYMAP/vicmd/[NORMAL]}/(main|viins)/[INSERT]}"
+    RPS2=$RPS1
+    zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 # Move to the end of the line and exclude whitespace
 function d-end-of-line-no-whitespace {
@@ -58,6 +79,8 @@ zle -N d-end-of-line-no-whitespace
 
 function noop {}
 zle -N noop
+
+bindkey -M viins '^r' history-incremental-search-backward
 
 bindkey -M vicmd q vi-backward-word
 bindkey -M vicmd Q vi-beginning-of-line
