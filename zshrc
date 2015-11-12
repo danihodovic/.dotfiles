@@ -1,10 +1,10 @@
-export ZSH=~/.oh-my-zsh
-ZSH_THEME="sorin"
-plugins=(vi-mode web-search)
-
 # Paths
 # ------------
 # Export paths before sourcing anything
+
+# Fixes colors for lxde-terminal. Useful for vim colorschemes
+# Also, if you put this in "" then apparantly backspace won't work
+export TERM=xterm-256color
 export dotfiles=~/.dotfiles
 export repos=~/repos
 export plugged=~/.vim/plugged
@@ -16,16 +16,20 @@ export NVM_DIR=~/.nvm
 export PATH=$PATH:/opt/eclipse
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
-# Fixes colors for lxde-terminal. Useful for vim colorschemes
-export TERM="xterm-256color"
 export EDITOR=nvim
 export NVIM_DIR=~/.config/nvim
 export PYTHONSTARTUP=~/.pythonrc
 
+source ~/.antigen/antigen.zsh
+
+antigen use oh-my-zsh
+antigen bundle zsh-users/zsh-syntax-highlighting
+#ZSH_THEME="sorin"
+antigen theme robbyrussell/oh-my-zsh themes/apple
+
 # External scripts
 # ------------
 # Source these before our own `bindkeys` so that we can override stuff
-source $ZSH/oh-my-zsh.sh
 source $dotfiles/scripts/z.sh
 
 if [ -f $NVM_DIR/nvm.sh ]; then
@@ -55,6 +59,9 @@ fi
 #
 # Modes: viins, vicmd
 
+# Set vi-mode
+bindkey -v
+
 # By default, there is a 0.4 second delay after you hit the <ESC>
 # key and when the mode change is registered. This results in a
 # very jarring and frustrating transition between modes. Let's reduce
@@ -71,13 +78,13 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 
 # Move to the end of the line and exclude whitespace
-function d-end-of-line-no-whitespace {
+function end-of-line-no-whitespace {
     zle vi-end-of-line
-    zle vi-backward-blank-word-end
+    zle vi-backward-word-end
 }
-zle -N d-end-of-line-no-whitespace
+zle -N end-of-line-no-whitespace
 
-function noop {}
+noop () {}
 zle -N noop
 
 bindkey -M viins '^r' history-incremental-search-backward
