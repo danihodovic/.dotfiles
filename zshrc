@@ -45,12 +45,23 @@ fi
 # ------------
 # See http://www.csse.uwa.edu.au/programming/linux/zsh-doc/zsh_19.html
 # for vi options
+# See http://sgeb.io/articles/zsh-zle-closer-look-custom-widgets/ for how to
+# write widgets
 # Modes: viins, vicmd
-noop() {}
+
+# Move to the end of the line and exclude whitespace
+function d-end-of-line-no-whitespace {
+    zle vi-end-of-line
+    zle vi-backward-blank-word-end
+}
+zle -N d-end-of-line-no-whitespace
+
+function noop {}
 zle -N noop
+
 bindkey -M vicmd q vi-backward-word
 bindkey -M vicmd Q vi-beginning-of-line
-bindkey -M vicmd W vi-end-of-line
+bindkey -M vicmd W end-of-line-no-whitespace
 bindkey -M vicmd $ noop
 bindkey -M vicmd 0 noop
 # v opens editor by default because of the vi-mode plugin
