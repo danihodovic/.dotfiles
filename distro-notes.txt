@@ -55,6 +55,14 @@ Example:
 Rerun `openbox --reconfigure`
 
 -------------------------
+Add a keychain and ssh-agent so that you don't need to re-enter passwords
+-------------------------
+http://www.cyberciti.biz/faq/ssh-passwordless-login-with-keychain-for-scripts/
+	keychain --quiet $HOME/.ssh/id_rsa
+	source $HOME/.keychain/$HOST-sh
+-------------------------
+
+-------------------------
 How to fix Skype:
 -------------------------
 Turn PulseAudio autospawn off, normally: $ echo "autospawn = no" > ~/.pulse/client.conf
