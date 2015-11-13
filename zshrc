@@ -23,6 +23,7 @@ export PYTHONSTARTUP=~/.pythonrc
 # Antigen
 source ~/.antigen/antigen.zsh
 
+# Plugins
 antigen use oh-my-zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen theme robbyrussell/oh-my-zsh themes/apple # sorin
@@ -49,7 +50,7 @@ if [ -f $NVM_DIR/bash_completion ]; then
 fi
 
 hash virtualenvwrapper 2>/dev/null
-if [ $? -eq 1 ]; then
+if [ $? == 0 ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
