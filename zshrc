@@ -55,8 +55,8 @@ fi
 
 # Bindings
 # ------------
-# General vi-options:
-# zle -la
+# Find all options:                 zle -la
+# To find out how a key is mapped:  bindkey <key>
 # http://www.csse.uwa.edu.au/programming/linux/zsh-doc/zsh_19.html
 #
 # How to make custom widgets:
@@ -95,14 +95,18 @@ zle -N end-of-line-no-whitespace
 noop () {}
 zle -N noop
 
+# Fix backspace delete in vi-mode
+# http://www.zsh.org/mla/users/2009/msg00812.html
+bindkey "^?" backward-delete-char
+
 # v opens editor by default because of the vi-mode plugin in oh-my-zsh
 # https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/vi-mode/vi-mode.plugin.zsh#L32
 bindkey -M vicmd v noop
 bindkey -M vicmd q vi-backward-word
-bindkey -M vicmd Q vi-beginning-of-line
-bindkey -M vicmd W end-of-line-no-whitespace
-bindkey -M vicmd $ noop
 bindkey -M vicmd 0 noop
+bindkey -M vicmd Q vi-beginning-of-line
+bindkey -M vicmd $ noop
+bindkey -M vicmd W end-of-line-no-whitespace
 
 bindkey -M viins '^r' history-incremental-search-backward
 
