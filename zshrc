@@ -3,7 +3,6 @@
 # Export paths before sourcing anything
 
 # Fixes colors for lxde-terminal. Useful for vim colorschemes
-# Also, if you put this in "" then apparantly backspace won't work
 export TERM=xterm-256color
 export dotfiles=~/.dotfiles
 export repos=~/repos
@@ -20,12 +19,21 @@ export EDITOR=nvim
 export NVIM_DIR=~/.config/nvim
 export PYTHONSTARTUP=~/.pythonrc
 
+
+# Antigen
 source ~/.antigen/antigen.zsh
 
 antigen use oh-my-zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
-#ZSH_THEME="sorin"
-antigen theme robbyrussell/oh-my-zsh themes/apple
+antigen theme robbyrussell/oh-my-zsh themes/apple # sorin
+antigen bundle djui/alias-tips
+
+# Useful but unused
+# antigen bundle b4b4r07/enhancd
+# antigen bundle Vifon/deer
+# antigen bundle Valiev/almostontop
+# antigen bundle zsh-users/zaw
+# antigen bundle peterhurford/git-it-on.zsh
 
 # External scripts
 # ------------
@@ -87,18 +95,16 @@ zle -N end-of-line-no-whitespace
 noop () {}
 zle -N noop
 
-bindkey -M viins '^r' history-incremental-search-backward
-
+# v opens editor by default because of the vi-mode plugin in oh-my-zsh
+# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/vi-mode/vi-mode.plugin.zsh#L32
+bindkey -M vicmd v noop
 bindkey -M vicmd q vi-backward-word
 bindkey -M vicmd Q vi-beginning-of-line
 bindkey -M vicmd W end-of-line-no-whitespace
 bindkey -M vicmd $ noop
 bindkey -M vicmd 0 noop
-# v opens editor by default because of the vi-mode plugin
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/
-# vi-mode/vi-mode.plugin.zsh#L32
-bindkey -M vicmd v noop
 
+bindkey -M viins '^r' history-incremental-search-backward
 
 # Aliases
 # ------------
@@ -131,11 +137,6 @@ function chpwd() {
 
 if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     echo 'Using Linux zshrc settings...'
-     # Let re-use ssh-agent and/or gpg-agent between logins
-     # http://www.cyberciti.biz/faq/ssh-passwordless-login-with-keychain-for-scripts/
-    #keychain --quiet $HOME/.ssh/id_rsa
-    #source $HOME/.keychain/$HOST-sh
-
 elif [[ "$(uname)" == "Darwin" ]]; then
     echo 'Using Mac OS zshrc settings...'
     # Use GNU coreutils instead of bsd ones
