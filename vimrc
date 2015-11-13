@@ -239,7 +239,19 @@ autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandt
 " Ag.vim
 "-----------------------------------------
 let g:ag_working_path_mode="r"
-nnoremap <leader>ag :Ags -Qt
+nnoremap <leader>ag :AgsWrapper
+command! -nargs=* -complete=file AgsWrapper    call AgsWrapper(<q-args>, '')
+" This function wraps :Ags with by providing the git root folder if inside a git repo.
+" It also uses -t for ag which seraches inside .gitignore folders
+function! AgsWrapper(args, cmd)
+  let root = systemlist('git rev-parse --show-toplevel')[0]
+  " If not in a git repo, search from here
+  if v:shell_error > 0
+    execute 'Ags' a:args
+  else
+    execute 'Ags' a:args l:root '-t'
+  endif
+endfu!
 "-----------------------------------------
 " EasyMotion
 "-----------------------------------------
