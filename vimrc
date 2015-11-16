@@ -50,13 +50,6 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 "-----------------------------------------
 call plug#end()
 
-" define our own colors
-let g:indent_guides_auto_colors = 0
-"ctermbg 234 = darkgrey
-"ctermbg 235 = lightgrey
-autocmd VimEnter * IndentGuidesEnable
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 "-----------------------------------------
 " General settings
 "-----------------------------------------
@@ -268,6 +261,15 @@ nnoremap <leader>ag :Ag! -Qt .
     "execute 'Ags' a:args l:root '-t'
   "endif
 "endfu!
+"-----------------------------------------
+" vim-indent-guides
+"-----------------------------------------
+" define our own colors instead of the plugin defining it for us
+let g:indent_guides_auto_colors = 0
+"ctermbg 234 = darkgrey, ctermbg 235 = lightgrey
+autocmd VimEnter * IndentGuidesEnable
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 "-----------------------------------------
 " EasyMotion
 "-----------------------------------------
