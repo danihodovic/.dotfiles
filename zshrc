@@ -29,13 +29,13 @@ antigen use oh-my-zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen theme robbyrussell/oh-my-zsh themes/apple # sorin
 antigen bundle djui/alias-tips
+antigen bundle peterhurford/git-it-on.zsh
 
 # Useful but unused
 # antigen bundle b4b4r07/enhancd
 # antigen bundle Vifon/deer
 # antigen bundle Valiev/almostontop
 # antigen bundle zsh-users/zaw
-# antigen bundle peterhurford/git-it-on.zsh
 
 # External scripts
 # ------------
