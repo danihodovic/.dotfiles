@@ -23,7 +23,8 @@ Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Valloric/MatchTagAlways'
 Plug 'ap/vim-css-color'
-Plug 'gabesoft/vim-ags'
+Plug 'rking/ag.vim'
+Plug 'nathanaelkane/vim-indent-guides'
 " Todo: Make this below work with ctrlp
 Plug 'othree/yajs.vim'
 "-----------------------------------------
@@ -48,6 +49,14 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'JamshedVesuna/vim-markdown-preview'
 "-----------------------------------------
 call plug#end()
+
+" define our own colors
+let g:indent_guides_auto_colors = 0
+"ctermbg 234 = darkgrey
+"ctermbg 235 = lightgrey
+autocmd VimEnter * IndentGuidesEnable
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 "-----------------------------------------
 " General settings
 "-----------------------------------------
@@ -68,6 +77,8 @@ set noshowmode
 set autochdir
 " Can switch buffers without saving
 set hidden
+" Reloads files without having to do :checktime
+set autoread
 " Seems like backspace doesn't work for nvim and source compiled new vim versions
 set backspace=indent,eol,start
 " Paste mode to paste properly. Is this required?
@@ -239,19 +250,24 @@ autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandt
 " Ag.vim
 "-----------------------------------------
 let g:ag_working_path_mode="r"
-nnoremap <leader>ag :AgsWrapper
-command! -nargs=* -complete=file AgsWrapper    call AgsWrapper(<q-args>, '')
-" This function wraps :Ags with by providing the git root folder if inside a git repo.
-" It also uses -t for ag which seraches inside .gitignore folders
-function! AgsWrapper(args, cmd)
-  let root = systemlist('git rev-parse --show-toplevel')[0]
-  " If not in a git repo, search from here
-  if v:shell_error > 0
-    execute 'Ags' a:args
-  else
-    execute 'Ags' a:args l:root '-t'
-  endif
-endfu!
+" Ag! is shamanic knowledge. ag.vim opens the first result by default when using :Ag, it does not do
+" this when using :Ag! You instead get to pick the option
+nnoremap <leader>ag :Ag! -Qt .
+
+" Below is legacy stuff for ags.vim
+"nnoremap <leader>ag :AgsWrapper
+"command! -nargs=* -complete=file AgsWrapper    call AgsWrapper(<q-args>, '')
+"" This function wraps :Ags with by providing the git root folder if inside a git repo.
+"" It also uses -t for ag which seraches inside .gitignore folders
+"function! AgsWrapper(args, cmd)
+  "let root = systemlist('git rev-parse --show-toplevel')[0]
+  "" If not in a git repo, search from here
+  "if v:shell_error > 0
+    "execute 'Ags' a:args
+  "else
+    "execute 'Ags' a:args l:root '-t'
+  "endif
+"endfu!
 "-----------------------------------------
 " EasyMotion
 "-----------------------------------------
