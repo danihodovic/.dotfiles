@@ -1,23 +1,24 @@
 # Paths
 # ------------
 # Export paths before sourcing anything
-
 # Fixes colors for lxde-terminal. Useful for vim colorschemes
 export TERM=xterm-256color
-export dotfiles=~/.dotfiles
-export repos=~/repos
-export plugged=~/.vim/plugged
+export NVIM_DIR=~/.config/nvim
+export NVM_DIR=~/.nvm
 export PATH=$PATH:/opt/nvim-qt
 export GOROOT=/opt/go
 export GOPATH=/opt/go_pkg
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-export NVM_DIR=~/.nvm
 export PATH=$PATH:/opt/eclipse
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 export EDITOR=nvim
-export NVIM_DIR=~/.config/nvim
 export PYTHONSTARTUP=~/.pythonrc
+
+# Ease of use
+export dotfiles=~/.dotfiles
+export repos=~/repos
+export plugged=$NVIM_DIR/plugged
 
 
 # Antigen
@@ -78,13 +79,13 @@ bindkey -v
 export KEYTIMEOUT=1
 
 # Show the vi mode you're in
-function zle-line-init zle-keymap-select {
-    RPS1="${${KEYMAP/vicmd/[NORMAL]}/(main|viins)/[INSERT]}"
-    RPS2=$RPS1
-    zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
+#function zle-line-init zle-keymap-select {
+    #RPS1="${${KEYMAP/vicmd/[NORMAL]}/(main|viins)/[INSERT]}"
+    #RPS2=$RPS1
+    #zle reset-prompt
+#}
+#zle -N zle-line-init
+#zle -N zle-keymap-select
 
 # Move to the end of the line and exclude whitespace
 function end-of-line-no-whitespace {
