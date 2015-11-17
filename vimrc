@@ -109,15 +109,15 @@ nnoremap Y y$
 noremap q b
 " Movement begin/end of line
 noremap Q ^
-noremap W $
+noremap W g_
 noremap 0 <nop>
 noremap $ <nop>
 noremap ^ <nop>
 " Move to next screen (vim) line instead of file line. Useful for long lines that span over two vim lines
-nnoremap j gj
-vnoremap j gj
-nnoremap k gk
-vnoremap k gk
+noremap j gj
+noremap j gj
+noremap k gk
+noremap k gk
 " Quit all
 nnoremap <leader>q qa!
 " Easier semicolon insertion
