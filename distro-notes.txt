@@ -94,6 +94,23 @@ Edit .config/openbox/lubuntu-rc.xml
       </action>
     </keybind>
 
+-------------------------
+# Other
+-------------------------
+Testing terminals for truecolor support
+---
+Run this perl script: https://github.com/robertknight/konsole/blob/master/tests/color-spaces.pl
+Also see: https://gist.github.com/XVilka/8346728
+---
+Adding true color support to gnome terminal
+---
+http://askubuntu.com/questions/512525/how-to-enable-24bit-true-color-support-in-gnome-terminal
+
+sudo add-apt-repository ppa:gnome3-team/gnome3-staging
+sudo apt-get update
+sudo apt-get install gnome-terminal
+sudo add-apt-repository -r ppa:gnome3-team/gnome3-staging
+
 -----------------------------------------------------------
 Mac
 -----------------------------------------------------------
