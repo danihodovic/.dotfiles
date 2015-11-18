@@ -109,7 +109,7 @@ vnoremap <leader>P "+P
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 " Copy til end of line (default is entire line - use `Y` for that)
-nnoremap Y y$
+nnoremap Y yg_
 " Movement
 noremap q b
 " Movement begin/end of line
@@ -139,10 +139,10 @@ inoremap <C-BS> <C-W>
 " map ctrl+del to delete next work
 inoremap <C-Del> <C-O>dw
 "Window movement
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <M-h> <C-w>h
+nnoremap <M-j> <C-w>j
+nnoremap <M-k> <C-w>k
+nnoremap <M-l> <C-w>l
 " Default mapping for switching
 nnoremap <M-q> :call Switch_buffer("left")<cr>
 nnoremap <M-w> :call Switch_buffer("right")<cr>
