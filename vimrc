@@ -70,16 +70,21 @@ set noshowmode
 set autochdir
 " Can switch buffers without saving
 set hidden
-" Reloads files without having to do :checktime
-set autoread
 " Seems like backspace doesn't work for nvim and source compiled new vim versions
 set backspace=indent,eol,start
 " Paste mode to paste properly. Is this required?
 set pastetoggle=<F9>
 " timeout in ms for key mappings interval
 set timeoutlen=500
+" Triggers the CursorHold autocmd event and writes the swap file to disk. CursorHold is only
+" triggered in normal mode once every time the user presses a key and it times out. Default 4000.
 " Causes ternJS to show the signature at bottom after x ms, same goes for Tagbar
-set updatetime=50
+set updatetime=1000
+" Check for file changes every time CursorHold is triggered.
+au CursorHold * checktime
+" If files have not been changed when :checktime is ran, reload the files automatically without
+" asking for permission
+set autoread
 " Specify location of tags file
 " 'The last semicolon is the key here. When Vim tries to locate the 'tags' file, it first looks at the current
 " directory, then the parent directory, then the parent of the parent, and so on'
@@ -490,7 +495,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#quickfix#location_text = 'Location'
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 
-let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 0
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
