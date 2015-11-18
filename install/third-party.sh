@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-read -p "Install nvm?"              INSTALL_NVM
-read -p "Install Dropbox?"          INSTALL_DROPBOX
-read -p "Install Oracle java?"      INSTALL_JAVA
-read -p "Install numix?"            INSTALL_NUMIX
-read -p "Install suckless-tools?"   INSTALL_SUCKLESS
+read -p "Install node version manager (nvm)?"       INSTALL_NVM
+read -p "Install Dropbox?"                          INSTALL_DROPBOX
+read -p "Install Oracle Java?"                      INSTALL_JAVA
+read -p "Install numix?"                            INSTALL_NUMIX
+read -p "Install suckless-tools?"                   INSTALL_SUCKLESS
 
 case $INSTALL_NVM in
     y)
