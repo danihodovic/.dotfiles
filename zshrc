@@ -25,17 +25,20 @@ export plugged=$NVIM_DIR/plugged
 source ~/.antigen/antigen.zsh
 
 # Plugins
-antigen use oh-my-zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen theme robbyrussell/oh-my-zsh themes/apple # sorin
 antigen bundle djui/alias-tips
 antigen bundle peterhurford/git-it-on.zsh
+
+# You dont need to load oh my zsh for this to work. If you load it dont call the theme like this, it
+# will cause duplicate tab completion.
+antigen theme robbyrussell/oh-my-zsh themes/apple
 
 # Useful but unused
 # antigen bundle b4b4r07/enhancd
 # antigen bundle Vifon/deer
 # antigen bundle Valiev/almostontop
 # antigen bundle zsh-users/zaw
+#antigen bundle olivierverdier/zsh-git-prompt
 
 # External scripts
 # ------------
@@ -131,6 +134,7 @@ alias gd='git diff'
 alias gl='git log'
 alias ga='git add'
 alias gf='git fetch'
+alias gr='git rebase'
 alias example='bro'
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
