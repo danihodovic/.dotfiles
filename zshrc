@@ -25,6 +25,7 @@ export plugged=$NVIM_DIR/plugged
 source ~/.antigen/antigen.zsh
 
 # Plugins
+antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle djui/alias-tips
 antigen bundle peterhurford/git-it-on.zsh
