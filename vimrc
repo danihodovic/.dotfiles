@@ -317,14 +317,13 @@ let g:ctrlp_working_path_mode = 'ra'
 " `changes`     search recent changes
 let g:ctrlp_extensions = ['tag', 'line', 'dir']
 " All files
-"nnoremap <M-p> :CtrlP<cr>
-let g:ctrlp_map = '<M-p>'
+let g:ctrlp_map = '<M-\>'
 " Open buffers
-nnoremap <C-p> :CtrlPBuffer<cr>
+nnoremap \ :CtrlPBuffer<cr>
 " Recent files
 nnoremap <leader>mr :CtrlPMRU<cr>
 " CTags
-nnoremap <M-t> :CtrlPTag<cr>
+nnoremap <M-\> :CtrlPTag<cr>
 " CtrlPFunky function
 nnoremap <leader>f :execute 'CtrlPFunky'<CR>
 " Search functions in all open buffers
