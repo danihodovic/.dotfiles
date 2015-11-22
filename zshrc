@@ -20,6 +20,9 @@ export dotfiles=~/.dotfiles
 export repos=~/repos
 export plugged=$NVIM_DIR/plugged
 
+# Wrk
+export NODE_PROJECTS_DIR=~/repos/lab/repos
+
 
 # Antigen
 source ~/.antigen/antigen.zsh
@@ -157,3 +160,5 @@ else
 fi
 
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
