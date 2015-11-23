@@ -3,7 +3,6 @@
 # Export paths before sourcing anything
 # Fixes colors for lxde-terminal. Useful for vim colorschemes
 export TERM=xterm-256color
-export NVIM_DIR=~/.config/nvim
 export NVM_DIR=~/.nvm
 export PATH=$PATH:/opt/nvim-qt
 export GOROOT=/opt/go
@@ -15,6 +14,11 @@ export PROJECT_HOME=$HOME/Devel
 export EDITOR=nvim
 export PYTHONSTARTUP=~/.pythonrc
 
+# Variables shared by personal install scripts.
+# Potentially replace installs with submodules for antigen
+export NVIM_DIR=~/.config/nvim
+export ANTIGEN_PATH=~/.antigen/antigen.zsh
+
 # Ease of use
 export dotfiles=~/.dotfiles
 export repos=~/repos
@@ -25,7 +29,7 @@ export NODE_PROJECTS_DIR=~/repos/lab/repos
 
 
 # Antigen
-source ~/.antigen/antigen.zsh
+source $ANTIGEN_PATH
 
 # Plugins
 antigen bundle zsh-users/zsh-completions
@@ -139,6 +143,7 @@ alias gl='git log'
 alias ga='git add'
 alias gf='git fetch'
 alias gr='git rebase'
+alias gb='git branch -a'
 alias example='bro'
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
