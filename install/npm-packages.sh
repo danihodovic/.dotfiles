@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
+set -e
 
-read -p "Install jscs?"                                 PARAM_JSCS
-read -p "Install jshint?"                               PARAM_JSHINT
+read -p "Install jscs? "                            PARAM_JSCS
+read -p "Install jshint? "                          PARAM_JSHINT
 
-read -p "Install Typescript? [y/n]"                     PARAM_TYPESCRIPT
-read -p "Install clausreinke/typescript-tools? [y/n]"   PARAM_TS_TOOLS
-read -p "Install vvakame/typescript-formatter? [y/n]"   PARAM_TS_FORMATTER
-
+read -p "Install Typescript? "                      PARAM_TYPESCRIPT
+read -p "Install clausreinke/typescript-tools? "    PARAM_TS_TOOLS
+read -p "Install vvakame/typescript-formatter? "    PARAM_TS_FORMATTER
 
 case $PARAM_JSCS in
     y|Y )
