@@ -3,6 +3,7 @@ set -e
 
 read -p "Install jscs? "                            PARAM_JSCS
 read -p "Install jshint? "                          PARAM_JSHINT
+read -p "Install fixmyjs? "                         PARAM_FIXMYJS
 
 read -p "Install Typescript? "                      PARAM_TYPESCRIPT
 read -p "Install clausreinke/typescript-tools? "    PARAM_TS_TOOLS
@@ -16,6 +17,11 @@ esac
 case $PARAM_JSHINT in
     y|Y )
         npm install -g jshint;;
+esac
+
+case $PARAM_FIXMYJS in
+    y)
+        npm install -g fixmyjs;;
 esac
 
 case $PARAM_TYPESCRIPT in
