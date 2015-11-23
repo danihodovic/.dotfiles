@@ -32,7 +32,8 @@ Plug 'othree/yajs.vim'
 "-----------------------------------------
 " JS/TS/CS
 Plug 'ruanyl/vim-fixmyjs'
-Plug 'marijnh/tern_for_vim' "Javascript
+" Tern require npm install in the vim repo
+Plug 'marijnh/tern_for_vim'
 Plug 'dani-h/typescript-vim' " Typescript Syntax
 Plug 'clausreinke/typescript-tools.vim' "Typescript Autocomplete
 Plug 'kchmck/vim-coffee-script'
@@ -527,6 +528,7 @@ vnoremap <leader>c :call NERDComment(0, "toggle")<CR>
 "-----------------------------------------
 " NERDTree
 "-----------------------------------------
+let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.pyc$', '\.db$']
 noremap <F5> :NERDTreeToggle<CR>
 " Open nerdtree
