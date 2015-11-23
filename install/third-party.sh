@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
+set -e
 
 read -p "Install node version manager (nvm)?"       INSTALL_NVM
+read -p "Install chrome? "                          INSTALL_CHROME
 read -p "Install Dropbox?"                          INSTALL_DROPBOX
 read -p "Install Oracle Java?"                      INSTALL_JAVA
 read -p "Install numix?"                            INSTALL_NUMIX
@@ -16,6 +18,14 @@ case $INSTALL_NVM in
                 nvm install node
                 nvm alias default node
         esac
+esac
+
+case $INSTALL_CHROME in
+    y)
+        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+        sudo apt-get update
+        sudo apt-get install google-chrome-beta
 esac
 
 case $INSTALL_DROPBOX in
