@@ -143,12 +143,24 @@ Reduce the brightness of the ePS display
 
 ---
 Swapping fn-ctrl
+TODO: Make this a script
 ---
+Install the Linux kernel headers (the patch depends on these).
+    # You might need to install the linux headers
+    # sudo apt-get install linux-headers-$(uname -r)
+
 Install https://github.com/free5lot/hid-apple-patched
+
+    git clone https://github.com/free5lot/hid-apple-patched.git
+    cd hid-apple-patched.git
+    ./build.sh
+    ./install.sh
+
 ---
 
 ---
 Enabling fn-keys properly
+TODO: Make this a script
 ---
 https://help.ubuntu.com/community/AppleKeyboard#Change_Function_Key_behavior
 
@@ -159,6 +171,7 @@ reboot
 
 ---
 Swapping command-option
+TODO: Make this a script
 ---
 https://help.ubuntu.com/community/AppleKeyboard#Mapping_keys_.28Insert.2C_Alt.2C_Cmd.2C_etc..29
 
