@@ -95,7 +95,7 @@ set tags=./tags;
 "-----------------------------------------
 " Resize vertically easier. `res` is built in, `vr` is not
 command! -nargs=? Vr vertical resize <args>
-command! -nargs=? Re resize <args>
+command! -nargs=? Hr resize <args>
 "-----------------------------------------
 " General remappings
 "-----------------------------------------
