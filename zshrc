@@ -105,6 +105,7 @@ function end-of-line-no-whitespace {
 }
 zle -N end-of-line-no-whitespace
 
+
 noop () {}
 zle -N noop
 
@@ -122,6 +123,27 @@ bindkey -M vicmd $ noop
 bindkey -M vicmd W end-of-line-no-whitespace
 
 bindkey -M viins '^r' history-incremental-search-backward
+
+# Fzf keybindings as suggested in the wiki
+# https://github.com/junegunn/fzf/wiki/examples
+# fda - including hidden directories
+cdd() {
+  local dir
+  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+}
+
+# cdf - cd into the directory of the selected file
+cdf() {
+   local file
+   local dir
+   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+}
+
+fe() {
+  local file
+  file=$(fzf --query="$1" --select-1 --exit-0)
+  [ -n "$file" ] && ${EDITOR:-vim} "$file"
+}
 
 # Aliases
 # ------------
