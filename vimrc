@@ -27,6 +27,20 @@ Plug 'rking/ag.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 " Todo: Make this below work with ctrlp
 Plug 'othree/yajs.vim'
+
+" Required by vim-oblique
+Plug 'junegunn/vim-pseudocl'
+" Better search /
+Plug 'junegunn/vim-oblique'
+
+Plug 'junegunn/vim-easy-align'
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+Plug 'junegunn/limelight.vim'
+
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
@@ -102,13 +116,6 @@ command! -nargs=? Hr resize <args>
 "TODO: Add remappings for vim command mode and insert mode for moving around and
 "deleting previous/next.
 let mapleader = ","
-" System clipboard c/p
-vnoremap <leader>y "+y
-vnoremap <leader>Y "+Y
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
 " Copy til end of line (default is entire line - use `Y` for that)
 nnoremap Y yg_
 " Movement
@@ -140,10 +147,10 @@ inoremap <C-BS> <C-W>
 " map ctrl+del to delete next work
 inoremap <C-Del> <C-O>dw
 "Window movement
-nnoremap <M-h> <C-w>h
-nnoremap <M-j> <C-w>j
-nnoremap <M-k> <C-w>k
-nnoremap <M-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 " Default mapping for switching
 nnoremap <M-q> :call Switch_buffer("left")<cr>
 nnoremap <M-w> :call Switch_buffer("right")<cr>
@@ -158,6 +165,13 @@ nnoremap <silent> N   N:call HLNext(0.1)<cr>
 nnoremap <esc><esc> :noh<cr><esc>
 " Search selected text, not only words as with `*`
 vnoremap // y/<C-R>"<CR>
+" System clipboard c/p
+vnoremap <leader>y "+y
+vnoremap <leader>Y "+Y
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
 " Disable this for now and get used to n-m
 if has("gui_running")
   " Firefox like tab switching
@@ -318,7 +332,7 @@ let g:ctrlp_working_path_mode = 'ra'
 " `changes`     search recent changes
 let g:ctrlp_extensions = ['tag', 'line', 'dir']
 " All files
-let g:ctrlp_map = '<M-\>'
+let g:ctrlp_map = '<C-\>'
 " Open buffers
 nnoremap \ :CtrlPBuffer<cr>
 " Recent files
