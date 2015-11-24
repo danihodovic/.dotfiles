@@ -151,6 +151,7 @@ alias cd.="cd .."
 alias cd..="cd ../.."
 alias cd...="cd ../../.."
 alias h="history"
+alias f='find'
 alias cd-="cd -"
 alias ls='ls --color=auto --classify'
 alias aptupgrade="sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade"
@@ -167,6 +168,10 @@ alias gb='git branch -a'
 alias example='bro'
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
+
+# TODO: Optimize these by looking at ~/.fzf/shell
+alias fhome='find ~ | fzf'
+alias froot='locate / | fzf'
 
 # cd && ls
 function chpwd() {
