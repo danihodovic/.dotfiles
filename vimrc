@@ -139,11 +139,11 @@ inoremap <C-BS> <C-W>
 " map ctrl+del to delete next work
 inoremap <C-Del> <C-O>dw
 "Window movement
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 " Default mapping for switching
 nnoremap <M-q> :call Switch_buffer("left")<cr>
 nnoremap <M-w> :call Switch_buffer("right")<cr>
