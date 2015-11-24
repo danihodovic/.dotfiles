@@ -99,7 +99,7 @@ export KEYTIMEOUT=1
 #zle -N zle-keymap-select
 
 # Move to the end of the line and exclude whitespace
-function end-of-line-no-whitespace {
+end-of-line-no-whitespace() {
     zle vi-end-of-line
     zle vi-backward-word-end
 }
@@ -112,17 +112,15 @@ zle -N noop
 # Fix backspace delete in vi-mode
 # http://www.zsh.org/mla/users/2009/msg00812.html
 bindkey "^?" backward-delete-char
-
 # v opens editor by default because of the vi-mode plugin in oh-my-zsh
 # https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/vi-mode/vi-mode.plugin.zsh#L32
 bindkey -M vicmd v noop
+# Movement bindings
 bindkey -M vicmd q vi-backward-word
 bindkey -M vicmd 0 noop
 bindkey -M vicmd Q vi-beginning-of-line
 bindkey -M vicmd $ noop
 bindkey -M vicmd W end-of-line-no-whitespace
-
-bindkey -M viins '^r' history-incremental-search-backward
 
 # Fzf keybindings as suggested in the wiki
 # https://github.com/junegunn/fzf/wiki/examples
