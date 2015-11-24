@@ -25,20 +25,12 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'ap/vim-css-color'
 Plug 'rking/ag.vim'
 Plug 'nathanaelkane/vim-indent-guides'
-" Todo: Make this below work with ctrlp
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'othree/yajs.vim'
-
 " Required by vim-oblique
 Plug 'junegunn/vim-pseudocl'
-" Better search /
 Plug 'junegunn/vim-oblique'
-
 Plug 'junegunn/vim-easy-align'
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
 Plug 'junegunn/limelight.vim'
 
 "-----------------------------------------
@@ -151,6 +143,7 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
 " Default mapping for switching
 nnoremap <M-q> :call Switch_buffer("left")<cr>
 nnoremap <M-w> :call Switch_buffer("right")<cr>
@@ -302,6 +295,13 @@ map F <Plug>(easymotion-Fl)
 map t <Plug>(easymotion-tl)
 map T <Plug>(easymotion-Tl)
 map s <Plug>(easymotion-sn)
+"-----------------------------------------
+" EasyAlign
+"-----------------------------------------
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 "-----------------------------------------
 " CtrlP/CtrlPFunky
 "-----------------------------------------
