@@ -545,11 +545,12 @@ vnoremap <leader>c :call NERDComment(0, "toggle")<CR>
 let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.pyc$', '\.db$']
 noremap <F5> :NERDTreeToggle<CR>
-" Open nerdtree
 " Open nerdtree on start
-autocmd vimenter * NERDTree
+"autocmd vimenter * NERDTree
+" Open NERDTree on enter and use the non-nerdtree window
 " Go to previous (last accessed) window.
-autocmd VimEnter * wincmd p
+"autocmd VimEnter * wincmd p
+" When exiting: Close nerdtree if its the only window left
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 " Close all open buffers on entering a window if the only
 " buffer that's left is the NERDTree buffer
