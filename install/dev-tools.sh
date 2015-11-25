@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 set -e
 
-read -p "Install zsh (+antigen) and tmux (+tpm)? "          INSTALL_ZSH
-read -p "Install Neovim ppa + neovim pip? "                 INSTALL_NEOVIM
+# -p <output this string before reading>
+# -n <number return input after *this* many characters instead of waiting for newline>
+# -r do not allow backslashes to escape any characters
+# Add an optional param last where output is stored
+read -p "Install zsh (+antigen) and tmux (+tpm)? " -n 1 -r  install_zsh
+echo
+read -p "Install Neovim ppa + neovim pip? " -n 1 -r         install_neovim
+echo
 
 # Todo: Add antigen
-case $INSTALL_ZSH in
+case $install_zsh in
     y|Y)
         if [ -z "$ANTIGEN_PATH" ]; then
             echo "[Error] Setup your dotfiles and source zshrc before attempting to install.."
@@ -36,7 +42,7 @@ case $INSTALL_ZSH in
         #esac
 esac
 
-case $INSTALL_NEOVIM in
+case $install_neovim in
     y|Y)
 
         # Check so that the env var is set. This probably means our dotfiles are

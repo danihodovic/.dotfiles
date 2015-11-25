@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
 set -e
 
-read -p "Install node version manager (nvm)?"       INSTALL_NVM
-read -p "Install chrome? "                          INSTALL_CHROME
-read -p "Install Dropbox?"                          INSTALL_DROPBOX
-read -p "Install Oracle Java?"                      INSTALL_JAVA
-read -p "Install numix?"                            INSTALL_NUMIX
-read -p "Install suckless-tools?"                   INSTALL_SUCKLESS
+read -p "Install node version manager (nvm)? " -n 1 -r      install_nvm
+echo
+read -p "Install chrome? "                     -n 1 -r      install_chrome
+echo
+read -p "Install Dropbox? "                    -n 1 -r      install_dropbox
+echo
+read -p "Install Oracle Java? "                -n 1 -r      install_java
+echo
+read -p "Install numix? "                      -n 1 -r      install_numix
+echo
+read -p "Install suckless-tools? "             -n 1 -r      install_suckless
+echo
 
-case $INSTALL_NVM in
+case $install_nvm in
     y)
         git clone https://github.com/creationix/nvm.git ~/.nvm
         read -p "Install latest node and set as stable?" INSTALL_NODE
@@ -20,7 +26,7 @@ case $INSTALL_NVM in
         esac
 esac
 
-case $INSTALL_CHROME in
+case $install_chrome in
     y)
         wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
         sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
@@ -28,7 +34,7 @@ case $INSTALL_CHROME in
         sudo apt-get install google-chrome-beta
 esac
 
-case $INSTALL_DROPBOX in
+case $install_dropbox in
     y)
         sudo apt-get install python-gtk2
         wget -O tempfile https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.02.12_amd64.deb
@@ -38,7 +44,7 @@ case $INSTALL_DROPBOX in
 esac
 
 
-case $INSTALL_JAVA in
+case $install_java in
     y)
         sudo add-apt-repository ppa:webupd8team/java -y
         sudo apt-get update
@@ -47,7 +53,7 @@ case $INSTALL_JAVA in
 esac
 
 
-case $INSTALL_NUMIX in
+case $install_numix in
     y)
         sudo add-apt-repository ppa:numix/ppa -y
         sudo apt-get update
@@ -56,7 +62,7 @@ case $INSTALL_NUMIX in
 esac
 
 
-case $INSTALL_SUCKLESS in
+case $install_suckless in
     y)
         sudo add-apt-repository ppa:minos-archive/main -y
         sudo apt-get update

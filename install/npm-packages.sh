@@ -1,40 +1,40 @@
 #!/usr/bin/env bash
 set -e
 
-read -p "Install jscs? "                            PARAM_JSCS
-read -p "Install jshint? "                          PARAM_JSHINT
-read -p "Install fixmyjs? "                         PARAM_FIXMYJS
+read -p "Install jscs? "                         -n 1 -r   param_jscs
+read -p "Install jshint? "                       -n 1 -r   param_jshint
+read -p "Install fixmyjs? "                      -n 1 -r   param_fixmyjs
 
-read -p "Install Typescript? "                      PARAM_TYPESCRIPT
-read -p "Install clausreinke/typescript-tools? "    PARAM_TS_TOOLS
-read -p "Install vvakame/typescript-formatter? "    PARAM_TS_FORMATTER
+read -p "Install Typescript? "                   -n 1 -r   param_typescript
+read -p "Install clausreinke/typescript-tools? " -n 1 -r   param_ts_tools
+read -p "Install vvakame/typescript-formatter? " -n 1 -r   param_ts_formatter
 
-case $PARAM_JSCS in
+case $param_jscs in
     y|Y )
         npm install -g jscs;;
 esac
 
-case $PARAM_JSHINT in
+case $param_jshint in
     y|Y )
         npm install -g jshint;;
 esac
 
-case $PARAM_FIXMYJS in
+case $param_fixmyjs in
     y)
         npm install -g fixmyjs;;
 esac
 
-case $PARAM_TYPESCRIPT in
+case $param_typescript in
     y|Y )
         npm install -g typescript;;
 esac
 
-case $PARAM_TS_TOOLS in
+case $param_ts_tools in
     y|Y )
         npm install -g clausreinke/typescript-tools;;
 esac
 
-case $PARAM_TS_FORMATTER in
+case $param_ts_formatter in
     y|Y )
         npm install -g typescript-formatter;;
 esac
