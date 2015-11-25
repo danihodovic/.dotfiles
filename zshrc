@@ -51,7 +51,7 @@ antigen theme robbyrussell/oh-my-zsh themes/apple
 # External scripts
 # ------------
 # Source these before our own `bindkeys` so that we can override stuff
-source $dotfiles/scripts/z.sh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if [ -f $NVM_DIR/nvm.sh ]; then
     source $NVM_DIR/nvm.sh
@@ -122,6 +122,11 @@ bindkey -M vicmd Q vi-beginning-of-line
 bindkey -M vicmd $ noop
 bindkey -M vicmd W end-of-line-no-whitespace
 
+# fzf
+# Run fzf and paste results onto command line
+bindkey -M vicmd '\' fzf-file-widget
+bindkey -M viins 'M-\' fzf-file-widget
+
 # Fzf keybindings as suggested in the wiki
 # https://github.com/junegunn/fzf/wiki/examples
 # fda - including hidden directories
@@ -171,6 +176,17 @@ fshow() {
                 xargs -I % sh -c 'git show --color=always % | less -R'"
 }
 
+# TODO: Optimize these by looking at ~/.fzf/shell
+ff() {
+    local dir=`find $1 | fzf`
+    echo $dir
+}
+
+fl() {
+    local dir=`locate $1 | fzf`
+}
+
+
 # Aliases
 # ------------
 alias gno="gnome-open"
@@ -197,10 +213,6 @@ alias example='bro'
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
 
-# TODO: Optimize these by looking at ~/.fzf/shell
-alias fhome='find ~ | fzf'
-alias froot='locate / | fzf'
-
 # cd && ls
 function chpwd() {
     emulate -L zsh
@@ -219,4 +231,3 @@ fi
 
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
