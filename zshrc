@@ -109,6 +109,7 @@ zle -N end-of-line-no-whitespace
 noop () {}
 zle -N noop
 
+# Key bindings. Wanna find weird keycodes? use cat
 # Fix backspace delete in vi-mode
 # http://www.zsh.org/mla/users/2009/msg00812.html
 bindkey "^?" backward-delete-char
@@ -124,8 +125,11 @@ bindkey -M vicmd W end-of-line-no-whitespace
 
 # fzf
 # Run fzf and paste results onto command line
-bindkey -M vicmd '\' fzf-file-widget
-bindkey -M viins 'M-\' fzf-file-widget
+bindkey -M vicmd '\'    fzf-file-widget
+bindkey -M viins 'M-\'  fzf-file-widget
+
+bindkey -M vicmd '^R'   fzf-history-widget
+bindkey -M viins '^R'   fzf-history-widget
 
 # Fzf keybindings as suggested in the wiki
 # https://github.com/junegunn/fzf/wiki/examples
@@ -244,4 +248,6 @@ fzf-root-widget() {
   zle redisplay
 }
 zle     -N   fzf-root-widget
-bindkey '^[|' fzf-root-widget
+
+bindkey -M vicmd '^[|' fzf-root-widget
+bindkey -M viins '^[|' fzf-root-widget
