@@ -247,7 +247,7 @@ autocmd FileType python                 setlocal  shiftwidth=4 tabstop=4 expandt
 autocmd FileType go                     setlocal  shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType erlang                 setlocal  shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType make                   setlocal  shiftwidth=4 tabstop=4 noexpandtab
-autocmd FileType sh,bash,zsh            setlocal  shiftwidth=4 tabstop=4 expandtab
+autocmd FileType sh,bash,zsh            setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType php                    setlocal  shiftwidth=4 tabstop=4 expandtab
 autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandtab
 "-----------------------------------------
@@ -322,7 +322,7 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 "if executable('ag')
 "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 "endif
-let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:50'
 " CtrlP Sets the current working path to a .git path
 let g:ctrlp_working_path_mode = 'ra'
 " `line`        search line
@@ -332,7 +332,7 @@ let g:ctrlp_working_path_mode = 'ra'
 " `changes`     search recent changes
 let g:ctrlp_extensions = ['tag', 'line', 'dir']
 " All files
-let g:ctrlp_map = '<C-\>'
+let g:ctrlp_map = '<M-\>'
 " Open buffers
 nnoremap \ :CtrlPBuffer<cr>
 " Recent files
