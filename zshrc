@@ -1,3 +1,4 @@
+setopt INC_APPEND_HISTORY
 # Paths
 # ------------
 # Export paths before sourcing anything
@@ -35,18 +36,17 @@ source $ANTIGEN_PATH
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle djui/alias-tips
-antigen bundle peterhurford/git-it-on.zsh
 
-# You dont need to load oh my zsh for this to work. If you load it dont call the theme like this, it
-# will cause duplicate tab completion.
-antigen theme robbyrussell/oh-my-zsh themes/apple
+antigen-use oh-my-zsh
+antigen theme robbyrussell/oh-my-zsh themes/amuse
 
 # Useful but unused
 # antigen bundle b4b4r07/enhancd
 # antigen bundle Vifon/deer
 # antigen bundle Valiev/almostontop
 # antigen bundle zsh-users/zaw
-#antigen bundle olivierverdier/zsh-git-prompt
+# antigen bundle olivierverdier/zsh-git-prompt
+# antigen bundle peterhurford/git-it-on.zsh
 
 # External scripts
 # ------------
@@ -208,7 +208,7 @@ alias gl='git log'
 alias ga='git add'
 alias gf='git fetch'
 alias gr='git rebase'
-alias gb='git branch -a'
+alias gb='git branch -avv'
 alias example='bro'
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
@@ -230,4 +230,18 @@ else
 fi
 
 
+# Temporary fix for root finding hotkey
+__fselroot() {
+  local cmd="locate /"
+  eval "$cmd" | $(__fzfcmd) -m | while read item; do
+    printf '%q ' "$item"
+  done
+  echo
+}
 
+fzf-root-widget() {
+  LBUFFER="${LBUFFER} $(__fselroot)"
+  zle redisplay
+}
+zle     -N   fzf-root-widget
+bindkey '^[|' fzf-root-widget
