@@ -7,8 +7,10 @@ call plug#begin('$NVIM_DIR/plugged')
 " General plugins
 "-----------------------------------------
 Plug 'Valloric/YouCompleteMe'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+nnoremap = :GitFiles<cr>
+nnoremap ` :Buffers<cr>
 Plug 'scrooloose/nerdtree'
 Plug 'flazz/vim-colorschemes'
 " Run linters or makefiles
@@ -304,47 +306,6 @@ map s <Plug>(easymotion-sn)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-"-----------------------------------------
-" CtrlP/CtrlPFunky
-"-----------------------------------------
-" Ignore, note does not work if a custom `ctrlp_user_command` is used, i.e `ag`
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.?(git|hg|svn)$',
-      \ 'file': '\v\.(exe|so|dll|pyc|patch|db)$',
-      \ 'link': 'some_bad_symbolic_links',
-      \ }
-let g:ctrlp_buftag_types = {
-  \ 'javascript' : {
-    \ 'args': '--language-force=JavaScript --javascript-types=fcmp',
-    \ },
-  \ }
-" Cache dir
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-" Use ag (faster ack) for searching files
-"if executable('ag')
-"let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-"endif
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:50'
-" CtrlP Sets the current working path to a .git path
-let g:ctrlp_working_path_mode = 'ra'
-" `line`        search line
-" `tag`         search for tag in file
-" `buffertag`   search for tags in buffers, requires ctags
-" `dir`         search for directory and jump to it
-" `changes`     search recent changes
-let g:ctrlp_extensions = ['tag', 'line', 'dir']
-" All files
-let g:ctrlp_map = '<M-\>'
-" Open buffers
-nnoremap \ :CtrlPBuffer<cr>
-" Recent files
-nnoremap <leader>mr :CtrlPMRU<cr>
-" CTags
-nnoremap <M-\> :CtrlPTag<cr>
-" CtrlPFunky function
-nnoremap <leader>f :execute 'CtrlPFunky'<CR>
-" Search functions in all open buffers
-let g:ctrlp_funky_multi_buffers = 1
 "-----------------------------------------
 " YouCompleteMe
 "-----------------------------------------
