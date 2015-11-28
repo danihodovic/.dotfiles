@@ -11,7 +11,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 Plug 'scrooloose/nerdtree'
 Plug 'flazz/vim-colorschemes'
+" Run linters or makefiles
 Plug 'benekastah/neomake'
+" Show git diffs
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Chiel92/vim-autoformat'
@@ -21,22 +23,30 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'SirVer/ultisnips'
 Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
-Plug 'Valloric/MatchTagAlways'
-Plug 'ap/vim-css-color'
 Plug 'rking/ag.vim'
 Plug 'nathanaelkane/vim-indent-guides'
+" Switch tabs between vim and tmux
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'othree/yajs.vim'
+" Sets active window focus
+Plug 'blueyed/vim-diminactive'
+" Enable focus events inside nvim so that FocusGained and FocusLost autocmds work in terminal vim
+" vim-fugitive plugin uses FocusGained for refreshing git branch in status line
+" vim-gitgutter uses FocusGained for refreshing ... (wait for it) git gutter
+Plug 'tmux-plugins/vim-tmux-focus-events'
 " Required by vim-oblique
 Plug 'junegunn/vim-pseudocl'
+" Improved / search for vim which allows z/ to be fuzzy
 Plug 'junegunn/vim-oblique'
+" Aligns text
 Plug 'junegunn/vim-easy-align'
+" Focuses text
 Plug 'junegunn/limelight.vim'
-
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
 " JS/TS/CS
+" JS syntax
+Plug 'othree/yajs.vim'
 Plug 'ruanyl/vim-fixmyjs'
 " Tern require npm install in the vim repo
 Plug 'marijnh/tern_for_vim'
@@ -46,6 +56,8 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'davidhalter/jedi-vim' "Python
 Plug 'derekwyatt/vim-scala'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
+" Show matching html/xml tags
+Plug 'Valloric/MatchTagAlways'
 Plug 'fatih/vim-go'
 Plug 'zah/nim.vim'
 Plug 'mustache/vim-mustache-handlebars'
@@ -54,6 +66,8 @@ Plug 'wavded/vim-stylus'
 Plug 'rust-lang/rust.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'JamshedVesuna/vim-markdown-preview'
+" Show hex codes in css files
+Plug 'ap/vim-css-color'
 "-----------------------------------------
 call plug#end()
 
