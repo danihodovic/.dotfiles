@@ -1,7 +1,20 @@
-Xubuntu/Lubuntu/Any system that uses xkb:
--------------------------
-How to customize keyboard/swap keys
--------------------------
+## Cinnamon
+
+### Disable alt-` to switch window groups
+Install dconf-editor
+Launch dconf-editor
+Locate
+	/org/gnome/desktop/wm/keybindings
+	and
+	/org/cinnamon/desktop/keybindings/wm
+Find the option switch group
+Find the definition for switch-group. It should be set to ['<Alt>AboveTab']
+Change this to something else
+You don't need to logoff for this to work
+
+# Xubuntu/Lubuntu/Any system that uses xkb:
+
+## How to customize keyboard/swap keys
 This can be done using xkb or xmodmap. Ubuntu and most other distros use xkb which is easier to
 setup so that it can be handled on startup and after suspension without having to fiddle with
 scripts.
@@ -34,13 +47,10 @@ Reboot
 If changing the system wide files you don't have to deal with startup scripts as you have to do with
 -options.
 
-------------------------
 
-Lubuntu:
+# Lubuntu:
 
--------------------------
-How to add shortkeys:
--------------------------
+## How to add shortkeys:
 Run `openbox --reconfigure` to generate the xml file.
 Add to `.conf/openbox/lubuntu-rc.xml` in keyboard entries
 
@@ -54,17 +64,14 @@ Example:
 `
 Rerun `openbox --reconfigure`
 
--------------------------
-Add a keychain and ssh-agent so that you don't need to re-enter passwords
--------------------------
+## Add a keychain and ssh-agent so that you don't need to re-enter passwords
 http://www.cyberciti.biz/faq/ssh-passwordless-login-with-keychain-for-scripts/
+
 	keychain --quiet $HOME/.ssh/id_rsa
 	source $HOME/.keychain/$HOST-sh
--------------------------
 
--------------------------
-How to fix Skype:
--------------------------
+## How to fix Skype:
+
 Turn PulseAudio autospawn off, normally: $ echo "autospawn = no" > ~/.pulse/client.conf
 Kill PulseAudio: $ killall pulseaudio
 Shut down and restart Skype
@@ -73,9 +80,7 @@ Software:
 xfce4-screenshooter-plugin
 
 
--------------------------
-Fix volume keyboard keys on Lubuntu with pulseaudio cli
--------------------------
+## Fix volume keyboard keys on Lubuntu with pulseaudio cli
 Edit .config/openbox/lubuntu-rc.xml
     <keybind key="XF86AudioRaiseVolume">
       <action name="Execute">
@@ -94,16 +99,13 @@ Edit .config/openbox/lubuntu-rc.xml
       </action>
     </keybind>
 
--------------------------
 # Other
--------------------------
-Testing terminals for truecolor support
----
+
+## Testing terminals for truecolor support
 Run this perl script: https://github.com/robertknight/konsole/blob/master/tests/color-spaces.pl
 Also see: https://gist.github.com/XVilka/8346728
----
-Adding true color support to gnome terminal
----
+
+## Adding true color support to gnome terminal
 http://askubuntu.com/questions/512525/how-to-enable-24bit-true-color-support-in-gnome-terminal
 
 sudo add-apt-repository ppa:gnome3-team/gnome3-staging
@@ -111,108 +113,10 @@ sudo apt-get update
 sudo apt-get install gnome-terminal
 sudo add-apt-repository -r ppa:gnome3-team/gnome3-staging
 
------------------------------------------------------------
-Mac
------------------------------------------------------------
-Fix C-h for tmux and Neovim, see https://github.com/neovim/neovim/issues/2048
+## Gnome-terminal colorschemes
+github.com/metalelf0/gnome-terminal-colors
 
-	infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
-	tic $TERM.ti
-
------------------------------------------------------------
-Native Xubuntu/Cinnamon on Mac
------------------------------------------------------------
-
-macfanctld - Daemon that reads temperature and adjusts the fan speed
----
-Installing macfanctld to keep it from overheating
-Run it in the foreground
-	sudo apt-get install macfanctld
-	sudo macfanctld -f
-
----
-
-Reducing brightness
----
-Run xrandr to find the connected display
-	xrandr -q | grep connected
-Reduce the brightness of the ePS display
-
-	xrandr --ouput <ePS?> --brightness 0.5
-
-
----
-Swapping fn-ctrl
-TODO: Make this a script
----
-Install the Linux kernel headers (the patch depends on these).
-    # You might need to install the linux headers
-    # sudo apt-get install linux-headers-$(uname -r)
-
-Install https://github.com/free5lot/hid-apple-patched
-
-    git clone https://github.com/free5lot/hid-apple-patched.git
-    cd hid-apple-patched.git
-    ./build.sh
-    ./install.sh
-
----
-
----
-Enabling fn-keys properly
-TODO: Make this a script
----
-https://help.ubuntu.com/community/AppleKeyboard#Change_Function_Key_behavior
-
-edit /etc/modprobe.d/hid_apple.conf
-add  options hid_apple fnmode=2
-run  sudo update-initramfs -u -k all
-reboot
-
----
-Swapping command-option
-TODO: Make this a script
----
-https://help.ubuntu.com/community/AppleKeyboard#Mapping_keys_.28Insert.2C_Alt.2C_Cmd.2C_etc..29
-
-edit /etc/modprobe.d/hid_apple.conf
-add  options hid_apple swap_opt_cmd=1
-run  sudo update-initramfs -u -k all
-reboot
-
----
-Vagrant nfs on linux
----
-sudo apt-get install nfs-kernel-server
-
-Vagrant issue when copying a Mac setup to Linux:
-replace
-    config.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['actimeo=1'], nfs_version: 4
-with
-    config.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['actimeo=1,v3']
-
----
-HIDPI
----
-Works by default using cinnamon. Either install Linux mint or install the
-cinnamon ppa - ppa:kranich/cinnamon
-
-
-
----
-General power management
----
-Install tlp:
-http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html
-	apt-add-repository ppa:linrunner/tlp
-	tlp start
-Tlp will run on startup by default. In order to check if it's running try
-	sudo tlp-stat
-
-
--------------------------
-Useful commands for loading/unloading kernel drivers
--------------------------
+## Useful commands for loading/unloading kernel drivers
 
 identify wifi card
 	# Look for `Kernel driver in use: <here>` on the last line
@@ -225,4 +129,96 @@ remove kernel module
 	sudo modprobe -r <module>
 list loaded kernel modules
 	lsmod
+
+# Mac
+
+Fix C-h for tmux and Neovim, see https://github.com/neovim/neovim/issues/2048
+
+	infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
+	tic $TERM.ti
+
+## Native Xubuntu/Cinnamon on Mac
+
+### Hardware
+#### macfanctld - Daemon that reads temperature and adjusts the fan speed
+Installing macfanctld to keep it from overheating
+Run it in the foreground
+
+	sudo apt-get install macfanctld
+	sudo macfanctld -f
+
+#### General power management
+Install tlp:
+http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html
+	apt-add-repository ppa:linrunner/tlp
+	tlp start
+Tlp will run on startup by default. In order to check if it's running try
+	sudo tlp-stat
+
+
+#### Reducing brightness
+Run xrandr to find the connected display
+
+	xrandr -q | grep connected
+
+Reduce the brightness of the ePS display
+
+	xrandr --ouput <ePS?> --brightness 0.5
+
+
+### Remapping keys
+
+#### Swapping fn-ctrl
+
+TODO: Make this a script
+
+Install the Linux kernel headers (the patch depends on these).
+    # You might need to install the linux headers
+    # sudo apt-get install linux-headers-$(uname -r)
+
+Install https://github.com/free5lot/hid-apple-patched
+
+    git clone https://github.com/free5lot/hid-apple-patched.git
+    cd hid-apple-patched.git
+    ./build.sh
+    ./install.sh
+
+
+#### Enabling fn-keys properly
+
+TODO: Make this a script
+
+https://help.ubuntu.com/community/AppleKeyboard#Change_Function_Key_behavior
+
+edit /etc/modprobe.d/hid_apple.conf
+add  options hid_apple fnmode=2
+run  sudo update-initramfs -u -k all
+reboot
+
+#### Swapping command-option
+
+TODO: Make this a script
+
+https://help.ubuntu.com/community/AppleKeyboard#Mapping_keys_.28Insert.2C_Alt.2C_Cmd.2C_etc..29
+
+edit /etc/modprobe.d/hid_apple.conf
+add  options hid_apple swap_opt_cmd=1
+run  sudo update-initramfs -u -k all
+reboot
+
+#### Vagrant nfs on linux
+sudo apt-get install nfs-kernel-server
+
+Vagrant issue when copying a Mac setup to Linux:
+replace
+    config.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['actimeo=1'], nfs_version: 4
+with
+    config.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['actimeo=1,v3']
+
+## HIDPI support
+Works by default using cinnamon. Either install Linux mint or install the
+cinnamon ppa - ppa:kranich/cinnamon
+
+
+
 
