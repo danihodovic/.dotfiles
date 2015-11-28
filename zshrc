@@ -109,6 +109,13 @@ zle -N end-of-line-no-whitespace
 noop () {}
 zle -N noop
 
+# Paste from clipboard
+vi-append-x-selection () {
+  RBUFFER="$(xclip -o)$RBUFFER"
+}
+zle -N vi-append-x-selection
+bindkey -M vicmd p vi-append-x-selection
+
 # Key bindings. Wanna find weird keycodes? use cat
 # Fix backspace delete in vi-mode
 # http://www.zsh.org/mla/users/2009/msg00812.html
