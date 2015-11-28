@@ -76,6 +76,8 @@ call plug#end()
 "-----------------------------------------
 " Silences C-Q, C-S and allows vim to catch them
 silent !stty -ixon > /dev/null 2>/dev/null
+" All y/p operations use clipboard by default
+set clipboard=unnamedplus
 " Sets the title of the terminal window
 set title
 " Line number
@@ -122,7 +124,8 @@ command! -nargs=? Hr resize <args>
 "TODO: Add remappings for vim command mode and insert mode for moving around and
 "deleting previous/next.
 let mapleader = ","
-" Copy til end of line (default is entire line - use `Y` for that)
+noremap <leader>q q
+" Copy til end of line (default is entire line - use `Y` for entire line instead)
 nnoremap Y yg_
 " Movement
 noremap q b
@@ -137,8 +140,6 @@ noremap j gj
 noremap j gj
 noremap k gk
 noremap k gk
-" Quit all
-nnoremap <leader>q qa!
 " Easier semicolon insertion
 autocmd FileType javascript,typescript,css noremap ;; :call InsertSemicolons()<CR>
 " Don't map this to tab since it blocks the jumplist. There is no way to remap <C-i> or <tab>
@@ -172,19 +173,6 @@ nnoremap <silent> N   N:call HLNext(0.1)<cr>
 nnoremap <esc><esc> :noh<cr><esc>
 " Search selected text, not only words as with `*`
 vnoremap // y/<C-R>"<CR>
-" System clipboard c/p
-vnoremap <leader>y "+y
-vnoremap <leader>Y "+Y
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-" Disable this for now and get used to n-m
-if has("gui_running")
-  " Firefox like tab switching
-  noremap <C-S-tab> :call Switch_buffer("left")()<cr>
-  noremap <C-tab> :call Switch_buffer("right")()<cr>
-endif
 " Close buffer without closing window
 " See http://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
 if has("nvim")
