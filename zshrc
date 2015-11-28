@@ -124,9 +124,26 @@ bindkey -M vicmd $ noop
 bindkey -M vicmd W end-of-line-no-whitespace
 
 # fzf
+
+# Temporary fix for root finding hotkey
+__fselroot() {
+  local cmd="locate /"
+  eval "$cmd" | $(__fzfcmd) -m | while read item; do
+    printf '%q ' "$item"
+  done
+  echo
+}
+
+fzf-root-widget() {
+  LBUFFER="${LBUFFER} $(__fselroot)"
+  zle redisplay
+}
+zle     -N   fzf-root-widget
+
 # Run fzf and paste results onto command line
-bindkey -M vicmd '\'    fzf-file-widget
-bindkey -M viins 'M-\'  fzf-file-widget
+# This will set ` to run fzf-root-widget in vicmd and M-` to run fzf-root-widget in viins
+bindkey -M vicmd '='    fzf-file-widget
+bindkey -M vicmd '+' fzf-root-widget
 
 bindkey -M vicmd '^R'   fzf-history-widget
 bindkey -M viins '^R'   fzf-history-widget
@@ -233,21 +250,3 @@ else
     echo 'Unknown OS' $(uname)
 fi
 
-
-# Temporary fix for root finding hotkey
-__fselroot() {
-  local cmd="locate /"
-  eval "$cmd" | $(__fzfcmd) -m | while read item; do
-    printf '%q ' "$item"
-  done
-  echo
-}
-
-fzf-root-widget() {
-  LBUFFER="${LBUFFER} $(__fselroot)"
-  zle redisplay
-}
-zle     -N   fzf-root-widget
-
-bindkey -M vicmd '^[|' fzf-root-widget
-bindkey -M viins '^[|' fzf-root-widget
