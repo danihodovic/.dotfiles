@@ -33,13 +33,6 @@ case $install_zsh in
             ANTIGEN_URL=https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh
             curl -fLo $ANTIGEN_PATH --create-dirs $ANTIGEN_URL
         fi
-
-        # TODO: Check if zsh is the default shell. If not, ask to set as default.
-        #read -p "Set zsh as the default shell? " DEFAULT_ZSH
-        #case $DEFAULT_ZSH in
-            #y)  chsh -s /bin/zsh
-                #echo "Zsh set as default shell"
-        #esac
 esac
 
 case $install_neovim in
