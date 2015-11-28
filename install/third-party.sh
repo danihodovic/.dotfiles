@@ -16,14 +16,19 @@ echo
 
 case $install_nvm in
     y)
-        git clone https://github.com/creationix/nvm.git ~/.nvm
-        read -p "Install latest node and set as stable?" INSTALL_NODE
-        case $INSTALL_NODE in
-            y)
-                source ~/.nvm/nvm.sh
-                nvm install node
-                nvm alias default node
-        esac
+        hash nvm || true
+        if [ $? -eq 1 ]; then
+          git clone https://github.com/creationix/nvm.git ~/.nvm
+          read -p "Install latest node and set as stable?" INSTALL_NODE
+          case $INSTALL_NODE in
+              y)
+                  source ~/.nvm/nvm.sh
+                  nvm install node
+                  nvm alias default node
+          esac
+        else
+            echo "Nvm already installed"
+        fi
 esac
 
 case $install_chrome in

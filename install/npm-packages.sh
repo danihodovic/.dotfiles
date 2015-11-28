@@ -2,12 +2,18 @@
 set -e
 
 read -p "Install jscs? "                         -n 1 -r   param_jscs
+echo
 read -p "Install jshint? "                       -n 1 -r   param_jshint
+echo
 read -p "Install fixmyjs? "                      -n 1 -r   param_fixmyjs
+echo
 
 read -p "Install Typescript? "                   -n 1 -r   param_typescript
+echo
 read -p "Install clausreinke/typescript-tools? " -n 1 -r   param_ts_tools
+echo
 read -p "Install vvakame/typescript-formatter? " -n 1 -r   param_ts_formatter
+echo
 
 case $param_jscs in
     y|Y )
