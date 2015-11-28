@@ -5,10 +5,21 @@ set -e
 # -n <number return input after *this* many characters instead of waiting for newline>
 # -r do not allow backslashes to escape any characters
 # Add an optional param last where output is stored
-read -p "Install zsh (+antigen) and tmux (+tpm)? " -n 1 -r  install_zsh
+
+read -p "Install gnome terminal from the latest ppa? " -n 1 -r  install_gnome_terminal
+echo
+read -p "Install zsh (+antigen) and tmux (+tpm) ? " -n 1 -r  install_zsh
 echo
 read -p "Install Neovim ppa + neovim pip? " -n 1 -r         install_neovim
 echo
+
+case $install_gnome_terminal in
+  y)
+    sudo add-apt-repository ppa:gnome3-team/gnome3-staging
+    sudo apt-get update
+    sudo apt-get install gnome-terminal
+    ;;
+esac
 
 # Todo: Add antigen
 case $install_zsh in
@@ -40,6 +51,7 @@ case $install_neovim in
 
         # Check so that the env var is set. This probably means our dotfiles are
         # installed. -z checks that the length of the env var is > 0
+        # Todo check if this dir is not a symlink
         if [ -z "$NVIM_DIR" ]; then
             echo "[Error] Setup your dotfiles and source zshrc before attempting to install.."
             exit 1
