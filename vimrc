@@ -9,8 +9,6 @@ call plug#begin('$NVIM_DIR/plugged')
 Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-nnoremap = :GitFiles<cr>
-nnoremap ` :Buffers<cr>
 Plug 'scrooloose/nerdtree'
 Plug 'flazz/vim-colorschemes'
 " Run linters or makefiles
@@ -256,6 +254,13 @@ autocmd FileType php                    setlocal  shiftwidth=4 tabstop=4 expandt
 autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandtab
 "-----------------------------------------
 " Plugin specific settings
+"-----------------------------------------
+" fzf.vim
+"-----------------------------------------
+nnoremap = :GitFiles<cr>
+nnoremap <M-=> :Files<cr>
+nnoremap ` :Buffers<cr>
+nnoremap <M-`> :buffer #<cr>
 "-----------------------------------------
 " Ag.vim
 "-----------------------------------------
