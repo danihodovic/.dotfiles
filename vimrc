@@ -78,6 +78,8 @@ call plug#end()
 silent !stty -ixon > /dev/null 2>/dev/null
 " All y/p operations use clipboard by default
 set clipboard=unnamedplus
+" Enable spelling
+set spell spelllang=en_us
 " Sets the title of the terminal window
 set title
 " Line number
