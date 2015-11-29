@@ -432,6 +432,8 @@ let g:UltiSnipsSnippetDirectories=[$NVIM_DIR.'/plugged/vim-dsnippets']
 " GitGutter
 "-----------------------------------------
 hi SignColumn guibg=black ctermbg=black
+nnoremap ggn :GitGutterNextHunk<cr>
+nnoremap ggp :GitGutterPrevHunk<cr>
 "-----------------------------------------
 " Neomake
 "-----------------------------------------
