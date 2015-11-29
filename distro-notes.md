@@ -4,13 +4,25 @@
 Install dconf-editor
 Launch dconf-editor
 Locate
+
 	/org/gnome/desktop/wm/keybindings
 	and
 	/org/cinnamon/desktop/keybindings/wm
+
 Find the option switch group
 Find the definition for switch-group. It should be set to ['<Alt>AboveTab']
 Change this to something else
 You don't need to logoff for this to work
+
+### Disable ctrl-alt-l to lock screen
+Launch dconf-editor
+Locate
+
+	/org/cinnamon/desktop/keybindings/wm
+
+Find the option `screensaver` and disable it.
+
+
 
 # Xubuntu/Lubuntu/Any system that uses xkb:
 
