@@ -262,7 +262,7 @@ autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandt
 " fzf.vim
 "-----------------------------------------
 nnoremap = :GitFiles<cr>
-nnoremap <M-=> :Files<cr>
+nnoremap + :Files<cr>
 nnoremap ` :Buffers<cr>
 nnoremap <M-`> :buffer #<cr>
 "-----------------------------------------
