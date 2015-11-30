@@ -257,3 +257,7 @@ else
     echo 'Unknown OS' $(uname)
 fi
 
+if [[ "$DESKTOP_SESSION" == "cinnamon" ]]; then
+  echo 'Using cinnamon settings...'
+  alias lock='cinnamon-screensaver-command -l'
+fi
