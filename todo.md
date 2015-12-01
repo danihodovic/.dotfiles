@@ -1,5 +1,7 @@
 # Todo
 
+- Add tags to various repos cf
+- Write a fzf helper which opens word under cursor in :Tags
 - Learn vim folds
 - Write vim-github viewer
 - Try ia in vim
