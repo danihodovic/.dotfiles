@@ -266,7 +266,16 @@ nnoremap + :Files<cr>
 nnoremap ` :Buffers<cr>
 " Remap below isn't really fzf related, it simply switches to the last buffer with vanilla vim
 nnoremap <M-`> :buffer #<cr>
-nnoremap <M-t> :Tags<cr>
+nnoremap <M-t> :call FzfTagsCurrWord()<cr>
+fu! FzfTagsCurrWord()
+  let currWord = expand('<cword>')
+  if len(currWord) > 0
+    call fzf#vim#tags({'options': '-q ' . currWord})
+  else
+    execute ':Tags'
+  endif
+endfu
+
 "-----------------------------------------
 " Ag.vim
 "-----------------------------------------
