@@ -264,7 +264,9 @@ autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandt
 nnoremap = :GitFiles<cr>
 nnoremap + :Files<cr>
 nnoremap ` :Buffers<cr>
+" Remap below isn't really fzf related, it simply switches to the last buffer with vanilla vim
 nnoremap <M-`> :buffer #<cr>
+nnoremap <M-t> :Tags<cr>
 "-----------------------------------------
 " Ag.vim
 "-----------------------------------------
