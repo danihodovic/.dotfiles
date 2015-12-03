@@ -135,7 +135,6 @@ noremap q b
 " Movement begin/end of line
 noremap Q ^
 noremap W g_
-noremap 0 <nop>
 noremap $ <nop>
 noremap ^ <nop>
 " Move to next screen (vim) line instead of file line. Useful for long lines that span over two vim lines
