@@ -147,6 +147,27 @@ fzf-root-widget() {
 }
 zle     -N   fzf-root-widget
 
+fzf-git-status-widget() {
+  # If we dont separate the declaration and definition of the variable
+  # the last ran command will be the output of `local`
+  local files
+  files=`git diff --name-only`
+  if [ $? != "0" ]; then
+    return
+  fi
+
+  local result
+  echo $files | fzf -m | while read item; do
+    result="${result} ${item}"
+  done
+  LBUFFER="${LBUFFER} ${result}"
+  zle redisplay
+}
+zle     -N     fzf-git-status-widget
+bindkey -M viins '^g' fzf-git-status-widget
+bindkey -M vicmd '^g' fzf-git-status-widget
+
+
 # Run fzf and paste results onto command line
 # This will set ` to run fzf-root-widget in vicmd and M-` to run fzf-root-widget in viins
 bindkey -M vicmd '='    fzf-file-widget
