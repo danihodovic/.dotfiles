@@ -8,6 +8,7 @@
 - Try iabbrev in vim
 - Try https://github.com/suan/vim-instant-markdown
 - Look into bash script testing so that your install scripts don't break constantly
+- Write a fzf helper for `git status` files
 
 # Done
 - ~~Write a fzf helper which opens word under cursor in :Ag~~
