@@ -264,9 +264,20 @@ nnoremap ` :Buffers<cr>
 " Remap below isn't really fzf related, it simply switches to the last buffer with vanilla vim
 nnoremap <M-`> :buffer #<cr>
 nnoremap <M-t> :call FzfTagsCurrWord()<cr>
-" TODO: Expand this to visual selection
-" TODO: Expand this to take ag args, such as -Q and -t
-nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+
+" TODO: Expand fzf to take ag args, such as -Q and -t
+noremap <leader>ag :call FzfAgCurrWord('n')<cr>
+" Use visualmode() to differentiate "v", "V" and "<CTRL-V>"
+vnoremap <leader>ag :call FzfAgCurrWord(visualmode())<cr>
+fu! FzfAgCurrWord(mode)
+  if a:mode ==# 'n'
+    let currWord = expand('<cword>')
+    execute 'Ag ' . currWord
+  elseif a:mode ==# 'v'
+    let selectedText = Get_visual_selection()
+    execute 'Ag ' . selectedText
+  endif
+endfu
 
 fu! FzfTagsCurrWord()
   let currWord = shellescape(expand('<cword>'))
