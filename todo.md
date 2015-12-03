@@ -1,5 +1,8 @@
 # Todo
 
+- Remove the focus-event plugin and clear the tmux file? since neovim has already implemented this
+  by default. See https://github.com/tmux-plugins/vim-tmux-focus-events/pull/4
+  Test before you commit
 - Add tags to various repos cf
 - Write a fzf helper which opens word under cursor in :Tags
 - Learn vim folds
