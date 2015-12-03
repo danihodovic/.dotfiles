@@ -25,7 +25,6 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'SirVer/ultisnips'
 Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
-Plug 'rking/ag.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 " Switch tabs between vim and tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -261,43 +260,23 @@ autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandt
 "-----------------------------------------
 " fzf.vim
 "-----------------------------------------
-nnoremap = :GitFiles<cr>
-nnoremap + :Files<cr>
+nnoremap = :Files<cr>
 nnoremap ` :Buffers<cr>
 " Remap below isn't really fzf related, it simply switches to the last buffer with vanilla vim
 nnoremap <M-`> :buffer #<cr>
 nnoremap <M-t> :call FzfTagsCurrWord()<cr>
+" TODO: Expand this to visual selection
+" TODO: Expand this to take ag args, such as -Q and -t
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+
 fu! FzfTagsCurrWord()
-  let currWord = expand('<cword>')
+  let currWord = shellescape(expand('<cword>'))
   if len(currWord) > 0
-    call fzf#vim#tags({'options': '-q ' . currWord})
+    call fzf#vim#tags({'options': '-q ' . currWord, 'down': '~40%'})
   else
     execute ':Tags'
   endif
 endfu
-
-"-----------------------------------------
-" Ag.vim
-"-----------------------------------------
-let g:ag_working_path_mode="r"
-" Ag! is shamanic knowledge. ag.vim opens the first result by default when using :Ag, it does not do
-" this when using :Ag! You instead get to pick the option
-nnoremap <leader>ag :Ag! -Qt .
-
-" Below is legacy stuff for ags.vim
-"nnoremap <leader>ag :AgsWrapper
-"command! -nargs=* -complete=file AgsWrapper    call AgsWrapper(<q-args>, '')
-"" This function wraps :Ags with by providing the git root folder if inside a git repo.
-"" It also uses -t for ag which seraches inside .gitignore folders
-"function! AgsWrapper(args, cmd)
-  "let root = systemlist('git rev-parse --show-toplevel')[0]
-  "" If not in a git repo, search from here
-  "if v:shell_error > 0
-    "execute 'Ags' a:args
-  "else
-    "execute 'Ags' a:args l:root '-t'
-  "endif
-"endfu!
 "-----------------------------------------
 " vim-indent-guides
 "-----------------------------------------
