@@ -263,12 +263,27 @@ nnoremap = :Files<cr>
 nnoremap ` :Buffers<cr>
 " Remap below isn't really fzf related, it simply switches to the last buffer with vanilla vim
 nnoremap <M-`> :buffer #<cr>
-nnoremap <M-t> :call FzfTagsCurrWord()<cr>
 
-" TODO: Expand fzf to take ag args, such as -Q and -t
+nnoremap <M-t> :call FzfTagsCurrWord('n')<cr>
+vnoremap <M-t> :call FzfTagsCurrWord(visualmode())<cr>
+fu! FzfTagsCurrWord(mode)
+  if a:mode ==# 'n'
+    let currWord = shellescape(expand('<cword>'))
+    if len(currWord) > 0
+      call fzf#vim#tags({'options': '-q ' . currWord, 'down': '~40%'})
+    else
+      execute 'Tags'
+    endif
+  elseif a:mode ==# 'v'
+    let selectedText = shellescape(Get_visual_selection())
+    call fzf#vim#tags({'options': '-q ' . selectedText, 'down': '~40%'})
+  endif
+endfu
+
 noremap <leader>ag :call FzfAgCurrWord('n')<cr>
 " Use visualmode() to differentiate "v", "V" and "<CTRL-V>"
 vnoremap <leader>ag :call FzfAgCurrWord(visualmode())<cr>
+" TODO: Expand fzf to take ag args, such as -Q and -t
 fu! FzfAgCurrWord(mode)
   if a:mode ==# 'n'
     let currWord = expand('<cword>')
@@ -276,15 +291,6 @@ fu! FzfAgCurrWord(mode)
   elseif a:mode ==# 'v'
     let selectedText = Get_visual_selection()
     execute 'Ag ' . selectedText
-  endif
-endfu
-
-fu! FzfTagsCurrWord()
-  let currWord = shellescape(expand('<cword>'))
-  if len(currWord) > 0
-    call fzf#vim#tags({'options': '-q ' . currWord, 'down': '~40%'})
-  else
-    execute ':Tags'
   endif
 endfu
 "-----------------------------------------
