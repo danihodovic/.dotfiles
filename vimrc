@@ -174,6 +174,7 @@ nnoremap <silent> N   N:call HLNext(0.1)<cr>
 " Clear highlight with enter
 nnoremap <esc><esc> :noh<cr><esc>
 " Search selected text, not only words as with `*`
+nnoremap / <Plug>(Oblique-F/)
 vnoremap // y/<C-R>"<CR>
 " Close buffer without closing window
 " See http://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
@@ -292,6 +293,10 @@ fu! FzfAgCustom(mode)
     call fzf#vim#ag('', {'source': source})
   endif
 endfu
+"-----------------------------------------
+" vim-oblique
+"-----------------------------------------
+let g:oblique#incsearch_highlight_all=1
 "-----------------------------------------
 " vim-indent-guides
 "-----------------------------------------
