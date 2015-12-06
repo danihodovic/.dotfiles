@@ -210,9 +210,9 @@ set cursorline
 autocmd InsertEnter * set cursorline
 " Color of search highlight
 " Note, this has to go AFTER the skin settings
-highlight Search ctermfg=30 ctermbg=black
+highlight Search ctermfg=45 ctermbg=black
 highlight Search guifg=red guibg=black
-highlight SearchFlash guibg=red ctermfg=yellow ctermbg=black
+highlight SearchFlash guibg=red ctermfg=132 ctermbg=16
 "-----------------------------------------
 " Text width settings
 "-----------------------------------------
@@ -599,9 +599,9 @@ fu! HLNext (blinktime)
   let [bufnum, lnum, col, off] = getpos('.')
   let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
   let target_pat = '\c\%#'.@/
-  let ring = matchadd('SearchFlash', target_pat, 101)
+  let ring = matchadd('SearchFlash', target_pat, 104)
   redraw
-  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  exec 'sleep ' . float2nr(a:blinktime * 800) . 'm'
   call matchdelete(ring)
   redraw
 endfunction
