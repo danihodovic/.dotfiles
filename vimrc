@@ -260,6 +260,7 @@ autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandt
 "-----------------------------------------
 " fzf.vim
 "-----------------------------------------
+let g:fzf_layout = {'up': '~40%'}
 nnoremap = :Files<cr>
 nnoremap ` :Buffers<cr>
 " Remap below isn't really fzf related, it simply switches to the last buffer with vanilla vim
@@ -269,10 +270,11 @@ nnoremap <leader>t :call FzfTagsCustom('n')<cr>
 vnoremap <leader>t :call FzfTagsCustom(visualmode())<cr>
 fu! FzfTagsCustom(mode)
   if a:mode ==# 'n'
-    execute 'Tags'
+    execute "Tags"
   elseif a:mode ==# 'v'
     let selectedText = shellescape(Get_visual_selection())
-    call fzf#vim#tags({'options': '-q ' . selectedText, 'down': '~40%'})
+    let opts = '-q ' . selectedText
+    call fzf#vim#tags({'options': opts, 'up': '~40%'})
   endif
 endfu
 
@@ -290,7 +292,7 @@ fu! FzfAgCustom(mode)
 
     let ag_opts = 'ag --nogroup --column --color -t "%s"'
     let source = printf(ag_opts, query)
-    call fzf#vim#ag('', {'source': source})
+    call fzf#vim#ag('', {'source': source, 'up': '~40%'})
   endif
 endfu
 "-----------------------------------------
