@@ -1,4 +1,12 @@
 # Todo
+
+## Priority:High
+- Fiddle with NERDCommenter to add one space before comment
+- Make neomake not expand or move fzf to top
+- Block certain notifications on Linux mint (battery) while others are unblocked (Slack)
+- Check out node inspector
+
+## Priority:Low
 - Remove the focus-event plugin and clear the tmux file? since neovim has already implemented this
   by default. See https://github.com/tmux-plugins/vim-tmux-focus-events/pull/4
   Test before you commit
