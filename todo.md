@@ -18,6 +18,8 @@
 - Look into bash script testing so that your install scripts don't break constantly
 - Write a fzf helper for `git status` files
 - Write a script for resizing of tmux and vim windows transparently, just like switching is done.
+- Write a vim fzf helper to show edited git files
+- Add a global gitignore
 
 # Done
 - ~~Write a fzf helper which opens word under cursor in :Ag~~
