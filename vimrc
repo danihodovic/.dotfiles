@@ -279,21 +279,29 @@ fu! FzfTagsCustom(mode)
 endfu
 
 
-noremap <leader>a :call FzfAgCustom('n')<cr>
+command! -bang -nargs=* AG call FzfAgCustom(<q-args>)
+noremap <leader>a :call FzfAgCustom('', 'n')<cr>
 " Use visualmode() to differentiate "v", "V" and "<CTRL-V>"
-vnoremap <leader>a :call FzfAgCustom(visualmode())<cr>
-fu! FzfAgCustom(mode)
-  if a:mode ==# 'n' || a:mode ==# 'v'
-    if a:mode ==# 'n'
+vnoremap <leader>a :call FzfAgCustom('', visualmode())<cr>
+
+" Todo?: Instead of mode use ...
+fu! FzfAgCustom(queryparam, ...)
+  if len(a:queryparam) > 0
+    let query = a:queryparam
+  elseif a:0 > 0
+    let mode = a:1
+    if mode ==# 'n'
       let query = escape('^(?=.)', '"\-')
-    elseif a:mode ==# 'v'
+    elseif mode ==# 'v'
       let query = escape(Get_visual_selection(), '"\-')
     endif
-
-    let ag_opts = 'ag --nogroup --column --color -t "%s"'
-    let source = printf(ag_opts, query)
-    call fzf#vim#ag('', {'source': source, 'up': '~40%'})
+  else
+    let query = ''
   endif
+
+  let ag_opts = 'ag --nogroup --column --color -t "%s"'
+  let source = printf(ag_opts, query)
+  call fzf#vim#ag(query, {'options': '-e', 'source': source, 'up': '~40%'})
 endfu
 "-----------------------------------------
 " vim-oblique
