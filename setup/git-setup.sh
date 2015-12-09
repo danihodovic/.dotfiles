@@ -19,3 +19,13 @@ git config --global rerere.enabled true
 git config --global push.default upstream
 
 git config --global alias.graph "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+
+gitconfig="${HOME}/.config/git"
+if [ ! -L "${gitconfig}/ignore" ]; then
+  echo "Symlinking global gitignore"
+  if [ ! -d "$gitconfig" ]; then
+    echo "Missing xdg git config directory, mkdir ${gitconfig}"
+    mkdir -p ${gitconfig}
+  fi
+  ln -s ~/.dotfiles/conf/global-gitignore "${gitconfig}/ignore"
+fi
