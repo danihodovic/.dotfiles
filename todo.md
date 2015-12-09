@@ -4,7 +4,8 @@
 - Fiddle with NERDCommenter to add one space before comment
 - Make neomake not expand or move fzf to top
 - Block certain notifications on Linux mint (battery) while others are unblocked (Slack)
-- Check out node inspector
+- Check out node inspector and the chrome debugger
+- Set fzf.vim :Ag to an exact match or start Ag with a specific query
 
 ## Priority:Low
 - Remove the focus-event plugin and clear the tmux file? since neovim has already implemented this
@@ -20,6 +21,8 @@
 - Write a script for resizing of tmux and vim windows transparently, just like switching is done.
 - Write a vim fzf helper to show edited git files
 - Add a global gitignore
+- Add vimscript snippets
+- Map C-g to echo new prompt when done selecting
 
 # Done
 - ~~Write a fzf helper which opens word under cursor in :Ag~~
