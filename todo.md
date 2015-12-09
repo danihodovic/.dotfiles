@@ -23,6 +23,7 @@
 - Add a global gitignore
 - Add vimscript snippets
 - Map C-g to echo new prompt when done selecting
+- Look into fixmyjs (or alternatives) for more than semicolon fixing
 
 # Done
 - ~~Write a fzf helper which opens word under cursor in :Ag~~
