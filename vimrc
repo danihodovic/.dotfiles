@@ -534,6 +534,8 @@ let g:AutoPairsShortcutToggle = ''
 "-----------------------------------------
 nnoremap <leader>c :call NERDComment(0, "toggle")<CR>
 vnoremap <leader>c :call NERDComment(0, "toggle")<CR>
+" Add a space before any comment
+let g:NERDSpaceDelims = 1
 "-----------------------------------------
 " NERDTree
 "-----------------------------------------
