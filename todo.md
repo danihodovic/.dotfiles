@@ -10,7 +10,7 @@
 ## Priority:Low
 - Remove the focus-event plugin and clear the tmux file? since neovim has already implemented this
   by default. See https://github.com/tmux-plugins/vim-tmux-focus-events/pull/4
-  Test before you commit
+..*Test before you commit
 - Add tags to various repos cf
 - Learn vim folds
 - Write vim-github viewer
@@ -25,6 +25,8 @@
 - Map C-g to echo new prompt when done selecting
 - Look into fixmyjs (or alternatives) for more than semicolon fixing
 - Add jscs formatting if it exists to vim-autoformat
+- Figure out how to store encrypted files in public repos
+..*https://github.com/AGWA/git-crypt
 
 # Done
 - ~~Write a fzf helper which opens word under cursor in :Ag~~
