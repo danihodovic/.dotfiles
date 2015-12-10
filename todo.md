@@ -6,16 +6,16 @@
 - Check out node inspector and the chrome debugger
 
 ## Priority:Low
+- Look at fpm
+- Write a fzf.vim helper that looks at git status files
 - Remove the focus-event plugin and clear the tmux file? since neovim has already implemented this
   by default. See https://github.com/tmux-plugins/vim-tmux-focus-events/pull/4
 ..*Test before you commit
-- Add tags to various repos cf
 - Learn vim folds
 - Write vim-github viewer
 - Try iabbrev in vim
 - Try https://github.com/suan/vim-instant-markdown
 - Look into bash script testing so that your install scripts don't break constantly
-- Write a fzf helper for `git status` files
 - Write a script for resizing of tmux and vim windows transparently, just like switching is done.
 - Write a vim fzf helper to show edited git files
 - Add a global gitignore
@@ -25,6 +25,7 @@
 - Add jscs formatting if it exists to vim-autoformat
 - Figure out how to store encrypted files in public repos
 ..*https://github.com/AGWA/git-crypt
+..*https://github.com/StackExchange/blackbox
 
 # Done
 - ~~Write a fzf helper which opens word under cursor in :Ag~~
@@ -41,3 +42,5 @@
 
 # Wont
 - Try the neovim terminal emulator
+- Add tags to various repos cf
+- Write a fzf helper for `git status` files
