@@ -284,7 +284,6 @@ noremap <leader>a :call FzfAgCustom('', 'n')<cr>
 " Use visualmode() to differentiate "v", "V" and "<CTRL-V>"
 vnoremap <leader>a :call FzfAgCustom('', visualmode())<cr>
 
-" Todo?: Instead of mode use ...
 fu! FzfAgCustom(queryparam, ...)
   if len(a:queryparam) > 0
     let query = a:queryparam
@@ -302,6 +301,20 @@ fu! FzfAgCustom(queryparam, ...)
   let ag_opts = 'ag --nogroup --column --color -t "%s"'
   let source = printf(ag_opts, query)
   call fzf#vim#ag(query, {'options': '-e', 'source': source, 'up': '~40%'})
+endfu
+
+nnoremap <leader>gs :call FzfGitStatus()<cr>
+vnoremap <leader>gs :call FzfGitStatus()<cr>
+" Using the custom fzf#run see https://github.com/junegunn/fzf#fzfrunoptions
+fu! FzfGitStatus()
+  let source = 'git diff --name-only'
+  let opts = {
+        \ 'source': source,
+        \ 'options': '--prompt "Git changed files>" --ansi',
+        \ 'sink': 'e',
+        \ 'dir': '.',
+        \ 'up': '40%' }
+  call fzf#run(opts)
 endfu
 "-----------------------------------------
 " vim-oblique
