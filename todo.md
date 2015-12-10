@@ -1,11 +1,9 @@
 # Todo
 
 ## Priority:High
-- Fiddle with NERDCommenter to add one space before comment
 - Make neomake not expand or move fzf to top
 - Block certain notifications on Linux mint (battery) while others are unblocked (Slack)
 - Check out node inspector and the chrome debugger
-- Set fzf.vim :Ag to an exact match or start Ag with a specific query
 
 ## Priority:Low
 - Remove the focus-event plugin and clear the tmux file? since neovim has already implemented this
@@ -38,6 +36,8 @@
 - ~~Try fzf~~
 - ~~Check out pasting to clipboard for vim+tmux https://gist.github.com/tarruda/5158535~~
 - ~~Rewrite distro notes to markdown format~~
+- ~~Fiddle with NERDCommenter to add one space before comment~~
+- ~~Set fzf.vim :Ag to an exact match or start Ag with a specific query~~
 
 # Wont
 - Try the neovim terminal emulator
