@@ -26,6 +26,8 @@
 - Figure out how to store encrypted files in public repos
 ..*https://github.com/AGWA/git-crypt
 ..*https://github.com/StackExchange/blackbox
+- Checkout chiphogg/vim-vtd
+- Figure out pgp signing
 
 # Done
 - ~~Write a fzf helper which opens word under cursor in :Ag~~
