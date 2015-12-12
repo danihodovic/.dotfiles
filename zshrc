@@ -51,20 +51,12 @@ antigen theme robbyrussell/oh-my-zsh themes/agnoster
 # External scripts
 # ------------
 # Source these before our own `bindkeys` so that we can override stuff
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-if [ -f $NVM_DIR/nvm.sh ]; then
-    source $NVM_DIR/nvm.sh
-fi
-
-if [ -f $NVM_DIR/bash_completion ]; then
-    source $NVM_DIR/bash_completion
-fi
+[ -f ~/.fzf.zsh ]               && source ~/.fzf.zsh
+[ -f $NVM_DIR/nvm.sh ]          && source $NVM_DIR/nvm.sh
+[ -f $NVM_DIR/bash_completion ] && source $NVM_DIR/bash_completion
 
 hash virtualenvwrapper 2>/dev/null
-if [ $? == 0 ]; then
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
+[ $? == 0 ] && source /usr/local/bin/virtualenvwrapper.sh
 
 # Bindings
 # ------------
