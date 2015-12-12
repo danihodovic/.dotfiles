@@ -1,13 +1,13 @@
 # Todo
 
 ## Priority:High
-- Make neomake not expand or move fzf to top
 - Block certain notifications on Linux mint (battery) while others are unblocked (Slack)
 - Check out node inspector and the chrome debugger
+- Write a script for resizing of tmux and vim windows transparently, just like switching is done.
+- Figure out how pgp signing works
 
 ## Priority:Low
 - Look at fpm
-- Write a fzf.vim helper that looks at git status files
 - Remove the focus-event plugin and clear the tmux file? since neovim has already implemented this
   by default. See https://github.com/tmux-plugins/vim-tmux-focus-events/pull/4
 ..*Test before you commit
@@ -16,20 +16,20 @@
 - Try iabbrev in vim
 - Try https://github.com/suan/vim-instant-markdown
 - Look into bash script testing so that your install scripts don't break constantly
-- Write a script for resizing of tmux and vim windows transparently, just like switching is done.
 - Write a vim fzf helper to show edited git files
-- Add a global gitignore
 - Add vimscript snippets
-- Map C-g to echo new prompt when done selecting
+- Map fzf-git-status (C-g) to echo new prompt when done selecting
 - Look into fixmyjs (or alternatives) for more than semicolon fixing
 - Add jscs formatting if it exists to vim-autoformat
 - Figure out how to store encrypted files in public repos
 ..*https://github.com/AGWA/git-crypt
 ..*https://github.com/StackExchange/blackbox
 - Checkout chiphogg/vim-vtd
-- Figure out pgp signing
 
 # Done
+- ~~Add a global gitignore and scripts to set it up~~
+- ~~Write a fzf.vim helper that looks at git status files~~
+- ~~Move fzf to top so that it doesn't enlarge the neomake window~~
 - ~~Write a fzf helper which opens word under cursor in :Ag~~
 - ~~Look into terminal based music players~~
 - ~~Write a fzf helper which opens word under cursor in :Tags~~
