@@ -38,7 +38,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle djui/alias-tips
 
 antigen-use oh-my-zsh
-antigen theme robbyrussell/oh-my-zsh themes/amuse
+antigen theme robbyrussell/oh-my-zsh themes/agnoster
 
 # Useful but unused
 # antigen bundle b4b4r07/enhancd
