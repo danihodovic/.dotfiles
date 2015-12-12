@@ -161,9 +161,8 @@ nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-" Default mapping for switching
-nnoremap <M-q> :call Switch_buffer("left")<cr>
-nnoremap <M-w> :call Switch_buffer("right")<cr>
+nnoremap + :vertical resize +15<cr>
+nnoremap - :vertical resize -15<cr>
 "Create a new buffer
 noremap <C-t> :enew<CR>
 nnoremap <C-w> :call DeleteBufferVisitPrevious()<CR>
