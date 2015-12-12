@@ -21,6 +21,10 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'Chiel92/vim-autoformat'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'bling/vim-airline'
+" Generates tmuxline configs. This doesn't have to be used unless you want to switch
+" tmuxline skins on the line or integrate them with vim.
+Plug 'edkolev/tmuxline.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'SirVer/ultisnips'
 Plug 'dani-h/vim-dsnippets'
@@ -499,34 +503,33 @@ let g:autoformat_javascript_typescript = 1
 "-----------------------------------------
 " VimAirline
 "-----------------------------------------
+" This needs to be enabled for airline to use powerline fonts
+let g:airline_powerline_fonts = 1
+" - Airline options
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '◀'
-" Airline extension Tabline
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = '▶'
 
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#show_tabs = 1
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tabline#show_tab_type = 1
-
-" Show the filename or parent/filename if filename is same
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#quickfix#location_text = 'Location'
+" - Airline built in extensions
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
-
-let g:airline#extensions#tabline#buffer_idx_mode = 0
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-
+let g:airline#extensions#quickfix#location_text = 'Location'
+"
+" - Airline external extensions
+" Most extensions are enabled by default and lazily loaded when the
+" corresponding plugin (if any) is detected.
+" an empty list disables all extensions
+" let g:airline_extensions = []
+" " or only load what you want
+" let g:airline_extensions = ['branch', 'tabline']
+"
+" These are all enabled by default if the respective plugins are loaded.
+" Let's be declarative here and show what plugins we want to use instead
+" of looking at the docs.
+" - Git branch (fugitive)
+let g:airline#extensions#branch#enabled = 1
+" - Git hunks.
+let g:airline#extensions#hunks#enabled = 1
+" - Tmuxline
+let g:airline#extensions#tmuxline#enabled = 0
 
 "-----------------------------------------
 " Auto-pairs
