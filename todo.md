@@ -5,8 +5,11 @@
 - Check out node inspector and the chrome debugger
 - Write a script for resizing of tmux and vim windows transparently, just like switching is done.
 - Figure out how pgp signing works
+- Improve your workflow using tpope/vim-fugitive. Specifically get used to
+  :Gdiff, :Gstatus, :Glog, :Gblame, :Gbrowse (github), :Gread and integrate it with statusline
 
 ## Priority:Low
+- Get used to gf, gd, gq in vim
 - Look at fpm
 - Remove the focus-event plugin and clear the tmux file? since neovim has already implemented this
   by default. See https://github.com/tmux-plugins/vim-tmux-focus-events/pull/4
@@ -27,6 +30,7 @@
 - Checkout chiphogg/vim-vtd
 
 # Done
+- ~~Enable vim-airline to show branch
 - ~~Add a global gitignore and scripts to set it up~~
 - ~~Write a fzf.vim helper that looks at git status files~~
 - ~~Move fzf to top so that it doesn't enlarge the neomake window~~
