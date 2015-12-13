@@ -692,6 +692,8 @@ fu! InsertSemicolons()
   " Note: vim has weird regexes. you need to escape '\|' and not '('. See `:h \v`
   " Currline is not ( or { or ; or not empty
   if currentmode == 'n' && currLine !~ '\v(\(|\{|;)\s*$' && currLine !~ '^$'
+    " We don't want - `var foo = baz ;`
+    call <SID>StripTrailingWhitespaces()
     execute "normal! A;\<esc>"
     call cursor(l, c)
   endif
