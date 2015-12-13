@@ -7,6 +7,7 @@
 - Figure out how pgp signing works
 - Improve your workflow using tpope/vim-fugitive. Specifically get used to
   :Gdiff, :Gstatus, :Glog, :Gblame, :Gbrowse (github), :Gread and integrate it with statusline
+- Improve your workflow using vim-startify. Learn how sessions work
 
 ## Priority:Low
 - Get used to gf, gd, gq in vim
@@ -28,6 +29,9 @@
 ..*https://github.com/AGWA/git-crypt
 ..*https://github.com/StackExchange/blackbox
 - Checkout chiphogg/vim-vtd
+- iabbrev date -> strftime or mapping for date
+- Checkout vim journals/calendars
+- Checkout apt-fast
 
 # Done
 - ~~Enable vim-airline to show branch
