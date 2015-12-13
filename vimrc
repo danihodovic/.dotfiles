@@ -12,6 +12,7 @@ Plug 'junegunn/fzf.vim'
 " Sets root directory to project (git) directory by default
 Plug 'airblade/vim-rooter'
 Plug 'scrooloose/nerdtree'
+Plug 'mhinz/vim-startify'
 Plug 'flazz/vim-colorschemes'
 " Run linters or makefiles
 Plug 'benekastah/neomake'
