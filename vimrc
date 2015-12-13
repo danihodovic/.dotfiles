@@ -12,8 +12,10 @@ Plug 'junegunn/fzf.vim'
 " Sets root directory to project (git) directory by default
 Plug 'airblade/vim-rooter'
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'mhinz/vim-startify'
 Plug 'flazz/vim-colorschemes'
+Plug 'ryanoasis/vim-devicons'
 " Run linters or makefiles
 Plug 'benekastah/neomake'
 " Show git diffs
@@ -120,6 +122,8 @@ set autoread
 " 'The last semicolon is the key here. When Vim tries to locate the 'tags' file, it first looks at the current
 " directory, then the parent directory, then the parent of the parent, and so on'
 set tags=./tags;
+" This needs to be set for devicons to work
+set encoding=utf8
 "-----------------------------------------
 " User defined commands
 "-----------------------------------------
