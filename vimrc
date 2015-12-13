@@ -123,7 +123,8 @@ set autoread
 " directory, then the parent directory, then the parent of the parent, and so on'
 set tags=./tags;
 " This needs to be set for devicons to work
-set encoding=utf8
+" TODO: Fix the error message that this causes
+" set encoding=utf8
 "-----------------------------------------
 " User defined commands
 "-----------------------------------------
