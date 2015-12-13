@@ -266,6 +266,8 @@ autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandt
 let g:fzf_layout = {'up': '~40%'}
 nnoremap = :Files<cr>
 nnoremap b :Buffers<cr>
+nnoremap <C-h> :History:<cr>
+nnoremap <leader>mr :History<cr>
 " Remap below isn't really fzf related, it simply switches to the last buffer with vanilla vim
 nnoremap <M-`> :buffer #<cr>
 

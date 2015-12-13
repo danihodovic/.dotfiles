@@ -165,8 +165,8 @@ bindkey -M vicmd '^g' fzf-git-status-widget
 bindkey -M vicmd '='    fzf-file-widget
 bindkey -M vicmd '+' fzf-root-widget
 
-bindkey -M vicmd '^R'   fzf-history-widget
-bindkey -M viins '^R'   fzf-history-widget
+bindkey -M vicmd '^h'   fzf-history-widget
+bindkey -M viins '^h'   fzf-history-widget
 
 # Fzf keybindings as suggested in the wiki
 # https://github.com/junegunn/fzf/wiki/examples
