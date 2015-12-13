@@ -165,6 +165,13 @@ vnoremap > >gv
 inoremap <C-BS> <C-W>
 " map ctrl+del to delete next work
 inoremap <C-Del> <C-O>dw
+" Delete previous and next word in insert mode.  TODO: Figure out if you need
+" this and enable it for zshrc too.
+inoremap <M-q> <esc>lcb
+" Delete next word. We need a conditional mapping becuase <esc> moves the
+" character left if we are not on the beginning of a line. If we are on the
+" beginning of a line it has nowhere to move.
+inoremap <expr> <M-w> col('.') == 1 ? '<esc>cw' : '<esc>lcw'
 "Window movement
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
