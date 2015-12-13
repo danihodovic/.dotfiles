@@ -181,8 +181,9 @@ nnoremap <silent> n   n:call HLNext(0.1)<cr>
 nnoremap <silent> N   N:call HLNext(0.1)<cr>
 " Clear highlight with enter
 nnoremap <esc><esc> :noh<cr><esc>
+" TODO: oblique disables search for some reason. Figure out why
+" nnoremap / <Plug>(Oblique-F/)
 " Search selected text, not only words as with `*`
-nnoremap / <Plug>(Oblique-F/)
 vnoremap // y/<C-R>"<CR>
 " Close buffer without closing window
 " See http://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
