@@ -239,13 +239,15 @@ alias h="history"
 alias f='find'
 alias cd-="cd -"
 alias ls='ls --color=auto --classify'
+alias aptinstall="sudo apt-get install ${1}"
 alias aptupgrade="sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade"
 alias xkbmapcaps="setxkbmap -option caps:swapescape"
 alias ddmenu="dmenu_run -fn '-*-fixed-*-*-*-*-20-*-*-*-*-*-*-*' -l 5 -i"
 alias vi='nvim'
 alias gs='git status'
 alias gd='git diff'
-alias gl='git log'
+alias gl='tig'
+alias gbl='tig blame'
 alias ga='git add'
 alias gf='git fetch'
 alias gr='git rebase'

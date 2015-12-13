@@ -14,4 +14,5 @@ sudo apt-get install \
     python-dev \
     xdotool wmctrl \
     colortest \
+    tig \
     -y
