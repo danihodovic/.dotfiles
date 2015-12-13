@@ -511,7 +511,6 @@ let g:airline_powerline_fonts = 1
 " - Airline options
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '◀'
-
 " - Airline built in extensions
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 let g:airline#extensions#quickfix#location_text = 'Location'
@@ -527,6 +526,16 @@ let g:airline#extensions#quickfix#location_text = 'Location'
 " These are all enabled by default if the respective plugins are loaded.
 " Let's be declarative here and show what plugins we want to use instead
 " of looking at the docs.
+
+ " - Airline tabline
+" We want to enable the tabline because vim's built in tabline behaves strangely
+" and needs to be configured. Using tabline solves this out of the box.
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = '▶'
+let g:airline#extensions#tabline#show_buffers = 1
+" Show the filename or parent/filename if filename is same
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
 " - Git branch (fugitive)
 let g:airline#extensions#branch#enabled = 1
 " - Git hunks.
