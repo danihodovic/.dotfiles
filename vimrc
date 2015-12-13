@@ -172,9 +172,13 @@ nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap + :vertical resize +15<cr>
 nnoremap - :vertical resize -15<cr>
-"Create a new buffer
+" Buffer operations similar to browsers
 noremap <C-t> :enew<CR>
 nnoremap <C-w> :call DeleteBufferVisitPrevious()<CR>
+" Text width formatting for small blocks
+nnoremap <leader>fo :call ReformatTextWidth()<cr>
+vnoremap <leader>fo :call ReformatTextWidth()<cr>
+
 nnoremap <leader>bc :call CopyBuffer()<CR>
 " Blink the current word when switching search words
 nnoremap <silent> n   n:call HLNext(0.1)<cr>
@@ -690,4 +694,22 @@ fu! InsertSemicolons()
     execute "normal! A;\<esc>"
     call cursor(l, c)
   endif
+endfu!
+
+" Prompt the user for width and reformat the text to specific width before
+" restoring textwidth.  Works for visual mode.  Useful for reformatting comments
+fu! ReformatTextWidth() range
+  " For some reason inputsave() and inputrestore() have to be called between getting input
+  call inputsave()
+  let currWidth = &textwidth
+  let width = input('Enter textwidth>')
+  let &textwidth = width
+  " Calling gvgq won't work because in normal mode it would
+  " get the last visual selection which we don't want
+  normal v
+  execute "normal " . a:firstline . "gg"
+  execute "normal " . a:lastline . "gg"
+  normal gq
+  let &textwidth = currWidth
+  call inputrestore()
 endfu!
