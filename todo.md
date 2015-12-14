@@ -54,6 +54,9 @@
 - Make ag not look in tags files
 - Fix Get_Visual_Selection() so that it doesn't look for the previous selection if there is no visal
 - Add C-u C-d to move up and down in fzf
+- Write a ctags replacement that uses an AST for JS
+- Use TagBar again
+- Extend ctags with describe() and it() by parsing inside the first argument quotes
 
 # Done
 - ~~Enable vim-airline to show branch
