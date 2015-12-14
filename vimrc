@@ -340,6 +340,22 @@ fu! FzfGitStatus()
         \ 'up': '40%' }
   call fzf#run(opts)
 endfu
+
+command! -bang -nargs=* -range AGrequirejs call FzfAgRequireJS(<q-args>)
+" Searches for a word in a `require(<word>)` call
+fu! FzfAgRequireJS(query, ...) range
+  if len(a:query) > 0
+    let word = a:query
+  else
+    let word = Get_visual_selection()
+    if len(word) == 0
+      let word = expand('<cword>')
+    endif
+  endif
+
+  let regex = "require\\([\\\"|'].*" . word . "(\.js)?[\\\"|']\\)"
+  call FzfAgCustom(regex)
+endfu
 "-----------------------------------------
 " vim-oblique
 "-----------------------------------------
