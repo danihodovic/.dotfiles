@@ -8,6 +8,8 @@
 - Improve your workflow using tpope/vim-fugitive. Specifically get used to
   :Gdiff, :Gstatus, :Glog, :Gblame, :Gbrowse (github), :Gread and integrate it with statusline
 - Improve your workflow using vim-startify. Learn how sessions work
+- Write a fzf-ag helper which find where files are required
+  -> Cursor over word `:AG require(.*<word>)`
 
 ## Priority:Low
 - Get used to gf, gd, gq in vim
