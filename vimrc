@@ -291,6 +291,7 @@ nnoremap <M-`> :buffer #<cr>
 
 nnoremap <leader>t :call FzfTagsCustom('n')<cr>
 vnoremap <leader>t :call FzfTagsCustom(visualmode())<cr>
+" TODO: Add prompt option like the git status helper
 fu! FzfTagsCustom(mode)
   if a:mode ==# 'n'
     execute "Tags"
@@ -306,7 +307,7 @@ command! -bang -nargs=* AG call FzfAgCustom(<q-args>)
 noremap <leader>a :call FzfAgCustom('', 'n')<cr>
 " Use visualmode() to differentiate "v", "V" and "<CTRL-V>"
 vnoremap <leader>a :call FzfAgCustom('', visualmode())<cr>
-
+" TODO: Add prompt option like the git status helper
 fu! FzfAgCustom(queryparam, ...)
   if len(a:queryparam) > 0
     let query = a:queryparam
@@ -682,6 +683,10 @@ function! Get_visual_selection()
   " Why is this not a built-in Vim script function?!
   let [lnum1, col1] = getpos("'<")[1:2]
   let [lnum2, col2] = getpos("'>")[1:2]
+  " Dani patch. If lnum1=0 and lnum2=0 something went wrong
+  if lnum1 == 0 && lnum2 == 0
+    return ''
+  endif
   let lines = getline(lnum1, lnum2)
   let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
   let lines[0] = lines[0][col1 - 1:]
