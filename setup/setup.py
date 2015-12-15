@@ -9,7 +9,7 @@ home    = os.path.expanduser("~")
 confDir = os.path.expanduser("~/.dotfiles/conf")
 
 confFiles = ['inputrc', 'tmux.conf', 'sqliterc', 'jshintrc', 'pylintrc',
-    'pythonrc', 'jsbeautifyrc', 'tern-config']
+    'pythonrc', 'jsbeautifyrc', 'tern-config', 'ctags']
 
 # DONT include ~/.bashrc here. Remember that we use the default bashrc which
 # sources our bashrc
