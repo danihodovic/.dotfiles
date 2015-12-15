@@ -750,3 +750,80 @@ fu! ReformatTextWidth() range
   let &textwidth = currWidth
   call inputrestore()
 endfu!
+
+autocmd BufNewFile,BufRead *.js nnoremap <F7> :call FindRequireJSFile()<cr>
+function! FindRequireJSFile(...)
+if a:0 > 0
+  let query = a:1
+else
+  let query = ''
+endif
+python << EOF
+# This is a clusterfuck, but surprisingly works for JS
+# TODO: Add visual selection to avoid the prompt
+import vim
+import os
+import subprocess
+
+choice = None
+currLine = vim.current.line
+m = re.search('require\(\'(.*)\'\)', currLine)
+if m:
+  choice = m.groups()[0]
+
+if choice == None:
+  requireCalls = []
+  for line in vim.current.buffer:
+    m = re.search('require\(\'(.*)\'\)', line)
+    if m:
+      for word in m.groups():
+        requireCalls.append(word)
+
+  formatted = ["'Select import'"]
+  for idx, elem in enumerate(requireCalls):
+    fixed = "'{}. {}'".format(idx + 1, elem)
+    formatted.append(fixed)
+  vimlist = '[{}]'.format(",".join(formatted))
+  result = vim.eval("inputlist({})".format(vimlist))
+  idx = int(result)
+
+  if idx > 0:
+    idx -= 1
+    choice = requireCalls[idx]
+
+if choice:
+  # If local import find and edit
+  match = re.match('\.', choice)
+  if match:
+    directory = os.path.dirname(vim.current.buffer.name)
+    relativeFilename = os.path.join(directory, choice + '.js')
+    realpath = os.path.realpath(relativeFilename)
+    if os.path.isfile(realpath):
+      vim.command('e ' + realpath)
+    else:
+      print '-- File doesnt exist'
+  else:
+    # TODO: Instead of relying on pwd being set to the root dir, walk the
+    # directory tree til you find the git repo
+    # TODO: Some node packages don't have the main file as $REPO_ROOT/index.js
+    # Instead this is specified in $REPO_ROOT/index.js - main. Parse package.json
+    # and extract the main file
+    repoRoot = vim.eval('getcwd()')
+
+    osCommand = 'find {} -name {} -type d'.format(repoRoot, choice)
+    subpOutput = subprocess.check_output(osCommand, shell=True)
+    if len(subpOutput) > 0:
+      # find return multiple results, the first is closest
+      directory = subpOutput.split("\n")[0] + '/'
+      # TODO: Why in the fuck can't we open a directory in python?!
+      # It opens a file instead
+      indexfile = directory + 'index.js'
+      if os.path.isfile(indexfile):
+        vim.command('e ' + directory + 'index.js')
+      else:
+        print '-- The node module exists, but index.js is not the main file'
+    else:
+      print '-- File not found by `find`'
+EOF
+endfunction
+
