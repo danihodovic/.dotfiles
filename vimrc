@@ -357,8 +357,12 @@ fu! FzfAgRequireJS(query, ...) range
       let word = expand('<cword>')
     endif
   endif
-
-  let regex = "require\\([\\\"|'].*" . word . "(\.js)?[\\\"|']\\)"
+  " Single quoted strings don't need extra escaping aside from single quotes being
+  " escaped by being repeated once. '''' => '''. Double quoted strings need escaping
+  " in general. \\( becomes \( and \" becomes ". However, we need to escape " one
+  " more time in the shell so " really becomes \\\".  Bear in mind that we need to
+  " escape " here regardless because this command is passed to the shell.
+  let regex = 'require\([\"|''].*' . word . '(\.js)?[\"|'']\)'
   call FzfAgCustom(regex)
 endfu
 "-----------------------------------------
