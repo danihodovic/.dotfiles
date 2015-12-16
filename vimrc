@@ -512,6 +512,7 @@ nnoremap ggp :GitGutterPrevHunk<cr>
 "-----------------------------------------
 " Neomake
 "-----------------------------------------
+let g:neomake_list_height = 5
 " Normal neomake for these. Doesn't work for some others (go)
 autocmd BufWritePost *.py,*.js,*.ts Neomake
 " Seems like neomake only builds one file using `:Neomake` so imports are ignored, `Neomake!` works
