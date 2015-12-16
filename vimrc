@@ -369,15 +369,18 @@ fu! AgJSFnDefinition(query) range
   endif
 endfu
 
-command! -bang -nargs=* -range AGrequirejs call FzfAgRequireJS(<q-args>)
+command! -nargs=* -range AgJSFindRequire call AgJSFindRequire(<q-args>)
 " Searches for a word in a `require(<word>)` call
-fu! FzfAgRequireJS(query, ...) range
+fu! AgJSFindRequire(query) range
+  " If we are passed a query param, use that
   if len(a:query) > 0
     let word = a:query
   else
+    " If there is a visual selection, use that
     let word = Get_visual_selection()
+    " Otherwise (most common use case), see where the current file is required
     if len(word) == 0
-      let word = expand('<cword>')
+      let word = expand('%:t:r')
     endif
   endif
   " Single quoted strings don't need extra escaping aside from single quotes being
