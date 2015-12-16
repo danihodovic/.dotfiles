@@ -51,6 +51,8 @@
   object - : <method>
   assignment - = <method>
   es6 class - <method>() {}
+- Make ag not look in tags files
+- Fix Get_Visual_Selection() so that it doesn't look for the previous selection if there is no visal
 
 # Done
 - ~~Enable vim-airline to show branch
