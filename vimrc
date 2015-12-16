@@ -105,6 +105,8 @@ set autochdir
 set hidden
 " Seems like backspace doesn't work for nvim and source compiled new vim versions
 set backspace=indent,eol,start
+" Dont treat _ like a keyword so_that_this_is_six_words
+set iskeyword-=_
 " Paste mode to paste properly. Is this required?
 set pastetoggle=<F9>
 " timeout in ms for key mappings interval
