@@ -346,6 +346,29 @@ fu! FzfGitStatus()
   call fzf#run(opts)
 endfu
 
+command! -nargs=* -range AgJSFunctionDefinition :call AgJSFunctionDefinition(<q-args>)
+" An ag matcher which find most usages of a <keyword> except for function calls.
+" ctags is probably a better solution but ctags doesnt seem reliable at all times
+fu! AgJSFnDefinition(query) range
+  if len(a:query) > 0
+    let word = a:query
+  else
+    let word = Get_visual_selection()
+    if len(word) == 0
+      let word = expand('<cword>')
+    endif
+  endif
+
+  if len(word) > 0
+    let regex1 = '(=\s*' . word . ')'          " = foo
+    let regex2 = '(prototype\.' . word . ')'   " prototype.foo
+    let regex3 = '(' . word . ':)'             " foo:
+    let regex4 = '(' . word . '\s*=)'          " foo =
+    let regex = printf('%s|%s|%s|%s', regex1, regex2, regex3, regex4)
+    call FzfAgCustom(regex)
+  endif
+endfu
+
 command! -bang -nargs=* -range AGrequirejs call FzfAgRequireJS(<q-args>)
 " Searches for a word in a `require(<word>)` call
 fu! FzfAgRequireJS(query, ...) range
