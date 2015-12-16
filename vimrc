@@ -383,6 +383,7 @@ map F <Plug>(easymotion-Fl)
 map t <Plug>(easymotion-tl)
 map T <Plug>(easymotion-Tl)
 map s <Plug>(easymotion-sn)
+map f <Plug>(easymotion-sl)
 "-----------------------------------------
 " EasyAlign
 "-----------------------------------------
