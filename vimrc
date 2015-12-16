@@ -327,7 +327,7 @@ fu! FzfAgCustom(queryparam, ...)
     let query = ''
   endif
 
-  let ag_opts = 'ag --nogroup --column --color -t "%s"'
+  let ag_opts = 'ag --nogroup --column --color -U "%s"'
   let source = printf(ag_opts, query)
   call fzf#vim#ag(query, {'options': '-e', 'source': source, 'up': '~40%'})
 endfu
@@ -346,7 +346,7 @@ fu! FzfGitStatus()
   call fzf#run(opts)
 endfu
 
-command! -nargs=* -range AgJSFunctionDefinition :call AgJSFunctionDefinition(<q-args>)
+command! -nargs=* -range AgJSFnDefinition :call AgJSFnDefinition(<q-args>)
 " An ag matcher which find most usages of a <keyword> except for function calls.
 " ctags is probably a better solution but ctags doesnt seem reliable at all times
 fu! AgJSFnDefinition(query) range
