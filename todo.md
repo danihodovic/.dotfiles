@@ -57,6 +57,23 @@
 - Write a ctags replacement that uses an AST for JS
 - Use TagBar again
 - Extend ctags with describe() and it() by parsing inside the first argument quotes
+- Add helper to collapse or inline JSON for JS (or Python, Go)
+- Allow fzf :History: to be called in visual mode
+- Fix try/catch in othree/yajs.vim
+- When calling <leader>a, it should be project or directory specific except when in root proj.
+  Use case: I ag something and find a node_modules. In that node_modules I want to find directory
+  specific stuff.
+- Instead of mapping <F7> and <F3> separately. Write a wrapper so that if we're above a require
+  statement it uses are custom finder and otherwise uses tern within the file. This gets rid of the
+  fancy prompt though :(. On a side note: Tern isn't all that bad. It requires some time to start
+  and cache results, but after that it's decent. It still cant find packages which don't have an
+  index.js file. Work on improving tern\_for\_vim instead? Update: The latest ternjs from master is
+  *noticably* snappier than the 0.16.0 version found in npm. Few timeouts.
+- Write an ag helper which finds Javascript definitons by
+  prototype - .prototype.<method>
+  object - : <method>
+  assignment - = <method>
+  es6 class - <method>() {}
 
 # Done
 - ~~Enable vim-airline to show branch
