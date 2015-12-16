@@ -360,10 +360,10 @@ fu! AgJSFnDefinition(query) range
   endif
 
   if len(word) > 0
-    let regex1 = '(=\s*' . word . ')'          " = foo
-    let regex2 = '(prototype\.' . word . ')'   " prototype.foo
-    let regex3 = '(' . word . ':)'             " foo:
-    let regex4 = '(' . word . '\s*=)'          " foo =
+    let regex1 = '(=\s*' . word . '\s+)'          " = foo
+    let regex2 = '(prototype\.' . word . '\s+)'   " prototype.foo
+    let regex3 = '(\s+' . word . ':)'             " foo:
+    let regex4 = '(\s+' . word . '\s*=)'          " foo =
     let regex = printf('%s|%s|%s|%s', regex1, regex2, regex3, regex4)
     call FzfAgCustom(regex)
   endif
