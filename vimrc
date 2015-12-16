@@ -18,6 +18,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 " Run linters or makefiles
 Plug 'benekastah/neomake'
+Plug 'majutsushi/tagbar'
 " Show git diffs
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdcommenter'
@@ -477,12 +478,15 @@ let g:go_auto_type_info = 1
 "-----------------------------------------
 " Tagbar
 "-----------------------------------------
-if exists("*GitBranchInfoString")
-  " On startup start tagbar for supported files
-  autocmd VimEnter * nested :call tagbar#autoopen(1)
-  " When opening a buffer with a supported filetype, open tagbar
-  autocmd FileType * nested :call tagbar#autoopen(0)
-endif
+let g:tagbar_sort        = 0
+let g:tagbar_compact     = 1
+let g:tagbar_indent      = 1
+let g:tagbar_foldlevel   = 0
+let g:tagbar_map_nexttag = '<C-j>'
+let g:tagbar_map_prevtag = '<C-k>'
+let g:tagbar_autofocus   = 1
+let g:tagbar_autoclose   = 1
+nnoremap <F6> :Tagbar<cr>
 "-----------------------------------------
 " UltiSnips
 "-----------------------------------------
