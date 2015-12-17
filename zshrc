@@ -124,6 +124,13 @@ bindkey -M vicmd W end-of-line-no-whitespace
 
 # fzf
 
+# This is the exact same as the fzf file widget except that it uses a space between
+# ${LBUFFER} and $(__fsel)"
+fzf-file-widget() {
+  LBUFFER="${LBUFFER} $(__fsel)"
+  zle redisplay
+}
+
 # Temporary fix for root finding hotkey
 __fselroot() {
   local cmd="locate /"
