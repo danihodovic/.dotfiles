@@ -468,15 +468,11 @@ let g:ycm_semantic_triggers =  {
 "-----------------------------------------
 " Typescript
 "-----------------------------------------
-autocmd FileType typescript map <buffer><F2> :TSSdefpreview<CR>
-autocmd FileType typescript map <buffer><F3> :TSSdef<CR>
+autocmd FileType typescript nnoremap <buffer>gd :TSSdef<CR>
 "-----------------------------------------
-" Python
-"-----------------------------------------
-autocmd FileType python map <buffer><F2> <CR>
-autocmd FileType python map <buffer><F3> :YcmCompleter GoToDefinition<CR>
 " Eclim Java, Scala
-autocmd FileType scala map <buffer> <F3> :ScalaSearch<cr>
+"-----------------------------------------
+autocmd FileType scala map <buffer>gd :ScalaSearch<cr>
 let g:EclimCompletionMethod = 'omnifunc'
 "-----------------------------------------
 " TernJS
@@ -494,10 +490,13 @@ let g:tern_show_signature_in_pum = 1
 let g:fixmyjs_engine = 'fixmyjs'
 " Legacy needed for es6 for some reason
 let g:fixmyjs_legacy_jshint = 1
-"autocmd BufWritePre *.js,*.ts Fixmyjs
+autocmd BufWritePre *.js,*.ts Fixmyjs
 "-----------------------------------------
 " Jedi Python
 "-----------------------------------------
+" YCM also provides this functionality. But from initial tests (finding stdlib modules) jedi seems
+" to be doing a better job.
+let g:jedi#goto_command = 'gd'
 let g:jedi#use_tabs_not_buffers = 0
 " Do not select the first popup option and complete it
 let g:jedi#popup_select_first = 0
@@ -506,9 +505,7 @@ let g:jedi#show_call_signatures = "1"
 "-----------------------------------------
 " Golang
 "-----------------------------------------
-autocmd FileType go map <buffer><F3> <Plug>(go-def)
-autocmd FileType go map <buffer><leader><F3> <Plug>(go-def-split)
-autocmd FileType go map <buffer><F4> <Plug>(go-doc)
+autocmd FileType go map <buffer>gd <Plug>(go-def)
 " Show the type info at the bottom bar when hovering over word
 let g:go_auto_type_info = 1
 "-----------------------------------------
