@@ -119,7 +119,8 @@ set timeoutlen=500
 " Causes ternJS to show the signature at bottom after x ms, same goes for Tagbar
 set updatetime=1000
 " Check for file changes every time CursorHold is triggered.
-au CursorHold * checktime
+" Executing this in a command line window causes an error
+au CursorHold * if expand("%") != "[Command Line]" | checktime
 " If files have not been changed when :checktime is ran, reload the files automatically without
 " asking for permission
 set autoread
