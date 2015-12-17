@@ -15,4 +15,6 @@ sudo apt-get install \
     xdotool wmctrl \
     colortest \
     tig \
+    vnstat \
+    gparted \
     -y
