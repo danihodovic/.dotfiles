@@ -428,7 +428,7 @@ let g:EasyMotion_smartcase = 1
 map f <Plug>(easymotion-sl)
 map t <Plug>(easymotion-tl)
 map T <Plug>(easymotion-Tl)
-map s <Plug>(easymotion-sn)
+map s <Plug>(easymotion-s2)
 "-----------------------------------------
 " EasyAlign
 "-----------------------------------------
