@@ -181,6 +181,15 @@ inoremap <M-q> <esc>lcb
 " character left if we are not on the beginning of a line. If we are on the
 " beginning of a line it has nowhere to move.
 inoremap <expr> <M-w> col('.') == 1 ? '<esc>cw' : '<esc>lcw'
+" Switch to last buffer or other buffer if last was deleted
+nnoremap <M-`> :call SwitchLast()<cr>
+fu! SwitchLast()
+  if buflisted(bufnr('#'))
+    buf #
+  else
+    bnext
+  endif
+endfu
 "Window movement
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
@@ -191,7 +200,7 @@ nnoremap + :vertical resize +15<cr>
 nnoremap - :vertical resize -15<cr>
 " Buffer operations similar to browsers
 noremap <C-t> :enew<CR>
-nnoremap <C-w> :call DeleteBufferVisitPrevious()<CR>
+nnoremap <C-w> :call MimicBrowserClose()<CR>
 " Text width formatting for small blocks
 nnoremap <leader>fo :call ReformatTextWidth()<cr>
 vnoremap <leader>fo :call ReformatTextWidth()<cr>
@@ -295,9 +304,6 @@ nnoremap = :Files<cr>
 nnoremap b :Buffers<cr>
 nnoremap <C-h> :History:<cr>
 nnoremap <leader>mr :History<cr>
-" Remap below isn't really fzf related, it simply switches to the last buffer with vanilla vim
-nnoremap <M-`> :buffer #<cr>
-
 nnoremap <leader>t :call FzfTagsCustom('n')<cr>
 vnoremap <leader>t :call FzfTagsCustom(visualmode())<cr>
 " TODO: Add prompt option like the git status helper
@@ -689,6 +695,47 @@ fun! CopyBuffer()
   call cursor(l, c)
 endfun
 
+fu! MimicBrowserClose()
+  " Mimic Chrome behavior with the exception that if we have an alt buffer, we switch to that first.
+  "
+  " You would expect this to work by default, but vim has a weird pattern of switching hidden
+  " buffers. If a buffer is not set as hidden, it will not be the prioritized when jumping using bn
+  " or bw. So if a file has been opened but never visited in a window it will never have the hidden
+  " option so the window order will be weird.
+
+  " We have a previous buffer. Wipe current and switch to that
+  if buflisted(bufnr('#'))
+    bw!
+  " Current buffer is the only buffer to exist
+  elseif bufnr('^') == bufnr('%')
+    bw!
+  " There are buffers to the right
+  elseif bufnr('%') < bufnr('$')
+    let nextRight = -1
+    " Find the next buffer to right
+    for i in range(bufnr('%') + 1, bufnr('$'))
+      if buflisted(i)
+        let nextRight = i
+        break
+      endif
+    endfor
+    execute 'buf' . nextRight
+    bw! #
+  " Current buffer is the last buffer on the right so we switch left
+  elseif bufnr('%') == bufnr('$')
+    let nextLeft = -1
+    " Find the next buffer to the left
+    for i in range(bufnr('%') - 1, bufnr('^'), -1)
+      if buflisted(i)
+        let nextLeft = i
+        break
+      endif
+    endfor
+    execute 'buf' . nextLeft
+    bw! #
+  endif
+endfu
+
 " This function does two things:
 " 1) Do not switch window if you're on a NERDTree window
 " 2) If you switch to a quickfix/location list window, just skip that one. Can't be called
@@ -724,15 +771,6 @@ fu! HLNext (blinktime)
   exec 'sleep ' . float2nr(a:blinktime * 800) . 'm'
   call matchdelete(ring)
   redraw
-endfunction
-
-" Unlike bd, this function will visit the previous buffer in the list (as seen in on the tab order).
-" The drawback of bd is that it will simply visit the last edited buffer.
-function! DeleteBufferVisitPrevious()
-  if Switch_buffer("left") == 1
-    let prevBufName = bufname("#")
-    execute "bd!" prevBufName
-  endif
 endfunction
 
 " See http://stackoverflow.com/a/6271254
