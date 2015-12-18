@@ -5,8 +5,11 @@
 - Check out node inspector and the chrome debugger
 - Figure out how pgp signing works
 - Checkout apt-fast
+- Disable q and w and try only f and t
 
 ## Priority:Low
+- Fix so that macros and autocomplete work together
+- Check out wakatime
 - Get used to gf, gd, gq in vim
 - Look at fpm
 - Remove the focus-event plugin and clear the tmux file? since neovim has already implemented this
