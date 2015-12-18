@@ -853,20 +853,22 @@ def findRelativeRequire(filename):
     return realpath
 
 def findNodeModulesRequire(filename):
-  # TODO: Instead of relying on pwd being set to the root dir, walk the
-  # directory tree til you find the git repo
-  # TODO: Some node packages don't have the main file as $REPO_ROOT/index.js
-  # Instead this is specified in $REPO_ROOT/index.js - main. Parse package.json
-  # and extract the main file
   if filename.endswith('.js'):
     filename = filename[:-3]
-  projectRoot = vim.eval('getcwd()')
 
-  packageDir = '{}/node_modules/{}/'.format(projectRoot, filename)
+  currFile = vim.eval('expand("%:p")')
+  currDir = os.path.dirname(currFile)
+
+  # Walk until node_modules is found or we are at fs root
+  while currDir != '/':
+    if 'node_modules' in os.listdir(currDir):
+      break
+    currDir = os.path.dirname(currDir)
+
+  packageDir = '{}/node_modules/{}/'.format(currDir, filename)
   with open(packageDir + 'package.json') as f:
     asJson = json.load(f)
     return packageDir + '/' + asJson['main']
-  return
 
 # Unused, but useful to keep for later maybe
 def findRequireStmts():
