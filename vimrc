@@ -484,7 +484,14 @@ let g:EclimCompletionMethod = 'omnifunc'
 " TernJS
 "-----------------------------------------
 " Replace the built in gd with Tern for JS files
-autocmd FileType javascript noremap <silent><buffer>gd :TernDef<cr>
+autocmd FileType javascript noremap <silent><buffer>gd :call TernOrDucktape()<cr>
+fu! TernOrDucktape()
+  if getline('.') =~ 'require\(.*\)'
+    call FindRequireJSFile()
+  else
+    execute 'TernDef'
+  endif
+endfu
 " 'no', 'on_move', 'on_hold' - Note: on_move will cause major lag when moving!
 let g:tern_show_argument_hints = 'no'
 " Shows args in completion menu
@@ -826,77 +833,74 @@ endfu!
 
 autocmd BufNewFile,BufRead *.js nnoremap <F7> :call FindRequireJSFile()<cr>
 function! FindRequireJSFile(...)
-if a:0 > 0
-  let query = a:1
-else
-  let query = ''
-endif
 python << EOF
 # This is a clusterfuck, but surprisingly works for JS
-# TODO: Add visual selection to avoid the prompt
 import vim
 import os
 import subprocess
+import json
 
-choice = None
-currLine = vim.current.line
-m = re.search('require\(\'(.*)\'\)', currLine)
-if m:
-  choice = m.groups()[0]
+REQUIRE_REGEX = 'require\(\'(.*)\'\)'
 
-if choice == None:
-  requireCalls = []
+def findRelativeRequire(filename):
+  # Solve this in the regex instead
+  if filename.endswith('.js') == False:
+    filename = filename + '.js'
+  currDir = os.path.dirname(vim.current.buffer.name)
+  relativePath = os.path.join(currDir, filename)
+  realpath = os.path.realpath(relativePath)
+  if os.path.isfile(realpath):
+    return realpath
+
+def findNodeModulesRequire(filename):
+  # TODO: Instead of relying on pwd being set to the root dir, walk the
+  # directory tree til you find the git repo
+  # TODO: Some node packages don't have the main file as $REPO_ROOT/index.js
+  # Instead this is specified in $REPO_ROOT/index.js - main. Parse package.json
+  # and extract the main file
+  if filename.endswith('.js'):
+    filename = filename[:-3]
+  projectRoot = vim.eval('getcwd()')
+
+  packageDir = '{}/node_modules/{}/'.format(projectRoot, filename)
+  with open(packageDir + 'package.json') as f:
+    asJson = json.load(f)
+    return packageDir + '/' + asJson['main']
+  return
+
+# Unused, but useful to keep for later maybe
+def findRequireStmts():
+  requireStmts = []
   for line in vim.current.buffer:
-    m = re.search('require\(\'(.*)\'\)', line)
+    m = re.search(REQUIRE_REGEX, line)
     if m:
       for word in m.groups():
-        requireCalls.append(word)
+        requireStmts.append(word)
+  return requireStmts
 
-  formatted = ["'Select import'"]
-  for idx, elem in enumerate(requireCalls):
-    fixed = "'{}. {}'".format(idx + 1, elem)
-    formatted.append(fixed)
-  vimlist = '[{}]'.format(",".join(formatted))
-  result = vim.eval("inputlist({})".format(vimlist))
-  idx = int(result)
+# Unused, but useful to keep for later maybe
+def promptChoice(title, arr):
+  choices = []
+  choices.append("'{}'".format(title))
+  for idx, elem in enumerate(arr):
+    choices.append("'{}. {}'".format(idx + 1, elem))
+  asStr = ", ".join(choices)
+  selected = vim.eval("inputlist([{}])".format(asStr))
+  selectedIdx = int(selected)
+  return arr[selectedIdx - 1]
 
-  if idx > 0:
-    idx -= 1
-    choice = requireCalls[idx]
-
-if choice:
-  # If local import find and edit
-  match = re.match('\.', choice)
-  if match:
-    directory = os.path.dirname(vim.current.buffer.name)
-    relativeFilename = os.path.join(directory, choice + '.js')
-    realpath = os.path.realpath(relativeFilename)
-    if os.path.isfile(realpath):
-      vim.command('e ' + realpath)
-    else:
-      print '-- File doesnt exist'
+currLine = vim.current.line
+m = re.search('require\(\'(.*)\'\)', vim.current.line)
+if m:
+  stmt = m.groups()[0]
+  root = None
+  if stmt.startswith('.'):
+    root = findRelativeRequire(stmt)
   else:
-    # TODO: Instead of relying on pwd being set to the root dir, walk the
-    # directory tree til you find the git repo
-    # TODO: Some node packages don't have the main file as $REPO_ROOT/index.js
-    # Instead this is specified in $REPO_ROOT/index.js - main. Parse package.json
-    # and extract the main file
-    repoRoot = vim.eval('getcwd()')
+    root = findNodeModulesRequire(stmt)
 
-    osCommand = 'find {} -name {} -type d'.format(repoRoot, choice)
-    subpOutput = subprocess.check_output(osCommand, shell=True)
-    if len(subpOutput) > 0:
-      # find return multiple results, the first is closest
-      directory = subpOutput.split("\n")[0] + '/'
-      # TODO: Why in the fuck can't we open a directory in python?!
-      # It opens a file instead
-      indexfile = directory + 'index.js'
-      if os.path.isfile(indexfile):
-        vim.command('e ' + directory + 'index.js')
-      else:
-        print '-- The node module exists, but index.js is not the main file'
-    else:
-      print '-- File not found by `find`'
+  if root:
+    vim.command('e ' + root)
 EOF
 endfunction
 
