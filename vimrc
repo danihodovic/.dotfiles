@@ -840,7 +840,7 @@ import os
 import subprocess
 import json
 
-REQUIRE_REGEX = 'require\(\'(.*)\'\)'
+REQUIRE_REGEX = 'require\(["\'](.*)["\']\)'
 
 def findRelativeRequire(filename):
   # Solve this in the regex instead
@@ -866,9 +866,11 @@ def findNodeModulesRequire(filename):
     currDir = os.path.dirname(currDir)
 
   packageDir = '{}/node_modules/{}/'.format(currDir, filename)
-  with open(packageDir + 'package.json') as f:
-    asJson = json.load(f)
-    return packageDir + '/' + asJson['main']
+  packageJson = packageDir + 'package.json'
+  if os.path.isfile(packageJson):
+    with open(packageJson) as f:
+      asJson = json.load(f)
+      return packageDir + '/' + asJson['main']
 
 # Unused, but useful to keep for later maybe
 def findRequireStmts():
@@ -892,7 +894,7 @@ def promptChoice(title, arr):
   return arr[selectedIdx - 1]
 
 currLine = vim.current.line
-m = re.search('require\(\'(.*)\'\)', vim.current.line)
+m = re.search(REQUIRE_REGEX, vim.current.line)
 if m:
   stmt = m.groups()[0]
   root = None
