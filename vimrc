@@ -885,7 +885,10 @@ def findNodeModulesRequire(filename):
   if os.path.isfile(packageJson):
     with open(packageJson) as f:
       asJson = json.load(f)
-      return packageDir + '/' + asJson['main']
+      mainfile = packageDir + '/' + asJson['main']
+      if mainfile.endswith('.js') == False:
+        mainfile = mainfile + '.js'
+      return mainfile
 
 # Unused, but useful to keep for later maybe
 def findRequireStmts():
