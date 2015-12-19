@@ -487,9 +487,24 @@ let g:EclimCompletionMethod = 'omnifunc'
 autocmd FileType javascript noremap <silent><buffer>gd :call TernOrDucktape()<cr>
 fu! TernOrDucktape()
   if getline('.') =~ 'require\(.*\)'
-    call FindRequireJSFile()
+    let file = FindRequireJSFile()
+    " If a string is returned
+    if type(file) == 1
+      let searchword = 'module.exports'
+      " Enter the file at the module.exports line
+      execute 'e +/' . searchword . ' ' . file
+      " Save the search in the search register
+      let @/ = searchword
+      " Highlight but dont save jump history
+      keepjumps normal nN
+    endif
   else
     execute 'TernDef'
+    let searchword = expand('<cword>')
+    let @/ = searchword
+    " This is ridicilous, "<\CR>" will execute a search but not '\<CR>''
+    execute 'normal /' . searchword . "\<CR>"
+    keepjumps normal N
   endif
 endfu
 " 'no', 'on_move', 'on_hold' - Note: on_move will cause major lag when moving!
@@ -904,7 +919,7 @@ if m:
     root = findNodeModulesRequire(stmt)
 
   if root:
-    vim.command('e ' + root)
+    vim.command('return "{}"'.format(root))
 EOF
 endfunction
 
