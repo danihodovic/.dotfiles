@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+read -p "Install apt-fast?"                    -n 1 -r      install_apt_fast
+echo
 read -p "Install node version manager (nvm)? " -n 1 -r      install_nvm
 echo
 read -p "Install chrome? "                     -n 1 -r      install_chrome
@@ -13,6 +15,14 @@ read -p "Install numix? "                      -n 1 -r      install_numix
 echo
 read -p "Install suckless-tools? "             -n 1 -r      install_suckless
 echo
+
+case $install_apt_fast in
+  y)
+    sudo add-apt-repository ppa:saiarcot895/myppa
+    sudo apt-get update
+    sudo apt-get -y install apt-fast
+    ;;
+esac
 
 case $install_nvm in
     y)
