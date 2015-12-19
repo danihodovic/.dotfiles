@@ -4,10 +4,10 @@
 - Block certain notifications on Linux mint (battery) while others are unblocked (Slack)
 - Check out node inspector and the chrome debugger
 - Figure out how pgp signing works
-- Checkout apt-fast
 - Disable q and w and try only f and t
 
 ## Priority:Low
+- apt-fast pr to lab
 - Fix so that macros and autocomplete work together
 - Check out wakatime
 - Get used to gf, gd, gq in vim
@@ -54,6 +54,7 @@
 - Improve your workflow using vim-startify. Learn how sessions work
 
 # Done
+- Checkout apt-fast
 - Write an ag helper which finds Javascript definitons by
   prototype - .prototype.<method>
   object - : <method>
