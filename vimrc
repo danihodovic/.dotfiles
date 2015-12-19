@@ -878,14 +878,24 @@ def findNodeModulesRequire(filename):
   currFile = vim.eval('expand("%:p")')
   currDir = os.path.dirname(currFile)
 
-  # Walk until node_modules is found or we are at fs root
+  # Walk until the package is found is found or we are at fs root. This accounts for nested
+  # dependencies in the packages and shrinkwrapped projects.  If we are deep in a dependency
+  # tree and look for a dependency that is common with the root projects dependency, npm may
+  # have moved this dependency up in the tree.  So we need to check for this package in
+  # every node_modules directory we encounter.
+  # E.g we are looking for dependency c in b
+  # $PROJ_ROOT/node_modules/a/node_modules/b
+  # $PROJ_ROOT/node_modules/c
+
+  packageDir = ''
   while currDir != '/':
     if 'node_modules' in os.listdir(currDir):
-      break
+      packageDir = os.path.realpath(currDir + '/node_modules/' + filename)
+      if os.path.isdir(packageDir):
+        break
     currDir = os.path.dirname(currDir)
 
-  packageDir = '{}/node_modules/{}/'.format(currDir, filename)
-  packageJson = packageDir + 'package.json'
+  packageJson = packageDir + '/package.json'
   if os.path.isfile(packageJson):
     with open(packageJson) as f:
       asJson = json.load(f)
