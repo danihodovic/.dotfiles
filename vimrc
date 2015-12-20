@@ -44,7 +44,7 @@ Plug 'blueyed/vim-diminactive'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 " Required by vim-oblique
 Plug 'junegunn/vim-pseudocl'
-" Improved / search for vim which allows z/ to be fuzzy
+" Colors current search result differently and sets nohlsearch on cursor move
 Plug 'junegunn/vim-oblique'
 " Aligns text
 Plug 'junegunn/vim-easy-align'
@@ -209,8 +209,6 @@ nnoremap <leader>bc :call CopyBuffer()<CR>
 " Blink the current word when switching search words
 nnoremap <silent> n   n:call HLNext(0.1)<cr>
 nnoremap <silent> N   N:call HLNext(0.1)<cr>
-" Clear highlight with enter
-nnoremap <esc><esc> :noh<cr><esc>
 " TODO: oblique disables search for some reason. Figure out why
 " nnoremap / <Plug>(Oblique-F/)
 " Search selected text, not only words as with `*`
