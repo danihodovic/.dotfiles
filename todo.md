@@ -7,6 +7,7 @@
 - Disable q and w and try only f and t
 
 ## Priority:Low
+- Patch tern_lookupDefinition("edit") to return 1 or 0 depending on if the result was found
 - apt-fast pr to lab
 - Fix so that macros and autocomplete work together
 - Check out wakatime
