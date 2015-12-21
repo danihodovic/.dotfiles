@@ -48,8 +48,7 @@ Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-oblique'
 " Aligns text
 Plug 'junegunn/vim-easy-align'
-" Focuses text
-Plug 'junegunn/limelight.vim'
+Plug 'itchyny/calendar.vim'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
@@ -335,7 +334,7 @@ fu! FzfAgCustom(queryparam, ...)
     let query = ''
   endif
 
-  let ag_opts = 'ag --nogroup --column --color -U "%s"'
+  let ag_opts = 'ag --nogroup --column --color -o -U "%s"'
   let source = printf(ag_opts, query)
   call fzf#vim#ag(query, {'options': '-e', 'source': source, 'up': '~40%'})
 endfu
