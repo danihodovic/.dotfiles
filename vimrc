@@ -301,6 +301,18 @@ nnoremap = :Files<cr>
 nnoremap b :Buffers<cr>
 nnoremap <C-h> :History:<cr>
 nnoremap <leader>mr :History<cr>
+
+command! FzfRootSearch call FzfRootSearch()
+fu! FzfRootSearch()
+  let source = 'locate /'
+  let opts = {
+    \ 'source': source,
+    \ 'options': '--prompt "Files>" --ansi',
+    \ 'sink': 'e',
+    \ 'up': '40%' }
+  call fzf#run(opts)
+endfu
+
 nnoremap <leader>t :call FzfTagsCustom('n')<cr>
 vnoremap <leader>t :call FzfTagsCustom(visualmode())<cr>
 " TODO: Add prompt option like the git status helper
