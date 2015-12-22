@@ -430,10 +430,11 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 "-----------------------------------------
 " EasyMotion
 "-----------------------------------------
-" Disable default mappings
+let g:EasyMotion_keys = 'ASDFGHJKL;QWERTYUIOPZXCVBNM'
 let g:EasyMotion_do_mapping = 0
-" Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
+let g:EasyMotion_do_shade = 0
+let g:EasyMotion_use_upper = 1
 map f <Plug>(easymotion-sl)
 map t <Plug>(easymotion-tl)
 map T <Plug>(easymotion-Tl)
