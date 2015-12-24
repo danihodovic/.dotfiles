@@ -4,30 +4,29 @@ setopt INC_APPEND_HISTORY
 # Export paths before sourcing anything
 # Fixes colors for lxde-terminal. Useful for vim colorschemes
 export TERM=xterm-256color
-export NVM_DIR=~/.nvm
+export NVM_DIR=${HOME}/.nvm
 export PATH=$PATH:/opt/nvim-qt
 export GOROOT=/opt/go
 export GOPATH=/opt/go_pkg
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH=$PATH:/opt/eclipse
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
+export WORKON_HOME=${HOME}/.virtualenvs
+export PROJECT_HOME=${HOME}/Devel
 export EDITOR=nvim
 export PYTHONSTARTUP=~/.pythonrc
 
 # Variables shared by personal install scripts.
 # Potentially replace installs with submodules for antigen
-export NVIM_DIR=~/.config/nvim
-export ANTIGEN_PATH=~/.antigen/antigen.zsh
+export NVIM_DIR=${HOME}/.config/nvim
+export ANTIGEN_PATH=${HOME}/.antigen/antigen.zsh
 
 # Ease of use
-export dotfiles=~/.dotfiles
-export repos=~/repos
-export plugged=$NVIM_DIR/plugged
+export dotfiles=${HOME}/.dotfiles
+export priv=${HOME}/.priv
+export plugged=${NVIM_DIR}/plugged
 
 # Wrk
-export NODE_PROJECTS_DIR=~/repos/lab/repos
-
+export NODE_PROJECTS_DIR=${HOME}/repos/lab/repos
 
 # Antigen
 source $ANTIGEN_PATH
@@ -51,7 +50,7 @@ antigen theme robbyrussell/oh-my-zsh themes/agnoster
 # External scripts
 # ------------
 # Source these before our own `bindkeys` so that we can override stuff
-[ -f ~/.fzf.zsh ]               && source ~/.fzf.zsh
+[ -f ${HOME}/.fzf.zsh ]         && source ~/.fzf.zsh
 [ -f $NVM_DIR/nvm.sh ]          && source $NVM_DIR/nvm.sh
 [ -f $NVM_DIR/bash_completion ] && source $NVM_DIR/bash_completion
 
