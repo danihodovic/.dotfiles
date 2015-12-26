@@ -18,7 +18,7 @@ echo
 
 case $install_apt_fast in
   y)
-    sudo add-apt-repository ppa:saiarcot895/myppa
+    sudo add-apt-repository -y ppa:saiarcot895/myppa
     sudo apt-get update
     sudo apt-get -y install apt-fast
     ;;
@@ -51,7 +51,7 @@ esac
 
 case $install_dropbox in
     y)
-        sudo apt-get install python-gtk2
+        sudo apt-get install -y python-gtk2
         wget -O tempfile https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.02.12_amd64.deb
         sudo dpkg -i tempfile
         dropbox start -i
