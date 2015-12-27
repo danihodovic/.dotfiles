@@ -272,10 +272,14 @@ function chpwd() {
 }
 
 man() {
-  # Possibly add Info if man page doesn't exist?
-  command man ${1} > /dev/null
-  if [ $? == 0 ]; then
-    nvim -c 'set ft=man' -c "Man ${1}" -c 'nnoremap <buffer> q :q<cr>'
+  # TODO: Add fzf helper and pipe to vim
+  if [ $1 == '-k' ]; then
+    apropos ${@:2}
+  else
+    command man ${1} > /dev/null
+    if [ $? == 0 ]; then
+      nvim -c 'set ft=man' -c "Man ${1}" -c 'nnoremap <buffer> q :q<cr>'
+    fi
   fi
 }
 
