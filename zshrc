@@ -107,13 +107,18 @@ vi-append-x-selection () {
 zle -N vi-append-x-selection
 bindkey -M vicmd p vi-append-x-selection
 
+tmux-copy-mode() {
+  if [ -n "$TMUX" ]; then
+    tmux copy-mode
+  fi
+}
+zle -N tmux-copy-mode
+bindkey -M vicmd v tmux-copy-mode
+
 # Key bindings. Wanna find weird keycodes? use cat
 # Fix backspace delete in vi-mode
 # http://www.zsh.org/mla/users/2009/msg00812.html
 bindkey "^?" backward-delete-char
-# v opens editor by default because of the vi-mode plugin in oh-my-zsh
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/vi-mode/vi-mode.plugin.zsh#L32
-bindkey -M vicmd v noop
 # Movement bindings
 bindkey -M vicmd q vi-backward-word
 bindkey -M vicmd 0 noop
