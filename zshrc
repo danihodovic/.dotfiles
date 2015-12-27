@@ -236,8 +236,6 @@ fl() {
 
 # Aliases
 # ------------
-alias gno="gnome-open"
-alias reboot="sudo reboot"
 alias cd.="cd .."
 alias cd..="cd ../.."
 alias cd...="cd ../../.."
