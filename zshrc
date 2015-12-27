@@ -266,6 +266,14 @@ function chpwd() {
     ls
 }
 
+man() {
+  # Possibly add Info if man page doesn't exist?
+  command man ${1} > /dev/null
+  if [ $? == 0 ]; then
+    nvim -c 'set ft=man' -c "Man ${1}" -c 'nnoremap <buffer> q :q<cr>'
+  fi
+}
+
 if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     echo 'Using Linux zshrc settings...'
 elif [[ "$(uname)" == "Darwin" ]]; then
