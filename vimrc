@@ -862,7 +862,7 @@ fu! ReformatTextWidth() range
   call inputrestore()
 endfu!
 
-autocmd BufNewFile,BufRead *.js nnoremap <F7> :call FindRequireJSFile()<cr>
+
 function! FindRequireJSFile(...)
 python << EOF
 # This is a clusterfuck, but surprisingly works for JS
