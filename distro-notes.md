@@ -113,7 +113,7 @@ Edit .config/openbox/lubuntu-rc.xml
 
 # Debian
 Compared to Ubuntu and Linux Mint, Debian is **very** barebones. Aside from missing firmware, a lot of
-essential packages, such as  `keyboard-configuration` and `python-software-properties`
+essential packages, such as  `keyboard-configuration` and `software-properties-common`
 (package that enables `apt-add repository`) are not installed by default.
 
 Debian has a million different versions of the OS to install. If you want a recovery live-usb you probably
