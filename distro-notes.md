@@ -176,6 +176,12 @@ Fix C-h for tmux and Neovim, see https://github.com/neovim/neovim/issues/2048
 
 	infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 	tic $TERM.ti
+	
+# Installing Linux on Mac
+Some Linux distros don't support EFI booting, so creating a bootable USB with the usual
+tools such as `usb-creator-gtk` and `unetbootin` doesn't work. 
+`Mac-Linux-USB-Loader` is an OSX app which creates bootable USB's for Mac.
+https://github.com/SevenBits/Mac-Linux-USB-Loader 
 
 ## Native Xubuntu/Cinnamon on Mac
 
