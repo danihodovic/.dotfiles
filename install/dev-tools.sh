@@ -30,10 +30,11 @@ case $install_zsh in
         fi
 
         echo "Installing zsh"
-        sudo apt-get install zsh -y
+        sudo apt-get install -y zsh
 
-        echo "Installing tmux and tpm"
-        sudo apt-get install tmux
+        echo "Installing tmux"
+        sudo apt-get install -y tmux
+
         if [ ! -d ~/.tmux/plugins/tpm ]; then
             echo "Installing tpm"
             git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
