@@ -183,6 +183,12 @@ tools such as `usb-creator-gtk` and `unetbootin` doesn't work.
 `Mac-Linux-USB-Loader` is an OSX app which creates bootable USB's for Mac.
 https://github.com/SevenBits/Mac-Linux-USB-Loader 
 
+For a Linux Mint installation, mark it as Ubuntu in the Mac-Linux-USB-Loader Gui.
+Check both boxes
+[x] This ISO lacks an EFI-enabled kernel.
+[x] This ISO has code older than Ubuntu 14.10
+It probably won't boot otherwise.
+
 ## Native Xubuntu/Cinnamon on Mac
 
 ### Hardware
