@@ -55,7 +55,7 @@ antigen theme robbyrussell/oh-my-zsh themes/agnoster
 [ -f $NVM_DIR/bash_completion ] && source $NVM_DIR/bash_completion
 
 hash virtualenvwrapper 2>/dev/null
-[ $? == 0 ] && source /usr/local/bin/virtualenvwrapper.sh
+[ $? = 0 ] && source /usr/local/bin/virtualenvwrapper.sh
 
 # Bindings
 # ------------
