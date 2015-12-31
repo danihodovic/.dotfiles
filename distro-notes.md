@@ -111,6 +111,33 @@ Edit .config/openbox/lubuntu-rc.xml
       </action>
     </keybind>
 
+# Debian
+Debian has a million different versions of the OS to install. If you want a recovery live-usb you probably
+don't want to use the net installation iso (although this is the smallest). If you do install a live-usb
+distro, **make sure** to pick one with third-party firmware so that these packages don't need to be installed
+afterwards (especially tricky without a connection) or download the firmware on a usb stick.
+
+Most of the debian iso's can be found here: http://cdimage.debian.org/cdimage/unofficial/
+Nonfree recommended: http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/ 
+If you have a wired connection, you can install the small netinst image. If not, go for the larger iso.
+
+If you install it with cinnamon it's very barebones. A lot of packages need to be installed/updated,
+such as `cinnamon-core` and `cinnamon-common`.
+
+### Reconfiguring keyboard layout
+See: https://wiki.debian.org/Keyboard
+
+Via the `keyboard-configuration` package: 
+
+	sudo apt-get install keyboard-configuration
+	dpkg-reconfigure keyboard-configuration
+	# ...Go through the terminal UI guide
+	service keyboard-setup restart
+	
+Or, if running X11, you can use `setxkbmap`
+	
+	setxkbmap us # setxkbmap se
+
 # Other
 
 ## Testing terminals for truecolor support
