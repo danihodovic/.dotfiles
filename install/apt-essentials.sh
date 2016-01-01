@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 set -e
+set -u
+
+# cmake, python-dev, build-essentials required by YCM
 
 sudo apt-get update
 sudo apt-get install \
@@ -12,6 +15,7 @@ sudo apt-get install \
     sshfs \
     cmake \
     python-dev \
+    build-essential \
     xdotool wmctrl \
     colortest \
     tig \
