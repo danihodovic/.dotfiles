@@ -12,15 +12,16 @@ Locate
 Find the option switch group
 Find the definition for switch-group. It should be set to ['<Alt>AboveTab']
 Change this to something else
-You don't need to logoff for this to work
+You need to log out of cinnamon for this to work
 
 ### Disable ctrl-alt-l to lock screen
 Launch dconf-editor
 Locate
 
-	/org/cinnamon/desktop/keybindings/wm
+	/org/cinnamon/desktop/keybindings/media-keys
 
 Find the option `screensaver` and disable it.
+Strangely, you don't need to log out of cinnamon for this to work.
 
 
 
