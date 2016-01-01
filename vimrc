@@ -437,10 +437,9 @@ let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_shade = 0
 let g:EasyMotion_use_upper = 1
-map f <Plug>(easymotion-sl)
-map t <Plug>(easymotion-tl)
-map T <Plug>(easymotion-Tl)
-map s <Plug>(easymotion-s2)
+map f <Plug>(easymotion-bd-f)
+map t <Plug>(easymotion-bd-t)
+map s <Plug>(easymotion-s)
 "-----------------------------------------
 " EasyAlign
 "-----------------------------------------
