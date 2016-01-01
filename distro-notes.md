@@ -122,21 +122,21 @@ distro, **make sure** to pick one with third-party firmware so that these packag
 afterwards (especially tricky without a connection) or download the firmware on a usb stick.
 
 Most of the debian iso's can be found here: http://cdimage.debian.org/cdimage/unofficial/
-Nonfree recommended: http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/ 
+Nonfree recommended: http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/
 If you have a wired connection, you can install the small netinst image. If not, go for the larger iso.
 
 ### Reconfiguring keyboard layout
 See: https://wiki.debian.org/Keyboard
 
-Via the `keyboard-configuration` package: 
+Via the `keyboard-configuration` package:
 
 	sudo apt-get install keyboard-configuration
 	dpkg-reconfigure keyboard-configuration
 	# ...Go through the terminal UI guide
 	service keyboard-setup restart
-	
+
 Or, if running X11, you can use `setxkbmap`
-	
+
 	setxkbmap us # setxkbmap se
 
 # Other
@@ -172,11 +172,12 @@ list loaded kernel modules
 
 # Mac
 
+
 # Installing Linux on Mac
 Some Linux distros don't support EFI booting, so creating a bootable USB with the usual
-tools such as `usb-creator-gtk` and `unetbootin` doesn't work. 
+tools such as `usb-creator-gtk` and `unetbootin` doesn't work.
 `Mac-Linux-USB-Loader` is an OSX app which creates bootable USB's for Mac.
-https://github.com/SevenBits/Mac-Linux-USB-Loader 
+https://github.com/SevenBits/Mac-Linux-USB-Loader
 
 For a Linux Mint installation, mark it as Ubuntu in the Mac-Linux-USB-Loader Gui.
 Check both boxes
@@ -228,10 +229,14 @@ Reduce the brightness of the ePS display
 
 	xrandr --ouput <ePS?> --brightness 0.5
 
-
 ### Remapping keys
 
 #### Swapping fn-ctrl
+
+Swapping fn-ctrl keys is provided by a patch on the hid-apple module found in this repo
+https://github.com/free5lot/hid-apple-patched.git. The patch has not reached the Linux kernel
+yet. The repo states that it works up to kernel 4.2, however it seems to work up to
+kernel 4.4.0-040400rc7-generic.
 
 TODO: Make this a script
 
@@ -287,6 +292,4 @@ Fix C-h for tmux and Neovim, see https://github.com/neovim/neovim/issues/2048
 
 	infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 	tic $TERM.ti
-
-
 
