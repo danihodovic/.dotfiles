@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+set -u
 
 read -p "Install apt-fast?"                    -n 1 -r      install_apt_fast
 echo
@@ -26,8 +27,11 @@ esac
 
 case $install_nvm in
     y)
-        hash nvm || true
-        if [ $? -eq 1 ]; then
+        set +e
+        hash nvm
+        nvm_installed=$?
+        set -e
+        if [ $nvm_installed = 1 ]; then
           git clone https://github.com/creationix/nvm.git ~/.nvm
           read -p "Install latest node and set as stable?" INSTALL_NODE
           case $INSTALL_NODE in
