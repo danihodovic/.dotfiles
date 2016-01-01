@@ -250,7 +250,7 @@ alias cd-="cd -"
 alias ls='ls --color=auto --classify'
 alias aptinstall="sudo apt-get install ${1}"
 alias aptupgrade="sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade"
-alias xkbmapcaps="setxkbmap -option caps:swapescape"
+alias setxkbmapcaps="setxkbmap -option caps:swapescape"
 alias ddmenu="dmenu_run -fn '-*-fixed-*-*-*-*-20-*-*-*-*-*-*-*' -l 5 -i"
 alias vi='nvim'
 alias gs='git status'
@@ -285,10 +285,13 @@ man() {
 
 if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     echo 'Using Linux zshrc settings...'
+    setxkbmap -option caps:swapescape
+
 elif [[ "$(uname)" == "Darwin" ]]; then
     echo 'Using Mac OS zshrc settings...'
     # Use GNU coreutils instead of bsd ones
     export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
+
 else
     echo 'Unknown OS' $(uname)
 fi
