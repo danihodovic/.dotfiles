@@ -348,7 +348,7 @@ fu! FzfAgCustom(queryparam, ...)
     let query = ''
   endif
 
-  let ag_opts = 'ag --nogroup --column --color -o -U "%s"'
+  let ag_opts = 'ag --nogroup --column --color -U "%s"'
   let source = printf(ag_opts, query)
   call fzf#vim#ag(query, {'options': '-e', 'source': source, 'up': '~40%'})
 endfu
@@ -367,12 +367,13 @@ fu! FzfGitStatus()
   call fzf#run(opts)
 endfu
 
+autocmd filetype javascript nnoremap <buffer><nowait> <leader>agf :call AgJSFnDefinition()<cr>
 command! -nargs=* -range AgJSFnDefinition :call AgJSFnDefinition(<q-args>)
 " An ag matcher which find most usages of a <keyword> except for function calls.
 " ctags is probably a better solution but ctags doesnt seem reliable at all times
-fu! AgJSFnDefinition(query) range
-  if len(a:query) > 0
-    let word = a:query
+fu! AgJSFnDefinition(...) range
+  if len(a:000) > 0
+    let word = a:1
   else
     let word = Get_visual_selection()
     if len(word) == 0
@@ -389,6 +390,8 @@ fu! AgJSFnDefinition(query) range
     let regex3 = '((\s+|\{)' . word . ':)'
     " foo = , baz.foo =
     let regex4 = '((\s+|\.)' . word . '\s*=)'
+    " Add function defintion - function foo() {}
+    " Add es6 class - foo() {}
     let regex = printf('%s|%s|%s|%s', regex1, regex2, regex3, regex4)
     call FzfAgCustom(regex)
   endif
