@@ -21,6 +21,8 @@ read -p "Install tmux plugin manager tpm? " -n 1 -r  install_tpm
 echo
 read -p "Setup nvim?" -n 1 -r  setup_nvim
 echo
+read -p "Install patched Hack font (Knack)?" -n 1 -r install_knack_patched
+echo
 
 
 case $install_gnome_terminal in
@@ -154,4 +156,16 @@ case $setup_nvim in
           echo "Neovim config files already set up"
       fi
 
+esac
+
+case $install_knack_patched in
+  y)
+      fontfile="${HOME}/.fonts/Knack Regular Nerd Font Complete Mono.ttf"
+      url="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/complete/Knack%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"
+
+      if [ ! -f "$fontfile" ]; then
+        [ ! -d ${HOME}/.fonts ] && mkdir ${HOME}/.fonts
+        curl -f -L -o "$fontfile" $url
+        fc-cache -fv
+      fi
 esac
