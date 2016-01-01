@@ -172,11 +172,6 @@ list loaded kernel modules
 
 # Mac
 
-Fix C-h for tmux and Neovim, see https://github.com/neovim/neovim/issues/2048
-
-	infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
-	tic $TERM.ti
-	
 # Installing Linux on Mac
 Some Linux distros don't support EFI booting, so creating a bootable USB with the usual
 tools such as `usb-creator-gtk` and `unetbootin` doesn't work. 
@@ -190,6 +185,20 @@ Check both boxes
 - [x] This ISO has code older than Ubuntu 14.10
 
 It probably won't boot otherwise.
+
+# Known issues for the 2015 Macbook (trackpad, swapping control keys)
+
+It seems like the trackpad and the swapping of control keys using `/etc/modprobe.d/hid_apple.conf` does
+not work for kernels earlier than 4.2.0. Ubuntu-based distros ship with 4.2 starting from Ubuntu version 15.10,
+so Ubuntu-spinoffs (Xubuntu, Mint) need to be based on at least this version for basic features to work.
+Linux Mint 17 ships with 3.x because it's based on Ubuntu LTS (14.04) so the trackpad doesn't work by default.
+
+Issues:
+
+- Trackpad scrolling doesn't work.
+- Trackpad double click doesn't work.
+- Swapping control keys by editing `/etc/modprobe.d/hid_apple.conf` doesn't work (fn-ctrl, cmd-option, fn-keys).
+
 
 ## Native Xubuntu/Cinnamon on Mac
 
@@ -273,6 +282,11 @@ with
 Works by default using cinnamon. Either install Linux mint or install the
 cinnamon ppa - ppa:kranich/cinnamon
 
+## Other
+Fix C-h for tmux and Neovim, see https://github.com/neovim/neovim/issues/2048
+
+	infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
+	tic $TERM.ti
 
 
 
