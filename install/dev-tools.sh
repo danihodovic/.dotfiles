@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+set -u
 
 # -p <output this string before reading>
 # -n <number return input after *this* many characters instead of waiting for newline>
@@ -76,21 +77,29 @@ case $install_neovim in
         fi
 
         # Neovim from pip needs to be installed for the python plugins to work
-        hash pip || true
-        if [ $? -eq 1 ]; then
+        set +e
+        hash pip
+        pip_installed=$?
+        set -e
+
+        if [ $pip_installed -eq 1 ]; then
             sudo wget -O - https://bootstrap.pypa.io/get-pip.py | sudo python
-        else
-	    echo "Pip already installed"
+        elif [ $pip_installed -eq 0 ]; then
+            echo "Pip already installed"
         fi
 
-        hash nvim || true
-        if [ $? -eq 1 ]; then
+        set +e
+        hash nvim
+        nvim_installed=$?
+        set -e
+
+        if [ $nvim_installed -eq 1 ]; then
             echo "...Installing neovim..."
             sudo apt-add-repository ppa:neovim-ppa/unstable -y
             sudo apt-get update
             sudo apt-get install neovim -y
             sudo pip install neovim
-        else
+        elif [ $nvim_installed -eq 0 ]; then
             echo "...Neovim already installed..."
         fi
 
