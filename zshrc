@@ -1,4 +1,4 @@
-setopt INC_APPEND_HISTORY
+set INC_APPEND_HISTORY
 # Paths
 # ------------
 # Export paths before sourcing anything
@@ -39,14 +39,6 @@ antigen bundle djui/alias-tips
 antigen-use oh-my-zsh
 antigen theme robbyrussell/oh-my-zsh themes/agnoster
 
-# Useful but unused
-# antigen bundle b4b4r07/enhancd
-# antigen bundle Vifon/deer
-# antigen bundle Valiev/almostontop
-# antigen bundle zsh-users/zaw
-# antigen bundle olivierverdier/zsh-git-prompt
-# antigen bundle peterhurford/git-it-on.zsh
-
 # External scripts
 # ------------
 # Source these before our own `bindkeys` so that we can override stuff
@@ -66,8 +58,7 @@ hash virtualenvwrapper 2>/dev/null
 # How to make custom widgets:
 # http://sgeb.io/articles/zsh-zle-closer-look-custom-widgets/
 # http://dougblack.io/words/zsh-vi-mode.html
-#
-# Also for visual vi-mode see http://stackoverflow.com/a/13881077/2966951
+# Also for visual vi-mode see: http://stackoverflow.com/a/13881077/2966951
 #
 # Modes: viins, vicmd
 
@@ -79,15 +70,6 @@ bindkey -v
 # very jarring and frustrating transition between modes. Let's reduce
 # this delay to 0.1 seconds.
 export KEYTIMEOUT=1
-
-# Show the vi mode you're in
-#function zle-line-init zle-keymap-select {
-    #RPS1="${${KEYMAP/vicmd/[NORMAL]}/(main|viins)/[INSERT]}"
-    #RPS2=$RPS1
-    #zle reset-prompt
-#}
-#zle -N zle-line-init
-#zle -N zle-keymap-select
 
 # Move to the end of the line and exclude whitespace
 end-of-line-no-whitespace() {
