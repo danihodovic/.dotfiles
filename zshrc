@@ -280,9 +280,21 @@ man() {
   fi
 }
 
+# Start a tmux session for new terminals. This does not apply if we're
+# inside a tmux session already or if tmux is not installed.
+start-tmux-if-exist() {
+  if [ -z $TMUX ]; then
+    hash tmux
+    if [ $? = 0 ]; then
+      tmux
+    fi
+  fi
+}
+
 if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     echo 'Using Linux zshrc settings...'
     setxkbmap -option caps:swapescape
+    start-tmux-if-exist
 
 elif [[ "$(uname)" == "Darwin" ]]; then
     echo 'Using Mac OS zshrc settings...'
