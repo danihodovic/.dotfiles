@@ -21,4 +21,5 @@ sudo apt-get install \
     tig \
     vnstat \
     gparted \
+    shellcheck \
     -y
