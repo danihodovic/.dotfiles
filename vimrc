@@ -537,7 +537,15 @@ let g:tern_show_signature_in_pum = 1
 let g:fixmyjs_engine = 'fixmyjs'
 " Legacy needed for es6 for some reason
 let g:fixmyjs_legacy_jshint = 1
-autocmd BufWritePre *.js,*.ts Fixmyjs
+" autocmd BufWritePre *.js,*.ts Fixmyjs
+
+" TODO: replace this with job-control
+autocmd filetype javascript command! -buffer FixJscs call RunJscs()
+fu! RunJscs()
+  call system("jscs --fix " . expand('%'))
+  checktime
+  w
+endfu
 "-----------------------------------------
 " Jedi Python
 "-----------------------------------------
