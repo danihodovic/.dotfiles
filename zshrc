@@ -51,6 +51,8 @@ scripts=(
 for script in $scripts; do
   if [ -f $script ]; then
     source $script
+  else
+    echo "tried sourcing ${script} but it was not found"
   fi
 done
 
