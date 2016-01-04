@@ -95,7 +95,7 @@ case $install_antigen in
       if [ ! -f "$ANTIGEN_PATH" ]; then
           echo "Installing antigen"
           ANTIGEN_URL=https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh
-          curl -fLo $ANTIGEN_PATH --create-dirs $ANTIGEN_URL
+          curl -fLo "$ANTIGEN_PATH" --create-dirs $ANTIGEN_URL
       fi
 esac
 
@@ -164,7 +164,7 @@ case $install_knack_patched in
       url="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/complete/Knack%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"
 
       if [ ! -f "$fontfile" ]; then
-        [ ! -d ${HOME}/.fonts ] && mkdir ${HOME}/.fonts
+        [ ! -d "${HOME}/.fonts" ] && mkdir "${HOME}/.fonts"
         curl -f -L -o "$fontfile" $url
         fc-cache -fv
       fi
