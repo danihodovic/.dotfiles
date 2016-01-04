@@ -4,13 +4,13 @@ set INC_APPEND_HISTORY
 # Export paths before sourcing anything
 # Fixes colors for lxde-terminal. Useful for vim colorschemes
 export TERM=xterm-256color
-export NVM_DIR=${HOME}/.nvm
-export PATH=$PATH:/opt/nvim-qt
 export GOROOT=/opt/go
 export GOPATH=/opt/go_pkg
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH=$PATH:/opt/eclipse
+# Virtualenv
 export WORKON_HOME=${HOME}/.virtualenvs
+# Virtualenv
 export PROJECT_HOME=${HOME}/Devel
 export EDITOR=nvim
 export PYTHONSTARTUP=~/.pythonrc
@@ -30,8 +30,6 @@ export NODE_PROJECTS_DIR=${HOME}/repos/lab/repos
 
 # Antigen
 source $ANTIGEN_PATH
-
-# Plugins
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle djui/alias-tips
@@ -39,15 +37,22 @@ antigen bundle djui/alias-tips
 antigen-use oh-my-zsh
 antigen theme robbyrussell/oh-my-zsh themes/agnoster
 
+antigen apply
+
 # External scripts
 # ------------
 # Source these before our own `bindkeys` so that we can override stuff
-[ -f ${HOME}/.fzf.zsh ]         && source ~/.fzf.zsh
-[ -f $NVM_DIR/nvm.sh ]          && source $NVM_DIR/nvm.sh
-[ -f $NVM_DIR/bash_completion ] && source $NVM_DIR/bash_completion
+scripts=(
+  ${HOME}/.fzf.zsh
+  ${HOME}/.nvm/nvm.sh
+  /usr/local/bin/aws_zsh_completer.sh
+)
 
-hash virtualenvwrapper 2>/dev/null
-[ $? = 0 ] && source /usr/local/bin/virtualenvwrapper.sh
+for script in $scripts; do
+  if [ -f $script ]; then
+    source $script
+  fi
+done
 
 # Bindings
 # ------------
@@ -291,3 +296,4 @@ if [[ "$DESKTOP_SESSION" == "cinnamon" ]]; then
   echo 'Using cinnamon settings...'
   alias lock='cinnamon-screensaver-command -l'
 fi
+
