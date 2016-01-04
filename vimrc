@@ -599,12 +599,6 @@ nnoremap ggp :GitGutterPrevHunk<cr>
 " Neomake
 "-----------------------------------------
 let g:neomake_list_height = 5
-" Normal neomake for these. Doesn't work for some others (go)
-autocmd BufWritePost *.py,*.js,*.ts Neomake
-" Seems like neomake only builds one file using `:Neomake` so imports are ignored, `Neomake!` works
-" but builds an executable which can be annoying. Use `:GoLint` from the `vim-go` package instead.
-autocmd BufWritePost *.go Neomake!
-" The value 2 means that we'll open the bottom tab, but keep the cursor position
 let g:neomake_open_list = 2
 
 " Avoid specifying all maker options here due to conflicts. Instead use conf files
@@ -619,7 +613,18 @@ let g:neomake_typescript_tsc_maker = {
       \ '%C%\s%\+%m'
       \ }
 
+let g:neomake_sh_shellcheck_maker = {
+  \ 'args': [ '-f' , 'gcc' ]
+  \ }
+
+let g:neomake_sh_enabled_makers = ['shellcheck']
 let g:neomake_go_enabled_makers = []
+
+" Do not enable this for zsh. shellcheck does not support zsh
+autocmd BufWritePost *.js,*.py,*.sh,*.bash,bashrc Neomake
+" Seems like neomake only builds one file using `:Neomake` so imports are ignored, `Neomake!` works
+" but builds an executable which can be annoying.
+autocmd BufWritePost *.go Neomake!
 "-----------------------------------------
 " AutoFormat
 "-----------------------------------------
