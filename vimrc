@@ -127,9 +127,8 @@ set autoread
 " 'The last semicolon is the key here. When Vim tries to locate the 'tags' file, it first looks at the current
 " directory, then the parent directory, then the parent of the parent, and so on'
 set tags=./tags;
-" This needs to be set for devicons to work
-" TODO: Fix the error message that this causes
-" set encoding=utf8
+
+set diffopt=filler,vertical
 "-----------------------------------------
 " User defined commands
 "-----------------------------------------
