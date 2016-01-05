@@ -621,11 +621,6 @@ let g:neomake_typescript_tsc_maker = {
       \ '%C%\s%\+%m'
       \ }
 
-let g:neomake_sh_shellcheck_maker = {
-  \ 'args': [ '-f' , 'gcc' ]
-  \ }
-
-let g:neomake_sh_enabled_makers = ['shellcheck']
 let g:neomake_go_enabled_makers = []
 
 " Do not enable this for zsh. shellcheck does not support zsh
