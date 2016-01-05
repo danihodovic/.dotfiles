@@ -366,7 +366,7 @@ fu! FzfGitStatus()
   call fzf#run(opts)
 endfu
 
-autocmd filetype javascript nnoremap <buffer><nowait> <leader>agf :call AgJSFnDefinition()<cr>
+autocmd filetype javascript nnoremap <buffer> <leader>agf :call AgJSFnDefinition()<cr>
 command! -nargs=* -range AgJSFnDefinition :call AgJSFnDefinition(<q-args>)
 " An ag matcher which find most usages of a <keyword> except for function calls.
 " ctags is probably a better solution but ctags doesnt seem reliable at all times
