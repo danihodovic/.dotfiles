@@ -327,24 +327,11 @@ fu! FzfTagsCustom(mode)
   endif
 endfu
 
-
-command! -bang -nargs=* AG call FzfAgCustom(<q-args>)
-noremap <leader>a :call FzfAgCustom('', 'n')<cr>
-" Use visualmode() to differentiate "v", "V" and "<CTRL-V>"
-vnoremap <leader>a :call FzfAgCustom('', visualmode())<cr>
-" TODO: Add prompt option like the git status helper
-fu! FzfAgCustom(queryparam, ...)
-  if len(a:queryparam) > 0
-    let query = a:queryparam
-  elseif a:0 > 0
-    let mode = a:1
-    if mode ==# 'n'
-      let query = escape('^(?=.)', '"\-')
-    elseif mode ==# 'v'
-      let query = escape(Get_visual_selection(), '"\-')
-    endif
-  else
-    let query = ''
+command! -nargs=* AG call FzfAgCustom(<q-args>)
+fu! FzfAgCustom(queryparam)
+  let query = a:queryparam
+  if len(query) == 0
+    let query = expand('<cword>')
   endif
 
   let ag_opts = 'ag --nogroup --column --color -U "%s"'
@@ -353,7 +340,6 @@ fu! FzfAgCustom(queryparam, ...)
 endfu
 
 nnoremap <leader>gs :call FzfGitStatus()<cr>
-vnoremap <leader>gs :call FzfGitStatus()<cr>
 " Using the custom fzf#run see https://github.com/junegunn/fzf#fzfrunoptions
 fu! FzfGitStatus()
   let source = 'git diff --name-only'
