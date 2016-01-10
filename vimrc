@@ -353,17 +353,13 @@ fu! FzfGitStatus()
 endfu
 
 autocmd filetype javascript nnoremap <buffer> <leader>agf :call AgJSFnDefinition()<cr>
-command! -nargs=* -range AgJSFnDefinition :call AgJSFnDefinition(<q-args>)
+command! -nargs=* AgJSDefinition :call AgJSFnDefinition(<q-args>)
 " An ag matcher which find most usages of a <keyword> except for function calls.
 " ctags is probably a better solution but ctags doesnt seem reliable at all times
-fu! AgJSFnDefinition(...) range
-  if len(a:000) > 0
-    let word = a:1
-  else
-    let word = Get_visual_selection()
-    if len(word) == 0
-      let word = expand('<cword>')
-    endif
+fu! AgJSFnDefinition(query) range
+  let word = a:queryparam
+  if len(word) == 0
+    let word = expand('<cword>')
   endif
 
   if len(word) > 0
