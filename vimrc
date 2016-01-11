@@ -496,16 +496,7 @@ fu! TernOrDucktape()
       execute 'normal /' . searchword . "\<CR>"
     endif
   else
-    let [_, origLine, origCol, _] = getpos('.')
     execute 'TernDef'
-    let [_, currLine, currCol, _] = getpos('.')
-    " Only highlight search if the cursor has moved meaning tern has found a definition
-    if currLine != origLine && currCol != origCol
-      let searchword = expand('<cword>')
-      let @/ = searchword
-      " This is ridicilous, "<\CR>" will execute a search but not '\<CR>''
-      execute 'normal /' . searchword . "\<CR>"
-    endif
   endif
 endfu
 " 'no', 'on_move', 'on_hold' - Note: on_move will cause major lag when moving!
