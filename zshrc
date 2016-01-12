@@ -239,6 +239,7 @@ alias ls='ls --color=auto --classify'
 alias aptinstall="sudo apt-get install ${1}"
 alias aptupgrade="sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade"
 alias setxkbmapcaps="setxkbmap -option caps:swapescape"
+alias open='xdg-open'
 alias vi='nvim'
 alias gs='git status'
 alias gd='git diff'
