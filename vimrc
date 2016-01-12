@@ -579,7 +579,7 @@ nnoremap ggp :GitGutterPrevHunk<cr>
 "-----------------------------------------
 " Neomake
 "-----------------------------------------
-let g:neomake_list_height = 5
+let g:neomake_list_height = 8
 let g:neomake_open_list = 2
 
 " Avoid specifying all maker options here due to conflicts. Instead use conf files
