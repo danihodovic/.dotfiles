@@ -292,6 +292,7 @@ autocmd FileType make                   setlocal  shiftwidth=4 tabstop=4 noexpan
 autocmd FileType sh,bash,zsh            setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType php                    setlocal  shiftwidth=4 tabstop=4 expandtab
 autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandtab
+autocmd FileType ruby                   setlocal  shiftwidth=2 tabstop=2 expandtab
 "-----------------------------------------
 " Plugin specific settings
 "-----------------------------------------
