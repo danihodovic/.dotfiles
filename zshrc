@@ -85,6 +85,17 @@ end-of-line-no-whitespace() {
 }
 zle -N end-of-line-no-whitespace
 
+zle-line-init zle-keymap-select() {
+  gnome_terminal_profile=':b1dcc9dd-5262-4d8d-a863-c897e6d979b9'
+  setting=/org/gnome/terminal/legacy/profiles:/$gnome_terminal_profile/cursor-shape
+  case $KEYMAP in
+    vicmd) dconf write $setting "'block'" ;;
+    viins|main) dconf write $setting "'ibeam'" ;;
+  esac
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+
 
 noop () {}
 zle -N noop

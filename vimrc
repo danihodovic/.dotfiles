@@ -127,8 +127,11 @@ set autoread
 " 'The last semicolon is the key here. When Vim tries to locate the 'tags' file, it first looks at the current
 " directory, then the parent directory, then the parent of the parent, and so on'
 set tags=./tags;
-
 set diffopt=filler,vertical
+
+autocmd InsertEnter * call ChangeCursor('i')
+autocmd InsertLeave * call ChangeCursor('n')
+autocmd FocusGained * call ChangeCursor('n')
 "-----------------------------------------
 " User defined commands
 "-----------------------------------------
@@ -939,3 +942,11 @@ if m:
 EOF
 endfunction
 
+fu! ChangeCursor(mode)
+  let dconf_cmd = 'dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/cursor-shape '
+  if a:mode ==# 'i'
+    call system(dconf_cmd . "\"'ibeam'\"")
+  else
+    call system(dconf_cmd . "\"'block'\"")
+  endif
+endfu
