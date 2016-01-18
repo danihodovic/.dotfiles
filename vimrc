@@ -40,7 +40,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'blueyed/vim-diminactive'
 " Enable focus events inside nvim so that FocusGained and FocusLost autocmds work in terminal vim
 " vim-fugitive plugin uses FocusGained for refreshing git branch in status line
-" vim-gitgutter uses FocusGained for refreshing ... (wait for it) git gutter
+" vim-gitgutter uses FocusGained for refreshing
 Plug 'tmux-plugins/vim-tmux-focus-events'
 " Required by vim-oblique
 Plug 'junegunn/vim-pseudocl'
