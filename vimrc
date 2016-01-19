@@ -84,6 +84,8 @@ call plug#end()
 "-----------------------------------------
 " General settings
 "-----------------------------------------
+" Cursor shape betwen block and ibeam.
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " Silences C-Q, C-S and allows vim to catch them
 silent !stty -ixon > /dev/null 2>/dev/null
 " All y/p operations use clipboard by default
@@ -128,10 +130,6 @@ set autoread
 " directory, then the parent directory, then the parent of the parent, and so on'
 set tags=./tags;
 set diffopt=filler,vertical
-
-autocmd InsertEnter * call ChangeCursor('i')
-autocmd InsertLeave * call ChangeCursor('n')
-autocmd FocusGained * call ChangeCursor('n')
 "-----------------------------------------
 " User defined commands
 "-----------------------------------------
@@ -942,11 +940,3 @@ if m:
 EOF
 endfunction
 
-fu! ChangeCursor(mode)
-  let dconf_cmd = 'dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/cursor-shape '
-  if a:mode ==# 'i'
-    call system(dconf_cmd . "\"'ibeam'\"")
-  else
-    call system(dconf_cmd . "\"'block'\"")
-  endif
-endfu
