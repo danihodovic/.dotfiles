@@ -198,7 +198,7 @@ nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap + :vertical resize +15<cr>
-nnoremap - :vertical resize -15<cr>
+nnoremap _ :vertical resize -15<cr>
 " Buffer operations similar to browsers
 noremap <C-t> :enew<CR>
 nnoremap <C-w> :call MimicBrowserClose()<CR>
