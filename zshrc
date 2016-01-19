@@ -86,16 +86,19 @@ end-of-line-no-whitespace() {
 zle -N end-of-line-no-whitespace
 
 zle-line-init zle-keymap-select() {
-  gnome_terminal_profile=':b1dcc9dd-5262-4d8d-a863-c897e6d979b9'
-  setting=/org/gnome/terminal/legacy/profiles:/$gnome_terminal_profile/cursor-shape
   case $KEYMAP in
-    vicmd) dconf write $setting "'block'" ;;
-    viins|main) dconf write $setting "'ibeam'" ;;
+    viins|main)  print -nR $'\e[5 q';;
+    vicmd)       print -nR $'\e[2 q';;
   esac
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
 
+# When a new command is entered, return to the block cursor
+zle-line-finish () {
+  print -nR $'\e[2 q'
+}
+zle -N zle-line-finish
 
 noop () {}
 zle -N noop
