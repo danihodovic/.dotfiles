@@ -1,12 +1,16 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3.5
 '''
 Script to setup all of the symlinks
 '''
 import os
 import argparse
 
-home    = os.path.expanduser("~")
-confDir = os.path.expanduser("~/.dotfiles/conf")
+HOME_DIR     = os.path.expandvars('${HOME}')
+DOTFILES_DIR = HOME_DIR + '/.dotfiles'
+CONF_DIR     = HOME_DIR + '/.dotfiles/conf'
+
+NVIMRC_FILE    = HOME_DIR + '/.dotfiles/vimrc'
+NVIMRC_SYMLINK = HOME_DIR + '/.config/nvim/init.vim'
 
 confFiles = ['inputrc', 'tmux.conf', 'sqliterc', 'jshintrc', 'pylintrc',
     'pythonrc', 'jsbeautifyrc', 'tern-config', 'ctags', 'agignore']
@@ -17,35 +21,28 @@ confFiles = ['inputrc', 'tmux.conf', 'sqliterc', 'jshintrc', 'pylintrc',
 # it's not as easy as slapping on symlinks. The nvim setup is done in the
 # installation scripts and I don't use vim anymore
 others = {
-    '~/.dotfiles/zshrc': '~/.zshrc',
-    }
-
-# Expand the strings to real paths
-for realPath, symlinkPath in others.iteritems():
-    others.pop(realPath)
-    realPath = os.path.expanduser(realPath)
-    others[realPath] = os.path.expanduser(symlinkPath)
+    HOME_DIR +'/.dotfiles/zshrc': HOME_DIR + '/.zshrc',
+}
 
 def unlink(link):
     msg = ""
     try:
         msg = "Removing:" + link
         os.unlink(link)
-    except OSError, err:
+    except OSError as err:
         msg = "{0}: {1}".format(err, link)
     finally:
-        print msg
+        print(msg)
 
 def createSymlink(src, dst):
     msg = ""
     try:
-        msg = "Creating symlink from: {} to: {}".format(src, dst)
+        msg = "[Success ] Creating symlink from: {} to: {}".format(src, dst)
         os.symlink(src, dst)
-    except OSError, err:
+    except OSError as err:
         msg = "{0}: {1}".format(err, dst)
     finally:
-        print msg
-
+        print(msg)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -56,18 +53,18 @@ if __name__ == '__main__':
 
     if args.clean:
         for f in confFiles:
-            symlink = home + "/." + f
+            symlink = HOME_DIR + "/." + f
             unlink(symlink)
 
-        for _, symlinkPath in others.iteritems():
+        for _, symlinkPath in others.items():
             unlink(symlinkPath)
 
     if args.symlink:
         for f in confFiles:
-            realPath = confDir + "/" + f
-            symlinkPath = home + "/." + f
+            realPath = CONF_DIR + "/" + f
+            symlinkPath = HOME_DIR + "/." + f
             createSymlink(realPath, symlinkPath)
 
-        for realPath, symlinkPath in others.iteritems():
+        for realPath, symlinkPath in others.items():
             createSymlink(realPath, symlinkPath)
 
