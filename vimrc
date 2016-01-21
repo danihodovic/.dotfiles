@@ -136,6 +136,7 @@ set diffopt=filler,vertical
 " Resize vertically easier. `res` is built in, `vr` is not
 command! -nargs=? Vr vertical resize <args>
 command! -nargs=? Hr resize <args>
+command! Fp echo expand('%:p')
 "-----------------------------------------
 " General remappings
 "-----------------------------------------
