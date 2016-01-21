@@ -48,7 +48,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--clean', dest="clean", action="store_true",
             help="Delete existing symlinks")
-    parser.add_argument('--link', dest="symlink", action="store_true", help="Setup symlinks")
     args = parser.parse_args()
 
     if args.clean:
@@ -59,7 +58,9 @@ if __name__ == '__main__':
         for _, symlinkPath in others.items():
             unlink(symlinkPath)
 
-    if args.symlink:
+        unlink(os.path.expandvars('${HOME}/.config/nvim/init.vim'))
+
+    else:
         for f in confFiles:
             realPath = CONF_DIR + "/" + f
             symlinkPath = HOME_DIR + "/." + f
@@ -68,3 +69,5 @@ if __name__ == '__main__':
         for realPath, symlinkPath in others.items():
             createSymlink(realPath, symlinkPath)
 
+        os.makedirs(os.path.dirname(NVIMRC_SYMLINK), exist_ok=True)
+        createSymlink(NVIMRC_FILE, NVIMRC_SYMLINK)
