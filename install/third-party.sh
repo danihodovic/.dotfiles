@@ -2,19 +2,17 @@
 set -e
 set -u
 
-read -p "Install apt-fast?"                    -n 1 -r      install_apt_fast
+read -p "Install chrome? "                     -n 1 -r      install_chrome
 echo
 read -p "Install node version manager (nvm)? " -n 1 -r      install_nvm
 echo
-read -p "Install chrome? "                     -n 1 -r      install_chrome
-echo
 read -p "Install Dropbox? "                    -n 1 -r      install_dropbox
-echo
-read -p "Install Oracle Java? "                -n 1 -r      install_java
 echo
 read -p "Install numix? "                      -n 1 -r      install_numix
 echo
-read -p "Install suckless-tools? "             -n 1 -r      install_suckless
+read -p "Install Oracle Java? "                -n 1 -r      install_java
+echo
+read -p "Install apt-fast?"                    -n 1 -r      install_apt_fast
 echo
 
 case $install_apt_fast in
@@ -77,15 +75,6 @@ case $install_numix in
         sudo add-apt-repository ppa:numix/ppa -y
         sudo apt-get update
         sudo apt-get install numix-gtk-theme numix-icon-theme-circle -y
-        ;;
-esac
-
-
-case $install_suckless in
-    y)
-        sudo add-apt-repository ppa:minos-archive/main -y
-        sudo apt-get update
-        sudo apt-get install suckless-tools
         ;;
 esac
 
