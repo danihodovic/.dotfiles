@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+tests=$(find ${HOME}/.dotfiles/ -regex '.*_test.py')
+for test in ${tests}; do
+  echo "Testing ${test}..."
+  $test
+  if [ $? != 0 ]; then
+    echo "Tests failed, aborting commit"
+    exit 1
+  fi
+done
+
+exit 0
+
