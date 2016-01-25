@@ -43,8 +43,9 @@ antigen apply
 # ------------
 # Source these before our own `bindkeys` so that we can override stuff
 scripts=(
-  ${HOME}/.dotfiles/fzf-helpers.zsh
   ${HOME}/.fzf.zsh
+  ${HOME}/.fzf/shell/key-bindings.zsh
+  ${HOME}/.dotfiles/fzf-helpers.zsh
   ${HOME}/.nvm/nvm.sh
   /usr/local/bin/aws_zsh_completer.sh
 )
