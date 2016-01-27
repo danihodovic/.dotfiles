@@ -421,7 +421,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 "-----------------------------------------
 " let g:EasyMotion_keys = 'ASDFGHJKL;QWERTYUIOPZXCVBNM'
 let g:EasyMotion_keys = 'SDFAGHJKL;QWERTYUIOPZXCVBNM'
-let g:EasyMotion_grouping = 2
+let g:EasyMotion_grouping = 1
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_shade = 0
