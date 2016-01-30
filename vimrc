@@ -25,6 +25,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'Chiel92/vim-autoformat'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " Generates tmuxline configs. This doesn't have to be used unless you want to switch
 " tmuxline skins on the line or integrate them with vim.
 Plug 'edkolev/tmuxline.vim'
