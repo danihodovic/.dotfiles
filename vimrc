@@ -13,7 +13,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'mhinz/vim-startify'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 " Run linters or makefiles
@@ -79,6 +78,8 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'JamshedVesuna/vim-markdown-preview'
 " Show hex codes in css files
 Plug 'ap/vim-css-color'
+" Plug 'mhinz/vim-startify'
+" Plug 'vim-scripts/conomode.vim'
 "-----------------------------------------
 call plug#end()
 
