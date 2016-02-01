@@ -232,8 +232,7 @@ endif
 "-----------------------------------------
 "Make sure to place color schemes after the vundle runtime has been declared
 syntax enable
-colorscheme badwolf "Monokai
-set guifont=Monaco
+colorscheme badwolf
 filetype plugin indent on
 "-----------------------------------------
 " Search
