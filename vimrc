@@ -318,8 +318,6 @@ fu! FzfRootSearch()
   call fzf#run(opts)
 endfu
 
-nnoremap <leader>t :call FzfTagsCustom('n')<cr>
-vnoremap <leader>t :call FzfTagsCustom(visualmode())<cr>
 " TODO: Add prompt option like the git status helper
 fu! FzfTagsCustom(mode)
   if a:mode ==# 'n'
@@ -486,6 +484,7 @@ let g:EclimCompletionMethod = 'omnifunc'
 "-----------------------------------------
 " TernJS
 "-----------------------------------------
+autocmd FileType javascript nnoremap <buffer> <leader>t :TernType<cr>
 " Replace the built in gd with Tern for JS files
 autocmd FileType javascript noremap <silent><buffer>gd :call TernOrDucktape()<cr>
 fu! TernOrDucktape()
