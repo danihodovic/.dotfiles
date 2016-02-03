@@ -16,10 +16,10 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 " Run linters or makefiles
-Plug 'benekastah/neomake'
+Plug 'benekastah/neomake', {'commit': 'fd61e6fbeaf018a13b9767febaf98ffc54e3f1a9'}
 Plug 'majutsushi/tagbar'
 " Show git diffs
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter', {'commit': '1067294cdc379be1deb56074a093b49a8303308f'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'Chiel92/vim-autoformat'
 Plug 'terryma/vim-multiple-cursors'
@@ -855,6 +855,7 @@ endfu!
 function! FindRequireJSFile(...)
 python << EOF
 # This is a clusterfuck, but surprisingly works for JS
+# TODO: Log when it can't find results
 import vim
 import os
 import subprocess
