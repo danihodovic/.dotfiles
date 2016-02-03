@@ -863,9 +863,9 @@ import json
 REQUIRE_REGEX = 'require\(["\'](.*)["\']\)'
 
 def findRelativeRequire(requirePath):
-  filename = None
-  if not requirePath.endswith('.js'):
-    filename = requirePath + '.js'
+  filename = requirePath
+  if not filename.endswith('.js'):
+    filename = filename + '.js'
 
   # Node permits you to require('./foo') where foo is a directory that contains index.js
   # Node will always prioritize a file named file.js rather than file/index.js
