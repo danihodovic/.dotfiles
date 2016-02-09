@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "Setting global git settings"
 
 git config --global user.name "Dani Hodovic"
@@ -23,7 +24,7 @@ if [ ! -L "${gitconfig}/ignore" ]; then
   echo "Symlinking global gitignore"
   if [ ! -d "$gitconfig" ]; then
     echo "Missing xdg git config directory, mkdir ${gitconfig}"
-    mkdir -p ${gitconfig}
+    mkdir -p "${gitconfig}"
   fi
   ln -s ~/.dotfiles/conf/global-gitignore "${gitconfig}/ignore"
 fi
