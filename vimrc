@@ -80,6 +80,7 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'ap/vim-css-color'
 " Plug 'mhinz/vim-startify'
 " Plug 'vim-scripts/conomode.vim'
+" Plug 'wellle/tmux-complete.vim'
 "-----------------------------------------
 call plug#end()
 
