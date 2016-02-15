@@ -18,6 +18,8 @@ conf_files = {
     CONF_DIR + '/tern-config':          HOME_DIR + '/.tern-config',
     CONF_DIR + '/ctags':                HOME_DIR + '/.ctags',
     CONF_DIR + '/agignore':             HOME_DIR + '/.agignore',
+    CONF_DIR + '/gitconfig':            HOME_DIR + '/.gitconfig',
+    CONF_DIR + '/global-gitignore':     HOME_DIR + '/.config/git/ignore',
     # File not in conf dir
     HOME_DIR + '/.dotfiles/zshrc':      HOME_DIR + '/.zshrc',
     HOME_DIR + '/.dotfiles/vimrc':      HOME_DIR + '/.config/nvim/init.vim',
