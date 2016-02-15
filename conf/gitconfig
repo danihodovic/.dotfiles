@@ -1,0 +1,24 @@
+[user]
+email = dani.hodovic@gmail.com
+name = Dani Hodovic
+
+[core]
+editor = nvim
+
+[pull]
+rebase = true
+
+[branch]
+autosetuprebase = always
+
+[rerere]
+enabled = true
+
+[push]
+default = upstream
+
+[alias]
+graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+[diff]
+algorithm = histogram
