@@ -33,7 +33,6 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'SirVer/ultisnips'
 Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
-Plug 'kana/vim-textobj-function'
 Plug 'nathanaelkane/vim-indent-guides'
 " Switch tabs between vim and tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -82,6 +81,8 @@ Plug 'ap/vim-css-color'
 " Plug 'mhinz/vim-startify'
 " Plug 'vim-scripts/conomode.vim'
 " Plug 'wellle/tmux-complete.vim'
+" Plug 'kana/vim-textobj-function'
+" Plug 'thinca/vim-textobj-function-javascript'
 "-----------------------------------------
 call plug#end()
 
