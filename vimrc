@@ -870,16 +870,18 @@ def findRelativeRequire(requirePath):
   if not filename.endswith('.js'):
     filename = filename + '.js'
 
-  # Node permits you to require('./foo') where foo is a directory that contains index.js
-  # Node will always prioritize a file named file.js rather than file/index.js
-  if not os.path.isfile(filename):
-    filename = requirePath + '/index.js'
-
   currDir = os.path.dirname(vim.current.buffer.name)
-  relativePath = os.path.join(currDir, filename)
-  realpath = os.path.realpath(relativePath)
+  realpath = os.path.realpath(os.path.join(currDir, filename))
+
   if os.path.isfile(realpath):
     return realpath
+  else:
+    filename = requirePath + '/index.js'
+
+    relativePath = os.path.join(currDir, filename)
+    realpath = os.path.realpath(relativePath)
+    if os.path.isfile(realpath):
+      return realpath
 
 def findNodeModulesRequire(filename):
   if filename.endswith('.js'):
