@@ -362,7 +362,7 @@ command! -nargs=* AgJSDefinition :call AgJSFnDefinition(<q-args>)
 " An ag matcher which find most usages of a <keyword> except for function calls.
 " ctags is probably a better solution but ctags doesnt seem reliable at all times
 fu! AgJSFnDefinition(query) range
-  let word = a:queryparam
+  let word = a:query
   if len(word) == 0
     let word = expand('<cword>')
   endif
