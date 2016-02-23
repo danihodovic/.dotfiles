@@ -59,7 +59,7 @@ Plug 'ruanyl/vim-fixmyjs'
 " Tern requires npm install in the repo to work. Don't install the default version in npm, it's
 " slow. Instead install the latest master. Save that dependency so that the update doesn't revert
 " backwards by using npm.
-Plug 'marijnh/tern_for_vim', {'do': 'npm install ternjs/tern --save && npm update'}
+Plug 'marijnh/tern_for_vim', {'do': 'cd $NVIM_DIR/plugged/tern_for_vim && npm install ternjs/tern'}
 Plug 'dani-h/typescript-vim' " Typescript Syntax
 Plug 'clausreinke/typescript-tools.vim' "Typescript Autocomplete
 Plug 'kchmck/vim-coffee-script'
