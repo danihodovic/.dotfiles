@@ -1,3 +1,4 @@
+" TODO: Add ag search within git files. Not node_modules
 "-----------------------------------------
 " Vim Plug
 "-----------------------------------------
@@ -375,10 +376,11 @@ fu! AgJSFnDefinition(query) range
     " foo: , {foo:
     let regex3 = '((\s+|\{)' . word . ':)'
     " foo = , baz.foo =
-    let regex4 = '((\s+|\.)' . word . '\s*=)'
-    " Add function defintion - function foo() {}
+    let regex4 = '((\s+|\.)' . word . '\s*=\s+)'
+    " function foo
+    let regex5 = '(function\s+' . word . '\s*)'
     " Add es6 class - foo() {}
-    let regex = printf('%s|%s|%s|%s', regex1, regex2, regex3, regex4)
+    let regex = printf('%s|%s|%s|%s|%s', regex1, regex2, regex3, regex4, regex5)
     call FzfAgCustom(regex)
   endif
 endfu
