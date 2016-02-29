@@ -342,7 +342,8 @@ fu! FzfAgCustom(queryparam)
 
   let ag_opts = 'ag --nogroup --column --color -U "%s"'
   let source = printf(ag_opts, query)
-  call fzf#vim#ag(query, {'options': '-e', 'source': source, 'up': '~40%'})
+  let options = '--tac -e'
+  call fzf#vim#ag(query, {'options': options, 'source': source, 'up': '~40%'})
 endfu
 
 nnoremap <leader>gs :call FzfGitStatus()<cr>
