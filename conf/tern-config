@@ -4,7 +4,11 @@
   ],
   "loadEagerly": [],
   "plugins": {
-    "node": {}
+    "node": {},
+    "doc_comment": null,
+    "modules": {
+      "dontLoad": true
+    }
   },
   "dontLoad": []
 }
