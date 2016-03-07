@@ -8,6 +8,7 @@ export GOROOT=/opt/go
 export GOPATH=/opt/go_pkg
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH=$PATH:/opt/eclipse
+export PATH=$PATH:${HOME}/.dasht/bin
 # Virtualenv
 export WORKON_HOME=${HOME}/.virtualenvs
 # Virtualenv
