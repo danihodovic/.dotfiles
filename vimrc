@@ -309,7 +309,7 @@ let g:fzf_layout = {'up': '~40%'}
 nnoremap = :Files<cr>
 nnoremap b :Buffers<cr>
 nnoremap <C-h> :History:<cr>
-nnoremap <leader>mr :History<cr>
+nnoremap r :History<cr>
 
 command! FzfRootSearch call FzfRootSearch()
 fu! FzfRootSearch()
