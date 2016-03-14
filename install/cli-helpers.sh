@@ -5,7 +5,10 @@ read -p "Install tldr? User defined summaries of man pages. Requires NodeJS [y/n
 read -p "Install how2? Retrieves answers from stackoverflow. Requires NodeJS [y/n] " INSTALL_HOW2
 
 case $INSTALL_DASHT in
-  y|Y) git clone git@github.com:sunaku/dasht.git "${HOME}/.dasht"
+  y|Y)
+    sudo apt-get install sqlite3 w3m wget
+    git clone git@github.com:sunaku/dasht.git "${HOME}/.dasht"
+    ;;
 esac
 
 case $INSTALL_TLDR in
