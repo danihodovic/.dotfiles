@@ -1,5 +1,4 @@
 {
-//Restrictive
 "bitwise": true,
 "curly": false,
 "eqeqeq": true,
@@ -20,18 +19,12 @@
 "maxstatements": false,
 "maxcomplexity": 20,
 "maxlen": 120,
-
-
-//Relaxing, didn't include all most are dumb
 "asi": false,
 "debug": false,
-"esnext": true,
 "newcap": false,
 "sub": true,
 "loopfunc": true,
 "bitwise": false,
-
-//Environment
 "browser": true,
 "couch": false,
 "devel": true,
@@ -45,6 +38,6 @@
 "rhino": false,
 "worker": true,
 "wsh": false,
-"yui": false
-
+"yui": false,
+"esversion": 6
 }
