@@ -146,6 +146,9 @@ Or, if running X11, you can use `setxkbmap`
 Run this perl script: https://github.com/robertknight/konsole/blob/master/tests/color-spaces.pl
 Also see: https://gist.github.com/XVilka/8346728
 
+## Disable gnome-terminal confirmation when closing window
+	/org/gnome/terminal/legacy -> uncheck the confirm-close
+
 ## Adding true color support to gnome terminal
 http://askubuntu.com/questions/512525/how-to-enable-24bit-true-color-support-in-gnome-terminal
 
