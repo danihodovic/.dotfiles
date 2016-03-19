@@ -79,6 +79,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'JamshedVesuna/vim-markdown-preview'
 " Show hex codes in css files
 Plug 'ap/vim-css-color'
+Plug 'tpope/vim-endwise.git'
 " Plug 'mhinz/vim-startify'
 " Plug 'vim-scripts/conomode.vim'
 " Plug 'wellle/tmux-complete.vim'
