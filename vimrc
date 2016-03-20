@@ -170,7 +170,7 @@ cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 cnoremap <C-h> <Esc>:History<cr>
 " Easier semicolon insertion
-autocmd FileType javascript,typescript,css noremap ;; :call InsertSemicolons()<CR>
+autocmd FileType javascript,typescript,css,perl noremap ;; :call InsertSemicolons()<CR>
 " Don't map this to tab since it blocks the jumplist. There is no way to remap <C-i> or <tab>
 " programatically it seems
 nnoremap <space> %
