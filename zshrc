@@ -32,8 +32,6 @@ export NODE_PROJECTS_DIR=${HOME}/repos/lab/repos
 # Antigen
 source $ANTIGEN_PATH
 antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-autosuggestions
-bindkey '^l' autosuggest-accept
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle djui/alias-tips
 
