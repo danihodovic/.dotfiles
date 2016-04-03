@@ -38,7 +38,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 " Switch tabs between vim and tmux
 Plug 'christoomey/vim-tmux-navigator'
 " Sets active window focus
-Plug 'blueyed/vim-diminactive'
+" Plug 'blueyed/vim-diminactive'
 " Enable focus events inside nvim so that FocusGained and FocusLost autocmds work in terminal vim
 " vim-fugitive plugin uses FocusGained for refreshing git branch in status line
 " vim-gitgutter uses FocusGained for refreshing
