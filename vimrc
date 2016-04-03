@@ -50,6 +50,7 @@ Plug 'junegunn/vim-oblique'
 " Aligns text
 Plug 'junegunn/vim-easy-align'
 Plug 'itchyny/calendar.vim'
+Plug 'itchyny/vim-cursorword'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
