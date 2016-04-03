@@ -22,4 +22,6 @@ sudo apt-get install \
     vnstat \
     gparted \
     shellcheck \
+    rofi \
+    ranger \
     -y
