@@ -111,7 +111,6 @@ vi-append-x-selection () {
   RBUFFER="$(xclip -o)$RBUFFER"
 }
 zle -N vi-append-x-selection
-bindkey -M vicmd p vi-append-x-selection
 
 tmux-copy-mode() {
   if [ -n "$TMUX" ]; then
@@ -119,7 +118,6 @@ tmux-copy-mode() {
   fi
 }
 zle -N tmux-copy-mode
-bindkey -M vicmd v tmux-copy-mode
 
 # Key bindings. Wanna find weird keycodes? use cat
 # Fix backspace delete in vi-mode
@@ -132,6 +130,13 @@ bindkey -M vicmd Q vi-beginning-of-line
 bindkey -M vicmd $ noop
 bindkey -M vicmd W end-of-line-no-whitespace
 
+bindkey -M vicmd p vi-append-x-selection
+bindkey -M vicmd P vi-append-x-selection
+
+bindkey -M vicmd v tmux-copy-mode
+
+# Reverse scrolling shift+tab
+bindkey -M menuselect '^[[Z' reverse-menu-complete
 # Aliases
 # ------------
 alias cd.="cd .."
