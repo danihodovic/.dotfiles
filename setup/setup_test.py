@@ -2,6 +2,7 @@
 import os
 import unittest
 from unittest.mock import patch
+
 import setup
 
 HOME_DIR = os.path.expandvars('${HOME}')
@@ -20,6 +21,8 @@ conf_files = {
     CONF_DIR + '/agignore':             HOME_DIR + '/.agignore',
     CONF_DIR + '/gitconfig':            HOME_DIR + '/.gitconfig',
     CONF_DIR + '/global-gitignore':     HOME_DIR + '/.config/git/ignore',
+    CONF_DIR + '/Xresources':           HOME_DIR + '/.Xresources',
+    CONF_DIR + '/i3-config':            HOME_DIR + '/.i3/config',
     # File not in conf dir
     HOME_DIR + '/.dotfiles/zshrc':      HOME_DIR + '/.zshrc',
     HOME_DIR + '/.dotfiles/vimrc':      HOME_DIR + '/.config/nvim/init.vim',
@@ -27,19 +30,19 @@ conf_files = {
 }
 
 class TestMain(unittest.TestCase):
+    @patch('os.remove')
     @patch('os.makedirs')
     @patch('os.symlink')
-    def test_main_link(self, os_symlink, os_makedirs):
-        setup.main(False)
+    def test_main_link(self, os_symlink, os_makedirs, os_remove):
+        setup.main()
         for path, link in conf_files.items():
+            os_remove.assert_any_call(link)
             os_makedirs.assert_any_call(os.path.dirname(path), exist_ok=True)
             os_symlink.assert_any_call(path, link)
 
-    @patch('os.unlink')
-    def test_main_unlink(self, os_unlink):
-        setup.main(True)
-        for _, link in conf_files.items():
-            os_unlink.assert_any_call(link)
+        assert(os_remove.call_count == len(conf_files))
+        assert(os_makedirs.call_count == len(conf_files))
+        assert(os_symlink.call_count == len(conf_files))
 
 
 if __name__ == '__main__':

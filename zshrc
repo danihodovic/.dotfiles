@@ -212,5 +212,10 @@ fi
 if [[ "$DESKTOP_SESSION" == "cinnamon" ]]; then
   echo 'Using cinnamon settings...'
   alias lock='cinnamon-screensaver-command -l'
+elif [ "$DESKTOP_SESSION" = "i3" ]; then
+  echo 'Using i3...'
+  alias lock=i3lock
+  keychain $HOME/.ssh/id_rsa
+  source $HOME/.keychain/$HOST-sh
 fi
 

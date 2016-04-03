@@ -3,13 +3,12 @@
 Script to setup all of the symlinks
 '''
 import os
-import argparse
 
-def _unlink(link):
+def _removeLink(link):
     msg = ""
     try:
         msg = "Removing:" + link
-        os.unlink(link)
+        os.remove(link)
     except OSError as err:
         msg = str(err)
     finally:
@@ -26,7 +25,7 @@ def _createSymlink(src, dst):
     finally:
         print(msg)
 
-def main(clean):
+def main():
     HOME_DIR = os.path.expandvars('${HOME}')
     CONF_DIR = HOME_DIR + '/.dotfiles/conf'
 
@@ -44,6 +43,8 @@ def main(clean):
         CONF_DIR + '/agignore':             HOME_DIR + '/.agignore',
         CONF_DIR + '/gitconfig':            HOME_DIR + '/.gitconfig',
         CONF_DIR + '/global-gitignore':     HOME_DIR + '/.config/git/ignore',
+        CONF_DIR + '/i3-config':            HOME_DIR + '/.i3/config',
+        CONF_DIR + '/Xresources':           HOME_DIR + '/.Xresources',
         # File not in conf dir
         HOME_DIR + '/.dotfiles/zshrc':      HOME_DIR + '/.zshrc',
         HOME_DIR + '/.dotfiles/vimrc':      HOME_DIR + '/.config/nvim/init.vim',
@@ -51,16 +52,10 @@ def main(clean):
     }
 
     for path, symlink in conf_files.items():
-        if clean:
-            _unlink(symlink)
-        else:
-            os.makedirs(os.path.dirname(path), exist_ok=True)
-            _createSymlink(path, symlink)
+        _removeLink(symlink)
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        _createSymlink(path, symlink)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--clean', dest="clean", action="store_true",
-                        help="Delete existing symlinks")
-    args = parser.parse_args()
-    main(args.clean)
+    main()
 

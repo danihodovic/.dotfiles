@@ -36,7 +36,7 @@ Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'nathanaelkane/vim-indent-guides'
 " Switch tabs between vim and tmux
-Plug 'christoomey/vim-tmux-navigator'
+" Plug 'christoomey/vim-tmux-navigator'
 " Sets active window focus
 " Plug 'blueyed/vim-diminactive'
 " Enable focus events inside nvim so that FocusGained and FocusLost autocmds work in terminal vim
@@ -203,10 +203,21 @@ fu! SwitchLast()
 endfu
 "Window movement
 let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> gwlh :call I3VIM_WindowFocus('h')<cr>
+nnoremap <silent> gwll :call I3VIM_WindowFocus('l')<cr>
+nnoremap <silent> gwlj :call I3VIM_WindowFocus('j')<cr>
+nnoremap <silent> gwlk :call I3VIM_WindowFocus('k')<cr>
+
+func! I3VIM_WindowFocus(direction)
+  let oldw = winnr()
+  silent exe 'wincmd ' . a:direction
+  let neww = winnr()
+  if oldw == neww
+    let directionMap = {'h': 'left', 'j': 'down', 'k': 'up', 'l': 'right'}
+    silent exe '!i3-msg -q focus ' . directionMap[a:direction]
+  endif
+endfunction
+
 nnoremap + :vertical resize +10<cr>
 nnoremap _ :vertical resize -10<cr>
 " Buffer operations similar to browsers
