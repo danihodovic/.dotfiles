@@ -43,12 +43,16 @@ antigen apply
 # External scripts
 # ------------
 # Source these before our own `bindkeys` so that we can override stuff
+# ------------
+autoload bashcompinit && bashcompinit
+scripts=${HOME}/.scripts
 scripts=(
   ${HOME}/.fzf.zsh
-  ${HOME}/.fzf/shell/key-bindings.zsh
+  $scripts/fzf/shell/key-bindings.zsh
   ${HOME}/.dotfiles/fzf-helpers.zsh
-  ${HOME}/.nvm/nvm.sh
+  $scripts/i3_completion.sh
   /usr/local/bin/aws_zsh_completer.sh
+  $scripts/nvm/nvm.sh
 )
 
 for script in $scripts; do
