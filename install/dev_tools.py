@@ -1,5 +1,7 @@
 #!/usr/bin/env python3.5
 
+# TODO: Add `pip install neovim`
+
 import subprocess
 import os
 import urllib.request
@@ -112,7 +114,6 @@ if __name__ == '__main__':
     ins_neovim   = input('Install neovim? [y/n]')
     ins_antigen  = input('Install antigen? [y/n]')
     ins_vim_plug = input('Install vim-plug? [y/n]')
-    ins_antigen  = input('Install antigen? [y/n]')
     ins_tpm      = input('Install tpm? [y/n]')
     ins_knack    = input('Install knack font? [y/n]')
     choose_py    = input('Set py3 as default? [y/n]')
