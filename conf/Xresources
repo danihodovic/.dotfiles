@@ -3,12 +3,13 @@
 ! ------------------------------
 URxvt*termName: rxvt-unicode
 
-Xft.dpi:        76
+Xft.dpi:        72
 Xft.antialias:  true
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
 
-URxvt.font: xft:Knack-Regular-Nerd-Font-Complete:pixelsize=8:size=8
+URxvt.font: xft:Knack-Bold-Nerd-Font-Complete:pixelsize=8:size=8
+URxvt.letterSpace: -2
 
 urxvt*scrollBar:  false
 urxvt*fading:  10
