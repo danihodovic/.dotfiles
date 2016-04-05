@@ -6,6 +6,7 @@ set -u
 
 sudo apt-get update
 sudo apt-get install \
+    rxvt-unicode-256color \
     zsh \
     tmux \
     silversearcher-ag \
@@ -24,4 +25,5 @@ sudo apt-get install \
     shellcheck \
     rofi \
     ranger \
+    keychain \
     -y
