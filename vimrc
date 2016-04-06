@@ -861,7 +861,9 @@ fu! ReformatTextWidth() range
   call inputsave()
   let currWidth = &textwidth
   let width = input('Enter textwidth>')
-  let &textwidth = width
+  if IsNumber(width)
+    let &textwidth = width
+  endif
   " Calling gvgq won't work because in normal mode it would
   " get the last visual selection which we don't want
   normal v
@@ -971,3 +973,6 @@ if m:
 EOF
 endfunction
 
+fu! IsNumber(val)
+  return type(a:val) == 0
+endfu
