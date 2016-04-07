@@ -1,8 +1,46 @@
+#!/ur/bin/env zsh
+#
 # There is an interesting study featured in "Thinking Fast and Slow" where they had two groups in a
 # pottery class. The first group would have the entirety of their grade based on the creativity of a
 # single piece they submit. The second group was graded on only the total number of pounds of clay
 # they threw.
-set INC_APPEND_HISTORY
+
+# Start a tmux session for new terminals. This does not apply if we're
+# inside a tmux session already or if tmux is not installed.
+start-tmux-if-exist() {
+  if [ -z $TMUX ]; then
+    hash tmux
+    if [ $? = 0 ]; then
+      tmux -2
+    fi
+  fi
+}
+
+if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
+    echo 'Using Linux zshrc settings...'
+    setxkbmap -option caps:swapescape
+    start-tmux-if-exist
+
+elif [[ "$(uname)" == "Darwin" ]]; then
+    echo 'Using Mac OS zshrc settings...'
+    # Use GNU coreutils instead of bsd ones
+    export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
+
+else
+    echo 'Unknown OS' $(uname)
+fi
+
+
+if [[ "$DESKTOP_SESSION" == "cinnamon" ]]; then
+  echo 'Using cinnamon settings...'
+  alias lock='cinnamon-screensaver-command -l'
+elif [ "$DESKTOP_SESSION" = "i3" ]; then
+  echo 'Using i3...'
+  alias lock=i3lock
+  keychain $HOME/.ssh/id_rsa
+  source $HOME/.keychain/$HOST-sh
+fi
+
 # Paths
 # ------------
 # Export paths before sourcing anything
@@ -185,39 +223,4 @@ man() {
     fi
   fi
 }
-
-# Start a tmux session for new terminals. This does not apply if we're
-# inside a tmux session already or if tmux is not installed.
-start-tmux-if-exist() {
-  if [ -z $TMUX ]; then
-    hash tmux
-    if [ $? = 0 ]; then
-      tmux
-    fi
-  fi
-}
-
-if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
-    echo 'Using Linux zshrc settings...'
-    setxkbmap -option caps:swapescape
-    start-tmux-if-exist
-
-elif [[ "$(uname)" == "Darwin" ]]; then
-    echo 'Using Mac OS zshrc settings...'
-    # Use GNU coreutils instead of bsd ones
-    export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
-
-else
-    echo 'Unknown OS' $(uname)
-fi
-
-if [[ "$DESKTOP_SESSION" == "cinnamon" ]]; then
-  echo 'Using cinnamon settings...'
-  alias lock='cinnamon-screensaver-command -l'
-elif [ "$DESKTOP_SESSION" = "i3" ]; then
-  echo 'Using i3...'
-  alias lock=i3lock
-  keychain $HOME/.ssh/id_rsa
-  source $HOME/.keychain/$HOST-sh
-fi
 
