@@ -65,7 +65,7 @@ Plug 'marijnh/tern_for_vim', {'do': 'cd $NVIM_DIR/plugged/tern_for_vim && npm in
 Plug 'dani-h/typescript-vim' " Typescript Syntax
 Plug 'clausreinke/typescript-tools.vim' "Typescript Autocomplete
 Plug 'kchmck/vim-coffee-script'
-Plug 'davidhalter/jedi-vim' "Python
+Plug 'davidhalter/jedi-vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
 " Show matching html/xml tags
@@ -620,13 +620,8 @@ let g:neomake_typescript_tsc_maker = {
       \ '%C%\s%\+%m'
       \ }
 
-let g:neomake_go_enabled_makers = []
-
 " Do not enable this for zsh. shellcheck does not support zsh
-autocmd BufWritePost *.js,*.py,*.sh,*.bash,bashrc Neomake
-" Seems like neomake only builds one file using `:Neomake` so imports are ignored, `Neomake!` works
-" but builds an executable which can be annoying.
-autocmd BufWritePost *.go Neomake!
+autocmd BufWritePost *.js,*.py,*.sh,*.bash,bashrc,*.lua,*.go Neomake
 "-----------------------------------------
 " AutoFormat
 "-----------------------------------------
