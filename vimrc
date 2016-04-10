@@ -35,6 +35,7 @@ Plug 'SirVer/ultisnips'
 Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'tmhedberg/matchit'
 " Switch tabs between vim and tmux
 " Plug 'christoomey/vim-tmux-navigator'
 " Sets active window focus
@@ -175,8 +176,8 @@ cnoremap <C-h> <Esc>:History<cr>
 autocmd FileType javascript,typescript,css,perl noremap ;; :call InsertSemicolons()<CR>
 " Don't map this to tab since it blocks the jumplist. There is no way to remap <C-i> or <tab>
 " programatically it seems
-nnoremap <space> %
-vnoremap <space> %
+nmap <space> %
+vmap <space> %
 " Stay in visual mode when indenting
 vnoremap < <gv
 vnoremap > >gv
