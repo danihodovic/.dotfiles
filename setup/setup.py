@@ -4,7 +4,7 @@ Script to setup all of the symlinks
 '''
 import os
 
-def _removeLink(link):
+def _removeLink(link, verbose=True):
     msg = ""
     try:
         msg = "Removing:" + link
@@ -12,10 +12,11 @@ def _removeLink(link):
     except OSError as err:
         msg = str(err)
     finally:
-        print(msg)
+        if verbose:
+            print(msg)
 
 
-def _createSymlink(src, dst):
+def _createSymlink(src, dst, verbose = True):
     msg = ""
     try:
         msg = "[Success ] Creating symlink from: {} to: {}".format(src, dst)
@@ -23,9 +24,10 @@ def _createSymlink(src, dst):
     except OSError as err:
         msg = str(err)
     finally:
-        print(msg)
+        if verbose:
+            print(msg)
 
-def main():
+def main(verbose=True):
     HOME_DIR = os.path.expandvars('${HOME}')
     CONF_DIR = HOME_DIR + '/.dotfiles/conf'
 
@@ -52,9 +54,9 @@ def main():
     }
 
     for path, symlink in conf_files.items():
-        _removeLink(symlink)
+        _removeLink(symlink, verbose)
         os.makedirs(os.path.dirname(path), exist_ok=True)
-        _createSymlink(path, symlink)
+        _createSymlink(path, symlink, verbose)
 
 if __name__ == '__main__':
     main()

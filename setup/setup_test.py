@@ -34,7 +34,7 @@ class TestMain(unittest.TestCase):
     @patch('os.makedirs')
     @patch('os.symlink')
     def test_main_link(self, os_symlink, os_makedirs, os_remove):
-        setup.main()
+        setup.main(verbose=False)
         for path, link in conf_files.items():
             os_remove.assert_any_call(link)
             os_makedirs.assert_any_call(os.path.dirname(path), exist_ok=True)
