@@ -468,10 +468,7 @@ let g:ycm_filetype_blacklist = {'notes': 1, 'markdown': 0, 'unite': 1, 'tagbar':
 " Avoid preview to use completion  engine lookups, otherwise it tends to lag.
 " Avoid longest as it disables you from typing
 set completeopt=menuone
-" YCM shows completions opts in the preview window
-let g:ycm_add_preview_to_completeopt = 0
-" YCM closes preview window on esc
-let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_min_num_of_chars_for_completion = 1
 
 let g:ycm_complete_in_comments = 1
 
