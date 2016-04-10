@@ -9,14 +9,12 @@ set INC_APPEND_HISTORY
 # Fixes colors for lxde-terminal. Useful for vim colorschemes
 export TERM=xterm-256color
 export GOROOT=/opt/go
-export GOPATH=/opt/go_pkg
+export GOPATH=${HOME}/repos/go_pkg
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH=$PATH:/opt/eclipse
 export PATH=$PATH:${HOME}/.dasht/bin
 # Virtualenv
 export WORKON_HOME=${HOME}/.virtualenvs
-# Virtualenv
-export PROJECT_HOME=${HOME}/Devel
 export EDITOR=nvim
 export PYTHONSTARTUP=~/.pythonrc
 
