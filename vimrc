@@ -50,11 +50,12 @@ Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-oblique'
 " Aligns text
 Plug 'junegunn/vim-easy-align'
-Plug 'itchyny/calendar.vim'
 Plug 'itchyny/vim-cursorword'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-lua-ftplugin'
 " JS/TS/CS
 " JS syntax
 Plug 'othree/yajs.vim'
@@ -718,6 +719,11 @@ let vim_markdown_preview_github=1
 " Dont display images and preview on key
 let vim_markdown_preview_toggle=0
 let vim_markdown_preview_hotkey='<leader>pr'
+"-----------------------------------------
+" vim-lua-ftplugin
+"-----------------------------------------
+let g:lua_complete_omni = 1
+let g:lua_complete_dynamic = 0
 "-----------------------------------------
 " Random funcs
 "-----------------------------------------
