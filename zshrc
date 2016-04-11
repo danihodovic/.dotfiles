@@ -66,9 +66,6 @@ export dotfiles=${HOME}/.dotfiles
 export priv=${HOME}/.priv
 export plugged=${NVIM_DIR}/plugged
 
-# Wrk
-export NODE_PROJECTS_DIR=${HOME}/repos/lab/repos
-
 # Antigen
 source $ANTIGEN_PATH
 antigen bundle zsh-users/zsh-completions
