@@ -56,8 +56,8 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # split in vertical orientation
-bindsym $mod+z exec "i3-msg split v && $Terminal"
-bindsym $mod+x exec "i3-msg split h && $Terminal"
+bindsym $mod+x exec "i3-msg split v && $Terminal"
+bindsym $mod+c exec "i3-msg split h && $Terminal"
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -76,7 +76,7 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 # focus the child container
-bindsym $mod+c focus child
+bindsym $mod+z focus child
 
 # sound volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
