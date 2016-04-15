@@ -56,8 +56,8 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # split in vertical orientation
-bindsym $mod+x exec "i3-msg split v && $Terminal"
-bindsym $mod+c exec "i3-msg split h && $Terminal"
+bindsym $mod+c exec "i3-msg split v && $Terminal"
+bindsym $mod+x exec "i3-msg split h && $Terminal"
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
