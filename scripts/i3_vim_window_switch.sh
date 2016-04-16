@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 logfile=/tmp/i3_vim_window_switch.log
 direction=$1
-active=$(xprop -id $(xdotool getwindowfocus) WM_NAME)
+active=$(xprop -id "$(xdotool getwindowfocus)" WM_NAME)
 
 is_vim_window_regex='vim"$'
 
@@ -17,8 +17,7 @@ if [[ $active =~ $is_vim_window_regex ]]; then
     left) key='h' ;;
     right) key='l' ;;
   esac
-  cmd="g+w+l+${key}"
-  xdotool getactivewindow key "$cmd"
+  xdotool getactivewindow key F6 o+w+e+"$key"
 else
   i3-msg focus "$direction"
 fi

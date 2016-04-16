@@ -206,10 +206,15 @@ fu! SwitchLast()
 endfu
 "Window movement
 let g:tmux_navigator_no_mappings = 1
-noremap <silent> gwlh :call I3VIM_WindowFocus('h')<cr>
-noremap <silent> gwll :call I3VIM_WindowFocus('l')<cr>
-noremap <silent> gwlj :call I3VIM_WindowFocus('j')<cr>
-noremap <silent> gwlk :call I3VIM_WindowFocus('k')<cr>
+imap <silent> <F6>oweh <esc>:call I3VIM_WindowFocus('h')<cr>
+imap <silent> <F6>owel <esc>:call I3VIM_WindowFocus('l')<cr>
+imap <silent> <F6>owej <esc>:call I3VIM_WindowFocus('j')<cr>
+imap <silent> <F6>owek <esc>:call I3VIM_WindowFocus('k')<cr>
+
+noremap <silent> <F6>oweh <esc>:call I3VIM_WindowFocus('h')<cr>
+noremap <silent> <F6>owel <esc>:call I3VIM_WindowFocus('l')<cr>
+noremap <silent> <F6>owej <esc>:call I3VIM_WindowFocus('j')<cr>
+noremap <silent> <F6>owek <esc>:call I3VIM_WindowFocus('k')<cr>
 
 func! I3VIM_WindowFocus(direction)
   let oldw = winnr()
