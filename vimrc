@@ -36,14 +36,8 @@ Plug 'dani-h/vim-dsnippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tmhedberg/matchit'
-" Switch tabs between vim and tmux
-" Plug 'christoomey/vim-tmux-navigator'
 " Sets active window focus
 " Plug 'blueyed/vim-diminactive'
-" Enable focus events inside nvim so that FocusGained and FocusLost autocmds work in terminal vim
-" vim-fugitive plugin uses FocusGained for refreshing git branch in status line
-" vim-gitgutter uses FocusGained for refreshing
-Plug 'tmux-plugins/vim-tmux-focus-events'
 " Required by vim-oblique
 Plug 'junegunn/vim-pseudocl'
 " Colors current search result differently and sets nohlsearch on cursor move
@@ -87,7 +81,6 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'evanmiller/nginx-vim-syntax'
 " Plug 'mhinz/vim-startify'
 " Plug 'vim-scripts/conomode.vim'
-" Plug 'wellle/tmux-complete.vim'
 " Plug 'kana/vim-textobj-function'
 " Plug 'thinca/vim-textobj-function-javascript'
 "-----------------------------------------
@@ -205,7 +198,6 @@ fu! SwitchLast()
   endif
 endfu
 "Window movement
-let g:tmux_navigator_no_mappings = 1
 imap <silent> <F6>oweh <esc>:call I3VIM_WindowFocus('h')<cr>
 imap <silent> <F6>owel <esc>:call I3VIM_WindowFocus('l')<cr>
 imap <silent> <F6>owej <esc>:call I3VIM_WindowFocus('j')<cr>
