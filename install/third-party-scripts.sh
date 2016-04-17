@@ -40,9 +40,8 @@ esac
 case $install_i3_completions in
   y)
     if [[ ! -f "$scripts/i3_completion.sh" ]]; then
-      curl -flO  \
-        https://raw.githubusercontent.com/cornerman/i3-completion/master/i3_completion.sh > \
-        "$scripts/i3_completion.sh"
+      url=https://raw.githubusercontent.com/cornerman/i3-completion/master/i3_completion.sh
+      curl $url -o "$scripts/i3_completion.sh"
     else
       echo "i3-completions already installed"
     fi
