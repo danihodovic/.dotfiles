@@ -146,4 +146,4 @@ exec --no-startup-id ~/.dotfiles/scripts/xkbmap.sh
 # Ethernet applet
 exec --no-startup-id nm-applet
 # Power manager
-exec –no-startup-id sleep 3 && xfce4-power-manager
+exec --no-startup-id sleep 3 && xfce4-power-manager
