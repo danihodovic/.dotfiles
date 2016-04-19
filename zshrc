@@ -46,6 +46,7 @@ fi
 # Export paths before sourcing anything
 # Fixes colors for lxde-terminal. Useful for vim colorschemes
 export TERM=xterm-256color
+export PATH=$PATH:${HOME}/.local/bin
 export GOROOT=/opt/go
 export GOPATH=${HOME}/repos/go_pkg
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
@@ -88,7 +89,7 @@ scripts=(
   $scripts/fzf/shell/key-bindings.zsh
   ${HOME}/.dotfiles/fzf-helpers.zsh
   $scripts/i3_completion.sh
-  /usr/local/bin/aws_zsh_completer.sh
+  ${HOME}/.local/bin/aws_zsh_completer.sh
   $scripts/nvm/nvm.sh
 )
 
