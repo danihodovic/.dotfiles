@@ -322,31 +322,18 @@ autocmd FileType lua                    setlocal  shiftwidth=2 tabstop=2 expandt
 "-----------------------------------------
 let g:fzf_layout = {'up': '~40%'}
 nnoremap = :Files<cr>
+nnoremap - :FzfLocateRoot<cr>
 nnoremap b :Buffers<cr>
 nnoremap <C-h> :History:<cr>
 nnoremap r :History<cr>
 nnoremap <leader>gs :GitFiles?<cr>
 
-command! FzfRootSearch call FzfRootSearch()
-fu! FzfRootSearch()
-  let source = 'locate /'
-  let opts = {
-    \ 'source': source,
-    \ 'options': '--prompt "Files>" --ansi',
-    \ 'sink': 'e',
-    \ 'up': '40%' }
-  call fzf#run(opts)
-endfu
-
-" TODO: Add prompt option like the git status helper
-fu! FzfTagsCustom(mode)
-  if a:mode ==# 'n'
-    execute "Tags"
-  elseif a:mode ==# 'v'
-    let selectedText = shellescape(Get_visual_selection())
-    let opts = '-q ' . selectedText
-    call fzf#vim#tags({'options': opts, 'up': '~40%'})
-  endif
+command! FzfLocateRoot call FzfLocateRoot()
+fu! FzfLocateRoot()
+  let opts = {}
+  let opts.source = 'locate /'
+  let opts.options = '--prompt ">" --ansi' 
+  call fzf#run(fzf#vim#wrap(opts))
 endfu
 
 command! -nargs=* AG call FzfAgCustom(<q-args>)
