@@ -198,6 +198,7 @@ alias gc='fcheckout'
 alias gr='git rebase -i `flog`'
 alias gb='git branch -avv'
 alias gcommit='git commit -v'
+alias ga='git add'
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
 
