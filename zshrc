@@ -190,15 +190,14 @@ alias aptupgrade="sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get
 alias setxkbmapcaps="setxkbmap -option caps:swapescape"
 alias open='xdg-open'
 alias vi='nvim'
-alias gs='git status'
+alias gs='git status -sb'
 alias gd='git diff'
-alias gl='git log'
-alias gbl='tig blame'
-alias ga='git add'
+alias gl='git log --decorate'
 alias gf='git fetch'
-alias gr='git rebase'
-alias gb='git branch -avv'
 alias gc='fcheckout'
+alias gr='git rebase -i `flog`'
+alias gb='git branch -avv'
+alias gcommit='git commit -v'
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
 
