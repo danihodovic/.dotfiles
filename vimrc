@@ -325,6 +325,7 @@ nnoremap = :Files<cr>
 nnoremap b :Buffers<cr>
 nnoremap <C-h> :History:<cr>
 nnoremap r :History<cr>
+nnoremap <leader>gs :GitFiles?<cr>
 
 command! FzfRootSearch call FzfRootSearch()
 fu! FzfRootSearch()
@@ -361,20 +362,6 @@ fu! FzfAgCustom(queryparam)
   call fzf#vim#ag(query, {'options': options, 'source': source, 'up': '~40%'})
 endfu
 
-nnoremap <leader>gs :call FzfGitStatus()<cr>
-" Using the custom fzf#run see https://github.com/junegunn/fzf#fzfrunoptions
-fu! FzfGitStatus()
-  let source = 'git diff --name-only'
-  let opts = {
-        \ 'source': source,
-        \ 'options': '--prompt "Git changed files>" --ansi',
-        \ 'sink': 'e',
-        \ 'dir': '.',
-        \ 'up': '40%' }
-  call fzf#run(opts)
-endfu
-
-autocmd filetype javascript nnoremap <buffer> <leader>agf :call AgJSFnDefinition()<cr>
 command! -nargs=* AgJSDefinition :call AgJSFnDefinition(<q-args>)
 " An ag matcher which find most usages of a <keyword> except for function calls.
 " ctags is probably a better solution but ctags doesnt seem reliable at all times
