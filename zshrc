@@ -148,7 +148,7 @@ zle -N noop
 
 # Paste from clipboard
 vi-append-x-selection () {
-  RBUFFER="$(xclip -o)$RBUFFER"
+  RBUFFER=" $(xclip -o)$RBUFFER"
 }
 zle -N vi-append-x-selection
 
