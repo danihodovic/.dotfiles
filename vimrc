@@ -700,6 +700,9 @@ let g:lua_complete_dynamic = 0
 " Random funcs
 "-----------------------------------------
 fun! <SID>StripTrailingWhitespaces()
+  if &ft =~ 'vim'
+    return
+  endif
   let l = line(".")
   let c = col(".")
   %s/\s\+$//e
