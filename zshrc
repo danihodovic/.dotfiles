@@ -44,8 +44,6 @@ fi
 # Paths
 # ------------
 # Export paths before sourcing anything
-# Fixes colors for lxde-terminal. Useful for vim colorschemes
-export TERM=xterm-256color
 export PATH=$PATH:${HOME}/.local/bin
 export GOROOT=/opt/go
 export GOPATH=${HOME}/repos/go_pkg
