@@ -41,6 +41,9 @@ elif [ "$DESKTOP_SESSION" = "i3" ]; then
   source $HOME/.keychain/$HOST-sh
 fi
 
+# Settings
+setopt HIST_IGNORE_ALL_DUPS
+
 # Paths
 # ------------
 # Export paths before sourcing anything
