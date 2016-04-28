@@ -33,7 +33,7 @@ class TestMain(unittest.TestCase):
     @patch('os.remove')
     @patch('os.makedirs')
     @patch('os.symlink')
-    def test_main_link(self, os_symlink, os_makedirs, os_remove):
+    def test_main(self, os_symlink, os_makedirs, os_remove):
         setup.main(verbose=False)
         for path, link in conf_files.items():
             os_remove.assert_any_call(link)
@@ -43,6 +43,9 @@ class TestMain(unittest.TestCase):
         assert(os_remove.call_count == len(conf_files))
         assert(os_makedirs.call_count == len(conf_files))
         assert(os_symlink.call_count == len(conf_files))
+
+    def test_dict_equal(self):
+        assert(set(conf_files.items()) == set(setup.conf_files.items()))
 
 
 if __name__ == '__main__':
