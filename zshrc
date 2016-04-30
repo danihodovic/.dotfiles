@@ -150,10 +150,15 @@ noop () {}
 zle -N noop
 
 # Paste from clipboard
-vi-append-x-selection () {
-  RBUFFER=" $(xclip -o)$RBUFFER"
+vi-append-x-selection-before () {
+  RBUFFER="$(xclip -o)$RBUFFER"
 }
-zle -N vi-append-x-selection
+vi-append-x-selection-after () {
+  CURSOR=$((CURSOR+1))
+  RBUFFER="$(xclip -o)$RBUFFER"
+}
+zle -N vi-append-x-selection-before
+zle -N vi-append-x-selection-after
 
 tmux-copy-mode() {
   if [ -n "$TMUX" ]; then
@@ -173,8 +178,8 @@ bindkey -M vicmd Q vi-beginning-of-line
 bindkey -M vicmd $ noop
 bindkey -M vicmd W end-of-line-no-whitespace
 
-bindkey -M vicmd p vi-append-x-selection
-bindkey -M vicmd P vi-append-x-selection
+bindkey -M vicmd P vi-append-x-selection-before
+bindkey -M vicmd p vi-append-x-selection-after
 
 bindkey -M vicmd v tmux-copy-mode
 
