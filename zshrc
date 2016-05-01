@@ -78,7 +78,6 @@ antigen-use oh-my-zsh
 antigen theme robbyrussell/oh-my-zsh themes/agnoster
 
 antigen apply
-
 # External scripts
 # ------------
 # Source these before our own `bindkeys` so that we can override stuff
@@ -130,21 +129,6 @@ end-of-line-no-whitespace() {
     zle vi-backward-word-end
 }
 zle -N end-of-line-no-whitespace
-
-zle-line-init zle-keymap-select() {
-  case $KEYMAP in
-    viins|main)  print -nR $'\e[5 q';;
-    vicmd)       print -nR $'\e[2 q';;
-  esac
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
-
-# When a new command is entered, return to the block cursor
-zle-line-finish () {
-  print -nR $'\e[2 q'
-}
-zle -N zle-line-finish
 
 noop () {}
 zle -N noop
