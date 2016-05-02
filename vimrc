@@ -315,6 +315,7 @@ autocmd FileType php                    setlocal  shiftwidth=4 tabstop=4 expandt
 autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandtab
 autocmd FileType ruby                   setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType lua                    setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType sshconfig              setlocal  shiftwidth=4 tabstop=4 expandtab
 "-----------------------------------------
 " Plugin specific settings
 "-----------------------------------------
