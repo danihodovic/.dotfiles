@@ -77,7 +77,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle djui/alias-tips
 
 antigen-use oh-my-zsh
-antigen theme robbyrussell/oh-my-zsh themes/agnoster
+antigen theme robbyrussell/oh-my-zsh themes/steeef
 
 antigen apply
 # External scripts
