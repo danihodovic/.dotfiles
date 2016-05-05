@@ -45,6 +45,9 @@ Plug 'junegunn/vim-oblique'
 " Aligns text
 Plug 'junegunn/vim-easy-align'
 Plug 'itchyny/vim-cursorword'
+Plug 'kana/vim-textobj-user'                          " Add additional text objects
+Plug 'kana/vim-textobj-function'                      " Add function based text objects
+Plug 'thinca/vim-textobj-function-javascript'         " Add JS function object
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
