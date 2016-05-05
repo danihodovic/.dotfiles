@@ -42,8 +42,10 @@ elif [ "$DESKTOP_SESSION" = "i3" ]; then
 fi
 
 # Settings
-setopt HIST_IGNORE_ALL_DUPS
-
+setopt hist_ignore_all_dups
+setopt append_history
+setopt no_inc_append_history
+setopt no_share_history
 # Paths
 # ------------
 # Export paths before sourcing anything
