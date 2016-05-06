@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 logfile=/tmp/i3_vim_window_switch.log
+
+log () {
+  echo "$@" >> "$logfile"
+}
+
 direction=$1
 active=$(xprop -id "$(xdotool getwindowfocus)" WM_NAME)
 
@@ -7,7 +12,7 @@ is_vim_window_regex='vim?"$'
 
 shopt -s nocasematch;
 
-echo "$active" >> "$logfile"
+log "$(date) - active window: ${active}"
 
 if [[ $active =~ $is_vim_window_regex ]]; then
   key=''
