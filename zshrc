@@ -37,8 +37,8 @@ if [[ "$DESKTOP_SESSION" == "cinnamon" ]]; then
 elif [ "$DESKTOP_SESSION" = "i3" ]; then
   echo 'Using i3...'
   alias lock=i3lock
-  keychain $HOME/.ssh/id_rsa
-  source $HOME/.keychain/$HOST-sh
+  # keychain $HOME/.ssh/id_rsa
+  # source $HOME/.keychain/$HOST-sh
 fi
 
 # Settings

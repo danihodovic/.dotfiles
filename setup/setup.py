@@ -9,6 +9,7 @@ CONF_DIR = HOME_DIR + '/.dotfiles/conf'
 
 # TODO: Add checks if I move conf files dirs
 conf_files = {
+    CONF_DIR + '/profile':              HOME_DIR + '/.profile',
     CONF_DIR + '/inputrc':              HOME_DIR + '/.inputrc',
     CONF_DIR + '/tmux.conf':            HOME_DIR + '/.tmux.conf',
     CONF_DIR + '/sqliterc':             HOME_DIR + '/.sqliterc',

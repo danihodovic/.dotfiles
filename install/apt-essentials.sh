@@ -25,5 +25,6 @@ sudo apt-get install \
     shellcheck \
     rofi \
     ranger \
-    keychain \
+    # Use gnome-settings daemon instead of keychain because of reasons
+    gnome-settings-daemon \
     -y
