@@ -92,8 +92,8 @@ call plug#end()
 "-----------------------------------------
 " General settings
 "-----------------------------------------
-" Cursor shape betwen block and ibeam.
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+" Cursor shape betwen block and ibeam. Does not work for lxterminal, xfce4-terminal
+" let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " Silences C-Q, C-S and allows vim to catch them
 silent !stty -ixon > /dev/null 2>/dev/null
 " All y/p operations use clipboard by default
