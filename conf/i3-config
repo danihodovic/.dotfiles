@@ -11,7 +11,7 @@
 
 set $Alt Mod1
 set $Win Mod4
-set $Terminal urxvt
+set $Terminal xfce4-terminal
 
 set $mod Mod1
 
