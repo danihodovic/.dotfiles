@@ -147,3 +147,6 @@ exec --no-startup-id ~/.dotfiles/scripts/xkbmap.sh
 exec --no-startup-id nm-applet
 # Power manager
 exec --no-startup-id sleep 3 && xfce4-power-manager
+# Sync x selection and primary (needs to be configured in the app indicator)
+exec --no-startup-id parcellite
+

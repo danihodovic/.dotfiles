@@ -6,7 +6,13 @@ set -u
 
 sudo apt-get update
 sudo apt-get install \
-    rxvt-unicode-256color \
+    # Sync primary + x clipboard by configuring the app indicator
+    parcellite \
+    # Why xfce4-terminal?
+    # 1. Can copy paste with both C-c and mouse
+    # 2. Can seamlessly use the xdotool script to switch windows with i3/vim
+    # 3. Doesn't have to reload xrdb ~/.Xresources to change fonts
+    xfce4-terminal \
     zsh \
     tmux \
     silversearcher-ag \
