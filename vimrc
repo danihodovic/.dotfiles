@@ -104,6 +104,8 @@ set clipboard=unnamedplus
 set title
 " Line number
 set number
+" Dont auto resize windows (good for i3)
+set winfixwidth
 " Relative line numbers for faster movement
 set norelativenumber
 " Disables the bottom bar which shows modes and allows plugins (tern - types) to display information
