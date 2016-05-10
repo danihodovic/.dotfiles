@@ -12,6 +12,7 @@
 set $Alt Mod1
 set $Win Mod4
 set $Terminal xfce4-terminal
+set $Browser google-chrome
 
 set $mod Mod1
 
@@ -35,6 +36,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec $Terminal
+bindsym $mod+Shift+Return exec $Browser
 
 # kill focused window
 bindsym $mod+Shift+q kill
