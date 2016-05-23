@@ -49,6 +49,7 @@ Plug 'kana/vim-textobj-user'                          " Add additional text obje
 Plug 'kana/vim-textobj-function'                      " Add function based text objects
 Plug 'thinca/vim-textobj-function-javascript'         " Add JS function object
 Plug 'FooSoft/vim-argwrap'
+Plug 'sunaku/vim-dasht'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
@@ -698,6 +699,20 @@ let vim_markdown_preview_github=1
 " Dont display images and preview on key
 let vim_markdown_preview_toggle=0
 let vim_markdown_preview_hotkey='<leader>pr'
+"-----------------------------------------
+" vim-dasht
+"-----------------------------------------
+let docsets_by_filetype = {
+  \ 'elixir': ['erlang'],
+  \ 'cpp': ['boost', '^c$', 'OpenGL', 'OpenCV_C'],
+  \ 'html': ['css', 'js', 'bootstrap', 'jquery'],
+  \ 'javascript': ['jasmine', 'nodejs', 'grunt', 'gulp', 'jade', 'react', 'underscore'],
+  \ 'python': ['(num|sci)py', 'pandas', 'sqlalchemy', 'twisted', 'jinja'],
+  \ }
+nnoremap K :call call('Dasht', [expand('<cword>')]
+      \ + get(docsets_by_filetype, &filetype, []))<Return>
+vnoremap K y:call call('Dasht', [getreg(0)]
+      \ + get(docsets_by_filetype, &filetype, []))<Return>
 "-----------------------------------------
 " vim-lua-ftplugin
 "-----------------------------------------
