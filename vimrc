@@ -48,6 +48,7 @@ Plug 'itchyny/vim-cursorword'
 Plug 'kana/vim-textobj-user'                          " Add additional text objects
 Plug 'kana/vim-textobj-function'                      " Add function based text objects
 Plug 'thinca/vim-textobj-function-javascript'         " Add JS function object
+Plug 'FooSoft/vim-argwrap'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
