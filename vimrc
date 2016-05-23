@@ -101,15 +101,15 @@ call plug#end()
 silent !stty -ixon > /dev/null 2>/dev/null
 " All y/p operations use clipboard by default
 set clipboard=unnamedplus
+set nobackup
+set nowritebackup
+set noswapfile
 " Enable spelling
 " set spell spelllang=en_us
-" Sets the title of the terminal window
 set title
-" Line number
 set number
 " Dont auto resize windows (good for i3)
 set winfixwidth
-" Relative line numbers for faster movement
 set norelativenumber
 " Disables the bottom bar which shows modes and allows plugins (tern - types) to display information
 " See https://github.com/marijnh/tern_for_vim/blob/master/doc/tern.txt#L135
