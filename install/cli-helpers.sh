@@ -6,7 +6,7 @@ read -p "Install how2? Retrieves answers from stackoverflow. Requires NodeJS [y/
 
 case $INSTALL_DASHT in
   y|Y)
-    sudo apt-get install sqlite3 w3m wget
+    sudo apt-get install sqlite3 w3m wget -y
     git clone git@github.com:sunaku/dasht.git "${HOME}/.dasht"
     ;;
 esac
