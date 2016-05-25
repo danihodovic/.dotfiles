@@ -196,8 +196,7 @@ inoremap <M-q> <esc>lcb
 " beginning of a line it has nowhere to move.
 inoremap <expr> <M-w> col('.') == 1 ? '<esc>cw' : '<esc>lcw'
 " Switch to last buffer or other buffer if last was deleted
-nnoremap <M-Tab> :call SwitchLast()<cr>
-inoremap <M-Tab> <esc>:call SwitchLast()<cr>
+nnoremap m :call SwitchLast()<cr>
 fu! SwitchLast()
   if buflisted(bufnr('#'))
     buf #
