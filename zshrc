@@ -1,4 +1,4 @@
-#!/ur/bin/env zsh
+#!/usr/bin/env zsh
 #
 # There is an interesting study featured in "Thinking Fast and Slow" where they had two groups in a
 # pottery class. The first group would have the entirety of their grade based on the creativity of a
@@ -67,8 +67,9 @@ export ANTIGEN_PATH=${HOME}/.antigen/antigen.zsh
 
 # Ease of use
 export dotfiles=${HOME}/.dotfiles
-export priv=${HOME}/.priv
 export plugged=${NVIM_DIR}/plugged
+export vimrc=${HOME}/.dotfiles/vimrc
+export zshrc=${HOME}/.dotfiles/zshrc
 
 # Antigen
 source $ANTIGEN_PATH
