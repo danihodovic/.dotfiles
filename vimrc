@@ -974,11 +974,4 @@ fu! IsNumber(val)
   return type(a:val) == 0
 endfu
 
-" Force save files that require root permission
-" *autocmd readonly is to stop warning+insert delay on root files
-cmap w!! W|
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
-augroup MyNoReadOnly
-  autocmd!
-  autocmd BufRead * setlocal noreadonly
-augroup END
