@@ -60,6 +60,22 @@ Reboot
 If changing the system wide files you don't have to deal with startup scripts as you have to do with
 -options.
 
+## Customizing a 68 key mechanical keyboard (Magicforce) to swap caps, escape, tilde, grave
+The keyboard has only 68 keys and therefore maps Esc, tilde and grave into one key. By default this
+forces you to use the modifier and shift keys for tilde which we dont want.
+
+Add the following rule in /usr/share/X11/xkb/symbols/capslock
+
+    partial hidden alphanumeric_keys
+    xkb_symbols "swapescape" {
+        key <CAPS> { [ Escape ] };
+        key <ESC>  { [ asciitilde ] };
+        key <TLDE> { [    asciitilde, grave ]       };
+    }
+
+and call
+
+    setxkbamp -option swapescape
 
 # Lubuntu:
 
@@ -163,15 +179,22 @@ github.com/metalelf0/gnome-terminal-colors
 ## Useful commands for loading/unloading kernel drivers
 
 identify wifi card
+
 	# Look for `Kernel driver in use: <here>` on the last line
 	lspci -vvnn | grep -A 9 Network
+
 list all PCI devices
+
 	# -vv is very verbose. Prints useful info nicely
 	# Look for the Network category
 	lspci -vv
+
 remove kernel module
+
 	sudo modprobe -r <module>
+
 list loaded kernel modules
+
 	lsmod
 
 # Mac
@@ -245,6 +268,7 @@ kernel 4.4.0-040400rc7-generic.
 TODO: Make this a script
 
 Install the Linux kernel headers (the patch depends on these).
+
     # You might need to install the linux headers
     # sudo apt-get install linux-headers-$(uname -r)
 
@@ -283,8 +307,11 @@ sudo apt-get install nfs-kernel-server
 
 Vagrant issue when copying a Mac setup to Linux:
 replace
+
     config.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['actimeo=1'], nfs_version: 4
+
 with
+
     config.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['actimeo=1,v3']
 
 ## HIDPI support
