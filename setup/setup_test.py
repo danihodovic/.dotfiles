@@ -39,7 +39,7 @@ class TestMain(unittest.TestCase):
         setup.main(verbose=False)
         for path, link in conf_files.items():
             os_remove.assert_any_call(link)
-            os_makedirs.assert_any_call(os.path.dirname(path), exist_ok=True)
+            os_makedirs.assert_any_call(os.path.dirname(link), exist_ok=True)
             os_symlink.assert_any_call(path, link)
 
         assert(os_remove.call_count == len(conf_files))

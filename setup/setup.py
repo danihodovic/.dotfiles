@@ -37,7 +37,7 @@ def _removeLink(link, verbose=True):
         msg = "Removing:" + link
         os.remove(link)
     except OSError as err:
-        msg = str(err)
+        msg = 'Error during _removeLink: ' + str(err)
     finally:
         if verbose:
             print(msg)
@@ -49,7 +49,7 @@ def _createSymlink(src, dst, verbose = True):
         msg = "[Success ] Creating symlink from: {} to: {}".format(src, dst)
         os.symlink(src, dst)
     except OSError as err:
-        msg = str(err)
+        msg = 'Error during _createSymlink: ' + str(err)
     finally:
         if verbose:
             print(msg)
@@ -57,7 +57,7 @@ def _createSymlink(src, dst, verbose = True):
 def main(verbose=True):
     for path, symlink in conf_files.items():
         _removeLink(symlink, verbose)
-        os.makedirs(os.path.dirname(path), exist_ok=True)
+        os.makedirs(os.path.dirname(symlink), exist_ok=True)
         _createSymlink(path, symlink, verbose)
 
 if __name__ == '__main__':
