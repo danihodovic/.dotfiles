@@ -33,6 +33,9 @@ And add this to ~/.gnupg/gpg-agent.conf
 
     pinentry-program /usr/bin/pinentry-curses
 
+For i3 it is recomennded you use pinentry-curses as pinentry-gtk-2 and pinentry-gnome3 seem to
+break.
+
 
 ## Cinnamon
 

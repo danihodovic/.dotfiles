@@ -55,6 +55,8 @@ export GOPATH=${HOME}/repos/go_pkg
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH=$PATH:/opt/eclipse
 export PATH=$PATH:${HOME}/.dasht/bin
+# Required for pinentry-ncurses
+export GPG_TTY=$(tty)
 # Virtualenv
 export WORKON_HOME=${HOME}/.virtualenvs
 export EDITOR=nvim
