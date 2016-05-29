@@ -1,3 +1,26 @@
+## Using gpg-agent and signing commits with gpg
+
+This section assumes you have generated a private gpg key.
+
+gpg and gpg-agent seem to be very difficult to get going. One possible reason for this is that the
+default gpg installed on Ubuntu systems (16.04 at the time of writing) is version 1.40 while
+gpg-agent is v2.1. gpg2 seems to be far more user friendly and directed at desktops while gpg is
+directed at servers.
+
+In order to avoid typing in your gpg passphrase for every commit install gpgv2 and gpg-agent (which
+should also be v2).
+
+    sudo apt-get install gnupg2
+    sudo apt-get install gpg-agent
+
+Configure git to use gpg2 by default
+
+    git config --global gpg.program gpg2
+
+Also remember to have your gpg key email match the email set for git
+
+    git config --global user.email <email>
+
 ## Cinnamon
 
 ### Disable alt-` to switch window groups
