@@ -1,4 +1,4 @@
-## Using gpg-agent and signing commits with gpg
+# Using gpg-agent and signing commits with gpg
 
 This section assumes you have generated a private gpg key.
 
@@ -20,6 +20,19 @@ Configure git to use gpg2 by default
 Also remember to have your gpg key email match the email set for git
 
     git config --global user.email <email>
+
+
+Note: If you don't want to use a pinentry with GUI to store your password, such as pinentry-curses
+you will have to expose a tty for the gpg-agent.
+
+Add the following to your .zshrc
+
+    export GPG_TTY=`tty`
+
+And add this to ~/.gnupg/gpg-agent.conf
+
+    pinentry-program /usr/bin/pinentry-curses
+
 
 ## Cinnamon
 
