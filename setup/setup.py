@@ -4,6 +4,11 @@ Script to setup all of the symlinks
 '''
 import os
 
+import sys
+if not sys.version.startswith('3.5'):
+    print('Error: Use python3.5')
+    sys.exit(1)
+
 HOME_DIR = os.path.expandvars('${HOME}')
 CONF_DIR = HOME_DIR + '/.dotfiles/conf'
 
