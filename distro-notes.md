@@ -36,6 +36,9 @@ And add this to ~/.gnupg/gpg-agent.conf
 For i3 it is recomennded you use pinentry-curses as pinentry-gtk-2 and pinentry-gnome3 seem to
 break.
 
+Also note that using gnome-keyring-daemon seems to interfere with the gpg-daemon; even if it's only
+used for ssh.
+
 
 ## Cinnamon
 
