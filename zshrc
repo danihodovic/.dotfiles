@@ -20,7 +20,7 @@ if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     echo 'Using Linux zshrc settings...'
     setxkbmap -option caps:swapescape
     start-tmux-if-exist
-    keychain ${HOME}/.ssh/id_rsa
+    keychain ${HOME}/.ssh/id_rsa -q
     source ${HOME}/.keychain/mbp-sh
 
 elif [[ "$(uname)" == "Darwin" ]]; then
