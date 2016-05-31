@@ -37,7 +37,11 @@ For i3 it is recomennded you use pinentry-curses as pinentry-gtk-2 and pinentry-
 break.
 
 Also note that using gnome-keyring-daemon seems to interfere with the gpg-daemon; even if it's only
-used for ssh.
+used for ssh. An alternative is to use keychain for the ssh keys as it doesn't conflict with
+gpg-agent. However if you use keychain you will have to add the following lines in your .zshrc
+
+    keychain ${HOME}/.ssh/id_rsa
+    source ${HOME}/.keychain/mbp-sh
 
 
 ## Cinnamon
