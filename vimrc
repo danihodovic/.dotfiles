@@ -53,6 +53,7 @@ Plug 'sunaku/vim-dasht'
 "-----------------------------------------
 " Lang specific
 "-----------------------------------------
+Plug 'danihodovic/vim-node-require', {'branch': 'dev'}
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-lua-ftplugin'
 " JS/TS/CS
