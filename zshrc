@@ -21,7 +21,6 @@ if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     setxkbmap -option caps:swapescape
     start-tmux-if-exist
     keychain ${HOME}/.ssh/id_rsa -q
-    source ${HOME}/.keychain/mbp-sh
 
 elif [[ "$(uname)" == "Darwin" ]]; then
     echo 'Using Mac OS zshrc settings...'
@@ -39,8 +38,6 @@ if [[ "$DESKTOP_SESSION" == "cinnamon" ]]; then
 elif [ "$DESKTOP_SESSION" = "i3" ]; then
   echo 'Using i3...'
   alias lock=i3lock
-  # keychain $HOME/.ssh/id_rsa
-  # source $HOME/.keychain/$HOST-sh
 fi
 
 # Settings
