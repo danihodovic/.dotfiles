@@ -8,7 +8,7 @@ log () {
 direction=$1
 active=$(xprop -id "$(xdotool getwindowfocus)" WM_NAME)
 
-is_vim_window_regex='vim?"$'
+is_vim_window_regex='^vim?"$'
 
 shopt -s nocasematch;
 
