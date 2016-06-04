@@ -370,3 +370,13 @@ Fix C-h for tmux and Neovim, see https://github.com/neovim/neovim/issues/2048
 	infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 	tic $TERM.ti
 
+#Installing sopcast on Ubuntu 14/15/16
+
+    dpkg --add-architecture i386
+    apt-get update
+    apt-get install libstdc++5:i386 curl -y
+
+    curl -O http://download.sopcast.com/download/sp-auth.tgz
+    tar -xf sp-auth.tgz
+    ./sp-auth/sp-sc-auth
+
