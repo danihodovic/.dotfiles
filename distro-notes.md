@@ -380,3 +380,24 @@ Fix C-h for tmux and Neovim, see https://github.com/neovim/neovim/issues/2048
     tar -xf sp-auth.tgz
     ./sp-auth/sp-sc-auth
 
+#Configuring ec2 for ssh access
+1. Launch an ec2 instance in the aws console
+2. Create a security group which allows inbound port 22 in the aws console
+3. Genetate a keypair in the aws console
+4. Download the keypair
+
+Optional, configure ~/.ssh/config
+
+    Host ec2
+        HostName xxxxxxx
+        Port 22
+        User ubuntu # This is important!
+        IdentityFile ~/.ssh/your-file.pem
+
+Optional, change the default ssh port
+
+1. Ssh into your ec2 instance
+2. Edit /etc/ssh/sshd_config. Change the port setting to your desired port
+3. Edit the security group in the aws console to allow the desired port
+4. Restart sshd `service ssh restart`
+
