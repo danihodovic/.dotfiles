@@ -43,6 +43,16 @@ gpg-agent. However if you use keychain you will have to add the following lines 
     keychain ${HOME}/.ssh/id_rsa
     source ${HOME}/.keychain/mbp-sh
 
+# Set maximum cache time on gpg-agent
+"Set it to a year or so – say, 34560000 seconds (400 days) – and you should be fine:"
+
+    default-cache-ttl 34560000
+
+Note: In GnuPG 2.1 and above, the maximum-cache-ttl option was renamed to max-cache-ttl without
+further changes.
+
+http://superuser.com/questions/624343/keep-gnupg-credentials-cached-for-entire-user-session
+
 
 ## Cinnamon
 
