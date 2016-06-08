@@ -723,6 +723,7 @@ let g:lua_complete_dynamic = 0
 "-----------------------------------------
 " Random funcs
 "-----------------------------------------
+command! StripTrailingWhitespaces :call <SID>StripTrailingWhitespaces()
 fun! <SID>StripTrailingWhitespaces()
   if &ft =~ 'vim'
     return
