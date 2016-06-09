@@ -178,6 +178,7 @@ cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 " Easier semicolon insertion
 autocmd FileType javascript,typescript,css,perl,nginx noremap ;; :call InsertSemicolons()<CR>
+autocmd FileType markdown setlocal spell spelllang=en_us
 " Don't map this to tab since it blocks the jumplist. There is no way to remap <C-i> or <tab>
 " programatically it seems
 nmap <space> %
@@ -259,6 +260,8 @@ endif
 "Make sure to place color schemes after the vundle runtime has been declared
 syntax enable
 colorscheme badwolf
+hi clear SpellBad
+hi SpellBad ctermfg=DarkRed term=undercurl
 filetype plugin indent on
 "-----------------------------------------
 " Search
