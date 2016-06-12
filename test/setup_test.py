@@ -1,11 +1,14 @@
 #!/usr/bin/env python3.5
 import os
 import unittest
+import sys
 from unittest.mock import patch
+
+repo_root = os.path.expanduser('~/.dotfiles')
+sys.path.append(repo_root)
 
 import setup
 
-import sys
 if not sys.version.startswith('3.5'):
     print('Error: Use python3.5')
     sys.exit(1)
