@@ -109,7 +109,7 @@ After swap:
 
 Clear the cache: `sudo rm /var/lib/xkb/*.xkm`
 
-Reconfigure xkb-data: `sudo  dpkg-reconfigure xkb-data`
+Reconfigure xkb-data: `sudo dpkg-reconfigure xkb-data`
 
 Reboot
 
@@ -118,23 +118,34 @@ If changing the system wide files you don't have to deal with startup scripts as
 
 ## Customizing a 68 key mechanical keyboard (Magicforce) to swap caps, escape, tilde, grave
 The keyboard has only 68 keys and therefore maps Esc, tilde and grave into one key. By default this
-forces you to use the modifier and shift keys for tilde which we dont want.
+forces you to use the modifier and shift keys for tilde which we don't want.
 
 Add the following rule in /usr/share/X11/xkb/symbols/capslock
 
     partial hidden alphanumeric_keys
-    xkb_symbols "swapescape" {
+    xkb_symbols "swapescape68keys" {
         key <CAPS> { [ Escape ] };
         key <ESC>  { [ asciitilde ] };
         key <TLDE> { [    asciitilde, grave ]       };
-    }
+    };
 
-and call
+Clear the cache:
 
-    setxkbamp -option swapescape
+    sudo rm /var/lib/xkb/*.xkm
+
+Reconfigure xkb-data:
+
+    sudo  dpkg-reconfigure xkb-data
+
+Reboot
+
+Enable it with:
+
+    setxkbamp -option swapescape68keys
+
+# Figure out how to recompile and reload xkb settings
 
 # Lubuntu:
-
 ## How to add shortkeys:
 Run `openbox --reconfigure` to generate the xml file.
 Add to `.conf/openbox/lubuntu-rc.xml` in keyboard entries
