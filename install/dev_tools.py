@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 import sys
@@ -72,7 +72,7 @@ def install_apt_pkg(pkg_name):
     pkg = cache[pkg_name]
 
     if pkg.is_installed:
-        print("{pkg_name} already installed".format(pkg_name=pkg_name))
+        print("Package: {pkg_name} is already installed".format(pkg_name=pkg_name))
     else:
         pkg.mark_install()
         cache.commit()
@@ -104,20 +104,20 @@ if __name__ == '__main__':
         print('Error: Python version {} detected, use at least version {}', version, min_version)
         sys.exit(1)
 
+    ins_neovim   = input('Install neovim? [y/n]')
     ins_zsh      = input('Install zsh? [y/n]')
     ins_tmux     = input('Install tmux? [y/n]')
-    ins_neovim   = input('Install neovim? [y/n]')
     ins_antigen  = input('Install antigen? [y/n]')
     ins_vim_plug = input('Install vim-plug? [y/n]')
+
+    if ins_neovim == 'y':
+        install_neovim()
 
     if ins_zsh == 'y':
         install_zsh()
 
     if ins_tmux == 'y':
         install_tmux()
-
-    if ins_neovim == 'y':
-        install_neovim()
 
     if ins_antigen == 'y':
         install_antigen()
