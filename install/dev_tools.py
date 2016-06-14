@@ -17,7 +17,9 @@ def install_neovim():
     lsb_codename = lsb_release.get_lsb_information()['CODENAME']
     filename = '/etc/apt/sources.list.d/neovim-ppa.list'
     line = 'deb http://ppa.launchpad.net/neovim-ppa/unstable/ubuntu {0} main\n'.format(lsb_codename)
+    print('Using ppa: {}'.format(line))
     f = open(filename, 'w')
+    os.chmod(filename, 0o644)
     f.write(line)
     f.close()
 
