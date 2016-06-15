@@ -3,10 +3,12 @@
 Script to setup all of the symlinks
 '''
 import os
-
 import sys
-if not sys.version.startswith('3.5'):
-    print('Error: Use python3.5')
+
+min_version = 3.4
+version = float(sys.version[0:3])
+if version < min_version:
+    print('Error: Python version {} detected, use at least version {}', version, min_version)
     sys.exit(1)
 
 HOME_DIR = os.path.expandvars('${HOME}')
