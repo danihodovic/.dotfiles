@@ -4,5 +4,5 @@ dependencies:
 
 test:
   override:
-    - sudo python3 -m unittest discover -s test/integration/ -p '*_test.py'
     - python3 -m unittest discover -s test/unit/ -p '*_test.py'
+    - sudo python3 -m unittest discover -s test/integration/ -p '*_test.py'
