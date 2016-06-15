@@ -1,0 +1,4 @@
+test:
+  override:
+    - sudo python3 test/integration/*-test.py
+    - python3 test/unit/*-test.py
