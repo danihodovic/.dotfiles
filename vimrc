@@ -145,6 +145,7 @@ set autoread
 " directory, then the parent directory, then the parent of the parent, and so on'
 set tags=./tags;
 set diffopt=filler,vertical
+spell spelllang=en_us
 "-----------------------------------------
 " User defined commands
 "-----------------------------------------
@@ -178,7 +179,6 @@ cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 " Easier semicolon insertion
 autocmd FileType javascript,typescript,css,perl,nginx noremap ;; :call InsertSemicolons()<CR>
-autocmd FileType markdown setlocal spell spelllang=en_us
 " Don't map this to tab since it blocks the jumplist. There is no way to remap <C-i> or <tab>
 " programatically it seems
 nmap <space> %
