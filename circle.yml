@@ -1,3 +1,7 @@
+dependencies:
+  pre:
+    - sudo apt-get install python3-apt
+
 test:
   override:
     - sudo python3 test/integration/*-test.py
