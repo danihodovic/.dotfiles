@@ -21,15 +21,28 @@ class IntegrationSuite(unittest.TestCase):
 
     def test_install_zsh(self):
         dev_tools.install_zsh()
-        cache = apt.cache.Cache()
-        pkg = cache['zsh']
-        self.assertTrue(pkg.is_installed)
+        self.assertTrue(is_installed_pkg('zsh'))
 
     def test_install_tmux(self):
         dev_tools.install_tmux()
-        cache = apt.cache.Cache()
-        pkg = cache['tmux']
-        self.assertTrue(pkg.is_installed)
+        self.assertTrue(is_installed_pkg('tmux'))
+
+    def test_install_neovim(self):
+        dev_tools.install_neovim()
+        self.assertTrue(is_installed_pkg('neovim'))
+
+    ###############################
+    # Other
+    ###############################
+
+    def test_install_antigen(self):
+        pass
+
+def is_installed_pkg(pkg_name):
+    cache = apt.cache.Cache()
+    pkg = cache[pkg_name]
+    return pkg.is_installed
+
 
 if __name__ == '__main__':
     unittest.main()
