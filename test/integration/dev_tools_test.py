@@ -43,6 +43,10 @@ class IntegrationSuite(unittest.TestCase):
         dev_tools.install_antigen()
         os.path.isfile(os.path.expandvars('${HOME}/.antigen/antigen.zsh'))
 
+    def test_install_vim_plug(self):
+        dev_tools.install_vim_plug()
+        os.path.isfile(os.path.expandvars('${HOME}/.config/nvim/autoload/plug.vim'))
+
 
 def is_installed_pkg(pkg_name):
     cache = apt.cache.Cache()
