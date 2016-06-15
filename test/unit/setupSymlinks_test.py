@@ -7,7 +7,7 @@ from unittest.mock import patch
 repo_root = os.path.expanduser('~/.dotfiles')
 sys.path.append(repo_root)
 
-import setup
+import setupSymlinks
 
 min_version = 3.4
 version = float(sys.version[0:3])
@@ -46,7 +46,7 @@ class TestMain(unittest.TestCase):
     @patch('os.makedirs')
     @patch('os.symlink')
     def test_main(self, os_symlink, os_makedirs, os_remove):
-        setup.main(verbose=False)
+        setupSymlinks.main(verbose=False)
         for path, link in conf_files.items():
             os_remove.assert_any_call(link)
             os_makedirs.assert_any_call(os.path.dirname(link), exist_ok=True)
@@ -57,7 +57,7 @@ class TestMain(unittest.TestCase):
         assert(os_symlink.call_count == len(conf_files))
 
     def test_dict_equal(self):
-        assert(set(conf_files.items()) == set(setup.conf_files.items()))
+        assert(set(conf_files.items()) == set(setupSymlinks.conf_files.items()))
 
 
 if __name__ == '__main__':
