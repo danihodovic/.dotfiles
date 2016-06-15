@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-tests=$(find ${HOME}/.dotfiles/ -regex '.*_test.py')
+tests=$(find ${HOME}/.dotfiles/test/unit/ -regex '.*_test.py')
 for test in ${tests}; do
   echo "Testing ${test}..."
   $test
