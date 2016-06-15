@@ -1,0 +1,8 @@
+dependencies:
+  pre:
+    - sudo apt-get install python3-apt
+
+test:
+  override:
+    - python3 -m unittest discover -s test/unit/ -p '*_test.py'
+    - sudo python3 -m unittest discover -s test/integration/ -p '*_test.py'
