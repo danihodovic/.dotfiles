@@ -19,6 +19,10 @@ if version < min_version:
 
 class IntegrationSuite(unittest.TestCase):
 
+    ###############################
+    # Apt packages
+    ###############################
+
     def test_install_zsh(self):
         dev_tools.install_zsh()
         self.assertTrue(is_installed_pkg('zsh'))
@@ -36,7 +40,9 @@ class IntegrationSuite(unittest.TestCase):
     ###############################
 
     def test_install_antigen(self):
-        pass
+        dev_tools.install_antigen()
+        os.path.isfile(os.path.expandvars('${HOME}/.antigen/antigen.zsh'))
+
 
 def is_installed_pkg(pkg_name):
     cache = apt.cache.Cache()
