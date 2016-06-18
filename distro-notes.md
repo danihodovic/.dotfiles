@@ -53,6 +53,31 @@ further changes.
 
 http://superuser.com/questions/624343/keep-gnupg-credentials-cached-for-entire-user-session
 
+# Using OpenVPN and gnome-network-manager
+
+This configuration uses NordVPN as an example
+
+Install openvpn and download the NordVPN configuration files and certificates
+
+    sudo apt-get install openvpn
+    cd /etc/openvpn
+    sudo curl -O https://nordvpn.com/api/files/zip
+    sudo unzip zip
+    sudo rm zip
+
+Install network-manager-openvpn to select a vpn connection using the applet
+
+    sudo apt-get install network-manager-openvpn
+    sudo apt-get install network-manager-openvpn-gnome
+
+Import the .ovpn file in the network manager gui applet
+
+1. Right click the applet -> Edit Connections
+2. Click Add
+3. Choose a connection type -> Import a saved VPN configuration
+4. Point to one of your downloaded NordVPN .ovpn files
+5. Enter your NordVPN credentials
+6. Connect
 
 ## Cinnamon
 
