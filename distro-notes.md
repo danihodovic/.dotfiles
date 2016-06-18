@@ -132,11 +132,7 @@ After swap:
     key <AD11> {	[ braceleft,	bracketleft	]	};
     key <AD12> {	[ braceright,	bracketright	]	};
 
-Clear the cache: `sudo rm /var/lib/xkb/*.xkm`
-
 Reconfigure xkb-data: `sudo dpkg-reconfigure xkb-data`
-
-Reboot
 
 If changing the system wide files you don't have to deal with startup scripts as you have to do with
 -options.
@@ -145,30 +141,27 @@ If changing the system wide files you don't have to deal with startup scripts as
 The keyboard has only 68 keys and therefore maps Esc, tilde and grave into one key. By default this
 forces you to use the modifier and shift keys for tilde which we don't want.
 
-Add the following rule in /usr/share/X11/xkb/symbols/capslock
+Add the remapping in `/usr/share/X11/xkb/symbols/capslock`
 
-    partial hidden alphanumeric_keys
-    xkb_symbols "swapescape68keys" {
+    hidden partial modifier_keys
+    xkb_symbols "swapescape68" {
         key <CAPS> { [ Escape ] };
-        key <ESC>  { [ asciitilde ] };
-        key <TLDE> { [    asciitilde, grave ]       };
+        key <ESC>  { [ grave ] };
+        key <TLDE> { [ grave, asciitilde ] };
     };
 
-Clear the cache:
+Add the rule in `/usr/share/X11/xkb/rules/evdev`
 
-    sudo rm /var/lib/xkb/*.xkm
+    // caps:swapescape   = +capslock(swapescape)
+    caps:swapescape68 = +capslock(swapescape68)
 
-Reconfigure xkb-data:
+Reconfigure xkb-data (or reboot)
 
-    sudo  dpkg-reconfigure xkb-data
-
-Reboot
+    sudo dpkg-reconfigure xkb-data
 
 Enable it with:
 
-    setxkbamp -option swapescape68keys
-
-# Figure out how to recompile and reload xkb settings
+    setxkbamp -option caps:swapescape68
 
 # Lubuntu:
 ## How to add shortkeys:
