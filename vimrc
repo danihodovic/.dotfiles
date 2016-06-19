@@ -159,7 +159,6 @@ command! Fp echo expand('%:p')
 "TODO: Add remappings for vim command mode and insert mode for moving around and
 "deleting previous/next.
 let mapleader = ","
-noremap <leader>q q
 " Copy til end of line (default is entire line - use `Y` for entire line instead)
 nnoremap Y yg_
 " Movement
