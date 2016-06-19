@@ -1,3 +1,5 @@
+# Reference: http://linux.about.com/library/cmd/blcmdl3_readline.htm
+
 $include /etc/inputrc
 set completion-ignore-case on
 set completion-map-case on
@@ -5,16 +7,12 @@ set blink-matching-paren on
 set editing-mode vi
 
 $if mode=vi
+  set keymap vi-command
+  Control-l: clear-screen
+  q: vi-backward-word
+  Q: beginning-of-line
+  W: end-of-line
 
-set keymap vi-command
-##################################
-Control-l: clear-screen
-"q": vi-backward-word
-##################################
-set keymap vi-insert
-##################################
-Control-l: clear-screen 
-
-
+  set keymap vi-insert
 $endif
 
