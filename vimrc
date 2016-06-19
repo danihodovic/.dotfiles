@@ -107,7 +107,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 " Enable spelling
-" set spell spelllang=en_us
+set spell
 set title
 set number
 " Dont auto resize windows (good for i3)
@@ -145,7 +145,6 @@ set autoread
 " directory, then the parent directory, then the parent of the parent, and so on'
 set tags=./tags;
 set diffopt=filler,vertical
-spell spelllang=en_us
 "-----------------------------------------
 " User defined commands
 "-----------------------------------------
@@ -320,7 +319,7 @@ autocmd FileType python                 setlocal  shiftwidth=4 tabstop=4 expandt
 autocmd FileType go                     setlocal  shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType erlang                 setlocal  shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType make                   setlocal  shiftwidth=4 tabstop=4 noexpandtab
-autocmd FileType sh,bash,zsh,nginx      setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType sh,bash,zsh,readline nginx      setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType php                    setlocal  shiftwidth=4 tabstop=4 expandtab
 autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandtab
 autocmd FileType ruby                   setlocal  shiftwidth=2 tabstop=2 expandtab
