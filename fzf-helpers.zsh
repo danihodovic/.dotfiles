@@ -48,6 +48,7 @@ bindkey -M vicmd '^g' fzf-git-status-widget
 bindkey -M vicmd '='    fzf-file-widget
 bindkey -M vicmd '\-'    fzf-root-widget
 
+export FZF_CTRL_R_OPTS='--exact'
 bindkey -M vicmd '^h'   fzf-history-widget
 bindkey -M viins '^h'   fzf-history-widget
 
