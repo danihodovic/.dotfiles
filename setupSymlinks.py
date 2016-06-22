@@ -35,6 +35,7 @@ conf_files = {
     # File not in conf dir
     HOME_DIR + '/.dotfiles/zshrc':      HOME_DIR + '/.zshrc',
     HOME_DIR + '/.dotfiles/vimrc':      HOME_DIR + '/.config/nvim/init.vim',
+    HOME_DIR + '/.dotfiles/vimrc':      HOME_DIR + '/.vimrc',
     HOME_DIR + '/.dotfiles/pre-commit': HOME_DIR + '/.dotfiles/.git/hooks/pre-commit'
 }
 
