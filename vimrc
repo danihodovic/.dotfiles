@@ -185,10 +185,9 @@ cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 " Easier semicolon insertion
 autocmd FileType javascript,typescript,css,perl,nginx noremap ;; :call InsertSemicolons()<CR>
-" Don't map this to tab since it blocks the jumplist. There is no way to remap <C-i> or <tab>
-" programatically it seems
 nmap <Tab> %
-vmap <Tab> %
+" Workaround for ultisnips overriding mappings: https://github.com/SirVer/ultisnips/issues/713
+autocmd VimEnter * vmap <Tab> %
 " Stay in visual mode when indenting
 vnoremap < <gv
 vnoremap > >gv
