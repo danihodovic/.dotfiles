@@ -343,7 +343,7 @@ Reduce the brightness of the ePS display
 
 ### Remapping keys
 
-#### Swapping fn-ctrl
+#### Swapping fn-ctrl on a Mac
 
 Swapping fn-ctrl keys is provided by a patch on the hid-apple module found in this repo
 https://github.com/free5lot/hid-apple-patched.git. The patch has not reached the Linux kernel
@@ -383,8 +383,14 @@ TODO: Make this a script
 https://help.ubuntu.com/community/AppleKeyboard#Mapping_keys_.28Insert.2C_Alt.2C_Cmd.2C_etc..29
 
 edit /etc/modprobe.d/hid_apple.conf
-add  options hid_apple swap_opt_cmd=1
-run  sudo update-initramfs -u -k all
+
+add:
+
+    options hid_apple swap_opt_cmd=1
+
+run:
+    sudo update-initramfs -u -k all
+
 reboot
 
 #### Vagrant nfs on linux
