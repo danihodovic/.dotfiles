@@ -158,6 +158,7 @@ command! Fp echo expand('%:p')
 "TODO: Add remappings for vim command mode and insert mode for moving around and
 "deleting previous/next.
 let mapleader = ","
+noremap <leader>q q
 " Copy til end of line (default is entire line - use `Y` for entire line instead)
 nnoremap Y yg_
 " Movement
@@ -172,6 +173,15 @@ noremap j gj
 noremap j gj
 noremap k gk
 noremap k gk
+nnoremap : <nop>
+execute "nnoremap <space> :" . &cedit . "a"
+execute "xnoremap <space> :" . &cedit . "a"
+execute "nnoremap / /" . &cedit . "a"
+execute "xnoremap / /" . &cedit . "a"
+execute "nnoremap ? ?" . &cedit . "a"
+execute "xnoremap ? ?" . &cedit . "a"
+autocmd CmdwinEnter * nnoremap <buffer> <esc> :q<cr>
+set cmdwinheight=1
 " Move up and down in command-line mode
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
@@ -179,8 +189,8 @@ cnoremap <C-j> <Down>
 autocmd FileType javascript,typescript,css,perl,nginx noremap ;; :call InsertSemicolons()<CR>
 " Don't map this to tab since it blocks the jumplist. There is no way to remap <C-i> or <tab>
 " programatically it seems
-nmap <space> %
-vmap <space> %
+nmap <Tab> %
+vmap <Tab> %
 " Stay in visual mode when indenting
 vnoremap < <gv
 vnoremap > >gv
@@ -291,8 +301,8 @@ autocmd FileType gitcommit setlocal colorcolumn=72
 " Sets the colorcolumn only in active windows
 augroup BgHighlight
     autocmd!
-    autocmd WinEnter * set cul
-    autocmd WinLeave * set nocul
+    autocmd WinEnter * set cursorline
+    autocmd WinLeave * set nocursorline
 augroup END
 " Wrapping can start 5 chars from right margin
 set wrapmargin=5
