@@ -12,7 +12,7 @@
 set $Alt Mod1
 set $Win Mod4
 set $Terminal xfce4-terminal
-set $Browser google-chrome
+set $Browser chromium-browser
 
 set $mod Mod1
 
