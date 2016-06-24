@@ -87,8 +87,6 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'sudar/vim-arduino-syntax'
 Plug 'cespare/vim-toml'
-" Plug 'mhinz/vim-startify'
-" Plug 'vim-scripts/conomode.vim'
 " Plug 'kana/vim-textobj-function'
 " Plug 'thinca/vim-textobj-function-javascript'
 "-----------------------------------------
