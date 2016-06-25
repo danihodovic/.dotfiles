@@ -188,6 +188,8 @@ alias aptupgrade="sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get
 alias setxkbmapcaps="setxkbmap -option caps:swapescape"
 alias open='xdg-open'
 alias vi='nvim'
+
+# Git
 alias gs='git status -sb'
 alias gd='git diff'
 alias gl='git log --decorate'
@@ -206,8 +208,23 @@ alias gtags-latest='git tag --list | sort -V | tail -n 1'
 alias gci-status='hub ci-status '
 goneline() {
   n=${1:-10}
-  git log --pretty=oneline --reverse | tail -n $n
+  git log --pretty=oneline --decorate=short --reverse | tail -n $n
 }
+
+# Docker
+alias dps='docker ps'
+alias drun='docker run '
+alias dexec='docker exec -i -t '
+alias dkill='docker kill '
+alias dkillall='docker kill $(docker ps -a -q)'
+alias dstop='docker stop '
+alias dstopall='docker stop $(docker ps -a -q)'
+alias drm='docker rm '
+alias drmall='docker rm $(docker ps -a -q)'
+
+alias dcbuild='docker-compose build'
+alias dcup='docker-compose up'
+alias dcrun='docker-compose run '
 
 # cd && ls
 function chpwd() {
