@@ -175,6 +175,8 @@ bindkey -M vicmd v tmux-copy-mode
 bindkey -M menuselect '^[[Z' reverse-menu-complete
 # Aliases
 # ------------
+# Allows 256 colors as background in terminal, used for Vi
+alias tmux="tmux -2"
 alias cd.="cd .."
 alias cd..="cd ../.."
 alias cd...="cd ../../.."
@@ -189,17 +191,23 @@ alias vi='nvim'
 alias gs='git status -sb'
 alias gd='git diff'
 alias gl='git log --decorate'
+alias glogS='git log -p -S '
 alias gf='git fetch'
 alias gc='fcheckout'
 alias gshow='git show'
 alias grebase='git rebase -i `flog`'
 alias gbranch='git branch -avv'
 alias gcommit='git commit -v -S'
+alias gpush='git push '
+alias greset='git reset '
 alias gadd='git add'
 alias gtags='git tag --list | sort -V'
 alias gtags-latest='git tag --list | sort -V | tail -n 1'
-# Allows 256 colors as background in terminal, used for Vi
-alias tmux="tmux -2"
+alias gci-status='hub ci-status '
+goneline() {
+  n=${1:-10}
+  git log --pretty=oneline --reverse | tail -n $n
+}
 
 # cd && ls
 function chpwd() {
