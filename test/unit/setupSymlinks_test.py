@@ -43,22 +43,44 @@ conf_files = {
 }
 
 class TestMain(unittest.TestCase):
+    def test_dict_equal(self):
+        '''
+        Ensures that the configuration files are the same as the ones defined in tests.
+        Basically a double check
+        '''
+        assert(set(conf_files.items()) == set(setupSymlinks.conf_files.items()))
+
     @patch('os.remove')
-    @patch('os.makedirs')
     @patch('os.symlink')
-    def test_main(self, os_symlink, os_makedirs, os_remove):
+    def test_main(self, os_symlink, os_remove):
+        '''
+        Ensures that delete and link is called, regardless of error
+        '''
         setupSymlinks.main(verbose=False)
+
         for path, link in conf_files.items():
             os_remove.assert_any_call(link)
-            os_makedirs.assert_any_call(os.path.dirname(link))
             os_symlink.assert_any_call(path, link)
 
         assert(os_remove.call_count == len(conf_files))
-        assert(os_makedirs.call_count == len(conf_files))
         assert(os_symlink.call_count == len(conf_files))
 
-    def test_dict_equal(self):
-        assert(set(conf_files.items()) == set(setupSymlinks.conf_files.items()))
+
+    @patch('os.remove')
+    @patch('os.symlink')
+    @patch('os.path.isdir')
+    @patch('os.makedirs')
+    def test_parent_directory_created(self, os_makedirs, os_path_isdir, _os_symlink, _os_remove):
+        '''
+        Ensures that the parent directory of the symlink is created if it doesnt exist
+        '''
+        os_path_isdir.return_value = False
+        setupSymlinks.main(verbose=False)
+
+        for _, link in conf_files.items():
+            os_makedirs.assert_any_call(os.path.dirname(link))
+
+        assert(os_makedirs.call_count == len(conf_files))
 
 
 if __name__ == '__main__':
