@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/env python2.7
 '''
 Script to setup all of the symlinks
 '''
@@ -65,7 +65,7 @@ def _createSymlink(src, dst, verbose = True):
 def main(verbose=True):
     for path, symlink in conf_files.items():
         _removeLink(symlink, verbose)
-        if os.path.isdir(os.path.dirname(symlink)):
+        if not os.path.isdir(os.path.dirname(symlink)):
             os.makedirs(os.path.dirname(symlink))
         _createSymlink(path, symlink, verbose)
 
