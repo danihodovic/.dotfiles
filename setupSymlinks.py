@@ -5,7 +5,7 @@ Script to setup all of the symlinks
 import os
 import sys
 
-min_version = 3.4
+min_version = 2.7
 version = float(sys.version[0:3])
 if version < min_version:
     print('Error: Python version {} detected, use at least version {}', version, min_version)
@@ -65,7 +65,8 @@ def _createSymlink(src, dst, verbose = True):
 def main(verbose=True):
     for path, symlink in conf_files.items():
         _removeLink(symlink, verbose)
-        os.makedirs(os.path.dirname(symlink), exist_ok=True)
+        if os.path.isdir(os.path.dirname(symlink)):
+            os.makedirs(os.path.dirname(symlink))
         _createSymlink(path, symlink, verbose)
 
 if __name__ == '__main__':
