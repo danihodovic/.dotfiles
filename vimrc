@@ -185,9 +185,8 @@ cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 " Easier semicolon insertion
 autocmd FileType javascript,typescript,css,perl,nginx noremap ;; :call InsertSemicolons()<CR>
-nmap <Tab> %
-" Workaround for ultisnips overriding mappings: https://github.com/SirVer/ultisnips/issues/713
-autocmd VimEnter * vmap <Tab> %
+nmap m %
+vmap m %
 " Stay in visual mode when indenting
 vnoremap < <gv
 vnoremap > >gv
@@ -203,7 +202,7 @@ inoremap <M-q> <esc>lcb
 " beginning of a line it has nowhere to move.
 inoremap <expr> <M-w> col('.') == 1 ? '<esc>cw' : '<esc>lcw'
 " Switch to last buffer or other buffer if last was deleted
-nnoremap m :call SwitchLast()<cr>
+" TODO: Unused
 fu! SwitchLast()
   if buflisted(bufnr('#'))
     buf #
@@ -660,14 +659,14 @@ let g:airline#extensions#tmuxline#enabled = 0
 "-----------------------------------------
 " Auto-pairs
 "-----------------------------------------
-let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
+let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 " Don't jump to the next bracket when closing
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsMultilineClose = 0
 " Shortcut to quickly wrap a world, i.e ''hello + key => 'hello'
-let g:AutoPairsShortcutFastWrap = "<leader>r"
+let g:AutoPairsShortcutFastWrap = ''
 " Jump to next closed pair
-let g:AutoPairsShortcutJump = "<leader>n"
+let g:AutoPairsShortcutJump = ''
 " Disable this
 let g:AutoPairsShortcutToggle = ''
 "-----------------------------------------
