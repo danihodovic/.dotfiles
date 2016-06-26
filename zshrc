@@ -213,6 +213,7 @@ goneline() {
 
 # Docker
 alias dps='docker ps'
+alias dbuild='docker build '
 alias drun='docker run '
 alias dexec='docker exec -i -t '
 alias dkill='docker kill '
