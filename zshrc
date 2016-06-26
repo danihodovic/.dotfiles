@@ -227,6 +227,11 @@ alias dcbuild='docker-compose build'
 alias dcup='docker-compose up'
 alias dcrun='docker-compose run '
 
+alias aptinstall='sudo apt-get install '
+alias aptupdate='sudo apt-get update'
+alias aptsearch='apt-cache search '
+alias aptpolicy='apt-cache policy '
+
 # cd && ls
 function chpwd() {
     emulate -L zsh
