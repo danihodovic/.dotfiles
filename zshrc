@@ -189,6 +189,7 @@ alias ls='ls --color=auto --classify'
 alias setxkbmapcaps="setxkbmap -option caps:swapescape"
 alias open='xdg-open'
 alias vi='nvim'
+alias psag='ps aux | ag '
 
 # Git
 alias gs='git status -sb'
@@ -221,7 +222,9 @@ alias drunit='docker run -i -t '
 alias dexec='docker exec -i -t '
 alias dkill='docker kill '
 alias dkillall='docker kill $(docker ps -a -q)'
+alias dkillrunning='docker kill $(docker ps -q)'
 alias dstop='docker stop '
+alias dstoprunning='docker stop $(docker ps -q)'
 alias dstopall='docker stop $(docker ps -a -q)'
 alias drm='docker rm '
 alias drmall='docker rm $(docker ps -a -q)'
