@@ -177,14 +177,14 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 # ------------
 # Allows 256 colors as background in terminal, used for Vi
 alias tmux="tmux -2"
+# Todo: Write a function instead
 alias cd.="cd .."
 alias cd..="cd ../.."
 alias cd...="cd ../../.."
+alias cd....='cd ../../../..'
 alias h="history"
 alias cd-="cd -"
 alias ls='ls --color=auto --classify'
-alias aptinstall="sudo apt-get install ${1}"
-alias aptupgrade="sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade"
 alias setxkbmapcaps="setxkbmap -option caps:swapescape"
 alias open='xdg-open'
 alias vi='nvim'
@@ -202,6 +202,7 @@ alias gbranch='git branch -avv'
 alias gcommit='git commit -v -S'
 alias gpush='git push '
 alias greset='git reset '
+alias gclone='git clone '
 alias gadd='git add'
 alias gtags='git tag --list | sort -V'
 alias gtags-latest='git tag --list | sort -V | tail -n 1'
@@ -215,6 +216,7 @@ goneline() {
 alias dps='docker ps'
 alias dbuild='docker build '
 alias drun='docker run '
+alias drunit='docker run -i -t '
 alias dexec='docker exec -i -t '
 alias dkill='docker kill '
 alias dkillall='docker kill $(docker ps -a -q)'
@@ -228,9 +230,11 @@ alias dcup='docker-compose up'
 alias dcrun='docker-compose run '
 
 alias aptinstall='sudo apt-get install '
+alias aptpurge='sudo apt-get purge '
 alias aptupdate='sudo apt-get update'
-alias aptsearch='apt-cache search '
-alias aptpolicy='apt-cache policy '
+alias aptsearch='sudo apt-cache search '
+alias aptpolicy='sudo apt-cache policy '
+alias aptrepository='sudo apt-add-repository  -y'
 
 # cd && ls
 function chpwd() {
