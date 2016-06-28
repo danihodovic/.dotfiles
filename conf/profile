@@ -1,1 +1,1 @@
-umask u=rwx,g=,o=
+umask 755
