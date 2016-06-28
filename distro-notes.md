@@ -446,3 +446,9 @@ Optional, change the default ssh port
 3. Edit the security group in the aws console to allow the desired port
 4. Restart sshd `service ssh restart`
 
+# Docker
+
+### library/mysql does not execute prepare.sql in a mounted volume
+
+Stupid issue. If the permissions are wrong on the host, the mysql user won't be able to see the
+script and can't execute the entrypoint script properly.
