@@ -104,6 +104,7 @@ set clipboard=unnamedplus
 set nobackup
 set nowritebackup
 set noswapfile
+set nofoldenable
 " Enable spelling
 set spell
 set title
