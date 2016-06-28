@@ -49,8 +49,8 @@ bindkey -M vicmd '='    fzf-file-widget
 bindkey -M vicmd '\-'    fzf-root-widget
 
 export FZF_CTRL_R_OPTS='--exact'
-bindkey -M vicmd '^h'   fzf-history-widget
-bindkey -M viins '^h'   fzf-history-widget
+bindkey -M vicmd '^r'   fzf-history-widget
+bindkey -M viins '^r'   fzf-history-widget
 
 # Fzf keybindings as suggested in the wiki
 # https://github.com/junegunn/fzf/wiki/examples
