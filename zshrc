@@ -95,6 +95,7 @@ scripts=(
   $scripts/i3_completion.sh
   ${HOME}/.local/bin/aws_zsh_completer.sh
   $scripts/nvm/nvm.sh
+  ${HOME}/.gvm/scripts/gvm
 )
 
 for script in $scripts; do
