@@ -75,20 +75,20 @@ fe() {
 
 # get git commit sha
 # example usage: git rebase -i `fcs`
-flog() {
+fcommit() {
   local commits commit
   commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
   commit=$(echo "$commits" | fzf --tac +s +m -e --ansi --reverse) &&
   echo -n $(echo "$commit" | sed "s/ .*//")
 }
 
-# fbr - checkout git branch (including remote branches)
-fcheckout() {
+
+fbranch() {
   local branches branch
   branches=$(git branch --all | grep -v HEAD) &&
   branch=$(echo "$branches" |
            fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
-  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+  echo -n $branch
 }
 
 # fshow - git commit browser
