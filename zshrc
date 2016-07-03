@@ -193,58 +193,12 @@ alias open='xdg-open'
 alias vi='nvim'
 alias psag='ps aux | ag '
 
-# Git
-alias gs='git status -sb'
-alias gd='git diff'
-alias gl='git log --decorate'
-alias glogS='git log -p -S '
-alias gf='git fetch'
-alias gcheckout='git checkout '
-alias gcc='git checkout `fcommit`'
-alias gcb='git checkout `fbranch`'
-alias gshow='git show '
-alias grebasecommit='git rebase -i `fcommit`'
-alias grebasebranch='git rebase -i `fbranch`'
-alias gpush='git push '
-alias greset='git reset '
-alias gpull='git pull '
-alias gclone='git clone '
-alias gstash='git stash '
-alias gadd='git add '
-alias gtags='git tag --list | sort -V'
-alias gtags-latest='git tag --list | sort -V | tail -n 1'
-alias gci-status='hub ci-status '
-goneline() {
-  n=${1:-10}
-  git log --pretty=oneline --decorate=short --reverse | tail -n $n
-}
-
-# Docker
-alias dps='docker ps'
-alias dbuild='docker build '
-alias dbuildt='docker build -t '
-alias drun='docker run '
-alias dstart='docker start '
-alias drunit='docker run -i -t '
-alias dexec='docker exec -i -t '
-alias dkill='docker kill '
-alias dkillall='docker kill $(docker ps -a -q)'
-alias dkillrunning='docker kill $(docker ps -q)'
-alias dstop='docker stop '
-alias dstoprunning='docker stop $(docker ps -q)'
-alias dstopall='docker stop $(docker ps -a -q)'
-alias drm='docker rm '
-alias drmall='docker rm $(docker ps -a -q)'
-
-alias dcbuild='docker-compose build'
-alias dcup='docker-compose up'
-alias dcrun='docker-compose run '
-
 alias aptinstall='sudo apt-get install '
 alias aptpurge='sudo apt-get purge '
 alias aptupdate='sudo apt-get update'
-alias aptsearch='sudo apt-cache search '
-alias aptpolicy='sudo apt-cache policy '
+alias aptsearch='apt-cache search '
+alias aptpolicy='apt-cache policy '
+alias aptshow='apt-cache show '
 alias aptrepository='sudo apt-add-repository  -y'
 
 # cd && ls
