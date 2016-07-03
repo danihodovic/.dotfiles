@@ -211,18 +211,26 @@ fu! SwitchLast()
     bnext
   endif
 endfu
-"Window movement
-imap <silent> <F6>oweh <esc>:call I3VIM_WindowFocus('h')<cr>
-imap <silent> <F6>owel <esc>:call I3VIM_WindowFocus('l')<cr>
-imap <silent> <F6>owej <esc>:call I3VIM_WindowFocus('j')<cr>
-imap <silent> <F6>owek <esc>:call I3VIM_WindowFocus('k')<cr>
 
-noremap <silent> <F6>oweh <esc>:call I3VIM_WindowFocus('h')<cr>
-noremap <silent> <F6>owel <esc>:call I3VIM_WindowFocus('l')<cr>
-noremap <silent> <F6>owej <esc>:call I3VIM_WindowFocus('j')<cr>
-noremap <silent> <F6>owek <esc>:call I3VIM_WindowFocus('k')<cr>
+"Window movement
+inoremap <silent> <F12>h <esc>:call I3VIM_WindowFocus('h')<cr>
+inoremap <silent> <F12>l <esc>:call I3VIM_WindowFocus('l')<cr>
+inoremap <silent> <F12>j <esc>:call I3VIM_WindowFocus('j')<cr>
+inoremap <silent> <F12>k <esc>:call I3VIM_WindowFocus('k')<cr>
+
+noremap <silent> <F12>h :call I3VIM_WindowFocus('h')<cr>
+noremap <silent> <F12>l :call I3VIM_WindowFocus('l')<cr>
+noremap <silent> <F12>j :call I3VIM_WindowFocus('j')<cr>
+noremap <silent> <F12>k :call I3VIM_WindowFocus('k')<cr>
 
 func! I3VIM_WindowFocus(direction)
+  " wincmd is not available in cmd mode, so we have to work around it
+  if bufname('') == '[Command Line]'
+    " Note: Stupid viml vimscript interpret '' and "" in feedkeys() differently!
+    call feedkeys("\<esc>")
+    return
+  endif
+
   let oldw = winnr()
   silent exe 'wincmd ' . a:direction
   let neww = winnr()

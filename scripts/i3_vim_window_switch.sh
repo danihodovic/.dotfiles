@@ -22,7 +22,7 @@ if [[ $active =~ $is_vim_window_regex ]]; then
     left) key='h' ;;
     right) key='l' ;;
   esac
-  xdotool getactivewindow key F6 o+w+e+"$key"
+  xdotool getactivewindow key F12+"$key"
 else
   i3-msg focus "$direction"
 fi
