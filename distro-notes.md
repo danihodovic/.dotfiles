@@ -446,6 +446,13 @@ Optional, change the default ssh port
 3. Edit the security group in the aws console to allow the desired port
 4. Restart sshd `service ssh restart`
 
+# Xsession loops login
+If it turns out that you try to login and it loops you back to the login screen, something is wrong
+with your xsession. Debug by running
+
+    # Enter a tty (Ctrl + Alt + F1) and login
+    cat ~/.xsession-errors
+
 # Docker
 
 ### library/mysql does not execute prepare.sql in a mounted volume
