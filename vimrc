@@ -180,9 +180,6 @@ execute "xnoremap ? ?" . &cedit . "a"
 " Exit cmdwindow on esc
 autocmd CmdwinEnter * nnoremap <buffer> <esc> :q<cr>
 set cmdwinheight=1
-" Move up and down in command-line mode
-cnoremap <C-k> <Up>
-cnoremap <C-j> <Down>
 " Easier semicolon insertion
 autocmd FileType javascript,typescript,css,perl,nginx noremap ;; :call InsertSemicolons()<CR>
 nmap m %
@@ -190,26 +187,6 @@ vmap m %
 " Stay in visual mode when indenting
 vnoremap < <gv
 vnoremap > >gv
-" ctrl-backspace to delete the previous word
-inoremap <C-BS> <C-W>
-" map ctrl+del to delete next work
-inoremap <C-Del> <C-O>dw
-" Delete previous and next word in insert mode.  TODO: Figure out if you need
-" this and enable it for zshrc too.
-inoremap <M-q> <esc>lcb
-" Delete next word. We need a conditional mapping becuase <esc> moves the
-" character left if we are not on the beginning of a line. If we are on the
-" beginning of a line it has nowhere to move.
-inoremap <expr> <M-w> col('.') == 1 ? '<esc>cw' : '<esc>lcw'
-" Switch to last buffer or other buffer if last was deleted
-" TODO: Unused
-fu! SwitchLast()
-  if buflisted(bufnr('#'))
-    buf #
-  else
-    bnext
-  endif
-endfu
 
 "Window movement
 inoremap <silent> <F12>h <esc>:call I3VIM_WindowFocus('h')<cr>
@@ -242,30 +219,13 @@ endfunction
 nnoremap + :vertical resize +10<cr>
 nnoremap _ :vertical resize -10<cr>
 " Buffer operations similar to browsers
-noremap <C-t> :enew<CR>
 nnoremap <C-w> :call MimicBrowserClose()<CR>
 " Text width formatting for small blocks
 nnoremap <leader>fo :call ReformatTextWidth()<cr>
 vnoremap <leader>fo :call ReformatTextWidth()<cr>
-
-nnoremap <leader>bc :call CopyBuffer()<CR>
 " Blink the current word when switching search words
 nnoremap <silent> n   n:call HLNext(0.1)<cr>
 nnoremap <silent> N   N:call HLNext(0.1)<cr>
-" TODO: oblique disables search for some reason. Figure out why
-" nnoremap / <Plug>(Oblique-F/)
-" Search selected text, not only words as with `*`
-vnoremap // y/<C-R>"<CR>
-" Close buffer without closing window
-" See http://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
-if has("nvim")
-  " Mapping for nvim-qt to paste into command line
-  cmap <S-Insert>  <C-R>+
-  nmap <S-Insert>  <C-R>+
-  " Fix this until the nvim-qt guy fixes proper guifont options
-  command! -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>")
-  let g:Guifont="Monaco:h10"
-endif
 "-----------------------------------------
 " Color scheme settings
 "-----------------------------------------
@@ -528,12 +488,6 @@ let g:tern_show_signature_in_pum = 1
 "-----------------------------------------
 " FixMyJS
 "-----------------------------------------
-" Eslint or fixmyjs (JSHint). It uses your defined JSHint settings to fix what it can
-let g:fixmyjs_engine = 'fixmyjs'
-" Legacy needed for es6 for some reason
-let g:fixmyjs_legacy_jshint = 1
-" autocmd BufWritePre *.js,*.ts Fixmyjs
-
 " TODO: replace this with job-control
 autocmd filetype javascript command! -buffer FixJscs call RunJscs()
 fu! RunJscs()
