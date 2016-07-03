@@ -568,13 +568,24 @@ nnoremap <F6> :Tagbar<cr>
 " UltiSnips
 "-----------------------------------------
 fu! Return_Or_Snippet()
+  " Make sure we don't set this ourselves...
+  if exists('g:UltiSnipsListSnippets') == 0
+    return "\<cr>"
+  endif
+
   if pumvisible()
     call UltiSnips#ExpandSnippet()
     if g:ulti_expand_res
       return ""
     endif
+  else
+    call UltiSnips#JumpForwards()
+    if g:ulti_jump_forwards_res
+      return ""
+    else
+      return "\<cr>"
+    endif
   endif
-  return "\<cr>"
 endfunction
 
 inoremap <return> <C-R>=Return_Or_Snippet()<cr>
