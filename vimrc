@@ -169,8 +169,6 @@ noremap $ <nop>
 noremap ^ <nop>
 " Move to next screen (vim) line instead of file line. Useful for long lines that span over two vim lines
 noremap j gj
-noremap j gj
-noremap k gk
 noremap k gk
 nnoremap : <nop>
 execute "nnoremap <space> :" . &cedit . "a"
@@ -179,6 +177,7 @@ execute "nnoremap / /" . &cedit . "a"
 execute "xnoremap / /" . &cedit . "a"
 execute "nnoremap ? ?" . &cedit . "a"
 execute "xnoremap ? ?" . &cedit . "a"
+" Exit cmdwindow on esc
 autocmd CmdwinEnter * nnoremap <buffer> <esc> :q<cr>
 set cmdwinheight=1
 " Move up and down in command-line mode
@@ -600,8 +599,6 @@ inoremap <return> <C-R>=Return_Or_Snippet()<cr>
 " Fix so that snippets show up in the completion menu, see
 " https://github.com/Valloric/YouCompleteMe/issues/1214
 let g:UltiSnipsUsePythonVersion = 2
-let g:UltiSnipsJumpForwardTrigger  = "<leader>w"
-let g:UltiSnipsJumpBackwardTrigger = "<leader>q"
 " Load my own snippets
 let g:UltiSnipsSnippetDirectories=[$NVIM_DIR.'/plugged/vim-dsnippets']
 "-----------------------------------------
