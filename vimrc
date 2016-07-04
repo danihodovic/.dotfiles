@@ -529,25 +529,32 @@ nnoremap <F6> :Tagbar<cr>
 " UltiSnips
 "-----------------------------------------
 fu! Return_Or_Snippet()
+  " This function *has* to return a keystroke since it's mapped by <C-R>=. 
+  " If nothing it returns it is implied to return 0 and 0 will be inserted.
+  
   " Make sure we don't set this ourselves...
   if exists('g:UltiSnipsListSnippets') == 0
     return "\<cr>"
   endif
 
+  " Insert snippet if we can
   if pumvisible()
     call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res
+    if g:ulti_expand_res != 0
       return ""
-    endif
-  else
-    call UltiSnips#JumpForwards()
-    if g:ulti_jump_forwards_res
-      return ""
-    else
-      return "\<cr>"
     endif
   endif
+
+  " Jump forward if we can
+  call UltiSnips#JumpForwards()
+  if g:ulti_jump_forwards_res != 0
+    return ""
+  endif
+
+  " Default to pressing enter
+  return "\<cr>"
 endfunction
+
 
 inoremap <return> <C-R>=Return_Or_Snippet()<cr>
 " Fix so that snippets show up in the completion menu, see
