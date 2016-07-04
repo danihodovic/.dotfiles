@@ -8,7 +8,7 @@ alias gcheckout='git checkout '
 alias gshow='git show '
 alias gpush='git push '
 alias greset='git reset '
-alias gpull='git pull '
+alias gpull='git pull --rebase'
 alias gclone='git clone '
 alias gstash='git stash '
 alias gadd='git add '
@@ -31,4 +31,18 @@ grebasebranch() {
 goneline() {
   n=${1:-10}
   git log --pretty=oneline --decorate=short --reverse | tail -n $n
+}
+gpullbranch() {
+  remote=$(git remote)
+  if [ $? != 0 ]; then
+    exit $?
+  fi
+
+  if [ $(echo $remote | wc -l) == 1  ]; then
+    branch=$(git symbolic-ref --short HEAD)
+    git pull $remote $branch
+  else
+    echo 'More than 1 remote, specify which one to pull from'
+    git remote
+  fi
 }
