@@ -32,17 +32,29 @@ goneline() {
   n=${1:-10}
   git log --pretty=oneline --decorate=short --reverse | tail -n $n
 }
-gpullbranch() {
+
+_remote_branch() {
   remote=$(git remote)
   if [ $? != 0 ]; then
-    exit $?
+    return 1 # Returning $? will return the output of the if test. lol...
   fi
 
   if [ $(echo $remote | wc -l) == 1  ]; then
     branch=$(git symbolic-ref --short HEAD)
-    git pull $remote $branch
+    echo "$remote $branch"
   else
     echo 'More than 1 remote, specify which one to pull from'
     git remote
+    return 1
   fi
+}
+
+gpullbranch() {
+  branch=$(_remote_branch)
+  [ $? == 0 ] && print -z git pull $branch
+}
+
+gpushbranch() {
+  branch=$(_remote_branch)
+  [ $? == 0 ] && print -z git push $branch
 }
