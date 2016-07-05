@@ -152,7 +152,7 @@ Add the remapping in `/usr/share/X11/xkb/symbols/capslock`
 
 Add the rule in `/usr/share/X11/xkb/rules/evdev`
 
-    // caps:swapescape   = +capslock(swapescape)
+    // The preceeding line looks like this: caps:swapescape   = +capslock(swapescape)
     caps:swapescape68 = +capslock(swapescape68)
 
 Reconfigure xkb-data (or reboot)
