@@ -51,10 +51,10 @@ _remote_branch() {
 
 gpullbranch() {
   branch=$(_remote_branch)
-  [ $? == 0 ] && print -z git pull $branch
+  [ $? == 0 ] && print -z git pull $branch $@
 }
 
 gpushbranch() {
   branch=$(_remote_branch)
-  [ $? == 0 ] && print -z git push $branch
+  [ $? == 0 ] && print -z git push $branch $@
 }
