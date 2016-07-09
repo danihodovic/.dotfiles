@@ -20,6 +20,8 @@ alias gci-status='hub ci-status '
 gcc() {
   print -z git checkout `fcommit`
 }
+# TODO: When checking out a remote branch, checkout with -b so that we don't end up in detached
+# state.
 gcb() {
   print -z git checkout `fbranch`
 }

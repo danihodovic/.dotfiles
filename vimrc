@@ -7,88 +7,60 @@ call plug#begin('$NVIM_DIR/plugged')
 "-----------------------------------------
 " General plugins
 "-----------------------------------------
+Plug 'dansomething/vim-eclim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'danihodovic/fzf.vim'
-" Sets root directory to project (git) directory by default
-Plug 'airblade/vim-rooter'
+Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
 Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'            " Shows dirty files in NERDTree
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
-" Run linters or makefiles
 Plug 'benekastah/neomake'
-Plug 'majutsushi/tagbar'
-" Show git diffs
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdcommenter'
-Plug 'Chiel92/vim-autoformat'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Generates tmuxline configs. This doesn't have to be used unless you want to switch
-" tmuxline skins on the line or integrate them with vim.
-Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'SirVer/ultisnips'
 Plug 'dani-h/vim-dsnippets'
-Plug 'jiangmiao/auto-pairs'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'tmhedberg/matchit'
-" Sets active window focus
-" Plug 'blueyed/vim-diminactive'
-" Required by vim-oblique
-Plug 'junegunn/vim-pseudocl'
-" Colors current search result differently and sets nohlsearch on cursor move
-Plug 'junegunn/vim-oblique'
-" Aligns text
-Plug 'junegunn/vim-easy-align'
-Plug 'itchyny/vim-cursorword'
-Plug 'kana/vim-textobj-user'                          " Add additional text objects
-Plug 'kana/vim-textobj-function'                      " Add function based text objects
-Plug 'thinca/vim-textobj-function-javascript'         " Add JS function object
-Plug 'FooSoft/vim-argwrap'
+Plug 'jiangmiao/auto-pairs' 
+Plug 'nathanaelkane/vim-indent-guides'        " Visually display indent lines with different color
+Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
+Plug 'junegunn/vim-pseudocl'                  " Required by vim-oblique
+Plug 'junegunn/vim-oblique'                   " Colors search result and sets nohlsearch on cursor move
+Plug 'junegunn/vim-easy-align'                
+Plug 'itchyny/vim-cursorword'                 " Highlight the occurances of the word under the cursor
+Plug 'kana/vim-textobj-user'                  " Add additional text objects
+Plug 'kana/vim-textobj-function'              " Add function based text objects
+Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
+Plug 'FooSoft/vim-argwrap'  
 Plug 'sunaku/vim-dasht'
-"-----------------------------------------
+Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
+" -----------------------------------------
 " Lang specific
-"-----------------------------------------
+" -----------------------------------------
 Plug 'danihodovic/vim-node-require', {'branch': 'dev'}
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-lua-ftplugin'
-" JS/TS/CS
-" JS syntax
-Plug 'othree/yajs.vim'
-Plug 'ruanyl/vim-fixmyjs'
-" Tern requires npm install in the repo to work. Don't install the default version in npm, it's
-" slow. Instead install the latest master. Save that dependency so that the update doesn't revert
-" backwards by using npm.
+Plug 'othree/yajs.vim'                        " Yet Another JavaScript Syntax
 Plug 'marijnh/tern_for_vim'
-Plug 'dani-h/typescript-vim' " Typescript Syntax
-Plug 'clausreinke/typescript-tools.vim' "Typescript Autocomplete
-Plug 'kchmck/vim-coffee-script'
+Plug 'dani-h/typescript-vim'                  " Typescript Syntax
+Plug 'clausreinke/typescript-tools.vim'       " Typescript Autocomplete
 Plug 'davidhalter/jedi-vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
-" Show matching html/xml tags
-Plug 'Valloric/MatchTagAlways'
+Plug 'Valloric/MatchTagAlways'                " Show matching html/xml tags
 Plug 'fatih/vim-go'
-Plug 'zah/nim.vim'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'digitaltoad/vim-jade'
-Plug 'wavded/vim-stylus'
 Plug 'rust-lang/rust.vim'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'JamshedVesuna/vim-markdown-preview'
-" Show hex codes in css files
-Plug 'ap/vim-css-color'
-Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-endwise'                      " Adds if/end in Lua/Ruby
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'sudar/vim-arduino-syntax'
 Plug 'cespare/vim-toml'
-" Plug 'kana/vim-textobj-function'
-" Plug 'thinca/vim-textobj-function-javascript'
 "-----------------------------------------
 call plug#end()
 
