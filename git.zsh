@@ -46,6 +46,20 @@ goneline() {
   git log --pretty=oneline --decorate=short --reverse | tail -n $n
 }
 
+gresetcommit() {
+  print -z git reset $@ `fcommit`
+}
+
+gresetbranch() {
+  print -z git reset $@ `fbranch`
+}
+
+compdef _git-reset gresetcommit gresetbranch
+
+gsha1() {
+  print -z `fcommit`
+}
+
 _remote_branch() {
   remote=$(git remote)
   if [ $? != 0 ]; then
