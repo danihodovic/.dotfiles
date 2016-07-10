@@ -60,6 +60,10 @@ gsha1() {
   print -z `fcommit`
 }
 
+_local_branch() {
+  git symbolic-ref --short HEAD
+}
+
 _remote_branch() {
   remote=$(git remote)
   if [ $? != 0 ]; then
@@ -67,7 +71,7 @@ _remote_branch() {
   fi
 
   if [ $(echo $remote | wc -l) == 1  ]; then
-    branch=$(git symbolic-ref --short HEAD)
+    branch=$(_local_branch)
     echo "$remote $branch"
   else
     echo 'More than 1 remote, specify which one to pull from'
@@ -78,10 +82,12 @@ _remote_branch() {
 
 gpullbranch() {
   branch=$(_remote_branch)
-  [ $? == 0 ] && print -z git pull $branch $@
+  [ $? == 0 ] && print -z git pull $@ $branch
 }
+compdef _git-pull gpullbranch
 
 gpushbranch() {
   branch=$(_remote_branch)
-  [ $? == 0 ] && print -z git push $branch $@
+  [ $? == 0 ] && print -z git push $@ $branch
 }
+compdef _git-push gpushbranch
