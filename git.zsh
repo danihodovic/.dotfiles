@@ -95,7 +95,7 @@ compdef _git-push gpushbranch
 gcherry() {
   current_branch=$(git symbolic-ref --short HEAD)
   unmerged_branch=$(git branch --no-merged $current_branch | cut -c 3- | fzf)
-  commits=$(git rev-list $unmerged_branch --not $current_branch --no-merges --pretty=oneline | fzf -m)
+  commits=$(git rev-list $unmerged_branch --not $current_branch --no-merges --pretty=oneline --abbrev-commit | fzf -m)
   num_commits=$(echo $commits | wc -l)
 
   if [[ $num_commits -gt '2' ]]; then
