@@ -106,6 +106,6 @@ gcherry() {
   elif [[ $num_commits -eq '2' ]]; then
     first=$(echo $commits | awk '{if (NR==1) print $1}')
     second=$(echo $commits | awk '{if (NR==2) print $1}')
-    print -z git cherry-pick $first..$second
+    print -z git cherry-pick $first^..$second
   fi
 }
