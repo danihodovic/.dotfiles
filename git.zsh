@@ -17,20 +17,30 @@ alias gtags='git tag --list | sort -V'
 alias gtags-latest='git tag --list | sort -V | tail -n 1'
 alias gci-status='hub ci-status '
 
+# Initiate _git which exposes the _git-* completions
+_git
+
 gcc() {
-  print -z git checkout `fcommit`
+  print -z git checkout $@ `fcommit`
 }
 # TODO: When checking out a remote branch, checkout with -b so that we don't end up in detached
 # state.
 gcb() {
-  print -z git checkout `fbranch`
+  print -z git checkout $@ `fbranch`
 }
+
+compdef _git-checkout gcc gcb
+
 grebasecommit() {
-  print -z git rebase -i `fcommit`
+  print -z git rebase -i $@ `fcommit`
 }
+
 grebasebranch() {
-  print -z git rebase -i `fbranch`
+  print -z git rebase -i $@ `fbranch`
 }
+
+compdef _git-rebase grebasecommit grebasebranch
+
 goneline() {
   n=${1:-10}
   git log --pretty=oneline --decorate=short --reverse | tail -n $n
