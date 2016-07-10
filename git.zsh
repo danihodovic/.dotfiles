@@ -91,3 +91,21 @@ gpushbranch() {
   [ $? == 0 ] && print -z git push $@ $branch
 }
 compdef _git-push gpushbranch
+
+gcherry() {
+  current_branch=$(git symbolic-ref --short HEAD)
+  unmerged_branch=$(git branch --no-merged $current_branch | cut -c 3- | fzf)
+  commits=$(git rev-list $unmerged_branch --not $current_branch --no-merges --pretty=oneline | fzf -m)
+  num_commits=$(echo $commits | wc -l)
+
+  if [[ $num_commits -gt '2' ]]; then
+    echo "Select 1 to 2 commits, starting at the oldest commit"
+  elif [[ $num_commits -eq '1' ]]; then
+    commit=$(echo $commits | awk '{print $1}')
+    print -z git cherry-pick $commit
+  elif [[ $num_commits -eq '2' ]]; then
+    first=$(echo $commits | awk '{if (NR==1) print $1}')
+    second=$(echo $commits | awk '{if (NR==2) print $1}')
+    print -z git cherry-pick $first..$second
+  fi
+}
