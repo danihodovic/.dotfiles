@@ -57,7 +57,7 @@ compdef _git-rebase grebasecommit grebasebranch
 
 goneline() {
   n=${1:-10}
-  git log --pretty=oneline --decorate=short --reverse | tail -n $n
+  git log --pretty=oneline --decorate=short | tail -n $n
 }
 
 gresetcommit() {
@@ -105,6 +105,9 @@ gpushbranch() {
   [ $? == 0 ] && print -z git push $@ $branch
 }
 compdef _git-push gpushbranch
+
+alias gplb=gpullbranch
+alias gpsb=gpushbranch
 
 gcherry() {
   current_branch=$(git symbolic-ref --short HEAD)
