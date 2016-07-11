@@ -48,7 +48,8 @@ Plug 'xolox/vim-lua-ftplugin'
 Plug 'othree/yajs.vim'                        " Yet Another JavaScript Syntax
 Plug 'marijnh/tern_for_vim'
 Plug 'dani-h/typescript-vim'                  " Typescript Syntax
-Plug 'clausreinke/typescript-tools.vim'       " Typescript Autocomplete
+Plug 'Shougo/vimproc.vim'                     " Required by Quramy/tsuquyomi
+Plug 'Quramy/tsuquyomi'                       " Typescript completion, error detection, goto
 Plug 'davidhalter/jedi-vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
@@ -547,25 +548,8 @@ nnoremap ggp :GitGutterPrevHunk<cr>
 let g:neomake_list_height = 8
 let g:neomake_open_list = 2
 
-" Avoid specifying all maker options here due to conflicts. Instead use conf files
-let g:neomake_typescript_tsc_maker = {
-      \ 'args': [
-      \ '--module', 'commonjs', '--noEmit', '--target', 'ES5'
-      \ ],
-      \ 'errorformat':
-      \ '%E%f %#(%l\,%c): error %m,' .
-      \ '%E%f %#(%l\,%c): %m,' .
-      \ '%Eerror %m,' .
-      \ '%C%\s%\+%m'
-      \ }
-
 " Do not enable this for zsh. shellcheck does not support zsh
 autocmd BufWritePost *.js,*.py,*.sh,*.bash,bashrc,*.lua,*.go Neomake
-"-----------------------------------------
-" AutoFormat
-"-----------------------------------------
-let g:autoformat_javascript_typescript = 1
-" autocmd BufwritePre *.js,*.ts Autoformat
 "-----------------------------------------
 " VimAirline
 "-----------------------------------------
