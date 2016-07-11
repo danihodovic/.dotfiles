@@ -21,7 +21,8 @@ alias gci-status='hub ci-status '
 _git
 
 gcheckoutcommit() {
-  print -z git checkout $@ `fcommit`
+  local commit=`fcommit`
+  [[ -n $commit ]] && print -z git checkout $@ $commit
 }
 # TODO: When checking out a remote branch, checkout with -b so that we don't end up in detached
 # state.
@@ -38,7 +39,7 @@ print out
 EOF
 
   local branch=$(echo `fbranch` | awk -F/ "{$awk_str}")
-  print -z git checkout $@ $branch
+  [[ -n $branch ]] && print -z git checkout $@ $branch
 }
 
 alias gcc=gcheckoutcommit
@@ -46,11 +47,13 @@ alias gcb=gcheckoutbranch
 compdef _git-checkout gcheckoutcommit gcheckoutbranch
 
 grebasecommit() {
-  print -z git rebase -i $@ `fcommit`
+  local commit=`fcommit`
+  [[ -n $commit ]] && print -z git rebase -i $@ $commit
 }
 
 grebasebranch() {
-  print -z git rebase -i $@ `fbranch`
+  branch=`fbranch`
+  [[ -n $branch ]] && print -z git rebase -i $@ `fbranch`
 }
 
 compdef _git-rebase grebasecommit grebasebranch
@@ -61,11 +64,13 @@ goneline() {
 }
 
 gresetcommit() {
-  print -z git reset $@ `fcommit`
+  commit=`fcommit`
+  [[ -n $commit ]] && print -z git reset $@ $commit
 }
 
 gresetbranch() {
-  print -z git reset $@ `fbranch`
+  branch=`fbranch`
+  [[ -n $branch ]] && print -z git reset $@ `fbranch`
 }
 
 compdef _git-reset gresetcommit gresetbranch
