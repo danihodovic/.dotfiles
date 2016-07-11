@@ -20,16 +20,30 @@ alias gci-status='hub ci-status '
 # Initiate _git which exposes the _git-* completions
 _git
 
-gcc() {
+gcheckoutcommit() {
   print -z git checkout $@ `fcommit`
 }
 # TODO: When checking out a remote branch, checkout with -b so that we don't end up in detached
 # state.
-gcb() {
-  print -z git checkout $@ `fbranch`
+gcheckoutbranch() {
+  # Remote branches can be /origin/zingo/foo/bar/baz, extract only the relevant bits from after
+  # origin/zingo
+  local awk_str
+read -r -d '' awk_str <<'EOF'
+out=""
+for (i = 3; i <= NF; i++) {
+  i == NF ? out=out$i : out=out$i"/"
+}
+print out
+EOF
+
+  local branch=$(echo `fbranch` | awk -F/ "{$awk_str}")
+  print -z git checkout $@ $branch
 }
 
-compdef _git-checkout gcc gcb
+alias gcc=gcheckoutcommit
+alias gcb=gcheckoutbranch
+compdef _git-checkout gcheckoutcommit gcheckoutbranch
 
 grebasecommit() {
   print -z git rebase -i $@ `fcommit`
