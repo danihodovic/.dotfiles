@@ -38,7 +38,10 @@ for (i = 3; i <= NF; i++) {
 print out
 EOF
 
-  local branch=$(echo `fbranch` | awk -F/ "{$awk_str}")
+  local branch=`fbranch`
+  if [[ $branch =~ ^remotes ]]; then
+    branch=$(echo $branch | awk -F/ "{$awk_str}")
+  fi
   [[ -n $branch ]] && print -z git checkout $@ $branch
 }
 
@@ -53,7 +56,7 @@ grebasecommit() {
 
 grebasebranch() {
   branch=`fbranch`
-  [[ -n $branch ]] && print -z git rebase -i $@ `fbranch`
+  [[ -n $branch ]] && print -z git rebase -i $@ $branch
 }
 
 compdef _git-rebase grebasecommit grebasebranch

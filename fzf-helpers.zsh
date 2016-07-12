@@ -85,10 +85,9 @@ fcommit() {
 
 fbranch() {
   local branches branch
-  branches=$(git branch --all | grep -v HEAD) &&
-  branch=$(echo "$branches" |
-           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
-  echo -n $branch
+  branches=$(git branch --all | grep -v HEAD)
+  branch=$(echo "$branches" | fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m)
+  echo -n $branch | cut -c 3-
 }
 
 # fshow - git commit browser
