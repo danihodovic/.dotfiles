@@ -39,6 +39,7 @@ Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
 Plug 'FooSoft/vim-argwrap'  
 Plug 'sunaku/vim-dasht'
 Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
+Plug 'tpope/vim-abolish'
 " -----------------------------------------
 " Lang specific
 " -----------------------------------------
