@@ -417,7 +417,6 @@ let g:ycm_semantic_triggers =  {
       \   'cs,java,javascript,d,python,perl6,scala,vb,elixir,go,typescript' : ['.'],
       \   'vim' : ['re![_a-zA-Z]+[_\w]*\.'],
       \   'ruby' : ['.', '::'],
-      \   'lua' : ['.', ':'],
       \   'erlang' : [':'],
       \ }
 "-----------------------------------------
