@@ -46,7 +46,7 @@ Plug 'tpope/vim-abolish'
 Plug 'danihodovic/vim-node-require', {'branch': 'dev'}
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-lua-ftplugin'
-Plug 'othree/yajs.vim'                        " Yet Another JavaScript Syntax
+Plug 'jelera/vim-javascript-syntax'
 Plug 'marijnh/tern_for_vim'
 Plug 'dani-h/typescript-vim'                  " Typescript Syntax
 Plug 'Shougo/vimproc.vim'                     " Required by Quramy/tsuquyomi
