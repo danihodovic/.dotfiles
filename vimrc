@@ -918,3 +918,18 @@ fu! IsNumber(val)
 endfu
 
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+
+" Create the parent directory if it doesn't exist before saving
+function s:MkNonExDir(file, buf)
+  if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+    let dir=fnamemodify(a:file, ':h')
+    if !isdirectory(dir)
+      call mkdir(dir, 'p')
+    endif
+  endif
+endfunction
+
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), expand('<abuf>'))
+augroup END
