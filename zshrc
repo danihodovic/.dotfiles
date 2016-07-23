@@ -192,6 +192,7 @@ alias setxkbmapcaps="setxkbmap -option caps:swapescape"
 alias open='xdg-open'
 alias vi='nvim'
 alias psag='ps aux | ag '
+alias service='sudo service '
 
 alias aptinstall='sudo apt-get install '
 alias aptpurge='sudo apt-get purge '
