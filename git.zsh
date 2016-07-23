@@ -56,7 +56,7 @@ grebasecommit() {
 
 grebasebranch() {
   branch=`fbranch`
-  [[ -n $branch ]] && print -z git rebase -i $@ $branch
+  [[ -n $branch ]] && print -z git rebase $@ $branch
 }
 
 compdef _git-rebase grebasecommit grebasebranch
@@ -118,7 +118,7 @@ alias gplb=gpullbranch
 alias gpsb=gpushbranch
 
 gcherry() {
-  current_branch=$(git symbolic-ref --short HEAD)
+  current_branch=$(_local_branch)
   unmerged_branch=$(git branch --no-merged $current_branch | cut -c 3- | fzf)
   commits=$(git rev-list $unmerged_branch --not $current_branch --no-merges --pretty=oneline --abbrev-commit | fzf -m)
   num_commits=$(echo $commits | wc -l)
@@ -134,3 +134,13 @@ gcherry() {
     print -z git cherry-pick $first^..$second
   fi
 }
+
+gchangedfilesinbranch() {
+  local changed_files=$(git --no-pager diff origin/master --name-only)
+  local selected_files=$(echo $changed_files | fzf -m)
+  local oneline=$(echo $selected_files | tr '\n' ' ')
+  LBUFFER="${LBUFFER} $oneline"
+  zle redisplay
+}
+zle -N gchangedfilesinbranch
+bindkey -M vicmd '\-' gchangedfilesinbranch

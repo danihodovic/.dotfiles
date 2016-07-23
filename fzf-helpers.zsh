@@ -46,7 +46,7 @@ bindkey -M vicmd '^g' fzf-git-status-widget
 # Run fzf and paste results onto command line
 # This will set ` to run fzf-root-widget in vicmd and M-` to run fzf-root-widget in viins
 bindkey -M vicmd '='    fzf-file-widget
-bindkey -M vicmd '\-'    fzf-root-widget
+# bindkey -M vicmd '\-'    fzf-root-widget
 
 export FZF_CTRL_R_OPTS='--exact'
 bindkey -M vicmd '^r'   fzf-history-widget
