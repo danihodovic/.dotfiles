@@ -421,12 +421,6 @@ let g:ycm_semantic_triggers =  {
       \   'erlang' : [':'],
       \ }
 "-----------------------------------------
-" Collection of GoToDef, Completion, Lang support for plugins
-"-----------------------------------------
-" Typescript
-"-----------------------------------------
-autocmd FileType typescript nnoremap <buffer>gd :TSSdef<CR>
-"-----------------------------------------
 " Eclim Java, Scala
 "-----------------------------------------
 autocmd FileType scala map <buffer>gd :ScalaSearch<cr>
@@ -634,6 +628,11 @@ function! s:CloseIfOnlyNerdTreeLeft()
     endif
   endif
 endfunction
+"-----------------------------------------
+" Quramy/tsuquyomi
+"-----------------------------------------
+autocmd FileType nnoremap <buffer>gd :TsuquyomiDefinition<cr>
+autocmd FileType vnoremap <buffer>gd :TsuquyomiDefinition<cr>
 "-----------------------------------------
 " vim-markdown-preview
 "-----------------------------------------
