@@ -89,13 +89,14 @@ antigen apply
 autoload bashcompinit && bashcompinit
 scripts=${HOME}/.scripts
 scripts=(
+  /usr/local/bin/aws_zsh_completer.sh
   ${HOME}/.fzf.zsh
   $scripts/fzf/shell/key-bindings.zsh
-  ${HOME}/.dotfiles/fzf-helpers.zsh
   $scripts/i3_completion.sh
-  ${HOME}/.local/bin/aws_zsh_completer.sh
   $scripts/nvm/nvm.sh
   ${HOME}/.gvm/scripts/gvm
+  # Own helpers
+  ${HOME}/.dotfiles/fzf-helpers.zsh
   ${HOME}/.dotfiles/docker.zsh
   ${HOME}/.dotfiles/git.zsh
 )
