@@ -43,6 +43,21 @@ gpg-agent. However if you use keychain you will have to add the following lines 
     keychain ${HOME}/.ssh/id_rsa
     source ${HOME}/.keychain/mbp-sh
 
+# Changing gpg-agent passphrase
+It seems like gpg and gpg2 use different passphrases to protect the key. To change the one the
+gpg-daemon uses you need to use gpg2. In case you want to change the passphrase gpg uses use `gpg`
+instead of `gpg2`.
+
+    $ gpg2 --edit-key <your key>
+    > passwd
+    > save
+
+    $ killall gpg-agent
+
+# Changing the ssh key passphrase
+
+    $ ssh-keygen -p -f ~/.ssh/id_rsa
+
 # Set maximum cache time on gpg-agent
 "Set it to a year or so – say, 34560000 seconds (400 days) – and you should be fine:"
 
