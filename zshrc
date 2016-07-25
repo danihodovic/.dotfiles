@@ -190,7 +190,7 @@ alias h="history"
 alias cd-="cd -"
 alias ls='ls --color=auto --classify'
 alias setxkbmapcaps="setxkbmap -option caps:swapescape"
-alias open='xdg-open'
+alias o='xdg-open'
 alias vi='nvim'
 alias psag='ps aux | ag '
 alias service='sudo service '
