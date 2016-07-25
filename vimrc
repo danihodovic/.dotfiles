@@ -418,17 +418,22 @@ let g:ycm_semantic_triggers =  {
       \   'ruby' : ['.', '::'],
       \   'erlang' : [':'],
       \ }
+
+augroup GoToBinding
+  autocmd FileType typescript nnoremap <buffer>gd :YcmCompleter GoToDefinition<cr>
+  autocmd FileType typescript command! -nargs=1 -buffer Rename YcmCompleter RefactorRename <args>
+
+  autocmd FileType javascript noremap <silent><buffer>gd :call TernOrDucktape()<cr>
+  autocmd FileType scala nnoremap map <buffer>gd :ScalaSearch<cr>
+  autocmd FileType typescript,javascript nnoremap <buffer><leader>t :YcmCompleter GetType<cr>
+augroup END
 "-----------------------------------------
 " Eclim Java, Scala
 "-----------------------------------------
-autocmd FileType scala map <buffer>gd :ScalaSearch<cr>
 let g:EclimCompletionMethod = 'omnifunc'
 "-----------------------------------------
 " TernJS
 "-----------------------------------------
-autocmd FileType javascript nnoremap <buffer> <leader>t :TernType<cr>
-" Replace the built in gd with Tern for JS files
-autocmd FileType javascript noremap <silent><buffer>gd :call TernOrDucktape()<cr>
 fu! TernOrDucktape()
   if getline('.') =~ 'require\(.*\)'
     let file = FindRequireJSFile()
@@ -443,13 +448,9 @@ fu! TernOrDucktape()
       execute 'normal /' . searchword . "\<CR>"
     endif
   else
-    execute 'TernDef'
+    execute 'YcmCompleter GoToDefinition'
   endif
 endfu
-" 'no', 'on_move', 'on_hold' - Note: on_move will cause major lag when moving!
-let g:tern_show_argument_hints = 'no'
-" Shows args in completion menu
-let g:tern_show_signature_in_pum = 1
 "-----------------------------------------
 " FixMyJS
 "-----------------------------------------
@@ -918,7 +919,7 @@ endfu
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 " Create the parent directory if it doesn't exist before saving
-function s:MkNonExDir(file, buf)
+function! s:MkNonExDir(file, buf)
   if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
     let dir=fnamemodify(a:file, ':h')
     if !isdirectory(dir)
