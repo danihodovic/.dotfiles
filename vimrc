@@ -273,6 +273,10 @@ autocmd FileType sshconfig              setlocal  shiftwidth=4 tabstop=4 expandt
 "-----------------------------------------
 " fzf.vim
 "-----------------------------------------
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'vsplit',
+  \ 'ctrl-c': 'split' }
 let g:fzf_layout = {'up': '~40%'}
 nnoremap = :Files<cr>
 nnoremap - :FzfLocateRoot<cr>
