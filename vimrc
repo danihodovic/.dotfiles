@@ -45,10 +45,7 @@ Plug 'tpope/vim-abolish'
 " -----------------------------------------
 Plug 'danihodovic/vim-node-require', {'branch': 'dev'}
 Plug 'jelera/vim-javascript-syntax'
-Plug 'marijnh/tern_for_vim'
-Plug 'dani-h/typescript-vim'                  " Typescript Syntax
-Plug 'Shougo/vimproc.vim'                     " Required by Quramy/tsuquyomi
-Plug 'Quramy/tsuquyomi'                       " Typescript completion, error detection, goto
+Plug 'HerringtonDarkholme/yats.vim'             " Typescript syntax
 Plug 'davidhalter/jedi-vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
@@ -541,8 +538,18 @@ nnoremap ggp :GitGutterPrevHunk<cr>
 let g:neomake_list_height = 8
 let g:neomake_open_list = 2
 
+let g:neomake_typescript_tsc_maker = {
+    \ 'args': ['--noEmit'],
+    \ 'append_file': 0,
+    \ 'errorformat':
+        \ '%E%f %#(%l\,%c): error %m,' .
+        \ '%E%f %#(%l\,%c): %m,' .
+        \ '%Eerror %m,' .
+        \ '%C%\s%\+%m',
+    \ }
+let g:neomake_typescript_enabled_makers = ['tsc']
 " Do not enable this for zsh. shellcheck does not support zsh
-autocmd BufWritePost *.js,*.py,*.sh,*.bash,bashrc,*.lua,*.go Neomake
+autocmd BufWritePost *.js,*.ts,*.py,*.sh,*.bash,bashrc,*.lua,*.go Neomake
 "-----------------------------------------
 " VimAirline
 "-----------------------------------------
@@ -627,11 +634,6 @@ function! s:CloseIfOnlyNerdTreeLeft()
     endif
   endif
 endfunction
-"-----------------------------------------
-" Quramy/tsuquyomi
-"-----------------------------------------
-autocmd FileType nnoremap <buffer>gd :TsuquyomiDefinition<cr>
-autocmd FileType vnoremap <buffer>gd :TsuquyomiDefinition<cr>
 "-----------------------------------------
 " vim-markdown-preview
 "-----------------------------------------
