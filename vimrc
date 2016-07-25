@@ -44,8 +44,6 @@ Plug 'tpope/vim-abolish'
 " Lang specific
 " -----------------------------------------
 Plug 'danihodovic/vim-node-require', {'branch': 'dev'}
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-lua-ftplugin'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'marijnh/tern_for_vim'
 Plug 'dani-h/typescript-vim'                  " Typescript Syntax
