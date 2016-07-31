@@ -17,6 +17,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'            " Shows dirty files in NERDTree
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'benekastah/neomake'
+Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
