@@ -283,12 +283,25 @@ let g:fzf_action = {
   \ 'ctrl-c': 'split' }
 let g:fzf_layout = {'up': '~40%'}
 nnoremap = :Files<cr>
-nnoremap - :FzfLocateRoot<cr>
+nnoremap - :call FzfGitChangedFilesFromMaster()<cr>
 nnoremap b :Buffers<cr>
 nnoremap <C-h> :History:<cr>
 cnoremap <C-h> <Esc>:History:<cr>
 nnoremap r :History<cr>
-nnoremap <leader>gs :GitFiles?<cr>
+
+function! FzfGitChangedFilesFromMaster()
+  let root = split(system('git rev-parse --show-toplevel'), '\n')[0]
+  if v:shell_error
+    return s:warn('Not in git repo')
+  endif
+  return fzf#run({
+  \ 'source':  'git --no-pager diff origin/master --name-only',
+  \ 'sink':    'edit',
+  \ 'dir':     root,
+  \ 'options': '--ansi --multi --nth 2..,.. --prompt "GitFiles?> "',
+  \ 'up':      '~40%'
+  \})
+endfunction
 
 command! FzfLocateRoot call FzfLocateRoot()
 fu! FzfLocateRoot()
