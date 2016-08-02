@@ -292,10 +292,15 @@ nnoremap r :History<cr>
 function! FzfGitChangedFilesFromMaster()
   let root = split(system('git rev-parse --show-toplevel'), '\n')[0]
   if v:shell_error
-    return s:warn('Not in git repo')
+    echom 'Not in git repo'
+    return
   endif
+  " If we pre determine the files and pass in a list instead of a command the fzf window will be
+  " intelligently wrapped in height. If we pass a command it will have a default height and grow
+  " from there.
+  let files = split(system('git --no-pager diff origin/master --name-only'), '\n')
   return fzf#run({
-  \ 'source':  'git --no-pager diff origin/master --name-only',
+  \ 'source':  files,
   \ 'sink':    'edit',
   \ 'dir':     root,
   \ 'options': '--ansi --multi --nth 2..,.. --prompt "GitFiles?> "',
