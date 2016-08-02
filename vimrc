@@ -17,36 +17,38 @@ Plug 'Xuyuanp/nerdtree-git-plugin'            " Shows dirty files in NERDTree
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'benekastah/neomake'
-Plug 'tpope/vim-surround'
-Plug 'airblade/vim-gitgutter'
-Plug 'scrooloose/nerdcommenter'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'bling/vim-airline'
+Plug 'tpope/vim-surround'                     " Surround text with (){}<>
+Plug 'jiangmiao/auto-pairs'                   " Automatically add (){}<>
+Plug 'airblade/vim-gitgutter'                 " Show changed git lines
+Plug 'scrooloose/nerdcommenter'               " Comment/uncomment source code files
+Plug 'terryma/vim-multiple-cursors' 
+Plug 'bling/vim-airline' 
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'
-Plug 'Lokaltog/vim-easymotion'
+Plug 'tpope/vim-fugitive'                     " Various git commands inside vim
+Plug 'Lokaltog/vim-easymotion'                " Better movement with f/t
 Plug 'SirVer/ultisnips'
-Plug 'dani-h/vim-dsnippets'
-Plug 'jiangmiao/auto-pairs' 
+Plug 'danihodovic/vim-dsnippets'              " My own snippets
 Plug 'nathanaelkane/vim-indent-guides'        " Visually display indent lines with different color
 Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
 Plug 'junegunn/vim-pseudocl'                  " Required by vim-oblique
 Plug 'junegunn/vim-oblique'                   " Colors search result and sets nohlsearch on cursor move
-Plug 'junegunn/vim-easy-align'                
+Plug 'junegunn/vim-easy-align'                " Align code around arbitrary characters =,:
 Plug 'itchyny/vim-cursorword'                 " Highlight the occurances of the word under the cursor
 Plug 'kana/vim-textobj-user'                  " Add additional text objects
 Plug 'kana/vim-textobj-function'              " Add function based text objects
 Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
-Plug 'FooSoft/vim-argwrap'  
-Plug 'sunaku/vim-dasht'
+Plug 'FooSoft/vim-argwrap'                    " Collapse or expand arguments for a function
+Plug 'sunaku/vim-dasht'                       " Show documentation for the word under the cursor
 Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
 Plug 'tpope/vim-abolish'
+Plug 'kana/vim-operator-user'                 " Required for vim-operator-flashy
+Plug 'haya14busa/vim-operator-flashy'         " Highlights the yanked words
+Plug 'luochen1990/rainbow'
 " -----------------------------------------
 " Lang specific
 " -----------------------------------------
-Plug 'danihodovic/vim-node-require', {'branch': 'dev'}
 Plug 'jelera/vim-javascript-syntax'
-Plug 'HerringtonDarkholme/yats.vim'             " Typescript syntax
+Plug 'HerringtonDarkholme/yats.vim'           " Typescript syntax
 Plug 'davidhalter/jedi-vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
@@ -58,7 +60,8 @@ Plug 'tpope/vim-endwise'                      " Adds if/end in Lua/Ruby
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'sudar/vim-arduino-syntax'
-Plug 'cespare/vim-toml'
+Plug 'cespare/vim-toml'                       " Toml is a configuration language similar to yaml
+Plug 'danihodovic/vim-node-require', {'branch': 'dev'}
 "-----------------------------------------
 call plug#end()
 
@@ -537,6 +540,11 @@ let g:gitgutter_max_signs=9999
 hi SignColumn guibg=black ctermbg=black
 nnoremap ggn :GitGutterNextHunk<cr>
 nnoremap ggp :GitGutterPrevHunk<cr>
+"-----------------------------------------
+" vim-operator-flashy
+"-----------------------------------------
+highlight Flashy term=bold ctermbg=15 ctermfg=122
+map y <Plug>(operator-flashy)
 "-----------------------------------------
 " Neomake
 "-----------------------------------------
