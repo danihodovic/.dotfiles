@@ -20,7 +20,10 @@ alias dsearch='docker search '
 
 alias dcbuild='docker-compose build'
 alias dcup='docker-compose up'
+alias dcdown='docker-compose down'
 alias dcrun='docker-compose run '
+alias dcexec='docker-compose exec '
+alias dclogs='docker-compose logs'
 
 fcontainer() {
   echo "$(docker ps --format=$custom_ps_format | awk '{if(NR>1) print}' | fzf | \
