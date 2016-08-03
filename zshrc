@@ -99,6 +99,7 @@ scripts=(
   ${HOME}/.dotfiles/fzf-helpers.zsh
   ${HOME}/.dotfiles/docker.zsh
   ${HOME}/.dotfiles/git.zsh
+  ${HOME}/.zshrc_local
 )
 
 for script in $scripts; do
