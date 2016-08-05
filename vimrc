@@ -7,7 +7,6 @@ call plug#begin('$NVIM_DIR/plugged')
 "-----------------------------------------
 " General plugins
 "-----------------------------------------
-Plug 'dansomething/vim-eclim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'danihodovic/fzf.vim'
