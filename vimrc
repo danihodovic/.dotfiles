@@ -40,7 +40,7 @@ Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
 Plug 'FooSoft/vim-argwrap'                    " Collapse or expand arguments for a function
 Plug 'sunaku/vim-dasht'                       " Show documentation for the word under the cursor
 Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
-Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-abolish'                      " Change snake case to camelcase and vice versa
 Plug 'kana/vim-operator-user'                 " Required for vim-operator-flashy
 Plug 'haya14busa/vim-operator-flashy'         " Highlights the yanked words
 Plug 'luochen1990/rainbow'
@@ -445,6 +445,7 @@ let g:ycm_semantic_triggers =  {
 augroup GoToBinding
   autocmd FileType typescript nnoremap <buffer>gd :YcmCompleter GoToDefinition<cr>
   autocmd FileType typescript command! -nargs=1 -buffer Rename YcmCompleter RefactorRename <args>
+  autocmd FileType typescript command! -nargs=0 -buffer References YcmCompleter GoToReferences 
 
   autocmd FileType javascript noremap <silent><buffer>gd :call TernOrDucktape()<cr>
   autocmd FileType scala nnoremap map <buffer>gd :ScalaSearch<cr>
