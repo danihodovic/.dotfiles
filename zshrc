@@ -93,7 +93,6 @@ scripts=(
   ${HOME}/.fzf.zsh
   $scripts/fzf/shell/key-bindings.zsh
   $scripts/i3_completion.sh
-  $scripts/nvm/nvm.sh
   ${HOME}/.gvm/scripts/gvm
   # Own helpers
   ${HOME}/.dotfiles/fzf-helpers.zsh
@@ -101,6 +100,10 @@ scripts=(
   ${HOME}/.dotfiles/git.zsh
   ${HOME}/.zshrc_local
 )
+# Source nvm with --no-use to significantly speed things up
+# With    --no-use: zsh -i -c exit  0,15s user 0,06s system 76% cpu 0,273 total
+# Without --no-use: zsh -i -c exit  0,44s user 0,09s system 68% cpu 0,779 total
+source $scripts/nvm/nvm.sh --no-use
 
 for script in $scripts; do
   if [ -f $script ]; then
