@@ -459,7 +459,7 @@ let g:EclimCompletionMethod = 'omnifunc'
 "-----------------------------------------
 fu! TernOrDucktape()
   if getline('.') =~ 'require\(.*\)'
-    let file = FindRequireJSFile()
+    let file = require#find_in_current_line()
     " If a string is returned
     if type(file) == 1
       let searchword = 'exports'
@@ -845,105 +845,6 @@ fu! ReformatTextWidth() range
   let &textwidth = currWidth
   call inputrestore()
 endfu!
-
-
-function! FindRequireJSFile(...)
-python << EOF
-# This is a clusterfuck, but surprisingly works for JS
-# TODO: Log when it can't find results
-import vim
-import os
-import subprocess
-import json
-
-REQUIRE_REGEX = 'require\(["\'](.*)["\']\)'
-
-def findRelativeRequire(requirePath):
-  filename = requirePath
-  if not filename.endswith('.js'):
-    filename = filename + '.js'
-
-  currDir = os.path.dirname(vim.current.buffer.name)
-  realpath = os.path.realpath(os.path.join(currDir, filename))
-
-  if os.path.isfile(realpath):
-    return realpath
-  else:
-    filename = requirePath + '/index.js'
-
-    relativePath = os.path.join(currDir, filename)
-    realpath = os.path.realpath(relativePath)
-    if os.path.isfile(realpath):
-      return realpath
-
-def findNodeModulesRequire(filename):
-  if filename.endswith('.js'):
-    filename = filename[:-3]
-
-  currFile = vim.eval('expand("%:p")')
-  currDir = os.path.dirname(currFile)
-
-  # Walk until the package is found is found or we are at fs root. This accounts for nested
-  # dependencies in the packages and shrinkwrapped projects.  If we are deep in a dependency
-  # tree and look for a dependency that is common with the root projects dependency, npm may
-  # have moved this dependency up in the tree.  So we need to check for this package in
-  # every node_modules directory we encounter.
-  # E.g we are looking for dependency c in b
-  # $PROJ_ROOT/node_modules/a/node_modules/b
-  # $PROJ_ROOT/node_modules/c
-
-  packageDir = ''
-  while currDir != '/':
-    if 'node_modules' in os.listdir(currDir):
-      packageDir = os.path.realpath(currDir + '/node_modules/' + filename)
-      if os.path.isdir(packageDir):
-        break
-    currDir = os.path.dirname(currDir)
-
-  packageJson = packageDir + '/package.json'
-  if os.path.isfile(packageJson):
-    with open(packageJson) as f:
-      asJson = json.load(f)
-      mainfile = packageDir + '/' + asJson['main']
-      if mainfile.endswith('.js') == False:
-        mainfile = mainfile + '.js'
-      return mainfile
-
-# Unused, but useful to keep for later maybe
-def findRequireStmts():
-  requireStmts = []
-  for line in vim.current.buffer:
-    m = re.search(REQUIRE_REGEX, line)
-    if m:
-      for word in m.groups():
-        requireStmts.append(word)
-  return requireStmts
-
-# Unused, but useful to keep for later maybe
-def promptChoice(title, arr):
-  choices = []
-  choices.append("'{}'".format(title))
-  for idx, elem in enumerate(arr):
-    choices.append("'{}. {}'".format(idx + 1, elem))
-  asStr = ", ".join(choices)
-  selected = vim.eval("inputlist([{}])".format(asStr))
-  selectedIdx = int(selected)
-  return arr[selectedIdx - 1]
-
-currLine = vim.current.line
-m = re.search(REQUIRE_REGEX, vim.current.line)
-if m:
-  stmt = m.groups()[0]
-  root = None
-  if stmt.startswith('.'):
-    root = findRelativeRequire(stmt)
-  else:
-    root = findNodeModulesRequire(stmt)
-
-  if root:
-    vim.command('return "{}"'.format(root))
-EOF
-endfunction
 
 fu! IsNumber(val)
   return type(a:val) == 0
