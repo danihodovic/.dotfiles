@@ -48,13 +48,13 @@ Plug 'luochen1990/rainbow'
 " -----------------------------------------
 Plug 'jelera/vim-javascript-syntax'
 Plug 'HerringtonDarkholme/yats.vim'           " Typescript syntax
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'                   " Python semantic completion
 Plug 'derekwyatt/vim-scala'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
 Plug 'Valloric/MatchTagAlways'                " Show matching html/xml tags
-Plug 'fatih/vim-go'
-Plug 'rust-lang/rust.vim'
-Plug 'ekalinin/Dockerfile.vim'
+Plug 'fatih/vim-go'                           " Basically a Golang IDE for vi
+Plug 'rust-lang/rust.vim'                     " Rust syntax highlighting, formatting
+Plug 'ekalinin/Dockerfile.vim'                " Syntax for Dockerfile and snippets 
 Plug 'tpope/vim-endwise'                      " Adds if/end in Lua/Ruby
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'evanmiller/nginx-vim-syntax'
