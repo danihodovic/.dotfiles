@@ -444,12 +444,15 @@ let g:ycm_semantic_triggers =  {
 
 augroup GoToBinding
   autocmd FileType typescript nnoremap <buffer>gd :YcmCompleter GoToDefinition<cr>
-  autocmd FileType typescript command! -nargs=1 -buffer Rename YcmCompleter RefactorRename <args>
-  autocmd FileType typescript command! -nargs=0 -buffer References YcmCompleter GoToReferences 
-
   autocmd FileType javascript noremap <silent><buffer>gd :call TernOrDucktape()<cr>
-  autocmd FileType scala nnoremap map <buffer>gd :ScalaSearch<cr>
+  " Don't make these commands -buffer local. If you do that you can't autocomplete the commands in
+  " the command line window.
+  autocmd FileType typescript,javascript command! -nargs=1 Rename YcmCompleter RefactorRename <args>
+  autocmd FileType typescript,javascript command! References YcmCompleter GoToReferences
+  autocmd FileType typescript,javascript command! Doc YcmCompleter GetDoc
   autocmd FileType typescript,javascript nnoremap <buffer><leader>t :YcmCompleter GetType<cr>
+
+  autocmd FileType scala nnoremap map <buffer>gd :ScalaSearch<cr>
 augroup END
 "-----------------------------------------
 " Eclim Java, Scala
