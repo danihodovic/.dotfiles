@@ -37,11 +37,6 @@ elif [ "$DESKTOP_SESSION" = "i3" ]; then
   alias lock=i3lock
 fi
 
-# Settings
-setopt hist_ignore_all_dups
-setopt append_history
-setopt no_inc_append_history
-setopt no_share_history
 # Paths
 # ------------
 # Export paths before sourcing anything
@@ -55,13 +50,12 @@ export PATH=$PATH:${HOME}/.dasht/bin
 export GPG_TTY=$(tty)
 # Virtualenv
 export WORKON_HOME=${HOME}/.virtualenvs
-export EDITOR=nvim
-export PYTHONSTARTUP=~/.pythonrc
-
-# Variables shared by personal install scripts.
-# Potentially replace installs with submodules for antigen
 export NVIM_DIR=${HOME}/.config/nvim
-export ANTIGEN_PATH=${HOME}/.antigen/antigen.zsh
+export EDITOR=nvim
+# Use n instead of nvm as it's significantly faster to start zsh with it
+export N_PREFIX=${HOME}/.n
+export PATH=$PATH:$N_PREFIX/bin
+export PYTHONSTARTUP=~/.pythonrc
 
 # Ease of use
 export dotfiles=${HOME}/.dotfiles
@@ -69,27 +63,42 @@ export plugged=${NVIM_DIR}/plugged
 export vimrc=${HOME}/.dotfiles/vimrc
 export zshrc=${HOME}/.dotfiles/zshrc
 
-# Antigen
-source $ANTIGEN_PATH
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle djui/alias-tips
 
-antigen-use oh-my-zsh
-antigen theme robbyrussell/oh-my-zsh themes/steeef
+# Antibody
+source <(antibody init)
+antibody bundle zsh-users/zsh-completions
+antibody bundle zsh-users/zsh-syntax-highlighting
+antibody bundle djui/alias-tips
+antibody bundle jarmo/expand-aliases-oh-my-zsh
+antibody bundle danihodovic/steeef
 
-antigen apply
+# Settings
+setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+# http://unix.stackexchange.com/questions/273861/unlimited-history-in-zsh
+# You need to set both HISTSIZE and SAVEHIST. They indicate how many lines of history to keep in
+# memory and how many lines to keep in the history file, respectively.
+HISTFILE=~/.zsh_history
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
+
+# Enable reverse-menu-complete
+zmodload zsh/complist
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+# Highlight selected option in tab completion menu
+zstyle ':completion:*' menu select
+
 # External scripts
 # ------------
 # Source these before our own `bindkeys` so that we can override stuff
 # ------------
 autoload bashcompinit && bashcompinit
-scripts=${HOME}/.scripts
-scripts=(
+scripts_to_source=(
   /usr/local/bin/aws_zsh_completer.sh
   ${HOME}/.fzf.zsh
-  $scripts/fzf/shell/key-bindings.zsh
-  $scripts/i3_completion.sh
+  ${HOME}/.scripts/fzf/shell/key-bindings.zsh
+  ${HOME}/.scripts/i3_completion.sh
   ${HOME}/.gvm/scripts/gvm
   # Own helpers
   ${HOME}/.dotfiles/fzf-helpers.zsh
@@ -97,10 +106,6 @@ scripts=(
   ${HOME}/.dotfiles/git.zsh
   ${HOME}/.zshrc_local
 )
-# Source nvm with --no-use to significantly speed things up
-# With    --no-use: zsh -i -c exit  0,15s user 0,06s system 76% cpu 0,273 total
-# Without --no-use: zsh -i -c exit  0,44s user 0,09s system 68% cpu 0,779 total
-source $scripts/nvm/nvm.sh --no-use
 
 for script in $scripts; do
   if [ -f $script ]; then
