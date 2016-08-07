@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-custom_ps_format='"table {{.Names}}\t{{.Image}}\t{{.ID}}\t{{.Command}}\t{{.Ports}}\t{{.Mounts}}"'
+custom_ps_format='table {{.Names}}\t{{.Image}}\t{{.ID}}\t{{.Command}}\t{{.Ports}}\t{{.Mounts}}'
 
 # $ docker ps --format=$custom_ps_format | awk '{if(NR>1) print}' | fzf | awk '{print $1 != "" ? $1 : $3}'
 
