@@ -509,3 +509,18 @@ Notes:
 ## References:
 http://eclim.org/install.html
 https://github.com/dansomething/vim-eclim
+
+# Installing virtualbox-dkms on Ubuntu 16 (kernel > 4.4)
+
+It seems like kernel > 4.4 has some signing issues when installing virtualbox-dkms.
+See: https://bugs.launchpad.net/ubuntu/+source/virtualbox/+bug/1574300
+
+Steps to fix:
+
+    $ sudo apt install mokutil
+    $ sudo mokutil --disable-validation
+    $ sudo dpkg-reconfigure virtualbox-dkms
+    $ service virtualbox stop
+    $ service virtualbox start
+
+### Tags: virtualbox, virtualbox-dkms, kubernetes, minikube
