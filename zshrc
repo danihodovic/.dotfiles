@@ -107,7 +107,18 @@ scripts_to_source=(
   ${HOME}/.zshrc_local
 )
 
-for script in $scripts; do
+# Lazy load kubectl completion since it's fairly slow
+if hash kubectl 2> /dev/null; then
+  original_kubectl=$(which kubectl)
+  kubectl() {
+    source <($original_kubectl completion zsh)
+    unfunction kubectl
+    kubectl=$original_kubectl
+    $original_kubectl $@
+  }
+fi
+
+for script in $scripts_to_source; do
   if [ -f $script ]; then
     source $script
   else
