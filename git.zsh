@@ -93,7 +93,7 @@ _remote_branch() {
     return 1 # Returning $? will return the output of the if test. lol...
   fi
 
-  if [ $(echo $remote | wc -l) == 1  ]; then
+  if [ $(echo $remote | wc -l) = 1  ]; then
     branch=$(_local_branch)
     echo "$remote $branch"
   else
@@ -105,13 +105,13 @@ _remote_branch() {
 
 gpullbranch() {
   branch=$(_remote_branch)
-  [ $? == 0 ] && print -z git pull $@ $branch
+  [ $? = 0 ] && print -z git pull $@ $branch
 }
 compdef _git-pull gpullbranch
 
 gpushbranch() {
   branch=$(_remote_branch)
-  [ $? == 0 ] && print -z git push $@ $branch
+  [ $? = 0 ] && print -z git push $@ $branch
 }
 compdef _git-push gpushbranch
 
