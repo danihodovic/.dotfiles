@@ -198,6 +198,8 @@ vnoremap <leader>fo :call ReformatTextWidth()<cr>
 " Blink the current word when switching search words
 nnoremap <silent> n   n:call HLNext(0.1)<cr>
 nnoremap <silent> N   N:call HLNext(0.1)<cr>
+" Map S to ys for vim-surround
+map s ys
 "-----------------------------------------
 " Color scheme settings
 "-----------------------------------------
@@ -401,7 +403,6 @@ let g:EasyMotion_do_shade = 0
 let g:EasyMotion_use_upper = 1
 map f <Plug>(easymotion-bd-fl)
 map t <Plug>(easymotion-bd-tl)
-map s <Plug>(easymotion-sn)
 map <C-j> <Plug>(easymotion-j)
 map <C-k> <Plug>(easymotion-k)
 "-----------------------------------------
