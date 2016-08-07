@@ -17,13 +17,11 @@ start-tmux-if-exist() {
 }
 
 if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
-    echo 'Using Linux zshrc settings...'
     setxkbmap -option caps:swapescape
     start-tmux-if-exist
     keychain ${HOME}/.ssh/id_rsa -q
 
 elif [[ "$(uname)" == "Darwin" ]]; then
-    echo 'Using Mac OS zshrc settings...'
     # Use GNU coreutils instead of bsd ones
     export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
 
@@ -36,7 +34,6 @@ if [[ "$DESKTOP_SESSION" == "cinnamon" ]]; then
   echo 'Using cinnamon settings...'
   alias lock='cinnamon-screensaver-command -l'
 elif [ "$DESKTOP_SESSION" = "i3" ]; then
-  echo 'Using i3...'
   alias lock=i3lock
 fi
 
