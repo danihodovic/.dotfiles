@@ -60,7 +60,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'sudar/vim-arduino-syntax'
 Plug 'cespare/vim-toml'                       " Toml is a configuration language similar to yaml
-Plug 'danihodovic/vim-node-require', {'branch': 'dev'}
+Plug 'danihodovic/nodejs-require.vim'
 "-----------------------------------------
 call plug#end()
 
