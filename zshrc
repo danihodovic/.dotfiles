@@ -203,6 +203,7 @@ alias cd.="cd .."
 alias cd..="cd ../.."
 alias cd...="cd ../../.."
 alias cd....='cd ../../../..'
+alias cp='cp -v '
 alias h="history"
 alias cd-="cd -"
 alias ls='ls --color=auto --classify'
