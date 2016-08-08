@@ -5,7 +5,7 @@ custom_ps_format='table {{.Names}}\t{{.Image}}\t{{.ID}}\t{{.Command}}\t{{.Ports}
 
 alias drun='docker run '
 alias dstart='docker start '
-alias dps="docker ps --format=$custom_ps_format"
+alias dps="docker ps --format='$custom_ps_format'"
 alias dbuild='docker build '
 alias dbuildt='docker build -t '
 alias dkill='docker kill '
