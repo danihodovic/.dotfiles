@@ -20,7 +20,7 @@ alias dsearch='docker search '
 
 alias dcbuild='docker-compose build'
 alias dcup='docker-compose up'
-alias dcdown='docker-compose down'
+alias dcdown='docker-compose down -v --remove-orphans'
 alias dcrun='docker-compose run --rm '
 alias dcexec='docker-compose exec '
 alias dclogs='docker-compose logs'
