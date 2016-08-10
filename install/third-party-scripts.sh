@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-read -p "Install node version manager (nvm)? " -n 1 -r      install_nvm
+read -p "Install node version manager (n)? " -n 1 -r      install_n
 echo
 read -p "Install FZF? " -n 1 -r      install_fzf
 echo
@@ -11,17 +11,12 @@ echo
 
 scripts=${HOME}/.scripts
 
-case $install_nvm in
+case $install_n in
     y)
-      if [[ ! -f "$scripts/nvm/nvm.sh" ]]; then
-        git clone https://github.com/creationix/nvm.git "$scripts/nvm"
-        read -p "Install latest node and set as stable?" INSTALL_NODE
-        case $INSTALL_NODE in
-            y)
-                source "$scripts/nvm/nvm.sh"
-                nvm install node
-                nvm alias default node
-        esac
+      if [ ! -d "${HOME}/.n" ]; then
+        git clone https://github.com/tj/n ${HOME}/.n
+        cd" ${HOME}/.n"
+        PREFIX=bin make install
       else
           echo "Nvm already installed"
       fi
