@@ -41,9 +41,7 @@ fi
 # ------------
 # Export paths before sourcing anything
 export PATH=$PATH:${HOME}/.local/bin
-export GOROOT=/opt/go
 export GOPATH=${HOME}/repos/go_pkg
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH=$PATH:/opt/eclipse
 export PATH=$PATH:${HOME}/.dasht/bin
 # Required for pinentry-ncurses
