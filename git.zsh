@@ -16,35 +16,38 @@ alias gclone='git clone '
 alias gstash='git stash '
 alias gadd='git add '
 alias gtags='git tag --list | sort -V'
+alias gpushtags='git push origin --tags'
 alias gtags-latest='git tag --list | sort -V | tail -n 1'
 alias gci-status='hub ci-status '
 
 # Initiate _git which exposes the _git-* completions
 _git
 
+# Retrieve local and remote branches sorted by last commit to the branch
+fbranch() {
+  format="%(HEAD) %(refname:short)\
+%09[%(color:green)%(committerdate:relative)]\
+%(color:yellow) %(authorname) "
+  local branches=$(git for-each-ref --sort=committerdate refs/heads refs/remotes --format=$format)
+  local branch=$(echo $branches | fzf --ansi --exact --tac)
+  # Get the branch name without all the other noise
+  local branch_name=$(echo $branch | cut -c 3- | awk '{print $1}')
+  echo $branch_name
+}
+
 gcheckoutcommit() {
   local commit=`fcommit`
   [[ -n $commit ]] && print -z git checkout $@ $commit
 }
-# TODO: When checking out a remote branch, checkout with -b so that we don't end up in detached
-# state.
-gcheckoutbranch() {
-  # Remote branches can be /origin/zingo/foo/bar/baz, extract only the relevant bits from after
-  # origin/zingo
-  local awk_str
-read -r -d '' awk_str <<'EOF'
-out=""
-for (i = 3; i <= NF; i++) {
-  i == NF ? out=out$i : out=out$i"/"
-}
-print out
-EOF
 
-  local branch=`fbranch`
-  if [[ $branch =~ ^remotes ]]; then
-    branch=$(echo $branch | awk -F/ "{$awk_str}")
+gcheckoutbranch() {
+  local branch_name=$(fbranch)
+  if [[ $branch_name =~ ^origin ]]; then
+    # Strip the origin part. If we don't do this it won't checkout a new branch but will be in
+    # detached state
+    branch_name=$(echo $branch_name | sed -e 's/^origin\///')
   fi
-  [[ -n $branch ]] && print -z git checkout $@ $branch
+  [[ -n $branch_name ]] && print -z git checkout $@ $branch_name
 }
 
 alias gcc=gcheckoutcommit
@@ -63,6 +66,7 @@ grebasebranch() {
 
 compdef _git-rebase grebasecommit grebasebranch
 
+# TODO: Use fzf
 goneline() {
   n=${1:-10}
   git log --pretty=oneline --decorate=short | tail -n $n
