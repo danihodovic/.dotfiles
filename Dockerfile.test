@@ -5,12 +5,8 @@ RUN apt-get update && apt-get install \
 	python3 \
 	python3-apt \
 	ca-certificates \
-	sudo \
 	-y
 
-RUN useradd dani -m
-RUN usermod -a -G sudo dani
-RUN echo 'dani:test' | chpasswd
-USER dani
+COPY . /root/.dotfiles
 
-WORKDIR /home/dani/.dotfiles
+WORKDIR /root/.dotfiles
