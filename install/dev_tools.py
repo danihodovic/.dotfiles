@@ -8,6 +8,8 @@ import apt
 import apt.progress
 import lsb_release
 
+user  = 'dani'
+group = 'dani'
 
 ###############################
 # Apt packages
@@ -36,8 +38,6 @@ def install_neovim():
     #  import pip
     #  pip.main(['install', 'neovim'])
     #  pip.main(['install', '--upgrade', 'pip'])
-
-
 
 def install_zsh():
     pkg_name = 'zsh'
@@ -82,11 +82,13 @@ def download_to_file(url, thefile):
     parent_dir = os.path.dirname(thefile)
     if not os.path.isdir(parent_dir):
         os.makedirs(parent_dir)
+        shutil.chown(parent_dir, user=user, group=user)
 
     if not os.path.isfile(thefile):
         with urllib.request.urlopen(url) as res:
             with open(thefile, 'wb') as f:
                 shutil.copyfileobj(res, f)
+                shutil.chown(thefile, user=user, group=user)
 
 
 ###############################
