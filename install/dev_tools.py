@@ -4,12 +4,12 @@ import os
 import sys
 import urllib
 import shutil
+import getpass
 import apt
 import apt.progress
 import lsb_release
 
-user  = 'dani'
-group = 'dani'
+user = getpass.getuser()
 
 ###############################
 # Apt packages

@@ -5,13 +5,14 @@ import os
 import pwd
 import grp
 import unittest
+import getpass
 import apt
 
 repo_root = os.path.expanduser('~/.dotfiles/install')
 sys.path.append(repo_root)
 import dev_tools
 
-me = 'dani'
+user = getpass.getuser()
 vim_plug_path = os.path.expandvars('${HOME}/.config/nvim/autoload/plug.vim')
 
 min_version = 3.4
@@ -65,10 +66,10 @@ class IntegrationSuite(unittest.TestCase):
         dev_tools.install_vim_plug()
         self.assertTrue(os.path.isfile(vim_plug_path))
 
-        user = find_owner(vim_plug_path)
-        group = find_group(vim_plug_path)
-        self.assertEqual(user, me)
-        self.assertEqual(group, me)
+        file_user = find_owner(vim_plug_path)
+        file_group = find_group(vim_plug_path)
+        self.assertEqual(file_user, user)
+        self.assertEqual(file_group, user)
 
 def is_installed_pkg(pkg_name):
     cache = apt.cache.Cache()
