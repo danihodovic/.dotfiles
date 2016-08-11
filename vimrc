@@ -159,6 +159,8 @@ vmap m %
 " Stay in visual mode when indenting
 vnoremap < <gv
 vnoremap > >gv
+nnoremap < <<
+nnoremap > >>
 
 "Window movement
 inoremap <silent> <F12>h <esc>:call I3VIM_WindowFocus('h')<cr>
@@ -200,6 +202,7 @@ nnoremap <silent> n   n:call HLNext(0.1)<cr>
 nnoremap <silent> N   N:call HLNext(0.1)<cr>
 " Map S to ys for vim-surround
 map s ys
+vmap s S
 "-----------------------------------------
 " Color scheme settings
 "-----------------------------------------
