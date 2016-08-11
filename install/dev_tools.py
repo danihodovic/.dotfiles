@@ -51,12 +51,6 @@ def install_tmux():
 ###############################
 # Plugin managers
 ###############################
-def install_antigen():
-    antigen_file = os.path.expandvars('${HOME}/.antigen/antigen.zsh')
-    url = 'https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh'
-    download_to_file(url, antigen_file)
-
-
 def install_vim_plug():
     plug_file = os.path.expandvars('${HOME}/.config/nvim/autoload/plug.vim')
     url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -109,7 +103,6 @@ if __name__ == '__main__':
     ins_neovim   = input('Install neovim? [y/n]')
     ins_zsh      = input('Install zsh? [y/n]')
     ins_tmux     = input('Install tmux? [y/n]')
-    ins_antigen  = input('Install antigen? [y/n]')
     ins_vim_plug = input('Install vim-plug? [y/n]')
 
     if ins_neovim == 'y':
@@ -120,9 +113,6 @@ if __name__ == '__main__':
 
     if ins_tmux == 'y':
         install_tmux()
-
-    if ins_antigen == 'y':
-        install_antigen()
 
     if ins_vim_plug== 'y':
         install_vim_plug()
