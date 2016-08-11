@@ -5,6 +5,8 @@ import sys
 import urllib
 import shutil
 import getpass
+import tarfile
+import platform
 import apt
 import apt.progress
 import lsb_release
@@ -56,6 +58,14 @@ def install_vim_plug():
     url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     download_to_file(url, plug_file)
 
+def install_antibody():
+    base_url = 'https://github.com/getantibody/antibody/releases/download'
+    url = '{base_url}/v0.9.2/antibody_{system}_{machine}.tar.gz'.format(
+        base_url=base_url, system=platform.system(), machine=platform.machine())
+    filename = '/tmp/antibody.tar.gz'
+    download_to_file(url, filename)
+    with tarfile.open('filename', 'r:gz') as tar:
+        tar.extract('./antibody', '/usr/local/bin/')
 
 def install_apt_pkg(pkg_name):
     print('Installing {}...'.format(pkg_name))
