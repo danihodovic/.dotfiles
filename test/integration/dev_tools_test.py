@@ -14,6 +14,7 @@ import dev_tools
 
 user = getpass.getuser()
 vim_plug_path = os.path.expandvars('${HOME}/.config/nvim/autoload/plug.vim')
+antibody_path = os.path.expandvars('/usr/local/bin/antibody')
 
 min_version = 3.4
 version = float(sys.version[0:3])
@@ -70,6 +71,10 @@ class IntegrationSuite(unittest.TestCase):
         file_group = find_group(vim_plug_path)
         self.assertEqual(file_user, user)
         self.assertEqual(file_group, user)
+
+    def test_install_antibody(self):
+        dev_tools.install_antibody()
+        self.assertTrue(os.path.isfile(antibody_path))
 
 def is_installed_pkg(pkg_name):
     cache = apt.cache.Cache()
