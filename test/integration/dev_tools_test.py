@@ -2,14 +2,17 @@
 
 import sys
 import os
+import pwd
+import grp
 import unittest
 import apt
-from unittest.mock import Mock, call, patch
 
 repo_root = os.path.expanduser('~/.dotfiles/install')
 sys.path.append(repo_root)
-
 import dev_tools
+
+me = 'dani'
+vim_plug_path = os.path.expandvars('${HOME}/.config/nvim/autoload/plug.vim')
 
 min_version = 3.4
 version = float(sys.version[0:3])
@@ -18,6 +21,25 @@ if version < min_version:
     sys.exit(1)
 
 class IntegrationSuite(unittest.TestCase):
+
+    def setUp(self):
+        # Remove apt packages to ensure they are installed
+        cache = apt.cache.Cache()
+
+        def remove_if_installed(pkg_name):
+            if pkg_name in cache and cache[pkg_name].is_installed:
+                cache[pkg_name].mark_delete(purge=True)
+
+        remove_if_installed('zsh')
+        remove_if_installed('tmux')
+        remove_if_installed('neovim')
+
+        cache.commit()
+
+        # Remove files to ensure they are installed
+        if os.path.isfile(vim_plug_path):
+            os.remove(vim_plug_path)
+
 
     ###############################
     # Apt packages
@@ -39,20 +61,26 @@ class IntegrationSuite(unittest.TestCase):
     # Other
     ###############################
 
-    def test_install_antigen(self):
-        dev_tools.install_antigen()
-        os.path.isfile(os.path.expandvars('${HOME}/.antigen/antigen.zsh'))
-
     def test_install_vim_plug(self):
         dev_tools.install_vim_plug()
-        os.path.isfile(os.path.expandvars('${HOME}/.config/nvim/autoload/plug.vim'))
+        self.assertTrue(os.path.isfile(vim_plug_path))
 
+        user = find_owner(vim_plug_path)
+        group = find_group(vim_plug_path)
+        self.assertEqual(user, me)
+        self.assertEqual(group, me)
 
 def is_installed_pkg(pkg_name):
     cache = apt.cache.Cache()
-    pkg = cache[pkg_name]
-    return pkg.is_installed
+    if pkg_name in cache:
+        pkg = cache[pkg_name]
+        return pkg.is_installed
 
+def find_owner(filename):
+    return pwd.getpwuid(os.stat(filename).st_uid).pw_name
+
+def find_group(filename):
+    return grp.getgrgid(os.stat(filename).st_gid).gr_name
 
 if __name__ == '__main__':
     unittest.main()
