@@ -470,6 +470,9 @@ with your xsession. Debug by running
 
 # Docker
 
+## Docker daemon fails to start with Linux kernel 4.7
+http://stackoverflow.com/a/37640824/2966951
+
 ### library/mysql does not execute prepare.sql in a mounted volume
 
 Stupid issue. If the permissions are wrong on the host, the mysql user won't be able to see the
