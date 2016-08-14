@@ -22,48 +22,43 @@ if version < min_version:
     print('Error: Python version {} detected, use at least version {}', version, min_version)
     sys.exit(1)
 
+#  cache = apt.cache.Cache()
+#  cache.open()
+
 class IntegrationSuite(unittest.TestCase):
-
-    def setUp(self):
-        # Remove apt packages to ensure they are installed
-        cache = apt.cache.Cache()
-
-        def remove_if_installed(pkg_name):
-            if pkg_name in cache and cache[pkg_name].is_installed:
-                cache[pkg_name].mark_delete(purge=True)
-
-        remove_if_installed('zsh')
-        remove_if_installed('tmux')
-        remove_if_installed('neovim')
-
-        cache.commit()
-
-        # Remove files to ensure they are installed
-        if os.path.isfile(vim_plug_path):
-            os.remove(vim_plug_path)
-
-
     ###############################
     # Apt packages
     ###############################
 
     def test_install_zsh(self):
-        dev_tools.install_zsh()
-        self.assertTrue(is_installed_pkg('zsh'))
+        with dev_tools.cache_handler() as cache:
+            remove_if_installed(cache, 'zsh')
+            dev_tools.install_zsh()
+            cache.open()
+            self.assertTrue(is_installed_pkg(cache, 'zsh'))
 
     def test_install_tmux(self):
-        dev_tools.install_tmux()
-        self.assertTrue(is_installed_pkg('tmux'))
+        with dev_tools.cache_handler() as cache:
+            remove_if_installed(cache, 'tmux')
+            dev_tools.install_tmux()
+            cache.open()
+            self.assertTrue(is_installed_pkg(cache, 'tmux'))
 
     def test_install_neovim(self):
-        dev_tools.install_neovim()
-        self.assertTrue(is_installed_pkg('neovim'))
+        with dev_tools.cache_handler() as cache:
+            remove_if_installed(cache, 'neovim')
+            dev_tools.install_neovim()
+            cache.open()
+            self.assertTrue(is_installed_pkg(cache, 'neovim'))
 
     ###############################
     # Other
     ###############################
 
     def test_install_vim_plug(self):
+        if os.path.isfile(vim_plug_path):
+            os.remove(vim_plug_path)
+
         dev_tools.install_vim_plug()
         self.assertTrue(os.path.isfile(vim_plug_path))
 
@@ -73,14 +68,19 @@ class IntegrationSuite(unittest.TestCase):
         self.assertEqual(file_group, user)
 
     def test_install_antibody(self):
+        if os.path.isfile(antibody_path):
+            os.remove(antibody_path)
+
         dev_tools.install_antibody()
         self.assertTrue(os.path.isfile(antibody_path))
 
-def is_installed_pkg(pkg_name):
-    cache = apt.cache.Cache()
-    if pkg_name in cache:
-        pkg = cache[pkg_name]
-        return pkg.is_installed
+def is_installed_pkg(cache, pkg_name):
+    return cache.has_key(pkg_name) and cache[pkg_name].is_installed
+
+def remove_if_installed(cache, pkg_name):
+    if is_installed_pkg(cache, pkg_name):
+        cache[pkg_name].mark_delete(purge=True)
+        cache.commit()
 
 def find_owner(filename):
     return pwd.getpwuid(os.stat(filename).st_uid).pw_name

@@ -7,48 +7,65 @@ import shutil
 import getpass
 import tarfile
 import platform
+import contextlib
 import apt
 import apt.progress
 import lsb_release
 
 user = getpass.getuser()
 
+@contextlib.contextmanager
+def cache_handler():
+    cache = None
+    try:
+        cache = apt.cache.Cache()
+        cache.open()
+        yield cache
+    finally:
+        cache.close()
+
 ###############################
 # Apt packages
 ###############################
 def install_neovim():
-    print('Adding neovim ppa...')
-    lsb_codename = lsb_release.get_lsb_information()['CODENAME']
-    filename = '/etc/apt/sources.list.d/neovim-ppa.list'
-    line = 'deb http://ppa.launchpad.net/neovim-ppa/unstable/ubuntu {0} main\n'.format(lsb_codename)
-    print('Using ppa: {}'.format(line))
-    f = open(filename, 'w')
-    os.chmod(filename, 0o644)
-    f.write(line)
-    f.close()
+    with cache_handler() as cache:
+        pkg_name = 'neovim'
 
-    cache = apt.cache.Cache()
-    cache.update()
-    cache.commit()
+        if pkg_name in cache and cache[pkg_name].is_installed:
+            print('Package: neovim already installed')
+            return
 
-    pkg_name = 'neovim'
-    install_apt_pkg(pkg_name)
+        print('Adding neovim ppa...')
+        lsb_codename = lsb_release.get_lsb_information()['CODENAME']
+        filename = '/etc/apt/sources.list.d/neovim-ppa.list'
+        line = 'deb http://ppa.launchpad.net/neovim-ppa/unstable/ubuntu {0} main\n'.format(lsb_codename)
+        print('Using ppa: {}'.format(line))
 
-    print('''Please install neovim via pip.
-    We can't automate this in a simple way since it depends on the default python version''')
-    #  install_apt_pkg('python-pip')
-    #  import pip
-    #  pip.main(['install', 'neovim'])
-    #  pip.main(['install', '--upgrade', 'pip'])
+        with open(filename, 'w') as f:
+            os.chmod(filename, 0o644)
+            f.write(line)
+
+        # apt-get update after adding the ppa
+        cache.open()
+        cache.update(raise_on_error=True)
+        cache.open()
+
+        install_apt_pkg(cache, pkg_name)
+
+        # Install neovim for python to (for python plugins)
+        install_apt_pkg(cache, 'python3-pip')
+        import pip
+        pip.main(['install', 'neovim'])
 
 def install_zsh():
-    pkg_name = 'zsh'
-    install_apt_pkg(pkg_name)
-
+    with cache_handler() as cache:
+        pkg_name = 'zsh'
+        install_apt_pkg(cache, pkg_name)
 
 def install_tmux():
-    pkg_name = 'tmux'
-    install_apt_pkg(pkg_name)
+    with cache_handler() as cache:
+        pkg_name = 'tmux'
+        install_apt_pkg(cache, pkg_name)
 
 ###############################
 # Plugin managers
@@ -64,22 +81,20 @@ def install_antibody():
         base_url=base_url, system=platform.system(), machine=platform.machine())
     filename = '/tmp/antibody.tar.gz'
     download_to_file(url, filename)
-    with tarfile.open('filename', 'r:gz') as tar:
+    with tarfile.open(filename, 'r:gz') as tar:
         tar.extract('./antibody', '/usr/local/bin/')
 
-def install_apt_pkg(pkg_name):
-    print('Installing {}...'.format(pkg_name))
-    cache = apt.cache.Cache()
-    cache.update()
-    cache.commit()
-
-    pkg = cache[pkg_name]
-
-    if pkg.is_installed:
-        print("Package: {pkg_name} is already installed".format(pkg_name=pkg_name))
-    else:
+def install_apt_pkg(cache, pkg_name):
+    cache.open()
+    if not cache.has_key(pkg_name):
+        raise Exception('Error - Package: {} could not be found in the cache'.format(pkg_name))
+    elif cache.has_key(pkg_name) and not cache[pkg_name].is_installed:
+        print('Installing {}...'.format(pkg_name))
+        pkg = cache[pkg_name]
         pkg.mark_install()
         cache.commit()
+    elif cache[pkg_name].is_installed:
+        print("Package: {pkg_name} is already installed".format(pkg_name=pkg_name))
 
 
 def download_to_file(url, thefile):
