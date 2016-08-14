@@ -143,7 +143,7 @@ gcherry() {
 
 gchangedfilesinbranch() {
   local changed_files=$(git --no-pager diff origin/master --name-only)
-  local selected_files=$(echo $changed_files | fzf -m)
+  local selected_files=$(echo $changed_files | fzf -m --preview 'git diff --color=always {}')
   local oneline=$(echo $selected_files | tr '\n' ' ')
   LBUFFER="${LBUFFER} $oneline"
   zle redisplay
