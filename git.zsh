@@ -79,7 +79,7 @@ gresetcommit() {
 
 gresetbranch() {
   branch=`fbranch`
-  [[ -n $branch ]] && print -z git reset $@ `fbranch`
+  [[ -n $branch ]] && print -z git reset $@ "$branch"
 }
 
 compdef _git-reset gresetcommit gresetbranch
