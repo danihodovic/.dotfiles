@@ -7,6 +7,7 @@ alias glogS='git log -p -S '
 alias glgrep='git log --grep '
 alias gf='git fetch'
 alias gcommit='git commit -v -S'
+alias grebase='git rebase '
 alias gcheckout='git checkout '
 alias gshow='git show '
 alias gpush='git push '
@@ -29,7 +30,9 @@ fbranch() {
 %09[%(color:green)%(committerdate:relative)]\
 %(color:yellow) %(authorname) "
   local branches=$(git for-each-ref --sort=committerdate refs/heads refs/remotes --format=$format)
-  local branch=$(echo $branches | fzf --ansi --exact --tac)
+  local preview_cmd=$'echo {} | cut -c 3- | awk \'{print $1}\' | \
+    git --no-pager log --color=always --pretty=oneline --abbrev-commit --stdin'
+  local branch=$(echo $branches | fzf --ansi --exact --tac --preview $preview_cmd)
   # Get the branch name without all the other noise
   local branch_name=$(echo $branch | cut -c 3- | awk '{print $1}')
   echo $branch_name
