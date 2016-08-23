@@ -17,7 +17,6 @@ start-tmux-if-exist() {
 }
 
 if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
-    setxkbmap -option caps:swapescape
     start-tmux-if-exist
     keychain ${HOME}/.ssh/id_rsa -q
 
