@@ -447,6 +447,7 @@ nmap ga <Plug>(EasyAlign)
 "-----------------------------------------
 " YouCompleteMe
 "-----------------------------------------
+let g:ycm_server_python_interpreter = '/usr/bin/python2.7'
 let g:ycm_filetype_blacklist = {'notes': 1, 'markdown': 0, 'unite': 1, 'tagbar': 1,
       \'pandoc': 1, 'qf': 1, 'vimwiki': 1, 'text': 0, 'infolog': 1, 'mail': 1}
 " Opts: menu, menuone, longest, preview
