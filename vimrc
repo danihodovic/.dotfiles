@@ -366,8 +366,10 @@ fu! FindFunctionDefinition(query)
     let regex4 = printf('\w+\.%s\s*=\s*', word) 
     " function foo (
     let regex5 = printf('(function\s+%s\s*\(.*\))', word)
+    " class method
+    let regex6 = printf('(%s\s*\(.*\)\s*\{)', word)
 
-    let regex = printf('(%s|%s|%s|%s|%s)', regex1, regex2, regex3, regex4, regex5)
+    let regex = printf('(%s|%s|%s|%s|%s|%s)', regex1, regex2, regex3, regex4, regex5, regex6)
 
     " See if there is only one match
     let ag_call = printf('ag --nogroup --column "%s"', regex)
