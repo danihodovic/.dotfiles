@@ -340,7 +340,7 @@ fu! FzfAgCustom(queryparam)
     let query = expand('<cword>')
   endif
 
-  let ag_opts = 'ag --nogroup --column --color -U "%s"'
+  let ag_opts = 'ag --nogroup --column --color "%s"'
   let source = printf(ag_opts, query)
   let options = '--tac -e'
   call fzf#vim#ag(query, {'options': options, 'source': source, 'up': '~40%'})
@@ -364,10 +364,26 @@ fu! FindFunctionDefinition(query)
     let regex3 = '((\s+|\{)' . word . ':)'
     " foo = , baz.foo =
     let regex4 = '((\s+|\.)' . word . '\s*=\s+)'
-    " function foo
-    let regex5 = '(function\s+' . word . '\s*)'
-    " Add es6 class - foo() {}
-    let regex = printf('%s|%s|%s|%s|%s', regex1, regex2, regex3, regex4, regex5)
+    " function foo (
+    let regex5 = printf('(function\s+%s\s*\(.*\))', word)
+
+    let regex = printf('(%s|%s|%s|%s|%s)', regex1, regex2, regex3, regex4, regex5)
+
+    " See if there is only one match
+    let ag_call = printf('ag --nogroup --column "%s"', regex)
+    let result = system(ag_call)
+    let as_array = split(result, '\n')
+
+    " Only one match, go to that
+    if len(as_array) == 1
+      let split_by_colon = split(as_array[0], ':')
+      let filename = split_by_colon[0]
+      let line_number = split_by_colon[1]
+      execute printf('edit +%s %s', line_number, filename)
+      return
+    endif
+
+    " Multiple matches, call ag using fzf and decide from there
     call FzfAgCustom(regex)
   endif
 endfu
