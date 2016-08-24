@@ -362,8 +362,8 @@ fu! FindFunctionDefinition(query)
     let regex2 = '(prototype\.' . word . '\s+)'
     " foo: , {foo:
     let regex3 = '((\s+|\{)' . word . ':)'
-    " foo = , baz.foo =
-    let regex4 = '((\s+|\.)' . word . '\s*=\s+)'
+    " baz.foo =
+    let regex4 = printf('\w+\.%s\s*=\s*', word) 
     " function foo (
     let regex5 = printf('(function\s+%s\s*\(.*\))', word)
 
