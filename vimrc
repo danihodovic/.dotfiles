@@ -346,10 +346,10 @@ fu! FzfAgCustom(queryparam)
   call fzf#vim#ag(query, {'options': options, 'source': source, 'up': '~40%'})
 endfu
 
-command! -nargs=* AgJSDefinition :call AgJSFnDefinition(<q-args>)
+command! -nargs=* FindFunctionDefintion :call FindFunctionDefinition(<q-args>)
 " An ag matcher which find most usages of a <keyword> except for function calls.
 " ctags is probably a better solution but ctags doesnt seem reliable at all times
-fu! AgJSFnDefinition(query) range
+fu! FindFunctionDefinition(query)
   let word = a:query
   if len(word) == 0
     let word = expand('<cword>')
@@ -372,9 +372,9 @@ fu! AgJSFnDefinition(query) range
   endif
 endfu
 
-command! -nargs=* -range AgJSFindRequire call AgJSFindRequire(<q-args>)
+command! -nargs=* -range FindRequireCalls call FindRequireCalls(<q-args>)
 " Searches for a word in a `require(<word>)` call
-fu! AgJSFindRequire(query) range
+fu! FindRequireCalls(query) range
   " If we are passed a query param, use that
   if len(a:query) > 0
     let word = a:query
