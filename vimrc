@@ -303,7 +303,7 @@ function! FzfGitChangedFilesFromMaster()
   " intelligently wrapped in height. If we pass a command it will have a default height and grow
   " from there.
   let files = split(system('git --no-pager diff origin/master --name-only'), '\n')
-  return fzf#run({
+  call fzf#run({
   \ 'source':  files,
   \ 'sink':    'edit',
   \ 'dir':     root,
@@ -311,6 +311,19 @@ function! FzfGitChangedFilesFromMaster()
   \ 'up':      '~40%'
   \})
 endfunction
+
+command! -nargs=* FindFunctionCalls :call FindFunctionCalls(<q-args>)
+fu! FindFunctionCalls(query)
+  let fn_name = ''
+  if len(a:query) == ''
+    let fn_name = expand('<cword>')
+  else
+    let fn_name = a:query
+  endif
+
+  let str = printf('%s\s*\(.*\)', fn_name)
+  call fzf#vim#ag(str)
+endfu
 
 command! FzfLocateRoot call FzfLocateRoot()
 fu! FzfLocateRoot()
