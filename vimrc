@@ -116,6 +116,7 @@ set autoread
 " directory, then the parent directory, then the parent of the parent, and so on'
 set tags=./tags;
 set diffopt=filler,vertical
+set foldmethod=indent
 "-----------------------------------------
 " User defined commands
 "-----------------------------------------
