@@ -772,7 +772,10 @@ fu! MimicBrowserClose()
 
   " We have a previous buffer. Wipe current and switch to that
   if buflisted(bufnr('#'))
-    bw!
+    " Swap to the previous buffer first and delete old buffer. If we just do bw! the first buffer we
+    " switch to will be a quickfix window if the quickfix widow is open.
+    execute 'buf' . bufnr('#')
+    execute 'bw! ' . bufname('#')
   " Current buffer is the only buffer to exist
   elseif bufnr('^') == bufnr('%')
     bw!
