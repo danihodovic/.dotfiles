@@ -117,6 +117,12 @@ set autoread
 set tags=./tags;
 set diffopt=filler,vertical
 set foldmethod=indent
+nnoremap zm zM
+nnoremap za zA
+nnoremap zc <nop>
+nnoremap zC <nop>
+nnoremap zo <nop>
+nnoremap zO <nop>
 "-----------------------------------------
 " User defined commands
 "-----------------------------------------
