@@ -379,18 +379,6 @@ Install https://github.com/free5lot/hid-apple-patched
     ./build.sh
     ./install.sh
 
-
-#### Enabling fn-keys properly
-
-TODO: Make this a script
-
-https://help.ubuntu.com/community/AppleKeyboard#Change_Function_Key_behavior
-
-edit /etc/modprobe.d/hid_apple.conf
-add  options hid_apple fnmode=2
-run  sudo update-initramfs -u -k all
-reboot
-
 #### Swapping command-option
 
 TODO: Make this a script
@@ -406,6 +394,17 @@ add:
 run:
     sudo update-initramfs -u -k all
 
+reboot
+
+#### Enabling fn-keys properly
+
+TODO: Make this a script
+
+https://help.ubuntu.com/community/AppleKeyboard#Change_Function_Key_behavior
+
+edit /etc/modprobe.d/hid_apple.conf
+add  options hid_apple fnmode=2
+run  sudo update-initramfs -u -k all
 reboot
 
 #### Vagrant nfs on linux
@@ -472,6 +471,14 @@ with your xsession. Debug by running
 
 ## Docker daemon fails to start with Linux kernel 4.7
 http://stackoverflow.com/a/37640824/2966951
+
+This also applies to a 'hanging' docker installation that gets stuck on
+
+    Setting up docker-engine (1.12.0-0~xenial) ...
+
+This is because the service can't be started
+
+    http://unix.stackexchange.com/questions/293675/installing-docker-hangs-at-setting-up-docker-engine-on-ubuntu-xenial
 
 ### library/mysql does not execute prepare.sql in a mounted volume
 
