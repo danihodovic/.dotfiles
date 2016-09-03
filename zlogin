@@ -178,7 +178,6 @@ alias setxkbmapcaps="setxkbmap -option caps:swapescape"
 alias o='xdg-open'
 alias vi='nvim'
 alias psag='ps aux | ag '
-alias pk='kill $(ps -eo "%c %p %C %U" | fzf --header-lines=1 --tac | awk "{print $2}")'
 alias ctl='sudo systemctl '
 
 alias aptinstall='sudo apt-get install '
@@ -194,6 +193,14 @@ alias aptrepository='sudo apt-add-repository  -y'
 function chpwd() {
     emulate -L zsh
     ls
+}
+
+function pk() {
+  local processes=$(ps -eo "%c %p %C %U" | tail -n +2 | sort -k3 -n --reverse)
+  local chosen_pids=$(echo $processes | fzf --multi | awk '{print $2}')
+  if [ -n "$chosen_pids" ]; then
+    echo $chosen_pids | xargs kill
+  fi
 }
 
 man() {
