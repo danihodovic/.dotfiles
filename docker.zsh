@@ -1,8 +1,6 @@
 #!/usr/bin/env zsh
 custom_ps_format='table {{.Names}}\t{{.Image}}\t{{.ID}}\t{{.Command}}\t{{.Ports}}\t{{.Mounts}}'
 
-# $ docker ps --format=$custom_ps_format | awk '{if(NR>1) print}' | fzf | awk '{print $1 != "" ? $1 : $3}'
-
 alias drun='docker run '
 alias dstart='docker start '
 alias dps="docker ps --format='$custom_ps_format'"
@@ -23,17 +21,17 @@ alias dcdown='docker-compose down -v --remove-orphans'
 alias dcrun='docker-compose run --rm '
 alias dcexec='docker-compose exec '
 alias dclogs='docker-compose logs'
-
+# fzf --header-lines=1 --tac
 fcontainer() {
-  echo "$(docker ps --format=$custom_ps_format | awk '{if(NR>1) print}' | fzf | \
+  echo "$(docker ps --format=$custom_ps_format | fzf --header-lines=1 | \
     awk '{print $1 != "" ? $1 : $3}')"
 }
 fcontainerall() {
-  echo "$(docker ps --format=$custom_ps_format -a | awk '{if(NR>1) print}' | fzf | \
+  echo "$(docker ps --format=$custom_ps_format -a | fzf --header-lines=1 | \
     awk '{print $1 != "" ? $1 : $3}')"
 }
 fimage() {
-  echo "$(docker images | awk '{if(NR>1) print}' | fzf | awk '{print $1}')"
+  echo "$(docker images | fzf --header-lines=1 | awk '{print $1}')"
 }
 
 dri() {
