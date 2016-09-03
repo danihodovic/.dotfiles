@@ -178,6 +178,7 @@ alias setxkbmapcaps="setxkbmap -option caps:swapescape"
 alias o='xdg-open'
 alias vi='nvim'
 alias psag='ps aux | ag '
+alias pk='kill $(ps -eo "%c %p %C %U" | fzf --header-lines=1 --tac | awk "{print $2}")'
 alias ctl='sudo systemctl '
 
 alias aptinstall='sudo apt-get install '
