@@ -32,6 +32,7 @@ conf_files = [
     (CONF_DIR + '/i3-config',            HOME_DIR + '/.i3/config'),
     (CONF_DIR + '/Xresources',           HOME_DIR + '/.Xresources'),
     (CONF_DIR + '/vimperatorrc',         HOME_DIR + '/.vimperatorrc'),
+    (CONF_DIR + '/ginit.vim',            HOME_DIR + '/.config/nvim/ginit.vim'),
     # File not in conf dir
     (HOME_DIR + '/.dotfiles/zlogin',     HOME_DIR + '/.zlogin'),
     (HOME_DIR + '/.dotfiles/zshrc',      HOME_DIR + '/.zshrc'),
