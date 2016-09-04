@@ -87,6 +87,13 @@ gresetbranch() {
 
 compdef _git-reset gresetcommit gresetbranch
 
+gformatpatch() {
+  commit=`fcommit`
+  [[ -n $commit ]] && print -z git format-patch $@ $commit
+}
+
+compdef _git-format-patch gformatpatch
+
 gsha1() {
   print -z `fcommit`
 }
