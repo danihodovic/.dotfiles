@@ -47,7 +47,7 @@ main() {
   done
 
   if [ "$(is_container_running "$container_id")" = 'true' ]; then
-    cvlc http://localhost:"$empty_port"/tv.asf &>/dev/null & disown
+    vlc http://localhost:"$empty_port"/tv.asf &>/dev/null & disown
   else
     echo 'Container failed to start. The stream probably sucks'
     exit 1
