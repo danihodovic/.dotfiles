@@ -319,7 +319,7 @@ function! FzfGitChangedFilesFromMaster()
   \})
 endfunction
 
-command! -nargs=* FindFunctionCalls :call FindFunctionCalls(<q-args>)
+command! -nargs=* Calls :call FindFunctionCalls(<q-args>)
 fu! FindFunctionCalls(query)
   let fn_name = ''
   if len(a:query) == ''
@@ -352,17 +352,27 @@ fu! FzfLocateRoot()
   call fzf#run(fzf#vim#wrap(opts))
 endfu
 
-command! -nargs=* AG call FzfAgCustom(<q-args>)
-fu! FzfAgCustom(queryparam)
-  let query = a:queryparam
+command! -nargs=* AG  call FzfAgCustom(<q-args>)
+command! -nargs=* AGu call FzfAgCustom(<q-args>, 'ag --nogroup --column --color -U "%s"')
+
+fu! FzfAgCustom(...)
+  let query = a:1
+  if a:0 >= 2
+    let ag_opts = a:2
+  else
+    " By default:
+    " - don't group multiple results in one file as one result
+    " - print column numbers in the results
+    " - don't search in VCS ignored files
+    let ag_opts = 'ag --nogroup --column --color "%s"'
+  endif
+
   if len(query) == 0
     let query = expand('<cword>')
   endif
 
-  let ag_opts = 'ag --nogroup --column --color "%s"'
   let source = printf(ag_opts, query)
-  let options = '--tac -e'
-  call fzf#vim#ag(query, {'options': options, 'source': source, 'up': '~40%'})
+  call fzf#vim#ag(query, {'source': source, 'up': '~40%'})
 endfu
 
 command! -nargs=* FindFunctionDefintion :call FindFunctionDefinition(<q-args>)
