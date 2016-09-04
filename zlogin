@@ -177,6 +177,7 @@ alias ls='ls --color=auto --classify'
 alias setxkbmapcaps="setxkbmap -option caps:swapescape"
 alias o='xdg-open'
 alias vi='nvim'
+gvi() { nohup nvim-qt $@ >/dev/null 2>&1 & }
 alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
 
