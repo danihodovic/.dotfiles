@@ -77,7 +77,6 @@ set clipboard=unnamedplus
 set nobackup
 set nowritebackup
 set noswapfile
-set nofoldenable
 " Enable spelling
 set spell
 set title
@@ -117,13 +116,11 @@ set autoread
 " directory, then the parent directory, then the parent of the parent, and so on'
 set tags=./tags;
 set diffopt=filler,vertical
-set foldmethod=indent
-nnoremap zm zM
-nnoremap za zA
-nnoremap zc <nop>
-nnoremap zC <nop>
-nnoremap zo <nop>
-nnoremap zO <nop>
+set scrolloff=10
+set nofoldenable
+autocmd BufEnter *.js,*.ts setlocal foldenable | setlocal foldmethod=indent
+autocmd BufEnter *.go setlocal foldenable | setlocal foldmethod=syntax
+let g:go_fmt_experimental = 1
 "-----------------------------------------
 " User defined commands
 "-----------------------------------------
@@ -218,6 +215,7 @@ nnoremap <leader>aw :ArgWrap<cr>
 "Make sure to place color schemes after the vundle runtime has been declared
 syntax enable
 colorscheme badwolf
+set background=dark
 hi clear SpellBad
 hi SpellBad ctermfg=DarkRed term=undercurl
 filetype plugin indent on
