@@ -210,6 +210,7 @@ nnoremap <silent> N   N:call HLNext(0.1)<cr>
 " Map S to ys for vim-surround
 map s ys
 vmap s S
+nnoremap <leader>aw :ArgWrap<cr>
 "-----------------------------------------
 " Color scheme settings
 "-----------------------------------------
@@ -330,6 +331,18 @@ fu! FindFunctionCalls(query)
 
   let str = printf('%s\s*\(.*\)', fn_name)
   call fzf#vim#ag(str)
+endfu
+
+command! -nargs=* Definition :call LogStatementFind(<q-args>)
+fu! LogStatementFind(query)
+  let query = a:query
+  if len(query) == ''
+    let query = expand('<cword>')
+  end
+
+  let regex = printf("console.log\\('%s'", query)
+  let ag_opts = 'ag --nogroup --column --color -U "%s"'
+  call FzfAgCustom(regex, ag_opts)
 endfu
 
 command! FzfLocateRoot call FzfLocateRoot()
@@ -524,7 +537,7 @@ endfu
 " FixMyJS
 "-----------------------------------------
 " TODO: replace this with job-control
-autocmd filetype javascript command! -buffer FixJscs call RunJscs()
+autocmd filetype javascript command! FixJscs call RunJscs()
 fu! RunJscs()
   call system("jscs --fix " . expand('%'))
   checktime
