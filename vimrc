@@ -43,6 +43,7 @@ Plug 'tpope/vim-abolish'                      " Change snake case to camelcase a
 Plug 'kana/vim-operator-user'                 " Required for vim-operator-flashy
 Plug 'haya14busa/vim-operator-flashy'         " Highlights the yanked words
 Plug 'luochen1990/rainbow'
+Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
 " -----------------------------------------
 " Lang specific
 " -----------------------------------------
