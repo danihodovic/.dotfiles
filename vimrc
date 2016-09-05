@@ -333,7 +333,7 @@ fu! FindFunctionCalls(query)
   call fzf#vim#ag(str)
 endfu
 
-command! -nargs=* Definition :call LogStatementFind(<q-args>)
+command! -nargs=* LogStatement :call LogStatementFind(<q-args>)
 fu! LogStatementFind(query)
   let query = a:query
   if len(query) == ''
@@ -376,7 +376,7 @@ fu! FzfAgCustom(...)
   call fzf#vim#ag(query, {'source': source, 'up': '~40%'})
 endfu
 
-command! -nargs=* FindFunctionDefintion :call FindFunctionDefinition(<q-args>)
+command! -nargs=* Definition :call FindFunctionDefinition(<q-args>)
 " An ag matcher which find most usages of a <keyword> except for function calls.
 " ctags is probably a better solution but ctags doesnt seem reliable at all times
 fu! FindFunctionDefinition(query)
