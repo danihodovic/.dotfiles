@@ -5,7 +5,6 @@ usage() {
 Usage:
 $(basename "$0") <sopcast-url>
 EOM
-    exit 1
 }
 
 find_empty_port() {
@@ -28,13 +27,22 @@ is_container_running() {
 main() {
   if [[ $# != 1 ]]; then
     usage
+    exit 1
   fi
 
   local sopcast_url=$1
+  # Name the container after the ID so we don't have duplicate channels with the same stream
+  local channel_id=$(echo $sopcast_url | awk -F/ '{print $4}')
   local empty_port=$(find_empty_port)
   local container_id=$(docker run -d \
     -p "$empty_port:$empty_port" \
+    --name "sopcast-$channel_id" \
     danihodovic/sopcast "$sopcast_url" "$empty_port")
+
+  if [ -z "$container_id" ]; then
+    echo "Failed to start container"
+    exit 1
+  fi
 
   for _ in $(seq 1 40); do
     if [[ $(is_container_running "$container_id") = 'false' ]]; then
