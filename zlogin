@@ -29,7 +29,7 @@ export PYTHONSTARTUP=~/.pythonrc
 export dotfiles=${HOME}/.dotfiles
 export plugged=${NVIM_DIR}/plugged
 export vimrc=${HOME}/.dotfiles/vimrc
-export zshrc=${HOME}/.dotfiles/zshrc
+export zlogin=${HOME}/.dotfiles/zlogin
 
 # Antibody
 source <(antibody init)
@@ -177,7 +177,7 @@ alias ls='ls --color=auto --classify'
 alias setxkbmapcaps="setxkbmap -option caps:swapescape"
 alias o='xdg-open'
 alias vi='nvim'
-gvi() { nohup nvim-qt $@ >/dev/null 2>&1 & }
+gvi() { nohup nvim-qt $@ >/dev/null 2>&1 &}
 alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
 
@@ -202,6 +202,21 @@ function pk() {
   if [ -n "$chosen_pids" ]; then
     echo $chosen_pids | xargs kill
   fi
+}
+
+function pgcli-docker () {
+  local postgres_container_names=$(docker ps | awk '{print $NF}' | ag postgres)
+  local lines=$(echo $postgres_container_names | wc -l)
+  if [ "$lines" -eq 0 ]; then
+    echo "No container with a name containing 'postgres' running"
+    return 1
+  fi
+  if [ "$lines" -gt 1 ]; then
+    echo "More than one postgres container running: \n$postgres_container_names"
+    return 1
+  fi
+
+  docker run -it --rm --network container:$postgres_container_names pgcli -h postgres -U postgres
 }
 
 man() {

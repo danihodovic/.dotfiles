@@ -18,7 +18,7 @@ case $install_n in
         cd" ${HOME}/.n"
         PREFIX=bin make install
       else
-          echo "Nvm already installed"
+        echo "N already installed"
       fi
 esac
 

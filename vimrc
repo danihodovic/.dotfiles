@@ -297,9 +297,10 @@ let g:fzf_layout = {'up': '~40%'}
 nnoremap = :Files<cr>
 nnoremap - :call FzfGitChangedFilesFromMaster()<cr>
 nnoremap b :Buffers<cr>
-nnoremap <C-h> :History:<cr>
-cnoremap <C-h> <Esc>:History:<cr>
+nnoremap <C-r> :History:<cr>
+cnoremap <C-r> :History:<cr>
 nnoremap r :History<cr>
+nnoremap U :redo<cr>
 
 function! FzfGitChangedFilesFromMaster()
   let root = split(system('git rev-parse --show-toplevel'), '\n')[0]
@@ -345,11 +346,12 @@ fu! LogStatementFind(query)
   call FzfAgCustom(regex, ag_opts)
 endfu
 
-command! FzfLocateRoot call FzfLocateRoot()
+nnoremap <leader>af :AllFiles<cr>
+command! AllFiles call FzfLocateRoot()
 fu! FzfLocateRoot()
   let opts = {}
   let opts.source = 'locate /'
-  let opts.options = '--prompt ">" --ansi' 
+  let opts.options = '--multi --prompt ">" --ansi'
   call fzf#run(fzf#vim#wrap(opts))
 endfu
 
