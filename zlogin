@@ -216,7 +216,7 @@ function pgcli-docker () {
     return 1
   fi
 
-  docker run -it --rm --network container:$postgres_container_names pgcli -h postgres -U postgres
+  docker run -it --rm --network container:$postgres_container_names danihodovic/pgcli -h postgres -U postgres
 }
 
 man() {
