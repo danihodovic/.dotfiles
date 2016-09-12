@@ -4,6 +4,7 @@ name = Dani Hodovic
 
 [core]
 editor = nvim
+	pager = less -+F
 
 [pull]
 rebase = true
