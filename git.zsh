@@ -19,6 +19,8 @@ alias gadd='git add '
 alias gtags='git tag --list | sort -V'
 alias gpushtags='git push origin --tags'
 alias gtags-latest='git tag --list | sort -V | tail -n 1'
+alias gremotes='git remote -v'
+alias gremote='git remote'
 alias gci-status='hub ci-status '
 
 # Initiate _git which exposes the _git-* completions
