@@ -298,6 +298,7 @@ nnoremap = :Files<cr>
 nnoremap - :call FzfGitChangedFilesFromMaster()<cr>
 nnoremap b :Buffers<cr>
 nnoremap <C-r> :History:<cr>
+vnoremap <C-r> :History:<cr>
 cnoremap <C-r> :History:<cr>
 nnoremap r :History<cr>
 nnoremap U :redo<cr>
