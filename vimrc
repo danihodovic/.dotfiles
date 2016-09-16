@@ -330,7 +330,7 @@ fu! FindFunctionCalls(query)
     let fn_name = a:query
   endif
 
-  let str = printf('%s\s*\(.*\)', fn_name)
+  let str = printf('%s\s*\(.*', fn_name)
   call fzf#vim#ag(str)
 endfu
 
