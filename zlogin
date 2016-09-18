@@ -52,7 +52,7 @@ SAVEHIST=$HISTSIZE
 
 # Enable reverse-menu-complete
 zmodload zsh/complist
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 # Highlight selected option in tab completion menu
 zstyle ':completion:*' menu select
 
