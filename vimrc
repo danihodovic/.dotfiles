@@ -346,6 +346,19 @@ fu! LogStatementFind(query)
   call FzfAgCustom(regex, ag_opts)
 endfu
 
+command! -nargs=* FocusTest :call FocusTest(<q-args>)
+fu! FocusTest(query)
+  let query = a:query
+  if len(query) == ''
+    let query = expand('<cword>')
+  end
+
+  let regex = '(it.only\('')|(describe.only\('')'
+  echom regex
+  let ag_opts = 'ag --nogroup --column --color -U "%s"'
+  call FzfAgCustom(regex, ag_opts)
+endfu
+
 nnoremap <leader>af :AllFiles<cr>
 command! AllFiles call FzfLocateRoot()
 fu! FzfLocateRoot()
