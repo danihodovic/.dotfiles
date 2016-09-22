@@ -9,7 +9,7 @@ call plug#begin('$NVIM_DIR/plugged')
 "-----------------------------------------
 Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'danihodovic/fzf.vim'
+Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'            " Shows dirty files in NERDTree
