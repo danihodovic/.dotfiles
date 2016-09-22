@@ -72,7 +72,7 @@ scripts_to_source=(
   ${HOME}/.dotfiles/fzf-helpers.zsh
   ${HOME}/.dotfiles/docker.zsh
   ${HOME}/.dotfiles/git.zsh
-  ${HOME}/.zshrc_local
+  ${HOME}/.zlogin_local
 )
 
 for script in $scripts_to_source; do
