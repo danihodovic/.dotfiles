@@ -530,7 +530,16 @@ Steps to fix:
     $ sudo apt install mokutil
     $ sudo mokutil --disable-validation
     $ sudo dpkg-reconfigure virtualbox-dkms
-    $ service virtualbox stop
-    $ service virtualbox start
+    $ sysctl stop virtualbox
+    $ sysctl start virtualbox
 
-### Tags: virtualbox, virtualbox-dkms, kubernetes, minikube
+If the above solution does not work try this:
+
+    # If the below command doesnt work due to a recent kernel version, download the headers
+    # from http://kernel.ubuntu.com/~kernel-ppa/mainline/.
+    # The required headers seem to be -generic
+    sudo apt-get install linux-headers-`uname -r`
+    sudo dpkg-reconfigure virtualbox-dkms
+
+
+### Tags: virtualbox, virtualbox-dkms, kubernetes, minikube, vboxdrv(?)
