@@ -353,9 +353,8 @@ fu! FocusTest(query)
     let query = expand('<cword>')
   end
 
-  let regex = '(it.only\('')|(describe.only\('')'
-  echom regex
-  let ag_opts = 'ag --nogroup --column --color -U "%s"'
+  let regex = '(it\.only)|(describe\.only)'
+  let ag_opts = 'ag --nogroup --column --color "%s"'
   call FzfAgCustom(regex, ag_opts)
 endfu
 
