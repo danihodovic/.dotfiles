@@ -6,11 +6,14 @@ import pwd
 import grp
 import unittest
 import getpass
-import apt
+import shutil
+import re
 
 repo_root = os.path.expanduser('~/.dotfiles/install')
 sys.path.append(repo_root)
 import dev_tools
+
+HOME = os.path.expanduser('~')
 
 user = getpass.getuser()
 vim_plug_path = os.path.expandvars('${HOME}/.config/nvim/autoload/plug.vim')
@@ -21,9 +24,6 @@ version = float(sys.version[0:3])
 if version < min_version:
     print('Error: Python version {} detected, use at least version {}', version, min_version)
     sys.exit(1)
-
-#  cache = apt.cache.Cache()
-#  cache.open()
 
 class IntegrationSuite(unittest.TestCase):
     ###############################
@@ -54,6 +54,28 @@ class IntegrationSuite(unittest.TestCase):
     ###############################
     # Other
     ###############################
+
+    def test_install_fzf(self):
+        fzf_dir = HOME + '/.fzf'
+        if os.path.isdir(fzf_dir):
+            shutil.rmtree(fzf_dir)
+
+        # We can't simply use HOME + '.fzf' + os.environ['SHELL'] because this variable
+        #  doesn't exist in tests. So we have to look for both .bash and .zsh
+        completion_file_regex = re.compile('fzf\.(bash|zsh)')
+        for f in os.listdir(HOME):
+            if completion_file_regex.search(f):
+                os.remove(HOME + '/' + f)
+
+        dev_tools.install_fzf()
+
+        completion_file = None
+        for f in os.listdir(HOME):
+            if completion_file_regex.search(f):
+                completion_file = f
+
+        self.assertTrue(os.path.isfile(fzf_dir + '/bin/fzf-tmux'))
+        self.assertTrue(completion_file != None)
 
     def test_install_vim_plug(self):
         if os.path.isfile(vim_plug_path):

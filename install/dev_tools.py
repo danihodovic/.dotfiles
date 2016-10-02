@@ -11,6 +11,10 @@ import contextlib
 import apt
 import apt.progress
 import lsb_release
+import io
+import json
+import tempfile
+import subprocess
 
 user = getpass.getuser()
 
@@ -22,7 +26,8 @@ def cache_handler():
         cache.open()
         yield cache
     finally:
-        cache.close()
+        if cache:
+            cache.close()
 
 ###############################
 # Apt packages
@@ -84,6 +89,30 @@ def install_antibody():
     with tarfile.open(filename, 'r:gz') as tar:
         tar.extract('./antibody', '/usr/local/bin/')
 
+
+def install_fzf():
+    url = 'https://api.github.com/repos/junegunn/fzf/tags'
+    with urllib.request.urlopen(url) as res:
+        content = res.read().decode('utf8')
+        as_json = json.loads(content)
+        tarball_url = as_json[0]['tarball_url']
+
+        with urllib.request.urlopen(tarball_url) as res:
+            file_like_object = io.BytesIO(res.read())
+            tar = tarfile.open(fileobj=file_like_object)
+            tarname = tar.members[0].name
+            tempdir = tempfile.mkdtemp()
+            tar.extractall(path=tempdir)
+            os.rename(tempdir + '/' + tarname, os.path.expandvars('${HOME}/.fzf'))
+
+    # Run the shell installation script which sets up fzf specific dotfiles
+    with cache_handler() as cache:
+        install_apt_pkg(cache, 'curl')
+        script = os.path.expanduser('~') + '/.fzf/install'
+        proc = subprocess.Popen([script, '--key-bindings', '--completion', '--no-update-rc'])
+        proc.wait()
+
+
 def install_apt_pkg(cache, pkg_name):
     cache.open()
     if not cache.has_key(pkg_name):
@@ -129,6 +158,7 @@ if __name__ == '__main__':
     ins_zsh      = input('Install zsh? [y/n]')
     ins_tmux     = input('Install tmux? [y/n]')
     ins_vim_plug = input('Install vim-plug? [y/n]')
+    ins_fzf      = input('Install fzf? [y/n]')
 
     if ins_neovim == 'y':
         install_neovim()
@@ -139,6 +169,9 @@ if __name__ == '__main__':
     if ins_tmux == 'y':
         install_tmux()
 
-    if ins_vim_plug== 'y':
+    if ins_vim_plug == 'y':
         install_vim_plug()
+
+    if ins_fzf == 'y':
+        install_fzf()
 
