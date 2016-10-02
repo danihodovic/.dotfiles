@@ -64,7 +64,7 @@ autoload bashcompinit && bashcompinit
 scripts_to_source=(
   /usr/local/bin/aws_zsh_completer.sh
   ${HOME}/.fzf.zsh
-  ${HOME}/.scripts/fzf/shell/key-bindings.zsh
+  # ${HOME}/.scripts/fzf/shell/key-bindings.zsh
   ${HOME}/.scripts/i3_completion.sh
   ${HOME}/.gvm/scripts/gvm
   ${HOME}/.rvm/scripts/rvm
