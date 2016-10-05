@@ -8,7 +8,7 @@ call plug#begin('$NVIM_DIR/plugged')
 " General plugins
 "-----------------------------------------
 Plug 'Valloric/YouCompleteMe'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': '~/.fzf/install --key-bindings --completion --no-update-rc' }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
 Plug 'scrooloose/nerdtree'
