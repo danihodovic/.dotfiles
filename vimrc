@@ -3,68 +3,77 @@
 " Vim Plug
 "-----------------------------------------
 set nocompatible
-call plug#begin('$NVIM_DIR/plugged')
-"-----------------------------------------
-" General plugins
-"-----------------------------------------
-Plug 'Valloric/YouCompleteMe'
-Plug 'junegunn/fzf', { 'do': '~/.fzf/install --key-bindings --completion --no-update-rc' }
-Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'            " Shows dirty files in NERDTree
-Plug 'flazz/vim-colorschemes'
-Plug 'ryanoasis/vim-devicons'
-Plug 'benekastah/neomake'
-Plug 'tpope/vim-surround'                     " Surround text with (){}<>
-Plug 'jiangmiao/auto-pairs'                   " Automatically add (){}<>
-Plug 'airblade/vim-gitgutter'                 " Show changed git lines
-Plug 'scrooloose/nerdcommenter'               " Comment/uncomment source code files
-Plug 'terryma/vim-multiple-cursors' 
-Plug 'bling/vim-airline' 
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'                     " Various git commands inside vim
-Plug 'Lokaltog/vim-easymotion'                " Better movement with f/t
-Plug 'SirVer/ultisnips'
-Plug 'danihodovic/vim-dsnippets'              " My own snippets
-Plug 'nathanaelkane/vim-indent-guides'        " Visually display indent lines with different color
-Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
-Plug 'junegunn/vim-pseudocl'                  " Required by vim-oblique
-Plug 'junegunn/vim-oblique'                   " Colors search result and sets nohlsearch on cursor move
-Plug 'junegunn/vim-easy-align'                " Align code around arbitrary characters =,:
-Plug 'itchyny/vim-cursorword'                 " Highlight the occurances of the word under the cursor
-Plug 'kana/vim-textobj-user'                  " Add additional text objects
-Plug 'kana/vim-textobj-function'              " Add function based text objects
-Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
-Plug 'FooSoft/vim-argwrap'                    " Collapse or expand arguments for a function
-Plug 'sunaku/vim-dasht'                       " Show documentation for the word under the cursor
-Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
-Plug 'tpope/vim-abolish'                      " Change snake case to camelcase and vice versa
-Plug 'kana/vim-operator-user'                 " Required for vim-operator-flashy
-Plug 'haya14busa/vim-operator-flashy'         " Highlights the yanked words
-Plug 'luochen1990/rainbow'
-Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
-" -----------------------------------------
-" Lang specific
-" -----------------------------------------
-Plug 'jelera/vim-javascript-syntax'
-Plug 'HerringtonDarkholme/yats.vim'           " Typescript syntax
-Plug 'davidhalter/jedi-vim'                   " Python semantic completion
-Plug 'derekwyatt/vim-scala'
-Plug 'vim-erlang/vim-erlang-omnicomplete'
-Plug 'Valloric/MatchTagAlways'                " Show matching html/xml tags
-Plug 'fatih/vim-go'                           " Basically a Golang IDE for vi
-Plug 'rust-lang/rust.vim'                     " Rust syntax highlighting, formatting
-Plug 'ekalinin/Dockerfile.vim'                " Syntax for Dockerfile and snippets 
-Plug 'tpope/vim-endwise'                      " Adds if/end in Lua/Ruby
-Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'evanmiller/nginx-vim-syntax'
-Plug 'sudar/vim-arduino-syntax'
-Plug 'cespare/vim-toml'                       " Toml is a configuration language similar to yaml
-Plug 'danihodovic/nodejs-require.vim'
-"-----------------------------------------
-call plug#end()
 
+" Only load plugins if we have vim-plug installed
+let s:has_plug = 0
+try
+  call plug#begin('$NVIM_DIR/plugged')
+  let s:has_plug = 1
+catch /Unknown function/
+endtry
+
+if s:has_plug == 1
+  "-----------------------------------------
+  " General plugins
+  "-----------------------------------------
+  Plug 'Valloric/YouCompleteMe'
+  Plug 'junegunn/fzf', { 'do': '~/.fzf/install --key-bindings --completion --no-update-rc' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
+  Plug 'scrooloose/nerdtree'
+  Plug 'Xuyuanp/nerdtree-git-plugin'            " Shows dirty files in NERDTree
+  Plug 'flazz/vim-colorschemes'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'benekastah/neomake'
+  Plug 'tpope/vim-surround'                     " Surround text with (){}<>
+  Plug 'jiangmiao/auto-pairs'                   " Automatically add (){}<>
+  Plug 'airblade/vim-gitgutter'                 " Show changed git lines
+  Plug 'scrooloose/nerdcommenter'               " Comment/uncomment source code files
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'bling/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'tpope/vim-fugitive'                     " Various git commands inside vim
+  Plug 'Lokaltog/vim-easymotion'                " Better movement with f/t
+  Plug 'SirVer/ultisnips'
+  Plug 'danihodovic/vim-dsnippets'              " My own snippets
+  Plug 'nathanaelkane/vim-indent-guides'        " Visually display indent lines with different color
+  Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
+  Plug 'junegunn/vim-pseudocl'                  " Required by vim-oblique
+  Plug 'junegunn/vim-oblique'                   " Colors search result and sets nohlsearch on cursor move
+  Plug 'junegunn/vim-easy-align'                " Align code around arbitrary characters =,:
+  Plug 'itchyny/vim-cursorword'                 " Highlight the occurances of the word under the cursor
+  Plug 'kana/vim-textobj-user'                  " Add additional text objects
+  Plug 'kana/vim-textobj-function'              " Add function based text objects
+  Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
+  Plug 'FooSoft/vim-argwrap'                    " Collapse or expand arguments for a function
+  Plug 'sunaku/vim-dasht'                       " Show documentation for the word under the cursor
+  Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
+  Plug 'tpope/vim-abolish'                      " Change snake case to camelcase and vice versa
+  Plug 'kana/vim-operator-user'                 " Required for vim-operator-flashy
+  Plug 'haya14busa/vim-operator-flashy'         " Highlights the yanked words
+  Plug 'luochen1990/rainbow'
+  Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
+  " -----------------------------------------
+  " Lang specific
+  " -----------------------------------------
+  Plug 'jelera/vim-javascript-syntax'
+  Plug 'HerringtonDarkholme/yats.vim'           " Typescript syntax
+  Plug 'davidhalter/jedi-vim'                   " Python semantic completion
+  Plug 'derekwyatt/vim-scala'
+  Plug 'vim-erlang/vim-erlang-omnicomplete'
+  Plug 'Valloric/MatchTagAlways'                " Show matching html/xml tags
+  Plug 'fatih/vim-go'                           " Basically a Golang IDE for vi
+  Plug 'rust-lang/rust.vim'                     " Rust syntax highlighting, formatting
+  Plug 'ekalinin/Dockerfile.vim'                " Syntax for Dockerfile and snippets 
+  Plug 'tpope/vim-endwise'                      " Adds if/end in Lua/Ruby
+  Plug 'PotatoesMaster/i3-vim-syntax'
+  Plug 'evanmiller/nginx-vim-syntax'
+  Plug 'sudar/vim-arduino-syntax'
+  Plug 'cespare/vim-toml'                       " Toml is a configuration language similar to yaml
+  Plug 'danihodovic/nodejs-require.vim'
+  "-----------------------------------------
+  call plug#end()
+end
 "-----------------------------------------
 " General settings
 "-----------------------------------------
@@ -215,7 +224,8 @@ nnoremap <leader>aw :ArgWrap<cr>
 "-----------------------------------------
 "Make sure to place color schemes after the vundle runtime has been declared
 syntax enable
-colorscheme badwolf
+" Set the colorscheme using silent so that we don't fail on servers without plugins
+silent! colorscheme badwolf
 set background=dark
 hi clear SpellBad
 hi SpellBad ctermfg=DarkRed term=undercurl
@@ -466,7 +476,7 @@ let g:oblique#incsearch_highlight_all=1
 " define our own colors instead of the plugin defining it for us
 let g:indent_guides_auto_colors = 0
 "ctermbg 234 = darkgrey, ctermbg 235 = lightgrey
-autocmd VimEnter * IndentGuidesEnable
+autocmd VimEnter * if exists(":NERDTree") | IndentGuidesEnable
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 "-----------------------------------------
