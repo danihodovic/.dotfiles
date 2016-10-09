@@ -247,13 +247,14 @@ function webm-to-m4a {
 }
 
 man() {
-  # TODO: Add fzf helper and pipe to vim
-  if [ $1 = '-k' ]; then
-    apropos ${@:2}
+  if [ $1 = '-k' ] && [ $# -gt 1 ]; then
+    choice=$(apropos ${@:2} | fzf | awk '{print $1}')
+    man $choice
   else
     command man ${1} > /dev/null
     if [ $? = 0 ]; then
-      nvim -c 'set ft=man' -c "Man ${1}" -c 'nnoremap <buffer> q :q<cr>'
+      # silent! because there is an error when `set ft=man` is executed
+      nvim -c 'silent! set ft=man' -c "Man ${1}" -c 'nnoremap <buffer> q :q<cr>'
     fi
   fi
 }
