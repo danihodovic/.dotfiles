@@ -807,6 +807,9 @@ endfun
 " Strip trailing whitespace
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
 fun! CopyBuffer()
   let l = line(".")
   let c = col(".")
