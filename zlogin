@@ -122,7 +122,7 @@ end-of-line-no-whitespace() {
 }
 zle -N end-of-line-no-whitespace
 
-noop () {}
+function noop {}
 zle -N noop
 
 # Paste from clipboard
@@ -174,10 +174,10 @@ alias cp='cp -v '
 alias h="history"
 alias cd-="cd -"
 alias ls='ls --color=auto --classify'
-alias setxkbmapcaps="setxkbmap -option caps:swapescape"
+alias setxkbmapcaps="setxkbmap -option caps:swapescape68"
 alias o='xdg-open'
 alias vi='nvim'
-gvi() { nohup nvim-qt $@ >/dev/null 2>&1 &}
+function gvi { nohup nvim-qt $@ >/dev/null 2>&1 &}
 alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
 
@@ -190,13 +190,23 @@ alias aptpolicy='apt-cache policy '
 alias aptshow='apt-cache show '
 alias aptrepository='sudo apt-add-repository  -y'
 
+function ssh-keygen-fingerprint { ssh-keygen -l -f }
+function ssh-keygen-fingerprint-md5 { ssh-keygen -E md5 -l -f }
+function ssh-sync {
+  if [ $# != '3' ]; then
+    echo 'Usage:\n\t ssh-sync <source-dir> <host>@<ip> <target-dir>'
+    return 1
+  fi
+  print -z lsyncd -log all -nodaemon -rsyncssh $@
+}
+
 # cd && ls
-function chpwd() {
+function chpwd {
     emulate -L zsh
     ls
 }
 
-function pk() {
+function pk {
   local processes=$(ps -eo "%c %p %C %U" | tail -n +2 | sort -k3 -n --reverse)
   local chosen_pids=$(echo $processes | fzf --multi | awk '{print $2}')
   if [ -n "$chosen_pids" ]; then
@@ -204,7 +214,7 @@ function pk() {
   fi
 }
 
-function pgcli-docker () {
+function pgcli-docker {
   local postgres_container_names=$(docker ps | awk '{print $NF}' | ag postgres)
   local lines=$(echo $postgres_container_names | wc -l)
   if [ "$lines" -eq 0 ]; then
@@ -217,6 +227,23 @@ function pgcli-docker () {
   fi
 
   docker run -it --rm --network container:$postgres_container_names danihodovic/pgcli -h postgres -U postgres
+}
+
+function youtube-download {
+  if [ "$1" = '' ]; then
+    echo 'Usage:\n\t youtube-download <url|id>'
+    return 1
+  fi
+  drun -v $(pwd):/home/user/mps/ andrey01/mps-youtube daurl $1
+}
+
+function webm-to-m4a {
+  if [ $# != '1' ]; then
+     echo "Usage:\n\t $0 <file.webm>"
+    return 1
+  fi
+  base="$(basename $1 .webm)"
+  ffmpeg -i "$1" -strict -2 "$base.m4a"
 }
 
 man() {
