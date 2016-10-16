@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
+set -e
+set -u
 
 read -p "Install node version manager (n)? " -n 1 -r      install_n
 echo
-read -p "Install FZF? " -n 1 -r      install_fzf
-echo
-read -p "Install i3-completions for zsh? " -n 1 -r      install_i3_completions
+read -p "Install Slack?"                       -n 1 -r      install_slack
 echo
 read -p "Install dasht? Cli tool for reading docs [y/n] " -n 1 -r INSTALL_DASHT
+echo
+read -p "Install i3-completions for zsh? " -n 1 -r      install_i3_completions
 echo
 
 scripts=${HOME}/.scripts
@@ -14,25 +16,29 @@ scripts=${HOME}/.scripts
 case $install_n in
     y)
       if [ ! -d "${HOME}/.n" ]; then
-        git clone https://github.com/tj/n ${HOME}/.n
-        cd" ${HOME}/.n"
+        git clone https://github.com/tj/n "${HOME}/.n"
+        cd "${HOME}/.n"
         PREFIX=bin make install
       else
         echo "N already installed"
       fi
 esac
 
-
-case $install_fzf in
+case $install_slack in
   y)
-    if [[ ! -f "$scripts/fzf/fzf" ]]; then
-      git clone --depth 1 https://github.com/junegunn/fzf.git "$scripts/fzf"
-      "$scripts"/fzf/install
-    else
-      echo "FZF already installed"
-    fi
+    url="https://downloads.slack-edge.com/linux_releases/slack-desktop-2.1.0-amd64.deb"
+    curl -o /tmp/slack.deb $url
+    sudo apt-get install -y gvfs-bin
+    sudo dpkg -i /tmp/slack.deb
+    ;;
 esac
 
+case $INSTALL_DASHT in
+  y|Y)
+    sudo apt-get install sqlite3 w3m wget -y
+    git clone https://github.com/sunaku/dasht.git "${HOME}/.dasht"
+    ;;
+esac
 
 case $install_i3_completions in
   y)
@@ -44,9 +50,4 @@ case $install_i3_completions in
     fi
 esac
 
-case $INSTALL_DASHT in
-  y|Y)
-    sudo apt-get install sqlite3 w3m wget -y
-    git clone https://github.com/sunaku/dasht.git "${HOME}/.dasht"
-    ;;
-esac
+

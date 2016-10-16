@@ -13,8 +13,14 @@ set -u
 
 # cmake, python-dev, build-essentials required by YCM
 
-sudo apt-get update
-sudo apt-get install \
+# If we are root, don't use sudo.
+sudo_cmd="sudo"
+if [ $EUID -eq 0 ]; then
+  sudo_cmd=""
+fi
+
+$sudo_cmd apt-get update
+$sudo_cmd apt-get install -y \
     parcellite \
     xfce4-terminal \
     zsh \
@@ -35,6 +41,5 @@ sudo apt-get install \
     shellcheck \
     rofi \
     ranger \
-    gnome-settings-daemon \
-    -y
+    gnome-settings-daemon
 
