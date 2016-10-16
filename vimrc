@@ -71,11 +71,13 @@ if s:has_plug == 1
   Plug 'sudar/vim-arduino-syntax'
   Plug 'cespare/vim-toml'                       " Toml is a configuration language similar to yaml
   Plug 'danihodovic/nodejs-require.vim'
+  Plug 'hashivim/vim-terraform'
   "-----------------------------------------
   call plug#end()
 end
 "-----------------------------------------
 " General settings
+set fillchars=stl:─,stlnc:─,vert:│,fold:─,diff:─
 "-----------------------------------------
 " Cursor shape betwen block and ibeam. Does not work for lxterminal, xfce4-terminal
 " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
@@ -274,7 +276,7 @@ set wrapmargin=5
 "-----------------------------------------
 " `nocindent smartindent` will allow us to omit semicolons and jump to the next line without auto indentation
 " for Javascript/Typescript
-autocmd FileType typescript,javascript  setlocal  shiftwidth=2 tabstop=2 expandtab nocindent smartindent
+autocmd FileType typescript,javascript,terraform  setlocal  shiftwidth=2 tabstop=2 expandtab nocindent smartindent
 autocmd FileType coffee                 setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType css,scss,stylus        setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType vim                    setlocal  shiftwidth=2 tabstop=2 expandtab
