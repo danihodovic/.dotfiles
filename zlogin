@@ -159,6 +159,14 @@ bindkey -M vicmd p vi-append-x-selection-after
 
 bindkey -M vicmd v tmux-copy-mode
 
+function tmux-search {
+  tmux copy-mode && tmux send-keys '?' && tmux send-keys \
+    BSpace BSpace BSpace BSpace BSpace BSpace BSpace BSpace BSpace BSpace BSpace BSpace
+}
+zle -N tmux-search
+
+bindkey -M vicmd '/' tmux-search
+
 # Reverse scrolling shift+tab
 bindkey -M menuselect '^[[Z' reverse-menu-complete
 # Aliases
@@ -190,8 +198,8 @@ alias aptpolicy='apt-cache policy '
 alias aptshow='apt-cache show '
 alias aptrepository='sudo apt-add-repository  -y'
 
-function ssh-keygen-fingerprint { ssh-keygen -l -f }
-function ssh-keygen-fingerprint-md5 { ssh-keygen -E md5 -l -f }
+function ssh-keygen-fingerprint { ssh-keygen -l -f $1 }
+function ssh-keygen-fingerprint-md5 { ssh-keygen -E md5 -l -f $1 }
 function ssh-sync {
   if [ $# != '3' ]; then
     echo 'Usage:\n\t ssh-sync <source-dir> <host>@<ip> <target-dir>'
