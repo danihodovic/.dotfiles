@@ -543,3 +543,60 @@ If the above solution does not work try this:
 
 
 ### Tags: virtualbox, virtualbox-dkms, kubernetes, minikube, vboxdrv(?)
+
+
+# Spin up ec2 instance with ingress ports 80,443,22 open and ssh into it
+
+    # Create the security group
+    aws ec2 create-security-group --group-name test1 --description 'Test security group'
+
+    aws ec2 authorize-security-group-ingress --group-name test1 --protocol tcp --port 80 --cidr 0.0.0.0/0
+    aws ec2 authorize-security-group-ingress --group-name test1 --protocol tcp --port 443 --cidr 0.0.0.0/0
+    aws ec2 authorize-security-group-ingress --group-name test1 --protocol tcp --port 22 --cidr 0.0.0.0/0
+
+    # Push your ssh key if you have not already
+    aws ec2 import-key-pair --key-name test-key-1 --public-key-material "$(cat ~/.ssh/id_rsa.pub)"
+
+    # Use an ubuntu image
+    image_id=ami-ed82e39e
+
+    # Run a micro instance and get the instance id
+    instance_id=$(aws ec2 run-instances --image-id $image_id \
+        --security-groups test1 \
+        --key-name test-key-1 \
+        --count 1 \
+        --instance-type t2.micro \
+        --query 'Instances[0].InstanceId' \
+        --output text)
+
+    # Get the public ip to use with ssh
+    public_ip=$(aws ec2 describe-instances \
+        --instance-ids $instance_id \
+        --query 'Reservations[0].Instances[0].PublicIpAddress' \
+        --output text )
+
+    ssh ubuntu@$public_ip
+
+
+# Tmux
+
+## Binding a key to send multiple commands
+You need to escape the ; between commands in order for them not to execute in parallel.
+Example:
+
+    bind -n '/' copy-mode '\;' send-keys ?
+
+The above example enters copy-mode and starts searching immediately.
+http://superuser.com/questions/539886/tmux-start-copy-mode-and-selection-at-the-same-time
+
+# Terminals
+
+## Blinking lxterminal
+    $ vi ~/.config/lxterminal/lxterminal.conf
+
+    cursorblinks=true
+
+## Blinking xfce4terminal
+    $ vi ~/.config/xfce4/terminal/terminalrc
+
+    MiscCursorBlinks=TRUE
