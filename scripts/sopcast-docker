@@ -34,14 +34,18 @@ main() {
   # Name the container after the ID so we don't have duplicate channels with the same stream
   local channel_id=$(echo $sopcast_url | awk -F/ '{print $4}')
   local empty_port=$(find_empty_port)
-  local container_id=$(docker run -d \
+  local container_id=$((docker run -d \
     -p "$empty_port:$empty_port" \
     --name "sopcast-$channel_id" \
-    danihodovic/sopcast "$sopcast_url" "$empty_port")
+    danihodovic/sopcast "$sopcast_url" "$empty_port") \
+    2>&1)
 
-  if [ -z "$container_id" ]; then
-    echo "Failed to start container"
-    exit 1
+  # If the container already exists, start it and update our empty port mapping
+  if [[ $container_id =~ "is already in use by container" ]]; then
+    container_id=$(echo $container_id | grep -oP 'The name "/\K(sopcast-[0-9]+)')
+    empty_port=$(docker inspect ${container_id} | grep -oP 'HostPort": "\K(\d+)' | head -n 1)
+    echo "Starting exsting container $container_id"
+    docker start $container_id > /dev/null
   fi
 
   for _ in $(seq 1 40); do
