@@ -178,6 +178,7 @@ alias cd.="cd .."
 alias cd..="cd ../.."
 alias cd...="cd ../../.."
 alias cd....='cd ../../../..'
+alias ll='ls -lart'
 alias cp='cp -v '
 alias h="history"
 alias cd-="cd -"
