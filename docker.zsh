@@ -11,7 +11,6 @@ alias dkillall='docker kill $(docker ps -q)'
 alias dstop='docker stop '
 alias dstoprunning='docker stop $(docker ps -q)'
 alias dstopall='docker stop $(docker ps -a -q)'
-alias drm='docker rm '
 alias drmall='docker rm $(docker ps -a -q)'
 alias dsearch='docker search '
 
@@ -38,6 +37,13 @@ dri() {
   choice=$(fimage)
   if [ -n "$choice" ]; then
     print -z docker run $@ "$choice"
+  fi
+}
+
+drm() {
+  choice=$(fcontainer)
+  if [ -n "$choice" ]; then
+    print -z docker rm -f $@ "$choice"
   fi
 }
 
