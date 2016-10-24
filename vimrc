@@ -35,7 +35,7 @@ if s:has_plug == 1
   Plug 'tpope/vim-fugitive'                     " Various git commands inside vim
   Plug 'Lokaltog/vim-easymotion'                " Better movement with f/t
   Plug 'SirVer/ultisnips'
-  Plug 'danihodovic/vim-dsnippets'              " My own snippets
+  Plug 'danihodovic/vim-snippets'               " My own snippets
   Plug 'nathanaelkane/vim-indent-guides'        " Visually display indent lines with different color
   Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
   Plug 'junegunn/vim-pseudocl'                  " Required by vim-oblique
@@ -644,7 +644,7 @@ inoremap <return> <C-R>=Return_Or_Snippet()<cr>
 " https://github.com/Valloric/YouCompleteMe/issues/1214
 let g:UltiSnipsUsePythonVersion = 2
 " Load my own snippets
-let g:UltiSnipsSnippetDirectories=[$NVIM_DIR.'/plugged/vim-dsnippets']
+let g:UltiSnipsSnippetDirectories=[$NVIM_DIR.'/plugged/vim-snippets']
 "-----------------------------------------
 " GitGutter
 "-----------------------------------------
