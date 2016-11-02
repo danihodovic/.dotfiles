@@ -50,6 +50,8 @@ HISTFILE=~/.zsh_history
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
 
+setopt dot_glob
+
 # Enable reverse-menu-complete
 zmodload zsh/complist
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
@@ -180,6 +182,7 @@ alias cd...="cd ../../.."
 alias cd....='cd ../../../..'
 alias ll='ls -lart'
 alias cp='cp -v '
+alias mv='mv -v '
 alias h="history"
 alias cd-="cd -"
 alias ls='ls --color=auto --classify'
