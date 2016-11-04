@@ -22,7 +22,7 @@ alias dcexec='docker-compose exec '
 alias dclogs='docker-compose logs'
 # fzf --header-lines=1 --tac
 fcontainer() {
-  echo "$(docker ps --format=$custom_ps_format | fzf --header-lines=1 | \
+  echo "$(docker ps --format=$custom_ps_format | fzf --header-lines=1 --multi | \
     awk '{print $1 != "" ? $1 : $3}')"
 }
 fcontainerall() {
