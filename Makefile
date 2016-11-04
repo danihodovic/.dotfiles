@@ -1,11 +1,14 @@
-# http://unix.stackexchange.com/a/217308/86046
-.DEFAULT_GOAL := all
-
 run_unit_tests=python3 -m unittest discover -s test/unit/ -p '*_test.py'
 run_integration_tests=python3 -m unittest discover -s test/integration/ -p '*_test.py'
 
 # In order to run one python test:
 # python3 test/integration/dev_tools_test.py IntegrationSuite.test_install_docker
+.PHONY: install
+install:
+	./install/apt-essentials.sh
+	./install/dev_tools.py
+	./install/other.sh
+	./setupSymlinks.py
 
 .PHONY: build
 build:
@@ -23,6 +26,6 @@ integration: build
 interactive: build
 	docker run --rm -it -v $(shell pwd):/root/.dotfiles dotfiles-test bash
 
-.PHONY: all
-all: build unit integration
+.PHONY: test-all
+test-all: build unit-docker integration-docker
 
