@@ -42,36 +42,24 @@ conf_files = [
     (HOME_DIR + '/.dotfiles/pre-commit', HOME_DIR + '/.dotfiles/.git/hooks/pre-commit')
 ]
 
-def _removeLink(link, verbose=True):
-    msg = ""
-    try:
-        msg = "Removing:" + link
-        os.remove(link)
-    except OSError as err:
-        msg = 'Error during _removeLink: ' + str(err)
-    finally:
-        if verbose:
-            print(msg)
-
-
-def _createSymlink(src, dst, verbose = True):
-    msg = ""
-    try:
-        msg = "[Success ] Creating symlink from: {} to: {}".format(src, dst)
-        os.symlink(src, dst)
-    except OSError as err:
-        msg = 'Error during _createSymlink: ' + str(err)
-    finally:
-        if verbose:
-            print(msg)
-
 def main(verbose=True):
     for [path, symlink] in conf_files:
-        _removeLink(symlink, verbose)
+        os.remove(symlink)
+        if verbose:
+            print("Removing:" + symlink)
+
         if not os.path.isdir(os.path.dirname(symlink)):
             os.makedirs(os.path.dirname(symlink))
-        _createSymlink(path, symlink, verbose)
+
+        try:
+            os.symlink(path, symlink)
+            if verbose:
+                print("Creating symlink from: {} to: {}".format(path, symlink))
+        except OSError as err:
+            if err.strerror != 'File exists':
+                raise err
+            if verbose:
+                print("Symlink already exists: {}".format(symlink))
 
 if __name__ == '__main__':
     main()
-
