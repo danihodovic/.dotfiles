@@ -198,6 +198,7 @@ if __name__ == '__main__':
     ins_zsh      = input('Install zsh? [y/n]')
     ins_tmux     = input('Install tmux? [y/n]')
     ins_vim_plug = input('Install vim-plug? [y/n]')
+    ins_antibody = input('Install antibody? [y/n]')
     ins_fzf      = input('Install fzf? [y/n]')
 
     if ins_neovim == 'y':
@@ -211,6 +212,9 @@ if __name__ == '__main__':
 
     if ins_vim_plug == 'y':
         install_vim_plug()
+
+    if ins_antibody == 'y':
+        install_antibody()
 
     if ins_fzf == 'y':
         install_fzf()
