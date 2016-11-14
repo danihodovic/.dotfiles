@@ -180,6 +180,7 @@ alias cd.="cd .."
 alias cd..="cd ../.."
 alias cd...="cd ../../.."
 alias cd....='cd ../../../..'
+alias entertemp='tempdir=$(mktemp -d) && cd $tempdir'
 alias ll='ls -lart'
 alias cp='cp -v '
 alias mv='mv -v '
