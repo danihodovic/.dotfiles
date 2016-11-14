@@ -33,44 +33,34 @@ def cache_handler():
 # Apt packages
 ###############################
 def install_neovim():
-    with cache_handler() as cache:
-        pkg_name = 'neovim'
+    pkg_name = 'neovim'
 
-        if pkg_name in cache and cache[pkg_name].is_installed:
-            print('Package: neovim already installed')
-            return
+    print('Adding neovim ppa...')
+    lsb_codename = lsb_release.get_lsb_information()['CODENAME']
+    filename = '/etc/apt/sources.list.d/neovim-ppa.list'
+    line = 'deb http://ppa.launchpad.net/neovim-ppa/unstable/ubuntu {0} main\n'.format(lsb_codename)
+    print('Using ppa: {}'.format(line))
 
-        print('Adding neovim ppa...')
-        lsb_codename = lsb_release.get_lsb_information()['CODENAME']
-        filename = '/etc/apt/sources.list.d/neovim-ppa.list'
-        line = 'deb http://ppa.launchpad.net/neovim-ppa/unstable/ubuntu {0} main\n'.format(lsb_codename)
-        print('Using ppa: {}'.format(line))
+    with open(filename, 'w') as f:
+        os.chmod(filename, 0o644)
+        f.write(line)
 
-        with open(filename, 'w') as f:
-            os.chmod(filename, 0o644)
-            f.write(line)
+    # apt-get update after adding the ppa
+    apt_get_update()
 
-        # apt-get update after adding the ppa
-        cache.open()
-        cache.update(raise_on_error=True)
-        cache.open()
+    apt_get_install(pkg_name)
 
-        install_apt_pkg(cache, pkg_name)
-
-        # Install neovim for python to (for python plugins)
-        install_apt_pkg(cache, 'python3-pip')
-        import pip
-        pip.main(['install', 'neovim'])
+    # Install neovim for python (for python plugins)
+    apt_get_install('python-pip')
+    subprocess.check_output(['pip', 'install', 'neovim'])
 
 def install_zsh():
-    with cache_handler() as cache:
-        pkg_name = 'zsh'
-        install_apt_pkg(cache, pkg_name)
+    pkg_name = 'zsh'
+    apt_get_install(pkg_name)
 
 def install_tmux():
-    with cache_handler() as cache:
-        pkg_name = 'tmux'
-        install_apt_pkg(cache, pkg_name)
+    pkg_name = 'tmux'
+    apt_get_install(pkg_name)
 
 ###############################
 # Plugin managers
@@ -106,25 +96,21 @@ def install_fzf():
             os.rename(tempdir + '/' + tarname, os.path.expandvars('${HOME}/.fzf'))
 
     # Run the shell installation script which sets up fzf specific dotfiles
-    with cache_handler() as cache:
-        install_apt_pkg(cache, 'curl')
-        script = os.path.expanduser('~') + '/.fzf/install'
-        proc = subprocess.Popen([script, '--key-bindings', '--completion', '--no-update-rc'])
-        proc.wait()
+    apt_get_install('curl')
+    script = os.path.expanduser('~') + '/.fzf/install'
+    proc = subprocess.Popen([script, '--key-bindings', '--completion', '--no-update-rc'])
+    proc.wait()
 
 
-def install_apt_pkg(cache, pkg_name):
-    cache.open()
-    if not cache.has_key(pkg_name):
-        raise Exception('Error - Package: {} could not be found in the cache'.format(pkg_name))
-    elif cache.has_key(pkg_name) and not cache[pkg_name].is_installed:
-        print('Installing {}...'.format(pkg_name))
-        pkg = cache[pkg_name]
-        pkg.mark_install()
-        cache.commit()
-    elif cache[pkg_name].is_installed:
-        print("Package: {pkg_name} is already installed".format(pkg_name=pkg_name))
+def apt_get_install(pkg_name):
+    cmd = ['apt-get', 'install', '-y', '--allow-unauthenticated', pkg_name]
+    proc = subprocess.Popen(cmd)
+    proc.communicate()
 
+def apt_get_update():
+    cmd = ['apt-get', 'update']
+    proc = subprocess.Popen(cmd)
+    proc.communicate()
 
 def download_to_file(url, thefile):
     parent_dir = os.path.dirname(thefile)
@@ -137,6 +123,60 @@ def download_to_file(url, thefile):
             with open(thefile, 'wb') as f:
                 shutil.copyfileobj(res, f)
                 shutil.chown(thefile, user=user, group=user)
+
+def install_docker():
+    apt_get_update()
+
+    # Install dependencies
+    apt_get_install('ca-certificates')
+    apt_get_install('apt-transport-https')
+
+    # Add the keyserver
+    subprocess.check_output([
+        'apt-key', 'adv',
+        '--keyserver', 'hkp://p80.pool.sks-keyservers.net:80',
+        '--recv-keys', '58118E89F3A912897C070ADBF76221572C52609D',
+    ])
+
+    #  Add the ppa
+    ubuntu_codename = lsb_release.get_lsb_information()['CODENAME']
+    line = 'deb https://apt.dockerproject.org/repo ubuntu-{} main'.format(ubuntu_codename)
+    filename = '/etc/apt/sources.list.d/docker.list'
+    print('Using ppa: {}'.format(line))
+
+    with open(filename, 'w') as f:
+        os.chmod(filename, 0o644)
+        f.write(line)
+
+    apt_get_update()
+
+    # Install linux-image-extra-virtual for the aufs filesystem
+    kernel_version = subprocess.check_output(['uname', '-r']).decode('utf8').rstrip()
+    linux_image_headers = 'linux-image-extra-{}'.format(kernel_version)
+    apt_get_install(linux_image_headers)
+    apt_get_install('linux-image-extra-virtual')
+
+    # Finally install docker
+    apt_get_install('docker-engine')
+
+    # Add me to the docker user
+    try:
+        output = subprocess.check_output(['groupadd', 'docker'], stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        group_exists_msg = "groupadd: group 'docker' already exists"
+        if not e.output.decode('utf8').startswith(group_exists_msg):
+            raise e
+
+    # TODO: Hack because test fails in docker because no dani user exists
+    try:
+        subprocess.check_output(['usermod', '-a', '-G', 'docker', 'dani'])
+    except subprocess.CalledProcessError as e:
+        pass
+
+    try:
+        subprocess.check_output(['su', '-', 'dani'])
+    except subprocess.CalledProcessError as e:
+        pass
 
 
 ###############################

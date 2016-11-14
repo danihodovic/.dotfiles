@@ -19,6 +19,18 @@ user = getpass.getuser()
 vim_plug_path = os.path.expandvars('${HOME}/.config/nvim/autoload/plug.vim')
 antibody_path = os.path.expandvars('/usr/local/bin/antibody')
 
+@contextlib.contextmanager
+def cache_handler():
+    cache = None
+    try:
+        cache = apt.cache.Cache()
+        cache.open()
+        yield cache
+    finally:
+        if cache:
+            cache.close()
+
+
 min_version = 3.4
 version = float(sys.version[0:3])
 if version < min_version:
@@ -31,25 +43,33 @@ class IntegrationSuite(unittest.TestCase):
     ###############################
 
     def test_install_zsh(self):
-        with dev_tools.cache_handler() as cache:
+        with cache_handler() as cache:
             remove_if_installed(cache, 'zsh')
             dev_tools.install_zsh()
             cache.open()
             self.assertTrue(is_installed_pkg(cache, 'zsh'))
 
     def test_install_tmux(self):
-        with dev_tools.cache_handler() as cache:
+        with cache_handler() as cache:
             remove_if_installed(cache, 'tmux')
             dev_tools.install_tmux()
             cache.open()
             self.assertTrue(is_installed_pkg(cache, 'tmux'))
 
     def test_install_neovim(self):
-        with dev_tools.cache_handler() as cache:
+        with cache_handler() as cache:
             remove_if_installed(cache, 'neovim')
             dev_tools.install_neovim()
             cache.open()
             self.assertTrue(is_installed_pkg(cache, 'neovim'))
+
+    # TODO: Test if dani is in the docker group
+    def test_install_docker(self):
+        with cache_handler() as cache:
+            remove_if_installed(cache, 'docker-engine')
+            dev_tools.install_docker()
+            cache.open()
+            self.assertTrue(is_installed_pkg(cache, 'docker-engine'))
 
     ###############################
     # Other
@@ -62,7 +82,7 @@ class IntegrationSuite(unittest.TestCase):
 
         # We can't simply use HOME + '.fzf' + os.environ['SHELL'] because this variable
         #  doesn't exist in tests. So we have to look for both .bash and .zsh
-        completion_file_regex = re.compile('fzf\.(bash|zsh)')
+        completion_file_regex = re.compile(r'fzf\.(bash|zsh)')
         for f in os.listdir(HOME):
             if completion_file_regex.search(f):
                 os.remove(HOME + '/' + f)
@@ -77,6 +97,7 @@ class IntegrationSuite(unittest.TestCase):
         self.assertTrue(os.path.isfile(fzf_dir + '/bin/fzf-tmux'))
         self.assertTrue(completion_file != None)
 
+    # TODO: Test that dani is the owner of the files
     def test_install_vim_plug(self):
         if os.path.isfile(vim_plug_path):
             os.remove(vim_plug_path)
