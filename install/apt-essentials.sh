@@ -41,5 +41,6 @@ $sudo_cmd apt-get install -y \
     shellcheck \
     rofi \
     ranger \
-    gnome-settings-daemon
+    gnome-settings-daemon \
+    apt-file
 
