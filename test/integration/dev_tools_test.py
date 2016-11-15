@@ -8,6 +8,8 @@ import unittest
 import getpass
 import shutil
 import re
+import contextlib
+import apt
 
 repo_root = os.path.expanduser('~/.dotfiles/install')
 sys.path.append(repo_root)
@@ -17,7 +19,7 @@ HOME = os.path.expanduser('~')
 
 user = getpass.getuser()
 vim_plug_path = os.path.expandvars('${HOME}/.config/nvim/autoload/plug.vim')
-antibody_path = os.path.expandvars('/usr/local/bin/antibody')
+antibody_path = '/usr/local/bin/antibody'
 
 @contextlib.contextmanager
 def cache_handler():
@@ -133,4 +135,3 @@ def find_group(filename):
 
 if __name__ == '__main__':
     unittest.main()
-
