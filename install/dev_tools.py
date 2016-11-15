@@ -112,17 +112,17 @@ def apt_get_update():
     proc = subprocess.Popen(cmd)
     proc.communicate()
 
-def download_to_file(url, thefile):
-    parent_dir = os.path.dirname(thefile)
+def download_to_file(url, path):
+    parent_dir = os.path.dirname(path)
     if not os.path.isdir(parent_dir):
         os.makedirs(parent_dir)
         shutil.chown(parent_dir, user=user, group=user)
 
-    if not os.path.isfile(thefile):
+    if not os.path.isfile(path):
         with urllib.request.urlopen(url) as res:
-            with open(thefile, 'wb') as f:
+            with open(path, 'wb') as f:
                 shutil.copyfileobj(res, f)
-                shutil.chown(thefile, user=user, group=user)
+                shutil.chown(path, user=user, group=user)
 
 def install_docker():
     apt_get_update()
@@ -178,6 +178,13 @@ def install_docker():
     except subprocess.CalledProcessError as e:
         pass
 
+    install_docker_compose()
+
+def install_docker_compose():
+    url = 'https://github.com/docker/compose/releases/download/1.8.1/run.sh'
+    path = '/usr/local/bin/docker-compose'
+    download_to_file(url, path)
+    subprocess.check_output(['chmod', '755', path])
 
 ###############################
 # Main
@@ -218,4 +225,3 @@ if __name__ == '__main__':
 
     if ins_fzf == 'y':
         install_fzf()
-

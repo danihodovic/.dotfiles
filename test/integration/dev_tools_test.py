@@ -68,10 +68,18 @@ class IntegrationSuite(unittest.TestCase):
     # TODO: Test if dani is in the docker group
     def test_install_docker(self):
         with cache_handler() as cache:
+            docker_compose_path = '/usr/local/bin/docker-compose'
             remove_if_installed(cache, 'docker-engine')
+            if os.path.isfile(docker_compose_path):
+                os.remove(docker_compose_path)
+
+            # Check if docker is installed
             dev_tools.install_docker()
             cache.open()
             self.assertTrue(is_installed_pkg(cache, 'docker-engine'))
+
+            # Check if docker-compose is installed
+            self.assertEqual(shutil.which('docker-compose'), docker_compose_path)
 
     ###############################
     # Other
