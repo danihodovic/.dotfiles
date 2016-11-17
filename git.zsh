@@ -94,6 +94,11 @@ gformatpatch() {
   [[ -n $commit ]] && print -z git format-patch $@ $commit
 }
 
+grevert() {
+  commit=`fcommit`
+  [[ -n $commit ]] && print -z git revert $@ $commit
+}
+
 compdef _git-format-patch gformatpatch
 
 gsha1() {
