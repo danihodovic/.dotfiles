@@ -103,8 +103,10 @@ def install_fzf():
 
 
 def apt_get_install(pkg_name):
+    env = os.environ.copy()
+    env['DEBIAN_FRONTEND'] = 'noninteractive'
     cmd = ['apt-get', 'install', '-y', '--allow-unauthenticated', pkg_name]
-    proc = subprocess.Popen(cmd)
+    proc = subprocess.Popen(cmd, env=env)
     proc.communicate()
 
 def apt_get_update():
