@@ -186,42 +186,40 @@ def install_docker_compose():
     download_to_file(url, path)
     subprocess.check_output(['chmod', '755', path])
 
-###############################
-# Main
-###############################
-if __name__ == '__main__':
+install = [
+    ('Install neovim? [y/n]', install_neovim),
+    ('Install zsh? [y/n]', install_zsh),
+    ('Install tmux? [y/n]', install_tmux),
+    ('Install vim-plug? [y/n]', install_vim_plug),
+    ('Install antibody? [y/n]', install_antibody),
+    ('Install fzf? [y/n]', install_fzf)
+]
 
+def _assert_sudo():
     if os.geteuid() != 0:
         print('Error: Run the script as root as we need to use apt')
         sys.exit(1)
 
+def _assert_python_version():
     version = float(sys.version[0:3])
     min_version = 3.4
     if version < min_version:
         print('Error: Python version {} detected, use at least version {}', version, min_version)
         sys.exit(1)
 
-    ins_neovim   = input('Install neovim? [y/n]')
-    ins_zsh      = input('Install zsh? [y/n]')
-    ins_tmux     = input('Install tmux? [y/n]')
-    ins_vim_plug = input('Install vim-plug? [y/n]')
-    ins_antibody = input('Install antibody? [y/n]')
-    ins_fzf      = input('Install fzf? [y/n]')
+###############################
+# Main
+###############################
+if __name__ == '__main__':
+    _assert_python_version()
+    _assert_sudo()
 
-    if ins_neovim == 'y':
-        install_neovim()
+    if input('Install all?') == 'y':
+        for _, install_func in install:
+            install_func()
 
-    if ins_zsh == 'y':
-        install_zsh()
+    for phrase, install_func in install:
+        response = input(phrase)
+        if response == 'y':
+            install_func()
 
-    if ins_tmux == 'y':
-        install_tmux()
-
-    if ins_vim_plug == 'y':
-        install_vim_plug()
-
-    if ins_antibody == 'y':
-        install_antibody()
-
-    if ins_fzf == 'y':
-        install_fzf()
