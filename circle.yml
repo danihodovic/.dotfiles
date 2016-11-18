@@ -4,4 +4,4 @@ machine:
 
 test:
   override:
-    - make test-all
+    - make test

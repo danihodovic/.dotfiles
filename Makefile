@@ -26,6 +26,6 @@ integration: build
 interactive: build
 	docker run --rm -it -v $(shell pwd):/root/.dotfiles dotfiles-test bash
 
-.PHONY: test-all
-test-all: build unit integration
+.PHONY: test
+test: build unit integration
 
