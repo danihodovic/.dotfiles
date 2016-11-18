@@ -1,3 +1,31 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python
 
-python3 -m unittest discover -s test/unit/ -p '*_test.py'
+import sys
+import subprocess
+
+should_test_unit = False
+should_test_integration = False
+output = subprocess.check_output(['git', 'diff', '--cached', '--name-status'])
+file_list = output.split('\n')
+
+for f in file_list:
+    as_array = f.split('\t')
+    if len(as_array) > 1:
+        filename = as_array[1]
+        if filename == 'setupSymlinks.py':
+            should_test_unit = True
+        if filename == 'install/dev_tools.py':
+            should_test_integration = True
+
+if should_test_unit:
+    proc = subprocess.Popen(['make', 'unit'])
+    exit_code = proc.wait()
+    if exit_code != 0:
+        sys.exit(exit_code)
+
+if should_test_integration:
+    proc = subprocess.Popen(['make', 'integration'])
+    exit_code = proc.wait()
+    if exit_code != 0:
+        sys.exit(exit_code)
+
