@@ -196,6 +196,7 @@ alias ctl='sudo systemctl '
 
 alias aptinstall='sudo apt-get install '
 alias aptpurge='sudo apt-get purge '
+alias aptautoremove='sudo apt-get autoremove'
 alias aptupdate='sudo apt-get update'
 alias aptupgrade='sudo apt-get dist-upgrade '
 alias aptsearch='apt-cache search '
