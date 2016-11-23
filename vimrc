@@ -578,6 +578,13 @@ fu! RunJscs()
   checktime
   w
 endfu
+
+autocmd filetype javascript command! FixEslint call RunEslint()
+fu! RunEslint()
+  call system("eslint --fix " . expand('%'))
+  checktime
+  w
+endfu
 "-----------------------------------------
 " Jedi Python
 "-----------------------------------------
