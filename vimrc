@@ -7,7 +7,7 @@ set nocompatible
 " Only load plugins if we have vim-plug installed
 let s:has_plug = 0
 try
-  call plug#begin('$NVIM_DIR/plugged')
+  call plug#begin('$HOME/.config/nvim/plugged')
   let s:has_plug = 1
 catch /Unknown function/
 endtry
@@ -309,10 +309,9 @@ let g:fzf_layout = {'up': '~40%'}
 nnoremap = :Files<cr>
 nnoremap - :call FzfGitChangedFilesFromMaster()<cr>
 nnoremap b :Buffers<cr>
-nnoremap <C-r> :History:<cr>
-cnoremap <C-r> :History:<cr>
+nnoremap H :History:<cr>
+cnoremap H :History:<cr>
 nnoremap r :History<cr>
-nnoremap U :redo<cr>
 
 function! FzfGitChangedFilesFromMaster()
   let root = split(system('git rev-parse --show-toplevel'), '\n')[0]
@@ -505,8 +504,15 @@ nmap ga <Plug>(EasyAlign)
 " YouCompleteMe
 "-----------------------------------------
 let g:ycm_server_python_interpreter = '/usr/bin/python2.7'
-let g:ycm_filetype_blacklist = {'notes': 1, 'markdown': 0, 'unite': 1, 'tagbar': 1,
-      \'pandoc': 1, 'qf': 1, 'vimwiki': 1, 'text': 0, 'infolog': 1, 'mail': 1}
+let g:ycm_filetype_blacklist = {
+  \'notes': 1,
+  \'unitte': 1,
+  \'tagtbar': 1,
+  \'pantdoc': 1,
+  \'qf': 1,
+  \'vimtwiki': 1,
+  \'inftolog': 1,
+  \'maitl': 1}
 " Opts: menu, menuone, longest, preview
 " Avoid preview to use completion  engine lookups, otherwise it tends to lag.
 " Avoid longest as it disables you from typing
