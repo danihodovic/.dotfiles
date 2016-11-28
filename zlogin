@@ -24,6 +24,7 @@ export EDITOR=nvim
 export N_PREFIX=${HOME}/.n
 export PATH=$PATH:$N_PREFIX/bin
 export PYTHONSTARTUP=~/.pythonrc
+export FZF_DEFAULT_COMMAND="find . -path '*/' -prune -o -type f -print -o -type l -print 2> /dev/null | sed s/^..//"
 
 # Ease of use
 export dotfiles=${HOME}/.dotfiles
@@ -180,7 +181,7 @@ alias cd.="cd .."
 alias cd..="cd ../.."
 alias cd...="cd ../../.."
 alias cd....='cd ../../../..'
-alias entertemp='tempdir=$(mktemp -d) && cd $tempdir'
+alias tempdir='tempdir=$(mktemp -d) && cd $tempdir'
 alias ll='ls -lart'
 alias cp='cp -v '
 alias mv='mv -v '
@@ -258,6 +259,10 @@ function webm-to-m4a {
   fi
   base="$(basename $1 .webm)"
   ffmpeg -i "$1" -strict -2 "$base.m4a"
+}
+
+function google {
+  chromium-browser "google.com/search?q=$*"
 }
 
 man() {
