@@ -1,7 +1,6 @@
 alias gs='git status -sb'
 alias gd='git diff'
 alias gdc='git diff --cached'
-alias gdom='git diff origin/master'
 alias gl='git log --decorate'
 alias glogS='git log -p -S '
 alias glgrep='git log --grep '
@@ -22,6 +21,9 @@ alias gtags-latest='git tag --list | sort -V | tail -n 1'
 alias gremotes='git remote -v'
 alias gremote='git remote'
 alias gci-status='hub ci-status '
+alias gdom='git diff origin/master'
+gdob () { git diff origin/$(_local_branch) }
+compdef _git-diff gdob
 
 # Initiate _git which exposes the _git-* completions
 _git
