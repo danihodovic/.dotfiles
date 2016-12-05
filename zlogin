@@ -2,7 +2,6 @@ if [[ "$DESKTOP_SESSION" == "cinnamon" ]]; then
   echo 'Using cinnamon settings...'
   alias lock='cinnamon-screensaver-command -l'
 elif [ "$DESKTOP_SESSION" = "i3" ]; then
-  alias lock=i3lock
   export $(gnome-keyring-daemon -s)
 fi
 
