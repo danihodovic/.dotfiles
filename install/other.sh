@@ -8,6 +8,8 @@ read -p "Install Slack?"                       -n 1 -r      install_slack
 echo
 read -p "Install github/hub?"                       -n 1 -r      install_hub
 echo
+read -p "Install ripgrep?"                       -n 1 -r      install_ripgrep
+echo
 read -p "Install dasht? Cli tool for reading docs [y/n] " -n 1 -r INSTALL_DASHT
 echo
 read -p "Install i3-completions for zsh? " -n 1 -r      install_i3_completions
@@ -47,6 +49,18 @@ case $install_hub in
     curl -sL "$download_url" | tar -C "$tempdir" --strip-components 1 -xz
     echo Installing...
     sudo "${tempdir}"/install
+esac
+
+case $install_ripgrep in
+  y)
+    tempdir=$(mktemp -d)
+    download_url=$(\
+      curl -sL https://api.github.com/repos/BurntSushi/ripgrep/releases/latest | \
+      grep -P 'https.+x86_64.+linux.+tar.gz' | \
+      sed 's/"//g' | \
+      awk '{print $2}')
+    curl -sL "$download_url" | tar xz --strip-components=1 -C "$tempdir"
+    sudo mv "$tempdir"/rg /usr/local/bin
 esac
 
 case $INSTALL_DASHT in
