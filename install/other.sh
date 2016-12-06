@@ -6,6 +6,8 @@ read -p "Install node version manager (n)? " -n 1 -r      install_n
 echo
 read -p "Install Slack?"                       -n 1 -r      install_slack
 echo
+read -p "Install github/hub?"                       -n 1 -r      install_hub
+echo
 read -p "Install dasht? Cli tool for reading docs [y/n] " -n 1 -r INSTALL_DASHT
 echo
 read -p "Install i3-completions for zsh? " -n 1 -r      install_i3_completions
@@ -31,6 +33,20 @@ case $install_slack in
     sudo apt-get install -y gvfs-bin
     sudo dpkg -i /tmp/slack.deb
     ;;
+esac
+
+case $install_hub in
+  y)
+    tempdir=$(mktemp -d)
+    download_url=$(\
+      curl -sL https://api.github.com/repos/github/hub/releases/latest | \
+      grep 'https.*linux-amd64.*\.tgz' | \
+      sed 's/"//g' | \
+      awk '{print $2}')
+    echo Downloading hub release from "${download_url}"...
+    curl -sL "$download_url" | tar -C "$tempdir" --strip-components 1 -xz
+    echo Installing...
+    sudo "${tempdir}"/install
 esac
 
 case $INSTALL_DASHT in
