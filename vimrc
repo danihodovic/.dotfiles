@@ -1,4 +1,4 @@
-" TODO: Add ag search within git files. Not node_modules
+" TODO: Add ag search within git files. Not node_module/s/
 "-----------------------------------------
 " Vim Plug
 "-----------------------------------------
@@ -58,7 +58,6 @@ if s:has_plug == 1
   " -----------------------------------------
   Plug 'jelera/vim-javascript-syntax'
   Plug 'HerringtonDarkholme/yats.vim'           " Typescript syntax
-  Plug 'davidhalter/jedi-vim'                   " Python semantic completion
   Plug 'derekwyatt/vim-scala'
   Plug 'vim-erlang/vim-erlang-omnicomplete'
   Plug 'Valloric/MatchTagAlways'                " Show matching html/xml tags
@@ -130,8 +129,6 @@ set tags=./tags;
 set diffopt=filler,vertical
 set scrolloff=10
 set nofoldenable
-autocmd BufEnter *.js,*.ts setlocal foldenable | setlocal foldmethod=indent
-autocmd BufEnter *.go setlocal foldenable | setlocal foldmethod=syntax
 let g:go_fmt_experimental = 1
 "-----------------------------------------
 " User defined commands
