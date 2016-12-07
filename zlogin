@@ -23,7 +23,6 @@ export EDITOR=nvim
 export N_PREFIX=${HOME}/.n
 export PATH=$PATH:$N_PREFIX/bin
 export PYTHONSTARTUP=~/.pythonrc
-export FZF_DEFAULT_COMMAND="find . -path '*/' -prune -o -type f -print -o -type l -print 2> /dev/null | sed s/^..//"
 
 function vi () {}
 
