@@ -25,6 +25,8 @@ export PATH=$PATH:$N_PREFIX/bin
 export PYTHONSTARTUP=~/.pythonrc
 export FZF_DEFAULT_COMMAND="find . -path '*/' -prune -o -type f -print -o -type l -print 2> /dev/null | sed s/^..//"
 
+function vi () {}
+
 # Ease of use
 export dotfiles=${HOME}/.dotfiles
 export plugged=${NVIM_DIR}/plugged
