@@ -22,7 +22,7 @@ alias gremotes='git remote -v'
 alias gremote='git remote'
 alias gci-status='hub ci-status '
 alias gdom='git diff origin/master'
-gdob () { git diff origin/$(_local_branch) }
+gdob () { git diff origin/$(_local_branch) $@ }
 compdef _git-diff gdob
 
 # Initiate _git which exposes the _git-* completions
