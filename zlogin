@@ -190,8 +190,14 @@ alias cd-="cd -"
 alias ls='ls --color=auto --classify'
 alias setxkbmapcaps="setxkbmap -option caps:swapescape68"
 alias o='xdg-open'
-alias v='nvim'
-function gvi { nohup nvim-qt $@ >/dev/null 2>&1 &}
+function v() {
+  which nvim-qt > /dev/null
+  if [ $? -eq 0 ]; then
+    nohup nvim-qt $@ > /dev/null 2>&1 &
+  else
+    nvim $@
+  fi
+}
 alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
 
