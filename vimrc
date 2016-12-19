@@ -71,6 +71,7 @@ if s:has_plug == 1
   Plug 'cespare/vim-toml'                       " Toml is a configuration language similar to yaml
   Plug 'danihodovic/nodejs-require.vim'
   Plug 'hashivim/vim-terraform'
+  " Plug 'danihodovic/vim-flow'
   "-----------------------------------------
   call plug#end()
 end
@@ -278,7 +279,7 @@ autocmd FileType coffee                 setlocal  shiftwidth=2 tabstop=2 expandt
 autocmd FileType css,scss,stylus        setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType vim                    setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType tex                    setlocal  shiftwidth=2 tabstop=2 expandtab
-autocmd FileType yaml                   setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType yaml,docker-compose    setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType json                   setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType snippets               setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType jade                   setlocal  shiftwidth=2 tabstop=2 expandtab
