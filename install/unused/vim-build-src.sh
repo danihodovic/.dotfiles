@@ -10,6 +10,8 @@
 # Uninstall using:
 # apt-get remove <tempdir-name>
 #
+set -ev
+
 TEMP=vim
 
 sudo apt-get remove vim vim-runtime gvim vim-tiny vim-common vim-gui-common -y

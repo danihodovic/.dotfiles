@@ -224,9 +224,9 @@ nnoremap <leader>aw :ArgWrap<cr>
 "-----------------------------------------
 "Make sure to place color schemes after the vundle runtime has been declared
 syntax enable
+set background=dark
 " Set the colorscheme using silent so that we don't fail on servers without plugins
 silent! colorscheme badwolf
-set background=dark
 hi clear SpellBad
 hi SpellBad ctermfg=DarkRed term=undercurl
 filetype plugin indent on
