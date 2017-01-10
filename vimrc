@@ -690,6 +690,8 @@ let g:neomake_typescript_tslint_maker = {
     \ 'append_file': 0,
     \ 'errorformat': '%f[%l\, %c]: %m'
     \ }
+
+let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
 " Do not enable this for zsh. shellcheck does not support zsh
 autocmd BufWritePost *.js,*.ts,*.py,*.sh,*.bash,bashrc,*.lua,*.go Neomake
