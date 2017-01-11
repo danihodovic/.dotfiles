@@ -575,14 +575,6 @@ endfu
 "-----------------------------------------
 " FixMyJS
 "-----------------------------------------
-" TODO: replace this with job-control
-autocmd filetype javascript command! FixJscs call RunJscs()
-fu! RunJscs()
-  call system("jscs --fix " . expand('%'))
-  checktime
-  w
-endfu
-
 autocmd filetype javascript command! FixEslint call RunEslint()
 fu! RunEslint()
   call system("eslint --fix " . expand('%'))
