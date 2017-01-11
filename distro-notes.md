@@ -359,13 +359,12 @@ Reduce the brightness of the ePS display
 ### Remapping keys
 
 #### Swapping fn-ctrl on a Mac
+NOTE: Just use ./scripts/fix-apple-keyboard.sh!
 
 Swapping fn-ctrl keys is provided by a patch on the hid-apple module found in this repo
 https://github.com/free5lot/hid-apple-patched.git. The patch has not reached the Linux kernel
 yet. The repo states that it works up to kernel 4.2, however it seems to work up to
 kernel 4.4.0-040400rc7-generic.
-
-TODO: Make this a script
 
 Install the Linux kernel headers (the patch depends on these).
 
