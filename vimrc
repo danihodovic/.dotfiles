@@ -656,6 +656,12 @@ hi SignColumn guibg=black ctermbg=black
 nnoremap ggn :GitGutterNextHunk<cr>
 nnoremap ggp :GitGutterPrevHunk<cr>
 "-----------------------------------------
+" Fugitive
+"-----------------------------------------
+nnoremap git :Gstatus<cr>
+nnoremap Gdom :Gdiff origin/master<cr>
+nnoremap Gdc :Gdiff --cached<cr>
+"-----------------------------------------
 " vim-operator-flashy
 "-----------------------------------------
 highlight Flashy term=bold ctermbg=15 ctermfg=122
