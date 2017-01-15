@@ -26,3 +26,5 @@ algorithm = histogram
 
 [gpg]
 program = gpg2
+[commit]
+	verbose = true
