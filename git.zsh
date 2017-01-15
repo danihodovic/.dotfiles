@@ -22,6 +22,7 @@ alias gremotes='git remote -v'
 alias gremote='git remote'
 alias gci-status='hub ci-status '
 alias gdom='git diff origin/master'
+alias grom='git rebase origin/master'
 gdob () { git diff origin/$(_local_branch) $@ }
 compdef _git-diff gdob
 
@@ -169,3 +170,14 @@ gchangedfilesinbranch() {
 }
 zle -N gchangedfilesinbranch
 bindkey -M vicmd '\-' gchangedfilesinbranch
+
+function gbranchdelete {
+  branch_name=$1
+  if [ -z "$branch_name" ]; then
+    echo Provide a branch name
+    return
+  fi
+  git branch -d "$branch_name"
+  git push origin --delete "$branch_name"
+}
+compdef _git-branch gbranchdelete
