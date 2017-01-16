@@ -658,7 +658,8 @@ nnoremap ggp :GitGutterPrevHunk<cr>
 "-----------------------------------------
 " Fugitive
 "-----------------------------------------
-nnoremap git :Gstatus<cr>
+nnoremap <leader>g :Gstatus<cr>
+nnoremap gc :Gcommit --verbose<CR>
 nnoremap Gdom :Gdiff origin/master<cr>
 nnoremap Gdc :Gdiff --cached<cr>
 "-----------------------------------------
