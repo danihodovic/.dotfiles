@@ -30,4 +30,5 @@ EOF
 
 echo Adding "$1" to links.json
 aws s3 cp "${tempdir}/links.json" s3://hodovi.ch/links.json
+rm -r "${tempdir}"
 
