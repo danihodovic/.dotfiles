@@ -659,9 +659,7 @@ nnoremap ggp :GitGutterPrevHunk<cr>
 " Fugitive
 "-----------------------------------------
 nnoremap <leader>g :Gstatus<cr>
-nnoremap gc :Gcommit --verbose<CR>
-nnoremap Gdom :Gdiff origin/master<cr>
-nnoremap Gdc :Gdiff --cached<cr>
+nnoremap <leader>gc :Gcommit --verbose<CR>
 "-----------------------------------------
 " vim-operator-flashy
 "-----------------------------------------
