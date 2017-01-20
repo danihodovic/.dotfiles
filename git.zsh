@@ -7,6 +7,7 @@ alias glgrep='git log --grep '
 alias gf='git fetch'
 alias gcommit='git commit -S'
 alias grebase='git rebase '
+alias gnb='git checkout -b'
 alias gcheckout='git checkout '
 alias gshow='git show '
 alias gpush='git push '
@@ -62,17 +63,17 @@ alias gcc=gcheckoutcommit
 alias gcb=gcheckoutbranch
 compdef _git-checkout gcheckoutcommit gcheckoutbranch
 
-grebasecommit() {
+grbc() {
   local commit=`fcommit`
   [[ -n $commit ]] && print -z git rebase -i $@ $commit
 }
 
-grebasebranch() {
+grbb() {
   branch=`fbranch`
   [[ -n $branch ]] && print -z git rebase $@ $branch
 }
 
-compdef _git-rebase grebasecommit grebasebranch
+compdef _git-rebase grbc grbb
 
 # TODO: Use fzf
 goneline() {
@@ -171,7 +172,7 @@ gchangedfilesinbranch() {
 zle -N gchangedfilesinbranch
 bindkey -M vicmd '\-' gchangedfilesinbranch
 
-function gbranchdelete {
+function gdelbranch {
   branch_name=$1
   if [ -z "$branch_name" ]; then
     echo Provide a branch name
@@ -180,4 +181,15 @@ function gbranchdelete {
   git branch -d "$branch_name"
   git push origin --delete "$branch_name"
 }
-compdef _git-branch gbranchdelete
+compdef _git-branch gdelbranch
+
+function gdeltag {
+  tag_name=$1
+  if [ -z "$tag_name" ]; then
+    echo Provide a tag name
+    return
+  fi
+  git tag -d "$tag_name"
+  git push origin :"$tag_name"
+}
+compdef _git-branch gdeltag
