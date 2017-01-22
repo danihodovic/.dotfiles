@@ -11,6 +11,7 @@ fi
 export PATH=$PATH:${HOME}/.local/bin
 export PATH=$PATH:${HOME}/.dotfiles/scripts
 export GOPATH=${HOME}/repos/go_pkg
+export PATH=${PATH}:${HOME}/.cargo/bin/
 export PATH=$PATH:/opt/eclipse
 export PATH=$PATH:${HOME}/.dasht/bin
 # Required for pinentry-ncurses
@@ -193,6 +194,7 @@ alias o='xdg-open'
 alias v='nvim'
 alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
+alias aptremove='sudo apt-get remove '
 
 alias aptinstall='sudo apt-get install '
 alias aptpurge='sudo apt-get purge '
