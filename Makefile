@@ -8,7 +8,7 @@ install:
 	./install/apt-essentials.sh
 	./install/dev_tools.py
 	./install/other.sh
-	./setupSymlinks.py
+	./setup_symlinks.py
 
 .PHONY: build
 build:

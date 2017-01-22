@@ -7,7 +7,7 @@ from unittest.mock import patch
 repo_root = os.path.expanduser('~/.dotfiles')
 sys.path.append(repo_root)
 
-import setupSymlinks
+import setup_symlinks
 
 min_version = 3.4
 version = float(sys.version[0:3])
@@ -53,7 +53,7 @@ class TestMain(unittest.TestCase):
         Basically a double check
         '''
         sort_by_first = lambda tup: tup[0]
-        assert(conf_files.sort(key=sort_by_first) == setupSymlinks.conf_files.sort(key=sort_by_first))
+        assert(conf_files.sort(key=sort_by_first) == setup_symlinks.conf_files.sort(key=sort_by_first))
 
     @patch('os.remove')
     @patch('os.symlink')
@@ -61,7 +61,7 @@ class TestMain(unittest.TestCase):
         '''
         Ensures that delete and link is called, regardless of error
         '''
-        setupSymlinks.main(verbose=False)
+        setup_symlinks.main(verbose=False)
 
         for [path, link] in conf_files:
             os_remove.assert_any_call(link)
@@ -82,7 +82,7 @@ class TestMain(unittest.TestCase):
         Ensures that the parent directory of the symlink is created if it doesnt exist
         '''
         os_path_isdir.return_value = False
-        setupSymlinks.main(verbose=False)
+        setup_symlinks.main(verbose=False)
 
         for [_, link] in conf_files:
             os_makedirs.assert_any_call(os.path.dirname(link))
