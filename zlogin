@@ -194,9 +194,10 @@ alias o='xdg-open'
 alias v='nvim'
 alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
-alias aptremove='sudo apt-get remove '
+function recent() { ls -t $1 | head -n ${2:-5} }
 
 alias aptinstall='sudo apt-get install '
+alias aptremove='sudo apt-get remove '
 alias aptpurge='sudo apt-get purge '
 alias aptautoremove='sudo apt-get autoremove'
 alias aptupdate='sudo apt-get update'
