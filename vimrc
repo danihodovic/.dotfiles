@@ -321,8 +321,9 @@ function! FzfGitChangedFilesFromMaster()
   " intelligently wrapped in height. If we pass a command it will have a default height and grow
   " from there.
   let files = split(system('git --no-pager diff origin/master --name-only'), '\n')
+  let untracked_files = split(system('git ls-files --others --exclude-standard'), '\n')
   call fzf#run({
-  \ 'source':  files,
+  \ 'source':  files + untracked_files,
   \ 'sink':    'edit',
   \ 'dir':     root,
   \ 'options': '--ansi --multi --nth 2..,.. --prompt "GitFiles?> "',
