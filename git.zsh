@@ -32,16 +32,14 @@ _git
 
 # Retrieve local and remote branches sorted by last commit to the branch
 fbranch() {
-  format="%(HEAD) %(refname:short)\
-%09[%(color:green)%(committerdate:relative)]\
-%(color:yellow) %(authorname) "
-  local branches=$(git for-each-ref --sort=committerdate refs/heads refs/remotes --format=$format)
-  local preview_cmd=$'echo {} | cut -c 3- | awk \'{print $1}\' | \
-    git --no-pager log --color=always --pretty=oneline --abbrev-commit --stdin'
-  local branch=$(echo $branches | fzf --ansi --exact --tac --preview $preview_cmd)
-  # Get the branch name without all the other noise
-  local branch_name=$(echo $branch | cut -c 3- | awk '{print $1}')
-  echo $branch_name
+  local branches=$(git branch --sort=committerdate -a |\
+    cut -c 3- |\
+    sed 's/^remotes\/origin\///' |\
+    sed '/HEAD/d' |\
+    uniq)
+
+  local branch=$(echo $branches | fzf --ansi --exact --tac)
+  echo $branch
 }
 
 gcheckoutcommit() {
