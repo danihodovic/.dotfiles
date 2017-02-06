@@ -171,7 +171,7 @@ zle -N gchangedfilesinbranch
 bindkey -M vicmd '\-' gchangedfilesinbranch
 
 function gdelbranch {
-  branch_name=$1
+  branch_name=$(fbranch)
   if [ -z "$branch_name" ]; then
     echo Provide a branch name
     return
