@@ -14,6 +14,7 @@ export GOPATH=${HOME}/repos/go_pkg
 export PATH=${PATH}:${HOME}/.cargo/bin/
 export PATH=$PATH:/opt/eclipse
 export PATH=$PATH:${HOME}/.dasht/bin
+export PATH=$PATH:.
 # Required for pinentry-ncurses
 export GPG_TTY=$(tty)
 # Virtualenv
