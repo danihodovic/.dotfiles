@@ -188,7 +188,7 @@ alias cp='cp -v '
 alias mv='mv -v '
 alias h="history"
 alias cd-="cd -"
-alias ls='ls --color=auto --classify'
+alias ls='ls --color=auto --classify -lrt --block-size=MB'
 alias setxkbmapcaps="setxkbmap -option caps:swapescape68"
 alias o='xdg-open'
 alias v='nvim'
@@ -220,7 +220,7 @@ function ssh-sync {
 # cd && ls
 function chpwd {
     emulate -L zsh
-    ls
+    ls -lrt --block-size=MB
 }
 
 function pk {
