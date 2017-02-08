@@ -23,7 +23,6 @@ if s:has_plug == 1
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'            " Shows dirty files in NERDTree
   Plug 'flazz/vim-colorschemes'
-  Plug 'ryanoasis/vim-devicons'
   Plug 'benekastah/neomake'
   Plug 'tpope/vim-surround'                     " Surround text with (){}<>
   Plug 'jiangmiao/auto-pairs'                   " Automatically add (){}<>
