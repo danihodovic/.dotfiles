@@ -18,12 +18,5 @@ start-tmux-if-exist() {
 
 if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     start-tmux-if-exist
-
-elif [[ "$(uname)" == "Darwin" ]]; then
-    # Use GNU coreutils instead of bsd ones
-    export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
-
-else
-    echo 'Unknown OS' $(uname)
 fi
 
