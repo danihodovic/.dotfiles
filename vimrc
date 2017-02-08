@@ -656,6 +656,8 @@ let g:gitgutter_max_signs=9999
 hi SignColumn guibg=black ctermbg=black
 nnoremap ggn :GitGutterNextHunk<cr>
 nnoremap ggp :GitGutterPrevHunk<cr>
+nmap <Leader>s <Plug>GitGutterStageHunk
+nmap <Leader>u <Plug>GitGutterUndoHunk
 "-----------------------------------------
 " Fugitive
 "-----------------------------------------
