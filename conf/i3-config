@@ -10,7 +10,6 @@ set $mod Mod1
 font pango:monospace 8
 
 # Disable window borders
-new_window 1pixel
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
@@ -48,9 +47,18 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# split in vertical orientation
-bindsym $mod+c exec "i3-msg split v && $Terminal"
-bindsym $mod+x exec "i3-msg split h && $Terminal"
+# Magic
+bindsym $mod+c exec \
+	i3-msg split v && \
+	xdotool key --window $(xdotool getactivewindow) Escape && \
+	path=$(tmux display-message -p -F '#{pane_current_path}') && \
+	$Terminal --default-working-directory=$path
+
+bindsym $mod+x exec \
+	i3-msg split h && \
+	xdotool key --window $(xdotool getactivewindow) Escape && \
+	path=$(tmux display-message -p -F '#{pane_current_path}') && \
+	$Terminal --default-working-directory=$path
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
