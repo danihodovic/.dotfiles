@@ -8,8 +8,7 @@ alias gf='git fetch'
 alias gcommit='git commit -S'
 alias grebase='git rebase '
 alias gnb='git checkout -b'
-alias gcheckout='git checkout '
-alias gshow='git show '
+alias gcheckout='git checkout'
 alias gpush='git push '
 alias greset='git reset '
 alias gpull='git pull --rebase'
@@ -42,6 +41,11 @@ fbranch() {
   echo $branch
 }
 
+function gshow {
+  local commit=`fcommit`
+  [[ -n $commit ]] && git show $@ $commit
+}
+
 gcheckoutcommit() {
   local commit=`fcommit`
   [[ -n $commit ]] && print -z git checkout $@ $commit
@@ -68,7 +72,7 @@ grbc() {
 
 grbb() {
   branch=`fbranch`
-  [[ -n $branch ]] && print -z git rebase $@ $branch
+  [[ -n $branch ]] && print -z git rebase $@ origin/$branch
 }
 
 compdef _git-rebase grbc grbb
@@ -176,7 +180,7 @@ function gdelbranch {
     echo Provide a branch name
     return
   fi
-  git branch -d "$branch_name"
+  git branch -D "$branch_name"
   git push origin --delete "$branch_name"
 }
 compdef _git-branch gdelbranch
