@@ -69,10 +69,9 @@ autoload bashcompinit && bashcompinit
 scripts_to_source=(
   /usr/local/bin/aws_zsh_completer.sh
   ${HOME}/.fzf.zsh
-  # ${HOME}/.scripts/fzf/shell/key-bindings.zsh
-  ${HOME}/.scripts/i3_completion.sh
   ${HOME}/.gvm/scripts/gvm
   ${HOME}/.rvm/scripts/rvm
+  ${HOME}/.i3_completion.sh
   # Own helpers
   ${HOME}/.dotfiles/fzf-helpers.zsh
   ${HOME}/.dotfiles/docker.zsh
@@ -80,24 +79,14 @@ scripts_to_source=(
   ${HOME}/.zlogin_local
 )
 
+hash kubectl 2> /dev/null && source <(kubectl completion zsh)
+
 for script in $scripts_to_source; do
   if [ -f $script ]; then
     source $script
-  else
-    echo "tried sourcing ${script} but it was not found"
   fi
 done
 
-# Lazy load kubectl completion since it's fairly slow
-if hash kubectl 2> /dev/null; then
-  original_kubectl=$(which kubectl)
-  kubectl() {
-    source <($original_kubectl completion zsh)
-    unfunction kubectl
-    kubectl=$original_kubectl
-    $original_kubectl $@
-  }
-fi
 # Bindings
 # ------------
 # Find all options:                 zle -la

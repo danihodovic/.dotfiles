@@ -15,8 +15,6 @@ echo
 read -p "Install i3-completions for zsh? " -n 1 -r      install_i3_completions
 echo
 
-scripts=${HOME}/.scripts
-
 case $install_n in
     y)
       if [ ! -d "${HOME}/.n" ]; then
