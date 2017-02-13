@@ -5,18 +5,3 @@
 # single piece they submit. The second group was graded on only the total number of pounds of clay
 # they threw.
 
-# Start a tmux session for new terminals. This does not apply if we're
-# inside a tmux session already or if tmux is not installed.
-start-tmux-if-exist() {
-  if [ -z $TMUX ]; then
-    hash tmux
-    if [ $? = 0 ]; then
-      tmux -2
-    fi
-  fi
-}
-
-if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
-    start-tmux-if-exist
-fi
-

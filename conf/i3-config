@@ -1,6 +1,6 @@
 set $Alt Mod1
 set $Win Mod4
-set $Terminal xfce4-terminal
+set $Terminal xfce4-terminal -e 'tmux -2'
 set $Browser chromium-browser
 
 set $mod Mod1
