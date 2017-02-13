@@ -21,7 +21,6 @@ if s:has_plug == 1
   Plug 'junegunn/fzf.vim'
   Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
   Plug 'scrooloose/nerdtree'
-  Plug 'Xuyuanp/nerdtree-git-plugin'            " Shows dirty files in NERDTree
   Plug 'flazz/vim-colorschemes'
   Plug 'benekastah/neomake'
   Plug 'tpope/vim-surround'                     " Surround text with (){}<>
