@@ -1,9 +1,9 @@
 #!/usr/bin/env python3.5
 
 import os
-import sys
 import subprocess
 import json
+import argparse
 
 # todo:
 # - Tick the task once it's downloaded :D
@@ -15,40 +15,45 @@ all the songs listed as the task title from Youtube.
 Constraints:
 - The task title needs to be the YouTube url
 - The Docker daemon needs to be installed
-
-Usage:
-    {} file.json
-'''.format(sys.argv[0])
-
-if len(sys.argv) != 2:
-    print(usage)
-    sys.exit(1)
+'''
 
 def is_task_completed(task):
-    return task['completedTime'] is None
+    return task['progress'] != 0
 
 def download_youtube_song(task):
     url = task['title']
     cmd = [
         'docker', 'run',
-        '-v', '{}:/home/user/mps/'.format(os.getcwd()),
-        'andrey01/mps-youtube',
-        'daurl', url
+        '-v', '{}:/data'.format(os.getcwd()),
+        '-u', '{}:{}'.format(os.getuid(), os.getgid()),
+        'vimagick/youtube-dl',
+        '-f', 'bestaudio[ext=m4a]', url
     ]
     proc = subprocess.Popen(cmd)
     proc.communicate()
     if proc.wait() != 0:
-        return 'Error when downloading song: {}'.format(url)
+        raise Exception('Error when downloading song: {}'.format(url))
+
+def main(filename):
+    with open(filename) as f:
+        tasklist = json.load(f)
+        not_downloaded = [task for task in tasklist if not is_task_completed(task)]
+        successful = 0
+        errors = []
+
+        for task in not_downloaded:
+            try:
+                download_youtube_song(task)
+                successful = successful + 1
+            except Exception as ex:
+                errors.append(ex)
+
+        print(errors)
+        print('Done. Successful downloads: {}, unsuccessful downloads: {}'.format(
+            successful, len(not_downloaded) - successful))
 
 if __name__ == '__main__':
-    jsonfile = sys.argv[1]
-    with open(jsonfile) as f:
-        tasklist = json.load(f)
-        successlist = [download_youtube_song(task) for task in tasklist]
-        unsuccessful = [item is not None for item in successlist]
-
-        print('Failed to download: \n')
-        print('\n'.join(unsuccessful))
-
-        print('Done. Successful downloads: {}, unsuccessful downloads: {}'.format(
-            (len(tasklist) - len(unsuccessful)), len(unsuccessful)))
+    parser = argparse.ArgumentParser(description=usage)
+    parser.add_argument('filename', type=str, help='the ticktick json file')
+    args = parser.parse_args()
+    main(args.filename)
