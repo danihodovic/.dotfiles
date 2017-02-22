@@ -5,7 +5,10 @@
   "loadEagerly": [],
   "plugins": {
     "node": {},
-    "doc_comment": null,
+    "doc_comment": {
+        "strong": true
+    },
+    ,
     "modules": {
       "dontLoad": true
     }
