@@ -10,10 +10,10 @@ fi
 # Export paths before sourcing anything
 export PATH=$PATH:${HOME}/.local/bin
 export PATH=$PATH:${HOME}/.dotfiles/scripts
-export GOPATH=${HOME}/repos/go_pkg
 export PATH=${PATH}:${HOME}/.cargo/bin/
 export PATH=$PATH:/opt/eclipse
 export PATH=$PATH:${HOME}/.dasht/bin
+# execute local scripts without prependeing ./
 export PATH=$PATH:.
 # Required for pinentry-ncurses
 export GPG_TTY=$(tty)
@@ -86,6 +86,9 @@ for script in $scripts_to_source; do
     source $script
   fi
 done
+
+# Source this after gvm, as gvm sets a custom $GOPATH...
+export GOPATH=${HOME}/repos/go_pkg
 
 # Bindings
 # ------------
