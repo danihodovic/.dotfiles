@@ -599,3 +599,10 @@ http://superuser.com/questions/539886/tmux-start-copy-mode-and-selection-at-the-
     $ vi ~/.config/xfce4/terminal/terminalrc
 
     MiscCursorBlinks=TRUE
+
+# Installing go 1.8
+
+    CGO_ENABLED=0 gvm install go1.4rc2
+    gvm use go1.4 --default
+    gvm install go1.8rc3
+    gvm use go1.8 --default
