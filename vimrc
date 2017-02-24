@@ -217,6 +217,8 @@ nnoremap <silent> N   N:call HLNext(0.1)<cr>
 map s ys
 vmap s S
 nnoremap <leader>aw :ArgWrap<cr>
+nnoremap <leader>en :lnext<cr>
+nnoremap <leader>ep :lprevious<cr>
 "-----------------------------------------
 " Color scheme settings
 "-----------------------------------------
