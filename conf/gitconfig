@@ -26,5 +26,9 @@ algorithm = histogram
 
 [gpg]
 program = gpg2
+
 [commit]
 	verbose = true
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
