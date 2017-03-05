@@ -37,36 +37,22 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # Magic
-bindsym $mod+c exec \
+bindsym $mod+x exec \
 	i3-msg split v && \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
 	path=$(tmux display-message -p -F '#{pane_current_path}') && \
 	$Terminal --default-working-directory=$path
 
-bindsym $mod+x exec \
+bindsym $mod+z exec \
 	i3-msg split h && \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
 	path=$(tmux display-message -p -F '#{pane_current_path}') && \
 	$Terminal --default-working-directory=$path
 
-# enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-# focus the child container
-bindsym $mod+z focus child
+bindsym $mod+p focus parent
+bindsym $mod+c focus child
 
 # sound volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
@@ -107,12 +93,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym h resize shrink width 5 px or 5 ppt
         bindsym k resize grow height 5 px or 5 ppt
         bindsym j resize shrink height 5 px or 5 ppt
