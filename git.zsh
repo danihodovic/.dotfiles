@@ -37,7 +37,7 @@ fbranch() {
     sed '/HEAD/d' |\
     uniq)
 
-  local branch=$(echo $branches | fzf --ansi --exact --tac)
+  local branch=$(echo $branches | fzf --ansi --exact --tac --multi)
   echo $branch
 }
 
@@ -175,13 +175,15 @@ zle -N gchangedfilesinbranch
 bindkey -M vicmd '\-' gchangedfilesinbranch
 
 function gdelbranch {
-  branch_name=$(fbranch)
-  if [ -z "$branch_name" ]; then
+  branches=$(fbranch)
+  if [ -z "$branches" ]; then
     echo Provide a branch name
     return
   fi
-  git branch -D "$branch_name"
-  git push origin --delete "$branch_name"
+  while read -r branch; do
+    git branch -d "$branch"
+    git push origin --delete "$branch"
+  done <<< $branches
 }
 compdef _git-branch gdelbranch
 
