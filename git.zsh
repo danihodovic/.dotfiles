@@ -58,7 +58,7 @@ gcheckoutbranch() {
     # detached state
     branch_name=$(echo $branch_name | sed -e 's/^origin\///')
   fi
-  [[ -n $branch_name ]] && print -z git checkout $@ $branch_name
+  [[ -n $branch_name ]] && eval git checkout $@ $branch_name
 }
 
 alias gcc=gcheckoutcommit
@@ -132,14 +132,14 @@ _remote_branch() {
 }
 
 gpullbranch() {
-  branch=$(_remote_branch)
-  [ $? = 0 ] && print -z git pull $@ $branch
+  branch=$(_local_branch)
+  [ $? = 0 ] && git fetch && git rebase $@ origin/$branch
 }
 compdef _git-pull gpullbranch
 
 gpushbranch() {
   branch=$(_remote_branch)
-  [ $? = 0 ] && print -z git push $@ $branch
+  [ $? = 0 ] && eval git push $@ $branch
 }
 compdef _git-push gpushbranch
 
