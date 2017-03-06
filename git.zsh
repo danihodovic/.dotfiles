@@ -4,7 +4,7 @@ alias gdc='git diff --cached'
 alias gl='git log --decorate'
 alias glogS='git log -p -S '
 alias glgrep='git log --grep '
-alias gf='git fetch'
+alias gf='git fetch --prune'
 alias gcommit='git commit -S'
 alias grebase='git rebase '
 alias gnb='git checkout -b'
@@ -133,7 +133,7 @@ _remote_branch() {
 
 gpullbranch() {
   branch=$(_local_branch)
-  [ $? = 0 ] && git fetch && git rebase $@ origin/$branch
+  [ $? = 0 ] && git fetch --prune && git rebase $@ origin/$branch
 }
 compdef _git-pull gpullbranch
 
