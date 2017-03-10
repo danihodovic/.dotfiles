@@ -8,10 +8,7 @@
     "doc_comment": {
         "strong": true
     },
-    ,
-    "modules": {
-      "dontLoad": true
-    }
+    "modules": {}
   },
   "dontLoad": []
 }
