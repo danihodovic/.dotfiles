@@ -606,3 +606,6 @@ http://superuser.com/questions/539886/tmux-start-copy-mode-and-selection-at-the-
     gvm use go1.4 --default
     gvm install go1.8rc3
     gvm use go1.8 --default
+
+# Fetching private go repositories using go get
+https://gist.github.com/shurcooL/6927554
