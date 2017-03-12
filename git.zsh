@@ -197,3 +197,5 @@ function gdeltag {
   git push origin :"$tag_name"
 }
 compdef _git-branch gdeltag
+
+alias pr='gpushbranch && hub pull-request'

@@ -49,7 +49,7 @@ if s:has_plug == 1
   Plug 'tpope/vim-abolish'                      " Change snake case to camelcase and vice versa
   Plug 'kana/vim-operator-user'                 " Required for vim-operator-flashy
   Plug 'haya14busa/vim-operator-flashy'         " Highlights the yanked words
-  Plug 'luochen1990/rainbow'
+  Plug 'luochen1990/rainbow'                    " Show diff level of parentheses in diff colors
   Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
   " -----------------------------------------
   " Lang specific
