@@ -42,5 +42,6 @@ $sudo_cmd apt-get install -y \
     rofi \
     ranger \
     gnome-settings-daemon \
-    apt-file
+    apt-file \
+    direnv
 
