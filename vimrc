@@ -322,18 +322,18 @@ function! FzfGitChangedFilesFromMaster()
     echom 'Not in git repo'
     return
   endif
-  " If we pre determine the files and pass in a list instead of a command the fzf window will be
-  " intelligently wrapped in height. If we pass a command it will have a default height and grow
-  " from there.
-  let files = split(system('git --no-pager diff origin/master --name-only'), '\n')
+
+  let diff_files = split(system('git --no-pager diff origin/master --name-only'), '\n')
   let untracked_files = split(system('git ls-files --others --exclude-standard'), '\n')
-  call fzf#run({
-  \ 'source':  files + untracked_files,
-  \ 'sink':    'edit',
+  let files = diff_files + untracked_files
+
+  let wrapped = fzf#wrap({
+  \ 'source':  files,
   \ 'dir':     root,
-  \ 'options': '--ansi --multi --nth 2..,.. --prompt "GitFiles?> "',
-  \ 'up':      '~40%'
+  \ 'options': '--ansi --multi --nth 2..,.. --tiebreak=index --prompt "GitFiles?> " --preview ''sh -c "(git diff origin/master --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500"''',
+  \ 'up':      '50%',
   \})
+  call fzf#run(wrapped)
 endfunction
 
 command! -nargs=* Calls :call FindFunctionCalls(<q-args>)
