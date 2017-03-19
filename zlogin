@@ -34,6 +34,9 @@ export plugged=${NVIM_DIR}/plugged
 export vimrc=${HOME}/.dotfiles/vimrc
 export zlogin=${HOME}/.dotfiles/zlogin
 
+# Activate direnv zsh hook if direnv is installed
+type direnv > /dev/null && eval "$(direnv hook zsh)"
+
 # Antibody
 source <(antibody init)
 antibody bundle zsh-users/zsh-completions
