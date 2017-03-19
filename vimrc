@@ -382,27 +382,14 @@ fu! FzfLocateRoot()
   call fzf#run(fzf#vim#wrap(opts))
 endfu
 
-command! -nargs=* AG  call FzfAgCustom(<q-args>)
-command! -nargs=* AGu call FzfAgCustom(<q-args>, 'ag --nogroup --column --color -U "%s"')
-
+command! -nargs=* AG call FzfAgCustom(<f-args>)
+" Wrapper around fzf#vim#ag that allows us to pass in Ag options after the
+" query. This allows the command to be used as such:
+" :AG query ag-option ag-value ag-option ag-value
 fu! FzfAgCustom(...)
   let query = a:1
-  if a:0 >= 2
-    let ag_opts = a:2
-  else
-    " By default:
-    " - don't group multiple results in one file as one result
-    " - print column numbers in the results
-    " - don't search in VCS ignored files
-    let ag_opts = 'ag --nogroup --column --color "%s"'
-  endif
-
-  if len(query) == 0
-    let query = expand('<cword>')
-  endif
-
-  let source = printf(ag_opts, query)
-  call fzf#vim#ag(query, {'source': source, 'up': '~40%'})
+  let ag_opts = join(a:000[1:], ' ')
+  call fzf#vim#ag(query, ag_opts, {})
 endfu
 
 command! -nargs=* Definition :call FindFunctionDefinition(<q-args>)
