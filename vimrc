@@ -17,7 +17,7 @@ if s:has_plug == 1
   " General plugins
   "-----------------------------------------
   Plug 'Valloric/YouCompleteMe'
-  Plug 'junegunn/fzf', { 'do': '~/.fzf/install --key-bindings --completion --no-update-rc' }
+  set rtp+=~/.fzf
   Plug 'junegunn/fzf.vim'
   Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
   Plug 'scrooloose/nerdtree'
