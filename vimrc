@@ -361,16 +361,10 @@ fu! LogStatementFind(query)
   call FzfAgCustom(regex, ag_opts)
 endfu
 
-command! -nargs=* FocusTest :call FocusTest(<q-args>)
-fu! FocusTest(query)
-  let query = a:query
-  if len(query) == ''
-    let query = expand('<cword>')
-  end
-
-  let regex = '(it\.only)|(describe\.only)'
-  let ag_opts = 'ag --nogroup --column --color "%s"'
-  call FzfAgCustom(regex, ag_opts)
+command! FocusTest :call FocusTest()
+fu! FocusTest()
+  let regex = '(it\.only)|(describe\.only)|(it\(''=>)|(describe\(''=>)'
+  call fzf#vim#ag(regex)
 endfu
 
 nnoremap <leader>af :AllFiles<cr>
