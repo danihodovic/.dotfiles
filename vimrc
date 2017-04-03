@@ -356,9 +356,8 @@ fu! LogStatementFind(query)
     let query = expand('<cword>')
   end
 
-  let regex = printf("console.log\\('%s'", query)
-  let ag_opts = 'ag --nogroup --column --color -U "%s"'
-  call FzfAgCustom(regex, ag_opts)
+  let regex = printf('console.log\(''%s', query)
+  call fzf#vim#ag(regex)
 endfu
 
 command! FocusTest :call FocusTest()
