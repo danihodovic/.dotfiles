@@ -561,11 +561,30 @@ endfu
 "-----------------------------------------
 " FixMyJS
 "-----------------------------------------
-autocmd filetype javascript command! FixEslint call RunEslint()
-fu! RunEslint()
-  call system("eslint --fix " . expand('%'))
+" TODO: Make this async?
+" TODO: Move this into Neomake?
+fu! EslintWrapperFix()
+  let eslintFilesExist = filereadable('.eslintrc.json') || filereadable('.eslintrc.js') || filereadable('.eslintrc.yml')
+
+  if eslintFilesExist == 0
+    echo 'No .eslintrc files found'
+    return
+  end
+
+  let output = system("eslint --fix " . expand('%'))
+  let lines = split(output, '\n')
+
+  " Nothing to fix, let's move along
+  if len(lines) == 0
+    return
+  endif
+
+  if lines[1] =~# "File ignored by default"
+    return
+  endif
+
   checktime
-  w
+  Neomake
 endfu
 "-----------------------------------------
 " Jedi Python
@@ -679,7 +698,8 @@ let g:neomake_typescript_tslint_maker = {
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
 " Do not enable this for zsh. shellcheck does not support zsh
-autocmd BufWritePost *.js,*.ts,*.py,*.sh,*.bash,bashrc,*.lua,*.go,*.rb Neomake
+autocmd BufWritePost *.ts,*.py,*.sh,*.bash,bashrc,*.lua,*.go,*.rb Neomake
+autocmd BufWritePost *.js call EslintWrapperFix()
 "-----------------------------------------
 " VimAirline
 "-----------------------------------------
