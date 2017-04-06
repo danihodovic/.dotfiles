@@ -567,7 +567,6 @@ fu! EslintWrapperFix()
   let eslintFilesExist = filereadable('.eslintrc.json') || filereadable('.eslintrc.js') || filereadable('.eslintrc.yml')
 
   if eslintFilesExist == 0
-    echo 'No .eslintrc files found'
     return
   end
 
