@@ -306,7 +306,7 @@ autocmd FileType sshconfig              setlocal  shiftwidth=4 tabstop=4 expandt
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'vsplit',
-  \ 'ctrl-c': 'split' }
+  \ 'ctrl-z': 'split' }
 let g:fzf_layout = {'up': '~40%'}
 nnoremap - :GitFiles<cr>
 nnoremap = :Files<cr>
