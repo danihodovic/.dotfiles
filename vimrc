@@ -599,10 +599,9 @@ let g:jedi#show_call_signatures = "1"
 "-----------------------------------------
 " Golang
 "-----------------------------------------
-autocmd FileType go map <buffer>gd <Plug>(go-def)
-autocmd FileType go nnoremap <buffer> <leader>t :GoInfo<cr>
-" Show the type info at the bottom bar when hovering over word
-let g:go_auto_type_info = 1
+autocmd FileType go nmap     <buffer> gd        <Plug>(go-def-split)
+autocmd FileType go nmap <buffer> <leader>t <Plug>(go-info)
+let g:go_auto_type_info = 0
 "-----------------------------------------
 " Tagbar
 "-----------------------------------------
