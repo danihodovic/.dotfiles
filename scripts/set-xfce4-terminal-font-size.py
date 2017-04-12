@@ -29,7 +29,6 @@ with open(path, 'r+') as f:
             new_number = new_number(sys.argv[1], old_number)
             new_line = re.sub(r'\d+$', str(new_number), line)
             lines.append(new_line)
-            print(new_line)
         else:
             lines.append(line)
 
