@@ -55,7 +55,7 @@ bindsym $mod+c focus child
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5%
 
-workspace_layout default
+workspace_layout stacking
 
 # switch to workspace
 bindsym $mod+1 workspace number 1
