@@ -42,7 +42,7 @@ main() {
 
   # If the container already exists, start it and update our empty port mapping
   if [[ $container_id =~ "is already in use by container" ]]; then
-    container_id=$(echo $container_id | grep -oP 'The name "/\K(sopcast-[0-9]+)')
+    container_id=$(echo $container_id | grep -oP 'The container name "/\K(sopcast-[0-9]+)')
     empty_port=$(docker inspect ${container_id} | grep -oP 'HostPort": "\K(\d+)' | head -n 1)
     echo "Starting exsting container $container_id"
     docker start $container_id > /dev/null
