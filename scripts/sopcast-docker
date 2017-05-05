@@ -34,7 +34,9 @@ main() {
   # Name the container after the ID so we don't have duplicate channels with the same stream
   local channel_id=$(echo $sopcast_url | awk -F/ '{print $4}')
   local empty_port=$(find_empty_port)
-  local container_id=$((docker run -d \
+  local container_id=$((docker run \
+    -d \
+    --rm \
     -p "$empty_port:$empty_port" \
     --name "sopcast-$channel_id" \
     danihodovic/sopcast "$sopcast_url" "$empty_port") \
