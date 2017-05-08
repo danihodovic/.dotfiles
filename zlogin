@@ -75,14 +75,13 @@ scripts_to_source=(
   ${HOME}/.gvm/scripts/gvm
   ${HOME}/.rvm/scripts/rvm
   ${HOME}/.i3_completion.sh
+  ${HOME}/.kubectl_completion
   # Own helpers
   ${HOME}/.dotfiles/fzf-helpers.zsh
   ${HOME}/.dotfiles/docker.zsh
   ${HOME}/.dotfiles/git.zsh
   ${HOME}/.zlogin_local
 )
-
-hash kubectl 2> /dev/null && source <(kubectl completion zsh)
 
 for script in $scripts_to_source; do
   if [ -f $script ]; then
