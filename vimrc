@@ -571,8 +571,9 @@ fu! EslintWrapperFix()
   let output = system("eslint --fix " . expand('%'))
   let lines = split(output, '\n')
 
-  " Nothing to fix, let's move along
+  " Nothing to fix, close the quickfix window and return
   if len(lines) == 0
+    Neomake
     return
   endif
 
