@@ -31,6 +31,7 @@ if s:has_plug == 1
   Plug 'bling/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'tpope/vim-fugitive'                     " Various git commands inside vim
+  Plug 'tpope/vim-rhubarb'
   Plug 'Lokaltog/vim-easymotion'                " Better movement with f/t
   Plug 'SirVer/ultisnips'
   Plug 'danihodovic/vim-snippets'               " My own snippets
