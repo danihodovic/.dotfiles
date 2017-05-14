@@ -256,8 +256,8 @@ highlight SearchFlash guibg=red ctermfg=132 ctermbg=16
 "-----------------------------------------
 " Text width settings
 "-----------------------------------------
-set textwidth=100
-set colorcolumn=100
+set textwidth=80
+set colorcolumn=80
 autocmd FileType gitcommit setlocal textwidth=72
 autocmd FileType gitcommit setlocal colorcolumn=72
 " Sets the colorcolumn only in active windows
@@ -560,14 +560,24 @@ endfu
 "-----------------------------------------
 " FixMyJS
 "-----------------------------------------
+function! EslintFileExists()
+  let eslintFiles = ['.eslintrc.json', '.eslintrc.js', '.eslintrc.yml', '.eslintrc']
+  let eslintFileExists = 0
+
+  for eslintFile in eslintFiles
+    if filereadable(eslintFile)
+      return 1
+    endif
+  endfor
+
+  return 0
+endfunction
 " TODO: Make this async?
 " TODO: Move this into Neomake?
 fu! EslintWrapperFix()
-  let eslintFilesExist = filereadable('.eslintrc.json') || filereadable('.eslintrc.js') || filereadable('.eslintrc.yml')
-
-  if eslintFilesExist == 0
+  if EslintFileExists() == 0
     return
-  end
+  endif
 
   let output = system("eslint --fix " . expand('%'))
   let lines = split(output, '\n')
