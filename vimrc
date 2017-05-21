@@ -609,7 +609,8 @@ let g:jedi#show_call_signatures = "1"
 "-----------------------------------------
 " Golang
 "-----------------------------------------
-autocmd FileType go nmap     <buffer> gd        <Plug>(go-def-split)
+autocmd FileType go nmap     <buffer> gd       <Plug>(go-def)
+autocmd FileType go nmap     <buffer> <leader> <Plug>(go-def-split)
 autocmd FileType go nmap <buffer> <leader>t <Plug>(go-info)
 let g:go_auto_type_info = 0
 "-----------------------------------------
