@@ -4,7 +4,7 @@ name = Dani Hodovic
 
 [core]
 editor = nvim
-pager = less -+F
+pager = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 
 [pull]
 rebase = true
@@ -32,3 +32,11 @@ program = gpg2
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[color "diff-highlight"]
+oldNormal = red bold
+oldHighlight = red bold 52
+newNormal = green bold
+newHighlight = green bold 22
+
+[diff-so-fancy]
+markEmptyLines = false
