@@ -10,10 +10,6 @@ font pango:DejaVu Sans Mono 11
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec $Terminal
-bindsym $mod+Shift+Return exec $Browser
-
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -34,6 +30,8 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # Magic
+bindsym $mod+Return exec $Terminal
+
 bindsym $mod+z exec \
 	i3-msg split v && \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
@@ -46,8 +44,9 @@ bindsym $mod+x exec \
 	path=$(tmux display-message -p -F '#{pane_current_path}') && \
 	$Terminal --default-working-directory=$path
 
+bindsym $mod+Shift+Return exec $Browser
+
 bindsym $mod+f fullscreen toggle
-bindsym $mod+s layout stacking
 bindsym $mod+p focus parent
 bindsym $mod+c focus child
 
@@ -55,7 +54,9 @@ bindsym $mod+c focus child
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5%
 
-workspace_layout stacking
+workspace_layout tabbed
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+t layout tabbed
 
 # switch to workspace
 bindsym $mod+1 workspace number 1
