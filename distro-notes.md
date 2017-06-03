@@ -178,6 +178,10 @@ Enable it with:
 
     setxkbamp -option caps:swapescape68
 
+If it fails with `Error loading new keyboard description` debug the error with
+
+xkbcomp /usr/share/X11/xkb/symbols/capslock
+
 # Lubuntu:
 ## How to add shortkeys:
 Run `openbox --reconfigure` to generate the xml file.
@@ -609,3 +613,14 @@ http://superuser.com/questions/539886/tmux-start-copy-mode-and-selection-at-the-
 
 # Fetching private go repositories using go get
 https://gist.github.com/shurcooL/6927554
+
+# Lightdm fails to start
+
+If Lightdm is failing to start with the error
+
+    failed to start seat seat0
+
+A possible solution is to simply restart Lightdm
+
+    sudo apt-get purge lightdm
+    sudo apt-get install lightdm
