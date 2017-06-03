@@ -24,21 +24,12 @@ fi
 
 swap_escape_68_rule=$(cat <<EOF
 
-! option	=	symbols
 hidden partial modifier_keys
 xkb_symbols "swapescape68" {
     key <CAPS> { [ Escape ] };
     key <ESC>  { [ grave ] };
     key <TLDE> { [ grave, asciitilde ] };
 };
-
-EOF
-)
-
-swap_escape_68_rule_declaration=$(cat <<EOF
-
-! option	=	symbols
-  caps:swapescape68 = +capslock(swapescape68)
 
 EOF
 )
@@ -54,7 +45,7 @@ if grep -q swapescape68 "$evdev_file"; then
   echo swapescape68 rule exists in "$evdev_file"
 else
   echo "Adding caps:swapescape68 to $evdev_file"
-  echo "$swap_escape_68_rule_declaration" >> "$evdev_file"
+  sed -i '/caps:swapescape/a\ \ caps:swapescape68 = +capslock(swapescape68)' "$evdev_file"
 fi
 
 sudo dpkg-reconfigure xkb-data
