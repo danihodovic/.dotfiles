@@ -179,15 +179,15 @@ nnoremap ( [(
 nnoremap ) ])
 
 "Window movement
-inoremap <silent> <F12>h <esc>:call I3VIM_WindowFocus('h')<cr>
-inoremap <silent> <F12>l <esc>:call I3VIM_WindowFocus('l')<cr>
-inoremap <silent> <F12>j <esc>:call I3VIM_WindowFocus('j')<cr>
-inoremap <silent> <F12>k <esc>:call I3VIM_WindowFocus('k')<cr>
+inoremap <silent> <C-h> <esc>:wincmd h<cr>
+inoremap <silent> <C-l> <esc>:wincmd l<cr>
+inoremap <silent> <C-j> <esc>:wincmd j<cr>
+inoremap <silent> <C-k> <esc>:wincmd k<cr>
 
-noremap <silent> <F12>h :call I3VIM_WindowFocus('h')<cr>
-noremap <silent> <F12>l :call I3VIM_WindowFocus('l')<cr>
-noremap <silent> <F12>j :call I3VIM_WindowFocus('j')<cr>
-noremap <silent> <F12>k :call I3VIM_WindowFocus('k')<cr>
+inoremap <silent> <C-h> :wincmd h<cr>
+inoremap <silent> <C-l> :wincmd l<cr>
+inoremap <silent> <C-j> :wincmd j<cr>
+inoremap <silent> <C-k> :wincmd k<cr>
 
 func! I3VIM_WindowFocus(direction)
   " wincmd is not available in cmd mode, so we have to work around it
@@ -477,8 +477,6 @@ let g:EasyMotion_do_shade = 0
 let g:EasyMotion_use_upper = 1
 map f <Plug>(easymotion-bd-fl)
 map t <Plug>(easymotion-bd-tl)
-map <C-j> <Plug>(easymotion-j)
-map <C-k> <Plug>(easymotion-k)
 "-----------------------------------------
 " EasyAlign
 "-----------------------------------------
