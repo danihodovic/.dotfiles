@@ -6,6 +6,8 @@ log () {
 }
 
 direction=$1
+i3-msg focus $direction
+exit 0
 active=$(xprop -id "$(xdotool getwindowfocus)" WM_NAME)
 
 is_vim_window_regex='(n?vim?"$)|(WM_NAME\(STRING\) = "Terminal - \[1\] vi)'
