@@ -131,9 +131,23 @@ _remote_branch() {
   fi
 }
 
+function delete_dead_branches {
+  dead_branches=$(git branch --merged=master | egrep --invert-match '(master|production)')
+  echo $dead_branches | while read branch; do
+    # If branch name does not contain just whitespace
+    if [[ $branch = *[![:space:]]* ]]; then
+      git branch -d $branch
+    fi
+  done
+}
+
 gpullbranch() {
   branch=$(_local_branch)
-  [ $? = 0 ] && git fetch --prune && git rebase $@ origin/$branch
+  if [ $? = 0 ]; then
+    git fetch --prune
+    git rebase $@ origin/$branch
+    delete_dead_branches
+  fi
 }
 compdef _git-pull gpullbranch
 
