@@ -217,8 +217,8 @@ vnoremap <leader>fo :call ReformatTextWidth()<cr>
 nnoremap <silent> n   n:call HLNext(0.1)<cr>
 nnoremap <silent> N   N:call HLNext(0.1)<cr>
 " Go to the next location list item
-nnoremap ln :lnext<cr>
-nnoremap lp :lprev<cr>
+nnoremap <leader>ln :lnext<cr>
+nnoremap <leader>lp :lprev<cr>
 " Map S to ys for vim-surround
 map s ys
 vmap s S
