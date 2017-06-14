@@ -184,10 +184,10 @@ inoremap <silent> <C-l> <esc>:wincmd l<cr>
 inoremap <silent> <C-j> <esc>:wincmd j<cr>
 inoremap <silent> <C-k> <esc>:wincmd k<cr>
 
-inoremap <silent> <C-h> :wincmd h<cr>
-inoremap <silent> <C-l> :wincmd l<cr>
-inoremap <silent> <C-j> :wincmd j<cr>
-inoremap <silent> <C-k> :wincmd k<cr>
+nnoremap <silent> <C-h> :wincmd h<cr>
+nnoremap <silent> <C-l> :wincmd l<cr>
+nnoremap <silent> <C-j> :wincmd j<cr>
+nnoremap <silent> <C-k> :wincmd k<cr>
 
 func! I3VIM_WindowFocus(direction)
   " wincmd is not available in cmd mode, so we have to work around it
