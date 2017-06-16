@@ -90,7 +90,8 @@ for script in $scripts_to_source; do
 done
 
 # Source this after gvm, as gvm sets a custom $GOPATH...
-export GOPATH=${HOME}/repos/go_pkg
+export GOPATH=$HOME/repos/go_pkg
+export PATH=$PATH:$GOPATH/bin
 
 # Bindings
 # ------------
