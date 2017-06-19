@@ -310,10 +310,10 @@ let g:fzf_action = {
   \ 'ctrl-x': 'vsplit',
   \ 'ctrl-z': 'split' }
 let g:fzf_layout = {'up': '~40%'}
-nnoremap - :GitFiles<cr>
-nnoremap = :Files<cr>
-nnoremap <M--> :call FzfGitChangedFilesFromMaster()<cr>
-nnoremap b :Buffers<cr>
+nnoremap - :Buffers<cr>
+nnoremap = :call FzfGitChangedFilesFromMaster()<cr>
+nnoremap <M-=> :Files<cr>
+nnoremap <M--> :Gitfiles<cr>
 nnoremap H :History:<cr>
 cnoremap H :History:<cr>
 nnoremap r :History<cr>
