@@ -76,6 +76,7 @@ scripts_to_source=(
   ${HOME}/.rvm/scripts/rvm
   ${HOME}/.i3_completion.sh
   ${HOME}/.kubectl_completion
+  ${HOME}/.kops_completion
   # Own helpers
   ${HOME}/.dotfiles/fzf-helpers.zsh
   ${HOME}/.dotfiles/docker.zsh
