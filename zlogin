@@ -81,6 +81,7 @@ scripts_to_source=(
   ${HOME}/.dotfiles/fzf-helpers.zsh
   ${HOME}/.dotfiles/docker.zsh
   ${HOME}/.dotfiles/git.zsh
+  ${HOME}/.dotfiles/kubectl.zsh
   ${HOME}/.zlogin_local
 )
 
