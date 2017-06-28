@@ -14,3 +14,9 @@ function kubecontext {
     kubectl config use-context $chosen_cluster
   fi
 }
+
+function kubesh {
+  pod=$(kubectl get pods | fzf --ansi --exact --tac)
+  pod_name=$(echo $pod | awk '{print $1}')
+  kubectl exec -it $pod_name bash || sh
+}
