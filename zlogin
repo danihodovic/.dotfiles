@@ -190,6 +190,7 @@ alias ls='ls --color=auto --classify -lrt --block-size=MB'
 alias setxkbmapcaps="setxkbmap -option caps:swapescape68"
 alias o='xdg-open'
 alias v='nvim'
+alias k='kubectl'
 alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
 function recent() { ls -t $1 | head -n ${2:-5} }
