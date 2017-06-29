@@ -15,8 +15,18 @@ function kubecontext {
   fi
 }
 
-function kubesh {
+function kubeexec {
   pod=$(kubectl get pods | fzf --ansi --exact --tac)
   pod_name=$(echo $pod | awk '{print $1}')
-  kubectl exec -it $pod_name bash || sh
+  if [ -n $pod_name ]; then
+    kubectl exec -it $@ $pod_name bash || sh
+  fi
+}
+
+function kubelog {
+  pod=$(kubectl get pods | fzf --ansi --exact --tac)
+  pod_name=$(echo $pod | awk '{print $1}')
+  if [ -n $pod_name ]; then
+    kubectl logs $@ $pod_name
+  fi
 }
