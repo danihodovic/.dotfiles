@@ -43,7 +43,7 @@ antibody bundle zsh-users/zsh-completions
 antibody bundle zsh-users/zsh-syntax-highlighting
 antibody bundle djui/alias-tips
 antibody bundle jarmo/expand-aliases-oh-my-zsh
-antibody bundle danihodovic/steeef
+antibody bundle danihodovic/mostar.zsh
 
 # Settings
 setopt SHARE_HISTORY
