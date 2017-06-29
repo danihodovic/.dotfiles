@@ -142,3 +142,5 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id parcellite
 exec --no-startup-id setxkbmap -option caps:swapescape68
 exec --no-startup-id bash -c 'path=~/Pictures/background.png && [ -f "$path" ] && feh --bg-scale "$path"'
+exec --no-startup-id xautolock -time 3 -locker i3lock
+exec --no-startup-id caffeine
