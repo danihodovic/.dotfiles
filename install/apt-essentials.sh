@@ -43,5 +43,8 @@ $sudo_cmd apt-get install -y \
     ranger \
     gnome-settings-daemon \
     apt-file \
-    direnv
+    direnv \
+    xautolock \
+    caffeine \
+    asciinema
 
