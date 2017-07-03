@@ -69,7 +69,7 @@ if s:has_plug == 1
   Plug 'sudar/vim-arduino-syntax'
   Plug 'cespare/vim-toml'                       " Toml is a configuration language similar to yaml
   Plug 'danihodovic/nodejs-require.vim'
-  Plug 'hashivim/vim-terraform'
+  Plug 'bkad/vim-terraform'
   " Plug 'danihodovic/vim-flow'
   "-----------------------------------------
   call plug#end()
