@@ -14,19 +14,22 @@ function kubecontext {
     kubectl config use-context $chosen_cluster
   fi
 }
+alias kcontext=kubecontext
 
 function kubeexec {
   pod=$(kubectl get pods | fzf --ansi --exact --tac)
   pod_name=$(echo $pod | awk '{print $1}')
   if [ -n $pod_name ]; then
-    kubectl exec -it $@ $pod_name bash || sh
+    kubectl exec -it $@ $pod_name sh
   fi
 }
+alias kexec=kubeexec
 
-function kubelog {
+function kubelogs {
   pod=$(kubectl get pods | fzf --ansi --exact --tac)
   pod_name=$(echo $pod | awk '{print $1}')
   if [ -n $pod_name ]; then
     kubectl logs $@ $pod_name
   fi
 }
+alias klogs=kubelogs
