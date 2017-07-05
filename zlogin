@@ -193,7 +193,6 @@ alias v='nvim'
 alias k='kubectl'
 alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
-function recent() { ls -t $1 | head -n ${2:-5} }
 
 alias aptinstall='sudo apt-get install '
 alias aptremove='sudo apt-get remove '
@@ -228,6 +227,11 @@ function pk {
   if [ -n "$chosen_pids" ]; then
     echo $chosen_pids | xargs kill
   fi
+}
+
+function awsprofile {
+  profile=$(grep -E '\[.+\]' ~/.aws/credentials | tr -d '[]' | fzf)
+  export AWS_PROFILE=$profile
 }
 
 function pgcli-docker {
