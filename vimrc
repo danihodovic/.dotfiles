@@ -143,6 +143,8 @@ command! Fp echo expand('%:p')
 "deleting previous/next.
 let mapleader = ","
 noremap <leader>q q
+" Execute macro over a visual selection
+xnoremap <leader>q :'<,'>:normal @q<CR>
 " Copy til end of line (default is entire line - use `Y` for entire line instead)
 nnoremap Y yg_
 " Movement
