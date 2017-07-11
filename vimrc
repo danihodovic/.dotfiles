@@ -77,6 +77,7 @@ end
 "-----------------------------------------
 " General settings
 set fillchars=stl:─,stlnc:─,vert:│,fold:─,diff:─
+set gdefault
 "-----------------------------------------
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " Silences C-Q, C-S and allows vim to catch them
