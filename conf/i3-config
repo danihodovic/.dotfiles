@@ -44,11 +44,15 @@ bindsym $mod+x exec \
 	path=$(tmux display-message -p -F '#{pane_current_path}') && \
 	$Terminal --default-working-directory=$path
 
+bindsym $mod+c exec \
+	xdotool key --window $(xdotool getactivewindow) Escape && \
+	path=$(tmux display-message -p -F '#{pane_current_path}') && \
+	$Terminal --default-working-directory=$path
+
 bindsym $mod+Shift+Return exec $Browser
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+p focus parent
-bindsym $mod+c focus child
 
 # sound volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
