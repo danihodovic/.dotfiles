@@ -1,4 +1,3 @@
-" TODO: Add ag search within git files. Not node_module/s/
 "-----------------------------------------
 " Vim Plug
 "-----------------------------------------
@@ -71,8 +70,6 @@ if s:has_plug == 1
   Plug 'cespare/vim-toml'                       " Toml is a configuration language similar to yaml
   Plug 'danihodovic/nodejs-require.vim'
   Plug 'bkad/vim-terraform'
-  " Plug 'danihodovic/vim-flow'
-  "-----------------------------------------
   call plug#end()
 end
 "-----------------------------------------
@@ -94,7 +91,7 @@ set title
 set number
 " Dont auto resize windows (good for i3)
 set winfixwidth
-set norelativenumber
+set relativenumber
 " Disables the bottom bar which shows modes and allows plugins (tern - types) to display information
 " See https://github.com/marijnh/tern_for_vim/blob/master/doc/tern.txt#L135
 " This only displays in insert and visual mode and is useless anyway because Airline displays the
