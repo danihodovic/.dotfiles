@@ -20,6 +20,7 @@ if s:has_plug == 1
   set rtp+=~/.fzf
   Plug 'junegunn/fzf.vim'
   Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
+  Plug 'tenfyzhong/CompleteParameter.vim'
   Plug 'scrooloose/nerdtree'
   Plug 'flazz/vim-colorschemes'
   Plug 'benekastah/neomake'
@@ -223,8 +224,7 @@ nnoremap <silent> N   N:call HLNext(0.1)<cr>
 nnoremap <leader>ln :lnext<cr>
 nnoremap <leader>lp :lprev<cr>
 " Map S to ys for vim-surround
-map s ys
-vmap s S
+map S ys
 nnoremap <leader>aw :ArgWrap<cr>
 nnoremap <leader>en :lnext<cr>
 nnoremap <leader>ep :lprevious<cr>
@@ -527,16 +527,15 @@ let g:ycm_semantic_triggers =  {
       \ }
 
 augroup GoToBinding
-  autocmd FileType typescript nnoremap <buffer>gd :YcmCompleter GoToDefinition<cr>
   autocmd FileType javascript noremap <silent><buffer>gd :call TernOrDucktape()<cr>
+  autocmd FileType go,typescript nnoremap <buffer>gd :YcmCompleter GoToDefinition<cr>
+  autocmd FileType typescript,javascript nnoremap <buffer><leader>t :YcmCompleter GetType<cr>
+  autocmd FileType scala nnoremap map <buffer>gd :ScalaSearch<cr>
   " Don't make these commands -buffer local. If you do that you can't autocomplete the commands in
   " the command line window.
   autocmd FileType typescript,javascript command! -nargs=1 Rename YcmCompleter RefactorRename <args>
   autocmd FileType typescript,javascript command! References YcmCompleter GoToReferences
   autocmd FileType typescript,javascript command! Doc YcmCompleter GetDoc
-  autocmd FileType typescript,javascript nnoremap <buffer><leader>t :YcmCompleter GetType<cr>
-
-  autocmd FileType scala nnoremap map <buffer>gd :ScalaSearch<cr>
 augroup END
 "-----------------------------------------
 " Eclim Java, Scala
@@ -600,6 +599,12 @@ fu! EslintWrapperFix()
   checktime
   Neomake
 endfu
+
+"-----------------------------------------
+" Plug 'tenfyzhong/CompleteParameter.vim'
+"-----------------------------------------
+let g:complete_parameter_mapping_goto_next = '<m-m>'
+let g:complete_parameter_mapping_goto_previous = '<m-n>'
 "-----------------------------------------
 " Jedi Python
 "-----------------------------------------
@@ -614,8 +619,6 @@ let g:jedi#show_call_signatures = "1"
 "-----------------------------------------
 " Golang
 "-----------------------------------------
-autocmd FileType go nmap     <buffer> gd       <Plug>(go-def)
-autocmd FileType go nmap     <buffer> <leader> <Plug>(go-def-split)
 autocmd FileType go nmap <buffer> <leader>t <Plug>(go-info)
 let g:go_auto_type_info = 0
 "-----------------------------------------
@@ -757,15 +760,13 @@ let g:airline#extensions#tmuxline#enabled = 0
 "-----------------------------------------
 " Auto-pairs
 "-----------------------------------------
-let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
-" Don't jump to the next bracket when closing
+" tenfyzhong/CompleteParameter already inserts ()
+let g:AutoPairs = {'[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+" Disable inappropriate defaults
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsMultilineClose = 0
-" Shortcut to quickly wrap a world, i.e ''hello + key => 'hello'
 let g:AutoPairsShortcutFastWrap = ''
-" Jump to next closed pair
 let g:AutoPairsShortcutJump = ''
-" Disable this
 let g:AutoPairsShortcutToggle = ''
 "-----------------------------------------
 " NERDCommenter
