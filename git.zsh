@@ -42,8 +42,12 @@ fbranch() {
 }
 
 function gshow {
-  local commit=`fcommit`
-  [[ -n $commit ]] && git show $@ $commit
+  if [ -n "$1" ]; then
+    git show "$1"
+  else
+    local commit=`fcommit`
+    [[ -n $commit ]] && git show $@ $commit
+  fi
 }
 
 gcheckoutcommit() {
