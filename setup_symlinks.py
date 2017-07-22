@@ -33,7 +33,7 @@ conf_files = [
     (CONF_DIR + '/Xresources',           HOME_DIR + '/.Xresources'),
     (CONF_DIR + '/vimperatorrc',         HOME_DIR + '/.vimperatorrc'),
     (CONF_DIR + '/ginit.vim',            HOME_DIR + '/.config/nvim/ginit.vim'),
-    (CONF_DIR + '/xfce4-terminalrc/',    HOME_DIR + '/.config/xfce4/terminal/terminalrc'),
+    (CONF_DIR + '/xfce4-terminalrc',     HOME_DIR + '/.config/xfce4/terminal/terminalrc'),
     # File not in conf dir
     (HOME_DIR + '/.dotfiles/zlogin',     HOME_DIR + '/.zlogin'),
     (HOME_DIR + '/.dotfiles/zshrc',      HOME_DIR + '/.zshrc'),
