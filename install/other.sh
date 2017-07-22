@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
-set -e
-set -u
+set -eu
 
 read -p "Install node version manager (n)? " -n 1 -r      install_n
 echo
-read -p "Install Slack?"                       -n 1 -r      install_slack
+read -p "Install Slack? "                       -n 1 -r      install_slack
 echo
-read -p "Install github/hub?"                       -n 1 -r      install_hub
+read -p "Install github/hub? "                       -n 1 -r      install_hub
 echo
-read -p "Install ripgrep?"                       -n 1 -r      install_ripgrep
+read -p "Install ripgrep? "                       -n 1 -r      install_ripgrep
 echo
-read -p "Install dasht? Cli tool for reading docs [y/n] " -n 1 -r INSTALL_DASHT
+read -p "Install dasht? " -n 1 -r INSTALL_DASHT
 echo
 read -p "Install i3-completions for zsh? " -n 1 -r      install_i3_completions
 echo
@@ -37,16 +36,14 @@ esac
 
 case $install_hub in
   y)
-    tempdir=$(mktemp -d)
-    download_url=$(\
-      curl -sL https://api.github.com/repos/github/hub/releases/latest | \
-      grep 'https.*linux-amd64.*\.tgz' | \
-      sed 's/"//g' | \
-      awk '{print $2}')
-    echo Downloading hub release from "${download_url}"...
-    curl -sL "$download_url" | tar -C "$tempdir" --strip-components 1 -xz
-    echo Installing...
-    sudo "${tempdir}"/install
+    latest_release=$(curl https://api.github.com/repos/github/hub/releases |
+    jq -r '.[0].assets[] |  select(.label | contains("Linux 64-bit")) | .browser_download_url')
+
+    tempdir=$(mktemp -d hub-XXXXXX)
+    curl -L "$latest_release" | tar xz -C "$tempdir" --strip-components 1
+
+    echo Installing hub...
+    sudo /tmp/hub/install
 esac
 
 case $install_ripgrep in
