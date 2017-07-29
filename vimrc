@@ -709,21 +709,10 @@ map y <Plug>(operator-flashy)
 let g:neomake_list_height = 8
 let g:neomake_open_list = 2
 
-let g:neomake_typescript_tsc_maker = {
-    \ 'args': ['--noEmit'],
-    \ 'append_file': 0,
-    \ 'errorformat':
-        \ '%E%f %#(%l\,%c): error %m,' .
-        \ '%E%f %#(%l\,%c): %m,' .
-        \ '%Eerror %m,' .
-        \ '%C%\s%\+%m',
-    \ }
-
-" let g:neomake_verbose = 3
 let g:neomake_typescript_tslint_maker = {
     \ 'args': ['--project', 'tsconfig.json'],
     \ 'append_file': 0,
-    \ 'errorformat': '%f[%l\, %c]: %m'
+    \ 'errorformat': '%EERROR: %f[%l\, %c]: %m,%E%f[%l\, %c]: %m'
     \ }
 
 let g:neomake_javascript_enabled_makers = ['eslint']
