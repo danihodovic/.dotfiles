@@ -378,14 +378,31 @@ fu! FzfLocateRoot()
   call fzf#run(fzf#vim#wrap(opts))
 endfu
 
-command! -nargs=* AG call FzfAgCustom(<f-args>)
+command! -nargs=* AG call FzfAgCustom(<q-args>)
 " Wrapper around fzf#vim#ag that allows us to pass in Ag options after the
 " query. This allows the command to be used as such:
 " :AG query ag-option ag-value ag-option ag-value
-fu! FzfAgCustom(...)
-  let query = a:1
-  let ag_opts = join(a:000[1:], ' ')
-  call fzf#vim#ag(query, ag_opts, {})
+fu! FzfAgCustom(args)
+
+python << EOF
+# Parse arguments as the shell would. Split on spaces, but not within quotes.
+# Use python since vimscript is hard.
+# https://stackoverflow.com/a/79985
+import shlex
+args = vim.eval('a:args')
+if len(args) > 0:
+  split_on_spaces = shlex.split(vim.eval('a:args'))
+  ag_query = split_on_spaces[0]
+  ag_options = ' '.join(split_on_spaces[1:])
+  vim.command('let ag_query = "{}"'.format(ag_query))
+  vim.command('let ag_options = "{}"'.format(ag_options))
+else:
+  word_under_cursor = vim.eval('expand("<cword>")')
+  vim.command('let ag_query = "{}"'.format(word_under_cursor))
+  vim.command('let ag_options = ""')
+EOF
+
+  call fzf#vim#ag(ag_query, ag_options, {})
 endfu
 
 command! -nargs=* Definition :call FindFunctionDefinition(<q-args>)
