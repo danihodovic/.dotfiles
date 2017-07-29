@@ -20,11 +20,13 @@ alias gpushtags='git push origin --tags'
 alias gtags-latest='git tag --list | sort -V | tail -n 1'
 alias gremotes='git remote -v'
 alias gremote='git remote'
-alias gci-status='hub ci-status '
 alias gdom='git diff origin/master'
 alias grom='git rebase origin/master'
 gdob () { git diff origin/$(_local_branch) $@ }
 compdef _git-diff gdob
+
+alias ci-status='hub ci-status'
+alias pr='gpushbranch && hub pull-request'
 
 # Initiate _git which exposes the _git-* completions
 _git
@@ -46,13 +48,21 @@ function gshow {
     git show "$1"
   else
     local commit=`fcommit`
-    [[ -n $commit ]] && git show $@ $commit
+    if [[ -n $commit ]]; then
+      cmd="git show $@ $commit"
+      print -s $cmd
+      eval $cmd
+    fi
   fi
 }
 
 gcheckoutcommit() {
   local commit=`fcommit`
-  [[ -n $commit ]] && print -z git checkout $@ $commit
+  if [[ -n $commit ]]; then
+    cmd="git checkout $@ $commit"
+    print -s $cmd
+    eval $cmd
+  fi
 }
 
 gcheckoutbranch() {
@@ -62,7 +72,11 @@ gcheckoutbranch() {
     # detached state
     branch_name=$(echo $branch_name | sed -e 's/^origin\///')
   fi
-  [[ -n $branch_name ]] && eval git checkout $@ $branch_name
+  if [[ -n $branch_name ]]; then
+    cmd="git checkout $@ $branch_name"
+    print -s $cmd
+    eval $cmd
+  fi
 }
 
 alias gcc=gcheckoutcommit
@@ -215,5 +229,3 @@ function gdeltag {
   git push origin :"$tag_name"
 }
 compdef _git-branch gdeltag
-
-alias pr='gpushbranch && hub pull-request'
