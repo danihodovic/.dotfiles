@@ -1,8 +1,6 @@
 "-----------------------------------------
 " Vim Plug
 "-----------------------------------------
-set nocompatible
-
 " Only load plugins if we have vim-plug installed
 let s:has_plug = 0
 try
