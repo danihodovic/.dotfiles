@@ -52,6 +52,10 @@ if s:has_plug == 1
   Plug 'haya14busa/vim-operator-flashy'         " Highlights the yanked words
   Plug 'luochen1990/rainbow'                    " Show diff level of parentheses in diff colors
   Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
+  Plug 'reedes/vim-wordy'
+  Plug 'aquach/vim-http-client'
+  Plug 'pgilad/vim-skeletons'
+  Plug 'danihodovic/vim-skeleton-snippets'
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
@@ -829,6 +833,11 @@ vnoremap K y:call call('Dasht', [getreg(0)]
 "-----------------------------------------
 let g:lua_complete_omni = 1
 let g:lua_complete_dynamic = 0
+"-----------------------------------------
+" pgilad/vim-skeletons
+"-----------------------------------------
+let skeletons#autoRegister = 1
+let skeletons#skeletonsDir = '$HOME/.config/nvim/plugged/vim-skeleton-snippets'
 "-----------------------------------------
 " Random funcs
 "-----------------------------------------
