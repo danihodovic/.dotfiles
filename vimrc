@@ -493,10 +493,11 @@ let g:EasyMotion_keys = 'hgjfkdls;a'
 let g:EasyMotion_grouping = 1
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
-let g:EasyMotion_do_shade = 0
+let g:EasyMotion_do_shade = 1
 let g:EasyMotion_use_upper = 1
 map f <Plug>(easymotion-bd-fl)
 map t <Plug>(easymotion-bd-tl)
+map s <Plug>(easymotion-sn)
 "-----------------------------------------
 " EasyAlign
 "-----------------------------------------
@@ -765,7 +766,6 @@ let g:airline#extensions#tmuxline#enabled = 0
 "-----------------------------------------
 " Auto-pairs
 "-----------------------------------------
-" tenfyzhong/CompleteParameter already inserts ()
 let g:AutoPairs = {'[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 " Disable inappropriate defaults
 let g:AutoPairsFlyMode = 0
