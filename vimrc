@@ -581,26 +581,42 @@ endfu
 "-----------------------------------------
 " FixMyJS
 "-----------------------------------------
-function! EslintFileExists()
-  let eslintFiles = ['.eslintrc.json', '.eslintrc.js', '.eslintrc.yml', '.eslintrc']
-  let eslintFileExists = 0
-
-  for eslintFile in eslintFiles
-    if filereadable(eslintFile)
+function! LintConfigExists()
+  if &filetype == 'typescript'
+    if filereadable('tslint.json')
       return 1
     endif
-  endfor
+  elseif &filetype == 'javascript'
+    let eslintFiles = ['.eslintrc.json', '.eslintrc.js', '.eslintrc.yml', '.eslintrc']
+    let eslintFileExists = 0
+
+    for eslintFile in eslintFiles
+      if filereadable(eslintFile)
+        return 1
+      endif
+    endfor
+  endif
 
   return 0
 endfunction
 " TODO: Make this async?
 " TODO: Move this into Neomake?
-fu! EslintWrapperFix()
-  if EslintFileExists() == 0
+fu! LintAndFix()
+  if &filetype != 'javascript' && &filetype != 'typescript'
     return
   endif
 
-  let output = system("eslint --fix " . expand('%'))
+  if LintConfigExists() == 0
+    return
+  endif
+
+  if &filetype == 'typescript'
+    let executable = 'tslint'
+  else
+    let executable = 'eslint'
+  endif
+
+  let output = system(executable . ' --fix ' . expand('%'))
   let lines = split(output, '\n')
 
   " Nothing to fix, close the quickfix window and return
@@ -721,8 +737,9 @@ let g:neomake_typescript_tslint_maker = {
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
 " Do not enable this for zsh. shellcheck does not support zsh
-autocmd BufWritePost *.ts,*.py,*.sh,*.bash,bashrc,*.lua,*.go,*.rb Neomake
-autocmd BufWritePost *.js call EslintWrapperFix()
+autocmd BufWritePost *.py,*.sh,*.bash,bashrc,*.lua,*.go,*.rb Neomake
+autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call LintAndFix()
+autocmd BufWritePost *.md,*.txt,*.doc silent Wordy weak
 "-----------------------------------------
 " VimAirline
 "-----------------------------------------
