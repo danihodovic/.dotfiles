@@ -32,19 +32,19 @@ bindsym $mod+Shift+l move right
 # Magic
 bindsym $mod+Return exec $Terminal
 
-bindsym $mod+z exec \
+bindsym $mod+x exec \
 	i3-msg split v && \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
 	path=$(tmux display-message -p -F '#{pane_current_path}') && \
 	$Terminal --default-working-directory=$path
 
-bindsym $mod+x exec \
+bindsym $mod+c exec \
 	i3-msg split h && \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
 	path=$(tmux display-message -p -F '#{pane_current_path}') && \
 	$Terminal --default-working-directory=$path
 
-bindsym $mod+c exec \
+bindsym $mod+z exec \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
 	path=$(tmux display-message -p -F '#{pane_current_path}') && \
 	$Terminal --default-working-directory=$path
