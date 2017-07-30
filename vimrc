@@ -13,65 +13,65 @@ if s:has_plug == 1
   "-----------------------------------------
   " General plugins
   "-----------------------------------------
-  Plug 'Valloric/YouCompleteMe'
   set rtp+=~/.fzf
-  Plug 'junegunn/fzf.vim'
-  Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
-  Plug 'tenfyzhong/CompleteParameter.vim'
-  Plug 'scrooloose/nerdtree'
-  Plug 'flazz/vim-colorschemes'
-  Plug 'benekastah/neomake'
-  Plug 'tpope/vim-surround'                     " Surround text with (){}<>
-  Plug 'jiangmiao/auto-pairs'                   " Automatically add (){}<>
   Plug 'airblade/vim-gitgutter'                 " Show changed git lines
-  Plug 'scrooloose/nerdcommenter'               " Comment/uncomment source code files
-  Plug 'terryma/vim-multiple-cursors'
+  Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
+  Plug 'aquach/vim-http-client'
+  Plug 'benekastah/neomake'
   Plug 'bling/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'tpope/vim-fugitive'                     " Various git commands inside vim
-  Plug 'tpope/vim-rhubarb'
-  Plug 'Lokaltog/vim-easymotion'                " Better movement with f/t
-  Plug 'SirVer/ultisnips'
+  Plug 'danihodovic/vim-skeleton-snippets'
   Plug 'danihodovic/vim-snippets'               " My own snippets
-  Plug 'nathanaelkane/vim-indent-guides'        " Visually display indent lines with different color
-  Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
-  Plug 'junegunn/vim-pseudocl'                  " Required by vim-oblique
-  Plug 'junegunn/vim-oblique'                   " Colors search result and sets nohlsearch on cursor move
-  Plug 'junegunn/vim-easy-align'                " Align code around arbitrary characters =,:
-  Plug 'itchyny/vim-cursorword'                 " Highlight the occurances of the word under the cursor
-  Plug 'kana/vim-textobj-user'                  " Add additional text objects
-  Plug 'kana/vim-textobj-function'              " Add function based text objects
-  Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
+  Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
+  Plug 'flazz/vim-colorschemes'
   Plug 'FooSoft/vim-argwrap'                    " Collapse or expand arguments for a function
+  Plug 'haya14busa/vim-operator-flashy'         " Highlights the yanked words
+  Plug 'itchyny/vim-cursorword'                 " Highlight the occurances of the word under the cursor
+  Plug 'jiangmiao/auto-pairs'                   " Automatically add (){}<>
+  Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/vim-easy-align'                " Align code around arbitrary characters =,:
+  Plug 'junegunn/vim-oblique'                   " Colors search result and sets nohlsearch on cursor move
+  Plug 'junegunn/vim-pseudocl'                  " Required by vim-oblique
+  Plug 'kana/vim-operator-user'                 " Required for vim-operator-flashy
+  Plug 'kana/vim-textobj-function'              " Add function based text objects
+  Plug 'kana/vim-textobj-user'                  " Add additional text objects
+  Plug 'Lokaltog/vim-easymotion'                " Better movement with f/t
+  Plug 'luochen1990/rainbow'                    " Show diff level of parentheses in diff colors
+  Plug 'nathanaelkane/vim-indent-guides'        " Visually display indent lines with different color
+  Plug 'pgilad/vim-skeletons'
+  Plug 'reedes/vim-wordy'                       " Linting for prose
+  Plug 'scrooloose/nerdcommenter'               " Comment/uncomment source code files
+  Plug 'scrooloose/nerdtree'
+  Plug 'SirVer/ultisnips'
   Plug 'sunaku/vim-dasht'                       " Show documentation for the word under the cursor
   Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
+  Plug 'tenfyzhong/CompleteParameter.vim'       " Inserts function parameters when completing a function
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
+  Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
   Plug 'tpope/vim-abolish'                      " Change snake case to camelcase and vice versa
-  Plug 'kana/vim-operator-user'                 " Required for vim-operator-flashy
-  Plug 'haya14busa/vim-operator-flashy'         " Highlights the yanked words
-  Plug 'luochen1990/rainbow'                    " Show diff level of parentheses in diff colors
-  Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
-  Plug 'reedes/vim-wordy'
-  Plug 'aquach/vim-http-client'
-  Plug 'pgilad/vim-skeletons'
-  Plug 'danihodovic/vim-skeleton-snippets'
+  Plug 'tpope/vim-fugitive'                     " Various git commands inside vim
+  Plug 'tpope/vim-rhubarb'                      " Github commands for Fugitive
+  Plug 'tpope/vim-surround'                     " Surround text with (){}<>
+  Plug 'Valloric/YouCompleteMe'                 " Autocompletion
+  Plug 'vim-airline/vim-airline-themes'
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
-  Plug 'jelera/vim-javascript-syntax'
-  Plug 'HerringtonDarkholme/yats.vim'           " Typescript syntax
-  Plug 'derekwyatt/vim-scala'
-  Plug 'vim-erlang/vim-erlang-omnicomplete'
-  Plug 'Valloric/MatchTagAlways'                " Show matching html/xml tags
-  Plug 'fatih/vim-go'                           " Basically a Golang IDE for vi
-  Plug 'rust-lang/rust.vim'                     " Rust syntax highlighting, formatting
-  Plug 'ekalinin/Dockerfile.vim'                " Syntax for Dockerfile and snippets 
-  Plug 'tpope/vim-endwise'                      " Adds if/end in Lua/Ruby
-  Plug 'PotatoesMaster/i3-vim-syntax'
-  Plug 'evanmiller/nginx-vim-syntax'
-  Plug 'sudar/vim-arduino-syntax'
+  Plug 'bkad/vim-terraform'
   Plug 'cespare/vim-toml'                       " Toml is a configuration language similar to yaml
   Plug 'danihodovic/nodejs-require.vim'
-  Plug 'bkad/vim-terraform'
+  Plug 'derekwyatt/vim-scala'
+  Plug 'ekalinin/Dockerfile.vim'                " Syntax for Dockerfile and snippets 
+  Plug 'evanmiller/nginx-vim-syntax'
+  Plug 'fatih/vim-go'                           " Basically a Golang IDE for vi
+  Plug 'HerringtonDarkholme/yats.vim'           " Typescript syntax
+  Plug 'jelera/vim-javascript-syntax'
+  Plug 'PotatoesMaster/i3-vim-syntax'
+  Plug 'rust-lang/rust.vim'                     " Rust syntax highlighting, formatting
+  Plug 'sudar/vim-arduino-syntax'
+  Plug 'tpope/vim-endwise'                      " Adds if/end in Lua/Ruby
+  Plug 'Valloric/MatchTagAlways'                " Show matching html/xml tags
+  Plug 'vim-erlang/vim-erlang-omnicomplete'
   call plug#end()
 end
 "-----------------------------------------
