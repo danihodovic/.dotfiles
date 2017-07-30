@@ -189,7 +189,7 @@ alias cd-="cd -"
 alias ls='ls --color=auto --classify -lrt --block-size=MB'
 alias setxkbmapcaps="setxkbmap -option caps:swapescape68"
 alias o='xdg-open'
-alias v='nvim'
+function v { i3-swallow.py nvim-gtk $@ }
 alias k='kubectl'
 alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
