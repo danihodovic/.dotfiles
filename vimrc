@@ -74,10 +74,6 @@ if s:has_plug == 1
   Plug 'vim-erlang/vim-erlang-omnicomplete'
   call plug#end()
 end
-try
-  call rpcnotify(1, 'Gui', 'Font', 'UbuntuMono 15')
-catch
-endtry
 "-----------------------------------------
 " General settings
 set fillchars=stl:─,stlnc:─,vert:│,fold:─,diff:─

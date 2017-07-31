@@ -1,3 +1,3 @@
-Guifont! Knack Nerd Font:h14:b
+Guifont! Ubuntu Mono:h13
 GuiLinespace 1
 colorscheme badwolf
