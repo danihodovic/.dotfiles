@@ -189,6 +189,13 @@ alias cd-="cd -"
 alias ls='ls --color=auto --classify -lrt --block-size=MB'
 alias setxkbmapcaps="setxkbmap -option caps:swapescape68"
 alias o='xdg-open'
+function v {
+  if which nvim-qt && which i3-swallow; then
+    i3-swallow nvim-qt --nofork $@
+  else
+    nvim $@
+  fi
+}
 alias v=nvim-qt
 alias k='kubectl'
 alias psag='ps aux | ag '
