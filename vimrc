@@ -72,6 +72,7 @@ if s:has_plug == 1
   Plug 'tpope/vim-endwise'                      " Adds if/end in Lua/Ruby
   Plug 'Valloric/MatchTagAlways'                " Show matching html/xml tags
   Plug 'vim-erlang/vim-erlang-omnicomplete'
+  Plug 'junegunn/vader.vim'
   call plug#end()
 end
 "-----------------------------------------
