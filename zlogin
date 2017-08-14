@@ -222,8 +222,8 @@ function chpwd {
 }
 
 function pk {
-  local processes=$(ps -eo "%c %p %C %U" | tail -n +2 | sort -k3 -n --reverse)
-  local chosen_pids=$(echo $processes | fzf --multi | awk '{print $2}')
+  local processes=$(ps -eo "%p %C %c %U" | tail -n +2 | sort -k2 -n --reverse)
+  local chosen_pids=$(echo $processes | fzf --multi | awk '{print $1}')
   if [ -n "$chosen_pids" ]; then
     echo $chosen_pids | xargs kill
   fi
