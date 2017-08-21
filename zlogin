@@ -181,7 +181,6 @@ alias cd..="cd ../.."
 alias cd...="cd ../../.."
 alias cd....='cd ../../../..'
 alias tempdir='tempdir=$(mktemp -d) && cd $tempdir'
-alias ll='ls -lart'
 alias cp='cp -v '
 alias mv='mv -v '
 alias h="history"
@@ -217,8 +216,8 @@ function ssh-sync {
 
 # cd && ls
 function chpwd {
-    emulate -L zsh
-    ls -lrt --block-size=MB
+  emulate -L zsh
+  \ls --color=auto --classify -lrt --block-size=MB
 }
 
 function pk {
@@ -249,14 +248,6 @@ function pgcli-docker {
   docker run -it --rm --network container:$postgres_container_names danihodovic/pgcli -h postgres -U postgres
 }
 
-function youtube-download {
-  if [ "$1" = '' ]; then
-    echo 'Usage:\n\t youtube-download <url|id>'
-    return 1
-  fi
-  drun -v $(pwd):/home/user/mps/ andrey01/mps-youtube daurl $1
-}
-
 function webm-to-m4a {
   if [ $# != '1' ]; then
      echo "Usage:\n\t $0 <file.webm>"
@@ -267,7 +258,7 @@ function webm-to-m4a {
 }
 
 function google {
-  chromium-browser "google.com/search?q=$*"
+  google-chrome "google.com/search?q=$*"
 }
 
 man() {
