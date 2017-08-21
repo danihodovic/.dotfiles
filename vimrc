@@ -94,7 +94,7 @@ set title
 set number
 " Dont auto resize windows (good for i3)
 set winfixwidth
-set relativenumber
+set norelativenumber
 " Disables the bottom bar which shows modes and allows plugins (tern - types) to display information
 " See https://github.com/marijnh/tern_for_vim/blob/master/doc/tern.txt#L135
 " This only displays in insert and visual mode and is useless anyway because Airline displays the
@@ -637,8 +637,11 @@ endfu
 "-----------------------------------------
 " Plug 'tenfyzhong/CompleteParameter.vim'
 "-----------------------------------------
-let g:complete_parameter_mapping_goto_next = '<m-m>'
-let g:complete_parameter_mapping_goto_previous = '<m-n>'
+inoremap <silent><expr> ( complete_parameter#pre_complete("()")
+smap <C-m> <Plug>(complete_parameter#goto_next_parameter)
+imap <C-m> <Plug>(complete_parameter#goto_next_parameter)
+smap <C-n> <Plug>(complete_parameter#goto_previous_parameter)
+imap <C-n> <Plug>(complete_parameter#goto_previous_parameter)
 "-----------------------------------------
 " Jedi Python
 "-----------------------------------------
