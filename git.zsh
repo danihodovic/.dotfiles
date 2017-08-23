@@ -95,10 +95,13 @@ grbb() {
 
 compdef _git-rebase grbc grbb
 
-# TODO: Use fzf
+# TODO: FZF preview window commit message
 goneline() {
-  n=${1:-10}
-  git log --pretty=oneline --decorate=short | tail -n $n
+  git log --pretty=oneline --decorate=short | \
+    fzf | \
+    awk '{print $1}' | \
+    tr -d '\n' | \
+    xclip -selection clipboard
 }
 
 gresetcommit() {
