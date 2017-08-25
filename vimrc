@@ -18,7 +18,6 @@ if s:has_plug == 1
   Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
   Plug 'aquach/vim-http-client'
   Plug 'benekastah/neomake'
-  Plug 'bling/vim-airline'
   Plug 'danihodovic/vim-skeleton-snippets'
   Plug 'danihodovic/vim-snippets'               " My own snippets
   Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
@@ -53,7 +52,6 @@ if s:has_plug == 1
   Plug 'tpope/vim-rhubarb'                      " Github commands for Fugitive
   Plug 'tpope/vim-surround'                     " Surround text with (){}<>
   Plug 'Valloric/YouCompleteMe'                 " Autocompletion
-  Plug 'vim-airline/vim-airline-themes'
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
@@ -95,10 +93,7 @@ set number
 " Dont auto resize windows (good for i3)
 set winfixwidth
 set norelativenumber
-" Disables the bottom bar which shows modes and allows plugins (tern - types) to display information
-" See https://github.com/marijnh/tern_for_vim/blob/master/doc/tern.txt#L135
-" This only displays in insert and visual mode and is useless anyway because Airline displays the
-" same information
+" Don't display the mode in insert mode at the bottom
 set noshowmode
 " Set pwd to current file
 set autochdir
@@ -209,6 +204,22 @@ func! I3VIM_WindowFocus(direction)
     silent exe '!i3-msg -q focus ' . directionMap[a:direction]
   endif
 endfunction
+
+set statusline=%m\ %f
+highlight statusline ctermfg=8 ctermbg=233
+autocmd CursorMoved,CursorMovedI * call UpdateStatusLine()
+autocmd BufWritePost * hi statusline ctermfg=8 ctermbg=233
+fu! UpdateStatusLine()
+  let bufinfos = getbufinfo()
+  for bufinfo in bufinfos
+    if bufinfo.changed
+      hi statusline ctermfg=46 ctermbg=233
+      return
+    endif
+
+    hi statusline ctermfg=8 ctermbg=233
+  endfor
+endfu
 
 nnoremap + :vertical resize +10<cr>
 nnoremap _ :vertical resize -10<cr>
@@ -743,47 +754,6 @@ let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
 " Do not enable this for zsh. shellcheck does not support zsh
 autocmd BufWritePost *.py,*.sh,*.bash,bashrc,*.lua,*.go,*.rb Neomake
 autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call LintAndFix()
-autocmd BufWritePost *.md,*.txt,*.doc silent Wordy weak
-"-----------------------------------------
-" VimAirline
-"-----------------------------------------
-" This needs to be enabled for airline to use powerline fonts
-let g:airline_powerline_fonts = 1
-" - Airline options
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '◀'
-" - Airline built in extensions
-let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
-let g:airline#extensions#quickfix#location_text = 'Location'
-"
-" - Airline external extensions
-" Most extensions are enabled by default and lazily loaded when the
-" corresponding plugin (if any) is detected.
-" an empty list disables all extensions
-" let g:airline_extensions = []
-" " or only load what you want
-" let g:airline_extensions = ['branch', 'tabline']
-"
-" These are all enabled by default if the respective plugins are loaded.
-" Let's be declarative here and show what plugins we want to use instead
-" of looking at the docs.
-
- " - Airline tabline
-" We want to enable the tabline because vim's built in tabline behaves strangely
-" and needs to be configured. Using tabline solves this out of the box.
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = '▶'
-let g:airline#extensions#tabline#show_buffers = 1
-" Show the filename or parent/filename if filename is same
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-
-" - Git branch (fugitive)
-let g:airline#extensions#branch#enabled = 1
-" - Git hunks.
-let g:airline#extensions#hunks#enabled = 1
-" - Tmuxline
-let g:airline#extensions#tmuxline#enabled = 0
-
 "-----------------------------------------
 " Auto-pairs
 "-----------------------------------------
