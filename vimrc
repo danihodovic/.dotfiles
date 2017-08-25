@@ -44,7 +44,6 @@ if s:has_plug == 1
   Plug 'sunaku/vim-dasht'                       " Show documentation for the word under the cursor
   Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
   Plug 'tenfyzhong/CompleteParameter.vim'       " Inserts function parameters when completing a function
-  Plug 'terryma/vim-multiple-cursors'
   Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
   Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
   Plug 'tpope/vim-abolish'                      " Change snake case to camelcase and vice versa
@@ -1007,3 +1006,5 @@ augroup BWCCreateDir
     autocmd!
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), expand('<abuf>'))
 augroup END
+
+nnoremap <leader>w :wa<cr>
