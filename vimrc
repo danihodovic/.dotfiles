@@ -160,7 +160,8 @@ execute "xnoremap / /" . &cedit . "a"
 execute "nnoremap ? ?" . &cedit . "a"
 execute "xnoremap ? ?" . &cedit . "a"
 " Exit cmdwindow on esc
-autocmd CmdwinEnter * nnoremap <buffer> <esc> :q<cr>
+nnoremap<C-q> :q<cr>
+autocmd CmdwinEnter * nnoremap <buffer> <C-q> :q<cr>
 set cmdwinheight=1
 " Easier semicolon insertion
 autocmd FileType javascript,typescript,css,perl,nginx noremap ;; :call InsertSemicolons()<CR>
