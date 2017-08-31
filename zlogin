@@ -46,6 +46,7 @@ antibody bundle jarmo/expand-aliases-oh-my-zsh
 antibody bundle git@gitlab.com:danihodovic/mostar.zsh.git
 
 # Settings
+setopt NO_BANG_HIST
 setopt SHARE_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
