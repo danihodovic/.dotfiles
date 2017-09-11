@@ -160,8 +160,8 @@ execute "xnoremap / /" . &cedit . "a"
 execute "nnoremap ? ?" . &cedit . "a"
 execute "xnoremap ? ?" . &cedit . "a"
 " Exit cmdwindow on esc
-nnoremap<C-q> :q<cr>
-autocmd CmdwinEnter * nnoremap <buffer> <C-q> :q<cr>
+nnoremap<C-w> :q<cr>
+autocmd CmdwinEnter * nnoremap <buffer> <C-w> :q<cr>
 set cmdwinheight=1
 " Easier semicolon insertion
 autocmd FileType javascript,typescript,css,perl,nginx noremap ;; :call InsertSemicolons()<CR>
@@ -224,7 +224,7 @@ endfu
 nnoremap + :vertical resize +10<cr>
 nnoremap _ :vertical resize -10<cr>
 " Buffer operations similar to browsers
-nnoremap <C-w> :call MimicBrowserClose()<CR>
+nnoremap <C-q> :call MimicBrowserClose()<CR>
 " Text width formatting for small blocks
 nnoremap <leader>fo :call ReformatTextWidth()<cr>
 vnoremap <leader>fo :call ReformatTextWidth()<cr>
