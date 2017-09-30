@@ -3,9 +3,28 @@
 # This is the exact same as the fzf file widget except that it uses a space between
 # ${LBUFFER} and $(__fsel)"
 fzf-file-widget() {
-  LBUFFER="${LBUFFER} $(__fsel)"
-  zle redisplay
+  result=$(__fsel)
+  if [ ! -z result ]; then
+    LBUFFER="${LBUFFER}${result}"
+    zle redisplay
+  fi
 }
+
+gchangedfilesinbranch() {
+  is_git_directory=$(git rev-parse --git-dir 2> /dev/null)
+  if [ -z "$is_git_directory" ]; then
+    return
+  fi
+  local changed_files=$(git --no-pager diff origin/master --name-only)
+  local selected_files=$(echo $changed_files | fzf -m --preview 'git diff --color=always origin/master {}')
+  local oneline=$(echo $selected_files | tr '\n' ' ')
+  if [ ! -z "$oneline" ]; then
+    LBUFFER="${LBUFFER}${oneline}"
+    zle redisplay
+  fi
+}
+zle -N gchangedfilesinbranch
+bindkey -M vicmd '\=' gchangedfilesinbranch
 
 # Temporary fix for root finding hotkey
 __fselroot() {
@@ -45,8 +64,7 @@ bindkey -M vicmd '^g' fzf-git-status-widget
 
 # Run fzf and paste results onto command line
 # This will set ` to run fzf-root-widget in vicmd and M-` to run fzf-root-widget in viins
-bindkey -M vicmd '='    fzf-file-widget
-# bindkey -M vicmd '\-'    fzf-root-widget
+bindkey -M vicmd '\-'    fzf-file-widget
 
 export FZF_CTRL_R_OPTS='--exact'
 bindkey -M vicmd '^r'   fzf-history-widget

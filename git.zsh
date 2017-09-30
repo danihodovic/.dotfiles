@@ -199,16 +199,6 @@ gcherry() {
   fi
 }
 
-gchangedfilesinbranch() {
-  local changed_files=$(git --no-pager diff origin/master --name-only)
-  local selected_files=$(echo $changed_files | fzf -m --preview 'git diff --color=always origin/master {}')
-  local oneline=$(echo $selected_files | tr '\n' ' ')
-  LBUFFER="${LBUFFER} $oneline"
-  zle redisplay
-}
-zle -N gchangedfilesinbranch
-bindkey -M vicmd '\-' gchangedfilesinbranch
-
 function gdelbranch {
   branches=$(fbranch)
   if [ -z "$branches" ]; then
