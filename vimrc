@@ -566,6 +566,12 @@ augroup GoToBinding
   autocmd FileType typescript,javascript command! References YcmCompleter GoToReferences
   autocmd FileType typescript,javascript command! Doc YcmCompleter GetDoc
 augroup END
+
+"-----------------------------------------
+" fatih/vim-go'                           
+"-----------------------------------------
+autocmd FileType go nnoremap <leader>gi :GoImports<cr>
+
 "-----------------------------------------
 " Eclim Java, Scala
 "-----------------------------------------
