@@ -59,7 +59,7 @@ if s:has_plug == 1
   Plug 'danihodovic/nodejs-require.vim'
   Plug 'derekwyatt/vim-scala'
   Plug 'ekalinin/Dockerfile.vim'                " Syntax for Dockerfile and snippets 
-  Plug 'evanmiller/nginx-vim-syntax'
+  Plug 'chr4/nginx.vim'
   Plug 'fatih/vim-go'                           " Basically a Golang IDE for vi
   Plug 'HerringtonDarkholme/yats.vim'           " Typescript syntax
   Plug 'jelera/vim-javascript-syntax'
