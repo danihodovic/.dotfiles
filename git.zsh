@@ -79,6 +79,16 @@ gcheckoutbranch() {
   fi
 }
 
+gresetbranch() {
+  local branch_name=$(fbranch)
+  if [[ -n $branch_name ]]; then
+    cmd="git reset $@ $branch_name"
+    print -s $cmd
+    eval $cmd
+  fi
+}
+compdef _git-reset gresetbranch
+
 alias gcc=gcheckoutcommit
 alias gcb=gcheckoutbranch
 compdef _git-checkout gcheckoutcommit gcheckoutbranch
