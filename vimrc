@@ -650,7 +650,10 @@ fu! LintAndFix()
   checktime
   Neomake
 endfu
-
+"-----------------------------------------
+" Plug 'fatih/vim-go'
+"-----------------------------------------
+autocmd filetype go nnoremap <leader>gi :GoImports<cr>
 "-----------------------------------------
 " Plug 'tenfyzhong/CompleteParameter.vim'
 "-----------------------------------------
