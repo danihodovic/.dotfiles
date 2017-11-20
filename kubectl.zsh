@@ -29,7 +29,9 @@ function kubelogs {
   pod=$(kubectl get pods | fzf --ansi --exact --tac)
   pod_name=$(echo $pod | awk '{print $1}')
   if [ -n $pod_name ]; then
-    kubectl logs $@ $pod_name
+    cmd="kubectl logs $@ $pod_name"
+    print -s $cmd
+    eval $cmd
   fi
 }
 alias klogs=kubelogs
