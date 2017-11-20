@@ -201,11 +201,13 @@ gcherry() {
     echo "Select 1 to 2 commits, starting at the oldest commit"
   elif [[ $num_commits -eq '1' ]]; then
     commit=$(echo $commits | awk '{print $1}')
-    print -z git cherry-pick $commit
+    print -z git cherry-pick "$commit"
   elif [[ $num_commits -eq '2' ]]; then
     first=$(echo $commits | awk '{if (NR==1) print $1}')
     second=$(echo $commits | awk '{if (NR==2) print $1}')
-    print -z git cherry-pick $first^..$second
+    cmd="git cherry-pick \"$first^..$second\""
+    print -s $cmd
+    eval "$cmd"
   fi
 }
 
