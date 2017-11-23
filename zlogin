@@ -190,6 +190,16 @@ alias ls='ls --color=auto --classify -lrt --block-size=MB'
 alias setxkbmapcaps="setxkbmap -option caps:swapescape68"
 alias o='xdg-open'
 alias v=nvim
+function vf {
+  if [ "$#" -lt 1 ]; then
+    return 1
+  fi
+  results=$(ag --nogroup --column --color "$@" | fzf --multi --ansi --prompt 'AG>')
+  if [ -n "$results" ]; then
+    files=$(echo $results | awk -F ':' '{print $1":"$2":"$3}' | tr '\r\n' ' ')
+    eval nvim "$files"
+  fi
+}
 alias k='kubectl'
 alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
