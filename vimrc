@@ -33,6 +33,7 @@ if s:has_plug == 1
   Plug 'kana/vim-operator-user'                 " Required for vim-operator-flashy
   Plug 'kana/vim-textobj-function'              " Add function based text objects
   Plug 'kana/vim-textobj-user'                  " Add additional text objects
+  Plug 'kopischke/vim-fetch'                    " Open files at file:line:column
   Plug 'Lokaltog/vim-easymotion'                " Better movement with f/t
   Plug 'luochen1990/rainbow'                    " Show diff level of parentheses in diff colors
   Plug 'nathanaelkane/vim-indent-guides'        " Visually display indent lines with different color
