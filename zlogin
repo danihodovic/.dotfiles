@@ -20,7 +20,6 @@ export GPG_TTY=$(tty)
 # Virtualenv
 export WORKON_HOME=${HOME}/.virtualenvs
 export NVIM_DIR=${HOME}/.config/nvim
-export EDITOR=nvim
 # Use n instead of nvm as it's significantly faster to start zsh with it
 export N_PREFIX=${HOME}/.n
 export PATH=$PATH:$N_PREFIX/bin
@@ -240,7 +239,7 @@ function pk {
 }
 
 function awsprofile {
-  profile=$(grep -E '\[.+\]' ~/.aws/credentials | tr -d '[]' | fzf)
+  profile=$(grep --text -E '\[.+\]' ~/.aws/credentials | tr -d '[]' | fzf)
   export AWS_PROFILE=$profile
 }
 
