@@ -20,7 +20,9 @@ function kubeexec {
   pod=$(kubectl get pods | fzf --ansi --exact --tac)
   pod_name=$(echo $pod | awk '{print $1}')
   if [ -n $pod_name ]; then
-    kubectl exec -it $@ $pod_name sh
+    cmd="kubectl exec -it $@ $pod_name bash"
+    print -s $cmd
+    eval $cmd
   fi
 }
 alias kexec=kubeexec
