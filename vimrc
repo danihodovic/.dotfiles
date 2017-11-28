@@ -189,6 +189,15 @@ nnoremap <silent> <C-l> :wincmd l<cr>
 nnoremap <silent> <C-j> :wincmd j<cr>
 nnoremap <silent> <C-k> :wincmd k<cr>
 
+func! SaveGoFile()
+  GoImports
+  wall
+  write
+endfunc
+
+nnoremap <leader>w :wa<cr>
+autocmd filetype go nnoremap <leader>w :call SaveGoFile()<cr>
+
 func! I3VIM_WindowFocus(direction)
   " wincmd is not available in cmd mode, so we have to work around it
   if bufname('') == '[Command Line]'
