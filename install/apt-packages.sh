@@ -48,3 +48,6 @@ $sudo_cmd apt-get install -y \
     caffeine \
     asciinema
 
+$sudo_cmd add-apt-repository ppa:peterlevi/ppa
+$sudo_cmd apt-get update
+$sudo_cmd apt-get install variety

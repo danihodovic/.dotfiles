@@ -5,7 +5,7 @@ run_integration_tests=python3 -m unittest discover -s test/integration/ -p '*_te
 # python3 test/integration/dev_tools_test.py IntegrationSuite.test_install_docker
 .PHONY: install
 install:
-	./install/apt-essentials.sh
+	./install/apt-packages.sh
 	./install/dev_tools.py
 	./install/other.sh
 	./setup_symlinks.py
