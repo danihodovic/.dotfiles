@@ -142,11 +142,10 @@ hide_edge_borders both
 
 # Ethernet applet
 exec --no-startup-id nm-applet
-# Power manager
 exec --no-startup-id xfce4-power-manager
 # Sync x selection and primary (needs to be configured in the app indicator)
 exec --no-startup-id parcellite
 exec --no-startup-id setxkbmap -option caps:swapescape68
-exec --no-startup-id bash -c 'path=~/Pictures/background.png && [ -f "$path" ] && feh --bg-scale "$path"'
 exec --no-startup-id xautolock -time 3 -locker i3lock
 exec --no-startup-id caffeine
+exec --no-startup-id variety
