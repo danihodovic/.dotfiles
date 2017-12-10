@@ -189,14 +189,8 @@ nnoremap <silent> <C-l> :wincmd l<cr>
 nnoremap <silent> <C-j> :wincmd j<cr>
 nnoremap <silent> <C-k> :wincmd k<cr>
 
-func! SaveGoFile()
-  GoImports
-  wall
-  write
-endfunc
-
 nnoremap <leader>w :wa<cr>
-autocmd filetype go nnoremap <leader>w :call SaveGoFile()<cr>
+autocmd filetype go nnoremap <leader>w :GoImports<cr> | write
 
 func! I3VIM_WindowFocus(direction)
   " wincmd is not available in cmd mode, so we have to work around it
@@ -1026,5 +1020,3 @@ augroup BWCCreateDir
     autocmd!
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), expand('<abuf>'))
 augroup END
-
-nnoremap <leader>w :wa<cr>
