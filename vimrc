@@ -18,7 +18,6 @@ if s:has_plug == 1
   Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
   Plug 'aquach/vim-http-client'
   Plug 'benekastah/neomake'
-  Plug 'danihodovic/vim-skeleton-snippets'
   Plug 'danihodovic/vim-snippets'               " My own snippets
   Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
   Plug 'flazz/vim-colorschemes'
@@ -37,7 +36,6 @@ if s:has_plug == 1
   Plug 'Lokaltog/vim-easymotion'                " Better movement with f/t
   Plug 'luochen1990/rainbow'                    " Show diff level of parentheses in diff colors
   Plug 'nathanaelkane/vim-indent-guides'        " Visually display indent lines with different color
-  Plug 'pgilad/vim-skeletons'
   Plug 'reedes/vim-wordy'                       " Linting for prose
   Plug 'scrooloose/nerdcommenter'               " Comment/uncomment source code files
   Plug 'scrooloose/nerdtree'
