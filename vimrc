@@ -463,6 +463,10 @@ fu! FindRequireCalls(query) range
   call FzfAgCustom(regex)
 endfu
 "-----------------------------------------
+" FooSoft/vim-argwrap
+"-----------------------------------------
+autocmd filetype go let b:argwrap_tail_comma = 1
+"-----------------------------------------
 " vim-oblique
 "-----------------------------------------
 let g:oblique#incsearch_highlight_all=1
