@@ -394,32 +394,7 @@ fu! FzfLocateRoot()
   call fzf#run(fzf#vim#wrap(opts))
 endfu
 
-command! -nargs=* AG call FzfAgCustom(<q-args>)
-" Wrapper around fzf#vim#ag that allows us to pass in Ag options after the
-" query. This allows the command to be used as such:
-" :AG query ag-option ag-value ag-option ag-value
-fu! FzfAgCustom(args)
-
-python << EOF
-# Parse arguments as the shell would. Split on spaces, but not within quotes.
-# Use python since vimscript is hard.
-# https://stackoverflow.com/a/79985
-import shlex
-args = vim.eval('a:args')
-if len(args) > 0:
-  split_on_spaces = shlex.split(vim.eval('a:args'))
-  ag_query = split_on_spaces[0]
-  ag_options = ' '.join(split_on_spaces[1:])
-  vim.command('let ag_query = "{}"'.format(ag_query))
-  vim.command('let ag_options = "{}"'.format(ag_options))
-else:
-  word_under_cursor = vim.eval('expand("<cword>")')
-  vim.command('let ag_query = "{}"'.format(word_under_cursor))
-  vim.command('let ag_options = ""')
-EOF
-
-  call fzf#vim#ag(ag_query, ag_options, {})
-endfu
+command! -nargs=* -complete=file AG call fzf#vim#ag_raw(<q-args>)
 
 command! -nargs=* Definition :call FindFunctionDefinition(<q-args>)
 " An ag matcher which find most usages of a <keyword> except for function calls.
