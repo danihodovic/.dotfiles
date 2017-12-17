@@ -190,23 +190,6 @@ nnoremap <silent> <C-k> :wincmd k<cr>
 nnoremap <leader>w :wa<cr>
 autocmd filetype go nnoremap <leader>w :GoImports<cr> | write
 
-func! I3VIM_WindowFocus(direction)
-  " wincmd is not available in cmd mode, so we have to work around it
-  if bufname('') == '[Command Line]'
-    " Note: Stupid viml vimscript interpret '' and "" in feedkeys() differently!
-    call feedkeys("\<esc>")
-    return
-  endif
-
-  let oldw = winnr()
-  silent exe 'wincmd ' . a:direction
-  let neww = winnr()
-  if oldw == neww
-    let directionMap = {'h': 'left', 'j': 'down', 'k': 'up', 'l': 'right'}
-    silent exe '!i3-msg -q focus ' . directionMap[a:direction]
-  endif
-endfunction
-
 set statusline=%m\ %f
 highlight statusline ctermfg=8 ctermbg=233
 autocmd CursorMoved,CursorMovedI * call UpdateStatusLine()
