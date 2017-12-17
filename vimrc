@@ -465,11 +465,6 @@ augroup GoToBinding
 augroup END
 
 "-----------------------------------------
-" fatih/vim-go'                           
-"-----------------------------------------
-autocmd FileType go nnoremap <leader>gi :GoImports<cr>
-
-"-----------------------------------------
 " Eclim Java, Scala
 "-----------------------------------------
 let g:EclimCompletionMethod = 'omnifunc'
@@ -547,10 +542,6 @@ fu! LintAndFix()
   checktime
   Neomake
 endfu
-"-----------------------------------------
-" Plug 'fatih/vim-go'
-"-----------------------------------------
-autocmd filetype go nnoremap <leader>gi :GoImports<cr>
 "-----------------------------------------
 " Plug 'tenfyzhong/CompleteParameter.vim'
 "-----------------------------------------
