@@ -563,18 +563,6 @@ let g:jedi#popup_select_first = 0
 " Autocomplete the function params
 let g:jedi#show_call_signatures = "1"
 "-----------------------------------------
-" Tagbar
-"-----------------------------------------
-let g:tagbar_sort        = 0
-let g:tagbar_compact     = 1
-let g:tagbar_indent      = 1
-let g:tagbar_foldlevel   = 0
-let g:tagbar_map_nexttag = '<C-j>'
-let g:tagbar_map_prevtag = '<C-k>'
-let g:tagbar_autofocus   = 1
-let g:tagbar_autoclose   = 1
-nnoremap <F6> :Tagbar<cr>
-"-----------------------------------------
 " UltiSnips
 "-----------------------------------------
 fu! Return_Or_Snippet()
