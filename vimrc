@@ -563,11 +563,6 @@ let g:jedi#popup_select_first = 0
 " Autocomplete the function params
 let g:jedi#show_call_signatures = "1"
 "-----------------------------------------
-" Golang
-"-----------------------------------------
-autocmd FileType go nmap <buffer> <leader>t <Plug>(go-info)
-let g:go_auto_type_info = 0
-"-----------------------------------------
 " Tagbar
 "-----------------------------------------
 let g:tagbar_sort        = 0
