@@ -50,6 +50,7 @@ if s:has_plug == 1
   Plug 'tpope/vim-rhubarb'                      " Github commands for Fugitive
   Plug 'tpope/vim-surround'                     " Surround text with (){}<>
   Plug 'Valloric/YouCompleteMe'                 " Autocompletion
+  Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh'}
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
@@ -431,8 +432,21 @@ let g:ycm_filetype_blacklist = {
 " Avoid preview to use completion  engine lookups, otherwise it tends to lag.
 " Avoid longest as it disables you from typing
 set completeopt=menuone
+"-----------------------------------------
+" LanguageClient
+"-----------------------------------------
+let g:LanguageClient_diagnosticsEnable = 0
+let g:LanguageClient_serverCommands = {
+  \ 'javascript': ['javascript-typescript-stdio'],
+\ }
+autocmd filetype javascript nnoremap <silent> gd :call TernOrDucktape()<CR>
+autocmd filetype javascript nnoremap <silent> <leader>t :call LanguageClient_textDocument_hover()<CR>
+autocmd filetype go nnoremap <silent> <Plug>(go-def)
+autocmd filetype go nmap <leader>t <Plug>(go-info)
+"-----------------------------------------
+" YCM
+"-----------------------------------------
 let g:ycm_min_num_of_chars_for_completion = 1
-
 let g:ycm_complete_in_comments = 1
 
 " Ycm Erlang hack: completion shouldn't close on typing
@@ -451,19 +465,6 @@ let g:ycm_semantic_triggers =  {
       \   'ruby' : ['.', '::'],
       \   'erlang' : [':'],
       \ }
-
-augroup GoToBinding
-  autocmd FileType javascript noremap <silent><buffer>gd :call TernOrDucktape()<cr>
-  autocmd FileType go,typescript nnoremap <buffer>gd :YcmCompleter GoToDefinition<cr>
-  autocmd FileType typescript,javascript nnoremap <buffer><leader>t :YcmCompleter GetType<cr>
-  autocmd FileType scala nnoremap map <buffer>gd :ScalaSearch<cr>
-  " Don't make these commands -buffer local. If you do that you can't autocomplete the commands in
-  " the command line window.
-  autocmd FileType typescript,javascript command! -nargs=1 Rename YcmCompleter RefactorRename <args>
-  autocmd FileType typescript,javascript command! References YcmCompleter GoToReferences
-  autocmd FileType typescript,javascript command! Doc YcmCompleter GetDoc
-augroup END
-
 "-----------------------------------------
 " Eclim Java, Scala
 "-----------------------------------------
@@ -485,7 +486,7 @@ fu! TernOrDucktape()
       execute 'normal /' . searchword . "\<CR>"
     endif
   else
-    execute 'YcmCompleter GoToDefinition'
+    call LanguageClient_textDocument_definition()
   endif
 endfu
 "-----------------------------------------
