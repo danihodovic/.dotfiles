@@ -49,6 +49,7 @@ class IntegrationSuite(unittest.TestCase):
 
         self.assertEqual(shutil.which('docker-compose'), '/usr/local/bin/docker-compose')
 
+
     def test_install_fzf(self):
         dev_tools.install_fzf()
         self.assertTrue(os.path.isfile('/root/.fzf/bin/fzf-tmux'))
@@ -57,9 +58,11 @@ class IntegrationSuite(unittest.TestCase):
         version = output.split(' ')[0]
         self.assertGreaterEqual(StrictVersion(version), StrictVersion('0.17.3'))
 
+
     def test_install_vim_plug(self):
         dev_tools.install_vim_plug()
         self.assertTrue(os.path.isfile('/root/.config/nvim/autoload/plug.vim'))
+
 
     def test_install_antibody(self):
         dev_tools.install_antibody()
@@ -68,6 +71,35 @@ class IntegrationSuite(unittest.TestCase):
         output = subprocess.check_output(['antibody', '-v'], stderr=subprocess.STDOUT).decode('utf-8')
         version = output.split('\n')[0].split(' ')[2]
         self.assertGreaterEqual(StrictVersion(version), StrictVersion('3.4.3'))
+
+
+    def test_install_hub(self):
+        dev_tools.install_hub()
+
+        output = subprocess.check_output(['hub', '--version']).decode('utf-8')
+        version = output.split('\n')[1].split(' ')[2]
+        self.assertGreaterEqual(LooseVersion(version), LooseVersion('2.3.0-pre10'))
+
+
+    def test_install_gvm(self):
+        dev_tools.install_gvm()
+
+        output = subprocess.check_output([
+            'bash', '-c', 'source /root/.gvm/scripts/gvm && gvm version'
+        ]).decode('utf-8')
+        version = output.split(' ')[3]
+        self.assertGreaterEqual(LooseVersion(version), LooseVersion('v1.0.2'))
+
+
+    def test_install_n(self):
+        self.skipTest('Implement later')
+
+        dev_tools.install_n()
+
+        output = subprocess.check_output(['/root/.n/bin/n', '--version']).decode('utf-8')
+        version = output.split('\n')[0]
+        self.assertGreaterEqual(LooseVersion(version), LooseVersion('2.1.8'))
+
 
 def is_installed_pkg(pkg):
     proc = subprocess.Popen(['apt-cache', 'policy', pkg], stdout=subprocess.PIPE)

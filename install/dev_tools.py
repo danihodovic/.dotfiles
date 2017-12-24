@@ -62,13 +62,57 @@ def install_fzf():
     proc = subprocess.Popen([script, '--key-bindings', '--completion', '--no-update-rc'])
     proc.wait()
 
+def install_hub():
+    apt_get_install('git')
+
+    releases_url = 'https://api.github.com/repos/github/hub/releases'
+    latest_release_res = urllib.request.urlopen(releases_url)
+    body = json.load(latest_release_res)
+    latest_release_assets = body[0]['assets']
+
+    linux_asset = ''
+    for asset in latest_release_assets:
+        if 'Linux 64-bit' in asset['label']:
+            linux_asset = asset
+            break
+
+    tar_res = urllib.request.urlopen(linux_asset['browser_download_url'])
+    file_like_object = io.BytesIO(tar_res.read())
+    tar = tarfile.open(fileobj=file_like_object)
+    tempdir = tempfile.mkdtemp(prefix='hub-')
+    top_level_directory = os.path.commonprefix(tar.getnames())
+    tar.extractall(path=tempdir)
+
+    install_script = '{}/{}/install'.format(tempdir, top_level_directory)
+    subprocess.Popen(['bash', install_script]).wait()
+
+def install_gvm():
+    apt_get_install('git')
+    apt_get_install('binutils')
+    apt_get_install('bison')
+    apt_get_install('gcc')
+    apt_get_install('curl')
+    script_url = 'https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer'
+    script = urllib.request.urlopen(script_url)
+
+    proc = subprocess.Popen(['bash'], stdin=subprocess.PIPE)
+    proc.stdin.writelines(script)
+    proc.communicate()
+
+def install_n():
+    pass
+    #  script_url = 'https://git.io/n-install'
+    #  script = urllib.request.urlopen(script_url)
+
+    #  proc = subprocess.Popen(['bash'], stdin=subprocess.PIPE)
+    #  proc.stdin.writelines(script)
+    #  proc.communicate()
 
 def apt_get_install(pkg_name):
     env = os.environ.copy()
     env['DEBIAN_FRONTEND'] = 'noninteractive'
     cmd = ['apt-get', 'install', '-y', pkg_name]
-    proc = subprocess.Popen(cmd, env=env)
-    proc.wait()
+    proc = subprocess.Popen(cmd, env=env).wait()
 
 def apt_get_update():
     cmd = ['apt-get', 'update']
@@ -117,6 +161,7 @@ def _assert_python_version():
     if version < min_version:
         print('Error: Python version {} detected, use at least version {}', version, min_version)
         sys.exit(1)
+
 
 ###############################
 # Main
