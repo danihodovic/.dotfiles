@@ -2,32 +2,16 @@
 
 import os
 import sys
-import urllib
+import urllib.request
 import shutil
 import getpass
 import tarfile
-import platform
-import contextlib
-import apt
-import apt.progress
-import lsb_release
 import io
 import json
 import tempfile
 import subprocess
 
 user = getpass.getuser()
-
-@contextlib.contextmanager
-def cache_handler():
-    cache = None
-    try:
-        cache = apt.cache.Cache()
-        cache.open()
-        yield cache
-    finally:
-        if cache:
-            cache.close()
 
 def install_neovim():
     apt_get_install('software-properties-common')
