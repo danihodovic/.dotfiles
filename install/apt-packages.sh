@@ -27,6 +27,7 @@ $sudo_cmd apt-get install -y \
     tmux \
     silversearcher-ag \
     xclip \
+    jq \
     git-extras \
     curl \
     sshfs \
