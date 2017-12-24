@@ -101,6 +101,11 @@ class IntegrationSuite(unittest.TestCase):
         self.assertGreaterEqual(LooseVersion(version), LooseVersion('2.1.8'))
 
 
+    def test_install_i3_completions(self):
+        dev_tools.install_i3_completions()
+        self.assertTrue(os.path.isfile('/root/.i3_completion.sh'))
+
+
 def is_installed_pkg(pkg):
     proc = subprocess.Popen(['apt-cache', 'policy', pkg], stdout=subprocess.PIPE)
     proc.stdout.readline()

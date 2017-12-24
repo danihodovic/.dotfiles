@@ -108,6 +108,11 @@ def install_n():
     #  proc.stdin.writelines(script)
     #  proc.communicate()
 
+def install_i3_completions():
+    home = os.path.expanduser('~')
+    url = 'https://raw.githubusercontent.com/cornerman/i3-completion/master/i3_completion.sh'
+    download_to_file(url, home + '/.i3_completion.sh')
+
 def apt_get_install(pkg_name):
     env = os.environ.copy()
     env['DEBIAN_FRONTEND'] = 'noninteractive'
