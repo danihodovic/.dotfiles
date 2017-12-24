@@ -12,7 +12,7 @@ for f in file_list:
     as_array = f.split('\t')
     if len(as_array) > 1:
         filename = as_array[1]
-        if filename == 'setupSymlinks.py':
+        if filename == 'setup_symlinks.py':
             should_test_unit = True
         if filename == 'install/dev_tools.py':
             should_test_integration = True
