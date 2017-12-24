@@ -50,7 +50,7 @@ if s:has_plug == 1
   Plug 'tpope/vim-rhubarb'                      " Github commands for Fugitive
   Plug 'tpope/vim-surround'                     " Surround text with (){}<>
   Plug 'Valloric/YouCompleteMe'                 " Autocompletion
-  Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh'}
+  Plug 'autozimu/LanguageClient-neovim', {'tag': 'binary-*-x86_64-unknown-linux-musl' }
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
