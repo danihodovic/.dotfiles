@@ -143,13 +143,6 @@ def install_docker_compose():
     download_to_file(url, path)
     subprocess.check_output(['chmod', '755', path])
 
-install = [
-    ('Install neovim? [y/n]', install_neovim),
-    ('Install vim-plug? [y/n]', install_vim_plug),
-    ('Install antibody? [y/n]', install_antibody),
-    ('Install fzf? [y/n]', install_fzf)
-]
-
 def _assert_sudo():
     if os.geteuid() != 0:
         print('Error: Run the script as root as we need to use apt')
@@ -170,12 +163,26 @@ if __name__ == '__main__':
     _assert_python_version()
     _assert_sudo()
 
-    if input('Install all?') == 'y':
-        for _, install_func in install:
-            install_func()
+    install_options = [
+        ('Install docker? [y/n] ', install_docker),
+        ('Install neovim? [y/n] ', install_neovim),
+        ('Install vim-plug? [y/n] ', install_vim_plug),
+        ('Install fzf? [y/n] ', install_fzf),
+        ('Install antibody? [y/n] ', install_antibody),
+        ('Install hub? [y/n] ', install_hub),
+        ('Install gvm? [y/n] ', install_gvm),
+    ]
 
-    for phrase, install_func in install:
+    to_install = []
+
+    if input('Install all? ') == 'y':
+        for _, fn in install_options:
+            fn()
+
+    for phrase, fn in install_options:
         response = input(phrase)
         if response == 'y':
-            install_func()
+            to_install.append(fn)
+
+    for fn in to_install: fn()
 
