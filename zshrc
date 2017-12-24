@@ -247,22 +247,3 @@ man() {
     fi
   fi
 }
-
-
-function fix-corrupt-history {
-  mv .zsh_history .zsh_history_bad
-  strings .zsh_history_bad > .zsh_history
-  fc -R .zsh_history
-}
-
-# TODO: Kill all open windows too, optionally.
-function resize-dpi {
-  size=$1
-  if [ -n "$size" ]; then
-    sed "s/Xft.dpi: *[[:digit:]]\+/Xft.dpi: $size/" .Xresources -i
-    xrdb ~/.Xresources
-    i3-msg restart
-  else
-    echo Provide size as the first argument
-  fi
-}
