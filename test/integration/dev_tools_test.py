@@ -8,30 +8,16 @@ import unittest
 import getpass
 import shutil
 import re
+import subprocess
 import contextlib
-import apt
+from distutils.version import StrictVersion, LooseVersion
 
 repo_root = os.path.expanduser('~/.dotfiles/install')
 sys.path.append(repo_root)
 import dev_tools
 
 HOME = os.path.expanduser('~')
-
 user = getpass.getuser()
-vim_plug_path = os.path.expandvars('${HOME}/.config/nvim/autoload/plug.vim')
-antibody_path = '/usr/local/bin/antibody'
-
-@contextlib.contextmanager
-def cache_handler():
-    cache = None
-    try:
-        cache = apt.cache.Cache()
-        cache.open()
-        yield cache
-    finally:
-        if cache:
-            cache.close()
-
 
 min_version = 3.4
 version = float(sys.version[0:3])
@@ -40,100 +26,56 @@ if version < min_version:
     sys.exit(1)
 
 class IntegrationSuite(unittest.TestCase):
-    ###############################
-    # Apt packages
-    ###############################
-
-    def test_install_zsh(self):
-        with cache_handler() as cache:
-            remove_if_installed(cache, 'zsh')
-            dev_tools.install_zsh()
-            cache.open()
-            self.assertTrue(is_installed_pkg(cache, 'zsh'))
-
-    def test_install_tmux(self):
-        with cache_handler() as cache:
-            remove_if_installed(cache, 'tmux')
-            dev_tools.install_tmux()
-            cache.open()
-            self.assertTrue(is_installed_pkg(cache, 'tmux'))
-
     def test_install_neovim(self):
-        with cache_handler() as cache:
-            remove_if_installed(cache, 'neovim')
-            dev_tools.install_neovim()
-            cache.open()
-            self.assertTrue(is_installed_pkg(cache, 'neovim'))
+        dev_tools.install_neovim()
 
-    # TODO: Test if dani is in the docker group
+        lines = subprocess.check_output(['pip', 'show', 'neovim']).decode('utf-8').splitlines()
+        pip_neovim_version = lines[1].split(': ')[1]
+
+        self.assertTrue(is_installed_pkg('neovim'))
+        self.assertGreaterEqual(
+            StrictVersion(pip_neovim_version),
+            StrictVersion('0.2.0'),
+            'pip neovim {} < 0.2.0'.format(pip_neovim_version)
+        )
+
+
     def test_install_docker(self):
-        with cache_handler() as cache:
-            docker_compose_path = '/usr/local/bin/docker-compose'
-            remove_if_installed(cache, 'docker-engine')
-            if os.path.isfile(docker_compose_path):
-                os.remove(docker_compose_path)
+        dev_tools.install_docker()
 
-            # Check if docker is installed
-            dev_tools.install_docker()
-            cache.open()
-            self.assertTrue(is_installed_pkg(cache, 'docker-engine'))
+        output = subprocess.check_output(['docker', '-v']).decode('utf-8')
+        version = LooseVersion(output.split(' ')[2])
+        self.assertGreaterEqual(version, LooseVersion('17.11.0'))
 
-            # Check if docker-compose is installed
-            self.assertEqual(shutil.which('docker-compose'), docker_compose_path)
-
-    ###############################
-    # Other
-    ###############################
+        self.assertEqual(shutil.which('docker-compose'), '/usr/local/bin/docker-compose')
 
     def test_install_fzf(self):
-        fzf_dir = HOME + '/.fzf'
-        if os.path.isdir(fzf_dir):
-            shutil.rmtree(fzf_dir)
-
-        # We can't simply use HOME + '.fzf' + os.environ['SHELL'] because this variable
-        #  doesn't exist in tests. So we have to look for both .bash and .zsh
-        completion_file_regex = re.compile(r'fzf\.(bash|zsh)')
-        for f in os.listdir(HOME):
-            if completion_file_regex.search(f):
-                os.remove(HOME + '/' + f)
-
         dev_tools.install_fzf()
+        self.assertTrue(os.path.isfile('/root/.fzf/bin/fzf-tmux'))
 
-        completion_file = None
-        for f in os.listdir(HOME):
-            if completion_file_regex.search(f):
-                completion_file = f
+        output = subprocess.check_output(['/root/.fzf/bin/fzf', '--version']).decode('utf-8')
+        version = output.split(' ')[0]
+        self.assertGreaterEqual(StrictVersion(version), StrictVersion('0.17.3'))
 
-        self.assertTrue(os.path.isfile(fzf_dir + '/bin/fzf-tmux'))
-        self.assertTrue(completion_file != None)
-
-    # TODO: Test that dani is the owner of the files
     def test_install_vim_plug(self):
-        if os.path.isfile(vim_plug_path):
-            os.remove(vim_plug_path)
-
         dev_tools.install_vim_plug()
-        self.assertTrue(os.path.isfile(vim_plug_path))
-
-        file_user = find_owner(vim_plug_path)
-        file_group = find_group(vim_plug_path)
-        self.assertEqual(file_user, user)
-        self.assertEqual(file_group, user)
+        self.assertTrue(os.path.isfile('/root/.config/nvim/autoload/plug.vim'))
 
     def test_install_antibody(self):
-        if os.path.isfile(antibody_path):
-            os.remove(antibody_path)
-
         dev_tools.install_antibody()
-        self.assertTrue(os.path.isfile(antibody_path))
+        self.assertTrue(os.path.isfile('/usr/local/bin/antibody'))
 
-def is_installed_pkg(cache, pkg_name):
-    return cache.has_key(pkg_name) and cache[pkg_name].is_installed
+        output = subprocess.check_output(['antibody', '-v'], stderr=subprocess.STDOUT).decode('utf-8')
+        version = output.split('\n')[0].split(' ')[2]
+        self.assertGreaterEqual(StrictVersion(version), StrictVersion('3.4.3'))
 
-def remove_if_installed(cache, pkg_name):
-    if is_installed_pkg(cache, pkg_name):
-        cache[pkg_name].mark_delete(purge=True)
-        cache.commit()
+def is_installed_pkg(pkg):
+    proc = subprocess.Popen(['apt-cache', 'policy', pkg], stdout=subprocess.PIPE)
+    proc.stdout.readline()
+    installed_str = proc.stdout.readline()
+    proc.communicate()
+    proc.wait()
+    return b'none' not in installed_str
 
 def find_owner(filename):
     return pwd.getpwuid(os.stat(filename).st_uid).pw_name
