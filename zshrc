@@ -235,34 +235,6 @@ function awsprofile {
   export AWS_PROFILE=$profile
 }
 
-function pgcli-docker {
-  local postgres_container_names=$(docker ps | awk '{print $NF}' | ag postgres)
-  local lines=$(echo $postgres_container_names | wc -l)
-  if [ "$lines" -eq 0 ]; then
-    echo "No container with a name containing 'postgres' running"
-    return 1
-  fi
-  if [ "$lines" -gt 1 ]; then
-    echo "More than one postgres container running: \n$postgres_container_names"
-    return 1
-  fi
-
-  docker run -it --rm --network container:$postgres_container_names danihodovic/pgcli -h postgres -U postgres
-}
-
-function webm-to-m4a {
-  if [ $# != '1' ]; then
-     echo "Usage:\n\t $0 <file.webm>"
-    return 1
-  fi
-  base="$(basename $1 .webm)"
-  ffmpeg -i "$1" -strict -2 "$base.m4a"
-}
-
-function google {
-  google-chrome "google.com/search?q=$*"
-}
-
 man() {
   if [ $1 = '-k' ] && [ $# -gt 1 ]; then
     choice=$(apropos ${@:2} | fzf | awk '{print $1}')
