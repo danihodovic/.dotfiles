@@ -1,12 +1,12 @@
+# In order to run one python test:
+# $ docker run --rm -it -v $PWD:/root/.dotfiles dotfiles-test python3 test/integration/dev_tools_test.py
 run_unit_tests=python3 -m unittest discover -s test/unit/ -p '*_test.py'
 run_integration_tests=python3 -m unittest discover -s test/integration/ -p '*_test.py'
 
-# In order to run one python test:
-# python3 test/integration/dev_tools_test.py IntegrationSuite.test_install_docker
 .PHONY: install
 install:
 	./install/apt-packages.sh
-	./install/dev_tools.py
+	sudo ./install/dev_tools.py
 	./install/other.sh
 	./setup_symlinks.py
 
