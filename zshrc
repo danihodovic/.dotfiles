@@ -30,14 +30,6 @@ export zlogin=${HOME}/.dotfiles/zlogin
 # Activate direnv zsh hook if direnv is installed
 type direnv > /dev/null && eval "$(direnv hook zsh)"
 
-# Antibody
-source <(antibody init)
-antibody bundle zsh-users/zsh-completions
-antibody bundle zsh-users/zsh-syntax-highlighting
-antibody bundle djui/alias-tips
-antibody bundle jarmo/expand-aliases-oh-my-zsh
-antibody bundle git@gitlab.com:danihodovic/mostar.zsh.git
-
 # Settings
 setopt NO_BANG_HIST
 setopt SHARE_HISTORY
@@ -83,6 +75,10 @@ for script in $scripts_to_source; do
   if [ -f $script ]; then
     source $script
   fi
+done
+
+for f in ~/.cache/antibody/*/*.zsh; do
+  source $f
 done
 
 # Source this after gvm, as gvm sets a custom $GOPATH...
