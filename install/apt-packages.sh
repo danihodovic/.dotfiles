@@ -47,8 +47,6 @@ $sudo_cmd apt-get install -y \
     direnv \
     xautolock \
     caffeine \
-    asciinema
-
-$sudo_cmd add-apt-repository ppa:peterlevi/ppa -y
-$sudo_cmd apt-get update
-$sudo_cmd apt-get install variety -y
+    asciinema \
+    variety \
+    feh
