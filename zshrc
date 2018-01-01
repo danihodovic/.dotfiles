@@ -25,7 +25,7 @@ function vi () {}
 export dotfiles=${HOME}/.dotfiles
 export plugged=${NVIM_DIR}/plugged
 export vimrc=${HOME}/.dotfiles/vimrc
-export zlogin=${HOME}/.dotfiles/zlogin
+export zshrc=${HOME}/.dotfiles/zshrc
 
 # Activate direnv zsh hook if direnv is installed
 type direnv > /dev/null && eval "$(direnv hook zsh)"
