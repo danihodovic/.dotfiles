@@ -3,7 +3,7 @@
 ! ------------------------------
 URxvt*termName: rxvt-unicode
 
-Xft.dpi:        72
+Xft.dpi:        110
 Xft.antialias:  true
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
