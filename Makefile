@@ -7,7 +7,6 @@ run_integration_tests=python3 -m unittest discover -s test/integration/ -p '*_te
 install:
 	./install/apt-packages.sh
 	sudo ./install/dev_tools.py
-	./install/other.sh
 	./setup_symlinks.py
 
 .PHONY: build
