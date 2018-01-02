@@ -103,6 +103,14 @@ class IntegrationSuite(unittest.TestCase):
         self.assertGreaterEqual(LooseVersion(version), LooseVersion('2.1.8'))
 
 
+    def test_install_chrome(self):
+        dev_tools.install_chrome()
+        # If the bash command fails, we'll get an error. We could also use
+        # `which`, but checking the version as a health check is consistent with
+        # the other tests.
+        subprocess.check_output(['google-chrome', '--version'])
+
+
     def test_install_i3_completions(self):
         dev_tools.install_i3_completions()
         self.assertTrue(os.path.isfile('/root/.i3_completion.sh'))

@@ -109,6 +109,20 @@ def install_n():
     #  proc.stdin.writelines(script)
     #  proc.communicate()
 
+def install_chrome():
+    apt_get_install('curl')
+    subprocess.Popen(
+        'curl --silent https://dl-ssl.google.com/linux/linux_signing_key.pub | ' +
+        'apt-key add'
+    , shell=True).wait()
+    subprocess.Popen(
+        'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > ' +
+        '/etc/apt/sources.list.d/google-chrome.list'
+    , shell=True).wait()
+
+    apt_get_update()
+    apt_get_install('google-chrome-stable')
+
 def install_i3_completions():
     home = os.path.expanduser('~')
     url = 'https://raw.githubusercontent.com/cornerman/i3-completion/master/i3_completion.sh'
@@ -177,6 +191,7 @@ if __name__ == '__main__':
         ('Install antibody? [y/n] ', install_antibody),
         ('Install hub? [y/n] ', install_hub),
         ('Install gvm? [y/n] ', install_gvm),
+        ('Install google chrome? [y/n] ', install_chrome),
     ]
 
     to_install = []
