@@ -49,4 +49,5 @@ $sudo_cmd apt-get install -y \
     caffeine \
     asciinema \
     variety \
-    feh
+    feh \
+    i3 i3status i3lock
