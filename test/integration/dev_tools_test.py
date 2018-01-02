@@ -1,17 +1,16 @@
 #!/usr/bin/env python3.5
 
-import sys
+from distutils.version import StrictVersion, LooseVersion
+import contextlib
+import getpass
+import grp
 import os
 import pwd
-import grp
-import unittest
-import getpass
-import shutil
 import re
+import shutil
 import subprocess
-import contextlib
-import grp
-from distutils.version import StrictVersion, LooseVersion
+import sys
+import unittest
 
 repo_root = os.path.expanduser('~/.dotfiles/install')
 sys.path.append(repo_root)

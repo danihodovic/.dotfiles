@@ -183,12 +183,12 @@ if __name__ == '__main__':
 
     if input('Install all? ') == 'y':
         for _, fn in install_options:
-            fn()
-
-    for phrase, fn in install_options:
-        response = input(phrase)
-        if response == 'y':
             to_install.append(fn)
+    else:
+        for phrase, fn in install_options:
+            response = input(phrase)
+            if response == 'y':
+                to_install.append(fn)
 
     for fn in to_install: fn()
 
