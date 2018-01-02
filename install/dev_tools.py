@@ -24,11 +24,12 @@ def install_neovim():
     proc = subprocess.Popen(['pip', 'install', '--upgrade', 'neovim'])
     proc.wait()
 
-def install_docker():
+def install_docker(add_user_to_docker_group='dani'):
     download_to_file('https://get.docker.com', '/tmp/get-docker.sh')
     proc = subprocess.Popen(['sh', '/tmp/get-docker.sh'])
     proc.wait()
 
+    subprocess.Popen(['usermod', '-a', '-G', 'docker', add_user_to_docker_group]).wait()
     install_docker_compose()
 
 def install_vim_plug():

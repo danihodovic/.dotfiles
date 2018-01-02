@@ -10,6 +10,7 @@ import shutil
 import re
 import subprocess
 import contextlib
+import grp
 from distutils.version import StrictVersion, LooseVersion
 
 repo_root = os.path.expanduser('~/.dotfiles/install')
@@ -41,13 +42,15 @@ class IntegrationSuite(unittest.TestCase):
 
 
     def test_install_docker(self):
-        dev_tools.install_docker()
+        user = 'root'
+        dev_tools.install_docker(add_user_to_docker_group=user)
 
         output = subprocess.check_output(['docker', '-v']).decode('utf-8')
         version = LooseVersion(output.split(' ')[2])
         self.assertGreaterEqual(version, LooseVersion('17.11.0'))
 
         self.assertEqual(shutil.which('docker-compose'), '/usr/local/bin/docker-compose')
+        self.assertEqual(grp.getgrnam('docker').gr_mem, [user])
 
 
     def test_install_fzf(self):
