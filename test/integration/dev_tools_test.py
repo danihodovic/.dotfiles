@@ -25,7 +25,7 @@ if version < min_version:
     print('Error: Python version {} detected, use at least version {}', version, min_version)
     sys.exit(1)
 
-class IntegrationSuite(unittest.TestCase):
+class Suite(unittest.TestCase):
     def test_install_neovim(self):
         dev_tools.install_neovim()
 
@@ -94,8 +94,6 @@ class IntegrationSuite(unittest.TestCase):
 
 
     def test_install_n(self):
-        self.skipTest('Implement later')
-
         dev_tools.install_n()
 
         output = subprocess.check_output(['/root/.n/bin/n', '--version']).decode('utf-8')

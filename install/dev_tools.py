@@ -101,13 +101,12 @@ def install_gvm():
     proc.communicate()
 
 def install_n():
-    pass
-    #  script_url = 'https://git.io/n-install'
-    #  script = urllib.request.urlopen(script_url)
-
-    #  proc = subprocess.Popen(['bash'], stdin=subprocess.PIPE)
-    #  proc.stdin.writelines(script)
-    #  proc.communicate()
+    apt_get_install('curl')
+    apt_get_install('git')
+    #  https://github.com/mklement0/n-install#examples
+    subprocess.Popen(
+        'curl -L https://git.io/n-install | N_PREFIX=$HOME/.n bash -s -- -y lts',
+    shell=True).wait()
 
 def install_chrome():
     apt_get_install('curl')
@@ -191,6 +190,7 @@ if __name__ == '__main__':
         ('Install antibody? [y/n] ', install_antibody),
         ('Install hub? [y/n] ', install_hub),
         ('Install gvm? [y/n] ', install_gvm),
+        ('Install n? [y/n] ', install_n),
         ('Install google chrome? [y/n] ', install_chrome),
     ]
 
