@@ -104,9 +104,7 @@ def install_n():
     apt_get_install('curl')
     apt_get_install('git')
     #  https://github.com/mklement0/n-install#examples
-    subprocess.Popen(
-        'curl -L https://git.io/n-install | N_PREFIX=$HOME/.n bash -s -- -y lts',
-    shell=True).wait()
+    subprocess.run('curl -L https://git.io/n-install | N_PREFIX=$HOME/.n bash -s -- -y lts', shell=True)
 
 def install_chrome():
     apt_get_install('curl')
@@ -126,6 +124,24 @@ def install_i3_completions():
     home = os.path.expanduser('~')
     url = 'https://raw.githubusercontent.com/cornerman/i3-completion/master/i3_completion.sh'
     download_to_file(url, home + '/.i3_completion.sh')
+
+def install_diff_so_fancy():
+    apt_get_install('curl')
+    apt_get_install('git')
+    apt_get_install('perl-modules-5.26')
+
+    url = 'https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy'
+    filename = '/usr/local/bin/diff-so-fancy'
+    subprocess.run(f'curl -o {filename} {url}', shell=True)
+    subprocess.run(f'chmod +x {filename}', shell=True)
+
+def install_tldr():
+    apt_get_install('curl')
+
+    url = 'https://raw.githubusercontent.com/raylee/tldr/master/tldr'
+    filename = '/usr/local/bin/tldr'
+    subprocess.run(f'curl -o {filename} {url}', shell=True)
+    subprocess.run(f'chmod +x {filename}', shell=True)
 
 def apt_get_install(pkg_name):
     env = os.environ.copy()
@@ -192,6 +208,8 @@ if __name__ == '__main__':
         ('Install gvm? [y/n] ', install_gvm),
         ('Install n? [y/n] ', install_n),
         ('Install google chrome? [y/n] ', install_chrome),
+        ('Install diff-so-fancy? [y/n] ', install_diff_so_fancy),
+        ('Install tldr? [y/n] ', install_tldr),
     ]
 
     to_install = []

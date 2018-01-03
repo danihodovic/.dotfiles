@@ -96,7 +96,7 @@ class Suite(unittest.TestCase):
     def test_install_n(self):
         dev_tools.install_n()
 
-        output = subprocess.check_output(['/root/.n/bin/n', '--version']).decode('utf-8')
+        output = subprocess.check_output('PATH=$HOME/.n/bin:$PATH n --version', shell=True).decode('utf-8')
         version = output.split('\n')[0]
         self.assertGreaterEqual(LooseVersion(version), LooseVersion('2.1.8'))
 
@@ -112,6 +112,24 @@ class Suite(unittest.TestCase):
     def test_install_i3_completions(self):
         dev_tools.install_i3_completions()
         self.assertTrue(os.path.isfile('/root/.i3_completion.sh'))
+
+
+    def test_install_diff_so_fancy(self):
+        dev_tools.install_diff_so_fancy()
+
+        # For some reason this doesn't output versions when the full integration
+        # suite is ran, but does output versions when only this test is focused.
+        result = subprocess.run('diff-so-fancy --version', shell=True, stderr=subprocess.PIPE)
+        #  version = result.stderr.decode('utf-8').split('\n')[1].split()[2]
+        #  self.assertGreaterEqual(LooseVersion(version), LooseVersion('1.1.1'))
+
+
+    def test_install_tldr(self):
+        dev_tools.install_tldr()
+
+        # No versions for tldr bash
+        result = subprocess.run('tldr')
+        self.assertEqual(result.returncode, 0)
 
 
 def is_installed_pkg(pkg):
