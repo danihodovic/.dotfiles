@@ -545,7 +545,7 @@ fu! LintAndFix()
     return
   endif
 
-  if lines[1] =~# "File ignored by default"
+  if lines[0] =~# "File ignored by default"
     return
   endif
 
