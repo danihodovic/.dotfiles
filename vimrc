@@ -450,6 +450,7 @@ autocmd filetype javascript nnoremap <silent> gd :call TernOrDucktape()<CR>
 autocmd filetype javascript nnoremap <silent> <leader>t :call LanguageClient_textDocument_hover()<CR>
 autocmd filetype go nnoremap <silent> <Plug>(go-def)
 autocmd filetype go nmap <leader>t <Plug>(go-info)
+autocmd filetype go nnoremap <buffer> <leader>fs :GoFillStruct<cr>
 "-----------------------------------------
 " YCM
 "-----------------------------------------
