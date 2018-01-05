@@ -448,7 +448,8 @@ let g:LanguageClient_serverCommands = {
 \ }
 autocmd filetype javascript nnoremap <silent> gd :call TernOrDucktape()<CR>
 autocmd filetype javascript nnoremap <silent> <leader>t :call LanguageClient_textDocument_hover()<CR>
-autocmd filetype go nnoremap <silent> <Plug>(go-def)
+autocmd filetype javascript nnoremap <silent> <leader>gr :call LanguageClient_textDocument_references()<CR>
+autocmd filetype go nnoremap <silent>gd <Plug>(go-def)
 autocmd filetype go nmap <leader>t <Plug>(go-info)
 autocmd filetype go nnoremap <buffer> <leader>fs :GoFillStruct<cr>
 "-----------------------------------------
