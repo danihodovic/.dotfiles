@@ -21,8 +21,9 @@ unit: build
 integration: build
 	docker run --rm -v $(shell pwd):/root/.dotfiles dotfiles-test $(run_integration_tests)
 
-.PHONY: interactive
-interactive: build
+# Interactively run tests in a bash session
+.PHONY: test-i
+test-i: build
 	docker run --rm -it -v $(shell pwd):/root/.dotfiles dotfiles-test bash
 
 .PHONY: test
