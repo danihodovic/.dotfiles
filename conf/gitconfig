@@ -31,7 +31,11 @@ program = gpg2
 	verbose = true
 
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+insteadOf = https://github.com/
+
+[url "git@gitlab.com:"]
+insteadOf = https://gitlab.com/
+
 [color "diff-highlight"]
 oldNormal = red bold
 oldHighlight = red bold 52
