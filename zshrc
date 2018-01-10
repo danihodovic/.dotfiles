@@ -4,14 +4,11 @@
 export PATH=$PATH:${HOME}/.local/bin
 export PATH=$PATH:${HOME}/.dotfiles/scripts
 export PATH=${PATH}:${HOME}/.cargo/bin/
-export PATH=$PATH:/opt/eclipse
 export PATH=$PATH:${HOME}/.dasht/bin
 # execute local scripts without prependeing ./
 export PATH=$PATH:.
 # execute node files without prefixing node_modules/.bin
 export PATH=$PATH:node_modules/.bin
-# Required for pinentry-ncurses
-export GPG_TTY=$(tty)
 # Virtualenv
 export WORKON_HOME=${HOME}/.virtualenvs
 export NVIM_DIR=${HOME}/.config/nvim
