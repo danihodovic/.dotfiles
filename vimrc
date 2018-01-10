@@ -385,7 +385,14 @@ fu! FzfLocateRoot()
   call fzf#run(fzf#vim#wrap(opts))
 endfu
 
-command! -nargs=* -complete=file AG call fzf#vim#ag_raw(<q-args>)
+command! -nargs=* -complete=file AG call AGraw(<q-args>)
+function! AGraw(args)
+  let query = a:args
+  if query == ''
+    let query = expand('<cword>')
+  endif
+  call fzf#vim#ag_raw(query)
+endfunction
 "-----------------------------------------
 " FooSoft/vim-argwrap
 "-----------------------------------------
