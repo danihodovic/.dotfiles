@@ -8,6 +8,8 @@ export PATH=$PATH:/opt/eclipse
 export PATH=$PATH:${HOME}/.dasht/bin
 # execute local scripts without prependeing ./
 export PATH=$PATH:.
+# execute node files without prefixing node_modules/.bin
+export PATH=$PATH:node_modules/.bin
 # Required for pinentry-ncurses
 export GPG_TTY=$(tty)
 # Virtualenv
