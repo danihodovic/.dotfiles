@@ -18,7 +18,7 @@ export PATH=$PATH:$N_PREFIX/bin
 export PYTHONSTARTUP=~/.pythonrc
 export AWS_PROFILE=$([ -f ~/.aws_profile ] && cat ~/.aws_profile)
 # Exclude ~/.kube/http-cache which does not contain kubeconfigs
-export KUBECONFIG=$(find ~/.kube -maxdepth 1 -type f | tr '\n' ':')
+export KUBECONFIG=$([ -d ~/.kube ] && find ~/.kube -maxdepth 1 -type f | tr '\n' ':')
 
 function vi () {}
 
