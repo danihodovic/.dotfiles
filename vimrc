@@ -190,13 +190,6 @@ nnoremap <silent> <C-j> :wincmd j<cr>
 nnoremap <silent> <C-k> :wincmd k<cr>
 
 nnoremap <leader>w :write<cr>
-fu! WriteGo()
-  " User defined commands cannot be used with | so we can't make this a one
-  " liner.
-  GoImports
-  write
-endfu
-autocmd filetype go nnoremap <buffer><silent><leader>w :call WriteGo()<cr>
 
 set statusline=%m\ %f
 highlight statusline ctermfg=8 ctermbg=233
@@ -639,6 +632,7 @@ let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
 " Do not enable this for zsh. shellcheck does not support zsh
 autocmd BufWritePost *.py,*.sh,*.bash,bashrc,*.lua,*.go,*.rb Neomake
 autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call LintAndFix()
+autocmd BufWritePre *.go GoImports
 "-----------------------------------------
 " Auto-pairs
 "-----------------------------------------
