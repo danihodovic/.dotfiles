@@ -189,7 +189,7 @@ nnoremap <silent> <C-l> :wincmd l<cr>
 nnoremap <silent> <C-j> :wincmd j<cr>
 nnoremap <silent> <C-k> :wincmd k<cr>
 
-nnoremap <leader>w :wa<cr>
+nnoremap <leader>w :write<cr>
 fu! WriteGo()
   " User defined commands cannot be used with | so we can't make this a one
   " liner.
