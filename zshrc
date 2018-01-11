@@ -17,6 +17,7 @@ export N_PREFIX=${HOME}/.n
 export PATH=$PATH:$N_PREFIX/bin
 export PYTHONSTARTUP=~/.pythonrc
 export AWS_PROFILE=$([ -f ~/.aws_profile ] && cat ~/.aws_profile)
+export KUBECONFIG=$(echo $HOME/.kube/* | sed 's/ /:/g')
 
 function vi () {}
 
