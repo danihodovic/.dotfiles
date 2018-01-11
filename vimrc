@@ -526,13 +526,8 @@ function! LintConfigExists()
 
   return 0
 endfunction
-" TODO: Make this async?
-" TODO: Move this into Neomake?
-fu! LintAndFix()
-  if &filetype != 'javascript' && &filetype != 'typescript'
-    return
-  endif
 
+fu! LintAndFix()
   if LintConfigExists() == 0
     return
   endif
@@ -543,21 +538,14 @@ fu! LintAndFix()
     let executable = 'eslint'
   endif
 
-  let output = system(executable . ' --fix ' . expand('%'))
-  let lines = split(output, '\n')
+  let currentFile = expand('%')
+  let cmd = printf('%s --fix %s', executable, currentFile)
 
-  " Nothing to fix, close the quickfix window and return
-  if len(lines) == 0
+  function! Callback(job_id, data, event)
     Neomake
-    return
-  endif
+  endfunction
 
-  if lines[0] =~# "File ignored by default"
-    return
-  endif
-
-  checktime
-  Neomake
+  call jobstart(cmd, {'on_exit': 'Callback'})
 endfu
 "-----------------------------------------
 " Plug 'tenfyzhong/CompleteParameter.vim'
