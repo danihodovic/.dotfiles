@@ -17,7 +17,8 @@ export N_PREFIX=${HOME}/.n
 export PATH=$PATH:$N_PREFIX/bin
 export PYTHONSTARTUP=~/.pythonrc
 export AWS_PROFILE=$([ -f ~/.aws_profile ] && cat ~/.aws_profile)
-export KUBECONFIG=$(echo $HOME/.kube/* | sed 's/ /:/g')
+# Exclude ~/.kube/http-cache which does not contain kubeconfigs
+export KUBECONFIG=$(find ~/.kube -maxdepth 1 -type f | tr '\n' ':')
 
 function vi () {}
 
@@ -68,7 +69,7 @@ scripts_to_source=(
   ${HOME}/.dotfiles/docker.zsh
   ${HOME}/.dotfiles/git.zsh
   ${HOME}/.dotfiles/kubectl.zsh
-  ${HOME}/.zlogin_local
+  ${HOME}/.zshrc_local
 )
 
 for script in $scripts_to_source; do
