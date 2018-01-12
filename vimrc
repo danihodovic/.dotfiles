@@ -608,8 +608,7 @@ nmap <Leader>u <Plug>GitGutterUndoHunk
 "-----------------------------------------
 " Fugitive
 "-----------------------------------------
-nnoremap <leader>g :Gstatus<cr>
-nnoremap <leader>gc :Gcommit --verbose<CR>
+command! Gdom Gdiff origin/master
 "-----------------------------------------
 " vim-operator-flashy
 "-----------------------------------------
