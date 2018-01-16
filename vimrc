@@ -534,11 +534,11 @@ fu! LintAndFix()
   let currentFile = expand('%')
   let cmd = printf('%s --fix %s', executable, currentFile)
 
-  function! Callback(job_id, data, event)
+  function! LintAndFixCallback(job_id, data, event)
     Neomake
   endfunction
 
-  call jobstart(cmd, {'on_exit': 'Callback'})
+  call jobstart(cmd, {'on_exit': 'LintAndFixCallback'})
 endfu
 "-----------------------------------------
 " Plug 'tenfyzhong/CompleteParameter.vim'
