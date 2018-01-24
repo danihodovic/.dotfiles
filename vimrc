@@ -40,7 +40,6 @@ if s:has_plug == 1
   Plug 'scrooloose/nerdcommenter'               " Comment/uncomment source code files
   Plug 'scrooloose/nerdtree'
   Plug 'SirVer/ultisnips'
-  Plug 'sunaku/vim-dasht'                       " Show documentation for the word under the cursor
   Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
   Plug 'tenfyzhong/CompleteParameter.vim'       " Inserts function parameters when completing a function
   Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
@@ -681,21 +680,6 @@ let vim_markdown_preview_github=1
 " Dont display images and preview on key
 let vim_markdown_preview_toggle=0
 let vim_markdown_preview_hotkey='<leader>pr'
-"-----------------------------------------
-" vim-dasht
-"-----------------------------------------
-let docsets_by_filetype = {
-  \ 'elixir': ['erlang'],
-  \ 'cpp': ['boost', '^c$', 'OpenGL', 'OpenCV_C'],
-  \ 'html': ['css', 'js', 'bootstrap', 'jquery'],
-  \ 'javascript': ['jasmine', 'nodejs', 'grunt', 'gulp', 'jade', 'react', 'underscore'],
-  \ 'python': ['(num|sci)py', 'pandas', 'sqlalchemy', 'twisted', 'jinja'],
-  \ }
-nnoremap K :call call('Dasht', [expand('<cword>')]
-      \ + get(docsets_by_filetype, &filetype, []))<Return>
-vnoremap K y:call call('Dasht', [getreg(0)]
-      \ + get(docsets_by_filetype, &filetype, []))<Return>
-"-----------------------------------------
 " vim-lua-ftplugin
 "-----------------------------------------
 let g:lua_complete_omni = 1
