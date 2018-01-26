@@ -13,7 +13,7 @@ floating_modifier $mod
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+d exec zsh -c 'export PATH=~/.dotfiles/scripts/:$PATH && rofi -show run'
+bindsym $mod+d exec zsh -c 'rofi -show run'
 bindsym F1 exec rofi -show window
 
 # change focus
@@ -49,6 +49,7 @@ bindsym $mod+z exec \
 	$Terminal --default-working-directory=$path
 
 bindsym $mod+Shift+Return exec $Browser
+bindsym $mod+Shift+p exec ~/.dotfiles/scripts/lock
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+p focus parent
@@ -139,12 +140,19 @@ client.background       #000000
 new_window normal 1
 hide_edge_borders both
 
+# i3 gaps
+gaps inner 4
+gaps outer 10
+# smart_gaps on
+smart_borders on
+for_window [class="^.*"] border pixel 2
+
 # Ethernet applet
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 # Sync x selection and primary (needs to be configured in the app indicator)
 exec --no-startup-id parcellite
 exec --no-startup-id setxkbmap -option caps:swapescape
-exec --no-startup-id xautolock -time 3 -locker i3lock
+exec --no-startup-id xautolock -time 3 -locker ~/.dotfiles/scripts/lock
 exec --no-startup-id caffeine
 exec --no-startup-id variety
