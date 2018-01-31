@@ -130,7 +130,7 @@ bar {
 	}
 }
 
-client.focused          #000000   #009900   #ffffff   #2e9ef4     #000000
+client.focused          #000000   #009900   #ffffff   #2e9ef4     #00ff00
 client.focused_inactive #000000   #003300   #ffffff   #484e50     #000000
 client.unfocused        #000000   #000000   #ffffff   #292d2e     #000000
 client.urgent           #000000   #900000   #ffffff   #900000     #000000
