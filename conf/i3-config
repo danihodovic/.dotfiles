@@ -59,8 +59,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 
 workspace_layout stacking
-bindsym $mod+Shift+s layout stacking
-bindsym $mod+Shift+t layout tabbed
+bindsym $mod+s layout toggle all
 
 # switch to workspace
 bindsym $mod+1 workspace number 1
