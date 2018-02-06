@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+scrot /tmp/i3-lock-background.png
+convert /tmp/i3-lock-background.png -blur 8x8 /tmp/i3-lock-background.png
+i3lock -i /tmp/i3-lock-background.png
