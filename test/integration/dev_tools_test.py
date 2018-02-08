@@ -126,6 +126,13 @@ class Suite(unittest.TestCase):
         result = subprocess.run('tldr')
         self.assertEqual(result.returncode, 0)
 
+
+    def test_install_alacritty(self):
+        dev_tools.install_alacritty()
+
+        version = cmd_output('alacritty --version').split()[1]
+        self.assertGreaterEqual(LooseVersion(version), LooseVersion('0.1.0'))
+
 def cmd_output(cmd):
     return subprocess.check_output(cmd, shell=True, encoding='utf-8')
 

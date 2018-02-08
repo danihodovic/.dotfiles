@@ -11,8 +11,6 @@ import json
 import tempfile
 import subprocess
 
-user = getpass.getuser()
-
 def install_neovim():
     cmd = '''
     sudo apt-get install -y software-properties-common
@@ -24,6 +22,8 @@ def install_neovim():
     subprocess.run(cmd, shell=True, check=True)
 
 def install_docker():
+    user = getpass.getuser()
+
     cmd = f'''
     sudo apt-get update
     sudo apt-get install -y curl
@@ -153,6 +153,29 @@ def install_tldr():
     url=https://raw.githubusercontent.com/raylee/tldr/master/tldr
     sudo curl $url -o /usr/local/bin/tldr
     sudo chmod +x /usr/local/bin/tldr
+    '''
+    subprocess.run(cmd, shell=True, check=True)
+
+def install_alacritty():
+    cmd = '''
+    set -e
+    export PATH=$PATH:${HOME}/.cargo/bin
+
+    sudo apt-get update
+    sudo apt-get install -y curl git cmake libfreetype6-dev libfontconfig1-dev xclip
+    curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
+    if [ ! -d ~/repos/alacritty ]; then
+      mkdir -p ~/repos
+      git clone https://github.com/jwilm/alacritty.git ~/repos/alacritty
+    else
+      cd ~/repos/alacritty
+      git pull
+    fi
+    cd ~/repos/alacritty
+    rustup override set stable
+    rustup update stable
+    cargo build --release
+    sudo cp target/release/alacritty /usr/local/bin/
     '''
     subprocess.run(cmd, shell=True, check=True)
 
