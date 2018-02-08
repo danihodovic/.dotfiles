@@ -29,7 +29,7 @@ class Suite(unittest.TestCase):
     def test_install_neovim(self):
         dev_tools.install_neovim()
 
-        lines = subprocess.check_output(['pip', 'show', 'neovim']).decode('utf-8').splitlines()
+        lines = subprocess.check_output(['pip', 'show', 'neovim'], encoding='utf-8').splitlines()
         pip_neovim_version = lines[1].split(': ')[1]
 
         self.assertTrue(is_installed_pkg('neovim'))
@@ -41,34 +41,32 @@ class Suite(unittest.TestCase):
 
 
     def test_install_docker(self):
-        user = 'root'
-        dev_tools.install_docker(add_user_to_docker_group=user)
+        dev_tools.install_docker()
 
-        output = subprocess.check_output(['docker', '-v']).decode('utf-8')
-        version = LooseVersion(output.split(' ')[2])
-        self.assertGreaterEqual(version, LooseVersion('17.11.0'))
-
-        self.assertEqual(shutil.which('docker-compose'), '/usr/local/bin/docker-compose')
+        docker_version = cmd_output('docker -v').split()[2]
+        self.assertGreaterEqual(LooseVersion(docker_version), LooseVersion('17.11.0'))
         self.assertEqual(grp.getgrnam('docker').gr_mem, [user])
+
+        docker_compose_version = cmd_output('docker-compose --version') \
+            .split()[2] \
+            .replace(',', '')
+        self.assertGreaterEqual(LooseVersion(docker_compose_version), LooseVersion('1.19.0'))
 
 
     def test_install_fzf(self):
         dev_tools.install_fzf()
-        self.assertTrue(os.path.isfile('/root/.fzf/bin/fzf-tmux'))
 
-        output = subprocess.check_output(['/root/.fzf/bin/fzf', '--version']).decode('utf-8')
-        version = output.split(' ')[0]
+        version = cmd_output('~/.fzf/bin/fzf --version').split()[0]
         self.assertGreaterEqual(StrictVersion(version), StrictVersion('0.17.3'))
 
 
     def test_install_vim_plug(self):
         dev_tools.install_vim_plug()
-        self.assertTrue(os.path.isfile('/root/.config/nvim/autoload/plug.vim'))
+        self.assertTrue(os.path.isfile(f'{HOME}/.config/nvim/autoload/plug.vim'))
 
 
     def test_install_antibody(self):
         dev_tools.install_antibody()
-        self.assertTrue(os.path.isfile('/usr/local/bin/antibody'))
 
         output = subprocess.check_output(['antibody', '-v'], stderr=subprocess.STDOUT).decode('utf-8')
         version = output.split('\n')[0].split(' ')[2]
@@ -86,10 +84,7 @@ class Suite(unittest.TestCase):
     def test_install_gvm(self):
         dev_tools.install_gvm()
 
-        output = subprocess.check_output([
-            'bash', '-c', 'source /root/.gvm/scripts/gvm && gvm version'
-        ]).decode('utf-8')
-        version = output.split(' ')[3]
+        version = cmd_output('bash -c "source ~/.gvm/scripts/gvm && gvm version"').split()[3]
         self.assertGreaterEqual(LooseVersion(version), LooseVersion('v1.0.2'))
 
 
@@ -111,7 +106,7 @@ class Suite(unittest.TestCase):
 
     def test_install_i3_completions(self):
         dev_tools.install_i3_completions()
-        self.assertTrue(os.path.isfile('/root/.i3_completion.sh'))
+        self.assertTrue(os.path.isfile(f'{HOME}/.i3_completion.sh'))
 
 
     def test_install_diff_so_fancy(self):
@@ -131,6 +126,8 @@ class Suite(unittest.TestCase):
         result = subprocess.run('tldr')
         self.assertEqual(result.returncode, 0)
 
+def cmd_output(cmd):
+    return subprocess.check_output(cmd, shell=True, encoding='utf-8')
 
 def is_installed_pkg(pkg):
     proc = subprocess.Popen(['apt-cache', 'policy', pkg], stdout=subprocess.PIPE)

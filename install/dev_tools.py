@@ -14,174 +14,147 @@ import subprocess
 user = getpass.getuser()
 
 def install_neovim():
-    apt_get_install('software-properties-common')
-    add_apt_repository('ppa:neovim-ppa/unstable')
-    apt_get_update()
-    apt_get_install('neovim')
+    cmd = '''
+    sudo apt-get install -y software-properties-common
+    sudo add-apt-repository -y ppa:neovim-ppa/unstable
+    sudo apt-get update
+    sudo apt-get install -y neovim python-pip
+    pip install --upgrade neovim
+    '''
+    subprocess.run(cmd, shell=True, check=True)
 
-    # Install neovim for python (for python plugins)
-    apt_get_install('python-pip')
-    proc = subprocess.Popen(['pip', 'install', '--upgrade', 'neovim'])
-    proc.wait()
+def install_docker():
+    cmd = f'''
+    sudo apt-get update
+    sudo apt-get install -y curl
 
-def install_docker(add_user_to_docker_group='dani'):
-    download_to_file('https://get.docker.com', '/tmp/get-docker.sh')
-    proc = subprocess.Popen(['sh', '/tmp/get-docker.sh'])
-    proc.wait()
+    curl https://get.docker.com | sudo bash
 
-    subprocess.Popen(['usermod', '-a', '-G', 'docker', add_user_to_docker_group]).wait()
-    install_docker_compose()
+    sudo apt-get install -y python-pip
+    sudo pip install docker-compose
+
+    sudo usermod -a -G docker {user}
+    '''
+    subprocess.run(cmd, shell=True, check=True)
 
 def install_vim_plug():
-    plug_file = os.path.expandvars('${HOME}/.config/nvim/autoload/plug.vim')
-    url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    download_to_file(url, plug_file)
+    cmd = '''
+    sudo apt-get update
+    sudo apt-get install -y curl
+
+    curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    '''
+    subprocess.run(cmd, shell=True, check=True)
 
 def install_antibody():
-    latest_release_url = 'https://api.github.com/repos/getantibody/antibody/releases/latest'
-    latest_release_res = urllib.request.urlopen(latest_release_url)
-    body = json.load(latest_release_res)
-    linux_tarball_url = body['assets'][10]['browser_download_url']
+    cmd = '''
+    sudo apt-get update
+    sudo apt-get install -y curl
 
-    tar_res = urllib.request.urlopen(linux_tarball_url)
-    file_like_object = io.BytesIO(tar_res.read())
-    tar = tarfile.open(fileobj=file_like_object)
-    tempdir = tempfile.mkdtemp(prefix='antibody-')
-    tar.extractall(path=tempdir)
-    shutil.copy(tempdir + '/antibody', '/usr/local/bin/antibody')
+    curl -sL https://git.io/antibody | sudo bash -s
+    '''
+    subprocess.run(cmd, shell=True, check=True)
 
 def install_fzf():
-    apt_get_install('git')
-    apt_get_install('curl')
-    home = os.path.expanduser('~')
-    subprocess.check_output([
-        'git', 'clone',
-        '--depth', '1',
-        'https://github.com/junegunn/fzf.git', home + '/.fzf'
-    ])
-    script =  home + '/.fzf/install'
-    proc = subprocess.Popen([script, '--key-bindings', '--completion', '--no-update-rc'])
-    proc.wait()
+    cmd = '''
+    sudo apt-get update
+    sudo apt-get install -y git
+
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install --key-bindings --completion --no-update-rc
+    '''
+    subprocess.run(cmd, shell=True, check=True)
 
 def install_hub():
-    apt_get_install('git')
-
     releases_url = 'https://api.github.com/repos/github/hub/releases'
     latest_release_res = urllib.request.urlopen(releases_url)
     body = json.load(latest_release_res)
     latest_release_assets = body[0]['assets']
 
-    linux_asset = ''
+    tarfile_url = ''
     for asset in latest_release_assets:
         if 'Linux 64-bit' in asset['label']:
-            linux_asset = asset
+            tarfile_url = asset['browser_download_url']
             break
 
-    tar_res = urllib.request.urlopen(linux_asset['browser_download_url'])
-    file_like_object = io.BytesIO(tar_res.read())
-    tar = tarfile.open(fileobj=file_like_object)
-    tempdir = tempfile.mkdtemp(prefix='hub-')
-    top_level_directory = os.path.commonprefix(tar.getnames())
-    tar.extractall(path=tempdir)
+    cmd = f'''
+    sudo apt-get update
+    sudo apt-get install -y curl git
 
-    install_script = '{}/{}/install'.format(tempdir, top_level_directory)
-    subprocess.Popen(['bash', install_script]).wait()
+    cd $(mktemp -d)
+    curl -L {tarfile_url} -o - | tar -xz
+    cd hub*
+    sudo ./install
+    '''
+    subprocess.run(cmd, shell=True, check=True)
 
 def install_gvm():
-    apt_get_install('git')
-    apt_get_install('binutils')
-    apt_get_install('bison')
-    apt_get_install('gcc')
-    apt_get_install('curl')
-    script_url = 'https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer'
-    script = urllib.request.urlopen(script_url)
+    cmd = '''
+    sudo apt-get update
+    sudo apt-get install -y git curl binutils bison gcc
 
-    proc = subprocess.Popen(['bash'], stdin=subprocess.PIPE)
-    proc.stdin.writelines(script)
-    proc.communicate()
+    url=https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer
+    curl -s -S -L $url | bash
+    '''
+    subprocess.run(cmd, shell=True, check=True)
 
 def install_n():
-    apt_get_install('curl')
-    apt_get_install('git')
-    #  https://github.com/mklement0/n-install#examples
-    subprocess.run('curl -L https://git.io/n-install | N_PREFIX=$HOME/.n bash -s -- -y lts', shell=True)
+    cmd = '''
+    sudo apt-get update
+    sudo apt-get install -y curl
+
+    # https://github.com/mklement0/n-install#examples
+    curl -L https://git.io/n-install | N_PREFIX=$HOME/.n bash -s -- -y lts
+    '''
+    subprocess.run(cmd, shell=True, check=True)
 
 def install_chrome():
-    apt_get_install('curl')
-    subprocess.Popen(
-        'curl --silent https://dl-ssl.google.com/linux/linux_signing_key.pub | ' +
-        'apt-key add'
-    , shell=True).wait()
-    subprocess.Popen(
-        'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > ' +
-        '/etc/apt/sources.list.d/google-chrome.list'
-    , shell=True).wait()
+    cmd = '''
+    sudo apt-get update
+    sudo apt-get install -y curl
 
-    apt_get_update()
-    apt_get_install('google-chrome-stable')
+    url=https://dl-ssl.google.com/linux/linux_signing_key.pub
+    curl --silent $url | sudo apt-key add
+    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | \
+        sudo tee /etc/apt/sources.list.d/google-chrome.list
+
+    sudo apt-get update
+    sudo apt-get install -y google-chrome-stable
+    '''
+    subprocess.run(cmd, shell=True, check=True)
 
 def install_i3_completions():
-    home = os.path.expanduser('~')
-    url = 'https://raw.githubusercontent.com/cornerman/i3-completion/master/i3_completion.sh'
-    download_to_file(url, home + '/.i3_completion.sh')
+    cmd = '''
+    sudo apt-get update
+    sudo apt-get install -y curl
+
+    url=https://raw.githubusercontent.com/cornerman/i3-completion/master/i3_completion.sh
+    curl $url -o ~/.i3_completion.sh
+    '''
+    subprocess.run(cmd, shell=True, check=True)
 
 def install_diff_so_fancy():
-    apt_get_install('curl')
-    apt_get_install('git')
-    apt_get_install('perl-modules-5.26')
+    cmd = '''
+    sudo apt-get update
+    sudo apt-get install -y curl perl-modules-5.26
 
-    url = 'https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy'
-    filename = '/usr/local/bin/diff-so-fancy'
-    subprocess.run(f'curl -o {filename} {url}', shell=True)
-    subprocess.run(f'chmod +x {filename}', shell=True)
+    url=https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
+    sudo curl $url -o /usr/local/bin/diff-so-fancy
+    sudo chmod +x /usr/local/bin/diff-so-fancy
+    '''
+    subprocess.run(cmd, shell=True, check=True)
 
 def install_tldr():
-    apt_get_install('curl')
+    cmd = '''
+    sudo apt-get update
+    sudo apt-get install -y curl
 
-    url = 'https://raw.githubusercontent.com/raylee/tldr/master/tldr'
-    filename = '/usr/local/bin/tldr'
-    subprocess.run(f'curl -o {filename} {url}', shell=True)
-    subprocess.run(f'chmod +x {filename}', shell=True)
-
-def apt_get_install(pkg_name):
-    env = os.environ.copy()
-    env['DEBIAN_FRONTEND'] = 'noninteractive'
-    cmd = ['apt-get', 'install', '-y', pkg_name]
-    proc = subprocess.Popen(cmd, env=env).wait()
-
-def apt_get_update():
-    cmd = ['apt-get', 'update']
-    proc = subprocess.Popen(cmd)
-    proc.wait()
-
-def add_apt_repository(repository):
-    cmd = ['add-apt-repository', '-y', repository]
-    proc = subprocess.Popen(cmd)
-    proc.wait()
-
-def download_to_file(url, path):
-    parent_dir = os.path.dirname(path)
-    if not os.path.isdir(parent_dir):
-        os.makedirs(parent_dir)
-        shutil.chown(parent_dir, user=user, group=user)
-
-    if not os.path.isfile(path):
-        with urllib.request.urlopen(url) as res:
-            with open(path, 'wb') as f:
-                shutil.copyfileobj(res, f)
-                shutil.chown(path, user=user, group=user)
-
-
-def install_docker_compose():
-    url = 'https://github.com/docker/compose/releases/download/1.18.0/run.sh'
-    path = '/usr/local/bin/docker-compose'
-    download_to_file(url, path)
-    subprocess.check_output(['chmod', '755', path])
-
-def _assert_sudo():
-    if os.geteuid() != 0:
-        print('Error: Run the script as root as we need to use apt')
-        sys.exit(1)
+    url=https://raw.githubusercontent.com/raylee/tldr/master/tldr
+    sudo curl $url -o /usr/local/bin/tldr
+    sudo chmod +x /usr/local/bin/tldr
+    '''
+    subprocess.run(cmd, shell=True, check=True)
 
 def _assert_python_version():
     version = float(sys.version[0:3])
@@ -196,7 +169,6 @@ def _assert_python_version():
 ###############################
 if __name__ == '__main__':
     _assert_python_version()
-    _assert_sudo()
 
     install_options = [
         ('Install docker? [y/n] ', install_docker),

@@ -3,11 +3,21 @@ FROM ubuntu:17.10
 # We need ca-certificates since we need to pull files using https
 # Make is installed for interactive test runs
 RUN apt-get update && apt-get install \
+	sudo \
 	python3 \
 	ca-certificates \
 	make \
 	-y
 
-COPY . /root/.dotfiles
+RUN adduser ronaldo --disabled-password --quiet --gecos "" && \
+    echo ronaldo:ronaldo | chpasswd && \
+    adduser ronaldo sudo
 
-WORKDIR /root/.dotfiles
+# Allow our test user to run scripts without prompting for a password
+RUN echo 'ronaldo ALL=(ALL) NOPASSWD:ALL' | sudo tee -a /etc/sudoers
+
+COPY . /home/ronaldo/.dotfiles
+
+USER ronaldo
+
+WORKDIR /home/ronaldo/.dotfiles
