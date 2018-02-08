@@ -1,6 +1,6 @@
 set $Alt Mod1
 set $Win Mod4
-set $Terminal xfce4-terminal -e 'tmux -2'
+set $Terminal alacritty -e 'tmux'
 set $Browser google-chrome
 
 set $mod Mod1
@@ -34,19 +34,19 @@ bindsym $mod+Return exec $Terminal
 bindsym $mod+c exec \
 	i3-msg split v && \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
-	path=$(tmux display-message -p -F '#{pane_current_path}') && \
-	$Terminal --default-working-directory=$path
+	current_dir=$(tmux display-message -p -F '#{pane_current_path}') && \
+	alacritty --working-directory $current_dir -e tmux
 
 bindsym $mod+x exec \
 	i3-msg split h && \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
-	path=$(tmux display-message -p -F '#{pane_current_path}') && \
-	$Terminal --default-working-directory=$path
+	current_dir=$(tmux display-message -p -F '#{pane_current_path}') && \
+	alacritty --working-directory $current_dir -e tmux
 
 bindsym $mod+z exec \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
-	path=$(tmux display-message -p -F '#{pane_current_path}') && \
-	$Terminal --default-working-directory=$path
+	current_dir=$(tmux display-message -p -F '#{pane_current_path}') && \
+	alacritty --working-directory $current_dir -e tmux
 
 bindsym $mod+Shift+Return exec $Browser
 bindsym $mod+Shift+p exec ~/.dotfiles/scripts/lock
