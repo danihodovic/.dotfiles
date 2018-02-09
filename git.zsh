@@ -20,7 +20,17 @@ alias gpushtags='git push origin --tags'
 alias gtags-latest='git tag --list | sort -V | tail -n 1'
 alias gremotes='git remote -v'
 alias gremote='git remote'
-alias gdom='git diff origin/master'
+function gdom {
+  query=$1
+  file=$(
+    git diff origin/master --stat | \
+    fzf --query=$query --ansi --prompt "GitFiles?> " \
+      --preview='git diff origin/master --color=always {1}' | \
+    awk '{print $1}'
+  )
+  git diff origin/master $file
+}
+
 alias grom='git rebase origin/master'
 gdob () { git diff origin/$(_local_branch) $@ }
 compdef _git-diff gdob
