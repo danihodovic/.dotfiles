@@ -196,6 +196,7 @@ if __name__ == '__main__':
     install_options = [
         ('Install docker? [y/n] ', install_docker),
         ('Install neovim? [y/n] ', install_neovim),
+        ('Install alacritty? [y/n] ', install_alacritty),
         ('Install vim-plug? [y/n] ', install_vim_plug),
         ('Install fzf? [y/n] ', install_fzf),
         ('Install antibody? [y/n] ', install_antibody),
