@@ -27,8 +27,9 @@ function gdom {
     fzf --query=$query --ansi --prompt "GitFiles?> " \
       --preview='git diff origin/master --color=always {1}' | \
     awk '{print $1}'
+
   )
-  git diff origin/master $file
+  [ ! -z $file ] && git diff origin/master $file
 }
 
 alias grom='git rebase origin/master'
