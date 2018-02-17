@@ -50,4 +50,5 @@ $sudo_cmd apt-get install -y \
     asciinema \
     variety \
     feh \
+    speedtest-cli \
     i3 i3status i3lock
