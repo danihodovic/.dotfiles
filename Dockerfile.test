@@ -4,10 +4,11 @@ FROM ubuntu:17.10
 # Make is installed for interactive test runs
 RUN apt-get update && apt-get install \
 	sudo \
-	python3 \
-	ca-certificates \
 	make \
+	python-pip \
 	-y
+
+RUN pip install ansible
 
 RUN adduser ronaldo --disabled-password --quiet --gecos "" && \
     echo ronaldo:ronaldo | chpasswd && \

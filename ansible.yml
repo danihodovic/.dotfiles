@@ -1,0 +1,209 @@
+- hosts: localhost
+
+  tasks:
+  - name: Install neovim
+    block:
+    - name: Add neovim ppa
+      apt_repository:
+        repo: ppa:neovim-ppa/unstable
+      become: true
+
+    - name: Install neovim
+      apt:
+        name: neovim
+        update_cache: yes
+      become: true
+
+    - name: Install neovim pip package
+      pip:
+        name: neovim
+
+
+  - name: Install fzf
+    tags: fzf
+    block:
+      - name: Install dependecies
+        apt:
+          name: '{{ item }}'
+        become: true
+        with_items:
+          - curl
+          - git
+
+      - name: Clone fzf
+        git:
+          repo: 'https://github.com/junegunn/fzf.git'
+          depth: 1
+          dest: ~/.fzf
+
+      - name: fzf installation script
+        shell: ~/.fzf/install --key-bindings --completion --no-update-rc
+
+
+  - name: Install diff-so-fancy
+    tags: diff-so-fancy
+    block:
+      - name: Install dependecies
+        apt:
+          name: '{{ item }}'
+        become: true
+        with_items:
+          - git
+          - curl
+          - perl-modules-5.26
+
+      - name: Install diff-so-fancy
+        get_url:
+          url: https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
+          dest: /usr/local/bin/diff-so-fancy
+          mode: 0555
+        become: true
+
+
+  - name: Install gvm
+    tags: gvm
+    block:
+      - name: Install dependencies
+        become: true
+        apt:
+          name: '{{ item }}'
+        with_items:
+          - git
+          - curl
+          - binutils
+          - bison
+          - gcc
+
+      - name: Install gvm
+        args:
+          executable: /bin/bash
+          creates: '{{ ansible_env.HOME }}/.gvm/bin/gvm'
+        shell: |
+          set -o pipefail
+          url=https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer
+          curl -s -S -L $url | bash
+
+  - name: Install n (node version manager)
+    tags: n
+    block:
+      - name: Install dependencies
+        become: true
+        apt:
+          name: '{{ item }}'
+        with_items:
+          - curl
+          - git
+
+      - name: Install n
+        args:
+          creates: '{{ ansible_env.HOME }}/.n/bin/n'
+        shell: |
+          # https://github.com/mklement0/n-install#examples
+          curl -L https://git.io/n-install | N_PREFIX=$HOME/.n bash -s -- -y lts
+
+
+  - name: Install chrome
+    tags: chrome
+    become: true
+    block:
+      - name: Add chrome ppa
+        apt_repository:
+          repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+          filename: 'google-chrome'
+
+      - name: Add chrome ppa key
+        apt_key:
+          url: https://dl-ssl.google.com/linux/linux_signing_key.pub
+
+      - name: Install chrome
+        apt:
+          name: google-chrome-stable
+
+
+  - name: Install tldr
+    tags: tldr
+    become: true
+    block:
+      - name: Install dependencies
+        apt:
+          name: curl
+
+      - name: Install tldr
+        get_url:
+          url: https://raw.githubusercontent.com/raylee/tldr/master/tldr
+          dest: /usr/local/bin/tldr
+          mode: 0555
+
+
+  - name: Install alacritty
+    tags: alacritty
+    block:
+      - name: Install dependencies
+        apt:
+          name: '{{ item }}'
+        become: true
+        with_items:
+          - curl
+          - git
+          - cmake
+          - libfreetype6-dev
+          - libfontconfig1-dev
+          - xclip
+
+      - name: Install rustup
+        shell: curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
+        args:
+          creates: ~/.cargo/bin/rustup
+
+      - name: Clone alacritty
+        register: alacritty_git
+        git:
+          repo: https://github.com/jwilm/alacritty.git
+          depth: 1
+          dest: ~/repos/alacritty
+          update: yes
+
+      - name: Install alacritty
+        when: alacritty_git.changed
+        environment:
+          PATH: '{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.cargo/bin'
+        args:
+          creates: /usr/local/bin/alacritty
+          chdir: ~/repos/alacritty
+        shell: |
+          set -e
+          rustup override set stable
+          rustup update stable
+          cargo build --release
+          sudo cp target/release/alacritty /usr/local/bin/
+
+
+  - name: Install antibody
+    tags: antibody
+    block:
+      - name: Install dependencies
+        apt:
+          name: curl
+
+      - name: Install antibody
+        become: true
+        args:
+          creates: /usr/local/bin/antibody
+        shell: curl -sL https://git.io/antibody | bash -s
+
+
+  - name: Install i3 completions
+    tags: i3-completions
+    block:
+      - name: Install dependencies
+        apt:
+          name: curl
+
+      - name: Install i3-completions
+        become: true
+        get_url:
+          url: https://raw.githubusercontent.com/cornerman/i3-completion/master/i3_completion.sh
+          dest: /usr/local/bin/tldr
+          mode: 0444
+
+
