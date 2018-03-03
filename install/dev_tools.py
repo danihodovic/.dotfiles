@@ -102,7 +102,7 @@ def install_gvm():
 def install_n():
     cmd = '''
     sudo apt-get update
-    sudo apt-get install -y curl
+    sudo apt-get install -y curl git
 
     # https://github.com/mklement0/n-install#examples
     curl -L https://git.io/n-install | N_PREFIX=$HOME/.n bash -s -- -y lts
