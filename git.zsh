@@ -22,7 +22,6 @@ alias gl-last-tag-to-HEAD='git log $(git tag --list | sort -V | tail -n 1)..mast
 alias gremotes='git remote -v'
 alias gremote='git remote'
 function gdom {
-
   query=$1
   default_remote_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
   file=$(
@@ -35,7 +34,11 @@ function gdom {
   [ ! -z $file ] && git diff origin/master $file
 }
 
-alias grom='git rebase origin/master'
+function grom {
+  default_remote_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+  git rebase origin/"$default_remote_branch"
+}
+
 gdob () { git diff origin/$(_local_branch) $@ }
 compdef _git-diff gdob
 
