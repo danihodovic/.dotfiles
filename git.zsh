@@ -22,11 +22,13 @@ alias gl-last-tag-to-HEAD='git log $(git tag --list | sort -V | tail -n 1)..mast
 alias gremotes='git remote -v'
 alias gremote='git remote'
 function gdom {
+
   query=$1
+  default_remote_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
   file=$(
-    git diff origin/master --stat | \
+    git diff origin/"$default_remote_branch" --stat --color=always | \
     fzf --query=$query --ansi --prompt "GitFiles?> " \
-      --preview='git diff origin/master --color=always {1}' | \
+      --preview="git diff origin/$default_remote_branch --color=always {1}" | \
     awk '{print $1}'
 
   )
