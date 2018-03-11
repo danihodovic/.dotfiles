@@ -69,6 +69,7 @@ scripts_to_source=(
   ${HOME}/.dotfiles/docker.zsh
   ${HOME}/.dotfiles/git.zsh
   ${HOME}/.dotfiles/kubectl.zsh
+  ${HOME}/.dotfiles/gcloud.zsh
   ${HOME}/.zshrc_local
 )
 
