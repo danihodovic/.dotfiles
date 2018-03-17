@@ -195,6 +195,7 @@ alias k='kubectl'
 alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
 alias s3='aws s3'
+alias xc='xclip -selection clipboard'
 
 alias aptinstall='sudo apt-get install '
 alias aptremove='sudo apt-get remove '
