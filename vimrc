@@ -328,7 +328,10 @@ function! FzfGitChangedFilesFromMaster()
     return
   endif
 
-  let diff_files = split(system('git --no-pager diff origin/master --name-only'), '\n')
+  let default_remote_branch = split(system("git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'"), '\n')[0]
+  let cmd_diff_files = printf('git --no-pager diff origin/%s --name-only', default_remote_branch)
+  let diff_files = split(system(cmd_diff_files), '\n')
+
   let untracked_files = split(system('git ls-files --others --exclude-standard'), '\n')
   let files = diff_files + untracked_files
 
