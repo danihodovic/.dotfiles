@@ -278,6 +278,7 @@ augroup BgHighlight
 augroup END
 " Wrapping can start 5 chars from right margin
 set wrapmargin=5
+autocmd BufNewFile,BufRead nginx.*.j2 set ft=nginx
 "-----------------------------------------
 " Indentation settings
 " See http://tedlogan.com/techblog3.html
