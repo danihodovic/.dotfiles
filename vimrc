@@ -74,6 +74,8 @@ if s:has_plug == 1
   Plug 'Valloric/MatchTagAlways'                " Show matching html/xml tags
   Plug 'vim-erlang/vim-erlang-omnicomplete'
   Plug 'junegunn/vader.vim'
+  Plug 'slashmili/alchemist.vim'
+  Plug 'elixir-editors/vim-elixir'
   call plug#end()
 end
 "-----------------------------------------
