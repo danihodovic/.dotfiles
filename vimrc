@@ -698,9 +698,9 @@ let g:lua_complete_dynamic = 0
 "-----------------------------------------
 " juliosueiras/vim-terraform-completion
 "-----------------------------------------
-noremap <buffer><silent> gd :call terraformcomplete#JumpRef()<CR>
-noremap <buffer><silent><Leader>o :call terraformcomplete#LookupAttr()<CR>
-noremap <buffer><silent> K :call terraformcomplete#OpenDoc()<CR>
+autocmd filetype terraform noremap <buffer><silent> gd :call terraformcomplete#JumpRef()<CR>
+autocmd filetype terraform noremap <buffer><silent><Leader>o :call terraformcomplete#LookupAttr()<CR>
+autocmd filetype terraform noremap <buffer><silent> K :call terraformcomplete#OpenDoc()<CR>
 "-----------------------------------------
 " pgilad/vim-skeletons
 "-----------------------------------------
