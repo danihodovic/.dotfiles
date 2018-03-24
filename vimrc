@@ -76,6 +76,7 @@ if s:has_plug == 1
   Plug 'junegunn/vader.vim'
   Plug 'slashmili/alchemist.vim'
   Plug 'elixir-editors/vim-elixir'
+  Plug 'pearofducks/ansible-vim'
   call plug#end()
 end
 "-----------------------------------------
