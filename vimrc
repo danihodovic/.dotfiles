@@ -57,7 +57,8 @@ if s:has_plug == 1
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
-  Plug 'bkad/vim-terraform'
+  Plug 'hashivim/vim-terraform'
+  Plug 'juliosueiras/vim-terraform-completion'
   Plug 'cespare/vim-toml'                       " Toml is a configuration language similar to yaml
   Plug 'danihodovic/nodejs-require.vim'
   Plug 'derekwyatt/vim-scala'
@@ -227,6 +228,7 @@ map S ys
 nnoremap <leader>aw :ArgWrap<cr>
 nnoremap <leader>en :lnext<cr>
 nnoremap <leader>ep :lprevious<cr>
+autocmd BufWritePre *.tf TerraformFmt
 "-----------------------------------------
 " Color scheme settings
 "-----------------------------------------
@@ -634,7 +636,7 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_javascript_eslint_exe = getcwd() . '/node_modules/.bin/eslint'
 let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
 " Do not enable this for zsh. shellcheck does not support zsh
-autocmd BufWritePost *.py,*.sh,*.bash,bashrc,*.lua,*.go,*.rb Neomake
+autocmd BufWritePost *.py,*.sh,*.bash,bashrc,*.lua,*.go,*.rb,*.tf Neomake
 autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call LintAndFix()
 autocmd BufWritePre *.go GoImports
 "-----------------------------------------
@@ -690,6 +692,12 @@ let vim_markdown_preview_hotkey='<leader>pr'
 "-----------------------------------------
 let g:lua_complete_omni = 1
 let g:lua_complete_dynamic = 0
+"-----------------------------------------
+" juliosueiras/vim-terraform-completion
+"-----------------------------------------
+noremap <buffer><silent> gd :call terraformcomplete#JumpRef()<CR>
+noremap <buffer><silent><Leader>o :call terraformcomplete#LookupAttr()<CR>
+noremap <buffer><silent> K :call terraformcomplete#OpenDoc()<CR>
 "-----------------------------------------
 " pgilad/vim-skeletons
 "-----------------------------------------
