@@ -639,10 +639,21 @@ let g:neomake_typescript_tslint_maker = {
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_javascript_eslint_exe = getcwd() . '/node_modules/.bin/eslint'
 let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
-" Do not enable this for zsh. shellcheck does not support zsh
-autocmd BufWritePost *.py,*.sh,*.bash,bashrc,*.lua,*.go,*.rb,*.tf Neomake
-autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call LintAndFix()
-autocmd BufWritePre *.go GoImports
+
+autocmd BufWritePost * call BufWritePostNeomake()
+func BufWritePostNeomake()
+  let neomake_bufwritepost_filetypes = ['python', 'bash', 'lua', 'go', 'ruby']
+  let neomake_lint_and_fix_filetypes = ['javascript', 'typescript']
+
+  if count(neomake_lint_and_fix_filetypes, &filetype)
+    call LintAndFix()
+  elseif count(neomake_bufwritepost_filetypes, &filetype)
+    Neomake
+  endif
+
+endfunc
+
+autocmd BufWritePre * if &ft == 'go' | GoImports | endif
 "-----------------------------------------
 " Auto-pairs
 "-----------------------------------------
