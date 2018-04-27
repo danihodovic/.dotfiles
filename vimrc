@@ -64,7 +64,7 @@ if s:has_plug == 1
   Plug 'ekalinin/Dockerfile.vim'                " Syntax for Dockerfile and snippets 
   Plug 'chr4/nginx.vim'
   Plug 'fatih/vim-go'                           " Basically a Golang IDE for vi
-  Plug 'HerringtonDarkholme/yats.vim'           " Typescript syntax
+  Plug 'leafgarland/typescript-vim'             " Typescript syntax
   Plug 'jelera/vim-javascript-syntax'
   Plug 'PotatoesMaster/i3-vim-syntax'
   Plug 'rust-lang/rust.vim'                     " Rust syntax highlighting, formatting
