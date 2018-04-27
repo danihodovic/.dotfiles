@@ -644,11 +644,11 @@ func BufWritePostNeomake()
 
 endfunc
 
-autocmd BufWritePre * if &ft == 'go' | GoImports | endif
+autocmd BufWritePre * if &ft == 'go' | exec 'GoImports' | endif
 "-----------------------------------------
 " Auto-pairs
 "-----------------------------------------
-let g:AutoPairs = {'[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 " Disable inappropriate defaults
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsMultilineClose = 0
@@ -704,6 +704,7 @@ let g:lua_complete_dynamic = 0
 autocmd filetype terraform noremap <buffer><silent> gd :call terraformcomplete#JumpRef()<CR>
 autocmd filetype terraform noremap <buffer><silent><Leader>o :call terraformcomplete#LookupAttr()<CR>
 autocmd filetype terraform noremap <buffer><silent> K :call terraformcomplete#OpenDoc()<CR>
+let g:neomake_terraform_enabled_makers = ['terraform_validate', 'tflint']
 "-----------------------------------------
 " pgilad/vim-skeletons
 "-----------------------------------------
