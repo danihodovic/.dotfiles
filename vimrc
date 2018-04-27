@@ -41,7 +41,6 @@ if s:has_plug == 1
   Plug 'scrooloose/nerdtree'
   Plug 'SirVer/ultisnips'
   Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
-  Plug 'tenfyzhong/CompleteParameter.vim'       " Inserts function parameters when completing a function
   Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
   Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
   Plug 'tpope/vim-abolish'                      " Change snake case to camelcase and vice versa
@@ -551,14 +550,6 @@ fu! LintAndFix()
 
   call jobstart(cmd, {'on_exit': 'LintAndFixCallback'})
 endfu
-"-----------------------------------------
-" Plug 'tenfyzhong/CompleteParameter.vim'
-"-----------------------------------------
-inoremap <silent><expr> ( complete_parameter#pre_complete("()")
-smap <C-m> <Plug>(complete_parameter#goto_next_parameter)
-imap <C-m> <Plug>(complete_parameter#goto_next_parameter)
-smap <C-n> <Plug>(complete_parameter#goto_previous_parameter)
-imap <C-n> <Plug>(complete_parameter#goto_previous_parameter)
 "-----------------------------------------
 " Jedi Python
 "-----------------------------------------
