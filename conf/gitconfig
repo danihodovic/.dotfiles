@@ -4,7 +4,7 @@ name = Dani Hodovic
 
 [core]
 editor = nvim
-pager = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+pager = diff-so-fancy | less --tabs=4 -RFX
 
 [pull]
 rebase = true
