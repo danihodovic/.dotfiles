@@ -24,6 +24,11 @@ alias gremote='git remote'
 function gdom {
   query=$1
   default_remote_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+  if [[ "$query" == "--stat" ]]; then
+    git diff origin/$default_remote_branch --stat
+    return
+  fi
+
   file=$(
     git diff origin/"$default_remote_branch" --stat --color=always | \
     fzf --query=$query --ansi --prompt "GitFiles?> " \
@@ -31,7 +36,7 @@ function gdom {
     awk '{print $1}'
 
   )
-  [ ! -z $file ] && git diff origin/master $file
+  [ ! -z $file ] && git diff origin/$default_remote_branch $file
 }
 
 function grom {
