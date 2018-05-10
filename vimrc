@@ -296,7 +296,7 @@ autocmd FileType yaml,docker-compose    setlocal  shiftwidth=2 tabstop=2 expandt
 autocmd FileType json                   setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType snippets               setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType jade                   setlocal  shiftwidth=2 tabstop=2 expandtab
-autocmd FileType html,htmldjango        setlocal  shiftwidth=4 tabstop=4 expandtab
+autocmd FileType html,htmldjango        setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType python                 setlocal  shiftwidth=4 tabstop=4 expandtab
 autocmd FileType go                     setlocal  shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType erlang                 setlocal  shiftwidth=4 tabstop=4 noexpandtab
