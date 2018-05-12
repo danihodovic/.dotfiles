@@ -73,7 +73,6 @@ if s:has_plug == 1
   Plug 'Valloric/MatchTagAlways'                " Show matching html/xml tags
   Plug 'vim-erlang/vim-erlang-omnicomplete'
   Plug 'junegunn/vader.vim'
-  Plug 'slashmili/alchemist.vim'
   Plug 'elixir-editors/vim-elixir'
   Plug 'pearofducks/ansible-vim'
   call plug#end()
@@ -255,6 +254,7 @@ set wildignorecase
 set ignorecase smartcase
 " Highlight the current line under the cursor
 set cursorline
+hi CursorLine ctermbg=236 guibg=#242321
 " Resets search
 autocmd InsertEnter * set cursorline
 " Color of search highlight
