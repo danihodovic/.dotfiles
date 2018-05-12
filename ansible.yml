@@ -245,4 +245,37 @@
           dest: /usr/local/bin/tldr
           mode: 0444
 
-
+  - name: Symlink config files
+    file:
+      src: '{{ item.src }}'
+      dest: '{{ item.dest }}'
+      owner: dani
+      group: dani
+      state: link
+    with_items:
+      - { src: , dest: }
+    tags: setup-symlinks
+      - { src: '{{ symlink_dir }}/profile',          dest: '{{ ansible_env.HOME }}/.profile' }
+      - { src: '{{ symlink_dir }}/inputrc',          dest: '{{ ansible_env.HOME }}/.inputrc' }
+      - { src: '{{ symlink_dir }}/tmux.conf',        dest: '{{ ansible_env.HOME }}/.tmux.conf' }
+      - { src: '{{ symlink_dir }}/sqliterc',         dest: '{{ ansible_env.HOME }}/.sqliterc' }
+      - { src: '{{ symlink_dir }}/jshintrc',         dest: '{{ ansible_env.HOME }}/.jshintrc' }
+      - { src: '{{ symlink_dir }}/pylintrc',         dest: '{{ ansible_env.HOME }}/.pylintrc' }
+      - { src: '{{ symlink_dir }}/pythonrc',         dest: '{{ ansible_env.HOME }}/.pythonrc' }
+      - { src: '{{ symlink_dir }}/jsbeautifyrc',     dest: '{{ ansible_env.HOME }}/.jsbeautifyrc' }
+      - { src: '{{ symlink_dir }}/tern-config',      dest: '{{ ansible_env.HOME }}/.tern-config' }
+      - { src: '{{ symlink_dir }}/ctags',            dest: '{{ ansible_env.HOME }}/.ctags' }
+      - { src: '{{ symlink_dir }}/agignore',         dest: '{{ ansible_env.HOME }}/.agignore' }
+      - { src: '{{ symlink_dir }}/gitconfig',        dest: '{{ ansible_env.HOME }}/.gitconfig' }
+      - { src: '{{ symlink_dir }}/global-gitignore', dest: '{{ ansible_env.HOME }}/.config/git/ignore' }
+      - { src: '{{ symlink_dir }}/i3-config',        dest: '{{ ansible_env.HOME }}/.i3/config' }
+      - { src: '{{ symlink_dir }}/Xresources',       dest: '{{ ansible_env.HOME }}/.Xresources' }
+      - { src: '{{ symlink_dir }}/vimperatorrc',     dest: '{{ ansible_env.HOME }}/.vimperatorrc' }
+      - { src: '{{ symlink_dir }}/ginit.vim',        dest: '{{ ansible_env.HOME }}/.config/nvim/ginit.vim' }
+      - { src: '{{ symlink_dir }}/alacritty.yml',    dest: '{{ ansible_env.HOME }}/.config/alacritty/alacritty.yml' }
+      - { src: '{{ symlink_dir }}/xfce4-terminalrc', dest: '{{ ansible_env.HOME }}/.config/xfce4/terminal/terminalrc' }
+      # Files not in conf dir
+      - { src: '{{ playbook_dir }}/zshrc',           dest: '{{ ansible_env.HOME }}/.zshrc'),
+      - { src: '{{ playbook_dir }}/bashrc',          dest: '{{ ansible_env.HOME }}/.bashrc'),
+      - { src: '{{ playbook_dir }}/vimrc',           dest: '{{ ansible_env.HOME }}/.config/nvim/init.vim'),
+      - { src: '{{ playbook_dir }}/pre-commit',      dest: '{{ playbook_dir }}/.git/hooks/pre-commit')
