@@ -1,6 +1,45 @@
 - hosts: localhost
+  vars:
+    symlink_dir: '{{ playbook_dir }}/conf'
 
   tasks:
+  - name: Install apt packages
+    apt:
+      name: '{{ item }}'
+    with_items:
+      - parcellite
+      - xfce4-terminal
+      - zsh
+      - tmux
+      - silversearcher-ag
+      - xclip
+      - jq
+      - git-extras
+      - curl
+      - sshfs
+      - cmake
+      - python-dev
+      - build-essential
+      - xdotool wmctrl
+      - colortest
+      - vnstat
+      - gparted
+      - shellcheck
+      - rofi
+      - ranger
+      - gnome-settings-daemon
+      - apt-file
+      - direnv
+      - xautolock
+      - caffeine
+      - asciinema
+      - variety
+      - feh
+      - speedtest-cli
+      - i3
+      - i3status
+      - i3lock
+
   - name: Install neovim
     block:
     - name: Add neovim ppa
