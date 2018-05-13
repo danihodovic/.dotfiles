@@ -1,5 +1,0 @@
-[Desktop Entry]
-Name=xkbmap-mappings
-Exec=setxkbmap -option caps:swapescape
-Type=Application
-Terminal=false
