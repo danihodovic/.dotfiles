@@ -8,12 +8,12 @@
     apt:
       name: '{{ item }}'
     with_items:
+      - zsh
       - git
       - curl
+      - openvpn
       - taskwarrior
       - parcellite
-      - xfce4-terminal
-      - zsh
       - tmux
       - silversearcher-ag
       - xclip
