@@ -282,6 +282,7 @@
       - { src: '{{ symlink_dir }}/Xresources',       dest: '{{ ansible_env.HOME }}/.Xresources' }
       - { src: '{{ symlink_dir }}/ginit.vim',        dest: '{{ ansible_env.HOME }}/.config/nvim/ginit.vim' }
       - { src: '{{ symlink_dir }}/alacritty.yml',    dest: '{{ ansible_env.HOME }}/.config/alacritty/alacritty.yml' }
+      - { src: '{{ symlink_dir }}/zlogin',           dest: '{{ ansible_env.HOME }}/.zlogin' }
       - { src: '{{ playbook_dir }}/zshrc',           dest: '{{ ansible_env.HOME }}/.zshrc' }
       - { src: '{{ playbook_dir }}/bashrc',          dest: '{{ ansible_env.HOME }}/.bashrc' }
       - { src: '{{ playbook_dir }}/vimrc',           dest: '{{ ansible_env.HOME }}/.config/nvim/init.vim' }
