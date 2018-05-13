@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install \
 
 RUN pip install ansible
 
+RUN ansible-galaxy install geerlingguy.docker
+
 RUN adduser ronaldo --disabled-password --quiet --gecos "" && \
     echo ronaldo:ronaldo | chpasswd && \
     adduser ronaldo sudo

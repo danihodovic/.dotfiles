@@ -8,6 +8,8 @@
     apt:
       name: '{{ item }}'
     with_items:
+      - git
+      - curl
       - parcellite
       - xfce4-terminal
       - zsh
@@ -42,6 +44,21 @@
       - i3status
       - i3lock
 
+  - name: Install docker
+    shell:
+      curl -fsSL get.docker.com | sh
+    args:
+      creates: /usr/bin/docker
+    tags: docker
+
+  - name: Add user to docker group
+    become: true
+    user:
+      name: '{{ ansible_user_id }}'
+      groups: docker
+      append: true
+    tags: docker
+
   - name: Install neovim
     block:
     - name: Add neovim ppa
@@ -62,14 +79,6 @@
   - name: Install fzf
     tags: fzf
     block:
-      - name: Install dependecies
-        apt:
-          name: '{{ item }}'
-        become: true
-        with_items:
-          - curl
-          - git
-
       - name: Clone fzf
         git:
           repo: 'https://github.com/junegunn/fzf.git'
@@ -88,8 +97,6 @@
           name: '{{ item }}'
         become: true
         with_items:
-          - git
-          - curl
           - perl-modules-5.26
 
       - name: Install diff-so-fancy
@@ -107,8 +114,6 @@
         apt:
           name: '{{ item }}'
         with_items:
-          - git
-          - curl
           - binutils
           - bison
           - gcc
@@ -125,14 +130,6 @@
   - name: Install n (node version manager)
     tags: n
     block:
-      - name: Install dependencies
-        become: true
-        apt:
-          name: '{{ item }}'
-        with_items:
-          - curl
-          - git
-
       - name: Install n
         args:
           creates: '{{ ansible_env.HOME }}/.n/bin/n'
@@ -163,10 +160,6 @@
     tags: tldr
     become: true
     block:
-      - name: Install dependencies
-        apt:
-          name: curl
-
       - name: Install tldr
         get_url:
           url: https://raw.githubusercontent.com/raylee/tldr/master/tldr
@@ -181,12 +174,9 @@
           name: '{{ item }}'
         become: true
         with_items:
-          - curl
-          - git
           - cmake
           - libfreetype6-dev
           - libfontconfig1-dev
-          - xclip
 
       - name: Install rustup
         shell: curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
@@ -212,7 +202,7 @@
           set -e
           rustup override set stable
           rustup update stable
-          cargo build --release
+          cargo build --release --verbose
           sudo cp target/release/alacritty /usr/local/bin/
 
 

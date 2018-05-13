@@ -1,6 +1,8 @@
 run_ansible_cmd=ansible-playbook ansible.yml -i 'localhost,' -c local
 
 install:
+	sudo pip install ansible
+	ansible-galaxy install geerlingguy.docker
 	$(run_ansible_cmd)
 
 build:
