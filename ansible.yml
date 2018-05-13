@@ -60,7 +60,7 @@
       append: true
     tags: docker
 
-  - name: Install neovim
+  - tags: nvim
     block:
     - name: Add neovim ppa
       apt_repository:
@@ -76,6 +76,18 @@
     - name: Install neovim pip package
       pip:
         name: neovim
+
+    - name: Create vim-plug parent directory
+      file:
+        path: '{{ ansible_env.HOME }}/.config/nvim/autoload'
+        state: directory
+
+    - name: Install vim-plug
+      get_url:
+        url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        dest: '{{ ansible_env.HOME }}/.config/nvim/autoload/plug.vim'
+        mode: 0440
+
 
   - name: Install fzf
     tags: fzf
@@ -238,10 +250,7 @@
   - name: Create symlink parent directories
     tags: symlinks
     file:
-      src: '{{ item }}'
-      dest: '{{ item }}'
-      owner: '{{ ansible_user_id }}'
-      group: '{{ ansible_user_id }}'
+      path: '{{ item }}'
       state: directory
     with_items:
       - '{{ ansible_env.HOME }}/.config/nvim'
