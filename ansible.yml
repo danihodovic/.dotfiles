@@ -291,6 +291,26 @@
           dest: /usr/local/bin/tldr
           mode: 0444
 
+  - name: Check if terraform exists
+    tags: terraform
+    stat:
+      path: /usr/local/bin/terraform
+    register: terraform_out
+
+  - tags: terraform
+    when: terraform_out.stat.exists == false
+    block:
+    - name: Download terraform
+      get_url:
+        url: https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip
+        dest: /tmp/terraform.zip
+
+    - name: Unarchive terraform
+      become: true
+      unarchive:
+        src: /tmp/terraform.zip
+        dest: /usr/local/bin/
+
   - name: Create symlink parent directories
     tags: symlinks
     file:
