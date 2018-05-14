@@ -13,6 +13,7 @@
       - curl
       - openvpn
       - taskwarrior
+      - tldr
       - parcellite
       - tmux
       - silversearcher-ag
