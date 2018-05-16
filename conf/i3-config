@@ -141,7 +141,7 @@ hide_edge_borders both
 
 # i3 gaps
 gaps inner 4
-gaps outer 10
+gaps outer 1
 # smart_gaps on
 smart_borders on
 for_window [class="^.*"] border pixel 2
