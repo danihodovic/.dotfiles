@@ -45,6 +45,7 @@
       - i3
       - i3status
       - i3lock
+      - ruby-dev
 
   - name: Install docker
     shell:
