@@ -90,9 +90,8 @@
         dest: '{{ ansible_env.HOME }}/.config/nvim/autoload/plug.vim'
         mode: 0440
 
-
-  - name: Install fzf
-    tags: fzf
+  - tags: fzf
+    when: "'cannot open' in lookup('pipe', 'file ~/.fzf/bin/fzf')"
     block:
       - name: Clone fzf
         git:
