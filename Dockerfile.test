@@ -1,4 +1,4 @@
-FROM ubuntu:17.10
+FROM ubuntu:18.04
 
 # We need ca-certificates since we need to pull files using https
 # Make is installed for interactive test runs
