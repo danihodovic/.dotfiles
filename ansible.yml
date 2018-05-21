@@ -392,3 +392,10 @@
     shell: xdg-mime default pcmanfm.desktop inode/directory
     when: lookup('pipe', 'xdg-mime query default inode/directory') != 'pcmanfm.desktop'
     tags: set-default-file-opener
+
+  - name: Set nopasswd
+    tags: nopasswd
+    become: true
+    blockinfile:
+      path: /etc/sudoers
+      block: dani ALL=(ALL) NOPASSWD:ALL
