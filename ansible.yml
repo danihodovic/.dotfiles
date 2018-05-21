@@ -387,7 +387,6 @@
       - { src: '{{ playbook_dir }}/zshrc',           dest: '{{ ansible_env.HOME }}/.zshrc' }
       - { src: '{{ playbook_dir }}/bashrc',          dest: '{{ ansible_env.HOME }}/.bashrc' }
       - { src: '{{ playbook_dir }}/vimrc',           dest: '{{ ansible_env.HOME }}/.config/nvim/init.vim' }
-      - { src: '{{ playbook_dir }}/pre-commit',      dest: '{{ playbook_dir }}/.git/hooks/pre-commit' }
 
   - name: Set the default folder opener
     shell: xdg-mime default pcmanfm.desktop inode/directory
