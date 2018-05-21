@@ -21,6 +21,7 @@ export AWS_PROFILE=$([ -f ~/.aws_profile ] && cat ~/.aws_profile)
 export KUBECONFIG=$([ -d ~/.kube ] && find ~/.kube -maxdepth 1 -type f | tr '\n' ':')
 
 function vi () {}
+function find () {}
 
 # Ease of use
 export dotfiles=${HOME}/.dotfiles
@@ -79,9 +80,11 @@ for script in $scripts_to_source; do
   fi
 done
 
-for f in ~/.cache/antibody/*/*.zsh; do
-  source $f
-done
+if [ -d ~/.cache/antibody/ ]; then
+  for f in ~/.cache/antibody/*/*.zsh; do
+    source $f
+  done
+fi
 
 # Source this after gvm, as gvm sets a custom $GOPATH...
 export GOPATH=$HOME/repos/go_pkg
