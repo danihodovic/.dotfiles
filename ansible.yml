@@ -14,6 +14,7 @@
       - openvpn
       - taskwarrior
       - tldr
+      - net-tools
       - parcellite
       - tmux
       - silversearcher-ag
@@ -53,6 +54,12 @@
     args:
       creates: /usr/bin/docker
     tags: docker
+
+  - name: Install docker-compose
+    become: true
+    pip:
+      name: docker-compose
+    tags: docker-compose
 
   - name: Add user to docker group
     become: true
