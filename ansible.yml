@@ -359,6 +359,32 @@
       - '{{ ansible_env.HOME }}/.config/git'
       - '{{ ansible_env.HOME }}/.i3'
 
+  - name: Check if github/hub is installed
+    shell: which hub
+    failed_when: false
+    register: hub_installed
+    tags: hub
+
+  - tags: hub
+    when: hub_installed.rc == 1
+    block:
+      - name: Pull hub binary
+        get_url:
+          url: https://github.com/github/hub/releases/download/v2.3.0-pre10/hub-linux-amd64-2.3.0-pre10.tgz
+          dest: /tmp/hub.tar
+          mode: 0755
+
+      - name: Extract hub
+        unarchive:
+          src: /tmp/hub.tar
+          dest: /tmp
+          list_files: true
+        register: hub_archive
+
+      - name: Install hub
+        become: true
+        shell: '/tmp/{{ hub_archive.files[0].split("/")[0] }}/install'
+
   - name: Symlink config files
     tags: symlinks
     file:
