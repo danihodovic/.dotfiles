@@ -191,16 +191,6 @@
           name: google-chrome-stable
           update_cache: yes
 
-  - name: Install tldr
-    tags: tldr
-    become: true
-    block:
-      - name: Install tldr
-        get_url:
-          url: https://raw.githubusercontent.com/raylee/tldr/master/tldr
-          dest: /usr/local/bin/tldr
-          mode: 0555
-
   - name: Install alacritty
     tags: alacritty
     block:
