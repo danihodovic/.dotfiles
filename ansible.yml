@@ -406,6 +406,7 @@
       copy:
         src: /tmp/ngrok
         dest: /usr/local/bin/
+        mode: 0755
 
   - name: Check if dropbox is installed
     tags: dropbox
