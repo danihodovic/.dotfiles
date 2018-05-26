@@ -212,12 +212,10 @@
         register: alacritty_git
         git:
           repo: https://github.com/jwilm/alacritty.git
-          depth: 1
           dest: ~/repos/alacritty
-          update: yes
 
       - name: Install alacritty
-        when: alacritty_git.changed
+        when: alacritty_git.before != alacritty_git.after
         environment:
           PATH: '{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.cargo/bin'
         args:
