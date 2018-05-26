@@ -156,3 +156,4 @@ exec --no-startup-id xautolock -time 3 -locker ~/.dotfiles/scripts/lock
 exec --no-startup-id caffeine
 exec --no-startup-id variety
 exec --no-startup-id rescuetime
+exec --no-startup-id dropbox start

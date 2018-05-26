@@ -392,6 +392,25 @@
         become: true
         shell: '/tmp/{{ hub_archive.files[0].split("/")[0] }}/install'
 
+  - name: Check if dropbox is installed
+    tags: dropbox
+    shell: dpkg-query -W dropbox
+    failed_when: false
+    register: dropbox_installed
+
+  - tags: dropbox
+    when: dropbox_installed.rc == 1
+    block:
+    - name: Get dropbox debian package
+      get_url:
+        url: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb
+        dest: /tmp/dropbox.deb
+        mode: 0755
+
+    - name: Install dropbox
+      apt:
+        deb: /tmp/dropbox.deb
+
   - name: Symlink config files
     tags: symlinks
     file:
