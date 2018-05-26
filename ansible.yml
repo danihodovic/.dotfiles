@@ -383,6 +383,32 @@
         become: true
         shell: '/tmp/{{ hub_archive.files[0].split("/")[0] }}/install'
 
+  - name: Check if ngrok is installed
+    shell: which ngrok
+    failed_when: false
+    changed_when: false
+    register: hub_installed
+    tags: ngrok
+
+  - tags: ngrok
+    block:
+    - name: Pull ngrok
+      get_url:
+        url: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+        dest: /tmp/ngrok.zip
+        mode: 0755
+
+    - name: Extract ngrok
+      unarchive:
+        src: /tmp/ngrok.zip
+        dest: /tmp
+
+    - name: Move ngrok to bin
+      become: true
+      copy:
+        src: /tmp/ngrok
+        dest: /usr/local/bin/
+
   - name: Check if dropbox is installed
     tags: dropbox
     shell: dpkg-query -W dropbox
