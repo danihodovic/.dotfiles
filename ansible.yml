@@ -359,6 +359,7 @@
   - name: Check if github/hub is installed
     shell: which hub
     failed_when: false
+    changed_when: false
     register: hub_installed
     tags: hub
 
@@ -386,6 +387,7 @@
     tags: dropbox
     shell: dpkg-query -W dropbox
     failed_when: false
+    changed_when: false
     register: dropbox_installed
 
   - tags: dropbox
