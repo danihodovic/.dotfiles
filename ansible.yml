@@ -40,6 +40,7 @@
       - xautolock
       - caffeine
       - asciinema
+      - network-manager-openvpn-gnome
       - variety
       - feh
       - speedtest-cli
@@ -343,17 +344,6 @@
       state: latest
       extra_args: --user
 
-  - name: Create symlink parent directories
-    tags: symlinks
-    file:
-      path: '{{ item }}'
-      state: directory
-    with_items:
-      - '{{ ansible_env.HOME }}/.config/nvim'
-      - '{{ ansible_env.HOME }}/.config/alacritty'
-      - '{{ ansible_env.HOME }}/.config/git'
-      - '{{ ansible_env.HOME }}/.i3'
-
   - name: Check if github/hub is installed
     shell: which hub
     failed_when: false
@@ -427,6 +417,21 @@
     - name: Install dropbox
       apt:
         deb: /tmp/dropbox.deb
+
+  - name: Install ansible-lint
+    pip:
+      name: ansible-lint
+
+  - name: Create symlink parent directories
+    tags: symlinks
+    file:
+      path: '{{ item }}'
+      state: directory
+    with_items:
+      - '{{ ansible_env.HOME }}/.config/nvim'
+      - '{{ ansible_env.HOME }}/.config/alacritty'
+      - '{{ ansible_env.HOME }}/.config/git'
+      - '{{ ansible_env.HOME }}/.i3'
 
   - name: Symlink config files
     tags: symlinks

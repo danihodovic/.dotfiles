@@ -638,7 +638,9 @@ let g:neomake_ansible_ansiblelint_maker = {
 
 autocmd BufWritePost * call BufWritePostNeomake()
 func BufWritePostNeomake()
-  let neomake_bufwritepost_filetypes = ['python', 'bash', 'lua', 'go', 'ruby', 'ansible']
+  let neomake_bufwritepost_filetypes = [
+  \ 'python', 'bash', 'lua', 'go', 'ruby', 'ansible', 'sh'
+  \]
   let neomake_lint_and_fix_filetypes = ['javascript', 'typescript']
 
   if count(neomake_lint_and_fix_filetypes, &filetype)
