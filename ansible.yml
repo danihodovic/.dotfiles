@@ -419,6 +419,7 @@
         deb: /tmp/dropbox.deb
 
   - name: Install ansible-lint
+    tags: ansible-lint
     pip:
       name: ansible-lint
 

@@ -56,7 +56,6 @@ zstyle ':completion:*' menu select
 # ------------
 # Source these before our own `bindkeys` so that we can override stuff
 # ------------
-autoload bashcompinit && bashcompinit
 scripts_to_source=(
   /usr/local/bin/aws_zsh_completer.sh
   ${HOME}/.fzf.zsh
@@ -85,6 +84,10 @@ if [ -d ~/.cache/antibody/ ]; then
     source $f
   done
 fi
+
+# Reloads custom zsh completions quickly by changing the default dump path.
+# I have no clue why this works...
+compinit -d ~/.zcompdump_custom
 
 # Source this after gvm, as gvm sets a custom $GOPATH...
 export GOPATH=$HOME/repos/go_pkg
