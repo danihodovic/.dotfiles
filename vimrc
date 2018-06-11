@@ -56,6 +56,7 @@ if s:has_plug == 1
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
+  Plug 'b4b4r07/vim-ansible-vault'
   Plug 'hashivim/vim-terraform'
   Plug 'juliosueiras/vim-terraform-completion'
   Plug 'cespare/vim-toml'                       " Toml is a configuration language similar to yaml
@@ -287,7 +288,7 @@ autocmd BufNewFile,BufRead nginx.*.j2 set ft=nginx
 "-----------------------------------------
 " `nocindent smartindent` will allow us to omit semicolons and jump to the next line without auto indentation
 " for Javascript/Typescript
-autocmd FileType typescript,javascript,terraform  setlocal  shiftwidth=2 tabstop=2 expandtab nocindent smartindent
+autocmd FileType typescript,javascript,terraform,jinja2  setlocal  shiftwidth=2 tabstop=2 expandtab nocindent smartindent
 autocmd FileType coffee                 setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType css,scss,stylus        setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType vim                    setlocal  shiftwidth=2 tabstop=2 expandtab
