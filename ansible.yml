@@ -48,6 +48,7 @@
       - i3status
       - i3lock
       - ruby-dev
+      - libnotify-bin
 
   - name: Install docker
     shell:
