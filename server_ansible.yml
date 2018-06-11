@@ -1,4 +1,4 @@
-- hosts: '{{ override_hosts }}'
+- hosts: all
 
   tasks:
   - tags: dependencies
@@ -67,4 +67,8 @@
     name: Copy zsh file
     copy:
       src: '{{ playbook_dir }}/zshrc'
-      dest: '{{ ansible_env.HOME }}/.zshrc'
+      dest: '{{ ansible_env.HOME }}/.zlogin'
+
+  - name: Set zsh as the default shell
+    become: true
+    shell: 'chsh -s /bin/zsh {{ ansible_user }}'
