@@ -70,6 +70,23 @@ export FZF_CTRL_R_OPTS='--exact'
 bindkey -M vicmd '^r'   fzf-history-widget
 bindkey -M viins '^r'   fzf-history-widget
 
+stty stop undef
+function fzf-ssh {
+  all_matches=$(grep -P -r "Host\s+\w+" ~/.ssh/ | grep -v '\*')
+  only_host_parts=$(echo "$all_matches" | awk '{print $NF}')
+  selection=$(echo "$only_host_parts" | fzf)
+  echo $selection
+
+  if [ ! -z $selection ]; then
+    BUFFER="ssh $selection"
+    zle accept-line
+  fi
+  zle reset-prompt
+}
+zle     -N     fzf-ssh
+bindkey -M vicmd '^s'   fzf-ssh
+bindkey -M viins '^s'   fzf-ssh
+
 # Fzf keybindings as suggested in the wiki
 # https://github.com/junegunn/fzf/wiki/examples
 # fda - including hidden directories
