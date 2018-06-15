@@ -38,6 +38,7 @@ setopt NO_BANG_HIST
 setopt SHARE_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
+setopt AUTO_CD
 # http://unix.stackexchange.com/questions/273861/unlimited-history-in-zsh
 # You need to set both HISTSIZE and SAVEHIST. They indicate how many lines of history to keep in
 # memory and how many lines to keep in the history file, respectively.
