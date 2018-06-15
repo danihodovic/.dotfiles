@@ -4,6 +4,20 @@ if which fd &> /dev/null; then
   export FZF_CTRL_T_COMMAND=fd
 fi
 
+# Custom fzf file widget.
+# The differences are:
+# 1) We add a space between LBUFFER and the selection we've made by pushing the
+#    cursor one step forward before inserting our selection
+# 2) After the insert we end up in viins mode instead of vicmd
+fzf-file-widget() {
+  CURSOR=$(($CURSOR + 1))
+  LBUFFER="${LBUFFER}$(__fsel)"
+  local ret=$?
+  zle -K viins
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  return $ret
+}
 
 stty stop undef
 function fzf-ssh {
