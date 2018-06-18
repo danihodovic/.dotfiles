@@ -34,6 +34,12 @@ function fzf-ssh {
 }
 zle     -N     fzf-ssh
 
+fcommit() {
+  local commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
+  local commit=$(echo "$commits" | fzf --tac +s -m -e --ansi --reverse) &&
+  echo -n $(echo "$commit" | sed "s/ .*//")
+}
+
 bindkey -M vicmd '\-' fzf-file-widget
 bindkey -M vicmd '^r'   fzf-history-widget
 bindkey -M viins '^r'   fzf-history-widget
