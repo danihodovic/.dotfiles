@@ -49,6 +49,7 @@
       - i3lock
       - ruby-dev
       - libnotify-bin
+      - yamllint
 
   - name: Install docker
     shell:
