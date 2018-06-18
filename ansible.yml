@@ -425,6 +425,34 @@
     pip:
       name: ansible-lint
 
+  - name: Check if tflint is installed
+    shell: which tflint
+    failed_when: false
+    changed_when: false
+    register: tflint_installed
+    tags: tflint
+
+  - tags: tflint
+    when: tflint_installed.rc == 1
+    block:
+      - name: Download archive
+        get_url:
+          url: https://github.com/wata727/tflint/releases/download/v0.7.0/tflint_linux_amd64.zip
+          dest: /tmp/tflint.zip
+          mode: 0755
+
+      - name: Extract archive
+        unarchive:
+          src: /tmp/tflint.zip
+          dest: /tmp
+
+      - name: Put tflint in $PATH
+        become: true
+        copy:
+          src: /tmp/tflint
+          dest: /usr/local/bin/tflint
+          mode: 0755
+
   - name: Create symlink parent directories
     tags: symlinks
     file:
