@@ -75,7 +75,6 @@ if s:has_plug == 1
   Plug 'vim-erlang/vim-erlang-omnicomplete'
   Plug 'junegunn/vader.vim'
   Plug 'elixir-editors/vim-elixir'
-  Plug 'pearofducks/ansible-vim'
   Plug 'tomlion/vim-solidity'
   call plug#end()
 end
@@ -632,16 +631,11 @@ let g:neomake_typescript_tslint_maker = {
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_javascript_eslint_exe = getcwd() . '/node_modules/.bin/eslint'
 let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
-let g:neomake_ansible_ansiblelint_maker = {
-    \ 'exe': 'ansible-lint',
-    \ 'args': ['-p', '--nocolor', '-x', 'ANSIBLE0011'],
-    \ 'errorformat': '%f:%l: [%tANSIBLE%n] %m',
-    \ }
 
 autocmd BufWritePost * call BufWritePostNeomake()
 func BufWritePostNeomake()
   let neomake_bufwritepost_filetypes = [
-  \ 'python', 'bash', 'lua', 'go', 'ruby', 'ansible', 'sh'
+  \ 'python', 'bash', 'lua', 'go', 'ruby', 'ansible', 'sh', 'yaml',
   \]
   let neomake_lint_and_fix_filetypes = ['javascript', 'typescript']
 
