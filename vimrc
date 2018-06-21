@@ -547,6 +547,7 @@ fu! LintAndFix()
 
   function! LintAndFixCallback(job_id, data, event)
     Neomake
+    edit
   endfunction
 
   call jobstart(cmd, {'on_exit': 'LintAndFixCallback'})
