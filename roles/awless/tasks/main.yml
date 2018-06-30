@@ -1,0 +1,36 @@
+---
+- name: Get latest release
+  uri:
+    url: https://api.github.com/repos/wallix/awless/releases/latest
+    timeout: 5
+  register: awless_latest_release
+  changed_when: false
+
+- name: Get download url
+  set_fact:
+    awless_download_url: >
+      {{
+        awless_latest_release.json.assets |
+        to_json | from_json |
+        json_query(
+          "[?contains(name, 'linux-amd64')].browser_download_url | [0]"
+        )
+      }}
+
+- name: Download tarfile
+  register: awless_tarfile
+  get_url:
+    url: '{{ awless_download_url }}'
+    dest: /tmp/
+
+- name: Unarchive
+  unarchive:
+    src: '{{ awless_tarfile.dest }}'
+    dest: /tmp/
+    list_files: true
+
+- name: Move awless to bin
+  copy:
+    src: /tmp/awless
+    dest: '{{ ansible_env.HOME }}/.local/bin/'
+    mode: 0500

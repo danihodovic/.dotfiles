@@ -332,6 +332,9 @@
             src: /tmp/terraform.zip
             dest: /usr/local/bin/
 
+    - tags: awless
+      import_role: name=awless
+
     - tags: gcloud
       become: true
       block:
