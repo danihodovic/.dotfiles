@@ -55,18 +55,27 @@
         - libnotify-bin
         - yamllint
 
+    - name: Install pip packages
+      pip:
+        name: '{{ item }}'
+        state: latest
+        extra_args: --user
+      with_items:
+        - neovim
+        - docker-compose
+        - awscli
+        - ansible-lint
+        # Pylint dependencies
+        - astroid
+        - isort
+        - pylint
+
     - name: Install docker
       shell:
         curl -fsSL get.docker.com | sh
       args:
         creates: /usr/bin/docker
       tags: docker
-
-    - name: Install docker-compose
-      become: true
-      pip:
-        name: docker-compose
-      tags: docker-compose
 
     - name: Add user to docker group
       become: true
@@ -88,10 +97,6 @@
             name: neovim
             update_cache: true
           become: true
-
-        - name: Install neovim pip package
-          pip:
-            name: neovim
 
         - name: Create vim-plug parent directory
           file:
@@ -343,13 +348,6 @@
             name: google-cloud-sdk
             update_cache: true
 
-    - name: Install aws cli
-      tags: aws
-      pip:
-        name: awscli
-        state: latest
-        extra_args: --user
-
     - name: Check if github/hub is installed
       shell: which hub
       failed_when: false
@@ -423,20 +421,6 @@
         - name: Install dropbox
           apt:
             deb: /tmp/dropbox.deb
-
-    - name: Install ansible-lint
-      tags: ansible-lint
-      pip:
-        name: ansible-lint
-
-    - name: Install pylint
-      tags: pylint
-      pip:
-        name: '{{ item}}'
-      with_items:
-        - astroid
-        - isort
-        - pylint
 
     - name: Check if tflint is installed
       shell: which tflint
