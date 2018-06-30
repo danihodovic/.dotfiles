@@ -1,5 +1,5 @@
+---
 - hosts: all
-
   tasks:
   - tags: dependencies
     become: true
@@ -39,6 +39,7 @@
     block:
       - name: Get fd
         get_url:
+          # yamllint disable-line rule:line-length
           url: https://github.com/sharkdp/fd/releases/download/v7.0.0/fd-v7.0.0-x86_64-unknown-linux-gnu.tar.gz
           dest: /tmp/fd.tar.gz
           mode: 0400

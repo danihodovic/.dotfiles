@@ -1,506 +1,519 @@
+---
+# yamllint disable rule:line-length
+# yamllint disable rule:commas
+# yamllint disable rule:braces
 - hosts: localhost
   vars:
     symlink_dir: '{{ playbook_dir }}/conf'
 
   tasks:
-  - name: Install apt packages
-    become: true
-    apt:
-      name: '{{ item }}'
-    with_items:
-      - zsh
-      - git
-      - curl
-      - openvpn
-      - taskwarrior
-      - tldr
-      - net-tools
-      - parcellite
-      - tmux
-      - silversearcher-ag
-      - xclip
-      - jq
-      - git-extras
-      - curl
-      - sshfs
-      - cmake
-      - python-dev
-      - build-essential
-      - xdotool
-      - wmctrl
-      - colortest
-      - vnstat
-      - gparted
-      - shellcheck
-      - rofi
-      - ranger
-      - gnome-settings-daemon
-      - apt-file
-      - direnv
-      - xautolock
-      - caffeine
-      - asciinema
-      - network-manager-openvpn-gnome
-      - variety
-      - feh
-      - speedtest-cli
-      - i3
-      - i3status
-      - i3lock
-      - ruby-dev
-      - libnotify-bin
-      - yamllint
-
-  - name: Install docker
-    shell:
-      curl -fsSL get.docker.com | sh
-    args:
-      creates: /usr/bin/docker
-    tags: docker
-
-  - name: Install docker-compose
-    become: true
-    pip:
-      name: docker-compose
-    tags: docker-compose
-
-  - name: Add user to docker group
-    become: true
-    user:
-      name: '{{ ansible_user_id }}'
-      groups: docker
-      append: true
-    tags: docker
-
-  - tags: nvim
-    block:
-    - name: Add neovim ppa
-      apt_repository:
-        repo: ppa:neovim-ppa/unstable
+    - name: Install apt packages
       become: true
-
-    - name: Install neovim
       apt:
-        name: neovim
-        update_cache: yes
-      become: true
+        name: '{{ item }}'
+      with_items:
+        - zsh
+        - git
+        - curl
+        - openvpn
+        - taskwarrior
+        - tldr
+        - net-tools
+        - parcellite
+        - tmux
+        - silversearcher-ag
+        - xclip
+        - jq
+        - git-extras
+        - curl
+        - sshfs
+        - cmake
+        - python-dev
+        - build-essential
+        - xdotool
+        - wmctrl
+        - colortest
+        - vnstat
+        - gparted
+        - shellcheck
+        - rofi
+        - ranger
+        - gnome-settings-daemon
+        - apt-file
+        - direnv
+        - xautolock
+        - caffeine
+        - asciinema
+        - network-manager-openvpn-gnome
+        - variety
+        - feh
+        - speedtest-cli
+        - i3
+        - i3status
+        - i3lock
+        - ruby-dev
+        - libnotify-bin
+        - yamllint
 
-    - name: Install neovim pip package
+    - name: Install docker
+      shell:
+        curl -fsSL get.docker.com | sh
+      args:
+        creates: /usr/bin/docker
+      tags: docker
+
+    - name: Install docker-compose
+      become: true
       pip:
-        name: neovim
+        name: docker-compose
+      tags: docker-compose
 
-    - name: Create vim-plug parent directory
+    - name: Add user to docker group
+      become: true
+      user:
+        name: '{{ ansible_user_id }}'
+        groups: docker
+        append: true
+      tags: docker
+
+    - tags: nvim
+      block:
+        - name: Add neovim ppa
+          apt_repository:
+            repo: ppa:neovim-ppa/unstable
+          become: true
+
+        - name: Install neovim
+          apt:
+            name: neovim
+            update_cache: true
+          become: true
+
+        - name: Install neovim pip package
+          pip:
+            name: neovim
+
+        - name: Create vim-plug parent directory
+          file:
+            path: '{{ ansible_env.HOME }}/.config/nvim/autoload'
+            state: directory
+
+        - name: Install vim-plug
+          get_url:
+            url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+            dest: '{{ ansible_env.HOME }}/.config/nvim/autoload/plug.vim'
+            mode: 0440
+
+    - tags: fzf
+      when: "'cannot open' in lookup('pipe', 'file ~/.fzf/bin/fzf')"
+      block:
+        - name: Clone fzf
+          git:
+            repo: 'https://github.com/junegunn/fzf.git'
+            depth: 1
+            dest: ~/.fzf
+            accept_hostkey: true
+
+        - name: fzf installation script
+          shell: ~/.fzf/install --key-bindings --completion --no-update-rc
+
+    - tags: fd
+      when: "'cannot open' in lookup('pipe', 'file /usr/bin/fd')"
+      block:
+        - name: Get the debian package from Github
+          get_url:
+            url: https://github.com/sharkdp/fd/releases/download/v7.0.0/fd_7.0.0_amd64.deb
+            dest: /tmp/fd.deb
+            mode: 0400
+
+        - name: Install fd
+          become: true
+          apt:
+            deb: /tmp/fd.deb
+
+    - name: Install diff-so-fancy
+      tags: diff-so-fancy
+      block:
+        - name: Install dependencies
+          apt:
+            name: '{{ item }}'
+          become: true
+          with_items:
+            - perl-modules-5.26
+
+        - name: Install diff-so-fancy
+          get_url:
+            url: https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
+            dest: /usr/local/bin/diff-so-fancy
+            mode: 0555
+          become: true
+
+    - name: Install gvm
+      tags: gvm
+      block:
+        - name: Install dependencies
+          become: true
+          apt:
+            name: '{{ item }}'
+          with_items:
+            - binutils
+            - bison
+            - gcc
+
+        - name: Install gvm
+          args:
+            executable: /bin/bash
+            creates: '{{ ansible_env.HOME }}/.gvm/bin/gvm'
+          shell: |
+            set -o pipefail
+            url=https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer
+            curl -s -S -L $url | bash
+
+    - name: Install n (node version manager)
+      tags: n
+      block:
+        - name: Install n
+          args:
+            creates: '{{ ansible_env.HOME }}/.n/bin/n'
+          shell: |
+            # https://github.com/mklement0/n-install#examples
+            curl -L https://git.io/n-install | N_PREFIX=$HOME/.n bash -s -- -y lts
+
+
+    - name: Install chrome
+      tags: chrome
+      become: true
+      block:
+        - name: Add chrome ppa key
+          apt_key:
+            url: https://dl.google.com/linux/linux_signing_key.pub
+
+        - name: Add chrome ppa
+          apt_repository:
+            repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+            filename: 'google-chrome'
+
+        - name: Install chrome
+          apt:
+            name: google-chrome-stable
+            update_cache: true
+
+    - name: Install alacritty
+      tags: alacritty
+      block:
+        - name: Install dependencies
+          apt:
+            name: '{{ item }}'
+          become: true
+          with_items:
+            - cmake
+            - libfreetype6-dev
+            - libfontconfig1-dev
+
+        - name: Install rustup
+          shell: curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
+          args:
+            creates: ~/.cargo/bin/rustup
+
+        - name: Clone alacritty
+          register: alacritty_git
+          git:
+            repo: https://github.com/jwilm/alacritty.git
+            dest: ~/repos/alacritty
+
+        - name: Install alacritty
+          when: alacritty_git.before != alacritty_git.after
+          environment:
+            PATH: '{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.cargo/bin'
+          args:
+            creates: /usr/local/bin/alacritty
+            chdir: ~/repos/alacritty
+          shell: |
+            set -e
+            rustup override set stable
+            rustup update stable
+            cargo build --release --verbose
+            sudo cp target/release/alacritty /usr/local/bin/
+
+
+    - name: Install antibody
+      tags: antibody
+      block:
+        - name: Install dependencies
+          apt:
+            name: curl
+
+        - name: Install antibody
+          become: true
+          args:
+            creates: /usr/local/bin/antibody
+          shell: curl -sL https://git.io/antibody | bash -s
+
+    - tags: i3-gaps
+      block:
+        - name: Install i3-gaps dependencies
+          apt:
+            name: '{{ item }}'
+          with_items:
+            - libxcb1-dev
+            - libxcb-keysyms1-dev
+            - libpango1.0-dev
+            - libxcb-util0-dev
+            - libxcb-icccm4-dev
+            - libyajl-dev
+            - libstartup-notification0-dev
+            - libxcb-randr0-dev
+            - libev-dev
+            - libxcb-cursor-dev
+            - libxcb-xinerama0-dev
+            - libxcb-xkb-dev
+            - libxkbcommon-dev
+            - libxkbcommon-x11-dev
+            - autoconf
+            - libxcb-xrm0
+            - libxcb-xrm-dev
+            - automake
+
+        - name: Clone i3-gaps
+          git:
+            repo: https://www.github.com/Airblader/i3
+            dest: '{{ ansible_env.HOME }}/repos/i3-gaps'
+          register: i3_gaps
+
+        - name: Compile and install i3-gaps
+          when:
+            i3_gaps.before != i3_gaps.after
+          args:
+            chdir: '{{ ansible_env.HOME }}/repos/i3-gaps'
+          shell: |
+            autoreconf --force --install
+            mkdir -p build && cd build/
+            ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+            make
+            sudo make install
+
+
+    - name: Install i3 completions
+      tags: i3-completions
+      block:
+        - name: Install dependencies
+          apt:
+            name: curl
+
+        - name: Install i3-completions
+          become: true
+          get_url:
+            url: https://raw.githubusercontent.com/cornerman/i3-completion/master/i3_completion.sh
+            dest: /usr/local/bin/tldr
+            mode: 0444
+
+    - name: Check if terraform exists
+      tags: terraform
+      stat:
+        path: /usr/local/bin/terraform
+      register: terraform_out
+
+    - tags: terraform
+      when: terraform_out.stat.exists == false
+      block:
+        - name: Download terraform
+          get_url:
+            url: https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip
+            dest: /tmp/terraform.zip
+
+        - name: Unarchive terraform
+          become: true
+          unarchive:
+            src: /tmp/terraform.zip
+            dest: /usr/local/bin/
+
+    - tags: gcloud
+      become: true
+      block:
+        - name: Add gcloud apt key
+          apt_key:
+            url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+        - name: Add gcloud apt repository
+          apt_repository:
+            repo: 'deb http://packages.cloud.google.com/apt cloud-sdk-{{ ansible_distribution_release }} main'
+
+        - name: Install gcloud
+          apt:
+            name: google-cloud-sdk
+            update_cache: true
+
+    - name: Install aws cli
+      tags: aws
+      pip:
+        name: awscli
+        state: latest
+        extra_args: --user
+
+    - name: Check if github/hub is installed
+      shell: which hub
+      failed_when: false
+      changed_when: false
+      register: hub_installed
+      tags: hub
+
+    - tags: hub
+      when: hub_installed.rc == 1
+      block:
+        - name: Pull hub binary
+          get_url:
+            url: https://github.com/github/hub/releases/download/v2.3.0-pre10/hub-linux-amd64-2.3.0-pre10.tgz
+            dest: /tmp/hub.tar
+            mode: 0755
+
+        - name: Extract hub
+          unarchive:
+            src: /tmp/hub.tar
+            dest: /tmp
+            list_files: true
+          register: hub_archive
+
+        - name: Install hub
+          become: true
+          shell: '/tmp/{{ hub_archive.files[0].split("/")[0] }}/install'
+
+    - name: Check if ngrok is installed
+      shell: which ngrok
+      failed_when: false
+      changed_when: false
+      register: hub_installed
+      tags: ngrok
+
+    - tags: ngrok
+      block:
+        - name: Pull ngrok
+          get_url:
+            url: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+            dest: /tmp/ngrok.zip
+            mode: 0755
+
+        - name: Extract ngrok
+          unarchive:
+            src: /tmp/ngrok.zip
+            dest: /tmp
+
+        - name: Move ngrok to bin
+          become: true
+          copy:
+            src: /tmp/ngrok
+            dest: /usr/local/bin/
+            mode: 0755
+
+    - name: Check if dropbox is installed
+      tags: dropbox
+      shell: dpkg-query -W dropbox
+      failed_when: false
+      changed_when: false
+      register: dropbox_installed
+
+    - tags: dropbox
+      when: dropbox_installed.rc == 1
+      block:
+        - name: Get dropbox debian package
+          get_url:
+            url: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb
+            dest: /tmp/dropbox.deb
+            mode: 0755
+
+        - name: Install dropbox
+          apt:
+            deb: /tmp/dropbox.deb
+
+    - name: Install ansible-lint
+      tags: ansible-lint
+      pip:
+        name: ansible-lint
+
+    - name: Install pylint
+      tags: pylint
+      pip:
+        name: '{{ item}}'
+      with_items:
+        - astroid
+        - isort
+        - pylint
+
+    - name: Check if tflint is installed
+      shell: which tflint
+      failed_when: false
+      changed_when: false
+      register: tflint_installed
+      tags: tflint
+
+    - tags: tflint
+      when: tflint_installed.rc == 1
+      block:
+        - name: Download archive
+          get_url:
+            url: https://github.com/wata727/tflint/releases/download/v0.7.0/tflint_linux_amd64.zip
+            dest: /tmp/tflint.zip
+            mode: 0755
+
+        - name: Extract archive
+          unarchive:
+            src: /tmp/tflint.zip
+            dest: /tmp
+
+        - name: Put tflint in $PATH
+          become: true
+          copy:
+            src: /tmp/tflint
+            dest: /usr/local/bin/tflint
+            mode: 0755
+
+    - name: Create symlink parent directories
+      tags: symlinks
       file:
-        path: '{{ ansible_env.HOME }}/.config/nvim/autoload'
+        path: '{{ item }}'
         state: directory
+      with_items:
+        - '{{ ansible_env.HOME }}/.config/nvim'
+        - '{{ ansible_env.HOME }}/.config/alacritty'
+        - '{{ ansible_env.HOME }}/.config/git'
+        - '{{ ansible_env.HOME }}/.i3'
 
-    - name: Install vim-plug
-      get_url:
-        url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        dest: '{{ ansible_env.HOME }}/.config/nvim/autoload/plug.vim'
-        mode: 0440
+    - name: Symlink config files
+      tags: symlinks
+      file:
+        src: '{{ item.src }}'
+        dest: '{{ item.dest }}'
+        owner: '{{ ansible_user_id }}'
+        group: '{{ ansible_user_id }}'
+        state: link
+        force: true
+      with_items:
+        - { src: '{{ symlink_dir }}/profile',          dest: '{{ ansible_env.HOME }}/.profile' }
+        - { src: '{{ symlink_dir }}/inputrc',          dest: '{{ ansible_env.HOME }}/.inputrc' }
+        - { src: '{{ symlink_dir }}/tmux.conf',        dest: '{{ ansible_env.HOME }}/.tmux.conf' }
+        - { src: '{{ symlink_dir }}/sqliterc',         dest: '{{ ansible_env.HOME }}/.sqliterc' }
+        - { src: '{{ symlink_dir }}/pylintrc',         dest: '{{ ansible_env.HOME }}/.pylintrc' }
+        - { src: '{{ symlink_dir }}/pythonrc',         dest: '{{ ansible_env.HOME }}/.pythonrc' }
+        - { src: '{{ symlink_dir }}/tern-config',      dest: '{{ ansible_env.HOME }}/.tern-config' }
+        - { src: '{{ symlink_dir }}/agignore',         dest: '{{ ansible_env.HOME }}/.agignore' }
+        - { src: '{{ symlink_dir }}/gitconfig',        dest: '{{ ansible_env.HOME }}/.gitconfig' }
+        - { src: '{{ symlink_dir }}/global-gitignore', dest: '{{ ansible_env.HOME }}/.config/git/ignore' }
+        - { src: '{{ symlink_dir }}/i3-config',        dest: '{{ ansible_env.HOME }}/.i3/config' }
+        - { src: '{{ symlink_dir }}/Xresources',       dest: '{{ ansible_env.HOME }}/.Xresources' }
+        - { src: '{{ symlink_dir }}/ginit.vim',        dest: '{{ ansible_env.HOME }}/.config/nvim/ginit.vim' }
+        - { src: '{{ symlink_dir }}/alacritty.yml',    dest: '{{ ansible_env.HOME }}/.config/alacritty/alacritty.yml' }
+        - { src: '{{ symlink_dir }}/zlogin',           dest: '{{ ansible_env.HOME }}/.zlogin' }
+        - { src: '{{ playbook_dir }}/zshrc',           dest: '{{ ansible_env.HOME }}/.zshrc' }
+        - { src: '{{ playbook_dir }}/bashrc',          dest: '{{ ansible_env.HOME }}/.bashrc' }
+        - { src: '{{ playbook_dir }}/vimrc',           dest: '{{ ansible_env.HOME }}/.config/nvim/init.vim' }
 
-  - tags: fzf
-    when: "'cannot open' in lookup('pipe', 'file ~/.fzf/bin/fzf')"
-    block:
-      - name: Clone fzf
-        git:
-          repo: 'https://github.com/junegunn/fzf.git'
-          depth: 1
-          dest: ~/.fzf
-          accept_hostkey: true
+    - name: Set the default folder opener
+      shell: xdg-mime default pcmanfm.desktop inode/directory
+      when: lookup('pipe', 'xdg-mime query default inode/directory') != 'pcmanfm.desktop'
+      tags: set-default-file-opener
 
-      - name: fzf installation script
-        shell: ~/.fzf/install --key-bindings --completion --no-update-rc
-
-  - tags: fd
-    when: "'cannot open' in lookup('pipe', 'file /usr/bin/fd')"
-    block:
-      - name: Get the debian package from Github
-        get_url:
-          url: https://github.com/sharkdp/fd/releases/download/v7.0.0/fd_7.0.0_amd64.deb
-          dest: /tmp/fd.deb
-          mode: 0400
-
-      - name: Install fd
-        become: true
-        apt:
-          deb: /tmp/fd.deb
-
-  - name: Install diff-so-fancy
-    tags: diff-so-fancy
-    block:
-      - name: Install dependencies
-        apt:
-          name: '{{ item }}'
-        become: true
-        with_items:
-          - perl-modules-5.26
-
-      - name: Install diff-so-fancy
-        get_url:
-          url: https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
-          dest: /usr/local/bin/diff-so-fancy
-          mode: 0555
-        become: true
-
-  - name: Install gvm
-    tags: gvm
-    block:
-      - name: Install dependencies
-        become: true
-        apt:
-          name: '{{ item }}'
-        with_items:
-          - binutils
-          - bison
-          - gcc
-
-      - name: Install gvm
-        args:
-          executable: /bin/bash
-          creates: '{{ ansible_env.HOME }}/.gvm/bin/gvm'
-        shell: |
-          set -o pipefail
-          url=https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer
-          curl -s -S -L $url | bash
-
-  - name: Install n (node version manager)
-    tags: n
-    block:
-      - name: Install n
-        args:
-          creates: '{{ ansible_env.HOME }}/.n/bin/n'
-        shell: |
-          # https://github.com/mklement0/n-install#examples
-          curl -L https://git.io/n-install | N_PREFIX=$HOME/.n bash -s -- -y lts
-
-
-  - name: Install chrome
-    tags: chrome
-    become: true
-    block:
-      - name: Add chrome ppa key
-        apt_key:
-          url: https://dl.google.com/linux/linux_signing_key.pub
-
-      - name: Add chrome ppa
-        apt_repository:
-          repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
-          filename: 'google-chrome'
-
-      - name: Install chrome
-        apt:
-          name: google-chrome-stable
-          update_cache: yes
-
-  - name: Install alacritty
-    tags: alacritty
-    block:
-      - name: Install dependencies
-        apt:
-          name: '{{ item }}'
-        become: true
-        with_items:
-          - cmake
-          - libfreetype6-dev
-          - libfontconfig1-dev
-
-      - name: Install rustup
-        shell: curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
-        args:
-          creates: ~/.cargo/bin/rustup
-
-      - name: Clone alacritty
-        register: alacritty_git
-        git:
-          repo: https://github.com/jwilm/alacritty.git
-          dest: ~/repos/alacritty
-
-      - name: Install alacritty
-        when: alacritty_git.before != alacritty_git.after
-        environment:
-          PATH: '{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.cargo/bin'
-        args:
-          creates: /usr/local/bin/alacritty
-          chdir: ~/repos/alacritty
-        shell: |
-          set -e
-          rustup override set stable
-          rustup update stable
-          cargo build --release --verbose
-          sudo cp target/release/alacritty /usr/local/bin/
-
-
-  - name: Install antibody
-    tags: antibody
-    block:
-      - name: Install dependencies
-        apt:
-          name: curl
-
-      - name: Install antibody
-        become: true
-        args:
-          creates: /usr/local/bin/antibody
-        shell: curl -sL https://git.io/antibody | bash -s
-
-  - tags: i3-gaps
-    block:
-      - name: Install i3-gaps dependencies
-        apt:
-          name: '{{ item }}'
-        with_items:
-          - libxcb1-dev
-          - libxcb-keysyms1-dev
-          - libpango1.0-dev
-          - libxcb-util0-dev
-          - libxcb-icccm4-dev
-          - libyajl-dev
-          - libstartup-notification0-dev
-          - libxcb-randr0-dev
-          - libev-dev
-          - libxcb-cursor-dev
-          - libxcb-xinerama0-dev
-          - libxcb-xkb-dev
-          - libxkbcommon-dev
-          - libxkbcommon-x11-dev
-          - autoconf
-          - libxcb-xrm0
-          - libxcb-xrm-dev
-          - automake
-
-      - name: Clone i3-gaps
-        git:
-          repo: https://www.github.com/Airblader/i3
-          dest: '{{ ansible_env.HOME }}/repos/i3-gaps'
-        register: i3_gaps
-
-      - name: Compile and install i3-gaps
-        when:
-          i3_gaps.before != i3_gaps.after
-        args:
-          chdir: '{{ ansible_env.HOME }}/repos/i3-gaps'
-        shell: |
-          autoreconf --force --install
-          mkdir -p build && cd build/
-          ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-          make
-          sudo make install
-
-
-  - name: Install i3 completions
-    tags: i3-completions
-    block:
-      - name: Install dependencies
-        apt:
-          name: curl
-
-      - name: Install i3-completions
-        become: true
-        get_url:
-          url: https://raw.githubusercontent.com/cornerman/i3-completion/master/i3_completion.sh
-          dest: /usr/local/bin/tldr
-          mode: 0444
-
-  - name: Check if terraform exists
-    tags: terraform
-    stat:
-      path: /usr/local/bin/terraform
-    register: terraform_out
-
-  - tags: terraform
-    when: terraform_out.stat.exists == false
-    block:
-    - name: Download terraform
-      get_url:
-        url: https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip
-        dest: /tmp/terraform.zip
-
-    - name: Unarchive terraform
+    - name: Set nopasswd
+      tags: nopasswd
       become: true
-      unarchive:
-        src: /tmp/terraform.zip
-        dest: /usr/local/bin/
-
-  - tags: gcloud
-    become: true
-    block:
-      - name: Add gcloud apt key
-        apt_key:
-          url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-
-      - name: Add gcloud apt repository
-        apt_repository:
-          repo: 'deb http://packages.cloud.google.com/apt cloud-sdk-{{ ansible_distribution_release }} main'
-
-      - name: Install gcloud
-        apt:
-          name: google-cloud-sdk
-          update_cache: yes
-
-  - name: Install aws cli
-    tags: aws
-    pip:
-      name: awscli
-      state: latest
-      extra_args: --user
-
-  - name: Check if github/hub is installed
-    shell: which hub
-    failed_when: false
-    changed_when: false
-    register: hub_installed
-    tags: hub
-
-  - tags: hub
-    when: hub_installed.rc == 1
-    block:
-      - name: Pull hub binary
-        get_url:
-          url: https://github.com/github/hub/releases/download/v2.3.0-pre10/hub-linux-amd64-2.3.0-pre10.tgz
-          dest: /tmp/hub.tar
-          mode: 0755
-
-      - name: Extract hub
-        unarchive:
-          src: /tmp/hub.tar
-          dest: /tmp
-          list_files: true
-        register: hub_archive
-
-      - name: Install hub
-        become: true
-        shell: '/tmp/{{ hub_archive.files[0].split("/")[0] }}/install'
-
-  - name: Check if ngrok is installed
-    shell: which ngrok
-    failed_when: false
-    changed_when: false
-    register: hub_installed
-    tags: ngrok
-
-  - tags: ngrok
-    block:
-    - name: Pull ngrok
-      get_url:
-        url: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
-        dest: /tmp/ngrok.zip
-        mode: 0755
-
-    - name: Extract ngrok
-      unarchive:
-        src: /tmp/ngrok.zip
-        dest: /tmp
-
-    - name: Move ngrok to bin
-      become: true
-      copy:
-        src: /tmp/ngrok
-        dest: /usr/local/bin/
-        mode: 0755
-
-  - name: Check if dropbox is installed
-    tags: dropbox
-    shell: dpkg-query -W dropbox
-    failed_when: false
-    changed_when: false
-    register: dropbox_installed
-
-  - tags: dropbox
-    when: dropbox_installed.rc == 1
-    block:
-    - name: Get dropbox debian package
-      get_url:
-        url: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb
-        dest: /tmp/dropbox.deb
-        mode: 0755
-
-    - name: Install dropbox
-      apt:
-        deb: /tmp/dropbox.deb
-
-  - name: Install ansible-lint
-    tags: ansible-lint
-    pip:
-      name: ansible-lint
-
-  - name: Check if tflint is installed
-    shell: which tflint
-    failed_when: false
-    changed_when: false
-    register: tflint_installed
-    tags: tflint
-
-  - tags: tflint
-    when: tflint_installed.rc == 1
-    block:
-      - name: Download archive
-        get_url:
-          url: https://github.com/wata727/tflint/releases/download/v0.7.0/tflint_linux_amd64.zip
-          dest: /tmp/tflint.zip
-          mode: 0755
-
-      - name: Extract archive
-        unarchive:
-          src: /tmp/tflint.zip
-          dest: /tmp
-
-      - name: Put tflint in $PATH
-        become: true
-        copy:
-          src: /tmp/tflint
-          dest: /usr/local/bin/tflint
-          mode: 0755
-
-  - name: Create symlink parent directories
-    tags: symlinks
-    file:
-      path: '{{ item }}'
-      state: directory
-    with_items:
-      - '{{ ansible_env.HOME }}/.config/nvim'
-      - '{{ ansible_env.HOME }}/.config/alacritty'
-      - '{{ ansible_env.HOME }}/.config/git'
-      - '{{ ansible_env.HOME }}/.i3'
-
-  - name: Symlink config files
-    tags: symlinks
-    file:
-      src: '{{ item.src }}'
-      dest: '{{ item.dest }}'
-      owner: '{{ ansible_user_id }}'
-      group: '{{ ansible_user_id }}'
-      state: link
-      force: true
-    with_items:
-      - { src: '{{ symlink_dir }}/profile',          dest: '{{ ansible_env.HOME }}/.profile' }
-      - { src: '{{ symlink_dir }}/inputrc',          dest: '{{ ansible_env.HOME }}/.inputrc' }
-      - { src: '{{ symlink_dir }}/tmux.conf',        dest: '{{ ansible_env.HOME }}/.tmux.conf' }
-      - { src: '{{ symlink_dir }}/sqliterc',         dest: '{{ ansible_env.HOME }}/.sqliterc' }
-      - { src: '{{ symlink_dir }}/pylintrc',         dest: '{{ ansible_env.HOME }}/.pylintrc' }
-      - { src: '{{ symlink_dir }}/pythonrc',         dest: '{{ ansible_env.HOME }}/.pythonrc' }
-      - { src: '{{ symlink_dir }}/tern-config',      dest: '{{ ansible_env.HOME }}/.tern-config' }
-      - { src: '{{ symlink_dir }}/agignore',         dest: '{{ ansible_env.HOME }}/.agignore' }
-      - { src: '{{ symlink_dir }}/gitconfig',        dest: '{{ ansible_env.HOME }}/.gitconfig' }
-      - { src: '{{ symlink_dir }}/global-gitignore', dest: '{{ ansible_env.HOME }}/.config/git/ignore' }
-      - { src: '{{ symlink_dir }}/i3-config',        dest: '{{ ansible_env.HOME }}/.i3/config' }
-      - { src: '{{ symlink_dir }}/Xresources',       dest: '{{ ansible_env.HOME }}/.Xresources' }
-      - { src: '{{ symlink_dir }}/ginit.vim',        dest: '{{ ansible_env.HOME }}/.config/nvim/ginit.vim' }
-      - { src: '{{ symlink_dir }}/alacritty.yml',    dest: '{{ ansible_env.HOME }}/.config/alacritty/alacritty.yml' }
-      - { src: '{{ symlink_dir }}/zlogin',           dest: '{{ ansible_env.HOME }}/.zlogin' }
-      - { src: '{{ playbook_dir }}/zshrc',           dest: '{{ ansible_env.HOME }}/.zshrc' }
-      - { src: '{{ playbook_dir }}/bashrc',          dest: '{{ ansible_env.HOME }}/.bashrc' }
-      - { src: '{{ playbook_dir }}/vimrc',           dest: '{{ ansible_env.HOME }}/.config/nvim/init.vim' }
-
-  - name: Set the default folder opener
-    shell: xdg-mime default pcmanfm.desktop inode/directory
-    when: lookup('pipe', 'xdg-mime query default inode/directory') != 'pcmanfm.desktop'
-    tags: set-default-file-opener
-
-  - name: Set nopasswd
-    tags: nopasswd
-    become: true
-    blockinfile:
-      path: /etc/sudoers
-      block: dani ALL=(ALL) NOPASSWD:ALL
+      blockinfile:
+        path: /etc/sudoers
+        block: dani ALL=(ALL) NOPASSWD:ALL
