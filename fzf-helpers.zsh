@@ -40,7 +40,7 @@ fcommit() {
   echo -n $(echo "$commit" | sed "s/ .*//")
 }
 
-bindkey -M vicmd '\-' fzf-file-widget
+bindkey -M vicmd '\-'   fzf-file-widget
 bindkey -M vicmd '^r'   fzf-history-widget
 bindkey -M viins '^r'   fzf-history-widget
 bindkey -M vicmd '^s'   fzf-ssh
