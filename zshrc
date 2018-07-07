@@ -21,7 +21,6 @@ export AWS_PROFILE=$([ -f ~/.aws_profile ] && cat ~/.aws_profile)
 export KUBECONFIG=$([ -d ~/.kube ] && find ~/.kube -maxdepth 1 -type f | tr '\n' ':')
 export EDITOR=nvim
 
-function vi () {}
 function find () {}
 
 # Ease of use
@@ -190,17 +189,8 @@ alias ls='ls --color=auto --classify -lrt --block-size=MB'
 alias setxkbmapcaps="setxkbmap -option caps:swapescape68"
 alias o='xdg-open'
 alias v=nvim
-function vf {
-  if [ "$#" -lt 1 ]; then
-    return 1
-  fi
-  results=$(ag --nogroup --column --color "$@" | fzf --multi --ansi --prompt 'AG>')
-  if [ -n "$results" ]; then
-    files=$(echo $results | awk -F ':' '{print $1":"$2":"$3}' | tr '\r\n' ' ')
-    eval nvim "$files"
-  fi
-}
 alias k='kubectl'
+alias aws=awless
 alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
 alias s3='aws s3'
@@ -258,4 +248,8 @@ man() {
       nvim -c 'silent! set ft=man' -c "Man ${1}" -c 'nnoremap <buffer> q :q<cr>'
     fi
   fi
+}
+
+function httpdump {
+  sudo tcpdump -A -s 0 "(((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0) $@"
 }
