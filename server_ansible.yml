@@ -3,98 +3,98 @@
   vars:
     ansible_become: false
   tasks:
-  - tags: dependencies
-    become: true
-    name: Install apt dependencies
-    apt:
-      name: '{{ item }}'
-    with_items:
-      - git
-      - curl
-      - zsh
-      - net-tools
+    - tags: dependencies
+      become: true
+      name: Install apt dependencies
+      apt:
+        name: '{{ item }}'
+      with_items:
+        - git
+        - curl
+        - zsh
+        - net-tools
 
-  - name: Check if fzf is installed
-    tags: fzf
-    shell: file ~/.fzf/bin/fzf
-    register: fzf_installed
-    changed_when: false
+    - name: Check if fzf is installed
+      tags: fzf
+      shell: file ~/.fzf/bin/fzf
+      register: fzf_installed
+      changed_when: false
 
-  # Requires git,curl for install...
-  # Requires fzf bin in path: export PATH=$PATH:~/.fzf/bin
-  - tags: fzf
-    when: "'cannot open' in fzf_installed.stdout"
-    block:
-      - name: Clone fzf
-        git:
-          repo: 'https://github.com/junegunn/fzf.git'
-          depth: 1
-          dest: ~/.fzf
-          accept_hostkey: true
+    # Requires git,curl for install...
+    # Requires fzf bin in path: export PATH=$PATH:~/.fzf/bin
+    - tags: fzf
+      when: "'cannot open' in fzf_installed.stdout"
+      block:
+        - name: Clone fzf
+          git:
+            repo: 'https://github.com/junegunn/fzf.git'
+            depth: 1
+            dest: ~/.fzf
+            accept_hostkey: true
 
-      - name: fzf installation script
-        shell: ~/.fzf/install --key-bindings --completion --no-update-rc
+        - name: fzf installation script
+          shell: ~/.fzf/install --key-bindings --completion --no-update-rc
 
-  - name: Check if fd is installed
-    tags: fd
-    shell: file ~/.local/bin/fd
-    register: fd_installed
-    changed_when: false
+    - name: Check if fd is installed
+      tags: fd
+      shell: file ~/.local/bin/fd
+      register: fd_installed
+      changed_when: false
 
-  - tags: fd
-    when: "'cannot open' in fd_installed.stdout"
-    block:
-      - name: Get fd
-        get_url:
-          # yamllint disable-line rule:line-length
-          url: https://github.com/sharkdp/fd/releases/download/v7.0.0/fd-v7.0.0-x86_64-unknown-linux-gnu.tar.gz
-          dest: /tmp/fd_.tar.gz
-          mode: 0400
-          owner: '{{ ansible_user }}'
+    - tags: fd
+      when: "'cannot open' in fd_installed.stdout"
+      block:
+        - name: Get fd
+          get_url:
+            # yamllint disable-line rule:line-length
+            url: https://github.com/sharkdp/fd/releases/download/v7.0.0/fd-v7.0.0-x86_64-unknown-linux-gnu.tar.gz
+            dest: /tmp/fd_.tar.gz
+            mode: 0400
+            owner: '{{ ansible_user }}'
 
-      - name: Extract fd
-        unarchive:
-          remote_src: true
-          src: /tmp/fd_.tar.gz
-          dest: /tmp
-          list_files: true
-        register: unarchive_contents
+        - name: Extract fd
+          unarchive:
+            remote_src: true
+            src: /tmp/fd_.tar.gz
+            dest: /tmp
+            list_files: true
+          register: unarchive_contents
 
-      - name: Create home bin directory
-        file:
-          path: ~/.local/bin/
-          state: directory
+        - name: Create home bin directory
+          file:
+            path: ~/.local/bin/
+            state: directory
 
-      - name: Copy fd to bin
-        copy:
-          remote_src: true
-          src: '/tmp/{{ unarchive_contents.files[0].split("/")[0] }}/fd'
-          dest: ~/.local/bin/
-          mode: 0755
+        - name: Copy fd to bin
+          copy:
+            remote_src: true
+            src: '/tmp/{{ unarchive_contents.files[0].split("/")[0] }}/fd'
+            dest: ~/.local/bin/
+            mode: 0755
 
-  - name: Create dotfiles dir
-    file:
-      path: '{{ ansible_env.HOME }}/.dotfiles'
-      state: directory
-      mode: 0770
-      recurse: true
+    - name: Create dotfiles dir
+      file:
+        path: '{{ ansible_env.HOME }}/.dotfiles'
+        state: directory
+        mode: 0770
+        recurse: true
 
-  - name: Copy shell files
-    copy:
-      src: '{{ item.src }}'
-      dest: '{{ item.dest }}'
-    with_items:
-      - src: '{{ playbook_dir }}/zshrc'
-        dest: '{{ ansible_env.HOME }}/.zshrc'
-      - src: '{{ playbook_dir }}/fzf-helpers.zsh'
-        dest: '{{ ansible_env.HOME }}/.dotfiles/fzf-helpers.zsh'
-      - src: '{{ playbook_dir }}/git.zsh'
-        dest: '{{ ansible_env.HOME }}/.dotfiles/git.zsh'
+    - name: Copy shell files
+      copy:
+        src: '{{ item.src }}'
+        dest: '{{ item.dest }}'
+      with_items:
+        - src: '{{ playbook_dir }}/zshrc'
+          dest: '{{ ansible_env.HOME }}/.zshrc'
+        - src: '{{ playbook_dir }}/fzf-helpers.zsh'
+          dest: '{{ ansible_env.HOME }}/.dotfiles/fzf-helpers.zsh'
+        - src: '{{ playbook_dir }}/git.zsh'
+          dest: '{{ ansible_env.HOME }}/.dotfiles/git.zsh'
 
-  - name: Set zsh as the default shell
-    # https://github.com/ansible/ansible/issues/32208
-    vars:
-      ansible_become: true
-    user:
-      name: '{{ ansible_user }}'
-      shell: /bin/zsh
+    - name: Set zsh as the default shell
+      # https://github.com/ansible/ansible/issues/32208
+      vars:
+        ansible_become: true
+      user:
+        name: '{{ ansible_user }}'
+        shell: /bin/zsh
