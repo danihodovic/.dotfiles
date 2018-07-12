@@ -1,0 +1,28 @@
+---
+- name: Install dependencies
+  apt:
+    name: '{{ item }}'
+  with_items:
+    - libdbus-1-dev
+    - git
+
+- name: Clone the repository
+  git:
+    repo: https://github.com/XYunknown/i3status-rust.git
+    dest: '{{ ansible_env.HOME }}/repos/i3status-rust'
+    depth: 1
+
+- name: Install i3status-rs
+  shell: cargo build --release
+  args:
+    chdir: '{{ ansible_env.HOME }}/repos/i3status-rust'
+    creates: >-
+      {{ ansible_env.HOME }}/repos/i3status-rust/target/release/i3status-rs
+
+- name: Copy the binary to $PATH
+  become: true
+  copy:
+    src: >-
+      {{ ansible_env.HOME }}/repos/i3status-rust/target/release/i3status-rs
+    dest: /usr/local/bin/
+    mode: 0555
