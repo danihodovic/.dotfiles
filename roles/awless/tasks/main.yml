@@ -34,3 +34,8 @@
     src: /tmp/awless
     dest: '{{ ansible_env.HOME }}/.local/bin/'
     mode: 0500
+
+- name: Create zsh completion file
+  shell: 'awless completion zsh > {{ ansible_env.HOME }}/.awless_zsh'
+  args:
+    creates: '{{ ansible_env.HOME }}/.awless_zsh'
