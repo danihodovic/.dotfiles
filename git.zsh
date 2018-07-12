@@ -43,6 +43,7 @@ function gdom {
 
 function grom {
   default_remote_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+  git fetch
   git rebase origin/"$default_remote_branch"
 }
 
