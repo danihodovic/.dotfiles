@@ -12,10 +12,6 @@ format_mem = "{Mup}%"
 format_swap = "{SUp}%"
 
 [[block]]
-block = "cpu"
-interval = 1
-
-[[block]]
 block = "speedtest"
 bytes = true
 interval = 600
@@ -23,7 +19,7 @@ interval = 600
 [[block]]
 block = "time"
 interval = 60
-format = "%a %d/%m %R"
+format = "%Y-%m-%d %R"
 
 [[block]]
 block = "battery"
