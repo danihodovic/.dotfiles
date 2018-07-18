@@ -302,6 +302,14 @@
         name: i3status_rs
       tags: i3status_rs
 
+    - name: bat
+      import_role:
+        name: bat
+      vars:
+        ansible_become: true
+        bat_dest: /usr/local/bin/
+      tags: bat
+
     - name: Install i3 completions
       tags: i3-completions
       block:

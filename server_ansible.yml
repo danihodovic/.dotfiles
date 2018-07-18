@@ -20,6 +20,12 @@
         appimage_dest: '{{ ansible_env.HOME }}/.local/bin/nvim'
       tags: neovim
 
+    - import_role:
+        name: bat
+      vars:
+        bat_dest: '{{ ansible_env.HOME }}/.local/bin/bat'
+      tags: bat
+
     - name: Check if fzf is installed
       tags: fzf
       shell: file ~/.fzf/bin/fzf
