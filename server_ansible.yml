@@ -14,6 +14,12 @@
         - zsh
         - net-tools
 
+    - import_role:
+        name: neovim
+      vars:
+        appimage_dest: '{{ ansible_env.HOME }}/.local/bin/nvim'
+      tags: neovim
+
     - name: Check if fzf is installed
       tags: fzf
       shell: file ~/.fzf/bin/fzf
@@ -72,12 +78,15 @@
             dest: ~/.local/bin/
             mode: 0755
 
-    - name: Create dotfiles dir
+    - name: Create dirs
       file:
-        path: '{{ ansible_env.HOME }}/.dotfiles'
+        path: '{{ item }}'
         state: directory
         mode: 0770
         recurse: true
+      with_items:
+        - '{{ ansible_env.HOME }}/.dotfiles'
+        - '{{ ansible_env.HOME }}/.config/nvim'
 
     - name: Copy shell files
       copy:
@@ -90,6 +99,8 @@
           dest: '{{ ansible_env.HOME }}/.dotfiles/fzf-helpers.zsh'
         - src: '{{ playbook_dir }}/git.zsh'
           dest: '{{ ansible_env.HOME }}/.dotfiles/git.zsh'
+        - src: '{{ playbook_dir }}/vimrc'
+          dest: '{{ ansible_env.HOME }}/.config/nvim/init.vim'
 
     - name: Set zsh as the default shell
       # https://github.com/ansible/ansible/issues/32208
