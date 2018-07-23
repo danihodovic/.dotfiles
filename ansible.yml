@@ -310,6 +310,11 @@
         bat_dest: /usr/local/bin/
       tags: bat
 
+    - name: doctl
+      import_role:
+        name: doctl
+      tags: doctl
+
     - name: Install i3 completions
       tags: i3-completions
       block:

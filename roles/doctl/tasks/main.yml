@@ -1,0 +1,41 @@
+---
+- name: Get latest release
+  uri:
+    url: https://api.github.com/repos/digitalocean/doctl/releases/latest
+    timeout: 5
+  register: doctl_latest_release
+  changed_when: false
+
+- name: Get download url
+  set_fact:
+    doctl_download_url: >
+      {{
+        doctl_latest_release.json.assets |
+        to_json | from_json |
+        json_query(
+          "[?contains(name, 'linux-amd64.tar.gz')].browser_download_url | [0]"
+        )
+      }}
+
+- name: Download archive
+  get_url:
+    url: '{{ doctl_download_url }}'
+    dest: /tmp/doctl.tar
+    mode: 0440
+
+- name: Extract archive
+  unarchive:
+    src: /tmp/doctl.tar
+    dest: /tmp/
+    remote_src: true
+
+- name: Copy binary
+  become: true
+  copy:
+    src: '/tmp/doctl'
+    dest: '/usr/local/bin/'
+    remote_src: true
+    mode: 0555
+
+- name: Generate completion file
+  shell: doctl completion zsh > ~/.doctl_zsh

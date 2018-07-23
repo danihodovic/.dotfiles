@@ -66,6 +66,7 @@ scripts_to_source=(
   ${HOME}/.kubectl_completion
   ${HOME}/.kops_completion
   ${HOME}/.awless_zsh
+  ${HOME}/.doctl_zsh
   # Own helpers
   ${HOME}/.dotfiles/fzf-helpers.zsh
   ${HOME}/.dotfiles/docker.zsh
