@@ -174,16 +174,16 @@ _local_branch() {
 _remote_branch() {
   remote=$(git remote)
   if [ $? != 0 ]; then
-    return 1 # Returning $? will return the output of the if test. lol...
+    return 1 # Returning $? will return the output of the if test.
   fi
 
+  branch=$(_local_branch)
+
   if [ $(echo $remote | wc -l) = 1  ]; then
-    branch=$(_local_branch)
     echo "$remote $branch"
   else
-    echo 'More than 1 remote, specify which one to pull from'
-    git remote
-    return 1
+    # If we have multiple remotes, default to origin
+    echo origin $branch
   fi
 }
 
