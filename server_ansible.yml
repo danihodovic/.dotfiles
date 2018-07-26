@@ -1,10 +1,12 @@
 ---
-- hosts: all
+- hosts: '{{ target | default("all") }}'
   vars:
     ansible_become: false
+
   tasks:
     - tags: dependencies
-      become: true
+      vars:
+        ansible_become: true
       name: Install apt dependencies
       apt:
         name: '{{ item }}'
@@ -13,6 +15,7 @@
         - curl
         - zsh
         - net-tools
+        - xclip
 
     - import_role:
         name: neovim
