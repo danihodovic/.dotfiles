@@ -1,0 +1,34 @@
+---
+- name: Install dependencies
+  apt:
+    name: '{{ item }}'
+  become: true
+  with_items:
+    - cmake
+    - libfreetype6-dev
+    - libfontconfig1-dev
+
+- name: Install rustup
+  shell: curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
+  args:
+    creates: ~/.cargo/bin/rustup
+
+- name: Clone alacritty
+  register: alacritty_git
+  git:
+    repo: https://github.com/jwilm/alacritty.git
+    dest: ~/repos/alacritty
+
+- name: Install alacritty
+  when: alacritty_git.before != alacritty_git.after
+  environment:
+    PATH: '{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.cargo/bin'
+  args:
+    creates: /usr/local/bin/alacritty
+    chdir: ~/repos/alacritty
+  shell: |
+    set -e
+    rustup override set stable
+    rustup update stable
+    cargo build --release --verbose
+    sudo cp target/release/alacritty /usr/local/bin/

@@ -1,0 +1,41 @@
+---
+- name: Install i3-gaps dependencies
+  apt:
+    name: '{{ item }}'
+  with_items:
+    - libxcb1-dev
+    - libxcb-keysyms1-dev
+    - libpango1.0-dev
+    - libxcb-util0-dev
+    - libxcb-icccm4-dev
+    - libyajl-dev
+    - libstartup-notification0-dev
+    - libxcb-randr0-dev
+    - libev-dev
+    - libxcb-cursor-dev
+    - libxcb-xinerama0-dev
+    - libxcb-xkb-dev
+    - libxkbcommon-dev
+    - libxkbcommon-x11-dev
+    - autoconf
+    - libxcb-xrm0
+    - libxcb-xrm-dev
+    - automake
+
+- name: Clone i3-gaps
+  git:
+    repo: https://www.github.com/Airblader/i3
+    dest: '{{ ansible_env.HOME }}/repos/i3-gaps'
+  register: i3_gaps
+
+- name: Compile and install i3-gaps
+  when:
+    i3_gaps.before != i3_gaps.after
+  args:
+    chdir: '{{ ansible_env.HOME }}/repos/i3-gaps'
+  shell: |
+    autoreconf --force --install
+    mkdir -p build && cd build/
+    ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+    make
+    sudo make install

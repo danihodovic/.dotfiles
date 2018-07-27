@@ -203,99 +203,20 @@
             name: google-chrome-stable
             update_cache: true
 
-    - name: Install alacritty
+    - name: alacritty
+      import_role:
+        name: alacritty
       tags: alacritty
-      block:
-        - name: Install dependencies
-          apt:
-            name: '{{ item }}'
-          become: true
-          with_items:
-            - cmake
-            - libfreetype6-dev
-            - libfontconfig1-dev
 
-        - name: Install rustup
-          shell: curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
-          args:
-            creates: ~/.cargo/bin/rustup
-
-        - name: Clone alacritty
-          register: alacritty_git
-          git:
-            repo: https://github.com/jwilm/alacritty.git
-            dest: ~/repos/alacritty
-
-        - name: Install alacritty
-          when: alacritty_git.before != alacritty_git.after
-          environment:
-            PATH: '{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.cargo/bin'
-          args:
-            creates: /usr/local/bin/alacritty
-            chdir: ~/repos/alacritty
-          shell: |
-            set -e
-            rustup override set stable
-            rustup update stable
-            cargo build --release --verbose
-            sudo cp target/release/alacritty /usr/local/bin/
-
-
-    - name: Install antibody
+    - name: antibody
+      import_role:
+        name: antibody
       tags: antibody
-      block:
-        - name: Install dependencies
-          apt:
-            name: curl
 
-        - name: Install antibody
-          become: true
-          args:
-            creates: /usr/local/bin/antibody
-          shell: curl -sL https://git.io/antibody | bash -s
-
-    - tags: i3-gaps
-      block:
-        - name: Install i3-gaps dependencies
-          apt:
-            name: '{{ item }}'
-          with_items:
-            - libxcb1-dev
-            - libxcb-keysyms1-dev
-            - libpango1.0-dev
-            - libxcb-util0-dev
-            - libxcb-icccm4-dev
-            - libyajl-dev
-            - libstartup-notification0-dev
-            - libxcb-randr0-dev
-            - libev-dev
-            - libxcb-cursor-dev
-            - libxcb-xinerama0-dev
-            - libxcb-xkb-dev
-            - libxkbcommon-dev
-            - libxkbcommon-x11-dev
-            - autoconf
-            - libxcb-xrm0
-            - libxcb-xrm-dev
-            - automake
-
-        - name: Clone i3-gaps
-          git:
-            repo: https://www.github.com/Airblader/i3
-            dest: '{{ ansible_env.HOME }}/repos/i3-gaps'
-          register: i3_gaps
-
-        - name: Compile and install i3-gaps
-          when:
-            i3_gaps.before != i3_gaps.after
-          args:
-            chdir: '{{ ansible_env.HOME }}/repos/i3-gaps'
-          shell: |
-            autoreconf --force --install
-            mkdir -p build && cd build/
-            ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-            make
-            sudo make install
+    - name: i3_gaps
+      import_role:
+        name: i3_gaps
+      tags: i3_gaps
 
     - name: i3status_rs
       import_role:

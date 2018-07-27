@@ -1,0 +1,8 @@
+---
+- name: Install dependencies
+  apt:
+    name: curl
+
+- name: Install antibody
+  become: true
+  shell: curl -sL https://git.io/antibody | bash -s
