@@ -1,0 +1,36 @@
+---
+- name: Get latest release
+  uri:
+    url: https://api.github.com/repos/hadolint/hadolint/releases/latest
+    timeout: 5
+  register: awless_latest_release
+  changed_when: false
+
+- name: Get download url
+  set_fact:
+    hadolint_download_url: >
+      {{
+        awless_latest_release.json.assets |
+        to_json | from_json |
+        json_query(
+          "[?contains(name, 'Linux-x86_64')].browser_download_url | [0]"
+        )
+      }}
+
+- name: Download
+  get_url:
+    url: '{{ hadolint_download_url }}'
+    dest: /tmp/hadolint
+
+- name: Create parent directory
+  file:
+    state: directory
+    path: '{{ ansible_env.HOME }}/.local/bin/'
+    mode: 0770
+    recurse: true
+
+- name: Move to bin
+  copy:
+    src: /tmp/hadolint
+    dest: '{{ ansible_env.HOME }}/.local/bin/'
+    mode: 0500

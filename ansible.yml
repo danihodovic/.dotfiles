@@ -236,6 +236,11 @@
         name: doctl
       tags: doctl
 
+    - name: hadolint
+      import_role:
+        name: hadolint
+      tags: hadolint
+
     - name: Install i3 completions
       tags: i3-completions
       block:

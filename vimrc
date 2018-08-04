@@ -63,7 +63,7 @@ if s:has_plug == 1
   Plug 'cespare/vim-toml'                       " Toml is a configuration language similar to yaml
   Plug 'danihodovic/nodejs-require.vim'
   Plug 'derekwyatt/vim-scala'
-  Plug 'ekalinin/Dockerfile.vim'                " Syntax for Dockerfile and snippets 
+  Plug 'moby/moby' , {'rtp': '/contrib/syntax/vim/'}
   Plug 'chr4/nginx.vim'
   Plug 'fatih/vim-go'                           " Basically a Golang IDE for vi
   Plug 'leafgarland/typescript-vim'             " Typescript syntax
@@ -637,7 +637,7 @@ let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
 autocmd BufWritePost * call BufWritePostNeomake()
 func BufWritePostNeomake()
   let neomake_bufwritepost_filetypes = [
-  \ 'python', 'bash', 'lua', 'go', 'ruby', 'ansible', 'sh', 'yaml',
+  \ 'python', 'bash', 'lua', 'go', 'ruby', 'ansible', 'sh', 'yaml', 'dockerfile'
   \]
   let neomake_lint_and_fix_filetypes = ['javascript', 'typescript']
 
