@@ -65,8 +65,10 @@ scripts_to_source=(
   ${HOME}/.i3_completion.sh
   ${HOME}/.kubectl_completion
   ${HOME}/.kops_completion
-  ${HOME}/.awless_zsh
+  # For some reason doctl has to be before awless, otherwise
+  # awless completion won't work.
   ${HOME}/.doctl_zsh
+  ${HOME}/.awless_zsh
   # Own helpers
   ${HOME}/.dotfiles/fzf-helpers.zsh
   ${HOME}/.dotfiles/docker.zsh
@@ -193,7 +195,6 @@ alias setxkbmapcaps="setxkbmap -option caps:swapescape68"
 alias o='xdg-open'
 alias v=nvim
 alias k='kubectl'
-alias aws=awless
 alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
 alias s3='aws s3'
@@ -255,4 +256,22 @@ man() {
 
 function httpdump {
   sudo tcpdump -A -s 0 "(((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0) $@"
+}
+
+function sync {
+  local_dir=$1
+
+  # user@remote:dir
+  remote=$2
+
+  remote_server=$(echo "$remote" | awk -F ':' '{print $1}')
+  remote_dir=$(echo "$remote" | awk -F ':' '{print $2}')
+  ssh "$remote_server" "rm -rf $remote_dir"
+
+  rsync -avz "$local_dir/" "$remote"
+  while inotifywait -e modify -r "$local_dir"; do
+    notify-send "Syncing $local_dir..." -i network-transmit-receive
+    rsync -avz "$local_dir/" "$remote"
+    pkill xfce4-notifyd
+  done
 }
