@@ -22,6 +22,12 @@ interval = 60
 format = "%Y-%m-%d %R"
 
 [[block]]
+block = "time"
+interval = 5
+timezone = "Europe/Berlin"
+format = "Berlin: %R"
+
+[[block]]
 block = "battery"
 interval = 10
 show = "both"
