@@ -1,0 +1,35 @@
+---
+- name: Get latest release
+  uri:
+    url: https://api.github.com/repos/github/hub/releases/latest
+    timeout: 5
+  register: latest_release
+  changed_when: false
+
+- name: Get download url
+  set_fact:
+    download_url: >
+      {{
+        latest_release.json.assets |
+        to_json | from_json |
+        json_query(
+          "[?contains(name, 'linux-amd64')].browser_download_url | [0]"
+        )
+      }}
+
+- name: Pull hub binary
+  get_url:
+    url: '{{ download_url }}'
+    dest: /tmp/hub.tar
+    force: true
+
+- name: Extract hub
+  unarchive:
+    src: /tmp/hub.tar
+    dest: /tmp
+    list_files: true
+  register: hub_archive
+
+- name: Install hub
+  become: true
+  shell: '/tmp/{{ hub_archive.files[0].split("/")[0] }}/install'
