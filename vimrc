@@ -76,6 +76,7 @@ if s:has_plug == 1
   Plug 'vim-erlang/vim-erlang-omnicomplete'
   Plug 'junegunn/vader.vim'
   Plug 'elixir-editors/vim-elixir'
+  Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
   Plug 'tomlion/vim-solidity'
   call plug#end()
 end
@@ -231,7 +232,8 @@ map S ys
 nnoremap <leader>aw :ArgWrap<cr>
 nnoremap <leader>en :lnext<cr>
 nnoremap <leader>ep :lprevious<cr>
-autocmd BufWritePre *.tf TerraformFmt
+autocmd BufWritePre *.tf call terraform#fmt()
+autocmd BufWritePre *.py YAPF
 "-----------------------------------------
 " Color scheme settings
 "-----------------------------------------
