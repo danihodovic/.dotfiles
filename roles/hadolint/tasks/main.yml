@@ -3,14 +3,14 @@
   uri:
     url: https://api.github.com/repos/hadolint/hadolint/releases/latest
     timeout: 5
-  register: awless_latest_release
+  register: latest_release
   changed_when: false
 
 - name: Get download url
   set_fact:
     hadolint_download_url: >
       {{
-        awless_latest_release.json.assets |
+        latest_release.json.assets |
         to_json | from_json |
         json_query(
           "[?contains(name, 'Linux-x86_64')].browser_download_url | [0]"

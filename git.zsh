@@ -236,6 +236,16 @@ gcherry() {
   fi
 }
 
+function gcherrynewbranch {
+  python3 -c "import git_helpers; git_helpers.git_cherry_pick_new_branch()"
+}
+
+function gcherrypr {
+  python3 -c "import git_helpers; git_helpers.git_cherry_pick_new_branch()"
+  gpushbranch
+  hub pull-request --no-edit
+}
+
 function gdelbranch {
   branches=$(fbranch)
   if [ -z "$branches" ]; then
