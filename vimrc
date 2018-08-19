@@ -626,6 +626,7 @@ map y <Plug>(operator-flashy)
 "-----------------------------------------
 let g:neomake_list_height = 8
 let g:neomake_open_list = 2
+let g:neomake_python_python_exe = 'python3'
 
 let g:neomake_typescript_tslint_maker = {
     \ 'args': ['--project', 'tsconfig.json'],
@@ -648,7 +649,6 @@ func BufWritePostNeomake()
   elseif count(neomake_bufwritepost_filetypes, &filetype)
     Neomake
   endif
-
 endfunc
 
 autocmd BufWritePre * if &ft == 'go' | exec 'GoImports' | endif
