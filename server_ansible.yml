@@ -1,5 +1,5 @@
 ---
-- hosts: '{{ target | default("all") }}'
+- hosts: all
   vars:
     ansible_become: false
 
