@@ -1,0 +1,13 @@
+---
+- name: Download terraform
+  get_url:
+    # yamllint disable-line rule:line-length
+    url: 'https://releases.hashicorp.com/terraform/{{ version }}/terraform_{{ version }}_linux_amd64.zip'
+    dest: /tmp/terraform.zip
+    force: true
+
+- name: Unarchive terraform
+  become: true
+  unarchive:
+    src: /tmp/terraform.zip
+    dest: /usr/local/bin/
