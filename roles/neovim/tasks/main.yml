@@ -26,4 +26,4 @@
   get_url:
     url: '{{ neovim_download_url }}'
     dest: '{{ appimage_dest }}'
-    mode: 0550
+    mode: 0770

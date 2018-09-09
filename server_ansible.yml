@@ -9,13 +9,13 @@
         ansible_become: true
       name: Install apt dependencies
       apt:
-        name: '{{ item }}'
-      with_items:
-        - git
-        - curl
-        - zsh
-        - net-tools
-        - xclip
+        name:
+          - git
+          - curl
+          - zsh
+          - net-tools
+          - xclip
+          - httpie
 
     - import_role:
         name: neovim

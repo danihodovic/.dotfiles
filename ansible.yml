@@ -10,50 +10,49 @@
     - name: Install apt packages
       become: true
       apt:
-        name: '{{ item }}'
-      with_items:
-        - zsh
-        - git
-        - curl
-        - openvpn
-        - taskwarrior
-        - tldr
-        - net-tools
-        - parcellite
-        - tmux
-        - silversearcher-ag
-        - xclip
-        - jq
-        - git-extras
-        - curl
-        - sshfs
-        - cmake
-        - python-dev
-        - build-essential
-        - xdotool
-        - wmctrl
-        - colortest
-        - vnstat
-        - gparted
-        - shellcheck
-        - rofi
-        - ranger
-        - gnome-settings-daemon
-        - apt-file
-        - direnv
-        - xautolock
-        - caffeine
-        - asciinema
-        - network-manager-openvpn-gnome
-        - variety
-        - feh
-        - speedtest-cli
-        - i3
-        - i3status
-        - i3lock
-        - ruby-dev
-        - libnotify-bin
-        - yamllint
+        name:
+          - zsh
+          - git
+          - httpie
+          - curl
+          - openvpn
+          - taskwarrior
+          - tldr
+          - net-tools
+          - parcellite
+          - tmux
+          - silversearcher-ag
+          - xclip
+          - jq
+          - git-extras
+          - sshfs
+          - cmake
+          - python-dev
+          - build-essential
+          - xdotool
+          - wmctrl
+          - colortest
+          - vnstat
+          - gparted
+          - shellcheck
+          - rofi
+          - ranger
+          - gnome-settings-daemon
+          - apt-file
+          - direnv
+          - xautolock
+          - caffeine
+          - asciinema
+          - network-manager-openvpn-gnome
+          - variety
+          - feh
+          - speedtest-cli
+          - i3
+          - i3status
+          - i3lock
+          - ruby-dev
+          - libnotify-bin
+          - yamllint
 
     - name: Install pip packages
       pip:
