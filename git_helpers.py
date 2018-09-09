@@ -12,7 +12,7 @@ def git_cherry_pick_new_branch():
 
     subprocess.run(f'''
         git checkout master
-        git pull origin/master
+        git pull origin master
         git checkout -b {new_branch_name}
         git cherry-pick {git_hash}
     ''', shell=True)
