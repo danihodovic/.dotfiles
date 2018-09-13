@@ -34,6 +34,28 @@ function fzf-ssh {
 }
 zle     -N     fzf-ssh
 
+function fzf-docker-logs {
+  matches=$(docker ps --format 'table {{ .Names }}\t{{ .Image }}')
+  selection=$(echo $matches | fzf --header-lines=1 | awk '{print $1}')
+  if [ ! -z $selection ]; then
+    args="${@:-"--tail 100 -f"}"
+    BUFFER="docker logs $args $selection"
+    zle accept-line
+  fi
+}
+zle -N fzf-docker-logs
+
+function fzf-docker-exec {
+  matches=$(docker ps --format 'table {{ .Names }}\t{{ .Image }}')
+  selection=$(echo $matches | fzf --header-lines=1 | awk '{print $1}')
+  if [ ! -z $selection ]; then
+    cmd="${@:-"sh -c 'bash || sh'"}"
+    BUFFER="docker exec -it $selection $cmd"
+    zle accept-line
+  fi
+}
+zle -N fzf-docker-exec
+
 fcommit() {
   local commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
   local commit=$(echo "$commits" | fzf --tac +s -m -e --ansi --reverse) &&
@@ -41,7 +63,15 @@ fcommit() {
 }
 
 bindkey -M vicmd '\-'   fzf-file-widget
+
 bindkey -M vicmd '^r'   fzf-history-widget
 bindkey -M viins '^r'   fzf-history-widget
+
 bindkey -M vicmd '^s'   fzf-ssh
 bindkey -M viins '^s'   fzf-ssh
+
+bindkey -M vicmd '^l'   fzf-docker-logs
+bindkey -M viins '^l'   fzf-docker-logs
+
+bindkey -M vicmd '^x'   fzf-docker-exec
+bindkey -M viins '^x'   fzf-docker-exec
