@@ -29,63 +29,11 @@
         bat_dest: '{{ ansible_env.HOME }}/.local/bin/bat'
       tags: bat
 
-    - name: Check if fzf is installed
+    - import_role: name=fzf
       tags: fzf
-      shell: file ~/.fzf/bin/fzf
-      register: fzf_installed
-      changed_when: false
 
-    # Requires git,curl for install...
-    # Requires fzf bin in path: export PATH=$PATH:~/.fzf/bin
-    - tags: fzf
-      when: "'cannot open' in fzf_installed.stdout"
-      block:
-        - name: Clone fzf
-          git:
-            repo: 'https://github.com/junegunn/fzf.git'
-            depth: 1
-            dest: ~/.fzf
-            accept_hostkey: true
-
-        - name: fzf installation script
-          shell: ~/.fzf/install --key-bindings --completion --no-update-rc
-
-    - name: Check if fd is installed
+    - import_role: name=fd
       tags: fd
-      shell: file ~/.local/bin/fd
-      register: fd_installed
-      changed_when: false
-
-    - tags: fd
-      when: "'cannot open' in fd_installed.stdout"
-      block:
-        - name: Get fd
-          get_url:
-            # yamllint disable-line rule:line-length
-            url: https://github.com/sharkdp/fd/releases/download/v7.0.0/fd-v7.0.0-x86_64-unknown-linux-gnu.tar.gz
-            dest: /tmp/fd_.tar.gz
-            mode: 0400
-            owner: '{{ ansible_user }}'
-
-        - name: Extract fd
-          unarchive:
-            remote_src: true
-            src: /tmp/fd_.tar.gz
-            dest: /tmp
-            list_files: true
-          register: unarchive_contents
-
-        - name: Create home bin directory
-          file:
-            path: ~/.local/bin/
-            state: directory
-
-        - name: Copy fd to bin
-          copy:
-            remote_src: true
-            src: '/tmp/{{ unarchive_contents.files[0].split("/")[0] }}/fd'
-            dest: ~/.local/bin/
-            mode: 0755
 
     - name: Create dirs
       file:
