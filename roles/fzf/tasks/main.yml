@@ -5,7 +5,6 @@
     name: [git, curl]
 
 - name: Clone fzf
-  # become_user: dani
   git:
     repo: https://github.com/junegunn/fzf.git
     depth: 1
@@ -13,5 +12,4 @@
     accept_hostkey: true
 
 - name: Install fzf
-  # become_user: dani
   shell: ~/.fzf/install --key-bindings --completion --no-update-rc

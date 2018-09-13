@@ -1,3 +1,5 @@
+# Default prompt
+export PROMPT='%F{81}%* %~ %m %# '
 # Paths
 # ------------
 # Export paths before sourcing anything

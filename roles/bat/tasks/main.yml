@@ -23,7 +23,7 @@
   get_url:
     url: '{{ bat_download_url }}'
     dest: /tmp/bat.tar
-    mode: 0440
+    mode: 0550
 
 - name: Extract archive
   unarchive:
@@ -38,4 +38,4 @@
     src: '/tmp/{{ bat_archive.files[0] }}'
     dest: '{{ bat_dest }}'
     remote_src: true
-    mode: 0555
+    mode: 0770
