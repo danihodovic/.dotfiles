@@ -22,7 +22,12 @@ export AWS_PROFILE=$([ -f ~/.aws_profile ] && cat ~/.aws_profile)
 export KUBECONFIG=$([ -d ~/.kube ] && find ~/.kube -maxdepth 1 -type f | tr '\n' ':')
 export EDITOR=nvim
 
-function find () {}
+function find () {
+  echo Use fd
+}
+function curl () {
+  echo 'Use httpie (cmd http)'
+}
 
 # Ease of use
 export dotfiles=${HOME}/.dotfiles
