@@ -1,0 +1,31 @@
+---
+- name: Install unzip
+  become: true
+  apt:
+    name: unzip
+
+- name: Download archive
+  register: archive
+  get_url:
+    # yamllint disable-line rule:line-length
+    url: https://releases.hashicorp.com/packer/{{ version }}/packer_{{ version }}_linux_amd64.zip
+    dest: /tmp/
+    force: true
+
+- stat:
+    path: '{{ dest }}'
+  register: st
+
+- name: Create parent dir if not exist
+  when: not st.stat.exists
+  file:
+    state: directory
+    path: '{{ dest }}'
+    mode: 0660
+
+- name: Unarchive
+  become: '{{ true if not st.stat.writeable else false }}'
+  unarchive:
+    remote_src: true
+    src: '{{ archive.dest }}'
+    dest: '{{ dest }}'

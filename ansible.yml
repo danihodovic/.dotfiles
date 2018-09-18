@@ -240,6 +240,10 @@
         version: 0.11.8
       tags: terraform
 
+    - name: Install packer
+      import_role: name=packer
+      tags: packer
+
     - tags: awless
       import_role: name=awless
 
