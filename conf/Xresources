@@ -47,6 +47,6 @@ urxvt*background: black
 ! ------------------------------
 ! Rofi
 ! ------------------------------
-rofi.kb-row-up:                      Up,Control+k
-rofi.kb-row-down:                    Down,Control+j
+rofi.kb-row-up:                      Up
+rofi.kb-row-down:                    Down
 rofi.kb-accept-entry: 		     Return,KP_Enter
