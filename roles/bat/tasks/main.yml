@@ -3,15 +3,15 @@
   uri:
     url: https://api.github.com/repos/sharkdp/bat/releases/latest
     timeout: 5
-  register: bat_latest_release
+  register: latest_release
   changed_when: false
 
 - name: Get download url
   set_fact:
     # yamllint disable rule:line-length
-    bat_download_url: >
+    download_url: >
       {{
-        bat_latest_release.json.assets |
+        latest_release.json.assets |
         to_json | from_json |
         json_query(
           "[?contains(name, 'x86_64-unknown-linux-gnu.tar.gz')].browser_download_url | [0]"
@@ -21,9 +21,9 @@
 
 - name: Download archive
   get_url:
-    url: '{{ bat_download_url }}'
+    url: '{{ download_url }}'
     dest: /tmp/bat.tar
-    mode: 0550
+    mode: 0770
 
 - name: Extract archive
   unarchive:
@@ -31,11 +31,11 @@
     dest: /tmp/
     remote_src: true
     list_files: true
-  register: bat_archive
+  register: archive
 
 - name: Copy binary
   copy:
-    src: '/tmp/{{ bat_archive.files[0] }}'
-    dest: '{{ bat_dest }}'
+    src: '/tmp/{{ archive.files[0] }}'
+    dest: '{{ dest_dir }}'
     remote_src: true
     mode: 0770

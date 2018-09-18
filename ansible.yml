@@ -205,7 +205,6 @@
       import_role:
         name: bat
       vars:
-        ansible_become: true
         bat_dest: /usr/local/bin/
       tags: bat
 

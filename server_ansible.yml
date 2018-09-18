@@ -1,13 +1,17 @@
 ---
+# Usage
+# $ ansible-playbook server_ansible.yml
+# -i <inventory>
+# --vault-password ~/.vault_password
+# -e ansible_become=false
+# -e ansible_ssh_user=dani
+# --ssh-common-args='-o ProxyJump=jumphost'
+# -l <instance>
 - hosts: all
-  vars:
-    ansible_become: false
-
   tasks:
     - tags: dependencies
-      vars:
-        ansible_become: true
       name: Install apt dependencies
+      become: true
       apt:
         name: [zsh, net-tools, xclip, httpie]
 
@@ -20,7 +24,7 @@
     - import_role:
         name: bat
       vars:
-        bat_dest: '{{ ansible_env.HOME }}/.local/bin/bat'
+        dest_dir: '{{ ansible_env.HOME }}/.local/bin/bat'
       tags: bat
 
     - import_role: name=fzf
@@ -28,6 +32,12 @@
 
     - import_role: name=fd
       tags: fd
+
+    - import_role: name=terraform
+      tags: terraform
+
+    - import_role: name=packer
+      tags: packer
 
     - name: Create dirs
       file:

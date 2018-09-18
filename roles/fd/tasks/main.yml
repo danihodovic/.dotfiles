@@ -24,8 +24,6 @@
     # yamllint disable-line rule:line-length
     url: '{{ download_url }}'
     dest: /tmp/fd_.tar.gz
-    mode: 0600
-    owner: '{{ ansible_user }}'
     force: true
 
 - name: Extract fd
@@ -43,6 +41,7 @@
 
 - name: Copy fd to bin
   copy:
+    remote_src: true
     src: '/tmp/{{ unarchive_contents.files[0].split("/")[0] }}/fd'
     dest: ~/.local/bin/
     mode: 0755

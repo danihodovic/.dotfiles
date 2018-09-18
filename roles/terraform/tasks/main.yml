@@ -1,4 +1,9 @@
 ---
+- name: Install unzip
+  become: true
+  apt:
+    name: unzip
+
 - name: Download terraform
   get_url:
     # yamllint disable-line rule:line-length
@@ -9,5 +14,6 @@
 - name: Unarchive terraform
   become: true
   unarchive:
+    remote_src: true
     src: /tmp/terraform.zip
     dest: /usr/local/bin/
