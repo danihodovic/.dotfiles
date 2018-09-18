@@ -35,7 +35,7 @@ function fzf-ssh {
 zle     -N     fzf-ssh
 
 function fzf-docker-logs {
-  matches=$(docker ps --format 'table {{ .Names }}\t{{ .Image }}')
+  matches=$(docker ps -a --format 'table {{ .Names }}\t{{ .Image }}')
   selection=$(echo $matches | fzf --header-lines=1 | awk '{print $1}')
   if [ ! -z $selection ]; then
     args="${@:-"--tail 100 -f"}"
