@@ -9,7 +9,7 @@
 # -l <instance>
 - hosts: all
   tasks:
-    - tags: dependencies
+    - tags: [dependencies, minimal]
       name: Install apt dependencies
       become: true
       apt:
@@ -28,7 +28,7 @@
       tags: bat
 
     - import_role: name=fzf
-      tags: fzf
+      tags: [fzf, minimal]
 
     - import_role: name=fd
       tags: fd
@@ -40,6 +40,7 @@
       tags: packer
 
     - name: Create dirs
+      tags: minimal
       file:
         path: '{{ item }}'
         state: directory
@@ -50,7 +51,7 @@
         - '{{ ansible_env.HOME }}/.config/nvim'
 
     - name: Copy shell files
-      tags: rc-files
+      tags: [rc-files, minimal]
       copy:
         src: '{{ item.src }}'
         dest: '{{ item.dest }}'
