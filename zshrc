@@ -70,7 +70,6 @@ scripts_to_source=(
   ${HOME}/.fzf.zsh
   ${HOME}/.gvm/scripts/gvm
   ${HOME}/.rvm/scripts/rvm
-  ${HOME}/.i3_completion.sh
   ${HOME}/.kubectl_completion
   ${HOME}/.kops_completion
   # For some reason doctl has to be before awless, otherwise
@@ -186,7 +185,7 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 # ------------
 # Allows 256 colors as background in terminal, used for Vi
 alias t=task
-alias cat='bat --style=numbers,changes'
+alias cat='bat --style=plain'
 alias tmux="tmux -2"
 # Todo: Write a function instead
 alias cd.="cd .."
