@@ -1,0 +1,14 @@
+---
+- name: Add gcloud apt key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+- name: Add gcloud apt repository
+  apt_repository:
+    # yamllint disable-line rule:line-length
+    repo: 'deb http://packages.cloud.google.com/apt cloud-sdk-{{ ansible_distribution_release }} main'
+
+- name: Install gcloud
+  apt:
+    name: google-cloud-sdk
+    update_cache: true

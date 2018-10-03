@@ -84,29 +84,8 @@
         append: true
       tags: docker
 
-    - tags: nvim
-      block:
-        - name: Add neovim ppa
-          apt_repository:
-            repo: ppa:neovim-ppa/unstable
-          become: true
-
-        - name: Install neovim
-          apt:
-            name: neovim
-            update_cache: true
-          become: true
-
-        - name: Create vim-plug parent directory
-          file:
-            path: '{{ ansible_env.HOME }}/.config/nvim/autoload'
-            state: directory
-
-        - name: Install vim-plug
-          get_url:
-            url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-            dest: '{{ ansible_env.HOME }}/.config/nvim/autoload/plug.vim'
-            mode: 0440
+    - import_role: name=neovim
+      tags: neovim
 
     - import_role: name=fzf
       tags: fzf
@@ -114,76 +93,19 @@
     - import_role: name=fd
       tags: fd
 
-    - name: Install diff-so-fancy
+    - import_role: name=diff_so_fancy
       tags: diff-so-fancy
-      block:
-        - name: Install dependencies
-          apt:
-            name: '{{ item }}'
-          become: true
-          with_items:
-            - perl-modules-5.26
 
-        - name: Install diff-so-fancy
-          get_url:
-            url: https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
-            dest: /usr/local/bin/diff-so-fancy
-            mode: 0555
-          become: true
-
-    - name: Install gvm
+    - import_role: name=gvm
       tags: gvm
-      block:
-        - name: Install dependencies
-          become: true
-          apt:
-            name: '{{ item }}'
-          with_items:
-            - binutils
-            - bison
-            - gcc
 
-        - name: Install gvm
-          args:
-            executable: /bin/bash
-            creates: '{{ ansible_env.HOME }}/.gvm/bin/gvm'
-          shell: |
-            set -o pipefail
-            url=https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer
-            curl -s -S -L $url | bash
-
-    - name: Install n (node version manager)
+    - import_role: name=n
       tags: n
-      block:
-        - name: Install n
-          args:
-            creates: '{{ ansible_env.HOME }}/.n/bin/n'
-          shell: |
-            # https://github.com/mklement0/n-install#examples
-            curl -L https://git.io/n-install | N_PREFIX=$HOME/.n bash -s -- -y lts
 
-
-    - name: Install chrome
+    - import_role: name=chrome
       tags: chrome
-      become: true
-      block:
-        - name: Add chrome ppa key
-          apt_key:
-            url: https://dl.google.com/linux/linux_signing_key.pub
 
-        - name: Add chrome ppa
-          apt_repository:
-            repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
-            filename: 'google-chrome'
-
-        - name: Install chrome
-          apt:
-            name: google-chrome-stable
-            update_cache: true
-
-    - name: alacritty
-      import_role:
-        name: alacritty
+    - import_role: name=alacritty
       tags: alacritty
 
     - name: antibody
@@ -191,26 +113,13 @@
         name: antibody
       tags: antibody
 
-    - name: i3_gaps
-      import_role:
-        name: i3_gaps
+    - import_role: name=i3_gaps
       tags: i3_gaps
 
-    - name: i3status_rs
-      import_role:
-        name: i3status_rs
+    - import_role: name=i3status_rs
       tags: i3status_rs
 
-    - name: bat
-      import_role:
-        name: bat
-      vars:
-        bat_dest: /usr/local/bin/
-      tags: bat
-
-    - name: doctl
-      import_role:
-        name: doctl
+    - import_role: name=doctl
       tags: doctl
 
     - name: hadolint
@@ -218,128 +127,31 @@
         name: hadolint
       tags: hadolint
 
-    - name: Install i3 completions
-      tags: i3-completions
-      block:
-        - name: Install dependencies
-          apt:
-            name: curl
-
-        - name: Install i3-completions
-          become: true
-          get_url:
-            url: https://raw.githubusercontent.com/cornerman/i3-completion/master/i3_completion.sh
-            dest: /usr/local/bin/tldr
-            mode: 0444
-
-    - name: Install terraform
-      import_role:
-        name: terraform
+    - import_role: name=terraform
       vars:
         version: 0.11.8
       tags: terraform
 
-    - name: Install packer
-      import_role: name=packer
+    - import_role: name=packer
       tags: packer
 
-    - tags: awless
-      import_role: name=awless
+    - import_role: name=awless
+      tags: awless
 
-    - tags: gcloud
-      become: true
-      block:
-        - name: Add gcloud apt key
-          apt_key:
-            url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    - import_role: name=gcloud
+      tags: gcloud
 
-        - name: Add gcloud apt repository
-          apt_repository:
-            repo: 'deb http://packages.cloud.google.com/apt cloud-sdk-{{ ansible_distribution_release }} main'
-
-        - name: Install gcloud
-          apt:
-            name: google-cloud-sdk
-            update_cache: true
-
-    - import_role:
-        name: hub
+    - import_role: name=hub
       tags: hub
 
-    - name: Check if ngrok is installed
-      shell: which ngrok
-      failed_when: false
-      changed_when: false
-      register: hub_installed
+    - import_role: name=ngrok
       tags: ngrok
 
-    - tags: ngrok
-      block:
-        - name: Pull ngrok
-          get_url:
-            url: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
-            dest: /tmp/ngrok.zip
-            mode: 0755
-
-        - name: Extract ngrok
-          unarchive:
-            src: /tmp/ngrok.zip
-            dest: /tmp
-
-        - name: Move ngrok to bin
-          become: true
-          copy:
-            src: /tmp/ngrok
-            dest: /usr/local/bin/
-            mode: 0755
-
-    - name: Check if dropbox is installed
+    - import_role: name=dropbox
       tags: dropbox
-      shell: dpkg-query -W dropbox
-      failed_when: false
-      changed_when: false
-      register: dropbox_installed
 
-    - tags: dropbox
-      when: dropbox_installed.rc == 1
-      block:
-        - name: Get dropbox debian package
-          get_url:
-            url: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb
-            dest: /tmp/dropbox.deb
-            mode: 0755
-
-        - name: Install dropbox
-          apt:
-            deb: /tmp/dropbox.deb
-
-    - name: Check if tflint is installed
-      shell: which tflint
-      failed_when: false
-      changed_when: false
-      register: tflint_installed
+    - import_role: name=tflint
       tags: tflint
-
-    - tags: tflint
-      when: tflint_installed.rc == 1
-      block:
-        - name: Download archive
-          get_url:
-            url: https://github.com/wata727/tflint/releases/download/v0.7.0/tflint_linux_amd64.zip
-            dest: /tmp/tflint.zip
-            mode: 0755
-
-        - name: Extract archive
-          unarchive:
-            src: /tmp/tflint.zip
-            dest: /tmp
-
-        - name: Put tflint in $PATH
-          become: true
-          copy:
-            src: /tmp/tflint
-            dest: /usr/local/bin/tflint
-            mode: 0755
 
     - name: Create symlink parent directories
       tags: symlinks

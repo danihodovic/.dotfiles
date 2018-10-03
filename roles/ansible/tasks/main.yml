@@ -1,0 +1,13 @@
+---
+- name: Install pip
+  apt:
+    name: python-pip
+
+- name: Install pip dependencies
+  pip:
+    name: [jmespath]
+
+- name: Install ansible
+  pip:
+    name: ansible
+    version: '{{ version }}'

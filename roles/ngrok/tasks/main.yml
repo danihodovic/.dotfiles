@@ -1,0 +1,19 @@
+---
+- name: Pull ngrok
+  get_url:
+    url: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+    dest: /tmp/ngrok.zip
+    mode: 0766
+    force: true
+
+- name: Extract ngrok
+  unarchive:
+    src: /tmp/ngrok.zip
+    dest: /tmp
+
+- name: Move ngrok to $PATH
+  become: true
+  copy:
+    src: /tmp/ngrok
+    dest: '{{ ngrok_dest }}'
+    mode: 0755

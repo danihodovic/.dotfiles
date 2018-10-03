@@ -11,21 +11,14 @@
   tasks:
     - tags: [dependencies, minimal]
       name: Install apt dependencies
-      become: true
+      vars:
+        ansible_become: true
       apt:
         name: [zsh, net-tools, xclip, httpie]
 
     - import_role:
         name: neovim
-      vars:
-        appimage_dest: '{{ ansible_env.HOME }}/.local/bin/nvim'
       tags: neovim
-
-    - import_role:
-        name: bat
-      vars:
-        dest_dir: '{{ ansible_env.HOME }}/.local/bin/bat'
-      tags: bat
 
     - import_role: name=fzf
       tags: [fzf, minimal]
@@ -38,6 +31,9 @@
 
     - import_role: name=packer
       tags: packer
+
+    - import_role: name=ansible
+      tags: ansible
 
     - name: Create dirs
       tags: minimal

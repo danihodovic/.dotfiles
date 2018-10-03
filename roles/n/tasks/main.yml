@@ -1,0 +1,10 @@
+---
+- name: Install n (node version manager)
+  tags: n
+  block:
+    - name: Install n
+      args:
+        creates: '{{ ansible_env.HOME }}/.n/bin/n'
+      shell: |
+        # https://github.com/mklement0/n-install#examples
+        curl -L https://git.io/n-install | N_PREFIX=$HOME/.n bash -s -- -y lts

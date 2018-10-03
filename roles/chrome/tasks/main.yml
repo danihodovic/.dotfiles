@@ -1,0 +1,17 @@
+---
+- name: Add chrome ppa key
+  become: true
+  apt_key:
+    url: https://dl.google.com/linux/linux_signing_key.pub
+
+- name: Add chrome ppa
+  become: true
+  apt_repository:
+    repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+    filename: 'google-chrome'
+
+- name: Install chrome
+  become: true
+  apt:
+    name: google-chrome-stable
+    update_cache: true

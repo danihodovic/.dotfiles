@@ -1,0 +1,36 @@
+---
+- name: Get latest release
+  uri:
+    url: https://api.github.com/repos/wata727/tflint/releases/latest
+    timeout: 5
+  register: latest_release
+  changed_when: false
+
+- name: Get download url
+  set_fact:
+    download_url: >-
+      {{
+        latest_release.json.assets | to_json | from_json |
+        json_query(
+          "[?contains(name, 'linux_amd64')].browser_download_url | [0]"
+        )
+      }}
+
+- name: Download archive
+  get_url:
+    url: '{{ download_url }}'
+    dest: /tmp/tflint.zip
+    mode: 0770
+    force: true
+
+- name: Extract archive
+  unarchive:
+    src: /tmp/tflint.zip
+    dest: /tmp
+
+- name: Put tflint in $PATH
+  become: true
+  copy:
+    src: /tmp/tflint
+    dest: '{{ tflint_dest }}'
+    mode: 0755
