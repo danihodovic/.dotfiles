@@ -221,13 +221,6 @@ alias aptrepository='sudo apt-add-repository  -y'
 
 function ssh-keygen-fingerprint { ssh-keygen -l -f $1 }
 function ssh-keygen-fingerprint-md5 { ssh-keygen -E md5 -l -f $1 }
-function ssh-sync {
-  if [ $# != '3' ]; then
-    echo 'Usage:\n\t ssh-sync <source-dir> <host>@<ip> <target-dir>'
-    return 1
-  fi
-  print -z lsyncd -log all -nodaemon -rsyncssh $@
-}
 
 # cd && ls
 function chpwd {
@@ -276,10 +269,10 @@ function sync {
   remote_dir=$(echo "$remote" | awk -F ':' '{print $2}')
   ssh "$remote_server" "rm -rf $remote_dir"
 
-  rsync -avz "$local_dir/" "$remote"
+  rsync -avz --cvs-exclude "$local_dir/" "$remote"
   while inotifywait -e modify -r "$local_dir"; do
     notify-send "Syncing $local_dir..." -i network-transmit-receive
-    rsync -avz "$local_dir/" "$remote"
+    rsync -avz --cvs-exclude "$local_dir/" "$remote"
     pkill xfce4-notifyd
   done
 }
