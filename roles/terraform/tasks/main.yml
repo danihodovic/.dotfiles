@@ -16,4 +16,4 @@
   unarchive:
     remote_src: true
     src: /tmp/terraform.zip
-    dest: /usr/local/bin/
+    dest: '{{ dest }}'
