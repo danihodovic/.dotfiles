@@ -8,6 +8,8 @@
 # --ssh-common-args='-o ProxyJump=jumphost'
 # -l <instance>
 - hosts: all
+  vars:
+    ansible_become: false
   tasks:
     - tags: [dependencies, minimal]
       name: Install apt dependencies
