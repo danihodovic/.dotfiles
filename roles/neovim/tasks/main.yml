@@ -2,7 +2,7 @@
 - name: Create directory
   file:
     state: directory
-    path: '{{ appimage_dest | dirname }}'
+    path: '{{ neovim_dest | dirname }}'
 
 - name: Get latest release
   uri:
@@ -25,5 +25,5 @@
 - name: Download appimage
   get_url:
     url: '{{ neovim_download_url }}'
-    dest: '{{ appimage_dest }}'
+    dest: '{{ neovim_dest }}'
     mode: 0770
