@@ -1,5 +1,6 @@
 ---
 - name: Install pip
+  become: true
   apt:
     name: python-pip
 

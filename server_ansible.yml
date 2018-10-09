@@ -8,13 +8,10 @@
 # --ssh-common-args='-o ProxyJump=jumphost'
 # -l <instance>
 - hosts: all
-  vars:
-    ansible_become: false
   tasks:
     - tags: [dependencies, minimal]
       name: Install apt dependencies
-      vars:
-        ansible_become: true
+      become: true
       apt:
         name: [zsh, net-tools, xclip, httpie]
 
@@ -71,9 +68,7 @@
           dest: '{{ ansible_env.HOME }}/.config/nvim/init.vim'
 
     - name: Set zsh as the default shell
-      # https://github.com/ansible/ansible/issues/32208
-      vars:
-        ansible_become: true
+      become: true
       user:
         name: '{{ ansible_user }}'
         shell: /bin/zsh
