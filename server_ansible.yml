@@ -18,8 +18,15 @@
       apt:
         name: [zsh, net-tools, xclip, httpie]
 
-    - import_role:
-        name: neovim
+    - import_role: name=geerlingguy.docker
+      become: true
+      vars:
+        docker_package: 'docker-ce=18.06.1*'
+        docker_install_compose: false
+        docker_users: ['{{ ansible_user_id }}']
+      tags: docker
+
+    - import_role: name=neovim
       tags: neovim
 
     - import_role: name=fzf
