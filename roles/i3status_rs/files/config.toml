@@ -18,14 +18,14 @@ interval = 600
 
 [[block]]
 block = "time"
-interval = 60
-format = "%Y-%m-%d %R"
-
-[[block]]
-block = "time"
 interval = 5
 timezone = "Europe/Berlin"
 format = "Berlin: %R"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%Y-%m-%d %R"
 
 [[block]]
 block = "battery"
