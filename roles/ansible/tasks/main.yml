@@ -6,7 +6,7 @@
 
 - name: Install pip dependencies
   pip:
-    name: [jmespath]
+    name: [jmespath, boto]
 
 - name: Install ansible
   pip:
