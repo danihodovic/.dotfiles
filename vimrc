@@ -17,7 +17,7 @@ if s:has_plug == 1
   Plug 'airblade/vim-gitgutter'                 " Show changed git lines
   Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
   Plug 'aquach/vim-http-client'
-  Plug 'benekastah/neomake'
+  Plug 'neomake/neomake'
   Plug 'danihodovic/vim-snippets'               " My own snippets
   Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
   Plug 'flazz/vim-colorschemes'
@@ -50,8 +50,8 @@ if s:has_plug == 1
   Plug 'tpope/vim-eunuch'                       " Unix helpers for vim
   Plug 'Valloric/YouCompleteMe', { 'dir': '$HOME/.config/nvim/plugged/YouCompleteMe', 'do': './install.py --tern-completer' }
   Plug 'autozimu/LanguageClient-neovim', {
-    \'tag': 'binary-*-x86_64-unknown-linux-musl',
-    \'do': 'which npm && npm install -g javascript-typescript-langserver@latest',
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
   \}
   Plug 'vitalk/vim-shebang'
   " -----------------------------------------
@@ -400,6 +400,12 @@ function! AGraw(args)
   endif
   call fzf#vim#ag_raw(query)
 endfunction
+"-----------------------------------------
+" neomake/neomake
+"-----------------------------------------
+" Remove when https://github.com/neomake/neomake/issues/2108#issuecomment-429153406
+" is resolved.
+let g:neomake_dockerfile_hadolint_uses_stdin = 0
 "-----------------------------------------
 " FooSoft/vim-argwrap
 "-----------------------------------------
