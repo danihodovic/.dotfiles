@@ -201,7 +201,7 @@ gpullbranch() {
   branch=$(_local_branch)
   if [ $? = 0 ]; then
     git fetch --prune
-    git rebase $@ origin/$branch
+    git pull $@ origin $branch
     delete_dead_branches
   fi
 }

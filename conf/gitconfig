@@ -9,6 +9,9 @@ pager = diff-so-fancy | less --tabs=4 -RFX
 [pull]
 rebase = true
 
+[rebase]
+autoStash = true
+
 [branch]
 autosetuprebase = always
 
