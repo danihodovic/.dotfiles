@@ -465,10 +465,12 @@ set completeopt=menuone
 let g:LanguageClient_diagnosticsEnable = 0
 let g:LanguageClient_serverCommands = {
   \ 'javascript': ['javascript-typescript-stdio'],
+  \ 'typescript': ['javascript-typescript-stdio'],
 \ }
 autocmd filetype javascript nnoremap <silent> gd :call TernOrDucktape()<CR>
-autocmd filetype javascript nnoremap <silent> <leader>t :call LanguageClient_textDocument_hover()<CR>
-autocmd filetype javascript nnoremap <silent> <leader>gr :call LanguageClient_textDocument_references()<CR>
+autocmd filetype typescript nnoremap <silent>gd :call LanguageClient_textDocument_definition()<CR>
+autocmd filetype javascript,typescript nnoremap <silent> <leader>t :call LanguageClient_textDocument_hover()<CR>
+autocmd filetype javascript,typescript nnoremap <silent> <leader>gr :call LanguageClient_textDocument_references()<CR>
 autocmd filetype go nnoremap <silent>gd <Plug>(go-def)
 autocmd filetype go nmap <leader>t <Plug>(go-info)
 autocmd filetype go nnoremap <buffer> <leader>fs :GoFillStruct<cr>
@@ -646,9 +648,9 @@ let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
 autocmd BufWritePost * call BufWritePostNeomake()
 func BufWritePostNeomake()
   let neomake_bufwritepost_filetypes = [
-  \ 'python', 'bash', 'lua', 'go', 'ruby', 'ansible', 'sh', 'yaml', 'dockerfile'
+  \ 'python', 'bash', 'lua', 'go', 'ruby', 'ansible', 'sh', 'yaml', 'dockerfile', 'typescript'
   \]
-  let neomake_lint_and_fix_filetypes = ['javascript', 'typescript']
+  let neomake_lint_and_fix_filetypes = ['javascript']
 
   if count(neomake_lint_and_fix_filetypes, &filetype)
     call LintAndFix()
