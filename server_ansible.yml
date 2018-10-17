@@ -30,7 +30,10 @@
       tags: [fzf, minimal]
 
     - import_role: name=fd
-      tags: fd
+      tags: [fd, minimal]
+
+    - import_role: name=bat
+      tags: [bat, minimal]
 
     - import_role: name=terraform
       tags: terraform
@@ -42,7 +45,7 @@
       tags: ansible
 
     - name: Create dirs
-      tags: minimal
+      tags: [rc-files, minimal]
       file:
         path: '{{ item }}'
         state: directory
