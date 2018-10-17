@@ -187,6 +187,7 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 alias t=task
 alias cat='bat --style=plain'
 alias tmux="tmux -2"
+alias https="http --default-scheme https"
 # Todo: Write a function instead
 alias cd.="cd .."
 alias cd..="cd ../.."
