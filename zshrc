@@ -185,6 +185,7 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 # ------------
 # Allows 256 colors as background in terminal, used for Vi
 alias t=task
+alias sed='sed -E'
 alias cat='bat --style=plain'
 alias tmux="tmux -2"
 alias https="http --default-scheme https"
