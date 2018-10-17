@@ -1,0 +1,2 @@
+---
+bat_dir: '{{ ansible_env.HOME }}/.local/bin/'

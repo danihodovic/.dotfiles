@@ -33,9 +33,15 @@
     list_files: true
   register: archive
 
+- name: Create dir
+  file:
+    state: directory
+    path: '{{ bat_dir }}'
+    mode: 0770
+
 - name: Copy binary
   copy:
     src: '/tmp/{{ archive.files[0] }}'
-    dest: '{{ dest_dir }}'
+    dest: '{{ bat_dir }}'
     remote_src: true
     mode: 0770
