@@ -41,7 +41,8 @@
 
 - name: Copy binary
   copy:
-    src: '/tmp/{{ archive.files[0] }}'
+    # get base path, e.g bat-v0.8.0-x86_64-unknown-linux-gnu/autocomplete/
+    src: '/tmp/{{ archive.files[0].split("/")[0] }}/bat'
     dest: '{{ bat_dir }}'
     remote_src: true
     mode: 0770
