@@ -1,5 +1,6 @@
 # Default prompt
 export PROMPT='%F{81}%* %~ %m %# %f'
+export SHELL=/bin/zsh
 # Paths
 # ------------
 # Export paths before sourcing anything
