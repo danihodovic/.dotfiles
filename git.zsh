@@ -34,7 +34,7 @@ function gdom {
   file=$(
     git diff origin/"$default_remote_branch" --stat --color=always | \
     fzf --query=$query --ansi --prompt "GitFiles?> " \
-      --preview="git diff origin/$default_remote_branch --color=always {1}" | \
+      --preview="git diff origin/$default_remote_branch --color=always -- {1}" | \
     awk '{print $1}'
 
   )
