@@ -48,7 +48,10 @@ if s:has_plug == 1
   Plug 'tpope/vim-rhubarb'                      " Github commands for Fugitive
   Plug 'tpope/vim-surround'                     " Surround text with (){}<>
   Plug 'tpope/vim-eunuch'                       " Unix helpers for vim
-  Plug 'Valloric/YouCompleteMe', { 'dir': '$HOME/.config/nvim/plugged/YouCompleteMe', 'do': './install.py --tern-completer' }
+  Plug 'Valloric/YouCompleteMe', {
+    \ 'dir': '$HOME/.config/nvim/plugged/YouCompleteMe',
+    \ 'do': './install.py --go-completer',
+  \}
   Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -65,7 +68,7 @@ if s:has_plug == 1
   Plug 'derekwyatt/vim-scala'
   Plug 'moby/moby' , {'rtp': '/contrib/syntax/vim/'}
   Plug 'chr4/nginx.vim'
-  Plug 'fatih/vim-go'                           " Basically a Golang IDE for vi
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'leafgarland/typescript-vim'             " Typescript syntax
   Plug 'jelera/vim-javascript-syntax'
   Plug 'PotatoesMaster/i3-vim-syntax'
