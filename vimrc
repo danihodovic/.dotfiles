@@ -350,7 +350,7 @@ function! FzfGitChangedFilesFromMaster()
   let wrapped = fzf#wrap({
   \ 'source':  files,
   \ 'dir':     root,
-  \ 'options': '--ansi --multi --nth 2..,.. --tiebreak=index --prompt "GitFiles?> " --preview ''sh -c "(git diff origin/master --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500"''',
+  \ 'options': '--ansi --multi --bind=alt-a:select-all --nth 2..,.. --tiebreak=index --prompt "GitFiles?> " --preview ''sh -c "(git diff origin/master --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500"''',
   \ 'up':      '50%',
   \})
   call fzf#run(wrapped)
