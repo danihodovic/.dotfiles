@@ -64,7 +64,6 @@ if s:has_plug == 1
   Plug 'hashivim/vim-terraform'
   Plug 'juliosueiras/vim-terraform-completion'
   Plug 'cespare/vim-toml'                       " Toml is a configuration language similar to yaml
-  Plug 'danihodovic/nodejs-require.vim'
   Plug 'derekwyatt/vim-scala'
   Plug 'moby/moby' , {'rtp': '/contrib/syntax/vim/'}
   Plug 'chr4/nginx.vim'
@@ -469,10 +468,12 @@ let g:LanguageClient_diagnosticsEnable = 0
 let g:LanguageClient_serverCommands = {
   \ 'javascript': ['javascript-typescript-stdio'],
   \ 'typescript': ['javascript-typescript-stdio'],
+  \ 'python':     ['pyls'],
+  \ 'ruby':       ['solargraph', 'stdio']
 \ }
-autocmd filetype javascript nnoremap <silent> gd :call TernOrDucktape()<CR>
-autocmd filetype typescript nnoremap <silent>gd :call LanguageClient_textDocument_definition()<CR>
-autocmd filetype javascript,typescript nnoremap <silent> <leader>t :call LanguageClient_textDocument_hover()<CR>
+
+autocmd filetype javascript,typescript,python,ruby nnoremap <silent>gd :call LanguageClient_textDocument_definition()<CR>
+autocmd filetype javascript,typescript,python,ruby nnoremap <silent> <leader>t :call LanguageClient_textDocument_hover()<CR>
 autocmd filetype javascript,typescript nnoremap <silent> <leader>gr :call LanguageClient_textDocument_references()<CR>
 autocmd filetype go nnoremap <silent>gd <Plug>(go-def)
 autocmd filetype go nmap <leader>t <Plug>(go-info)
@@ -503,26 +504,6 @@ let g:ycm_semantic_triggers =  {
 " Eclim Java, Scala
 "-----------------------------------------
 let g:EclimCompletionMethod = 'omnifunc'
-"-----------------------------------------
-" TernJS
-"-----------------------------------------
-fu! TernOrDucktape()
-  if getline('.') =~ 'require\(.*\)'
-    let file = require#find_in_current_line()
-    " If a string is returned
-    if type(file) == 1
-      let searchword = 'exports'
-      " Enter the file at the module.exports line
-      execute 'e +/' . searchword . ' ' . file
-      " Save the search in the search register
-      let @/ = searchword
-      " Highlight searchword
-      execute 'normal /' . searchword . "\<CR>"
-    endif
-  else
-    call LanguageClient_textDocument_definition()
-  endif
-endfu
 "-----------------------------------------
 " FixMyJS
 "-----------------------------------------
