@@ -271,10 +271,16 @@ function sync {
   remote_dir=$(echo "$remote" | awk -F ':' '{print $2}')
   ssh "$remote_server" "rm -rf $remote_dir"
 
-  rsync -avz --cvs-exclude "$local_dir/" "$remote"
-  while inotifywait -e modify -r "$local_dir"; do
+  rsync -avz --delete --cvs-exclude "$local_dir/" "$remote"
+
+  while inotifywait \
+    -e modify -e move -e create -e delete \
+    --exclude '.*(\.git|\.terraform|node_modules)' \
+    -r "$local_dir"; do
+
     notify-send "Syncing $local_dir..." -i network-transmit-receive
-    rsync -avz --cvs-exclude "$local_dir/" "$remote"
+    rsync -avz --delete --cvs-exclude "$local_dir/" "$remote"
     pkill xfce4-notifyd
   done
 }
+compdef sync=scp
