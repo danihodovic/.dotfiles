@@ -27,3 +27,4 @@
     url: '{{ neovim_download_url }}'
     dest: '{{ neovim_dest }}'
     mode: 0770
+    force: true
