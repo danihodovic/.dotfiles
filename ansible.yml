@@ -53,6 +53,7 @@
           - ruby-dev
           - libnotify-bin
           - yamllint
+          - ncdu
 
     - name: Install pip packages
       pip:
