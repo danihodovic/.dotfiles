@@ -1,0 +1,17 @@
+---
+- name: Clone the nordvpn repo
+  become: true
+  git:
+    repo: 'https://github.com/nstinus/nordvpn.git'
+    dest: /opt/nordvpn
+    depth: 1
+    version: 4cc2fc1bb3ceb450672fdbd51126956de78db3cd
+
+- name: Symlink the script to bin
+  become: true
+  file:
+    state: link
+    src: /opt/nordvpn/src/nordvpn
+    dest: /usr/local/bin/nordvpn
+
+- debug: msg='Populate /etc/openvpn/client/nordvpn/credentials.conf'

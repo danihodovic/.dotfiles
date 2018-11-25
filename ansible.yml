@@ -147,6 +147,9 @@
     - import_role: name=tflint
       tags: tflint
 
+    - import_role: name=nordvpn
+      tags: nordvpn
+
     - name: Create symlink parent directories
       tags: symlinks
       file:
