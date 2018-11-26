@@ -13,7 +13,7 @@
       name: Install apt dependencies
       become: true
       apt:
-        name: [zsh, net-tools, xclip, httpie, ncdu]
+        name: [zsh, net-tools, xclip, httpie, ncdu, direnv]
 
     - import_role: name=geerlingguy.docker
       become: true

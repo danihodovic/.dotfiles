@@ -1,0 +1,30 @@
+---
+- name: Install dependencies
+  become: true
+  apt:
+    name:
+      - make
+      - libcurses-perl
+      - libtry-tiny-perl
+      - libtext-charwidth-perl
+
+- name: Clone the repository
+  git:
+    repo: https://github.com/scottkosty/vit
+    dest: /tmp/vit
+    depth: 1
+
+- name: ./configure
+  shell: ./configure
+  args:
+    chdir: /tmp/vit
+
+- name: make
+  make:
+    chdir: /tmp/vit
+
+- name: make install
+  become: true
+  make:
+    chdir: /tmp/vit
+    target: install
