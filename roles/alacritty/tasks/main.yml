@@ -1,12 +1,11 @@
 ---
 - name: Install dependencies
   apt:
-    name: '{{ item }}'
+    name:
+      - cmake
+      - libfreetype6-dev
+      - libfontconfig1-dev
   become: true
-  with_items:
-    - cmake
-    - libfreetype6-dev
-    - libfontconfig1-dev
 
 - name: Install rustup
   shell: curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
@@ -24,7 +23,6 @@
   environment:
     PATH: '{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.cargo/bin'
   args:
-    creates: /usr/local/bin/alacritty
     chdir: ~/repos/alacritty
   shell: |
     set -e
