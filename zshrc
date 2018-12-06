@@ -67,6 +67,10 @@ zstyle ':completion:*' menu select
 # Source these before our own `bindkeys` so that we can override stuff
 # ------------
 scripts_to_source=(
+  # For some reason doctl overrides other completions. Source it first then
+  # source the rest
+  ${HOME}/.doctl_zsh
+
   /usr/local/bin/aws_zsh_completer.sh
   ${HOME}/.fzf.zsh
   ${HOME}/.gvm/scripts/gvm
@@ -74,9 +78,6 @@ scripts_to_source=(
   ${HOME}/.kubectl_completion
   ${HOME}/.kops_completion
   ${HOME}/.travis/travis.sh
-  # For some reason doctl has to be before awless, otherwise
-  # awless completion won't work.
-  ${HOME}/.doctl_zsh
   ${HOME}/.awless_zsh
   # Own helpers
   ${HOME}/.dotfiles/fzf-helpers.zsh
