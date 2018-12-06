@@ -323,6 +323,7 @@ let g:fzf_action = {
   \ 'ctrl-x': 'vsplit',
   \ 'ctrl-z': 'split' }
 let g:fzf_layout = {'up': '~40%'}
+let g:fzf_files_options = '--ansi --preview "bat --style=plain {}" --preview-window right:100'
 nnoremap b :e #<cr>
 nnoremap - :Buffers<cr>
 nnoremap = :call FzfGitChangedFilesFromMaster()<cr>
