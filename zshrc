@@ -73,6 +73,7 @@ scripts_to_source=(
   ${HOME}/.rvm/scripts/rvm
   ${HOME}/.kubectl_completion
   ${HOME}/.kops_completion
+  ${HOME}/.travis/travis.sh
   # For some reason doctl has to be before awless, otherwise
   # awless completion won't work.
   ${HOME}/.doctl_zsh

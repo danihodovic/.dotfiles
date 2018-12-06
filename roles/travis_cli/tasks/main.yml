@@ -1,0 +1,4 @@
+---
+- name: Install travis-cli
+  become: true
+  shell: gem install travis --pre
