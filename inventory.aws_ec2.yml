@@ -4,5 +4,8 @@ regions:
   - eu-west-1
   - ap-south-1
   - sa-east-1
+keyed_groups:
+  - key: tags.Name
+    separator: ''
 compose:
   ansible_host: private_ip_address
