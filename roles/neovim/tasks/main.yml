@@ -28,3 +28,7 @@
     dest: '{{ neovim_dest }}'
     mode: 0770
     force: true
+
+- name: Install pip package
+  pip:
+    name: neovim
