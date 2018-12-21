@@ -510,13 +510,14 @@ let g:EclimCompletionMethod = 'omnifunc'
 "-----------------------------------------
 function! LintConfigExists()
   if &filetype == 'typescript'
-    if filereadable('tslint.json')
-      return 1
-    endif
+    let tslintFiles = ['tslint.yml', 'tslint.yaml', 'tslint.json']
+    for tslintFile in tslintFiles
+      if filereadable(tslintFile)
+        return 1
+      endif
+    endfor
   elseif &filetype == 'javascript'
     let eslintFiles = ['.eslintrc.json', '.eslintrc.js', '.eslintrc.yml', '.eslintrc']
-    let eslintFileExists = 0
-
     for eslintFile in eslintFiles
       if filereadable(eslintFile)
         return 1
@@ -633,9 +634,9 @@ let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
 autocmd BufWritePost * call BufWritePostNeomake()
 func BufWritePostNeomake()
   let neomake_bufwritepost_filetypes = [
-  \ 'python', 'bash', 'lua', 'go', 'ruby', 'ansible', 'sh', 'yaml', 'dockerfile', 'typescript'
+  \ 'python', 'bash', 'lua', 'go', 'ruby', 'ansible', 'sh', 'yaml', 'dockerfile'
   \]
-  let neomake_lint_and_fix_filetypes = ['javascript']
+  let neomake_lint_and_fix_filetypes = ['javascript', 'typescript']
 
   if count(neomake_lint_and_fix_filetypes, &filetype)
     call LintAndFix()
