@@ -1,0 +1,17 @@
+---
+- name: Install firefox
+  apt:
+    name: firefox
+
+- set_fact:
+    extensions:
+      # yamllint disable rule:line-length
+      - https://addons.mozilla.org/firefox/downloads/file/1166954/ublock_origin-1.17.4-an+fx.xpi?src=dp-btn-primary
+      - https://addons.mozilla.org/firefox/downloads/file/760062/monastery-1.3.1-fx.xpi?src=dp-btn-primary
+      - https://addons.mozilla.org/firefox/downloads/file/1184844/rescuetime-3.2.1-fx.xpi?src=dp-btn-primary
+      - https://addons.mozilla.org/firefox/downloads/file/1179531/metamask-5.2.2-an+fx.xpi?src=dp-btn-primary
+      - https://dl.sinew.in/extensions/firefox/build/v5.5.2-25/enpass_firefox-5.5.2.xpi
+
+- name: Install firefox addon
+  shell: firefox --new-window {{ item }}
+  with_items: '{{ extensions }}'
