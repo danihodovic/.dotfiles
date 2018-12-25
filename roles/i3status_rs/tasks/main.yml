@@ -13,6 +13,7 @@
     repo: https://github.com/XYunknown/i3status-rust.git
     dest: '{{ ansible_env.HOME }}/repos/i3status-rust'
     depth: 1
+    force: true
 
 - name: Install i3status-rs
   shell: cargo build --release

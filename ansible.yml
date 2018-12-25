@@ -57,18 +57,19 @@
 
     - name: Install pip packages
       pip:
-        name: '{{ item }}'
+        name:
+          - docker-compose
+          - awscli
+          - ansible-lint
+          # Pylint dependencies
+          - astroid
+          - isort
+          - pylint
         state: latest
         extra_args: --user
-      with_items:
-        - neovim
-        - docker-compose
-        - awscli
-        - ansible-lint
-        # Pylint dependencies
-        - astroid
-        - isort
-        - pylint
+
+    - import_role: name=xorg
+      tags: xorg
 
     - import_role: name=geerlingguy.docker
       become: true
