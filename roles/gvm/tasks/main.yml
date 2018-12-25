@@ -2,11 +2,10 @@
 - name: Install dependencies
   become: true
   apt:
-    name: '{{ item }}'
-  with_items:
-    - binutils
-    - bison
-    - gcc
+    name:
+      - binutils
+      - bison
+      - gcc
 
 - name: Install gvm
   args:

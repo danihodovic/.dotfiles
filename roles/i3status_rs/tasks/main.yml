@@ -2,10 +2,9 @@
 - name: Install dependencies
   become: true
   apt:
-    name: '{{ item }}'
-  with_items:
-    - libdbus-1-dev
-    - git
+    name:
+      - libdbus-1-dev
+      - git
 
 - name: Clone the repository
   register: clone_repo
