@@ -1,5 +1,4 @@
 AddKeysToAgent yes
-IdentitiesOnly yes
 ServerAliveInterval 300
 ServerAliveCountMax 2
 

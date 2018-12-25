@@ -28,7 +28,7 @@ graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgr
 algorithm = histogram
 
 [gpg]
-program = gpg2
+program = gpg
 
 [commit]
 verbose = true
