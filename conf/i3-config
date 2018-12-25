@@ -1,6 +1,6 @@
 set $Alt Mod1
 set $Win Mod4
-set $Terminal alacritty -e 'tmux'
+set $Terminal alacritty -e tmux
 set $Browser firefox
 
 set $mod Mod1
