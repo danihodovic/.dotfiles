@@ -1,6 +1,5 @@
 ---
 - name: Install n (node version manager)
-  tags: n
   block:
     - name: Install n
       args:
@@ -8,3 +7,12 @@
       shell: |
         # https://github.com/mklement0/n-install#examples
         curl -L https://git.io/n-install | N_PREFIX=$HOME/.n bash -s -- -y lts
+
+- name: Install npm packages
+  npm:
+    name: '{{ item }}'
+    global: true
+  with_items:
+    - javascript-typescript-langserver
+    - typescript
+    - iplocation-cli
