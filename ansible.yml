@@ -54,6 +54,7 @@
           - libnotify-bin
           - yamllint
           - ncdu
+          - inotify-tools
 
     - name: Install pip packages
       pip:
@@ -70,11 +71,11 @@
 
     - name: Install ruby gems
       gem:
-        name: travis
+        name: '{{ item }}'
         user_install: true
-
-    - import_role: name=xorg
-      tags: xorg
+      with_items:
+        - travis
+        - gist
 
     - import_role: name=xorg
       tags: xorg
