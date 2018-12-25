@@ -71,6 +71,9 @@
     - import_role: name=xorg
       tags: xorg
 
+    - import_role: name=xorg
+      tags: xorg
+
     - import_role: name=geerlingguy.docker
       become: true
       vars:
