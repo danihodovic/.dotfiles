@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:18.10
 
 # We need ca-certificates since we need to pull files using https
 # Make is installed for interactive test runs
@@ -10,17 +10,20 @@ RUN apt-get update && apt-get install \
 
 RUN pip install ansible
 
-RUN ansible-galaxy install geerlingguy.docker
-
 RUN adduser ronaldo --disabled-password --quiet --gecos "" && \
     echo ronaldo:ronaldo | chpasswd && \
     adduser ronaldo sudo
 
-# Allow our test user to run scripts without prompting for a password
-RUN echo 'ronaldo ALL=(ALL) NOPASSWD:ALL' | sudo tee -a /etc/sudoers
-
-COPY . /home/ronaldo/.dotfiles
+RUN echo 'ronaldo ALL=(ALL) NOPASSWD:ALL' | tee -a /etc/sudoers
 
 USER ronaldo
 
 WORKDIR /home/ronaldo/.dotfiles
+
+COPY ./requirements.yml /home/ronaldo/.dotfiles/
+
+RUN ansible-galaxy install geerlingguy.docker
+
+COPY . /home/ronaldo/.dotfiles
+
+CMD ["ansible-playbook", "ansible.yml"]

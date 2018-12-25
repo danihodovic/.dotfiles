@@ -1,0 +1,11 @@
+---
+python:
+  - 2.7
+
+jobs:
+  include:
+    - name: Test
+      install:
+        - docker build . -t dotfiles-test-container -f Dockerfile.test
+      script:
+        - docker run dotfiles-test-container
