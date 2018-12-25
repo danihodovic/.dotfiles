@@ -200,6 +200,7 @@ nnoremap <leader>w :write<cr>
 
 set statusline=%m\ %f
 highlight statusline ctermfg=8 ctermbg=233
+highlight visual ctermfg=1 ctermbg=255
 autocmd CursorMoved,CursorMovedI * call UpdateStatusLine()
 autocmd BufWritePost * hi statusline ctermfg=8 ctermbg=233
 fu! UpdateStatusLine()
