@@ -1,4 +1,9 @@
 ---
+- name: Install xsel for yank
+  become: true
+  apt:
+    name: xsel
+
 - name: Create directory
   file:
     state: directory
@@ -32,3 +37,18 @@
 - name: Install pip package
   pip:
     name: neovim
+
+- set_fact:
+    vim_plug_path: ~/.local/share/nvim/site/autoload/plug.vim
+
+- name: Create vim-plug dir
+  file:
+    state: directory
+    path: '{{ vim_plug_path | dirname }}'
+
+- name: Install vim-plug
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: '{{ vim_plug_path }}'
+
+- include_tasks: ./language_servers.yml

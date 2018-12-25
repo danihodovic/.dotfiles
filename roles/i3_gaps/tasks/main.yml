@@ -1,5 +1,6 @@
 ---
 - name: Install i3-gaps dependencies
+  become: true
   apt:
     name: '{{ item }}'
   with_items:
@@ -20,6 +21,7 @@
     - autoconf
     - libxcb-xrm0
     - libxcb-xrm-dev
+    - libxcb-shape0-dev
     - automake
 
 - name: Clone i3-gaps

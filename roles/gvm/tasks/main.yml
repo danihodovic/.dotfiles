@@ -10,9 +10,23 @@
 
 - name: Install gvm
   args:
-    executable: /bin/bash
     creates: '{{ ansible_env.HOME }}/.gvm/bin/gvm'
+    executable: /bin/zsh
   shell: |
     set -o pipefail
     url=https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer
     curl -s -S -L $url | bash
+
+- set_fact:
+    # yamllint disable-line rule:line-length
+    latest_go_version: "{{ lookup('pipe', 'gvm listall | grep go | tail -n 1') }}"
+
+- name: Install latest go version
+  shell: |
+    set -e
+    gvm install {{ latest_go_version }} --prefer-binary
+    # https://github.com/moovweb/gvm/issues/188#issuecomment-256615244
+    source $GVM_ROOT/scripts/gvm
+    gvm use {{ latest_go_version }} --default
+  args:
+    executable: /bin/zsh

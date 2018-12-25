@@ -11,5 +11,4 @@
     # yamllint disable-line rule:line-length
     url: https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
     dest: '{{ diff_so_fancy_dest }}'
-    mode: 0555
-  become: true
+    mode: 0770

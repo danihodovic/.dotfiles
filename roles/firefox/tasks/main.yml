@@ -1,5 +1,6 @@
 ---
 - name: Install firefox
+  become: true
   apt:
     name: firefox
 

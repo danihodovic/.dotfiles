@@ -1,5 +1,6 @@
 ---
 - name: Install dependencies
+  become: true
   apt:
     name: '{{ item }}'
   with_items:

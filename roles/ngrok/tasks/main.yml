@@ -12,7 +12,6 @@
     dest: /tmp
 
 - name: Move ngrok to $PATH
-  become: true
   copy:
     src: /tmp/ngrok
     dest: '{{ ngrok_dest }}'

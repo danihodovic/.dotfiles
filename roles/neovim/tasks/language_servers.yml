@@ -1,0 +1,10 @@
+---
+- name: Install NodeJS language client
+  npm:
+    name: javascript-typescript-langserver
+    global: true
+
+- name: Install python language client
+  pip:
+    name: 'python-language-server[all]'
+    extra_args: --user
