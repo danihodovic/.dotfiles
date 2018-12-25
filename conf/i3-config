@@ -16,11 +16,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec zsh -c 'rofi -show run'
 bindsym F1 exec rofi -show window
 
-# change focus
-bindsym $mod+h exec --no-startup-id "bash ~/.dotfiles/scripts/i3_vim_window_switch.sh left"
-bindsym $mod+j exec --no-startup-id "bash ~/.dotfiles/scripts/i3_vim_window_switch.sh down"
-bindsym $mod+k exec --no-startup-id "bash ~/.dotfiles/scripts/i3_vim_window_switch.sh  up"
-bindsym $mod+l exec --no-startup-id "bash ~/.dotfiles/scripts/i3_vim_window_switch.sh right"
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
