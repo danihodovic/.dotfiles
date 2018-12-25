@@ -26,8 +26,6 @@
   file:
     state: directory
     path: '{{ ansible_env.HOME }}/.local/bin/'
-    mode: 0770
-    recurse: true
 
 - name: Move to bin
   copy:

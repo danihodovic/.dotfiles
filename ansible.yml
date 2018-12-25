@@ -57,18 +57,19 @@
 
     - name: Install pip packages
       pip:
-        name: '{{ item }}'
+        name:
+          - docker-compose
+          - awscli
+          - ansible-lint
+          # Pylint dependencies
+          - astroid
+          - isort
+          - pylint
         state: latest
         extra_args: --user
-      with_items:
-        - neovim
-        - docker-compose
-        - awscli
-        - ansible-lint
-        # Pylint dependencies
-        - astroid
-        - isort
-        - pylint
+
+    - import_role: name=xorg
+      tags: xorg
 
     - import_role: name=geerlingguy.docker
       become: true
@@ -86,6 +87,9 @@
 
     - import_role: name=fd
       tags: fd
+
+    - import_role: name=bat
+      tags: bat
 
     - import_role: name=diff_so_fancy
       tags: diff-so-fancy
@@ -141,9 +145,6 @@
     - import_role: name=ngrok
       tags: ngrok
 
-    - import_role: name=dropbox
-      tags: dropbox
-
     - import_role: name=tflint
       tags: tflint
 
@@ -168,6 +169,8 @@
         - '{{ ansible_env.HOME }}/.config/nvim'
         - '{{ ansible_env.HOME }}/.config/alacritty'
         - '{{ ansible_env.HOME }}/.config/git'
+        - '{{ ansible_env.HOME }}/.config/asciinema'
+        - '{{ ansible_env.HOME }}/.ssh'
         - '{{ ansible_env.HOME }}/.i3'
 
     - name: Symlink config files

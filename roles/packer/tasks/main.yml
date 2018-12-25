@@ -8,12 +8,12 @@
   register: archive
   get_url:
     # yamllint disable-line rule:line-length
-    url: https://releases.hashicorp.com/packer/{{ version }}/packer_{{ version }}_linux_amd64.zip
+    url: https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_amd64.zip
     dest: /tmp/
     force: true
 
 - stat:
-    path: '{{ dest }}'
+    path: '{{ packer_dest }}'
   register: st
 
 - name: Create parent dir if not exist
