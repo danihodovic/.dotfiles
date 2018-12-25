@@ -4,6 +4,12 @@
   apt:
     name: xsel
 
+- name: Install jmespath on the Ansible controller
+  delegate_to: localhost
+  pip:
+    name: jmespath
+    extra_args: --user
+
 - name: Create directory
   file:
     state: directory
