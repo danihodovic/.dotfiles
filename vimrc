@@ -22,14 +22,12 @@ if s:has_plug == 1
   Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
   Plug 'flazz/vim-colorschemes'
   Plug 'FooSoft/vim-argwrap'                    " Collapse or expand arguments for a function
-  Plug 'haya14busa/vim-operator-flashy'         " Highlights the yanked words
   Plug 'itchyny/vim-cursorword'                 " Highlight the occurances of the word under the cursor
   Plug 'jiangmiao/auto-pairs'                   " Automatically add (){}<>
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-easy-align'                " Align code around arbitrary characters =,:
   Plug 'junegunn/vim-oblique'                   " Colors search result and sets nohlsearch on cursor move
   Plug 'junegunn/vim-pseudocl'                  " Required by vim-oblique
-  Plug 'kana/vim-operator-user'                 " Required for vim-operator-flashy
   Plug 'kana/vim-textobj-function'              " Add function based text objects
   Plug 'kana/vim-textobj-user'                  " Add additional text objects
   Plug 'kopischke/vim-fetch'                    " Open files at file:line:column
@@ -610,11 +608,6 @@ nmap <Leader>u <Plug>GitGutterUndoHunk
 " Fugitive
 "-----------------------------------------
 command! Gdom Gdiff origin/master
-"-----------------------------------------
-" vim-operator-flashy
-"-----------------------------------------
-highlight Flashy term=bold ctermbg=15 ctermfg=122
-map y <Plug>(operator-flashy)
 "-----------------------------------------
 " Neomake
 "-----------------------------------------
