@@ -214,6 +214,8 @@ alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
 alias s3='aws s3'
 alias xc='xclip -selection clipboard'
+alias h1='head -n 1'
+alias t1='tail -n 1'
 
 alias aptinstall='sudo apt install'
 alias aptremove='sudo apt remove'
