@@ -6,3 +6,6 @@
 - name: Install antibody
   become: true
   shell: curl -sL https://git.io/antibody | bash -s
+
+- name: Install antibody plugins
+  shell: 'antibody bundle < {{ role_path }}/files/antibody.txt'
