@@ -153,6 +153,9 @@
     - import_role: name=vit
       tags: vit
 
+    - import_role: name=enpass
+      tags: enpass
+
     - import_role: name=firefox
       tags: firefox
 
