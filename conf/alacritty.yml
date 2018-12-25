@@ -1,4 +1,9 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
+# yamllint disable rule:line-length
+# yamllint disable rule:comments
+# yamllint disable rule:colons
+# yamllint disable rule:braces
+# yamllint disable rule:commas
 ---
 
 window:
@@ -226,4 +231,8 @@ live_config_reload: true
 # You can set `shell.program` to the path of your favorite shell, e.g. `/bin/fish`.
 # Entries in `shell.args` are passed unmodified as arguments to the shell.
 shell:
- program: /bin/zsh
+  program: /bin/zsh
+
+key_bindings:
+  - { key: V,    mods: Control, action: Paste }
+  - { key: Back, chars: "\x7f"                }
