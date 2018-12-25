@@ -68,6 +68,11 @@
         state: latest
         extra_args: --user
 
+    - name: Install ruby gems
+      gem:
+        name: travis
+        user_install: true
+
     - import_role: name=xorg
       tags: xorg
 
