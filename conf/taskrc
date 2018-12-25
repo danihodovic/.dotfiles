@@ -1,0 +1,32 @@
+# Files
+data.location=~/.task
+
+urgency.blocking.coefficient = 1.5
+
+report.donetoday.description=Tasks done today
+report.donetoday.columns=uuid.short,entry,due,project,description
+report.donetoday.sort=project+\/,entry+
+report.donetoday.filter=status:completed end.after:today
+
+report.doneyesterday.description=Tasks done yesterday
+report.doneyesterday.columns=uuid.short,entry,due,project,description
+report.doneyesterday.sort=project+\/,entry+
+report.doneyesterday.filter=status:completed end.after:yesterday end.before:today
+
+report.doneweek.description=Tasks done this week Mon - Sun
+report.doneweek.columns=uuid.short,entry,end,due,project,description
+report.doneweek.sort=project+\/,entry+
+report.doneweek.filter=status:completed end.after:monday-7d end.before:monday
+
+report.donelastweek.description=Tasks done this week Mon - Sun
+report.donelastweek.columns=uuid.short,entry,end,due,project,description
+report.donelastweek.sort=project+\/,entry+
+report.donelastweek.filter=status:completed end.after:socw-7d end.before:socw+1d
+
+include /usr/share/taskwarrior/dark-256.theme
+uda.reviewed.type=date
+uda.reviewed.label=Reviewed
+report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
+report._reviewed.columns=uuid
+report._reviewed.sort=reviewed+,modified+
+report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )

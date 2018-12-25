@@ -211,6 +211,7 @@
         - { src: '{{ symlink_dir }}/zlogin',           dest: '{{ ansible_env.HOME }}/.zlogin' }
         - { src: '{{ symlink_dir }}/cvsignore',        dest: '{{ ansible_env.HOME }}/.cvsignore' }
         - { src: '{{ symlink_dir }}/asciinema-config', dest: '{{ ansible_env.HOME }}/.config/asciinema/config' }
+        - { src: '{{ symlink_dir }}/taskrc',           dest: '{{ ansible_env.HOME }}/.taskrc' }
         - { src: '{{ symlink_dir }}/vitrc',            dest: '{{ ansible_env.HOME }}/.vitrc' }
         - { src: '{{ playbook_dir }}/zshrc',           dest: '{{ ansible_env.HOME }}/.zshrc' }
         - { src: '{{ playbook_dir }}/bashrc',          dest: '{{ ansible_env.HOME }}/.bashrc' }
