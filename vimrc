@@ -48,7 +48,7 @@ if s:has_plug == 1
   Plug 'tpope/vim-eunuch'                       " Unix helpers for vim
   Plug 'Valloric/YouCompleteMe', {
     \ 'dir': '$HOME/.config/nvim/plugged/YouCompleteMe',
-    \ 'do': './install.py --go-completer',
+    \ 'do': './install.py --ts-completer --go-completer',
   \}
   Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
