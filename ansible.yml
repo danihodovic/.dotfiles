@@ -55,6 +55,7 @@
           - yamllint
           - ncdu
           - inotify-tools
+          - flameshot
 
     - name: Install pip packages
       pip:

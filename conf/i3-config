@@ -161,5 +161,6 @@ exec --no-startup-id caffeine
 exec --no-startup-id variety
 exec --no-startup-id rescuetime
 exec --no-startup-id nextcloud
+exec --no-startup-id flameshot
 exec --no-startup-id i3-msg 'workspace 1; exec $Terminal'
 exec --no-startup-id i3-msg 'workspace 10; exec enpass'
