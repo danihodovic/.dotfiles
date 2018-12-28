@@ -885,3 +885,11 @@ augroup BWCCreateDir
     autocmd!
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), expand('<abuf>'))
 augroup END
+
+" https://github.com/junegunn/fzf/issues/632#issuecomment-236959826
+if has('nvim')
+  aug fzf_setup
+    au!
+    au TermOpen term://*FZF tnoremap <silent> <buffer><nowait> <esc> <c-c>
+  aug END
+end
