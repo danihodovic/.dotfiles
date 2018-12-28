@@ -59,6 +59,15 @@ dsh() {
     print -z docker exec -i -t "$choice" bash || sh
   fi
 }
+di() {
+  matches=$(docker ps --format 'table {{ .Names }}\t{{ .Image }}')
+  selection=$(echo $matches | fzf --header-lines=1 | awk '{print $1}')
+  if [ ! -z $selection ]; then
+    cmd="docker inspect $selection | bat"
+    print -s $cmd
+    eval $cmd
+  fi
+}
 dkc() {
   choice=$(fcontainer)
   if [ -n "$choice" ]; then
