@@ -234,5 +234,10 @@ shell:
   program: /bin/zsh
 
 key_bindings:
-  - { key: V,    mods: Control|Shift, action: Paste }
-  - { key: Back, chars: "\x7f"                }
+  - { key: V,     mods: Control|Shift, action: Paste }
+  - { key: Back,  chars: "\x7f" }
+  - { key: Tab,   mods: Shift,   chars: "\x1b[Z"  }
+  - { key: Left,  chars: "\x1bOD",   mode: AppCursor   }
+  - { key: Right, chars: "\x1bOC",   mode: AppCursor   }
+  - { key: Up,    chars: "\x1bOA",   mode: AppCursor   }
+  - { key: Down,  chars: "\x1bOB",   mode: AppCursor   }
