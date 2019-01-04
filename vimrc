@@ -478,6 +478,8 @@ autocmd filetype javascript,typescript nnoremap <silent> <leader>gr :call Langua
 autocmd filetype go nnoremap <silent>gd <Plug>(go-def)
 autocmd filetype go nmap <leader>t <Plug>(go-info)
 autocmd filetype go nnoremap <buffer> <leader>fs :GoFillStruct<cr>
+
+command! RenameReference :call LanguageClient#textDocument_rename()
 "-----------------------------------------
 " YCM
 "-----------------------------------------
