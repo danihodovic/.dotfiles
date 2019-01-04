@@ -137,8 +137,6 @@
       tags: hadolint
 
     - import_role: name=terraform
-      vars:
-        version: 0.11.8
       tags: terraform
 
     - import_role: name=packer
