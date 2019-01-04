@@ -8,7 +8,7 @@ export PATH=${HOME}/.local/bin:$PATH
 export PATH=$PATH:${HOME}/.dotfiles/scripts
 export PATH=${PATH}:${HOME}/.cargo/bin/
 export PATH=$PATH:${HOME}/.dasht/bin
-for dir in $(\ls ${HOME}/.gem/ruby/); do
+[ -d ${HOME}/.gem/ruby ] && for dir in $(\ls ${HOME}/.gem/ruby/); do
   export PATH=$PATH:${HOME}/.gem/ruby/$dir/bin
 done
 # execute local scripts without prependeing ./
