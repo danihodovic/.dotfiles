@@ -307,7 +307,7 @@ function sync {
 
   while inotifywait \
     -e modify -e move -e create -e delete \
-    --exclude '.*(\.git|\.terraform|node_modules)' \
+    --exclude '.*(\.git|\.terraform|node_modules|packer_cache)' \
     -r "$local_dir"; do
 
     notify-send "Syncing $local_dir..." -i network-transmit-receive
