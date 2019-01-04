@@ -24,6 +24,7 @@ export PATH=$PATH:$N_PREFIX/bin
 export PYTHONSTARTUP=~/.pythonrc
 export PYTHONPATH=$PYTHONPATH:~/.dotfiles/
 [ -f ~/.aws_profile ] && export AWS_PROFILE=$(cat ~/.aws_profile)
+[ -f ~/.aws_region ]  && export AWS_DEFAULT_REGION=$(cat ~/.aws_region)
 # Exclude ~/.kube/http-cache which does not contain kubeconfigs
 export KUBECONFIG=$([ -d ~/.kube ] && find ~/.kube -maxdepth 1 -type f | tr '\n' ':')
 export EDITOR=nvim
@@ -249,6 +250,30 @@ function awsprofile {
   profile=$(grep --text -E '\[.+\]' ~/.aws/credentials | tr -d '[]' | fzf)
   echo $profile > ~/.aws_profile
   export AWS_PROFILE=$profile
+}
+
+function awsregion {
+  regions=(
+    ap-south-1
+    eu-west-3
+    eu-north-1
+    eu-west-2
+    eu-west-1
+    ap-northeast-2
+    ap-northeast-1
+    sa-east-1
+    ca-central-1
+    ap-southeast-1
+    ap-southeast-2
+    eu-central-1
+    us-east-1
+    us-east-2
+    us-west-1
+    us-west-2
+  )
+  selected=$(printf '%s\n' "${regions[@]}" $regions | fzf)
+  echo $selected > ~/.aws_region
+  export AWS_DEFAULT_REGION=$selected
 }
 
 man() {
