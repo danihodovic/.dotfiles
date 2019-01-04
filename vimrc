@@ -535,13 +535,10 @@ fu! LintAndFix()
   endif
 
   if &filetype == 'typescript'
-    let executable = 'tslint'
+    let cmd = 'tslint -p tsconfig.json --fix'
   else
-    let executable = 'eslint'
+    let cmd = printf('eslint --fix %s', expand('%'))
   endif
-
-  let currentFile = expand('%')
-  let cmd = printf('%s --fix %s', executable, currentFile)
 
   function! LintAndFixCallback(job_id, data, event)
     Neomake
