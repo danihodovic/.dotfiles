@@ -57,6 +57,15 @@
           - inotify-tools
           - flameshot
 
+    # It ships by default with i3 and overrides xfce-notifyd. It's also not
+    # possible to easily kill like xfce4-nofiyd is, so the notificaiton is long
+    # running
+    - name: Remove dunst
+      become: true
+      apt:
+        name: dunst
+        state: absent
+
     - name: Install pip packages
       pip:
         name:
