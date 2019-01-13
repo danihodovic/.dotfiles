@@ -1,14 +1,24 @@
 ---
-- name: Install n (node version manager)
-  block:
-    - name: Install n
-      args:
-        creates: '{{ ansible_env.HOME }}/.n/bin/n'
-      shell: |
-        # https://github.com/mklement0/n-install#examples
-        curl -L https://git.io/n-install | N_PREFIX=$HOME/.n bash -s -- -y lts
+- git:
+    repo: https://github.com/tj/n
+    dest: ~/.n/
+
+- make:
+    chdir: ~/.n/
+    target: install
+    params:
+      PREFIX=~/.local
+
+- name: Install Node.js LTS
+  shell: |
+    source ~/.dotfiles/zshrc
+    n lts
+  args:
+    executable: /bin/zsh
 
 - name: Install npm packages
+  environment:
+    PATH: '{{ ansible_env.HOME }}/.n/bin'
   npm:
     name: '{{ item }}'
     global: true
