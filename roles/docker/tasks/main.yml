@@ -1,6 +1,6 @@
 ---
 - set_fact:
-    docker_url: https://download.docker.com/linux/ubuntu/dists
+
 
 - name: Install docker packages
   become: true
@@ -8,9 +8,9 @@
     # yamllint disable-line rule:line-length
     deb: '{{ docker_url }}/{{ ansible_distribution_release }}/pool/stable/amd64/{{ item }}'
   with_items:
-    - containerd.io_1.2.2-1_amd64.deb
-    - docker-ce-cli_18.09.1~3-0~ubuntu-cosmic_amd64.deb
-    - docker-ce_18.09.1~3-0~ubuntu-cosmic_amd64.deb
+    - '{{ docker_containerd_version }}'
+    - '{{ docker_cli_version }}'
+    - '{{ docker_daemon_version }}'
 
 - name: Add user to docker
   become: true

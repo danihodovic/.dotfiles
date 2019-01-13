@@ -1,0 +1,10 @@
+---
+- become: true
+  block:
+    - name: Add ppa
+      apt_repository:
+        repo: 'ppa:nextcloud-devs/client'
+
+    - name: Install nextcloud
+      apt:
+        name: nextcloud-client
