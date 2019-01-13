@@ -323,3 +323,8 @@ function sync {
   done
 }
 compdef sync=scp
+
+function molecule-ssh {
+  dir=$(basename $PWD)
+  ssh -i /tmp/molecule/$dir/default/ssh_key $(grep address /tmp/molecule/$dir/default/instance_config.yml | awk '{print $NF}')
+}
