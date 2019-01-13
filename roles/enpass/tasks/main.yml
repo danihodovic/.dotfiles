@@ -3,11 +3,12 @@
   block:
     - name: Add enpass repository
       apt_repository:
-        repo: deb http://repo.sinew.in/ stable main
+        repo: deb https://apt.enpass.io/ stable main
 
     - name: Add enpass signing key
       apt_key:
-        url: https://dl.sinew.in/keys/enpass-linux.key
+        url: https://apt.enpass.io/keys/enpass-linux.key
+        id: 6F7565879798C2FC
 
     - name: Install enpass
       apt:
@@ -16,5 +17,5 @@
     - name: Add binary to $PATH
       file:
         state: link
-        src: /opt/Enpass/bin/runenpass.sh
+        src: /opt/enpass/Enpass
         dest: /usr/local/bin/enpass
