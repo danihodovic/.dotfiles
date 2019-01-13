@@ -90,13 +90,7 @@
     - import_role: name=xorg
       tags: xorg
 
-    - import_role: name=geerlingguy.docker
-      become: true
-      when: false
-      vars:
-        docker_package: 'docker-ce=18.06.1*'
-        docker_install_compose: false
-        docker_users: ['{{ ansible_user_id }}']
+    - import_role: name=docker
       tags: docker
 
     - import_role: name=neovim
