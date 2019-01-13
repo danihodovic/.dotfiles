@@ -39,7 +39,7 @@ function curl () {
 # Ease of use
 export dotfiles=${HOME}/.dotfiles
 export plugged=${NVIM_DIR}/plugged
-export vimrc=${HOME}/.dotfiles/vimrc
+export vimrc=${HOME}/.dotfiles/roles/neovim/files/vimrc
 export zshrc=${HOME}/.dotfiles/zshrc
 
 # Activate direnv zsh hook if direnv is installed

@@ -67,8 +67,6 @@
           dest: '{{ ansible_env.HOME }}/.dotfiles/fzf-helpers.zsh'
         - src: '{{ playbook_dir }}/git.zsh'
           dest: '{{ ansible_env.HOME }}/.dotfiles/git.zsh'
-        - src: '{{ playbook_dir }}/vimrc'
-          dest: '{{ ansible_env.HOME }}/.config/nvim/init.vim'
 
     - name: Set zsh as the default shell
       become: true

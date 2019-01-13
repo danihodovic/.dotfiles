@@ -10,10 +10,14 @@
     name: jmespath
     extra_args: --user
 
-- name: Create directory
+- name: Create directories
   file:
     state: directory
-    path: '{{ neovim_dest | dirname }}'
+    path: '{{ item }}'
+  loop:
+    - '{{ neovim_dest | dirname }}'
+    - '{{ ansible_env.HOME}}/.config/nvim'
+    - '{{ vim_plug_path | dirname }}'
 
 - name: Get latest release
   uri:
@@ -43,18 +47,17 @@
 - name: Install pip package
   pip:
     name: neovim
+    extra_args: --user
 
-- set_fact:
-    vim_plug_path: ~/.local/share/nvim/site/autoload/plug.vim
-
-- name: Create vim-plug dir
+- name: Symlink vimrc
   file:
-    state: directory
-    path: '{{ vim_plug_path | dirname }}'
+    state: link
+    src: '{{ role_path }}/files/vimrc'
+    dest: '{{ ansible_env.HOME}}/.config/nvim/init.vim'
 
 - name: Install vim-plug
   get_url:
     url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     dest: '{{ vim_plug_path }}'
 
-- include_tasks: ./language_servers.yml
+#- include_tasks: ./language_servers.yml

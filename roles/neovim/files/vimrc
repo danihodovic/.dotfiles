@@ -234,7 +234,7 @@ nnoremap <leader>aw :ArgWrap<cr>
 nnoremap <leader>en :lnext<cr>
 nnoremap <leader>ep :lprevious<cr>
 autocmd BufWritePre *.tf call terraform#fmt()
-autocmd BufWritePre *.py YAPF
+" autocmd BufWritePre *.py YAPF
 "-----------------------------------------
 " Color scheme settings
 "-----------------------------------------

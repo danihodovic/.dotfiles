@@ -1,2 +1,3 @@
 ---
 neovim_dest: '{{ ansible_env.HOME }}/.local/bin/nvim'
+vim_plug_path: '~/.local/share/nvim/site/autoload/plug.vim'
