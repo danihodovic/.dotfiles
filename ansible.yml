@@ -128,9 +128,6 @@
     - import_role: name=i3_gaps
       tags: i3_gaps
 
-    - import_role: name=i3status_rs
-      tags: i3status_rs
-
     - import_role: name=doctl
       tags: doctl
 
