@@ -194,6 +194,7 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 alias t=task
 alias sed='sed -E'
 alias cat='bat --style=plain'
+function batf() { tail -f "$1" | bat --paging=never; }
 alias tmux="tmux -2"
 alias https="http --default-scheme https"
 # Todo: Write a function instead
