@@ -119,6 +119,16 @@ alias gcc=gcheckoutcommit
 alias gcb=gcheckoutbranch
 compdef _git-checkout gcheckoutcommit gcheckoutbranch
 
+gresetfilefromhead() {
+  file=$(git diff-tree --no-commit-id --name-only -r HEAD | fzf)
+  if [[ -n $file ]]; then
+    git reset --soft HEAD^
+    git reset HEAD $file
+    cmd="git reset HEAD $file"
+    git commit -c ORIG_HEAD --amend
+  fi
+}
+
 grbc() {
   local commit=`fcommit`
   [[ -n $commit ]] && print -z git rebase -i $@ $commit
