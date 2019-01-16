@@ -1,32 +1,48 @@
 ---
-- name: Install dependencies
-  apt:
-    name:
-      - cmake
-      - libfreetype6-dev
-      - libfontconfig1-dev
+- name: Get latest release
+  uri:
+    url: https://api.github.com/repos/jwilm/alacritty/releases/latest
+    timeout: 5
+  register: latest_release
+  changed_when: false
+
+- name: Get download url
+  set_fact:
+    alacritty_download_url: >
+      {{
+        latest_release.json.assets |
+        to_json | from_json |
+        json_query(
+          "[?contains(name, 'x86_64')].browser_download_url | [0]"
+        )
+      }}
+
+- name: Download
+  get_url:
+    url: '{{ alacritty_download_url }}'
+    dest: /tmp/alacritty.tar.gz
+    force: true
+
+- name: Unarchive
+  unarchive:
+    src: /tmp/alacritty.tar.gz
+    dest: /tmp/
+
+- name: Move to bin
   become: true
+  copy:
+    src: /tmp/alacritty
+    dest: /usr/local/bin/
+    mode: 0755
 
-- name: Install rustup
-  shell: curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
-  args:
-    creates: ~/.cargo/bin/rustup
+- name: Create parent dir
+  file:
+    state: directory
+    path: ~/.config/alacritty/
+    recurse: true
 
-- name: Clone alacritty
-  register: alacritty_git
-  git:
-    repo: https://github.com/jwilm/alacritty.git
-    dest: ~/repos/alacritty
-
-- name: Install alacritty
-  when: alacritty_git.before != alacritty_git.after
-  environment:
-    PATH: '{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.cargo/bin'
-  args:
-    chdir: ~/repos/alacritty
-  shell: |
-    set -e
-    rustup override set stable
-    rustup update stable
-    cargo build --release --verbose
-    sudo cp target/release/alacritty /usr/local/bin/
+- name: Copy config file
+  copy:
+    src: ../files/alacritty.yml
+    dest: ~/.config/alacritty/
+    remote_src: true

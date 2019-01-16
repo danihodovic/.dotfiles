@@ -182,7 +182,6 @@
         state: directory
       with_items:
         - '{{ ansible_env.HOME }}/.config/nvim'
-        - '{{ ansible_env.HOME }}/.config/alacritty'
         - '{{ ansible_env.HOME }}/.config/git'
         - '{{ ansible_env.HOME }}/.config/asciinema'
         - '{{ ansible_env.HOME }}/.ssh'
@@ -212,7 +211,6 @@
         - { src: '{{ symlink_dir }}/i3-config',        dest: '{{ ansible_env.HOME }}/.i3/config' }
         - { src: '{{ symlink_dir }}/Xresources',       dest: '{{ ansible_env.HOME }}/.Xresources' }
         - { src: '{{ symlink_dir }}/ginit.vim',        dest: '{{ ansible_env.HOME }}/.config/nvim/ginit.vim' }
-        - { src: '{{ symlink_dir }}/alacritty.yml',    dest: '{{ ansible_env.HOME }}/.config/alacritty/alacritty.yml' }
         - { src: '{{ symlink_dir }}/zlogin',           dest: '{{ ansible_env.HOME }}/.zlogin' }
         - { src: '{{ symlink_dir }}/cvsignore',        dest: '{{ ansible_env.HOME }}/.cvsignore' }
         - { src: '{{ symlink_dir }}/asciinema-config', dest: '{{ ansible_env.HOME }}/.config/asciinema/config' }
