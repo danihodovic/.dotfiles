@@ -41,8 +41,8 @@
     path: ~/.config/alacritty/
     recurse: true
 
-- name: Copy config file
-  copy:
-    src: ../files/alacritty.yml
-    dest: ~/.config/alacritty/
-    remote_src: true
+- name: Symlink config file
+  file:
+    state: link
+    src: '{{ role_path }}/files/alacritty.yml'
+    dest: ~/.config/alacritty/alacritty.yml
