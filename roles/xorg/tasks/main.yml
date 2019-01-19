@@ -1,5 +1,9 @@
 ---
 # Fixes backlight on Lenovo T440s when using i3
+- name: Install xbacklight
+  apt:
+    name: xbacklight
+
 - name: Create the xorg conf dir
   become: true
   file:
