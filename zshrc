@@ -333,5 +333,11 @@ compdef sync=scp
 
 function molecule-ssh {
   dir=$(basename $PWD)
-  ssh -i /tmp/molecule/$dir/default/ssh_key $(grep address /tmp/molecule/$dir/default/instance_config.yml | awk '{print $NF}')
+  file=/tmp/molecule/$dir/default/instance_config.yml
+  instance=$(yq -r '.[] | [.instance, .address] | @tsv' $file | fzf | awk '{print $NF}')
+
+  if [ -n "$instance" ]; then
+    user=$(yq -r '.[0].user' $file)
+    ssh -i /tmp/molecule/$dir/default/ssh_key "$user@$instance" -o IdentitiesOnly=yes
+  fi
 }
