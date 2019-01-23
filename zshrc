@@ -309,9 +309,8 @@ function sync {
 
   remote_server=$(echo "$remote" | awk -F ':' '{print $1}')
   remote_dir=$(echo "$remote" | awk -F ':' '{print $2}')
-  ssh "$remote_server" "rm -rf $remote_dir"
 
-  rsync -avz --delete --cvs-exclude "$local_dir/" "$remote"
+  sync_helper
 
   while inotifywait \
     -e modify -e move -e create -e delete \
@@ -319,9 +318,16 @@ function sync {
     -r "$local_dir"; do
 
     notify-send "Syncing $local_dir..." -i network-transmit-receive
-    rsync -avz --delete --cvs-exclude "$local_dir/" "$remote"
+    sync_helper
+
     pkill xfce4-notifyd
   done
+}
+function sync_helper {
+  rsync -avz --delete --cvs-exclude \
+    --filter='protect terraform.tfstate' \
+    --filter='protect terraform.tfplan' \
+    "$local_dir/" "$remote"
 }
 compdef sync=scp
 
