@@ -341,3 +341,29 @@ function molecule-ssh {
     ssh -i /tmp/molecule/$dir/default/ssh_key "$user@$instance" -o IdentitiesOnly=yes
   fi
 }
+
+function edit-file-docker {
+  set -v
+  container=$(docker ps -a | fzf --exact | awk '{print $1}')
+  if [ -z "$container" ] && return
+  working_dir=$(docker inspect $container -f '{{ .Config.WorkingDir }}')
+  host_path=/tmp/${container}
+  mkdir -p ${host_path}
+  docker cp ${container}:${working_dir} ${host_path}
+  host_files=$(fd . ${host_path}${working_dir} | fzf --exact --multi)
+  if [ -z "$host_files" ] && return
+  # Strip /tmp/path from the container
+  # container_file=${host_file#$host_path}
+  $EDITOR ${host_files}
+  docker cp ${host_path} ${container}:${working_dir}
+  # docker cp ${host_file} ${container}:${container_file}
+}
+
+function gitignore-gen() {
+  if [ -z $1 ]; then
+    echo Provide an argument.
+    echo Example: gitignore-gen python
+    return
+  fi
+  http --body https://www.gitignore.io/api/$1
+}
