@@ -625,6 +625,7 @@ let g:neomake_typescript_tslint_maker = {
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_javascript_eslint_exe = getcwd() . '/node_modules/.bin/eslint'
 let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
+let g:neomake_python_enabled_makers = ['pylint']
 
 autocmd BufWritePost * call BufWritePostNeomake()
 func BufWritePostNeomake()
