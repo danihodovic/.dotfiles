@@ -241,3 +241,5 @@ key_bindings:
   - { key: Right, chars: "\x1bOC",   mode: AppCursor   }
   - { key: Up,    chars: "\x1bOA",   mode: AppCursor   }
   - { key: Down,  chars: "\x1bOB",   mode: AppCursor   }
+  - { key: Subtract,   mods: Control,       action: DecreaseFontSize }
+  - { key: Add, mods: Control|Shift,       action: IncreaseFontSize }
