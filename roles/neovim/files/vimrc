@@ -58,9 +58,9 @@ if s:has_plug == 1
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
-  Plug 'b4b4r07/vim-ansible-vault'
-  Plug 'hashivim/vim-terraform'
-  Plug 'juliosueiras/vim-terraform-completion'
+  Plug 'danihodovic/vim-ansible-vault'
+  Plug 'hashivim/vim-terraform', {'commit': 'dcf58a8'}
+  Plug 'b4b4r07/vim-hcl'
   Plug 'cespare/vim-toml'                       " Toml is a configuration language similar to yaml
   Plug 'derekwyatt/vim-scala'
   Plug 'moby/moby' , {'rtp': '/contrib/syntax/vim/'}
