@@ -55,6 +55,7 @@ if s:has_plug == 1
     \ 'do': 'bash install.sh',
   \}
   Plug 'vitalk/vim-shebang'
+  Plug 'floobits/floobits-neovim'
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
@@ -80,6 +81,7 @@ if s:has_plug == 1
   Plug 'tomlion/vim-solidity'
   Plug 'ambv/black'
   Plug 'rhysd/vim-github-actions'
+  Plug 'euclio/vim-markdown-composer'
   call plug#end()
 end
 "-----------------------------------------
@@ -134,6 +136,7 @@ set diffopt=filler,vertical
 set scrolloff=10
 set nofoldenable
 let g:go_fmt_experimental = 1
+let g:markdown_composer_autostart = 0
 "-----------------------------------------
 " User defined commands
 "-----------------------------------------
@@ -235,7 +238,6 @@ map S ys
 nnoremap <leader>aw :ArgWrap<cr>
 nnoremap <leader>en :lnext<cr>
 nnoremap <leader>ep :lprevious<cr>
-autocmd BufWritePre *.tf call terraform#fmt()
 " autocmd BufWritePre *.py YAPF
 "-----------------------------------------
 " Color scheme settings
@@ -684,17 +686,11 @@ function! s:CloseIfOnlyNerdTreeLeft()
   endif
 endfunction
 "-----------------------------------------
-" vim-markdown-preview
-"-----------------------------------------
-" Use github flavored markdown, requires a connection
-let vim_markdown_preview_github=1
-" Dont display images and preview on key
-let vim_markdown_preview_toggle=0
-let vim_markdown_preview_hotkey='<leader>pr'
-" vim-lua-ftplugin
-"-----------------------------------------
 let g:lua_complete_omni = 1
 let g:lua_complete_dynamic = 0
+"-----------------------------------------
+autocmd BufNewFile,BufRead *.tf set filetype=terraform
+let g:terraform_fmt_on_save=1
 "-----------------------------------------
 " juliosueiras/vim-terraform-completion
 "-----------------------------------------
@@ -702,11 +698,6 @@ autocmd filetype terraform noremap <buffer><silent> gd :call terraformcomplete#J
 autocmd filetype terraform noremap <buffer><silent><Leader>o :call terraformcomplete#LookupAttr()<CR>
 autocmd filetype terraform noremap <buffer><silent> K :call terraformcomplete#OpenDoc()<CR>
 let g:neomake_terraform_enabled_makers = ['terraform_validate', 'tflint']
-"-----------------------------------------
-" pgilad/vim-skeletons
-"-----------------------------------------
-let skeletons#autoRegister = 1
-let skeletons#skeletonsDir = '$HOME/.config/nvim/plugged/vim-skeleton-snippets'
 "-----------------------------------------
 " Random funcs
 "-----------------------------------------
