@@ -172,6 +172,9 @@
     - import_role: name=firefox
       tags: firefox
 
+    - import_role: name=tldr
+      tags: tldr
+
     - name: Create symlink parent directories
       tags: symlinks
       file:
