@@ -27,27 +27,27 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# Magic
-bindsym $mod+Return exec $Terminal
+bindsym $mod+Shift+Return exec $Browser
+
+bindsym $mod+Return exec alacritty -e tmux new-session
 
 bindsym $mod+c exec \
 	i3-msg split v && \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
 	current_dir=$(tmux display-message -p -F '#{pane_current_path}') && \
-	alacritty --working-directory $current_dir -e tmux
+	alacritty -e tmux new-session -c $current_dir
 
 bindsym $mod+x exec \
 	i3-msg split h && \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
 	current_dir=$(tmux display-message -p -F '#{pane_current_path}') && \
-	alacritty --working-directory $current_dir -e tmux
+	alacritty -e tmux new-session -c $current_dir
 
 bindsym $mod+z exec \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
 	current_dir=$(tmux display-message -p -F '#{pane_current_path}') && \
-	alacritty --working-directory $current_dir -e tmux
+	alacritty -e tmux new-session -c $current_dir
 
-bindsym $mod+Shift+Return exec $Browser
 bindsym $mod+Shift+p exec ~/.dotfiles/scripts/lock
 
 bindsym $mod+f fullscreen toggle
