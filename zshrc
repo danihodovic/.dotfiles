@@ -29,13 +29,6 @@ export PYTHONPATH=$PYTHONPATH:~/.dotfiles/
 export KUBECONFIG=$([ -d ~/.kube ] && find ~/.kube -maxdepth 1 -type f | tr '\n' ':')
 export EDITOR=nvim
 
-function find () {
-  echo Use fd
-}
-function curl () {
-  echo 'Use httpie (cmd http)'
-}
-
 # Ease of use
 export dotfiles=${HOME}/.dotfiles
 export plugged=${NVIM_DIR}/plugged
