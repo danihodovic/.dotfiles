@@ -1,5 +1,6 @@
 .git/
 .terraform/
-.pyc
+*.pyc
 venv/
+.mypy_cache
 node_modules/
