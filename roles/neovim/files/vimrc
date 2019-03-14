@@ -406,12 +406,6 @@ function! AGraw(args)
   call fzf#vim#ag_raw(query)
 endfunction
 "-----------------------------------------
-" neomake/neomake
-"-----------------------------------------
-" Remove when https://github.com/neomake/neomake/issues/2108#issuecomment-429153406
-" is resolved.
-let g:neomake_dockerfile_hadolint_uses_stdin = 0
-"-----------------------------------------
 " FooSoft/vim-argwrap
 "-----------------------------------------
 autocmd filetype go let b:argwrap_tail_comma = 1
@@ -620,6 +614,9 @@ command! Gdom Gdiff origin/master
 "-----------------------------------------
 " Neomake
 "-----------------------------------------
+" Remove when https://github.com/neomake/neomake/issues/2108#issuecomment-429153406
+" is resolved.
+let g:neomake_dockerfile_hadolint_uses_stdin = 0
 let g:neomake_list_height = 8
 let g:neomake_open_list = 2
 let g:neomake_python_python_exe = 'python3'
@@ -630,9 +627,16 @@ let g:neomake_typescript_tslint_maker = {
     \ 'errorformat': '%EERROR: %f[%l\, %c]: %m,%E%f[%l\, %c]: %m'
     \ }
 let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_javascript_eslint_exe = getcwd() . '/node_modules/.bin/eslint'
+py3 <<EOF
+import os
+import vim
+
+local_eslint = os.getcwd() + '/node_modules/.bin/eslint'
+eslint = local_eslint if os.path.isfile(local_eslint) else 'eslint'
+vim.command(f'let g:neomake_javascript_eslint_exe = "{eslint}"')
+EOF
 let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
-let g:neomake_python_enabled_makers = ['pylint']
+let g:neomake_python_enabled_makers = ['pylint', 'mypy']
 
 autocmd BufWritePost * call BufWritePostNeomake()
 func BufWritePostNeomake()
