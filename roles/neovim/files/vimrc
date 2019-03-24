@@ -553,17 +553,6 @@ fu! LintAndFix()
   call jobstart(cmd, {'on_exit': 'LintAndFixCallback'})
 endfu
 "-----------------------------------------
-" Jedi Python
-"-----------------------------------------
-" YCM also provides this functionality. But from initial tests (finding stdlib modules) jedi seems
-" to be doing a better job.
-let g:jedi#goto_command = 'gd'
-let g:jedi#use_tabs_not_buffers = 0
-" Do not select the first popup option and complete it
-let g:jedi#popup_select_first = 0
-" Autocomplete the function params
-let g:jedi#show_call_signatures = "1"
-"-----------------------------------------
 " UltiSnips
 "-----------------------------------------
 fu! Return_Or_Snippet()
