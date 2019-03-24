@@ -1,7 +1,6 @@
 ---
 - set_fact:
 
-
 - name: Install docker packages
   become: true
   apt:
@@ -23,6 +22,7 @@
   tags: cron
   cron:
     name: docker_system_prune
+    minute: 0
     hour: 0
     weekday: 1
     job: 'docker system prune -f >> /var/log/docker_system_prune.log 2>&1'
