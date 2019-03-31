@@ -1,0 +1,22 @@
+---
+- name: Install bug warrior
+  become: true
+  pip:
+    name: bugwarrior
+
+- name: Create config dir
+  file:
+    state: directory
+    path: ~/.config/bugwarrior
+
+- name: Symlink config file
+  file:
+    state: link
+    src: '{{ role_path }}/files/bugwarriorrc'
+    dest: '{{ ansible_env.HOME}}/.config/bugwarrior/bugwarriorrc'
+
+- name: Add bugwarrior-pull cron entry
+  cron:
+    name: bugwarrior-pull
+    minute: 15
+    job: /usr/bin/bugwarrior-pull

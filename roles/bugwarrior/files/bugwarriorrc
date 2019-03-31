@@ -1,0 +1,17 @@
+[general]
+targets = github
+annotation_comments = False
+annotation_links = True
+shorten = True
+github.only_if_assigned = danihodovic
+github.also_unassigned = True
+github.default_priority = L
+
+[github]
+service = github
+github.username = danihodovic
+github.login = danihodovic
+github.token = @oracle:eval:echo $GITHUB_TOKEN
+github.import_labels_as_tags = True
+github.label_template = github_{{label}}
+github.filter_pull_requests = False

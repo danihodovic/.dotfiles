@@ -175,6 +175,9 @@
     - import_role: name=tldr
       tags: tldr
 
+    - import_role: name=bugwarrior
+      tags: bugwarrior
+
     - name: Create symlink parent directories
       tags: symlinks
       file:
