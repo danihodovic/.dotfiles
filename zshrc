@@ -185,6 +185,9 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 # ------------
 # Allows 256 colors as background in terminal, used for Vi
 alias t=task
+alias to=taskopen
+alias gotask=$GOPATH/bin/task
+alias top=htop
 alias sed='sed -E'
 alias cat='bat --style=plain'
 function batf() { tail -f "$1" | bat --paging=never; }
