@@ -2,7 +2,8 @@
 - name: Install bug warrior
   become: true
   pip:
-    name: bugwarrior
+    # yamllint disable-line rule:line-length
+    name: https://github.com/danihodovic/bugwarrior/archive/exclude-pull-requests.zip
 
 - name: Create config dir
   file:
