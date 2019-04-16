@@ -17,7 +17,6 @@
           - curl
           - openvpn
           - taskwarrior
-          - tldr
           - net-tools
           - parcellite
           - tmux
@@ -48,7 +47,6 @@
           - feh
           - speedtest-cli
           - i3
-          - i3status
           - i3lock
           - ruby-dev
           - libnotify-bin
