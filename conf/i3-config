@@ -117,7 +117,7 @@ bindsym $mod+r mode "resize"
 bar {
 	font pango:DejaVu Sans Mono 12
 	position top
-	status_command i3status-rs /home/dani/.dotfiles/roles/i3status_rs/files/config.toml
+	status_command exec ~/repos/go_pkg/bin/simple
 
 	colors {
 		background #000000
