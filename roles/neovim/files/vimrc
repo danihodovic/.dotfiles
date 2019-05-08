@@ -55,6 +55,7 @@ if s:has_plug == 1
   \}
   Plug 'vitalk/vim-shebang'
   Plug 'floobits/floobits-neovim'
+  Plug 'rhysd/git-messenger.vim'
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
@@ -698,6 +699,10 @@ autocmd filetype terraform noremap <buffer><silent> gd :call terraformcomplete#J
 autocmd filetype terraform noremap <buffer><silent><Leader>o :call terraformcomplete#LookupAttr()<CR>
 autocmd filetype terraform noremap <buffer><silent> K :call terraformcomplete#OpenDoc()<CR>
 let g:neomake_terraform_enabled_makers = ['terraform_validate', 'tflint']
+"-----------------------------------------
+" rhysd/git-messenger.vim
+"-----------------------------------------
+let g:git_messenger_include_diff = "current"
 "-----------------------------------------
 " Random funcs
 "-----------------------------------------
