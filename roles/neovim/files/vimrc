@@ -277,6 +277,7 @@ highlight SearchFlash guibg=red ctermfg=132 ctermbg=16
 " Text width settings
 "-----------------------------------------
 set textwidth=80
+autocmd FileType html,htmldjango setlocal textwidth=0
 set colorcolumn=80
 autocmd FileType gitcommit setlocal textwidth=72
 autocmd FileType gitcommit setlocal colorcolumn=72
