@@ -19,5 +19,5 @@
 - name: Add bugwarrior-pull cron entry
   cron:
     name: bugwarrior-pull
-    minute: 15
-    job: /usr/bin/bugwarrior-pull
+    special_time: daily
+    job: zsh -c '. /home/dani/.zshrc_local && /usr/local/bin/bugwarrior-pull'

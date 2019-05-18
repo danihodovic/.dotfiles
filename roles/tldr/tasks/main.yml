@@ -1,13 +1,12 @@
 ---
 - name: Install tldr
   become: true
-  apt:
+  pip:
     name: tldr
 
 - name: Add update cronjob
   cron:
     user: '{{ ansible_env.USER }}'
     name: tldr-update
-    hour: 0
-    minute: 0
-    job: /usr/bin/tldr --update >> /var/log/tldr-update.log 2>&1
+    special_time: daily
+    job: /usr/local/bin/tldr -u
