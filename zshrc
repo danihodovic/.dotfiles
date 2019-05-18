@@ -203,7 +203,7 @@ alias cp='cp -v '
 alias mv='mv -v '
 alias h="history"
 alias cd-="cd -"
-alias ls='ls --color=auto --classify -lrt --block-size=MB'
+alias ls='exa -s modified -l'
 alias setxkbmapcaps="setxkbmap -option caps:swapescape68"
 alias o='xdg-open'
 alias v=nvim
@@ -232,7 +232,7 @@ function ssh-keygen-fingerprint-md5 { ssh-keygen -E md5 -l -f $1 }
 # cd && ls
 function chpwd {
   emulate -L zsh
-  \ls --color=auto --classify -lrt --block-size=MB
+  exa -s modified -l
 }
 
 function pk {

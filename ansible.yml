@@ -173,6 +173,9 @@
     - import_role: name=tldr
       tags: tldr
 
+    - import_role: name=exa
+      tags: exa
+
     - import_role: name=bugwarrior
       tags: bugwarrior
 

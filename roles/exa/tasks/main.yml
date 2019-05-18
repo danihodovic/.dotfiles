@@ -1,0 +1,39 @@
+---
+- name: Get latest release
+  uri:
+    url: https://api.github.com/repos/ogham/exa/releases/latest
+    timeout: 5
+  register: latest_release
+  changed_when: false
+
+- name: Get download url
+  set_fact:
+    download_url: >
+      {{
+        latest_release.json.assets |
+        to_json | from_json |
+        json_query(
+          "[?contains(name, 'linux-x86_64')].browser_download_url | [0]"
+        )
+      }}
+
+- name: Download
+  get_url:
+    url: '{{ download_url }}'
+    dest: /tmp/exa.zip
+    force: true
+
+- name: Extract
+  unarchive:
+    src: /tmp/exa.zip
+    dest: /tmp
+    list_files: true
+  register: archive_result
+
+- name: Copy the binary to path
+  become: true
+  copy:
+    src: '/tmp/{{ archive_result.files[0] }}'
+    dest: /usr/local/bin/exa
+    remote_src: false
+    mode: 0755
