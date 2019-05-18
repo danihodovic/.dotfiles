@@ -85,6 +85,7 @@ if s:has_plug == 1
   Plug 'rhysd/vim-github-actions'
   Plug 'euclio/vim-markdown-composer'
   Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+  Plug 'fisadev/vim-isort'
   call plug#end()
 end
 "-----------------------------------------
