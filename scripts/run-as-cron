@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# https://unix.stackexchange.com/questions/42715/how-can-i-make-cron-run-a-job-right-now-for-testing-debugging-without-changing
+
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+/usr/bin/env -i $(cat $dir/run-as-cron-vars.sh) "$@"
