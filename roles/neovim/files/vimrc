@@ -30,6 +30,7 @@ if s:has_plug == 1
   Plug 'junegunn/vim-pseudocl'                  " Required by vim-oblique
   Plug 'kana/vim-textobj-function'              " Add function based text objects
   Plug 'kana/vim-textobj-user'                  " Add additional text objects
+  Plug 'rhysd/vim-textobj-anyblock'
   Plug 'kopischke/vim-fetch'                    " Open files at file:line:column
   Plug 'Lokaltog/vim-easymotion'                " Better movement with f/t
   Plug 'luochen1990/rainbow'                    " Show diff level of parentheses in diff colors
@@ -185,10 +186,10 @@ autocmd FileType javascript,typescript,css,perl,nginx noremap ;; :call InsertSem
 nmap m %
 vmap m %
 " Stay in visual mode when indenting
-vnoremap < <gv
-vnoremap > >gv
-nnoremap < <<
-nnoremap > >>
+vnoremap <C-<> <gv
+vnoremap <C->> >gv
+nnoremap <C-<> <<
+nnoremap <C->> >>
 nnoremap { [{
 nnoremap } ]}
 nnoremap ( [(
@@ -455,7 +456,7 @@ nmap ga <Plug>(EasyAlign)
 "-----------------------------------------
 " YouCompleteMe
 "-----------------------------------------
-let g:ycm_server_python_interpreter = '/usr/bin/python2.7'
+let g:ycm_server_python_interpreter = '/usr/bin/python'
 let g:ycm_filetype_blacklist = {
   \'notes': 1,
   \'unitte': 1,
