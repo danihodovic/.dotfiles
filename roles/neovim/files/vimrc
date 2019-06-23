@@ -16,7 +16,6 @@ if s:has_plug == 1
   set rtp+=~/.fzf
   Plug 'airblade/vim-gitgutter'                 " Show changed git lines
   Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
-  Plug 'aquach/vim-http-client'
   Plug 'neomake/neomake'
   Plug 'danihodovic/vim-snippets'               " My own snippets
   Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
@@ -33,6 +32,7 @@ if s:has_plug == 1
   Plug 'rhysd/vim-textobj-anyblock'
   Plug 'kopischke/vim-fetch'                    " Open files at file:line:column
   Plug 'Lokaltog/vim-easymotion'                " Better movement with f/t
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'luochen1990/rainbow'                    " Show diff level of parentheses in diff colors
   Plug 'nathanaelkane/vim-indent-guides'        " Visually display indent lines with different color
   Plug 'reedes/vim-wordy'                       " Linting for prose
@@ -46,14 +46,6 @@ if s:has_plug == 1
   Plug 'tpope/vim-rhubarb'                      " Github commands for Fugitive
   Plug 'tpope/vim-surround'                     " Surround text with (){}<>
   Plug 'tpope/vim-eunuch'                       " Unix helpers for vim
-  Plug 'Valloric/YouCompleteMe', {
-    \ 'dir': '$HOME/.config/nvim/plugged/YouCompleteMe',
-    \ 'do': './install.py --ts-completer --go-completer',
-  \}
-  Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-  \}
   Plug 'vitalk/vim-shebang'
   Plug 'floobits/floobits-neovim'
   Plug 'rhysd/git-messenger.vim'
@@ -76,7 +68,6 @@ if s:has_plug == 1
   Plug 'rust-lang/rust.vim'                     " Rust syntax highlighting, formatting
   Plug 'sudar/vim-arduino-syntax'
   Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-  Plug 'tpope/vim-endwise'                      " Adds if/end in Lua/Ruby
   Plug 'Valloric/MatchTagAlways'                " Show matching html/xml tags
   Plug 'vim-erlang/vim-erlang-omnicomplete'
   Plug 'junegunn/vader.vim'
@@ -123,10 +114,6 @@ set iskeyword-=_
 set pastetoggle=<F9>
 " timeout in ms for key mappings interval
 set timeoutlen=500
-" Triggers the CursorHold autocmd event and writes the swap file to disk. CursorHold is only
-" triggered in normal mode once every time the user presses a key and it times out. Default 4000.
-" Causes ternJS to show the signature at bottom after x ms, same goes for Tagbar
-set updatetime=1000
 " Check for file changes every time CursorHold is triggered.
 " Executing this in a command line window causes an error
 au CursorHold * if expand("%") != "[Command Line]" | checktime
@@ -412,6 +399,75 @@ function! AGraw(args)
   call fzf#vim#ag_raw(query)
 endfunction
 "-----------------------------------------
+" coc.nvim (https://github.com/neoclide/coc.nvim)
+"-----------------------------------------
+let g:coc_global_extensions = [
+      \  'coc-json',
+      \  'coc-yaml',
+      \ 'coc-vimlsp',
+      \ 'coc-highlight',
+      \  'coc-html',
+      \ 'coc-css',
+      \ 'coc-github',
+      \  'coc-ultisnips',
+      \  'coc-python',
+      \  'coc-tsserver'
+\]
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+inoremap <silent><expr> <c-space> coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+set updatetime=300
+set shortmess+=c
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
+autocmd BufWritePre *.py :OR
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+
+nnoremap <leader>or :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+"-----------------------------------------
 " FooSoft/vim-argwrap
 "-----------------------------------------
 autocmd filetype go let b:argwrap_tail_comma = 1
@@ -453,68 +509,6 @@ endif
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-"-----------------------------------------
-" YouCompleteMe
-"-----------------------------------------
-let g:ycm_server_python_interpreter = '/usr/bin/python'
-let g:ycm_filetype_blacklist = {
-  \'notes': 1,
-  \'unitte': 1,
-  \'tagtbar': 1,
-  \'pantdoc': 1,
-  \'qf': 1,
-  \'vimtwiki': 1,
-  \'inftolog': 1,
-  \'maitl': 1}
-" Opts: menu, menuone, longest, preview
-" Avoid preview to use completion  engine lookups, otherwise it tends to lag.
-" Avoid longest as it disables you from typing
-set completeopt=menuone
-"-----------------------------------------
-" LanguageClient
-"-----------------------------------------
-let g:LanguageClient_diagnosticsEnable = 0
-let g:LanguageClient_serverCommands = {
-  \ 'javascript': ['javascript-typescript-stdio'],
-  \ 'typescript': ['javascript-typescript-stdio'],
-  \ 'python':     ['pyls'],
-  \ 'ruby':       ['solargraph', 'stdio']
-\ }
-
-autocmd filetype javascript,typescript,python,ruby nnoremap <silent>gd :call LanguageClient_textDocument_definition()<CR>
-autocmd filetype javascript,typescript,python,ruby nnoremap <silent> <leader>t :call LanguageClient_textDocument_hover()<CR>
-autocmd filetype javascript,typescript nnoremap <silent> <leader>gr :call LanguageClient_textDocument_references()<CR>
-autocmd filetype go nnoremap <silent>gd <Plug>(go-def)
-autocmd filetype go nmap <leader>t <Plug>(go-info)
-autocmd filetype go nnoremap <buffer> <leader>fs :GoFillStruct<cr>
-
-command! RenameReference :call LanguageClient#textDocument_rename()
-"-----------------------------------------
-" YCM
-"-----------------------------------------
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_complete_in_comments = 1
-
-" Ycm Erlang hack: completion shouldn't close on typing
-autocmd FileType erlang let g:ycm_cache_omnifunc = 0
-autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript let g:ycm_cache_omnifunc = 1
-
-let g:ycm_semantic_triggers =  {
-      \   'c' : ['->', '.'],
-      \   'objc' : ['->', '.'],
-      \   'ocaml' : ['.', '#'],
-      \   'cpp,objcpp' : ['->', '.', '::'],
-      \   'perl' : ['->'],
-      \   'php' : ['->', '::'],
-      \   'cs,java,javascript,d,python,perl6,scala,vb,elixir,go,typescript' : ['.'],
-      \   'vim' : ['re![_a-zA-Z]+[_\w]*\.'],
-      \   'ruby' : ['.', '::'],
-      \   'erlang' : [':'],
-      \ }
-"-----------------------------------------
-" Eclim Java, Scala
-"-----------------------------------------
-let g:EclimCompletionMethod = 'omnifunc'
 "-----------------------------------------
 " FixMyJS
 "-----------------------------------------
@@ -559,38 +553,8 @@ endfu
 "-----------------------------------------
 " UltiSnips
 "-----------------------------------------
-fu! Return_Or_Snippet()
-  " This function *has* to return a keystroke since it's mapped by <C-R>=. 
-  " If nothing it returns it is implied to return 0 and 0 will be inserted.
-  
-  " Make sure we don't set this ourselves...
-  if exists('g:UltiSnipsListSnippets') == 0
-    return "\<cr>"
-  endif
-
-  " Insert snippet if we can
-  if pumvisible()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res != 0
-      return ""
-    endif
-  endif
-
-  " Jump forward if we can
-  call UltiSnips#JumpForwards()
-  if g:ulti_jump_forwards_res != 0
-    return ""
-  endif
-
-  " Default to pressing enter
-  return "\<cr>"
-endfunction
-
-
-inoremap <return> <C-R>=Return_Or_Snippet()<cr>
-" Fix so that snippets show up in the completion menu, see
-" https://github.com/Valloric/YouCompleteMe/issues/1214
-let g:UltiSnipsUsePythonVersion = 2
+" Ultisnips and coc.nvim conflict https://github.com/SirVer/ultisnips/issues/1052#issuecomment-504719268
+let g:UltiSnipsExpandTrigger = "<nop>"
 " Load my own snippets
 let g:UltiSnipsSnippetDirectories=[$NVIM_DIR.'/plugged/vim-snippets']
 "-----------------------------------------
