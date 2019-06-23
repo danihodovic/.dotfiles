@@ -16,7 +16,6 @@ if s:has_plug == 1
   set rtp+=~/.fzf
   Plug 'airblade/vim-gitgutter'                 " Show changed git lines
   Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
-  Plug 'aquach/vim-http-client'
   Plug 'neomake/neomake'
   Plug 'danihodovic/vim-snippets'               " My own snippets
   Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
