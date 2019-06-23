@@ -401,6 +401,18 @@ endfunction
 "-----------------------------------------
 " coc.nvim (https://github.com/neoclide/coc.nvim)
 "-----------------------------------------
+let g:coc_global_extensions = [
+      \  'coc-json',
+      \  'coc-yaml',
+      \ 'coc-vimlsp',
+      \ 'coc-highlight',
+      \  'coc-html',
+      \ 'coc-css',
+      \ 'coc-github',
+      \  'coc-ultisnips',
+      \  'coc-python',
+      \  'coc-tsserver'
+\]
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
