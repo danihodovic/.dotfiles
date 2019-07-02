@@ -49,11 +49,16 @@
     name: neovim
     extra_args: --user
 
-- name: Symlink vimrc
+- name: Symlink config files
   file:
     state: link
-    src: '{{ role_path }}/files/vimrc'
-    dest: '{{ ansible_env.HOME}}/.config/nvim/init.vim'
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+  loop:
+    - src: '{{ role_path }}/files/vimrc'
+      dest: '{{ ansible_env.HOME}}/.config/nvim/init.vim'
+    - src: '{{ role_path }}/files/coc-settings.json'
+      dest: '{{ ansible_env.HOME}}/.config/nvim/coc-settings.json'
 
 - name: Install vim-plug
   get_url:

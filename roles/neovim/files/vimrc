@@ -402,16 +402,17 @@ endfunction
 " coc.nvim (https://github.com/neoclide/coc.nvim)
 "-----------------------------------------
 let g:coc_global_extensions = [
-      \  'coc-json',
-      \  'coc-yaml',
+      \ 'coc-json',
+      \ 'coc-yaml',
       \ 'coc-vimlsp',
       \ 'coc-highlight',
-      \  'coc-html',
+      \ 'coc-html',
       \ 'coc-css',
       \ 'coc-github',
-      \  'coc-ultisnips',
-      \  'coc-python',
-      \  'coc-tsserver'
+      \ 'coc-ultisnips',
+      \ 'coc-python',
+      \ 'coc-tsserver',
+      \ 'coc-tabnine',
 \]
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -451,12 +452,12 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 autocmd BufWritePre *.py :OR
+
+command! -nargs=0 Format :call CocAction('format')
+autocmd BufWritePre *.py :Format
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
