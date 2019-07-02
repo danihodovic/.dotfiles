@@ -452,12 +452,32 @@ function! s:show_documentation()
   endif
 endfunction
 
-" use `:OR` for organize import of current buffer
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
-autocmd BufWritePre *.py :OR
 
-command! -nargs=0 Format :call CocAction('format')
-autocmd BufWritePre *.py :Format
+function! Format()
+py3 <<EOF
+import vim
+import subprocess
+
+def run():
+  rc = subprocess.run("git rev-parse --is-inside-work-tree", shell=True).returncode
+  if rc != 0:
+    return
+
+  fname = vim.current.buffer.name
+  rc = subprocess.run(f"git ls-files --error-unmatch {fname}", shell=True).returncode
+  if rc != 0:
+    return
+
+  vim.command("call CocAction('format')")
+  vim.command("OR")
+
+run()
+
+EOF
+endfun
+
+autocmd BufWritePre *.py,*.js call Format()
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
