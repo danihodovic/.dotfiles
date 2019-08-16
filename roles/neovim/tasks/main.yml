@@ -50,10 +50,7 @@
     extra_args: --user
 
 - name: Symlink config files
-  file:
-    state: link
-    src: '{{ item.src }}'
-    dest: '{{ item.dest }}'
+  include: ./copy_config.yml
   loop:
     - src: '{{ role_path }}/files/vimrc'
       dest: '{{ ansible_env.HOME}}/.config/nvim/init.vim'

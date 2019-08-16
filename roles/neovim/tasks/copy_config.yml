@@ -1,0 +1,11 @@
+---
+- when: server
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+
+- when: not server
+  file:
+    state: link
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
