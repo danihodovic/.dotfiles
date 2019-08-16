@@ -15,16 +15,11 @@
       become: true
       apt:
         name: [zsh, net-tools, xclip, httpie, ncdu, direnv]
-
-    - import_role: name=geerlingguy.docker
-      become: true
-      vars:
-        docker_package: 'docker-ce=18.06.1*'
-        docker_install_compose: false
-        docker_users: ['{{ ansible_user_id }}']
-      tags: docker
+        update_cache: true
 
     - import_role: name=neovim
+      vars:
+        server: true
       tags: neovim
 
     - import_role: name=fzf
