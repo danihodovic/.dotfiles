@@ -1,6 +1,6 @@
 ---
 - name: Install dependencies
-  become_user: root
+  become: true
   apt:
     name: [git, curl]
 
