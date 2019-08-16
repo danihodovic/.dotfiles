@@ -73,7 +73,6 @@ if s:has_plug == 1
   Plug 'junegunn/vader.vim'
   Plug 'elixir-editors/vim-elixir'
   Plug 'tomlion/vim-solidity'
-  Plug 'ambv/black'
   Plug 'rhysd/vim-github-actions'
   Plug 'euclio/vim-markdown-composer'
   Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
@@ -467,6 +466,7 @@ def run():
   fname = vim.current.buffer.name
   rc = subprocess.run(f"git ls-files --error-unmatch {fname}", shell=True).returncode
   if rc != 0:
+    print("No formatting on non-git files")
     return
 
   vim.command("call CocAction('format')")
@@ -517,12 +517,6 @@ let g:EasyMotion_use_upper = 1
 map f <Plug>(easymotion-bd-fl)
 map t <Plug>(easymotion-bd-tl)
 map s <Plug>(easymotion-sn)
-"-----------------------------------------
-" Black
-"-----------------------------------------
-if $PYTHON_BLACK_ENABLED
-  autocmd BufWritePost *.py :silent Black
-endif
 "-----------------------------------------
 " EasyAlign
 "-----------------------------------------
