@@ -14,6 +14,7 @@ if s:has_plug == 1
   " General plugins
   "-----------------------------------------
   set rtp+=~/.fzf
+  Plug 'raghur/vim-ghost'
   Plug 'airblade/vim-gitgutter'                 " Show changed git lines
   Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
   Plug 'neomake/neomake'
@@ -389,13 +390,14 @@ fu! FzfLocateRoot()
   call fzf#run(fzf#vim#wrap(opts))
 endfu
 
-command! -nargs=* -complete=file AG call AGraw(<q-args>)
-function! AGraw(args)
+
+command! -nargs=* -complete=file Rg call RgRaw(<q-args>)
+function! RgRaw(args)
   let query = a:args
   if query == ''
     let query = expand('<cword>')
   endif
-  call fzf#vim#ag_raw(query)
+  call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . query, 1)
 endfunction
 "-----------------------------------------
 " coc.nvim (https://github.com/neoclide/coc.nvim)
@@ -411,8 +413,7 @@ let g:coc_global_extensions = [
       \ 'coc-ultisnips',
       \ 'coc-python',
       \ 'coc-tsserver',
-      \ 'coc-tabnine',
-\]
+      \]
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -601,6 +602,7 @@ let g:neomake_typescript_tslint_maker = {
     \ 'errorformat': '%EERROR: %f[%l\, %c]: %m,%E%f[%l\, %c]: %m'
     \ }
 let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_text_enabled_makers = ['writegood']
 py3 <<EOF
 import os
 import vim

@@ -1,5 +1,5 @@
 {
-  "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnType": false,
   "python.formatting.provider": "black",
   "python.linting.mypyEnabled": false,
   "python.linting.pylintEnabled": false

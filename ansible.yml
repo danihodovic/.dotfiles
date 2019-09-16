@@ -20,7 +20,7 @@
           - net-tools
           - parcellite
           - tmux
-          - silversearcher-ag
+          - ripgrep
           - xclip
           - jq
           - git-extras
