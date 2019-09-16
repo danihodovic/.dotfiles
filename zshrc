@@ -28,6 +28,7 @@ export PYTHONPATH=$PYTHONPATH:~/.dotfiles/
 # Exclude ~/.kube/http-cache which does not contain kubeconfigs
 export KUBECONFIG=$([ -d ~/.kube ] && find ~/.kube -maxdepth 1 -type f | tr '\n' ':')
 export EDITOR=nvim
+export PYTHONBREAKPOINT=pudb.set_trace
 
 # Ease of use
 export dotfiles=${HOME}/.dotfiles
