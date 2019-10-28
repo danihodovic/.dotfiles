@@ -317,7 +317,7 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'vsplit',
   \ 'ctrl-z': 'split' }
-let g:fzf_layout = {'up': '~40%'}
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 let g:fzf_files_options = '--ansi --preview "bat --style=plain {}" --preview-window right:100'
 nnoremap b :e #<cr>
 nnoremap - :Buffers<cr>
@@ -327,6 +327,25 @@ nnoremap <M--> :GitFiles<cr>
 nnoremap H :History:<cr>
 cnoremap H :History:<cr>
 nnoremap r :History<cr>
+
+function! FloatingFZF()
+  let buf = nvim_create_buf(v:false, v:true)
+  call setbufvar(buf, '&signcolumn', 'no')
+
+  let height = &lines - 10
+  let width = float2nr(&columns - (&columns * 2 / 30))
+  let col = float2nr((&columns - width) / 2)
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': 3,
+        \ 'col': col,
+        \ 'width': width,
+        \ 'height': height
+        \ }
+
+  call nvim_open_win(buf, v:true, opts)
+endfunction
 
 function! FzfGitChangedFilesFromMaster()
   let root = split(system('git rev-parse --show-toplevel'), '\n')[0]
