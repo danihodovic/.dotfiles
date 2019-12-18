@@ -64,6 +64,7 @@ if s:has_plug == 1
   Plug 'chr4/nginx.vim'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'leafgarland/typescript-vim'             " Typescript syntax
+  Plug 'peitalin/vim-jsx-typescript'
   Plug 'jelera/vim-javascript-syntax'
   Plug 'PotatoesMaster/i3-vim-syntax'
   Plug 'rust-lang/rust.vim'                     " Rust syntax highlighting, formatting
@@ -288,7 +289,7 @@ autocmd BufNewFile,BufRead nginx.*.j2 set ft=nginx
 "-----------------------------------------
 " `nocindent smartindent` will allow us to omit semicolons and jump to the next line without auto indentation
 " for Javascript/Typescript
-autocmd FileType typescript,javascript,terraform,jinja2  setlocal  shiftwidth=2 tabstop=2 expandtab nocindent smartindent
+autocmd FileType typescript,javascript,javascriptreact,typescriptreact,terraform,jinja2  setlocal  shiftwidth=2 tabstop=2 expandtab nocindent smartindent
 autocmd FileType coffee                 setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType css,scss,stylus        setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType vim                    setlocal  shiftwidth=2 tabstop=2 expandtab
@@ -545,47 +546,6 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 "-----------------------------------------
-" FixMyJS
-"-----------------------------------------
-function! LintConfigExists()
-  if &filetype == 'typescript'
-    let tslintFiles = ['tslint.yml', 'tslint.yaml', 'tslint.json']
-    for tslintFile in tslintFiles
-      if filereadable(tslintFile)
-        return 1
-      endif
-    endfor
-  elseif &filetype == 'javascript'
-    let eslintFiles = ['.eslintrc.json', '.eslintrc.js', '.eslintrc.yml', '.eslintrc']
-    for eslintFile in eslintFiles
-      if filereadable(eslintFile)
-        return 1
-      endif
-    endfor
-  endif
-
-  return 0
-endfunction
-
-fu! LintAndFix()
-  if LintConfigExists() == 0
-    return
-  endif
-
-  if &filetype == 'typescript'
-    let cmd = 'tslint -p tsconfig.json --fix'
-  else
-    let cmd = printf('eslint --fix %s', expand('%'))
-  endif
-
-  function! LintAndFixCallback(job_id, data, event)
-    Neomake
-    edit
-  endfunction
-
-  call jobstart(cmd, {'on_exit': 'LintAndFixCallback'})
-endfu
-"-----------------------------------------
 " UltiSnips
 "-----------------------------------------
 " Ultisnips and coc.nvim conflict https://github.com/SirVer/ultisnips/issues/1052#issuecomment-504719268
@@ -613,39 +573,32 @@ command! Gdom Gdiff origin/master
 let g:neomake_dockerfile_hadolint_uses_stdin = 0
 let g:neomake_list_height = 8
 let g:neomake_open_list = 2
-let g:neomake_python_python_exe = 'python3'
 
-let g:neomake_typescript_tslint_maker = {
-    \ 'args': ['--project', 'tsconfig.json'],
-    \ 'append_file': 0,
-    \ 'errorformat': '%EERROR: %f[%l\, %c]: %m,%E%f[%l\, %c]: %m'
-    \ }
-let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_text_enabled_makers = ['writegood']
+let g:neomake_python_python_exe = 'python3'
+let g:neomake_python_enabled_makers = ['pylint', 'mypy']
+let g:neomake_typescript_tsx_enabled_makers = ['eslint']
+let root_dir = finddir('.git/..')
+let gitignore = root_dir.'/.gitignore'
+let g:neomake_scss_enabled_makers = ['stylelint']
+let g:neomake_css_enabled_makers = ['stylelint']
+let g:neomake_stylelint_exe = root_dir . '/node_modules/.bin/stylelint'
 py3 <<EOF
 import os
 import vim
-
 local_eslint = os.getcwd() + '/node_modules/.bin/eslint'
 eslint = local_eslint if os.path.isfile(local_eslint) else 'eslint'
-vim.command(f'let g:neomake_javascript_eslint_exe = "{eslint}"')
+vim.command(f"let g:neomake_eslint_exe = '{eslint}'")
 EOF
-let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
-let g:neomake_python_enabled_makers = ['pylint', 'mypy']
-
-autocmd BufWritePost * call BufWritePostNeomake()
-func BufWritePostNeomake()
-  let neomake_bufwritepost_filetypes = [
-  \ 'python', 'bash', 'lua', 'go', 'ruby', 'ansible', 'sh', 'yaml', 'dockerfile'
-  \]
-  let neomake_lint_and_fix_filetypes = ['javascript', 'typescript']
-
-  if count(neomake_lint_and_fix_filetypes, &filetype)
-    call LintAndFix()
-  elseif count(neomake_bufwritepost_filetypes, &filetype)
-    Neomake
-  endif
-endfunc
+let g:neomake_eslint_args = ['--fix', '--format=compact', '--ignore-path', gitignore]
+let g:neomake_stylelint_args = ['--fix', '--formatter=compact', '--ignore-path', gitignore]
+call neomake#configure#automake('w')
+" Refresh file after Neomake fixed our errors
+" https://github.com/neomake/neomake/issues/173#issuecomment-335530355
+augroup my_neomake_hooks
+  au!
+  autocmd User NeomakeJobFinished :checktime
+augroup END
 
 autocmd BufWritePre * if &ft == 'go' | exec 'GoImports' | endif
 "-----------------------------------------
