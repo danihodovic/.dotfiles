@@ -413,11 +413,13 @@ fu! FzfLocateRoot()
 endfu
 
 
-command! -nargs=* -complete=file Rg call RgRaw(<q-args>)
+nnoremap <leader>r :Rg<cr>
+vnoremap <leader>r :Rg<cr>
+command! -nargs=* -complete=file -range Rg call RgRaw(<q-args>)
 function! RgRaw(args)
   let query = a:args
   if query == ''
-    let query = expand('<cword>')
+    let query = Get_visual_selection()
   endif
   call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . query, 1)
 endfunction
