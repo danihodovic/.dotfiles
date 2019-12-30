@@ -482,6 +482,7 @@ function! Format()
 py3 <<EOF
 import vim
 import subprocess
+import os
 
 def run():
   rc = subprocess.run("git rev-parse --is-inside-work-tree", shell=True).returncode
@@ -494,15 +495,17 @@ def run():
     print("No formatting on non-git files")
     return
 
+  if os.getenv("VIM_DISABLE_AUTOFORMAT") == "true":
+    return
+
   vim.command("call CocAction('format')")
   vim.command("OR")
-
 run()
 
 EOF
 endfun
 
-autocmd BufWritePre *.py,*.js call Format()
+autocmd BufWritePre *.py call Format()
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
