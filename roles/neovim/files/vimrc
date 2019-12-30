@@ -618,8 +618,8 @@ let g:NERDSpaceDelims = 1
 "-----------------------------------------
 " pear-tree
 "-----------------------------------------
-let g:pear_tree_smart_openers = 1
-let g:pear_tree_smart_closers = 1
+" Disable this as it conflicts with coc.nvim and ultisnips
+let g:pear_tree_map_special_keys = 0
 "-----------------------------------------
 " NERDTree
 "-----------------------------------------
