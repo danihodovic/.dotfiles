@@ -2,5 +2,11 @@
   "coc.preferences.formatOnType": false,
   "python.formatting.provider": "black",
   "python.linting.mypyEnabled": false,
-  "python.linting.pylintEnabled": false
+  "python.linting.pylintEnabled": false,
+  "suggest.snippetIndicator": "🔨",
+  "snippets.extends": {
+    "typescript_tsx": ["typescript"],
+    "html": ["htmldjango"],
+    "scss": ["css"]
+  }
 }
