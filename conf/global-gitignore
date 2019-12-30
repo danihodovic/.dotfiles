@@ -1,3 +1,6 @@
 tags
 .envrc
 .mypy_cache
+venv
+.venv
+telepresence.log
