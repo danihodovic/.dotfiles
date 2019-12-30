@@ -23,7 +23,7 @@ if s:has_plug == 1
   Plug 'flazz/vim-colorschemes'
   Plug 'FooSoft/vim-argwrap'                    " Collapse or expand arguments for a function
   Plug 'itchyny/vim-cursorword'                 " Highlight the occurances of the word under the cursor
-  Plug 'jiangmiao/auto-pairs'                   " Automatically add (){}<>
+  Plug 'tmsvg/pear-tree'
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-easy-align'                " Align code around arbitrary characters =,:
   Plug 'junegunn/vim-oblique'                   " Colors search result and sets nohlsearch on cursor move
@@ -605,22 +605,17 @@ augroup END
 
 autocmd BufWritePre * if &ft == 'go' | exec 'GoImports' | endif
 "-----------------------------------------
-" Auto-pairs
-"-----------------------------------------
-let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
-" Disable inappropriate defaults
-let g:AutoPairsFlyMode = 0
-let g:AutoPairsMultilineClose = 0
-let g:AutoPairsShortcutFastWrap = ''
-let g:AutoPairsShortcutJump = ''
-let g:AutoPairsShortcutToggle = ''
-"-----------------------------------------
 " NERDCommenter
 "-----------------------------------------
 nnoremap <leader>c :call NERDComment(0, "toggle")<CR>
 vnoremap <leader>c :call NERDComment(0, "toggle")<CR>
 " Add a space before any comment
 let g:NERDSpaceDelims = 1
+"-----------------------------------------
+" pear-tree
+"-----------------------------------------
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
 "-----------------------------------------
 " NERDTree
 "-----------------------------------------
