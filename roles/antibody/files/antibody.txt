@@ -3,3 +3,4 @@ zsh-users/zsh-syntax-highlighting
 djui/alias-tips
 jarmo/expand-aliases-oh-my-zsh
 git@gitlab.com:danihodovic/mostar.zsh.git
+skywind3000/z.lua
