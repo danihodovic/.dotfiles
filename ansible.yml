@@ -224,6 +224,7 @@
         - { src: '{{ symlink_dir }}/vitrc',            dest: '{{ ansible_env.HOME }}/.vitrc' }
         - { src: '{{ symlink_dir }}/ptpython_config.py', dest: '{{ ansible_env.HOME }}/.ptpython/config.py' }
         - { src: '{{ symlink_dir }}/pudb.cfg',         dest: '{{ ansible_env.HOME }}/.config/pudb/pudb.cfg' }
+        - { src: '{{ symlink_dir }}/i3blocks-config',  dest: '{{ ansible_env.HOME }}/.config/i3blocks/config' }
         - { src: '{{ playbook_dir }}/zshrc',           dest: '{{ ansible_env.HOME }}/.zshrc' }
         - { src: '{{ playbook_dir }}/bashrc',          dest: '{{ ansible_env.HOME }}/.bashrc' }
 

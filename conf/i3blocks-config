@@ -1,0 +1,23 @@
+[rescuetime]
+command=$SCRIPT_DIR/rescuetime/rescuetime
+interval=60
+markup=pango
+
+[volume-pulseaudio]
+command=$SCRIPT_DIR/volume-pulseaudio/volume-pulseaudio
+LONG_FORMAT="${SYMB} ${VOL}%"
+interval=persist
+SUBSCRIBE=1
+signal=1
+
+[battery]
+command=$SCRIPT_DIR/battery2/battery2
+interval=30
+markup=pango
+
+[time]
+command=$SCRIPT_DIR/time/time
+interval=1
+STRFTIME_FORMAT=%y-%m-%d %H:%M
+TZONES=$DEFAULT_TZ,Brazil/East,Australia/Brisbane,Asia/Calcutta
+TZ_LABELS=,Brazil,AU,Hyderabad
