@@ -1,3 +1,8 @@
+[memory]
+command=$SCRIPT_DIR/memory/memory
+label=
+interval=30
+
 [rescuetime]
 command=$SCRIPT_DIR/rescuetime/rescuetime
 interval=60
