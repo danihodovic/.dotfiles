@@ -5,7 +5,7 @@ interval=30
 
 [rescuetime]
 command=$SCRIPT_DIR/rescuetime/rescuetime
-interval=60
+interval=30
 markup=pango
 
 [volume-pulseaudio]
@@ -24,5 +24,5 @@ markup=pango
 command=$SCRIPT_DIR/time/time
 interval=1
 STRFTIME_FORMAT=%y-%m-%d %H:%M
-TZONES=$DEFAULT_TZ,Brazil/East,Australia/Brisbane,Asia/Calcutta
-TZ_LABELS=,Brazil,AU,Hyderabad
+TZONES=$DEFAULT_TZ
+TZ_LABELS=
