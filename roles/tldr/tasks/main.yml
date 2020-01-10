@@ -9,4 +9,4 @@
     user: '{{ ansible_env.USER }}'
     name: tldr-update
     special_time: daily
-    job: /usr/local/bin/tldr -u
+    job: tldr --update
