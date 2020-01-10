@@ -242,7 +242,7 @@ function pk {
   local processes=$(ps -eo "%p %C %c %U" | tail -n +2 | sort -k2 -n --reverse)
   local chosen_pids=$(echo $processes | fzf --multi | awk '{print $1}')
   if [ -n "$chosen_pids" ]; then
-    echo $chosen_pids | xargs kill
+    echo $chosen_pids | sudo xargs kill
   fi
 }
 
@@ -365,4 +365,8 @@ function gitignore-gen() {
     return
   fi
   http --body https://www.gitignore.io/api/$1
+}
+
+function k8s-delete-all-namespace-resources {
+  kubectl delete "$(kubectl api-resources --namespaced=true --verbs=delete -o name | tr "\n" "," | sed -e 's/,$//')" --all
 }
