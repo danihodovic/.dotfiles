@@ -584,19 +584,19 @@ let g:neomake_open_list = 2
 let g:neomake_text_enabled_makers = ['writegood']
 let g:neomake_python_python_exe = 'python3'
 let g:neomake_python_enabled_makers = ['pylint', 'mypy']
-let g:neomake_typescript_tsx_enabled_makers = ['eslint']
+
+let g:neomake_typescript_enabled_makers = ['tsc', 'eslint']
+let g:neomake_typescript_tsx_enabled_makers = neomake_typescript_enabled_makers
 let root_dir = finddir('.git/..')
 let gitignore = root_dir.'/.gitignore'
 let g:neomake_scss_enabled_makers = ['stylelint']
-let g:neomake_css_enabled_makers = ['stylelint']
-let g:neomake_stylelint_exe = root_dir . '/node_modules/.bin/stylelint'
-py3 <<EOF
-import os
-import vim
-local_eslint = os.getcwd() + '/node_modules/.bin/eslint'
-eslint = local_eslint if os.path.isfile(local_eslint) else 'eslint'
-vim.command(f"let g:neomake_eslint_exe = '{eslint}'")
-EOF
+let g:neomake_css_enabled_makers = neomake_scss_enabled_makers
+
+let g:neomake_pylint_exe = systemlist('which pylint')[0]
+let g:neomake_mypy_exe = systemlist('which mypy')[0]
+let g:neomake_eslint_exe = systemlist('git rev-parse --show-toplevel')[0].'/'.systemlist('which eslint')[0]
+let g:neomake_stylelint_exe = systemlist('which stylelint')[0]
+
 let g:neomake_eslint_args = ['--fix', '--format=compact', '--ignore-path', gitignore]
 let g:neomake_stylelint_args = ['--fix', '--formatter=compact', '--ignore-path', gitignore]
 call neomake#configure#automake('w')
