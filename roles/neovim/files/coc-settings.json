@@ -3,6 +3,7 @@
   "python.formatting.provider": "black",
   "python.linting.mypyEnabled": false,
   "python.linting.pylintEnabled": false,
+  "typescript.validate.enable": false,
   "suggest.snippetIndicator": "🔨",
   "snippets.extends": {
     "typescript_tsx": ["typescript"],
