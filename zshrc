@@ -8,6 +8,8 @@ export PATH=${HOME}/.local/bin:$PATH
 export PATH=$PATH:${HOME}/.dotfiles/scripts
 export PATH=${PATH}:${HOME}/.cargo/bin/
 export PATH=$PATH:${HOME}/.dasht/bin
+export PATH=$PATH:${HOME}/.poetry/bin
+
 [ -d ${HOME}/.gem/ruby ] && for dir in $(\ls ${HOME}/.gem/ruby/); do
   export PATH=$PATH:${HOME}/.gem/ruby/$dir/bin
 done
@@ -16,7 +18,6 @@ export PATH=$PATH:.
 # execute node files without prefixing node_modules/.bin
 export PATH=$PATH:node_modules/.bin
 # Virtualenv
-export WORKON_HOME=${HOME}/.virtualenvs
 export NVIM_DIR=${HOME}/.config/nvim
 # Use n instead of nvm as it's significantly faster to start zsh with it
 export N_PREFIX=${HOME}/.n
