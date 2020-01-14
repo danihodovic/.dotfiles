@@ -23,6 +23,21 @@ report.donelastweek.columns=uuid.short,entry,end,due,project,description
 report.donelastweek.sort=project+\/,entry+
 report.donelastweek.filter=status:completed end.after:socw-7d end.before:socw+1d
 
+report.day.description=Tasks to do today
+report.day.columns=id,entry,project,description
+report.day.sort=due+\/,project+\/,entry+
+report.day.filter=due.before:eod (status:Waiting or status:Pending)
+
+report.week.description=Tasks to do this week
+report.week.columns=id,entry,project,description
+report.week.sort=due+\/,project+\/,entry+
+report.week.filter=due:eocw+1d (status:Waiting or status:Pending)
+
+report.month.description=Tasks to do this month
+report.month.columns=id,entry,project,description
+report.month.sort=due+\/,project+\/,entry+
+report.month.filter=due.before:eocm (status:Waiting or status:Pending)
+
 include /usr/share/taskwarrior/dark-256.theme
 uda.reviewed.type=date
 uda.reviewed.label=Reviewed
