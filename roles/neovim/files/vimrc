@@ -43,6 +43,7 @@ if s:has_plug == 1
   Plug 'SirVer/ultisnips'
   Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
   Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
+  Plug 'reconquest/vim-pythonx'                 " Allows for snippet aliasing http://tiny.cc/9j9qiz
   Plug 'tpope/vim-abolish'                      " Change snake case to camelcase and vice versa
   Plug 'tpope/vim-fugitive'                     " Various git commands inside vim
   Plug 'tpope/vim-rhubarb'                      " Github commands for Fugitive
