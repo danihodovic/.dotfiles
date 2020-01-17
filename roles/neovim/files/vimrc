@@ -544,7 +544,10 @@ run()
 EOF
 endfun
 
-autocmd BufWritePre *.py call Format()
+augroup FormatFiles
+    autocmd FileType python,json,typescript.tsx
+        \ autocmd! FormatFiles BufWritePost <buffer> call Format()
+augroup END
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
