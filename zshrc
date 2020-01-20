@@ -187,6 +187,9 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 # ------------
 # Allows 256 colors as background in terminal, used for Vi
 alias t=task
+alias tt='task today'
+alias tw='task week'
+alias tm='task month'
 alias to=taskopen
 alias gotask=$GOPATH/bin/task
 alias top=htop
@@ -196,11 +199,6 @@ alias cat='bat --style=plain'
 function batf() { tail -f "$1" | bat --paging=never; }
 alias tmux="tmux -2"
 alias https="http --default-scheme https"
-# Todo: Write a function instead
-alias cd.="cd .."
-alias cd..="cd ../.."
-alias cd...="cd ../../.."
-alias cd....='cd ../../../..'
 alias tempdir='tempdir=$(mktemp -d) && cd $tempdir'
 alias cp='cp -v '
 alias mv='mv -v '
@@ -214,6 +212,11 @@ alias k='kubectl'
 alias psag='ps aux | ag '
 alias ctl='sudo systemctl '
 alias s3='aws s3'
+alias c='z -I'
+alias cc='z -c'
+alias c.="cd .."
+alias c..="cd ../.."
+alias c...="cd ../../.."
 alias xc='xclip -selection clipboard'
 alias h1='head -n 1'
 alias t1='tail -n 1'
@@ -369,4 +372,25 @@ function gitignore-gen() {
 
 function k8s-delete-all-namespace-resources {
   kubectl delete "$(kubectl api-resources --namespaced=true --verbs=delete -o name | tr "\n" "," | sed -e 's/,$//')" --all
+}
+
+function git-standup-last-week() {
+  python <<EOF
+from datetime import date, timedelta
+import subprocess
+import os
+
+today = date.today()
+beginning_of_last_week = today - timedelta(days=today.weekday() + 7)
+end_of_last_week = beginning_of_last_week + timedelta(days=7)
+cmd = f"git standup -A {beginning_of_last_week} -B {end_of_last_week} -s"
+home = os.path.expanduser("~")
+dirs = [
+  os.path.join(home, ".dotfiles"),
+  os.path.join(home, "repos"),
+  os.path.join(home, ".config/nvim/plugged"),
+]
+for dir in dirs:
+  subprocess.run(cmd, shell=True, cwd=dir)
+EOF
 }
