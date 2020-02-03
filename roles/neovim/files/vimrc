@@ -24,7 +24,7 @@ if s:has_plug == 1
   Plug 'FooSoft/vim-argwrap'                    " Collapse or expand arguments for a function
   Plug 'itchyny/vim-cursorword'                 " Highlight the occurances of the word under the cursor
   Plug 'tmsvg/pear-tree', { 'for': ['html', 'htmldjango'] }
-  Plug 'jiangmiao/auto-pairs', { 'for': ['python', 'typescript_tsx', 'vim', 'zsh', 'sh', 'bash'] }
+  Plug 'jiangmiao/auto-pairs', { 'for': ['python', 'typescript.tsx', 'vim', 'zsh', 'sh', 'bash', 'css', 'scss'] }
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-easy-align'                " Align code around arbitrary characters =,:
   Plug 'junegunn/vim-oblique'                   " Colors search result and sets nohlsearch on cursor move
@@ -600,7 +600,7 @@ nmap ga <Plug>(EasyAlign)
 " Ultisnips and coc.nvim conflict https://github.com/SirVer/ultisnips/issues/1052#issuecomment-504719268
 let g:UltiSnipsExpandTrigger = "<nop>"
 " Load my own snippets
-let g:UltiSnipsSnippetDirectories=[$NVIM_DIR.'/plugged/vim-snippets']
+let g:UltiSnipsSnippetDirectories=[$NVIM_DIR.'/plugged/vim-snippets', $HOME.'/Nextcloud/vim-snippets']
 "-----------------------------------------
 " GitGutter
 "-----------------------------------------
@@ -608,8 +608,8 @@ let g:gitgutter_max_signs=9999
 hi SignColumn guibg=black ctermbg=black
 nnoremap ggn :GitGutterNextHunk<cr>
 nnoremap ggp :GitGutterPrevHunk<cr>
-nmap <Leader>s <Plug>GitGutterStageHunk
-nmap <Leader>u <Plug>GitGutterUndoHunk
+nmap <Leader>s <Plug>(GitGutterStageHunk)
+nmap <Leader>u <Plug>(GitGutterUndoHunk)
 "-----------------------------------------
 " Fugitive
 "-----------------------------------------
