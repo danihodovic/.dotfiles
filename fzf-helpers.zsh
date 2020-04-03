@@ -76,3 +76,15 @@ bindkey -M viins '^l'   fzf-docker-logs
 
 bindkey -M vicmd '^x'   fzf-docker-exec
 bindkey -M viins '^x'   fzf-docker-exec
+
+# fzf-tab
+FZF_TAB_OPTS=(
+    --ansi
+    --expect='/'
+    '--color=hl:$(( $#headers == 0 ? 108 : 255 ))'
+    --nth=2,3 --delimiter='\0'
+    --layout=reverse --height=90%
+    --tiebreak=begin -m --bind=tab:down,btab:up,change:top,ctrl-space:toggle --cycle
+    '--query=$query'
+    '--header-lines=$#headers'
+)

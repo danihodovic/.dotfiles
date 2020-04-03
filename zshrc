@@ -122,6 +122,7 @@ export PATH=$PATH:$GOPATH/bin
 
 # Set vi-mode
 bindkey -v
+enable-fzf-tab # bindkey -v resets bindings, so enable fzf-tab again
 
 # By default, there is a 0.4 second delay after you hit the <ESC>
 # key and when the mode change is registered. This results in a
