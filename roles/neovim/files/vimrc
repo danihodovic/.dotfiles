@@ -24,7 +24,7 @@ if s:has_plug == 1
   Plug 'FooSoft/vim-argwrap'                    " Collapse or expand arguments for a function
   Plug 'itchyny/vim-cursorword'                 " Highlight the occurances of the word under the cursor
   Plug 'tmsvg/pear-tree', { 'for': ['html', 'htmldjango'] }
-  Plug 'jiangmiao/auto-pairs', { 'for': ['python', 'typescript.tsx', 'vim', 'zsh', 'sh', 'bash', 'css', 'scss'] }
+  Plug 'jiangmiao/auto-pairs', { 'for': ['python', 'typescript.tsx', 'vim', 'zsh', 'sh', 'bash', 'css', 'scss', 'yaml'] }
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-easy-align'                " Align code around arbitrary characters =,:
   Plug 'junegunn/vim-oblique'                   " Colors search result and sets nohlsearch on cursor move
