@@ -1,6 +1,7 @@
 ---
 # Fixes backlight on Lenovo T440s when using i3
 - name: Install xbacklight
+  become: true
   apt:
     name: xbacklight
 
