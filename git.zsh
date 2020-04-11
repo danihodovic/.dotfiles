@@ -26,7 +26,9 @@ alias gremotes='git remote -v'
 alias gremote='git remote'
 function gdom {
   query=$1
-  default_remote_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+  if [ -z "$default_remote_branch" ]; then
+    local default_remote_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+  fi
   if [[ "$query" == "--stat" ]]; then
     git diff origin/$default_remote_branch --stat
     return
@@ -43,7 +45,9 @@ function gdom {
 }
 
 function grom {
-  default_remote_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+  if [ -z "$default_remote_branch" ]; then
+    local default_remote_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+  fi
   git fetch
   git rebase origin/"$default_remote_branch"
 }
