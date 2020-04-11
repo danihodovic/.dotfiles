@@ -1,0 +1,7 @@
+---
+default_context:
+  full_name: Dani Hodovic
+  author_name: Dani Hodovic
+  github_username: danihodovic
+abbreviations:
+  gh: https://github.com/{0}.git
