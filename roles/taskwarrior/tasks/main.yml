@@ -1,0 +1,23 @@
+---
+- name: Install dependencies
+  become: true
+  apt:
+    name: [git, cmake, make, gcc, gnutls-dev]
+
+- name: Install taskwarrior
+  import_tasks: _install_helper.yml
+  vars:
+    repo: https://github.com/GothenburgBitFactory/taskwarrior.git
+    dir: '{{ ansible_env.HOME }}/repos/taskwarrior/'
+
+- name: Install timewarrior
+  import_tasks: _install_helper.yml
+  vars:
+    repo: https://github.com/GothenburgBitFactory/timewarrior.git
+    dir: '{{ ansible_env.HOME }}/repos/timewarrior/'
+
+- name: Install a cronjob to sync tasks
+  cron:
+    name: sync taskwarrior
+    job: task sync
+    minute: '*/15'

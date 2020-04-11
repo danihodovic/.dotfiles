@@ -10,6 +10,9 @@
     - role: docker
       tags: docker
 
+    - role: taskwarrior
+      tags: taskwarrior
+
   tasks:
     - name: Set nopasswd
       tags: nopasswd
