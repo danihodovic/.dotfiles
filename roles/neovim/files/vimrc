@@ -92,6 +92,7 @@ end
 " General settings
 set fillchars=stl:─,stlnc:─,vert:│,fold:─,diff:─
 set gdefault
+set nomodeline
 "-----------------------------------------
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " Silences C-Q, C-S and allows vim to catch them
@@ -230,14 +231,18 @@ vnoremap <leader>fo :call ReformatTextWidth()<cr>
 " Blink the current word when switching search words
 nnoremap <silent> n   n:call HLNext(0.1)<cr>
 nnoremap <silent> N   N:call HLNext(0.1)<cr>
-" Go to the next location list item
-nnoremap <leader>ln :lnext<cr>
-nnoremap <leader>lp :lprev<cr>
 " Map S to ys for vim-surround
 map S ys
 nnoremap <leader>aw :ArgWrap<cr>
 nnoremap <leader>en :lnext<cr>
 nnoremap <leader>ep :lprevious<cr>
+
+nnoremap <leader>n :lbelow<cr>
+nnoremap <leader>m :labove<cr>
+" augroup SyntaxSettings
+    " autocmd!
+    " autocmd BufNewFile,BufRead *.tsx set filetype=typescriptreact
+" augroup END
 "-----------------------------------------
 " Color scheme settings
 "-----------------------------------------
@@ -273,9 +278,9 @@ highlight SearchFlash guibg=red ctermfg=132 ctermbg=16
 "-----------------------------------------
 " Text width settings
 "-----------------------------------------
-set textwidth=80
+set textwidth=79
 autocmd FileType html,htmldjango setlocal textwidth=0
-set colorcolumn=80
+set colorcolumn=79
 autocmd FileType gitcommit setlocal textwidth=72
 autocmd FileType gitcommit setlocal colorcolumn=72
 " Sets the colorcolumn only in active windows
@@ -450,7 +455,7 @@ ft = vim.eval("&ft")
 if ft == 'python':
   pip_path = output("which pip")
   deps_dir = Path(pip_path).parent.parent / 'lib'
-elif ft in ['javascript', 'typescript', 'typescript.tsx']:
+elif ft in ['javascript', 'typescript', 'typescript.tsx', 'scss', 'css']:
   root_dir = output("git rev-parse --show-toplevel")
   deps_dir = Path(root_dir) / 'node_modules'
 else:
@@ -532,9 +537,11 @@ def run():
     return
 
   fname = vim.current.buffer.name
+  if "venv/src" in fname:
+    return
+
   rc = subprocess.run(f"git ls-files --error-unmatch {fname}", shell=True).returncode
   if rc != 0:
-    print("No formatting on non-git files")
     return
 
   if os.getenv("VIM_DISABLE_AUTOFORMAT") == "true":
@@ -548,7 +555,7 @@ EOF
 endfun
 
 augroup FormatFiles
-    autocmd FileType python,json,typescript.tsx
+    autocmd FileType python,json
         \ autocmd! FormatFiles BufWritePost <buffer> call Format()
 augroup END
 
@@ -627,13 +634,12 @@ let g:neomake_list_height = 8
 let g:neomake_open_list = 2
 
 let g:neomake_text_enabled_makers = ['writegood']
+let g:neomake_markdown_enabled_makers = ['markdownlint']
 let g:neomake_python_python_exe = 'python3'
 let g:neomake_python_enabled_makers = ['pylint', 'mypy']
 
 let g:neomake_typescript_enabled_makers = ['tsc', 'eslint']
 let g:neomake_typescript_tsx_enabled_makers = neomake_typescript_enabled_makers
-let root_dir = finddir('.git/..')
-let gitignore = root_dir.'/.gitignore'
 let g:neomake_scss_enabled_makers = ['stylelint']
 let g:neomake_css_enabled_makers = neomake_scss_enabled_makers
 
@@ -641,7 +647,17 @@ let g:neomake_pylint_exe = systemlist('which pylint')[0]
 let g:neomake_mypy_exe = systemlist('which mypy')[0]
 let g:neomake_eslint_exe = systemlist('git rev-parse --show-toplevel')[0].'/'.systemlist('which eslint')[0]
 let g:neomake_stylelint_exe = systemlist('which stylelint')[0]
+let g:neomake_stylelint_exe = systemlist('which stylelint')[0]
 
+let g:neomake_htmldjango_jsbeautify_maker = {
+  \ 'exe': systemlist('which js-beautify')[0],
+  \ 'name': 'js-beautify',
+  \ 'args': ['-r', '--type html'],
+  \ }
+let g:neomake_htmldjango_enabled_makers = ['jsbeautify']
+
+let root_dir = finddir('.git/..')
+let gitignore = root_dir.'/.gitignore'
 let g:neomake_eslint_args = ['--fix', '--format=compact', '--ignore-path', gitignore]
 let g:neomake_stylelint_args = ['--fix', '--formatter=compact', '--ignore-path', gitignore]
 call neomake#configure#automake('w')
@@ -649,17 +665,17 @@ call neomake#configure#automake('w')
 " https://github.com/neomake/neomake/issues/173#issuecomment-335530355
 augroup my_neomake_hooks
   au!
+  autocmd User *.html NeomakeJobFinished :edit
   autocmd User NeomakeJobFinished :checktime
+
 augroup END
 
 autocmd BufWritePre * if &ft == 'go' | exec 'GoImports' | endif
 "-----------------------------------------
 " NERDCommenter
 "-----------------------------------------
-nnoremap <leader>c :call NERDComment(0, "toggle")<CR>
-vnoremap <leader>c :call NERDComment(0, "toggle")<CR>
-" Add a space before any comment
-let g:NERDSpaceDelims = 1
+let g:tcomment_maps = 1
+let g:tcomment_opleader1 = "<Leader>"
 "-----------------------------------------
 " pear-tree
 "-----------------------------------------
