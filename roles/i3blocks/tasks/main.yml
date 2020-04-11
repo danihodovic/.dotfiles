@@ -1,0 +1,24 @@
+---
+- name: Install dependencies
+  apt:
+    pkg: [git, make, build-essential]
+
+- name: Clone the repository
+  git:
+    repo: https://github.com/vivien/i3blocks
+    dest: /home/dani/repos/i3blocks
+
+- name: Run configure
+  shell: ./configure
+  args:
+    chdir: /home/dani/repos/i3blocks
+
+- name: Make
+  make:
+    chdir: /home/dani/repos/i3blocks
+
+- name: Make install
+  become: true
+  make:
+    chdir: /home/dani/repos/i3blocks
+    target: install

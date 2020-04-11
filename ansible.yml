@@ -13,6 +13,7 @@
         name:
           - zsh
           - git
+          - i3blocks
           - httpie
           - curl
           - openvpn
