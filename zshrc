@@ -95,7 +95,10 @@ done
 
 if [ -d ~/.cache/antibody/ ]; then
   for f in ~/.cache/antibody/*/*.zsh; do
-    source $f
+    # Skip symlinks, otherwise fzf-tab gets sourced twice
+    if [ ! -L "$f" ]; then
+      source $f
+    fi
   done
 fi
 
@@ -186,7 +189,7 @@ bindkey -M vicmd '/' tmux-search
 bindkey -M menuselect '^[[Z' reverse-menu-complete
 # Aliases
 # ------------
-# Allows 256 colors as background in terminal, used for Vi
+alias ls='ls -haltr --color=auto'
 alias t=task
 alias tt='task today'
 alias tw='task week'
@@ -205,7 +208,6 @@ alias cp='cp -v '
 alias mv='mv -v '
 alias h="history"
 alias cd-="cd -"
-alias ls='exa -s modified -l'
 alias setxkbmapcaps="setxkbmap -option caps:swapescape68"
 alias o='xdg-open'
 alias v=nvim
@@ -251,7 +253,8 @@ function twt {
 # cd && ls
 function chpwd {
   emulate -L zsh
-  exa -s modified -l
+  ls
+
 }
 
 function pk {
