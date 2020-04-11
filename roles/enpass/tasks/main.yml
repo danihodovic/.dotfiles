@@ -1,18 +1,19 @@
 ---
 - become: true
   block:
-    - name: Add enpass repository
-      apt_repository:
-        repo: deb https://apt.enpass.io/ stable main
-
     - name: Add enpass signing key
       apt_key:
         url: https://apt.enpass.io/keys/enpass-linux.key
         id: 6F7565879798C2FC
 
+    - name: Add enpass repository
+      apt_repository:
+        repo: deb https://apt.enpass.io/ stable main
+
     - name: Install enpass
       apt:
         name: enpass
+        update_cache: true
 
     - name: Add binary to $PATH
       file:
