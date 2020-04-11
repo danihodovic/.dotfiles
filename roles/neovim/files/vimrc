@@ -82,7 +82,7 @@ if s:has_plug == 1
   Plug 'elixir-editors/vim-elixir'
   Plug 'tomlion/vim-solidity'
   Plug 'rhysd/vim-github-actions'
-  Plug 'euclio/vim-markdown-composer'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
   Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
   call plug#end()
 end
