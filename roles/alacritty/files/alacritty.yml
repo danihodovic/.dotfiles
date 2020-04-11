@@ -33,9 +33,6 @@ window:
   #     - none: Neither borders nor title bar
   decorations: full
 
-  # When true, alacritty starts maximized.
-  start_maximized: false
-
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
@@ -44,27 +41,6 @@ scrolling:
   # Number of lines the viewport will move for every line scrolled when
   # scrollback is enabled (history > 0).
   multiplier: 3
-
-  # Faux Scrolling
-  #
-  # The `faux_multiplier` setting controls the number of lines the terminal
-  # should scroll when the alternate screen buffer is active. This is used
-  # to allow mouse scrolling for applications like `man`.
-  #
-  # Specifying `0` will disable faux scrolling.
-  faux_multiplier: 3
-
-  # Scroll to the bottom when new text is written to the terminal.
-  auto_scroll: false
-
-# Spaces per Tab (changes require restart)
-#
-# This setting defines the width of a tab in cells.
-#
-# Some applications, like Emacs, rely on knowing about the width of a tab.
-# To prevent unexpected behavior in these applications, it's also required to
-# change the `it` value in terminfo when altering this setting.
-tabspaces: 8
 
 # Font configuration (changes require restart)
 #
@@ -117,12 +93,6 @@ font:
   glyph_offset:
     x: 0
     y: 0
-
-# Display the time it takes to redraw each frame.
-render_timer: false
-
-# Keep the log file after quitting Alacritty.
-persistent_logging: false
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -232,6 +202,15 @@ live_config_reload: true
 # Entries in `shell.args` are passed unmodified as arguments to the shell.
 shell:
   program: /bin/zsh
+
+debug:
+  log_level: Warn
+
+  # Display the time it takes to redraw each frame.
+  render_timer: false
+
+  # Keep the log file after quitting Alacritty.
+  persistent_logging: false
 
 key_bindings:
   - { key: V,     mods: Control|Shift, action: Paste }

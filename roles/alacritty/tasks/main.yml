@@ -13,27 +13,20 @@
         latest_release.json.assets |
         to_json | from_json |
         json_query(
-          "[?contains(name, 'x86_64')].browser_download_url | [0]"
+          "[?contains(name, 'amd64')].browser_download_url | [0]"
         )
       }}
 
 - name: Download
   get_url:
     url: '{{ alacritty_download_url }}'
-    dest: /tmp/alacritty.tar.gz
+    dest: /tmp/alacritty.deb
     force: true
 
-- name: Unarchive
-  unarchive:
-    src: /tmp/alacritty.tar.gz
-    dest: /tmp/
-
-- name: Move to bin
+- name: Install deb
   become: true
-  copy:
-    src: /tmp/alacritty
-    dest: /usr/local/bin/
-    mode: 0755
+  apt:
+    deb: /tmp/alacritty.deb
 
 - name: Create parent dir
   file:
