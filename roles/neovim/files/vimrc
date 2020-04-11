@@ -49,9 +49,13 @@ if s:has_plug == 1
   Plug 'tpope/vim-rhubarb'                      " Github commands for Fugitive
   Plug 'tpope/vim-surround'                     " Surround text with (){}<>
   Plug 'tpope/vim-eunuch'                       " Unix helpers for vim
+  Plug 'wakatime/vim-wakatime'
   Plug 'vitalk/vim-shebang'
   Plug 'floobits/floobits-neovim'
   Plug 'rhysd/git-messenger.vim'
+  Plug 'junegunn/goyo.vim'
+  Plug 'glacambre/firenvim'
+  Plug 'camspiers/lens.vim'
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
