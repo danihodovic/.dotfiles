@@ -236,6 +236,18 @@ alias aptrepository='sudo apt-add-repository  -y'
 function ssh-keygen-fingerprint { ssh-keygen -l -f $1 }
 function ssh-keygen-fingerprint-md5 { ssh-keygen -E md5 -l -f $1 }
 
+# timewarrior toggle last task
+function twt {
+  if [[ $(timew) = 'There is no active time tracking.' ]]; then
+    last_timewarrior_task=$(timew export | jq -r '.[-1].tags[0]')
+    last_task_id=$(task $last_timewarrior_task export | jq -r '.[0].id')
+    task start $last_task_id
+  else
+    local task_id=$(task +ACTIVE -DELETED export rc.json.array=off | jq -r .id)
+    task $task_id stop
+  fi
+}
+
 # cd && ls
 function chpwd {
   emulate -L zsh
