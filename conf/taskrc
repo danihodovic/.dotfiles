@@ -28,17 +28,17 @@ report.donelastweek.filter=status:completed end.after:socw-7d end.before:socw+1d
 
 report.day.description=Tasks to do today
 report.day.columns=id,entry,project,description
-report.day.sort=due+\/,project+\/,entry+
+report.day.sort=due+\/,priority+\/,project+\/,entry+
 report.day.filter=due.before:tomorrow (status:Waiting or status:Pending)
 
 report.week.description=Tasks to do this week
 report.week.columns=id,due,entry,project,description
-report.week.sort=due+\/,project+\/,entry+
+report.week.sort=due+\/,priority+\/,project+\/,entry+
 report.week.filter=due.before:eocw+1d (status:Waiting or status:Pending)
 
 report.month.description=Tasks to do this month
 report.month.columns=id,due,entry,project,description
-report.month.sort=due+\/,project+\/,entry+
+report.month.sort=due+\/,priority+\/,project+\/,entry+
 report.month.filter=due.before:eocm+1d (status:Waiting or status:Pending)
 
 include /usr/share/taskwarrior/dark-256.theme
