@@ -11,6 +11,13 @@
       tags: docker
 
   tasks:
+    - name: Set nopasswd
+      tags: nopasswd
+      become: true
+      blockinfile:
+        path: /etc/sudoers
+        block: dani ALL=(ALL) NOPASSWD:ALL
+
     - name: Install apt packages
       become: true
       apt:
@@ -250,19 +257,15 @@
         - LC_MEASUREMENT=en_US.UTF-8
         - LC_IDENTIFICATION=en_US.UTF-8
 
-    - name: Set nopasswd
-      tags: nopasswd
+    - name: Use zsh
       become: true
-      blockinfile:
-        path: /etc/sudoers
-        block: dani ALL=(ALL) NOPASSWD:ALL
-
-    - name: Root to use zsh
-      become: true
-      tags: root-zsh
+      tags: use-zsh
       user:
-        name: root
+        name: '{{ item }}'
         shell: /bin/zsh
+      loop:
+        - root
+        - dani
 
     - name: Set the default folder opener
       shell: xdg-mime default pcmanfm.desktop inode/directory
