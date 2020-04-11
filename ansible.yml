@@ -149,9 +149,6 @@
     - import_role: name=packer
       tags: packer
 
-    - import_role: name=awless
-      tags: awless
-
     - import_role: name=gcloud
       tags: gcloud
 
@@ -167,9 +164,6 @@
     - import_role: name=nordvpn
       tags: nordvpn
 
-    - import_role: name=vit
-      tags: vit
-
     - import_role: name=enpass
       tags: enpass
 
@@ -181,9 +175,6 @@
 
     - import_role: name=tldr
       tags: tldr
-
-    - import_role: name=exa
-      tags: exa
 
     - import_role: name=bugwarrior
       tags: bugwarrior
