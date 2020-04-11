@@ -36,11 +36,11 @@ function fzf-ssh {
 zle     -N     fzf-ssh
 
 function fzf-docker-logs {
-  matches=$(docker ps -a --format 'table {{ .Names }}\t{{ .Image }}')
+  matches=$(docker ps --format 'table {{ .Names }}\t{{ .Image }}')
   selection=$(echo $matches | fzf --header-lines=1 | awk '{print $1}')
   if [ ! -z $selection ]; then
     args="${@:-"--tail 100 -f"}"
-    BUFFER="docker logs $args $selection"
+    BUFFER="docker logs -f --tail 100 $args $selection"
     zle accept-line
   fi
 }
