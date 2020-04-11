@@ -1,7 +1,12 @@
+[cpu_usage2]
+command=$SCRIPT_DIR/cpu_usage2/cpu_usage2
+markup=pango
+interval=persist
+
 [memory]
 command=$SCRIPT_DIR/memory/memory
-label=
-interval=30
+label=|Memory .
+interval=5
 
 [rescuetime]
 command=$SCRIPT_DIR/rescuetime/rescuetime
@@ -24,5 +29,5 @@ markup=pango
 command=$SCRIPT_DIR/time/time
 interval=1
 STRFTIME_FORMAT=%y-%m-%d %H:%M
-TZONES=$DEFAULT_TZ
+TZONES=Europe/Nicosia
 TZ_LABELS=
