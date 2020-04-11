@@ -1,22 +1,10 @@
 ---
-- set_fact:
-
-- name: Install docker packages
+- name: Install docker role
   become: true
-  apt:
-    # yamllint disable-line rule:line-length
-    deb: '{{ docker_url }}/{{ ansible_distribution_release }}/pool/stable/amd64/{{ item }}'
-  with_items:
-    - '{{ docker_containerd_version }}'
-    - '{{ docker_cli_version }}'
-    - '{{ docker_daemon_version }}'
-
-- name: Add user to docker
-  become: true
-  user:
-    name: '{{ ansible_env.USER }}'
-    groups: docker
-    append: true
+  import_role:
+    name: geerlingguy.docker
+  vars:
+    docker_users: ['{{ ansible_env.USER }}']
 
 - name: Add a cronjob for `docker system prune`
   tags: cron

@@ -6,6 +6,10 @@
   vars:
     symlink_dir: '{{ playbook_dir }}/conf'
 
+  roles:
+    - role: docker
+      tags: docker
+
   tasks:
     - name: Install apt packages
       become: true
@@ -88,9 +92,6 @@
 
     - import_role: name=xorg
       tags: xorg
-
-    - import_role: name=docker
-      tags: docker
 
     - import_role: name=neovim
       tags: neovim
