@@ -34,14 +34,14 @@ report.day.filter=due.before:tomorrow (status:Waiting or status:Pending)
 report.week.description=Tasks to do this week
 report.week.columns=id,due,entry,project,description
 report.week.sort=due+\/,priority+\/,project+\/,entry+
-report.week.filter=due.before:eocw+1d (status:Waiting or status:Pending)
+report.week.filter=due.before:eow+1d (status:Waiting or status:Pending)
 
 report.month.description=Tasks to do this month
 report.month.columns=id,due,entry,project,description
 report.month.sort=due+\/,priority+\/,project+\/,entry+
-report.month.filter=due.before:eocm+1d (status:Waiting or status:Pending)
+report.month.filter=due.before:eom+1d (status:Waiting or status:Pending)
 
-include /usr/share/taskwarrior/dark-256.theme
+include /usr/local/share/doc/task/rc/dark-256.theme
 uda.reviewed.type=date
 uda.reviewed.label=Reviewed
 report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
