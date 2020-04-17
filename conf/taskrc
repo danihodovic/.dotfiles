@@ -4,6 +4,8 @@ data.location=~/.task
 urgency.blocking.coefficient = 1.5
 weekstart=Monday
 
+# search.case.sensitive = no
+
 alias.rm=delete
 alias.today=day
 
