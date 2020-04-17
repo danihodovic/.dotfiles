@@ -2,6 +2,7 @@
 data.location=~/.task
 
 urgency.blocking.coefficient = 1.5
+weekstart=Monday
 
 alias.rm=delete
 alias.today=day
@@ -48,3 +49,4 @@ report._reviewed.description=Tasksh review report.  Adjust the filter to your ne
 report._reviewed.columns=uuid
 report._reviewed.sort=reviewed+,modified+
 report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
+include /home/dani/Nextcloud/taskwarriorrc
