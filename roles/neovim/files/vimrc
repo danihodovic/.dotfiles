@@ -23,8 +23,6 @@ if s:has_plug == 1
   Plug 'flazz/vim-colorschemes'
   Plug 'FooSoft/vim-argwrap'                    " Collapse or expand arguments for a function
   Plug 'itchyny/vim-cursorword'                 " Highlight the occurances of the word under the cursor
-  Plug 'tmsvg/pear-tree', { 'for': ['html', 'htmldjango'] }
-  Plug 'jiangmiao/auto-pairs', { 'for': ['python', 'typescript.tsx', 'vim', 'zsh', 'sh', 'bash', 'css', 'scss', 'yaml'] }
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-easy-align'                " Align code around arbitrary characters =,:
   Plug 'junegunn/vim-oblique'                   " Colors search result and sets nohlsearch on cursor move
@@ -484,6 +482,9 @@ let g:coc_global_extensions = [
       \ 'coc-ultisnips',
       \ 'coc-python',
       \ 'coc-tsserver',
+      \ 'coc-word',
+      \ 'coc-emoji',
+      \ 'coc-pairs',
       \]
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -686,16 +687,6 @@ let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
 let g:pear_tree_timeout = 1
 let g:pear_tree_did_javascript_ftplugin = 1
-" Auto-pairs
-"-----------------------------------------
-let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
-" Disable inappropriate defaults
-let g:AutoPairsFlyMode = 0
-let g:AutoPairsMultilineClose = 0
-let g:AutoPairsShortcutFastWrap = ''
-let g:AutoPairsShortcutJump = ''
-let g:AutoPairsShortcutToggle = ''
-"-----------------------------------------
 "-----------------------------------------
 " NERDTree
 "-----------------------------------------

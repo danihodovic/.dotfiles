@@ -9,5 +9,11 @@
     "typescript_tsx": ["typescript"],
     "html": ["htmldjango"],
     "scss": ["css"]
-  }
+  },
+  "coc.source.emoji.filetypes": ["markdown", "htmldjango", "html"],
+  "pairs.disableLanguages": ["html", "htmldjango"],
+  "html.autoClosingTags": true,
+  "html.format.indentInnerHtml": true,
+  "html.format.indentHandlebars": true,
+  "coc.source.word.filetypes": ["markdown", "txt"]
 }
