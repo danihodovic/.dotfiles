@@ -15,9 +15,3 @@
     state: link
     src: '{{ role_path }}/files/bugwarriorrc'
     dest: '{{ ansible_env.HOME}}/.config/bugwarrior/bugwarriorrc'
-
-- name: Add bugwarrior-pull cron entry
-  cron:
-    name: bugwarrior-pull
-    special_time: daily
-    job: zsh -c '. /home/dani/.zshrc_local && /usr/local/bin/bugwarrior-pull'

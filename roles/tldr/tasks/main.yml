@@ -3,10 +3,3 @@
   become: true
   pip:
     name: tldr
-
-- name: Add update cronjob
-  cron:
-    user: '{{ ansible_env.USER }}'
-    name: tldr-update
-    special_time: daily
-    job: tldr --update

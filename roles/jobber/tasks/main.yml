@@ -1,0 +1,12 @@
+---
+- name: Install jobber
+  import_role:
+    name: ansible-role-jobber
+
+- name: Symlink config file
+  notify: reload_jobber
+  file:
+    state: link
+    src: '{{ role_path }}/files/jobber.yml'
+    dest: '{{ ansible_env.HOME }}/.jobber'
+    force: true

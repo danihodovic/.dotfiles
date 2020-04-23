@@ -1,0 +1,25 @@
+---
+version: 1.4
+prefs:
+  runLog:
+    type: file
+    path: /home/dani/.jobber.log
+    maxFileLen: 100m
+    maxHistories: 1
+jobs:
+  tldr:
+    time: '0 0 * * *'
+    cmd: tldr --update
+
+  bugwarrior:
+    time: '0 0 * * *'
+    cmd: zsh -i -c bugwarrior-pull
+
+  docker_prune:
+    # Every monday
+    time: '0 0 * * 1'
+    cmd: docker system prune --volumes --force
+
+  taskwarrior_sync:
+    time: '*/15 * * * *'
+    cmd: zsh -i -c 'task sync'

@@ -15,9 +15,3 @@
   vars:
     repo: https://github.com/GothenburgBitFactory/timewarrior.git
     dir: '{{ ansible_env.HOME }}/repos/timewarrior/'
-
-- name: Install a cronjob to sync tasks
-  cron:
-    name: sync taskwarrior
-    job: task sync
-    minute: '*/15'
