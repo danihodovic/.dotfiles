@@ -8,26 +8,26 @@ prefs:
     maxHistories: 1
 jobs:
   tldr:
-    time: '0 0 * * *'
+    time: '0 0 0 * * *'
     cmd: tldr --update
 
   bugwarrior:
-    time: '0 0 * * *'
+    time: '0 0 0 * * *'
     cmd: zsh -i -c bugwarrior-pull
 
   docker_prune:
     # Every monday
-    time: '0 0 * * 1'
+    time: '0 0 0 * * 1'
     cmd: docker system prune --volumes --force
 
   taskwarrior_sync:
-    time: '*/15 * * * *'
+    time: '0 */5 * * * *'
     cmd: zsh -i -c 'task sync'
 
   backup_timewarrior:
-    time: '*/15 * * * *'
+    time: '0 */5 * * * *'
     cmd: 'cp -r ~/.timewarrior/* ~/Nextcloud/timewarrior'
 
   backup_taskwarrior:
-    time: '*/15 * * * *'
+    time: '0 */5 * * * *'
     cmd: 'cp -r ~/.task/* ~/Nextcloud/taskwarrior'
