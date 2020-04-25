@@ -23,3 +23,11 @@ jobs:
   taskwarrior_sync:
     time: '*/15 * * * *'
     cmd: zsh -i -c 'task sync'
+
+  backup_timewarrior:
+    time: '*/15 * * * *'
+    cmd: 'cp -r ~/.timewarrior/* ~/Nextcloud/timewarrior'
+
+  backup_taskwarrior:
+    time: '*/15 * * * *'
+    cmd: 'cp -r ~/.task/* ~/Nextcloud/taskwarrior'
