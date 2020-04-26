@@ -24,10 +24,25 @@ alias gtags-latest='git tag --list | sort -V | tail -n 1'
 alias gl-last-tag-to-HEAD='git log $(git tag --list | sort -V | tail -n 1)..master'
 alias gremotes='git remote -v'
 alias gremote='git remote'
+
+function _default_remote_branch {
+  output=$(git symbolic-ref refs/remotes/origin/HEAD 2>&1)
+  # For fresh repositories HEAD is not set
+  # https://stackoverflow.com/questions/45811971/warning-ignoring-broken-ref-refs-remotes-origin-head
+  if [[ $output == "fatal: ref refs/remotes/origin/HEAD is not a symbolic ref" ]]
+  then
+    git remote set-head origin master > /dev/null 2>&1
+    echo "master"
+    return
+  fi
+
+  git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+}
+
 function gdom {
   query=$1
   if [ -z "$default_remote_branch" ]; then
-    local default_remote_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+    local default_remote_branch=$(_default_remote_branch)
   fi
   if [[ "$query" == "--stat" ]]; then
     git diff origin/$default_remote_branch --stat
@@ -46,7 +61,7 @@ function gdom {
 
 function grom {
   if [ -z "$default_remote_branch" ]; then
-    local default_remote_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+    local default_remote_branch=$(_default_remote_branch)
   fi
   git fetch
   git rebase origin/"$default_remote_branch"
