@@ -125,7 +125,8 @@ export PATH=$PATH:$GOPATH/bin
 
 # Set vi-mode
 bindkey -v
-enable-fzf-tab # bindkey -v resets bindings, so enable fzf-tab again
+# bindkey -v resets bindings, so enable fzf-tab again
+which enable-fzf-tab > /dev/null 2>&1 && enable-fzf-tab
 
 # By default, there is a 0.4 second delay after you hit the <ESC>
 # key and when the mode change is registered. This results in a
@@ -249,6 +250,14 @@ function twt {
     task $task_id stop
   fi
 }
+
+function tst {
+  local output=$(task add $@)
+  echo $output
+  local task_uuid=$(echo $output | awk -F ' ' '{print $3}' | sed 's/\.//')
+  task start $task_uuid
+}
+compdef _task tst
 
 # cd && ls
 function chpwd {
