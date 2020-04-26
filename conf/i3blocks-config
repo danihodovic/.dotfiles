@@ -1,3 +1,8 @@
+[timewarrior]
+command=$SCRIPT_DIR/timewarrior/timewarrior
+markup=pango
+interval=5
+
 [cpu_usage2]
 command=$SCRIPT_DIR/cpu_usage2/cpu_usage2
 markup=pango
@@ -5,8 +10,8 @@ interval=persist
 
 [memory]
 command=$SCRIPT_DIR/memory/memory
-label=|Memory .
-interval=5
+label=| .
+interval=2
 
 [rescuetime]
 command=$SCRIPT_DIR/rescuetime/rescuetime
