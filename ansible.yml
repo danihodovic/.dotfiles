@@ -235,6 +235,7 @@
         - { src: '{{ symlink_dir }}/pudb.cfg',         dest: '{{ ansible_env.HOME }}/.config/pudb/pudb.cfg' }
         - { src: '{{ symlink_dir }}/i3blocks-config',  dest: '{{ ansible_env.HOME }}/.config/i3blocks/config' }
         - { src: '{{ symlink_dir }}/cookiecutterrc',   dest: '{{ ansible_env.HOME }}/.cookiecutterrc' }
+        - { src: '{{ symlink_dir }}/poetry.toml',      dest: '{{ ansible_env.HOME }}/.config/pypoetry/config.toml' }
         - { src: '{{ playbook_dir }}/zshrc',           dest: '{{ ansible_env.HOME }}/.zshrc' }
         - { src: '{{ playbook_dir }}/bashrc',          dest: '{{ ansible_env.HOME }}/.bashrc' }
 
