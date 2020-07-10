@@ -157,7 +157,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 # Sync x selection and primary (needs to be configured in the app indicator)
 exec --no-startup-id parcellite
-exec --no-startup-id setxkbmap -option caps:swapescape
+exec --no-startup-id setxkbmap -option caps:swapescape -option compose:ralt
 exec --no-startup-id xautolock -time 3 -locker ~/.dotfiles/scripts/lock
 exec --no-startup-id caffeine
 exec --no-startup-id variety
