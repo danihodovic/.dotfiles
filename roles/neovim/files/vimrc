@@ -30,8 +30,9 @@ if s:has_plug == 1
   Plug 'kana/vim-textobj-function'              " Add function based text objects
   Plug 'kana/vim-textobj-user'                  " Add additional text objects
   Plug 'rhysd/vim-textobj-anyblock'
+  Plug 'dkarter/bullets.vim'
   Plug 'kopischke/vim-fetch'                    " Open files at file:line:column
-  Plug 'Lokaltog/vim-easymotion'                " Better movement with f/t
+  Plug 'easymotion/vim-easymotion'              " Better movement with f/t
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'luochen1990/rainbow'                    " Show diff level of parentheses in diff colors
   Plug 'nathanaelkane/vim-indent-guides'        " Visually display indent lines with different color
@@ -42,16 +43,21 @@ if s:has_plug == 1
   Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
   Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
   Plug 'reconquest/vim-pythonx'                 " Allows for snippet aliasing http://tiny.cc/9j9qiz
+  Plug 'AndrewRadev/tagalong.vim'               " Dynamically changes html tags
+  Plug 'AndrewRadev/linediff.vim'
   Plug 'tpope/vim-abolish'                      " Change snake case to camelcase and vice versa
   Plug 'tpope/vim-fugitive'                     " Various git commands inside vim
   Plug 'tpope/vim-rhubarb'                      " Github commands for Fugitive
   Plug 'tpope/vim-surround'                     " Surround text with (){}<>
   Plug 'tpope/vim-eunuch'                       " Unix helpers for vim
+  Plug 'kamykn/spelunker.vim'
   Plug 'wakatime/vim-wakatime'
   Plug 'vitalk/vim-shebang'
   Plug 'floobits/floobits-neovim'
   Plug 'rhysd/git-messenger.vim'
+  Plug 'mzlogin/vim-markdown-toc'
   Plug 'junegunn/goyo.vim'
+  Plug 'brooth/far.vim'
   Plug 'glacambre/firenvim'
   Plug 'camspiers/lens.vim'
   " -----------------------------------------
