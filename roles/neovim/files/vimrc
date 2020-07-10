@@ -74,6 +74,7 @@ if s:has_plug == 1
   Plug 'rhysd/vim-github-actions'
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
   Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+  Plug 'direnv/direnv.vim'
   call plug#end()
 end
 
