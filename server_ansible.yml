@@ -13,8 +13,9 @@
     - tags: [dependencies, minimal]
       name: Install apt dependencies
       become: true
+      failed_when: false # Fail and skip on older distros
       apt:
-        name: [zsh, net-tools, xclip, httpie, ncdu, direnv]
+        name: [zsh, ripgrep, net-tools, htop, xclip, httpie, ncdu, direnv]
         update_cache: true
 
     - import_role: name=neovim
