@@ -16,9 +16,8 @@ jobs:
     cmd: zsh -i -c bugwarrior-pull
 
   docker_prune:
-    # Every monday
-    time: '0 0 0 * * 1'
-    cmd: docker system prune --volumes --force
+    time: '0 0 0 * * 1'  # Every monday
+    cmd: docker system prune --force
 
   taskwarrior_sync:
     time: '0 */5 * * * *'
@@ -31,3 +30,33 @@ jobs:
   backup_taskwarrior:
     time: '0 */5 * * * *'
     cmd: 'cp -r ~/.task/* ~/Nextcloud/taskwarrior'
+
+  update_antibody:
+    time: '0 0 0 * * 1'  # Every monday
+    cmd: zsh -i -c 'antibody update'
+
+  update_vim_plugins:
+    time: '0 0 0 * * 1'  # Every monday
+    cmd: zsh -i -c 'antibody update'
+
+  update_apt:
+    time: '0 0 0 * * 1'  # Every monday
+    cmd: sudo apt update
+
+  update_exist_plus:
+    time: '0 30 19 * * *'
+    cmd: docker exec -t exist_plus ./manage.py update_exist_data dani
+
+  update_taskwarrior_data:
+    time: '0 0 */1 * * *'
+    cmd: >-
+      zsh -i -c '
+      task export | http --print hHb POST localhost:18900/taskwarrior/task-bulk
+      "Authorization: Token $EXIST_PLUS_TOKEN"
+      '
+      &&
+      zsh -i -c '
+      timew export |
+      http --print hHb POST localhost:18900/taskwarrior/task-interval-bulk
+      "Authorization: Token $EXIST_PLUS_TOKEN"
+      '
