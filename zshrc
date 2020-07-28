@@ -408,7 +408,7 @@ import os
 today = date.today()
 beginning_of_last_week = today - timedelta(days=today.weekday() + 7)
 end_of_last_week = beginning_of_last_week + timedelta(days=7)
-cmd = f"git standup -A {beginning_of_last_week} -B {end_of_last_week} -s"
+cmd = f"git standup -d {beginning_of_last_week} -u {end_of_last_week} -s"
 home = os.path.expanduser("~")
 dirs = [
   os.path.join(home, ".dotfiles"),
