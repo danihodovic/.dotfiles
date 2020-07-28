@@ -440,21 +440,29 @@ import vim
 import subprocess
 from subprocess import PIPE
 from pathlib import Path
+import os
 
 def output(cmd):
   return subprocess.run(cmd, shell=True, stdout=PIPE, stderr=PIPE).stdout.decode('utf8').strip()
 
-ft = vim.eval("&ft")
-if ft == 'python':
-  pip_path = output("which pip")
-  deps_dir = Path(pip_path).parent.parent / 'lib'
-elif ft in ['javascript', 'typescript', 'typescript.tsx', 'scss', 'css']:
-  root_dir = output("git rev-parse --show-toplevel")
-  deps_dir = Path(root_dir) / 'node_modules'
-else:
-  vim.command('echo "Cant autodetect dependecies dir for current ft"')
-  deps_dir = ''
+def get_deps_dir():
+  ft = vim.eval("&ft")
 
+  if ft == "python":
+    if ".venv" in os.listdir():
+      return Path(os.getcwd()) / ".venv" / "lib"
+
+    pip_path = output("which pip")
+    return Path(pip_path).parent.parent / 'lib'
+
+  elif ft in ['javascript', 'typescript', 'typescript.tsx', 'scss', 'css']:
+    root_dir = output("git rev-parse --show-toplevel")
+    return Path(root_dir) / 'node_modules'
+
+  vim.command('echo "Cant autodetect dependecies dir for current ft"')
+  return ''
+
+deps_dir = get_deps_dir()
 vim.command(f"let deps_dir = '{deps_dir}'")
 EOF
 
