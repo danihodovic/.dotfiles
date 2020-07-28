@@ -23,7 +23,9 @@ export NVIM_DIR=${HOME}/.config/nvim
 export N_PREFIX=${HOME}/.n
 export PATH=$PATH:$N_PREFIX/bin
 export PYTHONSTARTUP=~/.pythonrc
-export PYTHONPATH=$PYTHONPATH:~/.dotfiles/
+export PATH="/home/dani/.pyenv/bin:$PATH"
+which pyenv > /dev/null 2>&1 && eval "$(pyenv init -)"
+
 [ -f ~/.aws_profile ] && export AWS_PROFILE=$(cat ~/.aws_profile)
 [ -f ~/.aws_region ]  && export AWS_DEFAULT_REGION=$(cat ~/.aws_region)
 # Exclude ~/.kube/http-cache which does not contain kubeconfigs
