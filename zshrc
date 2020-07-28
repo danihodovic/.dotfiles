@@ -268,6 +268,27 @@ function chpwd {
   ls
 
 }
+zle-line-init() {
+  last_cmd=$(tail -n 1 ~/.zsh_history | awk -F ';' '{print $2}')
+  if [[ "$last_cmd" =~ "^(rm|t|tt|tw|tm|gs|ls|gd|pr|gadd|greset|v|k)\s?" ]]; then
+    return
+  fi
+  # Git aliases
+  if [[ "$last_cmd" =~ "^g[a-z]{1,5}" ]]; then
+    return
+  fi
+  if [[ "$last_cmd" =~ "^(which|gcb|ansible-playbook|mv|http)\s" ]]; then
+    return
+  fi
+  if [[ "$last_cmd" =~ "(./manage.py|docker|echo|mkdir|git-standup-last-week|docker ps|pytest|meld|ln|cat|file|pyenv|docker-compose|pip|airflow|ffsend|fd|netstat)" ]]; then
+    return
+  fi
+  if [[ "$last_cmd" =~ "(dri)" ]]; then
+    return
+  fi
+  fzf-history-widget
+}
+zle -N zle-line-init
 
 function pk {
   local processes=$(ps -eo "%p %C %c %U" | tail -n +2 | sort -k2 -n --reverse)
