@@ -28,8 +28,6 @@ which pyenv > /dev/null 2>&1 && eval "$(pyenv init -)"
 
 [ -f ~/.aws_profile ] && export AWS_PROFILE=$(cat ~/.aws_profile)
 [ -f ~/.aws_region ]  && export AWS_DEFAULT_REGION=$(cat ~/.aws_region)
-# Exclude ~/.kube/http-cache which does not contain kubeconfigs
-export KUBECONFIG=$([ -d ~/.kube ] && find ~/.kube -maxdepth 1 -type f | tr '\n' ':')
 export EDITOR=nvim
 export PYTHONBREAKPOINT=pudb.set_trace
 
