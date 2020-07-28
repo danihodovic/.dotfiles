@@ -34,9 +34,11 @@ fimage() {
 }
 
 dri() {
-  choice=$(fimage)
+  choice=$(fcontainer)
   if [ -n "$choice" ]; then
-    print -z docker run $@ "$choice"
+    cmd="docker restart $@ $choice"
+    print -s $cmd
+    eval $cmd
   fi
 }
 
