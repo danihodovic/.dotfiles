@@ -192,11 +192,11 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 # ------------
 alias ls='ls -haltr --color=auto'
 alias t=task
+alias p=pyp
 alias tt='task today'
 alias tw='task week'
 alias tm='task month'
 alias to=taskopen
-alias gotask=$GOPATH/bin/task
 alias top=htop
 alias diff=icdiff
 alias sed='sed -E'
@@ -213,14 +213,15 @@ alias setxkbmapcaps="setxkbmap -option caps:swapescape68"
 alias o='xdg-open'
 alias v=nvim
 alias k='kubectl'
-alias psag='ps aux | ag '
+alias psag='ps aux | rg '
 alias ctl='sudo systemctl '
 alias s3='aws s3'
 alias c='z -I'
 alias cc='z -c'
-alias c.="cd .."
-alias c..="cd ../.."
-alias c...="cd ../../.."
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
 alias xc='xclip -selection clipboard'
 alias h1='head -n 1'
 alias t1='tail -n 1'
