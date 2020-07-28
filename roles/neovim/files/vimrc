@@ -196,7 +196,8 @@ nnoremap <silent> <C-k> :wincmd k<cr>
 
 nnoremap <leader>w :write<cr>
 
-set statusline=%m\ %f
+set statusline=%m\ %f\ 
+set statusline+=%{coc#status()}
 highlight statusline ctermfg=8 ctermbg=233
 highlight visual ctermfg=1 ctermbg=255
 autocmd CursorMoved,CursorMovedI * call UpdateStatusLine()
