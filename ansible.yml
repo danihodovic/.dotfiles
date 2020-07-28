@@ -87,10 +87,6 @@
           - docker-compose
           - awscli
           - ansible-lint
-          # Pylint dependencies
-          - astroid
-          - isort
-          - pylint
         state: latest
         extra_args: --user
 
