@@ -15,14 +15,3 @@
     n lts
   args:
     executable: /bin/zsh
-
-- name: Install npm packages
-  environment:
-    PATH: '{{ ansible_env.HOME }}/.n/bin'
-  npm:
-    name: '{{ item }}'
-    global: true
-  with_items:
-    - javascript-typescript-langserver
-    - typescript
-    - iplocation-cli
