@@ -715,6 +715,11 @@ function! s:CloseIfOnlyNerdTreeLeft()
   endif
 endfunction
 "-----------------------------------------
+" FAR
+"-----------------------------------------
+" let g:far#source = 'rgnvim'
+let g:far#enable_undo=1
+"-----------------------------------------
 let g:lua_complete_omni = 1
 let g:lua_complete_dynamic = 0
 "-----------------------------------------
