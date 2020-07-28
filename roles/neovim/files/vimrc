@@ -94,8 +94,8 @@ set clipboard=unnamedplus
 set nobackup
 set nowritebackup
 set noswapfile
-" Enable spelling
-set spell
+" Disable spelling to use spelunker
+set nospell
 set title
 set number
 " Dont auto resize windows (good for i3)
@@ -166,7 +166,7 @@ execute "xnoremap / /" . &cedit . "a"
 execute "nnoremap ? ?" . &cedit . "a"
 execute "xnoremap ? ?" . &cedit . "a"
 " Exit cmdwindow on esc
-nnoremap<C-w> :q<cr>
+nnoremap <C-w> :q<cr>
 autocmd CmdwinEnter * nnoremap <buffer> <C-w> :q<cr>
 set cmdwinheight=1
 " Easier semicolon insertion
