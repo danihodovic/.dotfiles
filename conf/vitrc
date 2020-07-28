@@ -1,4 +1,0 @@
-set confirmation=no
-set nowait=yes
-map q=Q
-map <Space>=:
