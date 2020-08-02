@@ -271,3 +271,6 @@
       shell: xdg-mime default pcmanfm.desktop inode/directory
       when: lookup('pipe', 'xdg-mime query default inode/directory') != 'pcmanfm.desktop'
       tags: set-default-file-opener
+
+  - debug:
+      msg: Run nextcloud restore to setup files

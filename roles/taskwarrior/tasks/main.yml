@@ -15,3 +15,6 @@
   vars:
     repo: https://github.com/GothenburgBitFactory/timewarrior.git
     dir: '{{ ansible_env.HOME }}/repos/timewarrior/'
+
+- debug:
+    msg: Run nextcloud restore to setup files

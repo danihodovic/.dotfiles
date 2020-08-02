@@ -2,20 +2,20 @@
 - name: Clone the repo
   git:
     repo: '{{ repo }}'
-    dest: '{{ ansible_env.HOME }}/repos/{{ dir }}/'
+    dest: '{{ dir }}'
     depth: 1
 
 - name: Run cmake
   shell: cmake -DCMAKE_BUILD_TYPE=release .
   args:
-    chdir: '{{ ansible_env.HOME }}/repos/{{ dir }}/'
+    chdir: '{{ dir }}'
 
 - name: Run make
   make:
-    chdir: '{{ ansible_env.HOME }}/repos/{{ dir }}/'
+    chdir: '{{ dir }}'
 
 - name: Run make install
   become: true
   make:
-    chdir: '{{ ansible_env.HOME }}/repos/{{ dir }}/'
+    chdir: '{{ dir }}'
     target: install

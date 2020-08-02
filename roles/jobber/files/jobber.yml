@@ -19,17 +19,9 @@ jobs:
     time: '0 0 0 * * 1'  # Every monday
     cmd: docker system prune --force
 
-  taskwarrior_sync:
+  taskwarrior_sync_intheam:
     time: '0 */5 * * * *'
     cmd: zsh -i -c 'task sync'
-
-  backup_timewarrior:
-    time: '0 */5 * * * *'
-    cmd: 'cp -r ~/.timewarrior/* ~/Nextcloud/timewarrior'
-
-  backup_taskwarrior:
-    time: '0 */5 * * * *'
-    cmd: 'cp -r ~/.task/* ~/Nextcloud/taskwarrior'
 
   update_antibody:
     time: '0 0 0 * * 1'  # Every monday
