@@ -272,5 +272,5 @@
       when: lookup('pipe', 'xdg-mime query default inode/directory') != 'pcmanfm.desktop'
       tags: set-default-file-opener
 
-  - debug:
-      msg: Run nextcloud restore to setup files
+    - debug:
+        msg: Run nextcloud restore to setup files
