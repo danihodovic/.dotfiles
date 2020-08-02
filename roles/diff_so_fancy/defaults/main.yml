@@ -1,2 +1,0 @@
----
-diff_so_fancy_dest: '{{ ansible_env.HOME }}/.local/bin/'
