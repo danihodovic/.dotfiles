@@ -33,6 +33,4 @@ markup=pango
 [time]
 command=$SCRIPT_DIR/time/time
 interval=1
-STRFTIME_FORMAT=%y-%m-%d %H:%M
-TZONES=Europe/Nicosia
-TZ_LABELS=
+STRFTIME_FORMAT=%Y-%m-%d %H:%M
