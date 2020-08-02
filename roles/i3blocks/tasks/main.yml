@@ -3,13 +3,17 @@
   apt:
     pkg: [git, make, build-essential, autoconf]
 
+- name: Install fontawesome
+  apt:
+    pkg: fonts-font-awesome
+
 - name: Clone the repository
   git:
     repo: https://github.com/vivien/i3blocks
     dest: /home/dani/repos/i3blocks
 
 - name: Run configure
-  shell: ./configure
+  shell: ./autogen.sh && ./configure
   args:
     chdir: /home/dani/repos/i3blocks
 
