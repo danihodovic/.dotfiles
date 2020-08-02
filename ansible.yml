@@ -8,6 +8,9 @@
 
   roles:
     - role: docker
+      become: true
+      vars:
+        docker_install_compose: false
       tags: docker
 
     - role: taskwarrior
@@ -27,13 +30,13 @@
       become: true
       apt:
         name:
+          - htop
           - zsh
           - git
           - i3blocks
           - httpie
           - curl
           - openvpn
-          - taskwarrior
           - net-tools
           - parcellite
           - tmux
@@ -71,6 +74,7 @@
           - ncdu
           - inotify-tools
           - flameshot
+          - lua5.3
 
     # It ships by default with i3 and overrides xfce-notifyd. It's also not
     # possible to easily kill like xfce4-nofiyd is, so the notificaiton is long
@@ -113,11 +117,8 @@
     - import_role: name=bat
       tags: bat
 
-    - import_role: name=diff_so_fancy
-      tags: diff-so-fancy
-
-    - import_role: name=gvm
-      tags: gvm
+#     - import_role: name=gvm
+#       tags: gvm
 
     - import_role: name=n
       tags: n
@@ -196,6 +197,8 @@
         - '{{ ansible_env.HOME }}/.ssh'
         - '{{ ansible_env.HOME }}/.i3'
         - '{{ ansible_env.HOME }}/.ptpython'
+        - '{{ ansible_env.HOME }}/.config/pypoetry/'
+        - '{{ ansible_env.HOME }}/.config/i3blocks/'
 
     - name: Symlink config files
       tags: symlinks
