@@ -13,7 +13,7 @@ floating_modifier $mod
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+d exec zsh -c 'rofi -show run'
+bindsym $mod+d exec zsh -c 'rofi -show run -font "Ubuntu Mono 30" -theme solarized'
 bindsym F1 exec rofi -show window
 
 bindsym $mod+h focus left
