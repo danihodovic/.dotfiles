@@ -281,7 +281,7 @@ zle-line-init() {
   if [[ "$last_cmd" =~ "(./manage.py|docker|echo|mkdir|git-standup-last-week|docker ps|pytest|meld|ln|cat|file|pyenv|docker-compose|pip|airflow|ffsend|fd|netstat)" ]]; then
     return
   fi
-  if [[ "$last_cmd" =~ "(dri|molecule)" ]]; then
+  if [[ "$last_cmd" =~ "^(dri|molecule|rg|grep|xrandr|rclone|jobber).*" ]]; then
     return
   fi
   fzf-history-widget
