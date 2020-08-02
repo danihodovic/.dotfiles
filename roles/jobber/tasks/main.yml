@@ -4,9 +4,13 @@
     name: ansible-role-jobber
 
 - name: Symlink config file
-  notify: reload_jobber
   file:
     state: link
     src: '{{ role_path }}/files/jobber.yml'
     dest: '{{ ansible_env.HOME }}/.jobber'
     force: true
+    mode: 0644
+
+- name: Reload jobber
+  changed_when: false
+  shell: jobber reload

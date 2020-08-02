@@ -60,3 +60,9 @@ jobs:
       http --print hHb POST localhost:18900/taskwarrior/task-interval-bulk
       "Authorization: Token $EXIST_PLUS_TOKEN"
       '
+
+  rclone_sync:
+    time: '0 */5 * * * *'
+    cmd: >-
+      /home/dani/repos/rclonesync-V2/rclonesync.py
+      /home/dani/Nextcloud nextcloudwebo:
