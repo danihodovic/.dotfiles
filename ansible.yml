@@ -74,6 +74,7 @@
           - inotify-tools
           - flameshot
           - lua5.3
+          - libpq-dev
 
     # It ships by default with i3 and overrides xfce-notifyd. It's also not
     # possible to easily kill like xfce4-nofiyd is, so the notificaiton is long
