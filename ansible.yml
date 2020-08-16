@@ -274,3 +274,8 @@
 
     - debug:
         msg: Run nextcloud restore to setup files
+
+    - name: Allow inotifywait to use more watches
+      copy:
+        content: 16384
+        dest: /proc/sys/fs/inotify/max_user_watches
