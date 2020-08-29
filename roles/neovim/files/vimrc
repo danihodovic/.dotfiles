@@ -64,6 +64,7 @@ if s:has_plug == 1
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
+  Plug 'rhysd/committia.vim'
   Plug 'tweekmonster/django-plus.vim'
   Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
   Plug 'bps/vim-textobj-python'
