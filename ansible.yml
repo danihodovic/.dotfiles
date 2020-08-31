@@ -270,12 +270,17 @@
     - name: Set the default folder opener
       shell: xdg-mime default pcmanfm.desktop inode/directory
       when: lookup('pipe', 'xdg-mime query default inode/directory') != 'pcmanfm.desktop'
-      tags: set-default-file-opener
+      tags: [set-default-file-opener, xdg]
+
+    - name: Set default browser
+      shell: xdg-settings set default-web-browser firefox.desktop
+      when: lookup('pipe', 'xdg-settings get default-web-browser') != 'firefox.desktop'
+      tags: [set-default-browser, xdg]
 
     - debug:
         msg: Run nextcloud restore to setup files
 
     - name: Allow inotifywait to use more watches
       copy:
-        content: 16384
+        content: 30000
         dest: /proc/sys/fs/inotify/max_user_watches
