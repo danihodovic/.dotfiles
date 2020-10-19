@@ -1,7 +1,7 @@
 ---
 - name: Install dependencies
   apt:
-    pkg: [git, make, build-essential, autoconf]
+    pkg: [git, make, build-essential, autoconf, xcompmgr]
 
 - name: Install fontawesome
   apt:
