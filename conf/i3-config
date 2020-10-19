@@ -13,7 +13,7 @@ floating_modifier $mod
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+d exec zsh -c 'rofi -show run -font "Ubuntu Mono 30" -theme solarized'
+bindsym $mod+d exec zsh -c 'rofi -show run -font "Ubuntu Mono 30"'
 bindsym F1 exec rofi -show window
 
 bindsym $mod+h focus left
@@ -56,13 +56,13 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+p focus parent
 
 # sound volume
-bindsym XF86AudioRaiseVolume 	exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume 	exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioRaiseVolume 	exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%
+bindsym XF86AudioLowerVolume 	exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
 bindsym XF86AudioMute 	 	exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # brightness controls
-bindsym XF86MonBrightnessUp 	exec xbacklight -inc 7
-bindsym XF86MonBrightnessDown 	exec xbacklight -dec 7
+bindsym XF86MonBrightnessUp 	exec xbacklight -inc 3
+bindsym XF86MonBrightnessDown 	exec xbacklight -dec 3
 
 workspace_layout stacking
 bindsym $mod+s layout toggle all
