@@ -1,6 +1,7 @@
 # Default prompt
 export PROMPT='%F{81}%* %~ %m %# %f'
 export SHELL=/bin/zsh
+export LC_ALL=en_US.UTF-8
 # Paths
 # ------------
 # Export paths before sourcing anything
@@ -281,7 +282,10 @@ zle-line-init() {
   if [[ "$last_cmd" =~ "(./manage.py|docker|echo|mkdir|git-standup-last-week|docker ps|pytest|meld|ln|cat|file|pyenv|docker-compose|pip|airflow|ffsend|fd|netstat)" ]]; then
     return
   fi
-  if [[ "$last_cmd" =~ "^(dri|molecule|rg|grep|xrandr|rclone|jobber).*" ]]; then
+  if [[ "$last_cmd" =~ "^(dri|molecule|rg|grep|xrandr|rclone|jobber|pex).*" ]]; then
+    return
+  fi
+  if [[ "$last_cmd" =~ "^(doctl).*" ]]; then
     return
   fi
   fzf-history-widget
@@ -440,4 +444,14 @@ dirs = [
 for dir in dirs:
   subprocess.run(cmd, shell=True, cwd=dir)
 EOF
+}
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+function install_dht() {
+  latest_release_url=$(curl -s https://api.github.com/repos/danihodovic/dht/releases/latest | grep "browser_download_url" | awk -F '"' '{print $4}')
+  curl $latest_release_url -L -o /tmp/dht
+  chmod +x /tmp/dht
+  mv /tmp/dht/ /usr/local/bin
 }
