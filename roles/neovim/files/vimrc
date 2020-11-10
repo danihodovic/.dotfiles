@@ -38,7 +38,6 @@ if s:has_plug == 1
   Plug 'nathanaelkane/vim-indent-guides'        " Visually display indent lines with different color
   Plug 'reedes/vim-wordy'                       " Linting for prose
   Plug 'tomtom/tcomment_vim'
-  Plug 'scrooloose/nerdtree'
   Plug 'SirVer/ultisnips'
   Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
   Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
