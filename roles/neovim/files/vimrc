@@ -61,6 +61,7 @@ if s:has_plug == 1
   Plug 'glacambre/firenvim'
   Plug 'camspiers/lens.vim'
   Plug 'sheerun/vim-polyglot'
+  Plug 'ActivityWatch/aw-watcher-vim'
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
