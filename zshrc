@@ -285,7 +285,7 @@ zle-line-init() {
   if [[ "$last_cmd" =~ "^(dri|molecule|rg|grep|xrandr|rclone|jobber|pex).*" ]]; then
     return
   fi
-  if [[ "$last_cmd" =~ "^(doctl).*" ]]; then
+  if [[ "$last_cmd" =~ "^(doctl|dig|hcloud|nc|drone|upower|./dist/dht|dht|curl|http).*" ]]; then
     return
   fi
   fzf-history-widget
