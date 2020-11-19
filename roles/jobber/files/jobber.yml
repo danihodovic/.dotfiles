@@ -58,3 +58,9 @@ jobs:
     cmd: >-
       /home/dani/repos/rclonesync-V2/rclonesync.py
       /home/dani/Nextcloud nextcloudwebo:
+
+  backup_activitywatch:
+    time: '0 0 * * * *'
+    cmd: >-
+      cp /home/dani/.local/share/activitywatch/aw-server/peewee-sqlite.v2.db
+      /home/dani/Nextcloud/activitywatch.db
