@@ -70,7 +70,6 @@ scripts_to_source=(
   # For some reason doctl overrides other completions. Source it first then
   # source the rest
   ${HOME}/.doctl_zsh
-
   /usr/local/bin/aws_zsh_completer.sh
   ${HOME}/.fzf.zsh
   ${HOME}/.gvm/scripts/gvm
@@ -79,6 +78,7 @@ scripts_to_source=(
   ${HOME}/.kops_completion
   ${HOME}/.travis/travis.sh
   ${HOME}/.awless_zsh
+  ${HOME}/repos/dht/dht-complete.zsh
   # Own helpers
   ${HOME}/.dotfiles/fzf-helpers.zsh
   ${HOME}/.dotfiles/docker.zsh
