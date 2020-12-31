@@ -1,3 +1,16 @@
+fzf_opts=(
+  --multi
+  --reverse
+  --bind ctrl-space:toggle-preview
+  --bind ctrl-j:down
+  --bind ctrl-k:up
+  --bind ctrl-d:half-page-down
+  --bind ctrl-u:half-page-up
+  --bind ctrl-s:toggle-sort
+  --bind ctrl-e:preview-down
+  --bind ctrl-y:preview-up
+)
+export FZF_DEFAULT_OPTS="${fzf_opts[*]}"
 export FZF_DEFAULT_COMMAND="fd --type f --no-ignore --hidden"
 export FZF_CTRL_R_OPTS='--exact'
 
