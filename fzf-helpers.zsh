@@ -63,6 +63,27 @@ fcommit() {
   echo -n $(echo "$commit" | sed "s/ .*//")
 }
 
+function fzf-taskwarrior {
+  matches_common="rc._forcecolor:on rc.defaultwidth:120 rc.detection:off rc.verbose=no"
+  matches_few="task due.before:today+14d limit=30 $matches_common"
+  matches_many="task due.before:today+365d limit=100 $matches_common"
+  start_cmd="ctrl-s:execute(task start {1})+abort"
+  delete_cmd="ctrl-x:reload(task {1} delete rc.confirmation:no rc.verbose=nothing && eval $matches_few)+clear-query"
+  done_cmd="ctrl-f:reload(task done {1} rc.verbose=nothing && eval $matches_few)+clear-query"
+  show_more_cmd="ctrl-m:reload(eval $matches_many)"
+  selection=$(eval "$matches_few" |
+    fzf --bind "$start_cmd,$delete_cmd,$done_cmd,$show_more_cmd" \
+    --header-lines=2 --ansi --layout=reverse --border \
+    --preview 'task {1} rc._forcecolor:on'
+  )
+
+  if [ ! -z $selection ]; then
+    BUFFER=""
+    zle accept-line
+  fi
+}
+zle -N fzf-taskwarrior
+
 bindkey -M vicmd '\-'   fzf-file-widget
 
 bindkey -M vicmd '^r'   fzf-history-widget
@@ -76,5 +97,8 @@ bindkey -M viins '^l'   fzf-docker-logs
 
 bindkey -M vicmd '^x'   fzf-docker-exec
 bindkey -M viins '^x'   fzf-docker-exec
+
+bindkey -M viins '^w'   fzf-taskwarrior
+bindkey -M vicmd '^w'   fzf-taskwarrior
 
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
