@@ -250,6 +250,7 @@ function taskwarrior-toggle {
 }
 alias t=task
 alias tt=taskwarrior-toggle
+alias tc='dht task done'
 
 function tst {
   local output=$(task add $@)
