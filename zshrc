@@ -194,9 +194,6 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 alias ls='ls -haltr --color=auto'
 alias t=task
 alias p=pyp
-alias tt='task today'
-alias tw='task week'
-alias tm='task month'
 alias to=taskopen
 alias top=htop
 alias diff=icdiff
@@ -241,8 +238,7 @@ alias aptrepository='sudo apt-add-repository  -y'
 function ssh-keygen-fingerprint { ssh-keygen -l -f $1 }
 function ssh-keygen-fingerprint-md5 { ssh-keygen -E md5 -l -f $1 }
 
-# timewarrior toggle last task
-function twt {
+function taskwarrior-toggle {
   if [[ $(timew) = 'There is no active time tracking.' ]]; then
     last_timewarrior_task=$(timew export | jq -r '.[-1].tags[0]')
     last_task_id=$(task $last_timewarrior_task export | jq -r '.[0].id')
@@ -252,6 +248,8 @@ function twt {
     task $task_id stop
   fi
 }
+alias t=task
+alias tt=taskwarrior-toggle
 
 function tst {
   local output=$(task add $@)

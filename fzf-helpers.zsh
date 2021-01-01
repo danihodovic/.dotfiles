@@ -80,7 +80,7 @@ function fzf-taskwarrior {
   matches_common="rc._forcecolor:on rc.defaultwidth:120 rc.detection:off rc.verbose=no"
   matches_few="task due.before:today+14d limit=30 $matches_common"
   matches_many="task due.before:today+365d limit=100 $matches_common"
-  start_cmd="ctrl-s:execute(task start {1})+abort"
+  start_cmd="ctrl-s:execute(dht task start {1})+abort"
   delete_cmd="ctrl-x:reload(task {1} delete rc.confirmation:no rc.verbose=nothing && eval $matches_few)+clear-query"
   done_cmd="ctrl-f:reload(task done {1} rc.verbose=nothing && eval $matches_few)+clear-query"
   show_more_cmd="ctrl-m:reload(eval $matches_many)"
