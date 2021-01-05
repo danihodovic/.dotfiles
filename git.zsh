@@ -56,7 +56,7 @@ function gdom {
     awk '{print $1}'
 
   )
-  [ ! -z $file ] && git diff origin/$default_remote_branch $file
+  [ ! -z $file ] && git diff origin/$default_remote_branch -- $file
 }
 
 function grom {
@@ -71,10 +71,7 @@ gdob () { git diff origin/$(_local_branch) $@ }
 compdef _git-diff gdob
 
 alias ci-status='hub ci-status'
-function pr {
-  msg=$(git log -1 --pretty=%s)
-  grom && gpushbranch && hub pull-request -m $msg
-}
+alias pr='dht git pr'
 
 # Initiate _git which exposes the _git-* completions
 _git
