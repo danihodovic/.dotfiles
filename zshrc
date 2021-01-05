@@ -383,17 +383,6 @@ function sync_helper {
 }
 compdef sync=scp
 
-function molecule-ssh {
-  dir=$(basename $PWD)
-  file=/tmp/molecule/$dir/default/instance_config.yml
-  instance=$(yq -r '.[] | [.instance, .address] | @tsv' $file | fzf | awk '{print $NF}')
-
-  if [ -n "$instance" ]; then
-    user=$(yq -r '.[0].user' $file)
-    ssh -i /tmp/molecule/$dir/default/ssh_key "$user@$instance" -o IdentitiesOnly=yes
-  fi
-}
-
 function edit-file-docker {
   set -v
   container=$(docker ps -a | fzf --exact | awk '{print $1}')
