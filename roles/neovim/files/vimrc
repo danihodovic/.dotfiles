@@ -55,9 +55,11 @@ if s:has_plug == 1
   Plug 'floobits/floobits-neovim'
   Plug 'rhysd/git-messenger.vim'
   Plug 'mzlogin/vim-markdown-toc'
+  Plug 'pechorin/any-jump.vim'
   Plug 'junegunn/goyo.vim'
   Plug 'brooth/far.vim'
   Plug 'glacambre/firenvim'
+  Plug 'vim-test/vim-test'
   Plug 'camspiers/lens.vim'
   Plug 'sheerun/vim-polyglot'
   Plug 'ActivityWatch/aw-watcher-vim'
@@ -925,3 +927,16 @@ if has('nvim')
     au TermOpen term://*FZF tnoremap <silent> <buffer><nowait> <esc> <c-c>
   aug END
 end
+
+let test#python#runner = 'pytest'
+let test#python#pytest#options = '-s'
+
+" Normal mode: Jump to definition under cursore
+nnoremap R :AnyJump<CR>
+" Visual mode: jump to selected text in visual mode
+xnoremap R :AnyJumpVisual<CR>
+" Normal mode: open previous opened file (after jump)
+nnoremap <leader>ab :AnyJumpBack<CR>
+" Normal mode: open last closed search window again
+nnoremap <leader>r :AnyJumpLastResults<CR>
+let g:any_jump_disable_vcs_ignore = 1
