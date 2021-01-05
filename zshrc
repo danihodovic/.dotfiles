@@ -38,6 +38,12 @@ export plugged=${NVIM_DIR}/plugged
 export vimrc=${HOME}/.dotfiles/roles/neovim/files/vimrc
 export zshrc=${HOME}/.dotfiles/zshrc
 
+# Ansible
+export ANSIBLE_CACHE_PLUGIN=jsonfile
+export ANSIBLE_CACHE_PLUGIN_CONNECTION=/tmp/ansible-cache
+export ANSIBLE_INVENTORY_CACHE=True
+export ANSIBLE_FORCE_COLOR=1
+
 # Activate direnv zsh hook if direnv is installed
 type direnv > /dev/null && eval "$(direnv hook zsh)"
 
