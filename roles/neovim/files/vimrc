@@ -9,12 +9,13 @@ try
 catch /Unknown function/
 endtry
 
+let g:python3_host_prog = '/home/dani/.pyenv/shims/python'
+
 if s:has_plug == 1
   "-----------------------------------------
   " General plugins
   "-----------------------------------------
   set rtp+=~/.fzf
-  Plug 'raghur/vim-ghost'
   Plug 'airblade/vim-gitgutter'                 " Show changed git lines
   Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
   Plug 'neomake/neomake'
@@ -22,7 +23,6 @@ if s:has_plug == 1
   Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
   Plug 'flazz/vim-colorschemes'
   Plug 'FooSoft/vim-argwrap'                    " Collapse or expand arguments for a function
-  Plug 'itchyny/vim-cursorword'                 " Highlight the occurances of the word under the cursor
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-easy-align'                " Align code around arbitrary characters =,:
   Plug 'junegunn/vim-oblique'                   " Colors search result and sets nohlsearch on cursor move
@@ -52,7 +52,6 @@ if s:has_plug == 1
   Plug 'kamykn/spelunker.vim'
   Plug 'wakatime/vim-wakatime'
   Plug 'vitalk/vim-shebang'
-  Plug 'floobits/floobits-neovim'
   Plug 'rhysd/git-messenger.vim'
   Plug 'mzlogin/vim-markdown-toc'
   Plug 'pechorin/any-jump.vim'
