@@ -50,7 +50,7 @@ bindsym $mod+z exec \
 	current_dir=$(tmux display-message -p -F '#{pane_current_path}') && \
 	xfce4-terminal -e tmux --working-directory $current_dir
 
-bindsym $mod+Shift+p exec ~/.dotfiles/scripts/lock
+bindsym $mod+Shift+p exec dht i3 lock
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+p focus parent
