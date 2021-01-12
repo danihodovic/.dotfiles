@@ -29,6 +29,7 @@ graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgr
 
 [diff]
 algorithm = histogram
+colorMoved = default
 
 [gpg]
 program = gpg
