@@ -6,38 +6,74 @@ prefs:
     path: /home/dani/.jobber.log
     maxFileLen: 100m
     maxHistories: 1
+resultSinks:
+  - &notify
+    type: program
+    path: /usr/local/bin/dht_notify
 jobs:
   tldr:
     time: '0 0 0 * * *'
     cmd: tldr --update
+    notifyOnFailure:
+      - *notify
+    notifyOnError:
+      - *notify
 
   bugwarrior:
     time: '0 0 0 * * *'
     cmd: zsh -i -c bugwarrior-pull
+    notifyOnFailure:
+      - *notify
+    notifyOnError:
+      - *notify
 
   docker_prune:
     time: '0 0 0 * * 1'  # Every monday
     cmd: docker system prune --force
+    notifyOnFailure:
+      - *notify
+    notifyOnError:
+      - *notify
 
   taskwarrior_sync_intheam:
     time: '0 */5 * * * *'
     cmd: zsh -i -c 'task sync'
+    notifyOnFailure:
+      - *notify
+    notifyOnError:
+      - *notify
 
   update_antibody:
     time: '0 0 0 * * 1'  # Every monday
     cmd: zsh -i -c 'antibody update'
+    notifyOnFailure:
+      - *notify
+    notifyOnError:
+      - *notify
 
   update_vim_plugins:
     time: '0 0 0 * * 1'  # Every monday
     cmd: zsh -i -c 'antibody update'
+    notifyOnFailure:
+      - *notify
+    notifyOnError:
+      - *notify
 
   update_apt:
     time: '0 0 0 * * 1'  # Every monday
     cmd: sudo apt update
+    notifyOnFailure:
+      - *notify
+    notifyOnError:
+      - *notify
 
   update_exist_plus:
     time: '0 30 19 * * *'
     cmd: docker exec -t exist_plus ./manage.py update_exist_data dani
+    notifyOnFailure:
+      - *notify
+    notifyOnError:
+      - *notify
 
   update_taskwarrior_data:
     time: '0 0 */1 * * *'
@@ -52,15 +88,28 @@ jobs:
       http --print hHb POST localhost:18900/taskwarrior/task-interval-bulk
       "Authorization: Token $EXIST_PLUS_TOKEN"
       '
+    notifyOnFailure:
+      - *notify
+    notifyOnError:
+      - *notify
 
   rclone_sync:
     time: '0 */5 * * * *'
     cmd: >-
       /home/dani/repos/rclonesync-V2/rclonesync.py
       /home/dani/Nextcloud nextcloudwebo:
+    notifyOnFailure:
+      - *notify
+    notifyOnError:
+      - *notify
+
 
   backup_activitywatch:
     time: '0 0 * * * *'
     cmd: >-
       cp /home/dani/.local/share/activitywatch/aw-server/peewee-sqlite.v2.db
       /home/dani/Nextcloud/activitywatch.db
+    notifyOnFailure:
+      - *notify
+    notifyOnError:
+      - *notify
