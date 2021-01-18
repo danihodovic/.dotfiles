@@ -19,25 +19,9 @@ jobs:
     notifyOnError:
       - *notify
 
-  bugwarrior:
-    time: '0 0 0 * * *'
-    cmd: zsh -i -c bugwarrior-pull
-    notifyOnFailure:
-      - *notify
-    notifyOnError:
-      - *notify
-
   docker_prune:
     time: '0 0 0 * * 1'  # Every monday
     cmd: docker system prune --force
-    notifyOnFailure:
-      - *notify
-    notifyOnError:
-      - *notify
-
-  taskwarrior_sync_intheam:
-    time: '0 */5 * * * *'
-    cmd: zsh -i -c 'task sync'
     notifyOnFailure:
       - *notify
     notifyOnError:
