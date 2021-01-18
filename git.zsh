@@ -71,7 +71,7 @@ gdob () { git diff origin/$(_local_branch) $@ }
 compdef _git-diff gdob
 
 alias ci-status='hub ci-status'
-alias pr='dht git pr'
+alias pr='dht git pull-request'
 
 # Initiate _git which exposes the _git-* completions
 _git
