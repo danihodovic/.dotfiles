@@ -162,7 +162,6 @@ exec --no-startup-id xautolock -time 3 -locker ~/.dotfiles/scripts/lock
 exec --no-startup-id caffeine
 exec --no-startup-id variety
 exec --no-startup-id rescuetime
-exec --no-startup-id nextcloud
 exec --no-startup-id flameshot
 exec --no-startup-id /opt/activitywatch/aw-qt
 exec --no-startup-id xcompmgr -c -l0 -t0 -r0 -o.00

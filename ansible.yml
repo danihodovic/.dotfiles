@@ -170,9 +170,6 @@
     - import_role: name=enpass
       tags: enpass
 
-    - import_role: name=nextcloud
-      tags: nextcloud
-
     - import_role: name=firefox
       tags: firefox
 
