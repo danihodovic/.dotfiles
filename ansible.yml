@@ -75,6 +75,7 @@
           - flameshot
           - lua5.3
           - libpq-dev
+          - scrot
 
     # It ships by default with i3 and overrides xfce-notifyd. It's also not
     # possible to easily kill like xfce4-nofiyd is, so the notificaiton is long
@@ -116,9 +117,6 @@
 
     - import_role: name=bat
       tags: bat
-
-#     - import_role: name=gvm
-#       tags: gvm
 
     - import_role: name=n
       tags: n
