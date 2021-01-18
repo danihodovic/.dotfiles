@@ -78,6 +78,7 @@ if s:has_plug == 1
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
   Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
   Plug 'direnv/direnv.vim'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   call plug#end()
 end
 
@@ -173,8 +174,9 @@ autocmd CmdwinEnter * nnoremap <buffer> <C-w> :q<cr>
 set cmdwinheight=1
 " Easier semicolon insertion
 autocmd FileType javascript,typescript,css,perl,nginx noremap ;; :call InsertSemicolons()<CR>
-nmap m %
-vmap m %
+nnoremap m %
+vnoremap m %
+nnoremap ; m
 " Stay in visual mode when indenting
 vnoremap <C-<> <gv
 vnoremap <C->> >gv
@@ -678,7 +680,7 @@ augroup END
 
 autocmd BufWritePre * if &ft == 'go' | exec 'GoImports' | endif
 "-----------------------------------------
-" NERDCommenter
+" Tcomment
 "-----------------------------------------
 let g:tcomment_maps = 1
 let g:tcomment_opleader1 = "<Leader>"
@@ -938,4 +940,3 @@ xnoremap R :AnyJumpVisual<CR>
 nnoremap <leader>ab :AnyJumpBack<CR>
 " Normal mode: open last closed search window again
 nnoremap <leader>r :AnyJumpLastResults<CR>
-let g:any_jump_disable_vcs_ignore = 1
