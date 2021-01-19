@@ -87,12 +87,20 @@ jobs:
     notifyOnError:
       - *notify
 
-
   backup_activitywatch:
     time: '0 0 * * * *'
     cmd: >-
       cp /home/dani/.local/share/activitywatch/aw-server/peewee-sqlite.v2.db
       /home/dani/Nextcloud/activitywatch.db
+    notifyOnFailure:
+      - *notify
+    notifyOnError:
+      - *notify
+
+  backup_zsh_history:
+    time: '0 */3 * * * *'
+    cmd: >-
+      cp ~/.zsh_history /home/dani/Nextcloud/zsh_history
     notifyOnFailure:
       - *notify
     notifyOnError:
