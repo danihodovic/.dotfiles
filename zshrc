@@ -215,7 +215,13 @@ alias h="history"
 alias cd-="cd -"
 alias setxkbmapcaps="setxkbmap -option caps:swapescape68"
 alias o='xdg-open'
-alias v=nvim
+function v() {
+  if [[ -z "$1" ]]; then
+    nvim $(__fsel)
+  else
+    nvim $@
+  fi
+}
 alias k='kubectl'
 alias psag='ps aux | rg '
 alias ctl='sudo systemctl '
