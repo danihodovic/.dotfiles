@@ -334,9 +334,9 @@ nnoremap - :Buffers<cr>
 nnoremap = :call FzfGitChangedFilesFromMaster()<cr>
 nnoremap <M-=> :Files<cr>
 nnoremap <M--> :GitFiles<cr>
-nnoremap H :History:<cr>
-cnoremap H :History:<cr>
-nnoremap r :History<cr>
+nnoremap <C-r> :History:<cr>
+cnoremap <C-r> :History:<cr>
+nnoremap r <C-R>
 
 function! FloatingFZF()
   let buf = nvim_create_buf(v:false, v:true)
@@ -410,26 +410,16 @@ fu! FocusTest()
   call fzf#vim#ag(regex)
 endfu
 
-nnoremap <leader>af :AllFiles<cr>
-command! AllFiles call FzfLocateRoot()
-fu! FzfLocateRoot()
-  let opts = {}
-  let opts.source = 'locate /'
-  let opts.options = '--multi --prompt ">" --ansi'
-  call fzf#run(fzf#vim#wrap(opts))
-endfu
 
-
-nnoremap <leader>r :Rg<cr>
-vnoremap <leader>r :Rg<cr>
-command! -nargs=* -complete=file -range Rg call RgRaw(<q-args>)
-function! RgRaw(args)
-  let query = a:args
-  if query == ''
-    let query = Get_visual_selection()
-  endif
-  call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . query, 1)
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+nnoremap S :RG<cr>
 
 
 command! -nargs=1 -complete=file -range RgDeps call RgDeps(<q-args>)
@@ -604,7 +594,6 @@ let g:EasyMotion_do_shade = 1
 let g:EasyMotion_use_upper = 1
 map f <Plug>(easymotion-bd-fl)
 map t <Plug>(easymotion-bd-tl)
-map s <Plug>(easymotion-sn)
 "-----------------------------------------
 " EasyAlign
 "-----------------------------------------
@@ -933,9 +922,9 @@ let test#python#runner = 'pytest'
 let test#python#pytest#options = '-s'
 
 " Normal mode: Jump to definition under cursore
-nnoremap R :AnyJump<CR>
+nnoremap s :AnyJump<CR>
 " Visual mode: jump to selected text in visual mode
-xnoremap R :AnyJumpVisual<CR>
+xnoremap s :AnyJumpVisual<CR>
 " Normal mode: open previous opened file (after jump)
 nnoremap <leader>ab :AnyJumpBack<CR>
 " Normal mode: open last closed search window again
