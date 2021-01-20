@@ -30,6 +30,7 @@
       become: true
       apt:
         name:
+          - pinentry-curses
           - htop
           - zsh
           - git
