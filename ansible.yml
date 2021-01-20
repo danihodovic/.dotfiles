@@ -131,9 +131,6 @@
     - import_role: name=chrome
       tags: chrome
 
-    - import_role: name=alacritty
-      tags: alacritty
-
     - name: antibody
       import_role:
         name: antibody
