@@ -77,6 +77,11 @@
           - libpq-dev
           - scrot
 
+    - name: Install system firmware
+      tags: [firmware, system]
+      import_role:
+        name: system
+
     # It ships by default with i3 and overrides xfce-notifyd. It's also not
     # possible to easily kill like xfce4-nofiyd is, so the notificaiton is long
     # running

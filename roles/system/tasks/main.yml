@@ -1,0 +1,14 @@
+---
+- become: true
+  block:
+    - name: Upgrade system firmware
+      apt:
+        name: fwupd
+        update_cache: true
+
+    - name: Update firmware
+      shell: |
+        fwupdmgr get-devices
+        fwupdmgr refresh --force
+        fwupdmgr get-updates
+        fwupdmgr update
