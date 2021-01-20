@@ -1,9 +1,0 @@
-AddKeysToAgent yes
-ServerAliveInterval 300
-ServerAliveCountMax 2
-
-ControlMaster auto
-ControlPath /tmp/ssh-conn-%r@%h-%p
-ControlPersist 600
-
-Include ~/.ssh/config-*

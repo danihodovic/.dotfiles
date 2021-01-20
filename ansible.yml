@@ -189,7 +189,6 @@
         - '{{ ansible_env.HOME }}/.config/git'
         - '{{ ansible_env.HOME }}/.config/asciinema'
         - '{{ ansible_env.HOME }}/.config/pudb'
-        - '{{ ansible_env.HOME }}/.ssh'
         - '{{ ansible_env.HOME }}/.i3'
         - '{{ ansible_env.HOME }}/.ptpython'
         - '{{ ansible_env.HOME }}/.config/pypoetry/'
@@ -205,7 +204,6 @@
         state: link
         force: true
       with_items:
-        - { src: '{{ symlink_dir }}/ssh-base-config',  dest: '{{ ansible_env.HOME }}/.ssh/config' }
         - { src: '{{ symlink_dir }}/profile',          dest: '{{ ansible_env.HOME }}/.profile' }
         - { src: '{{ symlink_dir }}/inputrc',          dest: '{{ ansible_env.HOME }}/.inputrc' }
         - { src: '{{ symlink_dir }}/tmux.conf',        dest: '{{ ansible_env.HOME }}/.tmux.conf' }
