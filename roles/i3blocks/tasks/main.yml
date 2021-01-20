@@ -1,11 +1,8 @@
 ---
 - name: Install dependencies
+  become: true
   apt:
-    pkg: [git, make, build-essential, autoconf, xcompmgr]
-
-- name: Install fontawesome
-  apt:
-    pkg: fonts-font-awesome
+    pkg: [git, make, build-essential, autoconf, xcompmgr, fonts-font-awesome]
 
 - name: Clone the repository
   git:
