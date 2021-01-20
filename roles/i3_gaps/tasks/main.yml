@@ -22,21 +22,20 @@
       - libxcb-xrm-dev
       - libxcb-shape0-dev
       - automake
+      - meson
 
 - name: Clone i3-gaps
   git:
     repo: https://www.github.com/Airblader/i3
     dest: '{{ ansible_env.HOME }}/repos/i3-gaps'
+    version: gaps-next
   register: i3_gaps
 
 - name: Compile and install i3-gaps
-  when:
-    i3_gaps.before != i3_gaps.after
   args:
     chdir: '{{ ansible_env.HOME }}/repos/i3-gaps'
   shell: |
-    autoreconf --force --install
     mkdir -p build && cd build/
-    ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-    make
-    sudo make install
+    meson ..
+    ninja
+    meson install

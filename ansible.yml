@@ -64,7 +64,6 @@
           - variety
           - feh
           - speedtest-cli
-          - i3
           - i3lock
           - ruby-dev
           - libnotify-bin
@@ -137,7 +136,7 @@
       tags: antibody
 
     - import_role: name=i3_gaps
-      tags: i3_gaps
+      tags: [i3_gaps, i3-gaps]
 
     - import_role: name=i3blocks
       tags: i3blocks
