@@ -1,14 +1,13 @@
 ---
-- become: true
-  block:
-  - name: Install dependencies
-    apt:
-      pkg: [git, make, build-essential, autoconf, xcompmgr, fonts-font-awesome]
+- name: Install dependencies
+  become: true
+  apt:
+    pkg: [git, make, build-essential, autoconf, xcompmgr, fonts-font-awesome]
 
-  - name: Clone the repository
-    git:
-      repo: https://github.com/vivien/i3blocks
-      dest: /home/dani/repos/i3blocks
+- name: Clone the repository
+  git:
+    repo: https://github.com/vivien/i3blocks
+    dest: /home/dani/repos/i3blocks
 
 - name: Run configure
   shell: ./autogen.sh && ./configure
