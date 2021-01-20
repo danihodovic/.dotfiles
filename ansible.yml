@@ -197,6 +197,7 @@
         - '{{ ansible_env.HOME }}/.ptpython'
         - '{{ ansible_env.HOME }}/.config/pypoetry/'
         - '{{ ansible_env.HOME }}/.config/i3blocks/'
+        - '{{ ansible_env.HOME }}/.gnupg'
 
     - name: Symlink config files
       tags: symlinks
@@ -229,6 +230,7 @@
         - { src: '{{ symlink_dir }}/ptpython_config.py', dest: '{{ ansible_env.HOME }}/.config/ptpython/config.py' }
         - { src: '{{ symlink_dir }}/pudb.cfg',         dest: '{{ ansible_env.HOME }}/.config/pudb/pudb.cfg' }
         - { src: '{{ symlink_dir }}/i3blocks-config',  dest: '{{ ansible_env.HOME }}/.config/i3blocks/config' }
+        - { src: '{{ symlink_dir }}/gpg-agent.conf',   dest: '{{ ansible_env.HOME }}/.gnupg/gpg-agent.conf' }
         - { src: '{{ symlink_dir }}/cookiecutterrc',   dest: '{{ ansible_env.HOME }}/.cookiecutterrc' }
         - { src: '{{ symlink_dir }}/poetry.toml',      dest: '{{ ansible_env.HOME }}/.config/pypoetry/config.toml' }
         - { src: '{{ playbook_dir }}/zshrc',           dest: '{{ ansible_env.HOME }}/.zshrc' }

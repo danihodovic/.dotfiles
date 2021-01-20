@@ -32,7 +32,7 @@ algorithm = histogram
 colorMoved = default
 
 [gpg]
-program = gpg
+	program = gpg2
 
 [commit]
 verbose = true

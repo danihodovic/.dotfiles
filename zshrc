@@ -2,6 +2,7 @@
 export PROMPT='%F{81}%* %~ %m %# %f'
 export SHELL=/bin/zsh
 export LC_ALL=en_US.UTF-8
+export GPG_TTY=$(tty)
 # Paths
 # ------------
 # Export paths before sourcing anything
