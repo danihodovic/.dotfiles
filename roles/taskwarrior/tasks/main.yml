@@ -2,7 +2,7 @@
 - name: Install dependencies
   become: true
   apt:
-    name: [git, cmake, make, gcc, gnutls-dev]
+    name: [git, cmake, make, gcc, gnutls-dev, build-essential, uuid-dev]
 
 - name: Install taskwarrior
   import_tasks: _install_helper.yml
