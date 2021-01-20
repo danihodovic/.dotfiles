@@ -646,13 +646,6 @@ let g:neomake_eslint_exe = systemlist('git rev-parse --show-toplevel')[0].'/'.sy
 let g:neomake_stylelint_exe = systemlist('which stylelint')[0]
 let g:neomake_stylelint_exe = systemlist('which stylelint')[0]
 
-let g:neomake_htmldjango_jsbeautify_maker = {
-  \ 'exe': systemlist('which js-beautify')[0],
-  \ 'name': 'js-beautify',
-  \ 'args': ['-r', '--type html'],
-  \ }
-let g:neomake_htmldjango_enabled_makers = ['jsbeautify']
-
 let root_dir = finddir('.git/..')
 let gitignore = root_dir.'/.gitignore'
 let g:neomake_eslint_args = ['--fix', '--format=compact', '--ignore-path', gitignore]
