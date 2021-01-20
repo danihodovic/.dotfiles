@@ -1,4 +1,5 @@
 ---
+# yamllint disable rule:line-length
 - become: true
   block:
     - name: Upgrade system firmware
@@ -6,9 +7,17 @@
         name: fwupd
         update_cache: true
 
-    - name: Update firmware
+    - name: Refresh
       shell: |
         fwupdmgr get-devices
         fwupdmgr refresh --force
-        fwupdmgr get-updates
-        fwupdmgr update
+
+    - name: Get updates
+      shell: fwupdmgr get-updates
+      register: _result
+      failed_when: _result.rc != 0 and "No updatable devices" not in _result.stderr
+
+    - name: Update
+      shell: fwupdmgr update
+      register: _result
+      failed_when: _result.rc != 0 and "has no available firmware updates" not in _result.stderr
