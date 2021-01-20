@@ -38,7 +38,6 @@
           - openvpn
           - net-tools
           - parcellite
-          - tmux
           - ripgrep
           - xclip
           - jq
@@ -110,6 +109,9 @@
 
     - import_role: name=xorg
       tags: xorg
+
+    - import_role: name=tmux
+      tags: tmux
 
     - import_role: name=neovim
       tags: neovim
