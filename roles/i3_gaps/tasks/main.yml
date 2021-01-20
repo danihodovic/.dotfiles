@@ -31,11 +31,16 @@
     version: gaps-next
   register: i3_gaps
 
-- name: Compile and install i3-gaps
+- name: Compile
   args:
     chdir: '{{ ansible_env.HOME }}/repos/i3-gaps'
   shell: |
     mkdir -p build && cd build/
     meson ..
     ninja
-    meson install
+
+- name: Install i3-gaps
+  become: true
+  shell: meson install
+  args:
+    chdir: '{{ ansible_env.HOME }}/repos/i3-gaps/build'
