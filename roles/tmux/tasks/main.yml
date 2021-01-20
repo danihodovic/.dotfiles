@@ -1,4 +1,18 @@
 ---
+- name: Install dependencies
+  become: true
+  apt:
+    name:
+      - autotools-dev
+      - automake
+      - libevent-dev
+      - ncurses-dev
+      - build-essential
+      - bison
+      - pkg-config
+
+    update_cache: true
+
 - name: Create repos
   file:
     state: directory
