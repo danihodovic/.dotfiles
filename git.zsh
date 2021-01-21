@@ -72,6 +72,7 @@ compdef _git-diff gdob
 
 alias ci-status='hub ci-status'
 alias pr='dht git pull-request'
+alias squash='dht git autosquash'
 
 # Initiate _git which exposes the _git-* completions
 _git
