@@ -1,3 +1,9 @@
+# Using Intels proprietary driver
+
+Make sure the proprietary driver is checked.
+
+https://i.imgur.com/xuE1kLj.png
+
 # Using gpg-agent and signing commits with gpg
 
 This section assumes you have generated a private gpg key.
