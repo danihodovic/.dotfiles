@@ -12,7 +12,7 @@
 
     - name: Install enpass
       apt:
-        name: enpass
+        name: [enpass, libxkbcommon-x11-0]
         update_cache: true
 
     - name: Add binary to $PATH
