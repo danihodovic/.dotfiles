@@ -30,6 +30,10 @@
       import_role: name=pyenv
       tags: pyenv
 
+    - name: Install gotask
+      import_role: name=gotask
+      tags: pyenv
+
     - name: Install apt packages
       become: true
       apt:

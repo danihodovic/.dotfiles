@@ -1,0 +1,11 @@
+---
+- name: Install go-task
+  tags: gotask
+  become: true
+  community.general.snap:
+    name: task
+    classic: true
+
+- name: Add gotask snap alias
+  become: true
+  shell: snap alias task gotask
