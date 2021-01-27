@@ -26,6 +26,10 @@
         path: /etc/sudoers
         block: dani ALL=(ALL) NOPASSWD:ALL
 
+    - name: Install pyenv
+      import_role: name=pyenv
+      tags: pyenv
+
     - name: Install apt packages
       become: true
       apt:
