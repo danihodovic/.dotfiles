@@ -44,3 +44,9 @@
   shell: meson install
   args:
     chdir: '{{ ansible_env.HOME }}/repos/i3-gaps/build'
+
+- name: Copy the desktop login file
+  become: true
+  copy:
+    src: '{{ ansible_env.HOME }}/repos/i3-gaps/share/xsessions/i3.desktop'
+    dest: /usr/share/xsessions/i3.desktop
