@@ -62,6 +62,7 @@ if s:has_plug == 1
   Plug 'camspiers/lens.vim'
   Plug 'sheerun/vim-polyglot'
   Plug 'ActivityWatch/aw-watcher-vim'
+  " Plug 'takac/vim-hardtime'
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
@@ -419,7 +420,7 @@ function! RipgrepFzf(query, fullscreen)
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-nnoremap S :RG<cr>
+nnoremap \| :RG<cr>
 
 
 command! -nargs=1 -complete=file -range RgDeps call RgDeps(<q-args>)
@@ -594,6 +595,8 @@ let g:EasyMotion_do_shade = 1
 let g:EasyMotion_use_upper = 1
 map f <Plug>(easymotion-bd-fl)
 map t <Plug>(easymotion-bd-tl)
+" map \ <Plug>(easymotion-sn)
+map s <Plug>(easymotion-sn)
 "-----------------------------------------
 " EasyAlign
 "-----------------------------------------
@@ -915,10 +918,12 @@ let test#python#runner = 'pytest'
 let test#python#pytest#options = '-s'
 
 " Normal mode: Jump to definition under cursore
-nnoremap s :AnyJump<CR>
+nnoremap \ :AnyJump<CR>
 " Visual mode: jump to selected text in visual mode
-xnoremap s :AnyJumpVisual<CR>
+xnoremap \ :AnyJumpVisual<CR>
 " Normal mode: open previous opened file (after jump)
 nnoremap <leader>ab :AnyJumpBack<CR>
 " Normal mode: open last closed search window again
 nnoremap <leader>r :AnyJumpLastResults<CR>
+let g:hardtime_default_on = 1
+let g:hardtime_maxcount = 2
