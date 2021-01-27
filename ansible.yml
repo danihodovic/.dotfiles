@@ -26,13 +26,17 @@
         path: /etc/sudoers
         block: dani ALL=(ALL) NOPASSWD:ALL
 
+    - name: Install rclone
+      import_role: name=ansible-rclone
+      tags: rclone
+
     - name: Install pyenv
       import_role: name=pyenv
       tags: pyenv
 
     - name: Install gotask
       import_role: name=gotask
-      tags: pyenv
+      tags: gotask
 
     - name: Install apt packages
       become: true
