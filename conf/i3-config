@@ -1,6 +1,6 @@
 set $Alt Mod1
 set $Win Mod4
-set $Terminal xfce4-terminal -e tmux
+set $Terminal alacritty -e tmux
 set $Browser firefox
 
 set $mod Mod1
@@ -31,7 +31,7 @@ bindsym $mod+Shift+l move right
 
 bindsym $mod+Shift+Return exec $Browser
 
-bindsym $mod+Return exec xfce4-terminal -e tmux
+bindsym $mod+Return exec alacritty -e tmux new-session
 
 bindsym $mod+c exec \
 	i3-msg split v && \
@@ -43,12 +43,12 @@ bindsym $mod+x exec \
 	i3-msg split h && \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
 	current_dir=$(tmux display-message -p -F '#{pane_current_path}') && \
-	xfce4-terminal -e tmux --working-directory $current_dir
+	alacritty -e tmux new-session -c $current_dir
 
 bindsym $mod+z exec \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
 	current_dir=$(tmux display-message -p -F '#{pane_current_path}') && \
-	xfce4-terminal -e tmux --working-directory $current_dir
+	alacritty -e tmux new-session -c $current_dir
 
 bindsym $mod+Shift+p exec dht i3 lock
 
