@@ -16,5 +16,8 @@
     repo: https://github.com/GothenburgBitFactory/timewarrior.git
     dir: '{{ ansible_env.HOME }}/repos/timewarrior/'
 
-- debug:
-    msg: Run nextcloud restore to setup files
+- name: Install hook
+  copy:
+    src: '{{ ansible_env.HOME }}/repos/timewarrior/ext/on-modify.timewarrior'
+    dest: '{{ ansible_env.HOME }}/.task/hooks/on-modify.timewarrior'
+    mode: 0755
