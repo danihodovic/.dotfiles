@@ -1,6 +1,16 @@
 # Using Intels proprietary driver
 
-Make sure the proprietary driver is checked.
+- Make sure there is no section on Intel backlight in /etc/x11/xorg.conf.d/
+
+```
+#       Section "Device"
+#           Identifier  "Intel Graphics"
+#           Driver      "intel"
+#           Option      "Backlight"  "intel_backlight"
+#       EndSection
+```
+
+- Make sure the proprietary driver is checked.
 
 https://i.imgur.com/xuE1kLj.png
 
