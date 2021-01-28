@@ -61,8 +61,8 @@ bindsym XF86AudioLowerVolume 	exec --no-startup-id pactl set-sink-volume @DEFAUL
 bindsym XF86AudioMute 	 	exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # brightness controls
-bindsym XF86MonBrightnessUp 	exec xbacklight -inc 2
-bindsym XF86MonBrightnessDown 	exec xbacklight -dec 2
+bindsym XF86MonBrightnessUp 	exec xbright +300
+bindsym XF86MonBrightnessDown 	exec xbright -300
 
 workspace_layout stacking
 bindsym $mod+s layout toggle all

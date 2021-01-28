@@ -1,0 +1,17 @@
+---
+- name: Clone repo
+  git:
+    repo: https://github.com/snobb/xbright
+    dest: '{{ ansible_env.HOME }}/repos/xbright'
+    depth: 1
+    version: 6d54aab78d21efd119a3b58b68f46ab72c66f950
+
+- name: Build
+  make:
+    chdir: '{{ ansible_env.HOME }}/repos/xbright'
+
+- name: Install
+  become: true
+  make:
+    chdir: '{{ ansible_env.HOME }}/repos/xbright'
+    target: install

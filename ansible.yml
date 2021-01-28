@@ -38,6 +38,10 @@
       import_role: name=gotask
       tags: gotask
 
+    - name: Install xbright
+      import_role: name=xbright
+      tags: xbright
+
     - name: Install apt packages
       become: true
       apt:
@@ -118,9 +122,6 @@
       with_items:
         - travis
         - gist
-
-    - import_role: name=xorg
-      tags: xorg
 
     - import_role: name=tmux
       tags: tmux
