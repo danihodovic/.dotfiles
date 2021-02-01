@@ -9,6 +9,7 @@ fzf_opts=(
   --bind ctrl-s:toggle-sort
   --bind ctrl-e:preview-down
   --bind ctrl-y:preview-up
+  --preview-window=right:45%
 )
 export FZF_DEFAULT_OPTS="${fzf_opts[*]}"
 export FZF_DEFAULT_COMMAND="fd --type f --no-ignore --hidden"
@@ -87,7 +88,8 @@ function fzf-taskwarrior {
   selection=$(eval "$matches_few" |
     fzf --bind "$start_cmd,$delete_cmd,$done_cmd,$show_more_cmd" \
     --header-lines=2 --ansi --layout=reverse --border \
-    --preview 'task {1} rc._forcecolor:on'
+    --preview 'task {1} rc._forcecolor:on' \
+    --preview-window=right:40%
   )
 
   if [ ! -z $selection ]; then
