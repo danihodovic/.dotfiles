@@ -15,9 +15,6 @@
 
     - role: taskwarrior
       tags: taskwarrior
-
-    - role: jobber
-      tags: jobber
   tasks:
     - name: Set nopasswd
       tags: nopasswd
