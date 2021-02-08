@@ -62,6 +62,7 @@ if s:has_plug == 1
   Plug 'camspiers/lens.vim'
   Plug 'sheerun/vim-polyglot'
   Plug 'ActivityWatch/aw-watcher-vim'
+  Plug 'takac/vim-hardtime'
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
@@ -419,7 +420,7 @@ function! RipgrepFzf(query, fullscreen)
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-nnoremap S :RG<cr>
+nnoremap \| :RG<cr>
 
 
 command! -nargs=1 -complete=file -range RgDeps call RgDeps(<q-args>)
@@ -521,8 +522,6 @@ function! s:show_documentation()
   endif
 endfunction
 
-command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
-
 function! Format()
 py3 <<EOF
 import vim
@@ -545,8 +544,8 @@ def run():
   if os.getenv("VIM_DISABLE_AUTOFORMAT") == "true":
     return
 
-  vim.command("call CocAction('format')")
-  vim.command("OR")
+  # vim.command("call CocAction('format')")
+  # vim.command("OR")
 run()
 
 EOF
@@ -563,9 +562,9 @@ nmap <leader>rn <Plug>(coc-rename)
 " Remap for do codeAction of current line
 nmap <leader>ac  <Plug>(coc-codeaction)
 
-nnoremap <leader>or :call     CocAction('runCommand', 'editor.action.organizeImport')
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+" nnoremap <leader>or :call     CocAction('runCommand', 'editor.action.organizeImport')
+" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 "-----------------------------------------
 " FooSoft/vim-argwrap
 "-----------------------------------------
@@ -594,6 +593,12 @@ let g:EasyMotion_do_shade = 1
 let g:EasyMotion_use_upper = 1
 map f <Plug>(easymotion-bd-fl)
 map t <Plug>(easymotion-bd-tl)
+" map \ <Plug>(easymotion-sn)
+map s <Plug>(easymotion-sn)
+" map l <Plug>(easymotion-lineforward)
+" map j <Plug>(easymotion-j)
+" map k <Plug>(easymotion-k)
+" map h <Plug>(easymotion-linebackward)
 "-----------------------------------------
 " EasyAlign
 "-----------------------------------------
@@ -915,10 +920,13 @@ let test#python#runner = 'pytest'
 let test#python#pytest#options = '-s'
 
 " Normal mode: Jump to definition under cursore
-nnoremap s :AnyJump<CR>
+nnoremap \ :AnyJump<CR>
 " Visual mode: jump to selected text in visual mode
-xnoremap s :AnyJumpVisual<CR>
+xnoremap \ :AnyJumpVisual<CR>
 " Normal mode: open previous opened file (after jump)
 nnoremap <leader>ab :AnyJumpBack<CR>
 " Normal mode: open last closed search window again
 nnoremap <leader>r :AnyJumpLastResults<CR>
+let g:hardtime_default_on = 1
+let g:hardtime_maxcount = 3
+autocmd CursorHold * silent call CocActionAsync('highlight')
