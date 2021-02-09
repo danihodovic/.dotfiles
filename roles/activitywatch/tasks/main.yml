@@ -1,0 +1,22 @@
+---
+- name: Fetch the zip file
+  shell: >-
+    fetch --repo
+    https://github.com/ActivityWatch/activitywatch
+    --release-asset=".*linux-x86_64.zip"
+    --tag={{ activitywatch_tag }} /tmp
+
+- name: Create dir
+  file:
+    state: directory
+    path: /tmp/activitywatch
+
+- name: Unzip file
+  unarchive:
+    src: '/tmp/activitywatch-{{ activitywatch_tag }}-linux-x86_64.zip'
+    dest: /tmp/activitywatch/
+
+- name: Move files to opt
+  synchronize:
+    src: /tmp/activitywatch/activitywatch/
+    dest: /opt/activitywatch

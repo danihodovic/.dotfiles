@@ -123,6 +123,9 @@
     - import_role: name=tmux
       tags: tmux
 
+    - import_role: name=activitywatch
+      tags: activitywatch
+
     - import_role: name=neovim
       tags: neovim
 
