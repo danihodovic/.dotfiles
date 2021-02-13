@@ -1,0 +1,15 @@
+---
+# yamllint disable rule:line-length
+- name: Fetch the binary
+  shell: >-
+    fetch --repo https://github.com/github-release/github-release --release-asset='linux-amd64*' --tag v0.10.0 /tmp/
+
+- name: Unarchive the binary
+  shell: bzip2 -f -d /tmp/linux-amd64-github-release.bz2
+
+- name: Copy the binary
+  become: true
+  copy:
+    src: /tmp/linux-amd64-github-release
+    dest: /usr/local/bin/github-release
+    mode: 0755

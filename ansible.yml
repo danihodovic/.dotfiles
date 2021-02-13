@@ -48,6 +48,10 @@
       import_role: name=xbright
       tags: xbright
 
+    - name: Install github-release
+      import_role: name=github_release
+      tags: github-release
+
     - name: Install apt packages
       become: true
       apt:
