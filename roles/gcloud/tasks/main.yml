@@ -3,12 +3,13 @@
   become: true
   apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    keyring: /usr/share/keyrings/cloud.google.gpg
 
 - name: Add gcloud apt repository
   become: true
   apt_repository:
     # yamllint disable-line rule:line-length
-    repo: 'deb http://packages.cloud.google.com/apt cloud-sdk-{{ ansible_distribution_release }} main'
+    repo: 'deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main'
 
 - name: Install gcloud
   become: true
