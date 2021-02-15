@@ -85,18 +85,20 @@ function fzf-taskwarrior {
   start_cmd="ctrl-s:execute(dht task start {1})+abort"
   delete_cmd="ctrl-x:reload(task {1} delete rc.confirmation:no rc.verbose=nothing && eval $matches_few)+clear-query"
   done_cmd="ctrl-f:reload(task done {1} rc.verbose=nothing && eval $matches_few)+clear-query"
-  show_more_cmd="ctrl-m:reload(eval $matches_many)"
+  show_more_cmd="ctrl-v:reload(eval $matches_many)"
   selection=$(eval "$matches_few" |
-    fzf --bind "$start_cmd,$delete_cmd,$done_cmd,$show_more_cmd,$show_recent_cmd" \
+    fzf --bind "$start_cmd,$delete_cmd,$done_cmd,$show_recent_cmd,$show_more_cmd" \
     --header-lines=2 --ansi --layout=reverse --border \
     --preview 'task {1} rc._forcecolor:on' \
     --preview-window=right:40%
   )
 
   if [ ! -z $selection ]; then
-    BUFFER=""
-    zle accept-line
+    dht task edit $(echo $selection | awk '{print $1}') --quiet
+    fzf-taskwarrior
   fi
+  BUFFER=""
+  zle accept-line
 }
 zle -N fzf-taskwarrior
 
