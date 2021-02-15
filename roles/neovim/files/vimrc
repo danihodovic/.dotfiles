@@ -335,9 +335,6 @@ nnoremap - :Buffers<cr>
 nnoremap = :call FzfGitChangedFilesFromMaster()<cr>
 nnoremap <M-=> :Files<cr>
 nnoremap <M--> :GitFiles<cr>
-nnoremap <C-r> :History:<cr>
-cnoremap <C-r> :History:<cr>
-nnoremap r <C-R>
 
 function! FloatingFZF()
   let buf = nvim_create_buf(v:false, v:true)
