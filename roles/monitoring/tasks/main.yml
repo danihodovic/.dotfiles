@@ -1,0 +1,58 @@
+---
+- name: Create Prometheus dir
+  file:
+    state: directory
+    path: /opt/prometheus
+
+- name: Copy rules files
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+  loop:
+    - src: node_exporter_rules.yml
+      dest: /opt/prometheus/node_exporter_rules.yml
+    - src: node_exporter_alerts.yml
+      dest: /opt/prometheus/node_exporter_alerts.yml
+
+- name: Prometheus
+  import_role:
+    name: ansible-role-prometheus
+    tasks_from: prometheus.yml
+  vars:
+    prometheus_container:
+      network_mode: host
+      networks: []
+      ports: []
+    prometheus_config: '{{ lookup("template", "prometheus.yml") }}'
+  tags: prometheus
+
+- name: Deploy grafana
+  tags: grafana
+  import_role:
+    name: ansible-role-prometheus
+    tasks_from: grafana.yml
+  vars:
+    grafana_image: grafana/grafana:7.4.0
+    grafana_container:
+      network_mode: host
+      networks: []
+      env:
+        GF_SERVER_HTTP_PORT: '9089'
+        GF_SERVER_HTTP_ENABLE_GZIP: 'true'
+        GF_DATABASE_TYPE: 'sqlite3'
+        GF_DATABASE_PATH: '/var/lib/grafana/grafana.sqlite3'
+    grafana_data_sources: |
+      apiVersion: 1
+      datasources:
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          isDefault: true
+          jsonData:
+            timeInterval: 30s
+          url: 'http://localhost:9090'
+
+- name: Install node exporter
+  import_role:
+    name: cloudalchemy.node-exporter
+  tags: node-exporter

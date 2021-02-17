@@ -1,3 +1,5 @@
 ---
 - src: geerlingguy.docker
+- src: cloudalchemy.node-exporter
 - src: https://github.com/stefangweichinger/ansible-rclone.git
+- src: https://github.com/danihodovic/ansible-role-prometheus.git
