@@ -18,6 +18,6 @@
 
 - name: Install hook
   copy:
-    src: '{{ ansible_env.HOME }}/repos/timewarrior/ext/on-modify.timewarrior'
+    src: '{{ ansible_env.HOME }}/.dotfiles/scripts/timewarrior/on-modify-timewarrior.py'
     dest: '{{ ansible_env.HOME }}/.task/hooks/on-modify.timewarrior'
     mode: 0755
