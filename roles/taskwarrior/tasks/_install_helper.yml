@@ -11,11 +11,11 @@
     chdir: '{{ dir }}'
 
 - name: Run make
-  make:
+  community.general.make:
     chdir: '{{ dir }}'
 
 - name: Run make install
   become: true
-  make:
+  community.general.make:
     chdir: '{{ dir }}'
     target: install

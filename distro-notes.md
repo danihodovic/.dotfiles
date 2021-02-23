@@ -640,3 +640,11 @@ A possible solution is to simply restart Lightdm
 
     sudo apt-get purge lightdm
     sudo apt-get install lightdm
+
+# Errors "No module named apt"
+
+If you're running in a virtualenv:
+
+```sh
+cp /usr/lib/python3/dist-packages/{apt,aptsources,apt*.so} .venv/lib/python3.8/site-packages/ -r
+```

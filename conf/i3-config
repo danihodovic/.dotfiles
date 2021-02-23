@@ -37,7 +37,7 @@ bindsym $mod+c exec \
 	i3-msg split v && \
 	xdotool key --window $(xdotool getactivewindow) Escape && \
 	current_dir=$(tmux display-message -p -F '#{pane_current_path}') && \
-	xfce4-terminal -e tmux --working-directory $current_dir
+	alacritty -e tmux new-session -c $current_dir
 
 bindsym $mod+x exec \
 	i3-msg split h && \
@@ -163,7 +163,8 @@ exec --no-startup-id caffeine
 exec --no-startup-id variety
 exec --no-startup-id rescuetime
 exec --no-startup-id flameshot
-exec --no-startup-id /opt/activitywatch/aw-qt
 exec --no-startup-id xcompmgr -c -l0 -t0 -r0 -o.00
+exec --no-startup-id /opt/activitywatch/aw-qt
+exec --no-startup-id syncthing
 exec --no-startup-id i3-msg 'workspace 1; exec $Terminal'
 exec --no-startup-id i3-msg 'workspace 10; exec enpass'
