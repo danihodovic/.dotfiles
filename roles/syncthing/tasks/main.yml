@@ -1,0 +1,22 @@
+---
+- become: true
+  block:
+    - name: Install syncthing keys
+      apt_key:
+        url: https://syncthing.net/release-key.gpg
+        keyring: /usr/share/keyrings/syncthing-archive-keyring.gpg
+
+    - name: Add apt repository
+      ansible.builtin.apt_repository:
+        repo: deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing candidate
+
+    - name: Pin priority
+      ansible.builtin.lineinfile:
+        path: /etc/apt/preferences.d/syncthing
+        line: "Package: *\nPin: origin apt.syncthing.net\nPin-Priority: 990\n"
+        create: true
+
+    - name: Install syncthing
+      ansible.builtin.apt:
+        name: syncthing
+        update_cache: true

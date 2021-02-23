@@ -52,6 +52,10 @@
       import_role: name=github_release
       tags: github-release
 
+    - name: Install syncthing
+      import_role: name=syncthing
+      tags: syncthing
+
     - name: Install monitoring
       import_role: name=monitoring
       tags: monitoring
