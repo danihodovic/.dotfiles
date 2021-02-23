@@ -417,7 +417,7 @@ function! RipgrepFzf(query, fullscreen)
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-nnoremap \| :RG<cr>
+nnoremap \ :RG<cr>
 
 
 command! -nargs=1 -complete=file -range RgDeps call RgDeps(<q-args>)
@@ -582,7 +582,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 "-----------------------------------------
 " EasyMotion
 "-----------------------------------------
-let g:EasyMotion_keys = 'hgjfkdls;a'
 let g:EasyMotion_grouping = 1
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
@@ -917,13 +916,15 @@ let test#python#runner = 'pytest'
 let test#python#pytest#options = '-s'
 
 " Normal mode: Jump to definition under cursore
-nnoremap \ :AnyJump<CR>
+nnoremap \| :AnyJump<CR>
 " Visual mode: jump to selected text in visual mode
-xnoremap \ :AnyJumpVisual<CR>
+xnoremap \| :AnyJumpVisual<CR>
 " Normal mode: open previous opened file (after jump)
 nnoremap <leader>ab :AnyJumpBack<CR>
 " Normal mode: open last closed search window again
 nnoremap <leader>r :AnyJumpLastResults<CR>
 let g:hardtime_default_on = 1
 let g:hardtime_maxcount = 3
+let g:hardtime_ignore_quickfix = 1
+let g:hardtime_showmsg = 1
 autocmd CursorHold * silent call CocActionAsync('highlight')
