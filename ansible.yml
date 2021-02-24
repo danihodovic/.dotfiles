@@ -218,6 +218,9 @@
     - import_role: name=tldr
       tags: tldr
 
+    - import_role: name=alacritty
+      tags: alacritty
+
     - name: Create symlink parent directories
       tags: symlinks
       file:

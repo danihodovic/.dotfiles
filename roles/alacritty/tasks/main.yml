@@ -1,41 +1,11 @@
 ---
-- name: Get latest release
-  uri:
-    url: https://api.github.com/repos/jwilm/alacritty/releases/latest
-    timeout: 5
-  register: latest_release
-  changed_when: false
+- name: Add the ppa
+  become: true
+  apt_repository:
+    repo: ppa:mmstick76/alacritty
 
-- name: Get download url
-  set_fact:
-    alacritty_download_url: >
-      {{
-        latest_release.json.assets |
-        to_json | from_json |
-        json_query(
-          "[?contains(name, 'amd64')].browser_download_url | [0]"
-        )
-      }}
-
-- name: Download
-  get_url:
-    url: '{{ alacritty_download_url }}'
-    dest: /tmp/alacritty.deb
-    force: true
-
-- name: Install deb
+- name: Install alacritty
   become: true
   apt:
-    deb: /tmp/alacritty.deb
-
-- name: Create parent dir
-  file:
-    state: directory
-    path: ~/.config/alacritty/
-    recurse: true
-
-- name: Symlink config file
-  file:
-    state: link
-    src: '{{ role_path }}/files/alacritty.yml'
-    dest: ~/.config/alacritty/alacritty.yml
+    name: alacritty
+    update_cache: true
