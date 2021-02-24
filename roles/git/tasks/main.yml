@@ -1,0 +1,12 @@
+---
+- name: Fetch the Delta deb pkg
+  shell: >-
+    fetch --repo https://github.com/dandavison/delta
+    --release-asset='git-delta_.*amd64.deb'
+    --tag={{ delta_version }}
+    /tmp/
+
+- name: Install deb
+  become: true
+  apt:
+    deb: /tmp/git-delta_{{ delta_version }}_amd64.deb

@@ -32,6 +32,10 @@
         path: /etc/sudoers
         block: dani ALL=(ALL) NOPASSWD:ALL
 
+    - name: Install git
+      import_role: name=git
+      tags: git
+
     - name: Install rclone
       import_role: name=ansible-rclone
       tags: rclone
@@ -213,9 +217,6 @@
 
     - import_role: name=tldr
       tags: tldr
-
-    - import_role: name=bugwarrior
-      tags: bugwarrior
 
     - name: Create symlink parent directories
       tags: symlinks
