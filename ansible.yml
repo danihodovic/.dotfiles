@@ -124,15 +124,6 @@
         name: dunst
         state: absent
 
-    - name: Install pip packages
-      pip:
-        name:
-          - docker-compose
-          - awscli
-          - ansible-lint
-        state: latest
-        extra_args: --user
-
     - name: Install ruby gems
       gem:
         name: '{{ item }}'
