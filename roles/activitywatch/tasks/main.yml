@@ -16,7 +16,14 @@
     src: '/tmp/activitywatch-{{ activitywatch_tag }}-linux-x86_64.zip'
     dest: /tmp/activitywatch/
 
-- name: Move files to opt
+- name: Create /opt/ dir
+  become: true
+  file:
+    state: directory
+    path: //opt/activitywatch/
+    mode: 0777
+
+- name: Move files to /opt/
   synchronize:
     src: /tmp/activitywatch/activitywatch/
     dest: /opt/activitywatch
