@@ -1,8 +1,13 @@
 ---
-- name: Create Prometheus dir
+- name: Create dirs
+  become: true
   file:
     state: directory
-    path: /opt/prometheus
+    path: '{{ item }}'
+    mode: 0777
+  loop:
+    - /opt/prometheus
+    - /opt/grafana
 
 - name: Copy rules files
   copy:
