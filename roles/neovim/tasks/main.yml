@@ -4,10 +4,11 @@
   apt:
     name: xsel
 
-- name: Install jmespath on the Ansible controller
+- name: Install pip deps
   delegate_to: localhost
   pip:
-    name: jmespath
+    executable: /usr/local/bin/pip
+    name: [jmespath, neovim]
     extra_args: --user
 
 - name: Create directories
@@ -44,11 +45,6 @@
     mode: 0770
     force: true
 
-- name: Install pip package
-  pip:
-    name: neovim
-    extra_args: --user
-
 - name: Symlink config files
   include: ./copy_config.yml
   loop:
@@ -61,5 +57,3 @@
   get_url:
     url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     dest: '{{ vim_plug_path }}'
-
-#- include_tasks: ./language_servers.yml

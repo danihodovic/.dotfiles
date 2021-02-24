@@ -24,6 +24,7 @@
     mode: 0777
 
 - name: Move files to /opt/
+  become: true
   synchronize:
     src: /tmp/activitywatch/activitywatch/
     dest: /opt/activitywatch

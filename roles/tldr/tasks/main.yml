@@ -2,4 +2,5 @@
 - name: Install tldr
   become: true
   pip:
+    executable: /usr/local/bin/pip
     name: tldr
