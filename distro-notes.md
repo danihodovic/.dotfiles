@@ -646,5 +646,5 @@ A possible solution is to simply restart Lightdm
 If you're running in a virtualenv:
 
 ```sh
-cp /usr/lib/python3/dist-packages/{apt,aptsources,apt*.so} .venv/lib/python3.8/site-packages/ -r
+cp /usr/lib/python3/dist-packages/{apt,aptsources,apt*.so} .venv/lib/python*/site-packages/ -r
 ```

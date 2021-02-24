@@ -15,9 +15,3 @@
   vars:
     repo: https://github.com/GothenburgBitFactory/timewarrior.git
     dir: '{{ ansible_env.HOME }}/repos/timewarrior/'
-
-- name: Install hook
-  copy:
-    src: '{{ ansible_env.HOME }}/.dotfiles/scripts/timewarrior/on-modify-timewarrior.py'
-    dest: '{{ ansible_env.HOME }}/.task/hooks/on-modify.timewarrior'
-    mode: 0755
