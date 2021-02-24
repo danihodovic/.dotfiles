@@ -221,6 +221,13 @@
     - import_role: name=alacritty
       tags: alacritty
 
+    - name: Clone i3-contrib
+      tags: i3blocks-contrib
+      git:
+        repo: https://github.com/danihodovic/i3blocks-contrib.git
+        dest: ~/repos/i3blocks-contrib
+        version: productivity-colors
+
     - name: Create symlink parent directories
       tags: symlinks
       file:
