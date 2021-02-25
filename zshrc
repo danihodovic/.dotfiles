@@ -45,6 +45,9 @@ export ANSIBLE_CACHE_PLUGIN_CONNECTION=/tmp/ansible-cache
 export ANSIBLE_INVENTORY_CACHE=True
 export ANSIBLE_FORCE_COLOR=1
 
+# Django
+export DJANGO_SETTINGS_MODULE=config.settings.local
+
 # Activate direnv zsh hook if direnv is installed
 type direnv > /dev/null && eval "$(direnv hook zsh)"
 
