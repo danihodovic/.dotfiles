@@ -102,11 +102,8 @@ for script in $scripts_to_source; do
 done
 
 if [ -d ~/.cache/antibody/ ]; then
-  for f in ~/.cache/antibody/*/*.zsh; do
-    # Skip symlinks, otherwise fzf-tab gets sourced twice
-    if [ ! -L "$f" ]; then
-      source $f
-    fi
+  for f in ~/.cache/antibody/*/*.plugin.zsh; do
+    source "$f"
   done
 fi
 
@@ -273,12 +270,11 @@ function tst {
 }
 compdef _task tst
 
-# cd && ls
-function chpwd {
+function _cd_ls (){
   emulate -L zsh
   ls
-
 }
+chpwd_functions+=(_cd_ls)
 
 function pk {
   local processes=$(ps -eo "%p %C %c %U" | tail -n +2 | sort -k2 -n --reverse)
