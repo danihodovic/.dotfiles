@@ -10,3 +10,13 @@
   become: true
   apt:
     deb: /tmp/git-delta_{{ delta_version }}_amd64.deb
+
+- name: Git-lfs install script
+  become: true
+  shell: >-
+    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
+
+- name: Install git-lfs
+  become: true
+  apt:
+    name: git-lfs
