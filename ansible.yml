@@ -113,6 +113,7 @@
           - lua5.3
           - libpq-dev
           - scrot
+          - libjpeg8-dev  # required by python pillow
 
     - name: Install system firmware
       tags: [firmware, system]
