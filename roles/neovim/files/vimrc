@@ -9,8 +9,6 @@ try
 catch /Unknown function/
 endtry
 
-let g:python3_host_prog = '/home/dani/.pyenv/shims/python'
-
 if s:has_plug == 1
   "-----------------------------------------
   " General plugins
