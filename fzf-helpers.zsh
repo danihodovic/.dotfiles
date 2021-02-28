@@ -7,8 +7,6 @@ fzf_opts=(
   --bind ctrl-d:half-page-down
   --bind ctrl-u:half-page-up
   --bind ctrl-s:toggle-sort
-  --bind ctrl-e:preview-down
-  --bind ctrl-y:preview-up
   --preview-window=right:45%
 )
 export FZF_DEFAULT_OPTS="${fzf_opts[*]}"
@@ -83,17 +81,25 @@ function fzf-taskwarrior {
   matches_many="task due.before:today+365d limit=100 $matches_common"
   show_recent_cmd="ctrl-w:reload(task modified:today)+clear-query"
   delete_cmd="ctrl-x:reload(task {1} delete rc.confirmation:no rc.verbose=nothing && eval $matches_few)+clear-query"
-  done_cmd="ctrl-f:reload(task done {1} rc.verbose=nothing && eval $matches_few)+clear-query"
+  done_cmd="ctrl-f:reload(task done {1} rc.verbose=nothing && eval $matches_few)"
   show_more_cmd="ctrl-v:reload(eval $matches_many)"
   selection=$(eval "$matches_few" |
     fzf --bind "$delete_cmd,$done_cmd,$show_recent_cmd,$show_more_cmd" \
+    --expect=ctrl-e \
     --header-lines=2 --ansi --layout=reverse --border \
     --preview 'task {1} rc._forcecolor:on' \
     --preview-window=right:40%
   )
 
+  if [[ "$(echo $selection | sed -n 1p)" == "ctrl-e" ]]; then
+    task_id="$(echo $selection | sed -n 2p | awk '{print $1}')"
+    tasktools edit "$task_id" --quiet
+    fzf-taskwarrior
+    return
+  fi
+
   if [ ! -z $selection ]; then
-    id=$(echo $selection | awk '{print $1}')
+    id=$(echo $selection | awk '{print $1}' | tr -d '\n')
     tasktools start "$id" --quiet
     # Accept the line to update the prompt
     zle accept-line
