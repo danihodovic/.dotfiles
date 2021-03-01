@@ -2,7 +2,13 @@
 - name: Install dependencies
   become: true
   apt:
-    name: [libssl-dev, zlib1g-dev, libbz2-dev, libreadline-dev, libsqlite3-dev]
+    name:
+      - libssl-dev
+      - zlib1g-dev
+      - libbz2-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - liblzma-dev
 
 - name: Install pyenv
   git:
