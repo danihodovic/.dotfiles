@@ -18,6 +18,9 @@
         name: [zsh, ripgrep, net-tools, htop, xclip, httpie, ncdu, direnv]
         update_cache: true
 
+    - import_role: name=fetch
+      tags: fetch
+
     - import_role: name=neovim
       vars:
         server: true
@@ -31,6 +34,9 @@
 
     - import_role: name=bat
       tags: [bat, minimal]
+
+    - import_role: name=duf
+      tags: [duf, minimal]
 
     - import_role: name=terraform
       tags: terraform

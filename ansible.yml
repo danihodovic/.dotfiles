@@ -114,6 +114,7 @@
           - libpq-dev
           - scrot
           - libjpeg8-dev  # required by python pillow
+          - cloc
 
     - name: Install system firmware
       tags: [firmware, system]
@@ -166,6 +167,9 @@
 
     - import_role: name=n
       tags: n
+
+    - import_role: name=duf
+      tags: duf
 
     - import_role: name=chrome
       tags: chrome

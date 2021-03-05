@@ -1,0 +1,11 @@
+---
+- name: Fetch the zip file
+  shell: >-
+    fetch --repo
+    https://github.com/muesli/duf
+    --release-asset=".*amd64.deb"
+    --tag=v{{ duf_tag }} /tmp
+
+- name: Install the deb file
+  apt:
+    deb: '/tmp/duf_{{ duf_tag }}_linux_amd64.deb'
