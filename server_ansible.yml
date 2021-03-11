@@ -10,43 +10,6 @@
 - hosts: all
   strategy: free
   tasks:
-    - tags: [dependencies, minimal]
-      name: Install apt dependencies
-      become: true
-      failed_when: false # Fail and skip on older distros
-      apt:
-        name: [zsh, ripgrep, net-tools, htop, xclip, httpie, ncdu, direnv]
-        update_cache: true
-
-    - import_role: name=fetch
-      tags: fetch
-
-    - import_role: name=neovim
-      vars:
-        server: true
-      tags: neovim
-
-    - import_role: name=fzf
-      tags: [fzf, minimal]
-
-    - import_role: name=fd
-      tags: [fd, minimal]
-
-    - import_role: name=bat
-      tags: [bat, minimal]
-
-    - import_role: name=duf
-      tags: [duf, minimal]
-
-    - import_role: name=terraform
-      tags: terraform
-
-    - import_role: name=packer
-      tags: packer
-
-    - import_role: name=ansible
-      tags: ansible
-
     - name: Create dirs
       tags: [rc-files, minimal]
       file:
@@ -63,6 +26,7 @@
       copy:
         src: '{{ item.src }}'
         dest: '{{ item.dest }}'
+
       with_items:
         - src: '{{ playbook_dir }}/zshrc'
           dest: '{{ ansible_env.HOME }}/.zshrc'
@@ -76,3 +40,30 @@
       user:
         name: '{{ ansible_user_id }}'
         shell: /bin/zsh
+    - tags: [dependencies, minimal]
+      name: Install apt dependencies
+      become: true
+      failed_when: false # Fail and skip on older distros
+      apt:
+        name: [zsh, ripgrep, net-tools, htop, xclip, httpie, ncdu, direnv]
+        update_cache: true
+
+    - import_role: name=fetch
+      tags: always
+
+    - import_role: name=fd
+      tags: always
+
+    - import_role: name=fzf
+      tags: always
+
+    - import_role: name=bat
+      tags: always
+
+    - import_role: name=duf
+      tags: always
+
+    - import_role: name=neovim
+      vars:
+        server: true
+      tags: neovim
