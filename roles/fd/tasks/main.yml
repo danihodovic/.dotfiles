@@ -1,47 +1,12 @@
 ---
-- name: Get latest release
-  uri:
-    url: https://api.github.com/repos/sharkdp/fd/releases/latest
-    timeout: 5
-  register: latest_release
-  changed_when: false
+- name: Fetch the repo
+  shell: >-
+    fetch --repo
+    https://github.com/sharkdp/fd
+    --release-asset="fd_.*_amd64.deb"
+    --tag=v{{ fd_tag }} /tmp/
 
-- name: Get download url
-  set_fact:
-    # yamllint disable rule:line-length
-    download_url: >
-      {{
-        latest_release.json.assets |
-        to_json | from_json |
-        json_query(
-          "[?contains(name, 'x86_64-unknown-linux-gnu.tar.gz')].browser_download_url | [0]"
-        )
-      }}
-    # yamllint enable rule:line-length
-
-- name: Get fd
-  get_url:
-    # yamllint disable-line rule:line-length
-    url: '{{ download_url }}'
-    dest: /tmp/fd_.tar.gz
-    force: true
-
-- name: Extract fd
-  unarchive:
-    remote_src: true
-    src: /tmp/fd_.tar.gz
-    dest: /tmp
-    list_files: true
-  register: unarchive_contents
-
-- name: Create home bin directory
-  file:
-    path: ~/.local/bin/
-    state: directory
-
-- name: Copy fd to bin
-  copy:
-    remote_src: true
-    src: '/tmp/{{ unarchive_contents.files[0].split("/")[0] }}/fd'
-    dest: ~/.local/bin/
-    mode: 0755
+- name: Install deb package
+  become: true
+  apt:
+    deb: '/tmp/fd_{{ fd_tag }}_amd64.deb'
