@@ -1,0 +1,12 @@
+---
+- name: Fetch the binary
+  shell: >-
+    fetch --repo https://github.com/drone/drone-cli
+    --release-asset='linux_amd64.tar.gz'
+    --tag v1.2.4 /tmp/
+
+- name: Unarchive the binary
+  become: true
+  unarchive:
+    src: /tmp/drone_linux_amd64.tar.gz
+    dest: /usr/local/bin/

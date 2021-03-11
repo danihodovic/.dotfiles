@@ -17,13 +17,8 @@
       tags: taskwarrior
   tasks:
     - name: Install fetch
-      become: true
+      import_role: name=fetch
       tags: fetch
-      get_url:
-        url: https://github.com/gruntwork-io/fetch/releases/download/v0.4.1/fetch_linux_amd64
-        dest: /usr/local/bin/fetch
-        mode: 0755
-        force: true
 
     - name: Set nopasswd
       tags: nopasswd
@@ -207,6 +202,9 @@
 
     - import_role: name=ngrok
       tags: ngrok
+
+    - import_role: name=drone
+      tags: drone
 
     - import_role: name=tflint
       tags: tflint
