@@ -81,7 +81,7 @@ function fzf-taskwarrior {
   matches_many="task due.before:today+365d limit=100 $matches_common"
   show_recent_cmd="ctrl-w:reload(task modified:today)+clear-query"
   delete_cmd="ctrl-x:reload(task {1} delete rc.confirmation:no rc.verbose=nothing && eval $matches_few)+clear-query"
-  done_cmd="ctrl-f:reload(task done {1} rc.verbose=nothing && eval $matches_few)"
+  done_cmd="ctrl-f:reload(task done {1} rc.verbose=nothing && eval $matches_few)+clear-query"
   show_more_cmd="ctrl-v:reload(eval $matches_many)"
   selection=$(eval "$matches_few" |
     fzf --bind "$delete_cmd,$done_cmd,$show_recent_cmd,$show_more_cmd" \
