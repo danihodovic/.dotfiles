@@ -67,3 +67,6 @@
       vars:
         server: true
       tags: neovim
+
+    - import_role: name=navi
+      tags: navi

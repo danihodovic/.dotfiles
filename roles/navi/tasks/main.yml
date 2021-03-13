@@ -1,0 +1,13 @@
+---
+- name: Fetch binary
+  shell: >-
+    fetch --repo
+    https://github.com/denisidoro/navi
+    --release-asset=".*x86_64-unknown-linux-musl.*"
+    --tag=v{{ navi_tag }} /tmp
+
+- name: Extract the binary
+  become: true
+  unarchive:
+    src: "{{ lookup('fileglob', '/tmp/nav*tar.gz', wantlist=True) | first }}"
+    dest: /usr/local/bin/

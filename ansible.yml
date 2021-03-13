@@ -224,6 +224,9 @@
     - import_role: name=alacritty
       tags: alacritty
 
+    - import_role: name=navi
+      tags: navi
+
     - name: Clone i3-contrib
       tags: i3blocks-contrib
       git:
