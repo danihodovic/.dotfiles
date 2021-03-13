@@ -61,6 +61,7 @@ if s:has_plug == 1
   Plug 'sheerun/vim-polyglot'
   Plug 'ActivityWatch/aw-watcher-vim'
   Plug 'takac/vim-hardtime'
+  Plug 'andymass/vim-matchup'
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
