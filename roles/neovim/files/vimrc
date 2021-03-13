@@ -922,7 +922,13 @@ nnoremap <leader>ab :AnyJumpBack<CR>
 " Normal mode: open last closed search window again
 nnoremap <leader>r :AnyJumpLastResults<CR>
 let g:hardtime_default_on = 1
-let g:hardtime_maxcount = 3
+let g:hardtime_maxcount = 7
+let g:hardtime_timeout = 4000
 let g:hardtime_ignore_quickfix = 1
 let g:hardtime_showmsg = 1
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+augroup spec_ft
+  au!
+  autocmd BufNewFile,BufRead *.spec   set syntax=python
+augroup END
