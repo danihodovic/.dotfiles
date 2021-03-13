@@ -170,6 +170,11 @@ tmux-copy-mode() {
 }
 zle -N tmux-copy-mode
 
+_navi() {
+    navi
+}
+zle -N _navi
+
 # Key bindings. Wanna find weird keycodes? use cat
 # Fix backspace delete in vi-mode
 # http://www.zsh.org/mla/users/2009/msg00812.html
@@ -185,6 +190,8 @@ bindkey -M vicmd P vi-append-x-selection-before
 bindkey -M vicmd p vi-append-x-selection-after
 
 bindkey -M vicmd v tmux-copy-mode
+bindkey -M viins '^f'   _navi
+bindkey -M vicmd '^f'   _navi
 
 function tmux-search {
   tmux copy-mode && tmux send-keys '?' && tmux send-keys \
@@ -200,8 +207,8 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 # ------------
 alias ls='ls -haltr --color=auto'
 alias t=task
+alias df=duf
 alias p=pyp
-alias to=taskopen
 alias top=htop
 alias diff=icdiff
 alias sed='sed -E'
