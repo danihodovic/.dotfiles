@@ -21,26 +21,20 @@
 
 - name: Prometheus
   import_role:
-    name: ansible-role-prometheus
+    name: ansible-role-monitoring
     tasks_from: prometheus.yml
   vars:
-    prometheus_container:
-      network_mode: host
-      networks: []
-      ports: []
     prometheus_config: '{{ lookup("template", "prometheus.yml") }}'
   tags: prometheus
 
 - name: Deploy grafana
   tags: grafana
   import_role:
-    name: ansible-role-prometheus
+    name: ansible-role-monitoring
     tasks_from: grafana.yml
   vars:
     grafana_image: grafana/grafana:7.4.0
     grafana_container:
-      network_mode: host
-      networks: []
       env:
         GF_SERVER_HTTP_PORT: '9089'
         GF_SERVER_HTTP_ENABLE_GZIP: 'true'
@@ -59,5 +53,5 @@
 
 - name: Install node exporter
   import_role:
-    name: cloudalchemy.node-exporter
+    name: cloudalchemy.node_exporter
   tags: node-exporter
