@@ -7,7 +7,7 @@
 - name: Install pip deps
   delegate_to: localhost
   pip:
-    executable: /usr/local/bin/pip
+    executable: /home/dani/.pyenv/shims/pip
     name: [jmespath, neovim]
     extra_args: --user
 

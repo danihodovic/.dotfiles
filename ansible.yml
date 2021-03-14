@@ -35,10 +35,6 @@
       import_role: name=ansible-rclone
       tags: rclone
 
-    - name: Install pyenv
-      import_role: name=pyenv
-      tags: pyenv
-
     - name: Install gotask
       import_role: name=gotask
       tags: gotask
@@ -95,7 +91,6 @@
           - caffeine
           - asciinema
           - network-manager-openvpn-gnome
-          - variety
           - feh
           - speedtest-cli
           - i3lock
@@ -126,8 +121,9 @@
         state: absent
 
     - name: Install pip packages
+      tags: pip
       pip:
-        executable: /usr/local/bin/pip
+        executable: /home/dani/.pyenv/shims/pip
         name:
           - docker-compose
           - awscli
@@ -331,9 +327,6 @@
       shell: xdg-settings set default-web-browser firefox.desktop
       when: lookup('pipe', 'xdg-settings get default-web-browser') != 'firefox.desktop'
       tags: [set-default-browser, xdg]
-
-    - debug:
-        msg: Run nextcloud restore to setup files
 
     - name: Allow inotifywait to use more watches
       shell: echo 30000 | sudo tee /proc/sys/fs/inotify/max_user_watches

@@ -2,5 +2,5 @@
 - name: Install tldr
   become: true
   pip:
-    executable: /usr/local/bin/pip
+    executable: /home/dani/.pyenv/shims/pip
     name: tldr
