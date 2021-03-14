@@ -11,3 +11,15 @@
   unarchive:
     src: "{{ lookup('fileglob', '/tmp/nav*tar.gz', wantlist=True) | first }}"
     dest: /usr/local/bin/
+
+- name: Clone my cheats
+  git:
+    repo: https://github.com/danihodovic/cheats.git
+    dest: ~/repos/cheats
+
+- name: Symlink cheats
+  file:
+    state: link
+    src: ~/repos/cheats
+    dest: ~/.local/share/navi/cheats/danihodovic__cheats
+    force: true
