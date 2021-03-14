@@ -3,3 +3,5 @@
 tags
 **/*.retry
 .mypy_cache
+.venv
+.virtualenv
