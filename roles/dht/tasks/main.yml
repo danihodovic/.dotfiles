@@ -1,0 +1,5 @@
+---
+- name: Clone repository
+  git:
+    repo: https://github.com/danihodovic/dht
+    dest: ~/repos/dht

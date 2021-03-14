@@ -227,6 +227,9 @@
     - import_role: name=navi
       tags: navi
 
+    - import_role: name=dht
+      tags: dht
+
     - name: Clone i3-contrib
       tags: i3blocks-contrib
       git:
