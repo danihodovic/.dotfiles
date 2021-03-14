@@ -17,6 +17,12 @@
     repo: https://github.com/danihodovic/cheats.git
     dest: ~/repos/cheats
 
+- name: Create parent dir
+  file:
+    state: directory
+    dest: ~/.local/share/navi/cheats/
+    recurse: true
+
 - name: Symlink cheats
   file:
     state: link
