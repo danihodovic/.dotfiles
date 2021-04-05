@@ -9,8 +9,9 @@
 - name: Extract the binary
   become: true
   unarchive:
-    src: "{{ lookup('fileglob', '/tmp/nav*tar.gz', wantlist=True) | first }}"
+    src: '/tmp/navi-v{{ navi_tag }}-x86_64-unknown-linux-musl.tar.gz'
     dest: /usr/local/bin/
+    remote_src: true
 
 - name: Clone my cheats
   git:
