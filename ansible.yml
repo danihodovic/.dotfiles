@@ -55,6 +55,10 @@
       import_role: name=monitoring
       tags: monitoring
 
+    - name: Install and configure imagemagick
+      import_role: name=imagemagick
+      tags: imagemagick
+
     - name: Install apt packages
       become: true
       apt:

@@ -1,0 +1,12 @@
+---
+- name: Install imagemagick
+  apt:
+    name: imagemagick
+    update_cache: true
+
+- name: Allow converting png to pdf
+  become: true
+  lineinfile:
+    path: /etc/ImageMagick-6/policy.xml
+    regexp: 'policy domain="coder" rights="none" pattern="PDF"'
+    line: '<policy domain="coder" rights="read|write" pattern="PDF" />'
