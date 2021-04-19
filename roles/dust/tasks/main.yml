@@ -1,0 +1,23 @@
+---
+- name: Fetch the binary
+  shell: >-
+    fetch --repo https://github.com/bootandy/dust
+    --release-asset="x86_64-unknown-linux-gnu.tar.gz"
+    --tag={{ dust_tag }}
+    --release-asset-checksum-algo=sha512
+    --release-asset-checksum={{ dust_checksum }}
+    /tmp/
+
+- name: Unarchive the binary
+  unarchive:
+    src: '/tmp/dust-{{ dust_tag }}-x86_64-unknown-linux-gnu.tar.gz'
+    dest: /tmp/
+    remote_src: true
+
+- name: Move binary to path
+  become: true
+  copy:
+    src: /tmp/dust-{{ dust_tag }}-x86_64-unknown-linux-gnu/dust
+    dest: /usr/local/bin/
+    remote_src: true
+    mode: 0755

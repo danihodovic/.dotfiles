@@ -52,16 +52,19 @@
       tags: always
 
     - import_role: name=fd
-      tags: always
+      tags: fd
 
     - import_role: name=fzf
-      tags: always
+      tags: fzf
 
     - import_role: name=bat
-      tags: always
+      tags: bat
 
     - import_role: name=duf
-      tags: always
+      tags: duf
+
+    - import_role: name=dust
+      tags: duf
 
     - import_role: name=neovim
       vars:

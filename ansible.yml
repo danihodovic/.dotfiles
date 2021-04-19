@@ -166,6 +166,9 @@
     - import_role: name=duf
       tags: duf
 
+    - import_role: name=dust
+      tags: dust
+
     - import_role: name=chrome
       tags: chrome
 
