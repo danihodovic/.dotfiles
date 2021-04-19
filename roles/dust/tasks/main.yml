@@ -15,7 +15,8 @@
     remote_src: true
 
 - name: Move binary to path
-  become: true
+  vars:
+    ansible_become: true
   copy:
     src: /tmp/dust-{{ dust_tag }}-x86_64-unknown-linux-gnu/dust
     dest: /usr/local/bin/

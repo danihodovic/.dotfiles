@@ -1,14 +1,10 @@
 ---
 # Usage
-# $ ansible-playbook server_ansible.yml
-# -i <inventory>
-# --vault-password ~/.vault_password
-# -e ansible_become=false
-# -e ansible_ssh_user=dani
-# --ssh-common-args='-o ProxyJump=jumphost'
-# -l <instance>
+# $ ansible-playbook server_ansible.yml -i <inventory> --vault-password ~/.vault_password -e ansible_ssh_user=dani --ssh-common-args='-o ProxyJump=jumphost'
 - hosts: all
   strategy: free
+  vars:
+    ansible_become: false
   tasks:
     - name: Create dirs
       tags: [rc-files, minimal]
@@ -36,17 +32,20 @@
           dest: '{{ ansible_env.HOME }}/.dotfiles/git.zsh'
 
     - name: Set zsh as the default shell
-      become: true
+      vars:
+        ansible_become: true
       user:
         name: '{{ ansible_user_id }}'
         shell: /bin/zsh
-    - tags: [dependencies, minimal]
-      name: Install apt dependencies
-      become: true
+
+    - name: Install apt dependencies
       failed_when: false # Fail and skip on older distros
+      vars:
+        ansible_become: true
       apt:
         name: [zsh, ripgrep, net-tools, htop, xclip, httpie, ncdu, direnv]
         update_cache: true
+      tags: [dependencies, minimal]
 
     - import_role: name=fetch
       tags: always
@@ -57,19 +56,11 @@
     - import_role: name=fzf
       tags: fzf
 
-    - import_role: name=bat
-      tags: bat
-
     - import_role: name=duf
       tags: duf
 
     - import_role: name=dust
-      tags: duf
-
-    - import_role: name=neovim
-      vars:
-        server: true
-      tags: neovim
+      tags: dust
 
     - import_role: name=navi
       tags: navi

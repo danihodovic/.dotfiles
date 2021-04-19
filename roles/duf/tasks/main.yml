@@ -7,6 +7,7 @@
     --tag=v{{ duf_tag }} /tmp
 
 - name: Install the deb file
-  become: true
+  vars:
+    ansible_become: true
   apt:
     deb: '/tmp/duf_{{ duf_tag }}_linux_amd64.deb'

@@ -7,7 +7,8 @@
     --tag=v{{ navi_tag }} /tmp
 
 - name: Extract the binary
-  become: true
+  vars:
+    ansible_become: true
   unarchive:
     src: '/tmp/navi-v{{ navi_tag }}-x86_64-unknown-linux-musl.tar.gz'
     dest: /usr/local/bin/
