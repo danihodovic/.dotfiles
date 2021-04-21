@@ -1,0 +1,15 @@
+---
+- name: Fetch the binary
+  shell: >-
+    fetch --repo https://github.com/stripe/stripe-cli
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
+    --release-asset=".*linux_amd64.deb"
+    --tag=v{{ stripe_tag }}
+    --release-asset-checksum-algo=sha512
+    --release-asset-checksum={{ stripe_checksum }}
+    /tmp/
+
+- name: Install deb
+  become: true
+  apt:
+    deb: /tmp/stripe_{{ stripe_tag }}_linux_amd64.deb

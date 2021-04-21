@@ -233,6 +233,9 @@
     - import_role: name=dht
       tags: dht
 
+    - import_role: name=stripe
+      tags: stripe
+
     - name: Clone i3-contrib
       tags: i3blocks-contrib
       git:
