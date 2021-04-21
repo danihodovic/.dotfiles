@@ -3,6 +3,7 @@
   shell: >-
     fetch --repo
     https://github.com/muesli/duf
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
     --release-asset=".*amd64.deb"
     --tag=v{{ duf_tag }} /tmp
 

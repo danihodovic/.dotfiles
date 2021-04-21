@@ -2,6 +2,7 @@
 - name: Fetch the binary
   shell: >-
     fetch --repo https://github.com/bootandy/dust
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
     --release-asset="x86_64-unknown-linux-gnu.tar.gz"
     --tag={{ dust_tag }}
     --release-asset-checksum-algo=sha512

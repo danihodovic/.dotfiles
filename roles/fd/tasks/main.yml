@@ -3,6 +3,7 @@
   shell: >-
     fetch --repo
     https://github.com/sharkdp/fd
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
     --release-asset="fd_.*_amd64.deb"
     --tag=v{{ fd_tag }} /tmp/
 

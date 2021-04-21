@@ -3,6 +3,7 @@
   shell: >-
     fetch --repo
     https://github.com/denisidoro/navi
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
     --release-asset=".*x86_64-unknown-linux-musl.*"
     --tag=v{{ navi_tag }} /tmp
 
