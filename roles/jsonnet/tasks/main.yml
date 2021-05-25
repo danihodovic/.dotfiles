@@ -12,3 +12,35 @@
   apt:
     deb: '{{ item }}'
   loop: "{{ lookup('fileglob', '/tmp/jsonnet*.deb', wantlist=True) }}"
+
+- name: Fetch jsonnet bundler
+  shell: >-
+    fetch --repo https://github.com/jsonnet-bundler/jsonnet-bundler
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
+    --release-asset="jb-linux-amd64"
+    --release-asset-checksum-algo=sha512
+    --release-asset-checksum={{ jb_checksum }}
+    --tag={{ jb_tag }}
+    /tmp/
+
+- name: Move jsonnet bundler to bin
+  become: true
+  copy:
+    src: /tmp/jb-linux-amd64
+    dest: /usr/local/bin/jb
+    mode: 0755
+
+- name: Fetch promtool
+  shell: >-
+    fetch --repo https://github.com/prometheus/prometheus
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
+    --release-asset="prometheus-.*linux-amd64.tar.gz"
+    --tag={{ prometheus_tag }}
+    /tmp/
+
+- name: Copy the promtool binary
+  become: true
+  copy:
+    src: "/tmp/prometheus-{{ prometheus_tag[1:] }}.linux-amd64/promtool"
+    dest: /usr/local/bin/promtool
+    mode: 0755

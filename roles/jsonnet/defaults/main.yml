@@ -1,2 +1,6 @@
 ---
 jsonnet_tag: v0.17.0
+jb_tag: v0.4.0
+jb_checksum: >-
+  0a68f357c98cc1d0046f240404745133c35dda00f2ed0a5aed3b13a4a900c73fb5fb033b37783a150eaff1df5bb1200e4108f21faea5959a01feec0cf3f56244
+prometheus_tag: v2.27.1
