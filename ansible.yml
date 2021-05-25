@@ -236,6 +236,9 @@
     - import_role: name=stripe
       tags: stripe
 
+    - import_role: name=jsonnet
+      tags: jsonnet
+
     - name: Clone i3-contrib
       tags: i3blocks-contrib
       git:

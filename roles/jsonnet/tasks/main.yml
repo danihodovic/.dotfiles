@@ -1,0 +1,14 @@
+---
+- name: Fetch the binary
+  shell: >-
+    fetch --repo https://github.com/google/go-jsonnet
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
+    --release-asset=".*linux_amd64.deb"
+    --tag={{ jsonnet_tag }}
+    /tmp/
+
+- name: Install the binary
+  become: true
+  apt:
+    deb: '{{ item }}'
+  loop: "{{ lookup('fileglob', '/tmp/jsonnet*.deb', wantlist=True) }}"
