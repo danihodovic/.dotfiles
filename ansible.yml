@@ -109,6 +109,7 @@
           - scrot
           - libjpeg8-dev  # required by python pillow
           - cloc
+          - patchelf
 
     - name: Install system firmware
       tags: [firmware, system]
