@@ -5,4 +5,5 @@ djui/alias-tips
 jarmo/expand-aliases-oh-my-zsh
 git@gitlab.com:danihodovic/mostar.zsh.git
 skywind3000/z.lua
-RobertDeRose/virtualenv-autodetect
+danihodovic/virtualenv-autodetect
+jeffreytse/zsh-vi-mode

@@ -81,7 +81,6 @@ scripts_to_source=(
   # source the rest
   ${HOME}/.doctl_zsh
   /usr/local/bin/aws_zsh_completer.sh
-  ${HOME}/.fzf.zsh
   ${HOME}/.gvm/scripts/gvm
   ${HOME}/.rvm/scripts/rvm
   ${HOME}/.kubectl_completion
@@ -90,7 +89,6 @@ scripts_to_source=(
   ${HOME}/.awless_zsh
   ${HOME}/repos/dht/dht-complete.zsh
   # Own helpers
-  ${HOME}/.dotfiles/fzf-helpers.zsh
   ${HOME}/.dotfiles/docker.zsh
   ${HOME}/.dotfiles/git.zsh
   ${HOME}/.dotfiles/kubectl.zsh
@@ -109,6 +107,11 @@ if [ -d ~/.cache/antibody/ ]; then
     source "$f"
   done
 fi
+
+function zvm_after_init() {
+  source ${HOME}/.fzf.zsh
+  source ${HOME}/.dotfiles/fzf-helpers.zsh
+}
 
 # Reloads custom zsh completions quickly by changing the default dump path.
 # I have no clue why this works...
@@ -450,3 +453,6 @@ function install_dht() {
   chmod +x /tmp/dht
   mv /tmp/dht/ /usr/local/bin
 }
+
+# https://github.com/jeffreytse/zsh-vi-mode#command-line-initial-mode
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
