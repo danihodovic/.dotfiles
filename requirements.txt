@@ -32,7 +32,7 @@ pyrsistent==0.17.3
 python-dotenv==0.15.0
 PyYAML==5.4.1
 rich==9.9.0
-rsa==4.5
+rsa==4.7
 ruamel.yaml==0.16.12
 ruamel.yaml.clib==0.2.2
 s3transfer==0.3.4
