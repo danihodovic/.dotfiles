@@ -26,7 +26,7 @@ export N_PREFIX=${HOME}/.n
 export PATH=$PATH:$N_PREFIX/bin
 export PYTHONSTARTUP=~/.pythonrc
 export PATH="/home/dani/.pyenv/bin:$PATH"
-which pyenv > /dev/null 2>&1 && eval "$(pyenv init -)"
+which pyenv > /dev/null 2>&1 && eval "$(pyenv init --path)"
 
 [ -f ~/.aws_profile ] && export AWS_PROFILE=$(cat ~/.aws_profile)
 [ -f ~/.aws_region ]  && export AWS_DEFAULT_REGION=$(cat ~/.aws_region)
