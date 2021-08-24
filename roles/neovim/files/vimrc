@@ -33,7 +33,7 @@ if s:has_plug == 1
   Plug 'easymotion/vim-easymotion'              " Better movement with f/t
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'luochen1990/rainbow'                    " Show diff level of parentheses in diff colors
-  Plug 'nathanaelkane/vim-indent-guides'        " Visually display indent lines with different color
+  Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'reedes/vim-wordy'                       " Linting for prose
   Plug 'tomtom/tcomment_vim'
   Plug 'SirVer/ultisnips'
