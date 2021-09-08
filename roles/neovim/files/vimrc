@@ -51,8 +51,6 @@ if s:has_plug == 1
   Plug 'vitalk/vim-shebang'
   Plug 'rhysd/git-messenger.vim'
   Plug 'mzlogin/vim-markdown-toc'
-  Plug 'pechorin/any-jump.vim'
-  Plug 'neovim/nvim-lspconfig'
   Plug 'junegunn/goyo.vim'
   Plug 'brooth/far.vim'
   Plug 'glacambre/firenvim'
@@ -449,6 +447,18 @@ endfunction
 "-----------------------------------------
 " coc.nvim (https://github.com/neoclide/coc.nvim)
 "-----------------------------------------
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>re <Plug>(coc-rename)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-yaml',
@@ -483,18 +493,6 @@ endfunction
 set updatetime=300
 set shortmess+=c
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gt <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -901,12 +899,6 @@ end
 let test#python#runner = 'pytest'
 let test#python#pytest#options = '-s'
 
-" Normal mode: Jump to definition under cursore
-nnoremap gr :AnyJump<CR>
-" Visual mode: jump to selected text in visual mode
-xnoremap gr :AnyJumpVisual<CR>
-" Normal mode: open previous opened file (after jump)
-nnoremap <leader>ab :AnyJumpBack<CR>
 let g:hardtime_default_on = 1
 let g:hardtime_maxcount = 7
 let g:hardtime_timeout = 4000
