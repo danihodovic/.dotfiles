@@ -27,8 +27,7 @@ if s:has_plug == 1
   Plug 'junegunn/vim-pseudocl'                  " Required by vim-oblique
   Plug 'kana/vim-textobj-function'              " Add function based text objects
   Plug 'kana/vim-textobj-user'                  " Add additional text objects
-  Plug 'rhysd/vim-textobj-anyblock'
-  Plug 'dkarter/bullets.vim'
+  Plug 'gcmt/wildfire.vim'
   Plug 'kopischke/vim-fetch'                    " Open files at file:line:column
   Plug 'easymotion/vim-easymotion'              " Better movement with f/t
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -704,10 +703,12 @@ function! s:CloseIfOnlyNerdTreeLeft()
   endif
 endfunction
 "-----------------------------------------
-" FAR
+" gcmt/wildfire.vim
 "-----------------------------------------
-" let g:far#source = 'rgnvim'
-let g:far#enable_undo=1
+let g:wildfire_objects = {
+    \ "*" : ["i'", 'i"', "i)", "i]", "i}"],
+    \ "html,xml" : ["at", "it"],
+\ }
 "-----------------------------------------
 let g:lua_complete_omni = 1
 let g:lua_complete_dynamic = 0
