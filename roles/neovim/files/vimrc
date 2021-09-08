@@ -38,7 +38,7 @@ if s:has_plug == 1
   Plug 'SirVer/ultisnips'
   Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
   Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
-  Plug 'reconquest/vim-pythonx'                 " Allows for snippet aliasing http://tiny.cc/9j9qiz
+  Plug 'reconquest/vim-pythonx'                 " Allows for snippet aliasing
   Plug 'AndrewRadev/tagalong.vim'               " Dynamically changes html tags
   Plug 'AndrewRadev/linediff.vim'
   Plug 'tpope/vim-abolish'                      " Change snake case to camelcase and vice versa
@@ -919,13 +919,11 @@ let test#python#runner = 'pytest'
 let test#python#pytest#options = '-s'
 
 " Normal mode: Jump to definition under cursore
-nnoremap \| :AnyJump<CR>
+nnoremap gr :AnyJump<CR>
 " Visual mode: jump to selected text in visual mode
-xnoremap \| :AnyJumpVisual<CR>
+xnoremap gr :AnyJumpVisual<CR>
 " Normal mode: open previous opened file (after jump)
 nnoremap <leader>ab :AnyJumpBack<CR>
-" Normal mode: open last closed search window again
-nnoremap <leader>r :AnyJumpLastResults<CR>
 let g:hardtime_default_on = 1
 let g:hardtime_maxcount = 7
 let g:hardtime_timeout = 4000
