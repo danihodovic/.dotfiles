@@ -53,6 +53,7 @@ if s:has_plug == 1
   Plug 'rhysd/git-messenger.vim'
   Plug 'mzlogin/vim-markdown-toc'
   Plug 'pechorin/any-jump.vim'
+  Plug 'neovim/nvim-lspconfig'
   Plug 'junegunn/goyo.vim'
   Plug 'brooth/far.vim'
   Plug 'glacambre/firenvim'
@@ -62,6 +63,7 @@ if s:has_plug == 1
   Plug 'ActivityWatch/aw-watcher-vim'
   Plug 'takac/vim-hardtime'
   Plug 'andymass/vim-matchup'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
@@ -932,4 +934,20 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 augroup spec_ft
   au!
   autocmd BufNewFile,BufRead *.spec   set syntax=python
+  autocmd BufNewFile,BufRead *.dat,*.ldg,*.ledger   setf ledger | comp ledger
 augroup END
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = { "javascript" }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { },  -- list of language that will be disabled
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
