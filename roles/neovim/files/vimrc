@@ -63,6 +63,7 @@ if s:has_plug == 1
   Plug 'takac/vim-hardtime'
   Plug 'andymass/vim-matchup'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'vim-airline/vim-airline'
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
@@ -200,24 +201,6 @@ nnoremap <silent> <C-j> :wincmd j<cr>
 nnoremap <silent> <C-k> :wincmd k<cr>
 
 nnoremap <leader>w :write<cr>
-
-set statusline=%m\ %f\ 
-set statusline+=%{coc#status()}
-highlight statusline ctermfg=8 ctermbg=233
-highlight visual ctermfg=1 ctermbg=255
-autocmd CursorMoved,CursorMovedI * call UpdateStatusLine()
-autocmd BufWritePost * hi statusline ctermfg=8 ctermbg=233
-fu! UpdateStatusLine()
-  let bufinfos = getbufinfo()
-  for bufinfo in bufinfos
-    if bufinfo.changed
-      hi statusline ctermfg=46 ctermbg=233
-      return
-    endif
-
-    hi statusline ctermfg=8 ctermbg=233
-  endfor
-endfu
 
 nnoremap + :vertical resize +10<cr>
 nnoremap _ :vertical resize -10<cr>
