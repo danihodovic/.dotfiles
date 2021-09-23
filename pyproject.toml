@@ -6,7 +6,7 @@ authors = ["Dani Hodovic <dani.hodovic@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-ansible = "^2.9.6"
+ansible = "^4.2.0"
 pyyaml = "^5.3"
 jinja2 = "^2.11.1"
 jmespath = "^0.9.5"
