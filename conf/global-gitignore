@@ -3,5 +3,11 @@ tags
 .mypy_cache
 venv
 .venv
+.virtualenv
 telepresence.log
 .tox
+.vim
+.terraform
+.terraform.lock.hcl
+.terraform.tfstate.backup
+*.tfplan
