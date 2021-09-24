@@ -240,6 +240,9 @@
     - import_role: name=jsonnet
       tags: jsonnet
 
+    - import_role: name=kubectx
+      tags: kubectx
+
     - name: Clone i3-contrib
       tags: i3blocks-contrib
       git:

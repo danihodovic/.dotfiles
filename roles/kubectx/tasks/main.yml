@@ -1,0 +1,50 @@
+---
+- name: Fetch the binary
+  shell: >-
+    fetch --repo https://github.com/ahmetb/kubectx
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
+    --release-asset="kubectx_.*_linux_x86_64.tar.gz"
+    --tag={{ kubectx_tag }}
+    --release-asset-checksum-algo=sha256
+    --release-asset-checksum={{ kubectx_checksum }}
+    /tmp/
+
+- name: Unarchive the binary
+  unarchive:
+    src: "{{ lookup('fileglob', '/tmp/kubectx*.tar.gz', wantlist=True)[0] }}"
+    dest: /tmp/
+    remote_src: true
+
+- name: Move binary to path
+  vars:
+    ansible_become: true
+  copy:
+    src: /tmp/kubectx
+    dest: /usr/local/bin/kubectx
+    remote_src: true
+    mode: 0755
+
+- name: Fetch the binary
+  shell: >-
+    fetch --repo https://github.com/ahmetb/kubectx
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
+    --release-asset="kubens_.*_linux_x86_64.tar.gz"
+    --tag={{ kubens_tag }}
+    --release-asset-checksum-algo=sha256
+    --release-asset-checksum={{ kubens_checksum }}
+    /tmp/
+
+- name: Unarchive the binary
+  unarchive:
+    src: "{{ lookup('fileglob', '/tmp/kubens*.tar.gz', wantlist=True)[0] }}"
+    dest: /tmp/
+    remote_src: true
+
+- name: Move binary to path
+  vars:
+    ansible_become: true
+  copy:
+    src: /tmp/kubens
+    dest: /usr/local/bin/kubens
+    remote_src: true
+    mode: 0755
