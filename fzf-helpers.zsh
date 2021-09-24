@@ -12,6 +12,7 @@ fzf_opts=(
 export FZF_DEFAULT_OPTS="${fzf_opts[*]}"
 export FZF_DEFAULT_COMMAND="fd --type f --no-ignore --hidden"
 export FZF_CTRL_R_OPTS='--exact'
+export KUBECTL_FZF_OPTIONS=(-1 --header-lines=2 --layout reverse -e --no-hscroll --no-sort --bind space:accept)
 
 if which fd &> /dev/null; then
   export FZF_CTRL_T_COMMAND="fd"
@@ -106,6 +107,7 @@ function fzf-taskwarrior {
   fi
 }
 zle -N fzf-taskwarrior
+
 
 bindkey -M vicmd '\-'   fzf-file-widget
 

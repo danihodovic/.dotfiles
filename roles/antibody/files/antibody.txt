@@ -3,7 +3,9 @@ zsh-users/zsh-completions
 zsh-users/zsh-syntax-highlighting
 djui/alias-tips
 jarmo/expand-aliases-oh-my-zsh
+jonmosco/kube-ps1
 git@gitlab.com:danihodovic/mostar.zsh.git
 skywind3000/z.lua
 danihodovic/virtualenv-autodetect
-jeffreytse/zsh-vi-mode
+ohmyzsh/ohmyzsh path:plugins/kubectl
+bonnefoa/kubectl-fzf
