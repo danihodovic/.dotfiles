@@ -11,27 +11,30 @@ fzf_opts=(
 )
 export FZF_DEFAULT_OPTS="${fzf_opts[*]}"
 export FZF_DEFAULT_COMMAND="fd --type f --no-ignore --hidden"
-export FZF_CTRL_R_OPTS='--exact'
 export KUBECTL_FZF_OPTIONS=(-1 --header-lines=2 --layout reverse -e --no-hscroll --no-sort --bind space:accept)
 
 if which fd &> /dev/null; then
   export FZF_CTRL_T_COMMAND="fd"
 fi
 
-# Custom fzf file widget.
-# The differences are:
-# 1) We add a space between LBUFFER and the selection we've made by pushing the
-#    cursor one step forward before inserting our selection
-# 2) After the insert we end up in viins mode instead of vicmd
-fzf-file-widget() {
-  CURSOR=$(($CURSOR + 1))
-  LBUFFER="${LBUFFER}$(__fsel)"
-  local ret=$?
-  zle -K viins
+
+histdb-fzf-widget() {
+  local selected num
+  setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
+  local source_histdb='source $(fd sqlite-history.zsh ~/.cache/antibody)'
+  local read_history="$source_histdb && histdb --sep=04g | awk -F'04g' '{print \$NF}'"
+  local selected=$(eval "$read_history" |
+    $(__fzfcmd) \
+    --tiebreak=index \
+    --height=45% \
+    --bind="ctrl-x:execute-silent(eval $source_histdb && histdb --forget --yes {})+reload(eval $read_history)" \
+    --bind=ctrl-z:ignore
+  )
+  LBUFFER=$selected
   zle redisplay
-  typeset -f zle-line-init >/dev/null && zle zle-line-init
-  return $ret
 }
+zle     -N   histdb-fzf-widget
+
 
 stty stop undef
 function fzf-ssh {
@@ -85,7 +88,11 @@ function fzf-taskwarrior {
   done_cmd="ctrl-f:reload(task done {1} rc.verbose=nothing && eval $matches_few)+clear-query"
   show_more_cmd="ctrl-v:reload(eval $matches_many)"
   selection=$(eval "$matches_few" |
-    fzf --bind "$delete_cmd,$done_cmd,$show_recent_cmd,$show_more_cmd" \
+    fzf \
+    --bind="$delete_cmd" \
+    --bind="$done_cmd" \
+    --bind="$show_recent_cmd" \
+    --bind="$show_more_cmd" \
     --expect=ctrl-e \
     --header-lines=2 --ansi --layout=reverse --border \
     --preview 'task {1} rc._forcecolor:on' \
@@ -111,8 +118,8 @@ zle -N fzf-taskwarrior
 
 bindkey -M vicmd '\-'   fzf-file-widget
 
-bindkey -M vicmd '^r'   fzf-history-widget
-bindkey -M viins '^r'   fzf-history-widget
+bindkey -M vicmd '^r' histdb-fzf-widget
+bindkey -M viins '^r' histdb-fzf-widget
 
 bindkey -M vicmd '^s'   fzf-ssh
 bindkey -M viins '^s'   fzf-ssh

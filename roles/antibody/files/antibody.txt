@@ -9,3 +9,4 @@ skywind3000/z.lua
 danihodovic/virtualenv-autodetect
 ohmyzsh/ohmyzsh path:plugins/kubectl
 bonnefoa/kubectl-fzf
+larkery/zsh-histdb
