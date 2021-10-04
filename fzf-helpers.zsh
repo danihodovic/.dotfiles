@@ -22,7 +22,7 @@ histdb-fzf-widget() {
   local selected num
   setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
   local source_histdb='source $(fd sqlite-history.zsh ~/.cache/antibody)'
-  local read_history="$source_histdb && histdb --desc --sep=04g | awk -F'04g' '{print \$NF}'"
+  local read_history="$source_histdb && histdb --desc --sep=04g | awk -F'04g' '{if (NR!=1) print \$NF}'"
   local selected=$(eval "$read_history" |
     $(__fzfcmd) \
     --tiebreak=index \
