@@ -25,7 +25,8 @@ enabled = true
 default = upstream
 
 [alias]
-graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+graph   = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+oneline = log --pretty=format:'%C(auto,yellow)%h%C(auto,magenta)%   %C(auto,blue)%>(17,trunc)%ad  %C(auto,green)%<(15,trunc)%aN%C(auto,reset)  %s%C(auto,red) %D'
 
 [diff]
 algorithm = histogram
@@ -57,3 +58,12 @@ date = auto:human
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
