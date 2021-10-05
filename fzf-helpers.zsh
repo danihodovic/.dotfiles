@@ -19,19 +19,24 @@ fi
 
 
 histdb-fzf-widget() {
-  local selected num
   setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
   local source_histdb='source $(fd sqlite-history.zsh ~/.cache/antibody)'
   local read_history="$source_histdb && histdb --desc --sep=04g | awk -F'04g' '{if (NR!=1) print \$NF}'"
+
   local selected=$(eval "$read_history" |
     $(__fzfcmd) \
     --tiebreak=index \
     --height=45% \
     --bind="ctrl-x:execute-silent(eval $source_histdb && histdb --forget --yes {})+reload(eval $read_history)" \
-    --bind=ctrl-z:ignore
+    --bind=ctrl-z:ignore \
+    --query=${LBUFFER} \
+    --no-multi
   )
-  LBUFFER=$selected
-  zle redisplay
+  if [ ! -z "$selected" ]; then
+    LBUFFER=$selected
+    zle redisplay
+  fi
+  zle reset-prompt
 }
 zle     -N   histdb-fzf-widget
 
