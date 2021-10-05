@@ -33,6 +33,9 @@ which pyenv > /dev/null 2>&1 && eval "$(pyenv init --path)"
 export EDITOR=nvim
 export PYTHONBREAKPOINT=pudb.set_trace
 
+# Kube
+export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
+
 # Ease of use
 export dotfiles=${HOME}/.dotfiles
 export plugged=${NVIM_DIR}/plugged
@@ -40,6 +43,7 @@ export vimrc=${HOME}/.dotfiles/roles/neovim/files/vimrc
 export zshrc=${HOME}/.dotfiles/zshrc
 
 # Ansible
+ANSIBLE_ENABLE_TASK_DEBUGGER=True
 export ANSIBLE_CACHE_PLUGIN=jsonfile
 export ANSIBLE_CACHE_PLUGIN_CONNECTION=/tmp/ansible-cache
 export ANSIBLE_INVENTORY_CACHE=True
@@ -366,3 +370,4 @@ function install_dht() {
 }
 
 export GOPATH="$HOME/repos/go_pkg"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
+export NODE_REPL_EXTERNAL_MODULE=$(which node-prototype-repl)
