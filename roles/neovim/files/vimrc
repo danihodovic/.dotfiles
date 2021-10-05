@@ -79,6 +79,7 @@ if s:has_plug == 1
   Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
   Plug 'direnv/direnv.vim'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'google/vim-jsonnet'
   call plug#end()
 end
 
@@ -617,6 +618,17 @@ let g:neomake_text_enabled_makers = ['writegood']
 let g:neomake_markdown_enabled_makers = ['markdownlint']
 let g:neomake_python_python_exe = 'python3'
 let g:neomake_python_enabled_makers = ['pylint', 'mypy', 'flake8']
+let g:neomake_jsonnet_jsonnetlint_maker = {
+    \ 'name': 'jsonnetlint',
+    \ 'exe': 'jsonnet-lint',
+    \ 'errorformat': '%m',
+    \ }
+let g:neomake_jsonnet_jsonnetfmt_maker = {
+    \ 'name': 'jsonnetfmt',
+    \ 'exe': 'jsonnetfmt',
+    \ 'args': ['--in-place'],
+    \ }
+let g:neomake_jsonnet_enabled_makers = ['jsonnetfmt']
 
 let g:neomake_typescript_enabled_makers = ['tsc', 'eslint']
 let g:neomake_typescript_tsx_enabled_makers = neomake_typescript_enabled_makers
