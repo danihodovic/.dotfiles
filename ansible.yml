@@ -243,6 +243,9 @@
     - import_role: name=kubectx
       tags: kubectx
 
+    - import_role: name=age
+      tags: age
+
     - name: Clone i3-contrib
       tags: i3blocks-contrib
       git:

@@ -1,0 +1,30 @@
+---
+- name: Fetch the zip file
+  shell: >-
+    fetch --repo
+    https://github.com/FiloSottile/age
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
+    --release-asset=".*linux.*amd64.tar.gz"
+    --tag={{ age_tag }}
+    --release-asset-checksum={{ age_checksum }}
+    --release-asset-checksum-algo=sha256
+    /tmp
+
+- name: Unarchive the file
+  unarchive:
+    src: "{{ lookup('fileglob', '/tmp/age*tar.gz', wantlist=True)[0] }}"
+    dest: /tmp/
+    remote_src: true
+
+- name: Copy binary files to bin
+  become: true
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    remote_src: false
+    mode: 0755
+  loop:
+    - src: /tmp/age/age
+      dest: /usr/local/bin/age
+    - src: /tmp/age/age-keygen
+      dest: /usr/local/bin/age-keygen
