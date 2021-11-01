@@ -62,6 +62,7 @@ if s:has_plug == 1
   Plug 'andymass/vim-matchup'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'vim-airline/vim-airline'
+  Plug 'github/copilot.vim'
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
