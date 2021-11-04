@@ -1,4 +1,10 @@
 ---
+- name: Install snap
+  become: true
+  community.general.snap:
+    name: kubectl
+    classic: true
+
 - name: Fetch the binary
   shell: >-
     fetch --repo https://github.com/ahmetb/kubectx
