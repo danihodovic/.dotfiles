@@ -1,5 +1,6 @@
 ---
 - name: Install imagemagick
+  become: true
   apt:
     name: imagemagick
     update_cache: true
