@@ -60,9 +60,11 @@
       tags: imagemagick
 
     - name: Install apt packages
+      tags: apt
       become: true
       apt:
         name:
+          - gnupg2
           - pinentry-curses
           - htop
           - zsh
