@@ -40,6 +40,8 @@
         GF_SERVER_HTTP_ENABLE_GZIP: 'true'
         GF_DATABASE_TYPE: 'sqlite3'
         GF_DATABASE_PATH: '/var/lib/grafana/grafana.sqlite3'
+        GF_AUTH_ANONYMOUS: 'true'
+        GF_AUTH_ANONYMOUS_org_name: 'local'
     grafana_data_sources: |
       apiVersion: 1
       datasources:
