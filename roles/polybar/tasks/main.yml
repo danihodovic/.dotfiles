@@ -1,0 +1,82 @@
+---
+- name: Clone the repo
+  git:
+    repo: https://github.com/polybar/polybar.git
+    dest: ~/repos/polybar
+    force: true
+    accept_hostkey: true
+
+- name: Install apt dependencies
+  become: true
+  apt:
+    name:
+      - build-essential
+      - git
+      - cmake
+      - cmake-data
+      - pkg-config
+      - python3-sphinx
+      - python3-packaging
+      - libuv1-dev
+      - libcairo2-dev
+      - libxcb1-dev
+      - libxcb-util0-dev
+      - libxcb-randr0-dev
+      - libxcb-composite0-dev
+      - python3-xcbgen
+      - xcb-proto
+      - libxcb-image0-dev
+      - libxcb-ewmh-dev
+      - libxcb-icccm4-dev
+      - libxcb-xkb-dev
+      - libxcb-xrm-dev
+      - libxcb-cursor-dev
+      - libasound2-dev
+      - libpulse-dev
+      - libjsoncpp-dev
+      - libmpdclient-dev
+      - libcurl4-openssl-dev
+      - libnl-genl-3-dev
+    update_cache: true
+
+- name: Create the build directory
+  file:
+    state: directory
+    path: ~/repos/polybar/build
+
+- name: Run cmake
+  shell: cmake ..
+  args:
+    chdir: ~/repos/polybar/build
+
+- name: Make
+  make:
+    chdir: ~/repos/polybar/build
+    params:
+      NUM_THREADS: 4
+
+- name: Make install
+  become: true
+  make:
+    chdir: /home/dani/repos/polybar/build
+    target: install
+
+- name: Create config dir
+  file:
+    state: directory
+    path: ~/.config/polybar
+
+- name: Symlink config file
+  file:
+    state: link
+    src: '{{ role_path }}/files/config.ini'
+    dest: ~/.config/polybar/config.ini
+    force: true
+
+- name: Clone polybar scripts
+  git:
+    repo: https://github.com/danihodovic/polybar-scripts.git
+    dest: ~/repos/polybar-scripts
+    force: true
+    version: custom
+    accept_hostkey: true

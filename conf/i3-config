@@ -114,27 +114,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-	# https://stackoverflow.com/questions/32596646/font-awesome-and-i3bar/32655343#32655343
-	position top
-	status_command SCRIPT_DIR=/home/dani/repos/i3blocks-contrib i3blocks
-
-	colors {
-		background #000000
-		statusline #ffffff
-		separator #666666
-
-		# class		   # border    # backgr.    # text
-		focused_workspace  #4c7899     #00ff00      #000000
-		active_workspace   #333333     #000000      #ffffff
-		inactive_workspace #333333     #222222      #888888
-		urgent_workspace   #2f343a     #900000      #ffffff
-		binding_mode       #2f343a     #900000      #ffffff
-	}
-}
-
 client.focused          #000000   #009900   #ffffff   #2e9ef4     #00ff00
 client.focused_inactive #000000   #003300   #ffffff   #484e50     #000000
 client.unfocused        #000000   #000000   #ffffff   #292d2e     #000000
@@ -156,6 +135,7 @@ for_window [class="^.*"] border pixel 2
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 # Sync x selection and primary (needs to be configured in the app indicator)
+exec_always --no-startup-id ~/.dotfiles/scripts/run-polybar.sh
 exec --no-startup-id parcellite
 exec --no-startup-id setxkbmap -option caps:swapescape -option compose:ralt
 exec --no-startup-id xautolock -time 3 -locker ~/.dotfiles/scripts/lock
