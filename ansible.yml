@@ -248,12 +248,9 @@
     - import_role: name=age
       tags: age
 
-    - name: Clone i3-contrib
-      tags: i3blocks-contrib
-      git:
-        repo: https://github.com/danihodovic/i3blocks-contrib.git
-        dest: ~/repos/i3blocks-contrib
-        version: productivity-colors
+    - name: Install tanka and jsonnet bundler
+      import_role: name=tanka
+      tags: tanka
 
     - name: Create symlink parent directories
       tags: symlinks

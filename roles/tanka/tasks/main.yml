@@ -1,0 +1,17 @@
+---
+# yamllint disable rule:line-length
+- name: Install tanka
+  become: true
+  get_url:
+    url: https://github.com/grafana/tanka/releases/latest/download/tk-linux-amd64
+    dest: /usr/local/bin/tk
+    mode: 0755
+    force: true
+
+- name: Install jsonnet bundler
+  become: true
+  get_url:
+    url: https://github.com/jsonnet-bundler/jsonnet-bundler/releases/latest/download/jb-linux-amd64
+    dest: /usr/local/bin/jb
+    mode: 0755
+    force: true
