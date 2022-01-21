@@ -1,0 +1,14 @@
+---
+customCommands:
+  - key: 'o'
+    command: 'dht git pull-request'
+    context: 'files'
+  - key: 'o'
+    command: 'dht git pull-request'
+    context: 'localBranches'
+  - key: 'O'
+    command: 'dht git pull-request --open-url'
+    context: 'files'
+  - key: 'O'
+    command: 'dht git pull-request --open-url'
+    context: 'localBranches'
