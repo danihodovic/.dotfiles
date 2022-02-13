@@ -127,8 +127,8 @@ bindkey -M vicmd '\-'   fzf-file-widget
 bindkey -M vicmd '^r' histdb-fzf-widget
 bindkey -M viins '^r' histdb-fzf-widget
 
-bindkey -M vicmd '^s'   fzf-ssh
-bindkey -M viins '^s'   fzf-ssh
+bindkey -M vicmd '^e'   fzf-ssh
+bindkey -M viins '^e'   fzf-ssh
 
 bindkey -M vicmd '^l'   fzf-docker-logs
 bindkey -M viins '^l'   fzf-docker-logs
