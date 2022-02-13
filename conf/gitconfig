@@ -4,7 +4,7 @@ name = Dani Hodovic
 
 [core]
 editor = nvim
-pager = delta --plus-color="#024700" --minus-color="#810000" --theme='Monokai Extended' --keep-plus-minus-markers
+pager = delta --plus-style="#024700" --minus-style="#810000" --syntax-theme='Monokai Extended' --keep-plus-minus-markers
 
 [interactive]
 diffFilter = delta --color-only
