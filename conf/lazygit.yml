@@ -1,14 +1,14 @@
 ---
 customCommands:
   - key: 'o'
-    command: 'dht git pull-request'
+    command: 'dht git pull-request --force-push'
     context: 'files'
   - key: 'o'
-    command: 'dht git pull-request'
+    command: 'dht git pull-request --force-push'
     context: 'localBranches'
   - key: 'O'
-    command: 'dht git pull-request --open-url'
+    command: 'dht git pull-request --open-url --force-push'
     context: 'files'
   - key: 'O'
-    command: 'dht git pull-request --open-url'
+    command: 'dht git pull-request --open-url --force-push'
     context: 'localBranches'
