@@ -935,6 +935,7 @@ let g:hardtime_maxcount = 7
 let g:hardtime_timeout = 4000
 let g:hardtime_ignore_quickfix = 1
 let g:hardtime_showmsg = 1
+let g:list_of_normal_keys = ["h", "j", "k", "l", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 augroup spec_ft
