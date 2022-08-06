@@ -86,7 +86,7 @@ fcommit() {
 }
 
 function fzf-taskwarrior {
-  matches_common="rc._forcecolor:on rc.defaultwidth:120 rc.detection:off rc.verbose=no"
+  matches_common="rc._forcecolor:on rc.defaultwidth:200 rc.detection:off rc.verbose=no"
   matches_few="task due.before:today+14d limit=30 $matches_common"
   matches_many="task due.before:today+365d limit=100 $matches_common"
   show_recent_cmd="ctrl-w:reload(task modified:today)+clear-query"
@@ -101,8 +101,6 @@ function fzf-taskwarrior {
     --bind="$show_more_cmd" \
     --expect=ctrl-e \
     --header-lines=2 --ansi --layout=reverse --border \
-    --preview 'task {1} rc._forcecolor:on' \
-    --preview-window=right:40%
   )
 
   if [[ "$(echo $selection | sed -n 1p)" == "ctrl-e" ]]; then
