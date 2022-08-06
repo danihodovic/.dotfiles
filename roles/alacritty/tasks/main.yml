@@ -9,3 +9,14 @@
   apt:
     name: alacritty
     update_cache: true
+
+- name: Create config dir
+  file:
+    state: directory
+    path: '{{ ansible_env.HOME}}/.config/alacritty'
+
+- name: Symlink config file
+  file:
+    state: link
+    src: '{{ role_path }}/files/alacritty.yml'
+    dest: '{{ ansible_env.HOME}}/.config/alacritty/alacritty.yml'
