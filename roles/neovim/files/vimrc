@@ -479,17 +479,20 @@ nmap <leader>re <Plug>(coc-rename)
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 let g:coc_global_extensions = [
+      \ 'coc-marketplace',
       \ 'coc-json',
       \ 'coc-yaml',
       \ 'coc-vimlsp',
       \ 'coc-highlight',
       \ 'coc-html',
+      \ 'coc-htmldjango',
       \ 'coc-css',
       \ 'coc-github',
       \ 'coc-ultisnips',
       \ 'coc-jedi',
       \ 'coc-pyright',
       \ 'coc-tsserver',
+      \ 'coc-tailwindcss',
       \ 'coc-word',
       \ 'coc-emoji',
       \ 'coc-pairs',
@@ -638,6 +641,13 @@ let g:neomake_jsonnet_jsonnetfmt_maker = {
     \ 'args': ['--in-place'],
     \ }
 let g:neomake_jsonnet_enabled_makers = ['jsonnetfmt']
+
+let g:neomake_htmldjango_jsbeautify_maker = {
+    \ 'name': 'jsbeautify',
+    \ 'exe': 'js-beautify',
+    \ 'args': ['-r', '--type html'],
+    \ }
+let g:neomake_htmldjango_enabled_makers = ['jsbeautify']
 
 let g:neomake_typescript_enabled_makers = ['tsc', 'eslint']
 let g:neomake_typescript_tsx_enabled_makers = neomake_typescript_enabled_makers
