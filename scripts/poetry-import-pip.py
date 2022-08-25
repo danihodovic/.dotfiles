@@ -8,14 +8,15 @@ from pathlib import Path
 import sys
 import argparse
 
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        'requirements_txt',
+        "requirements_txt",
         type=str,
-        help='Path to the requirements.txt file',
-        default='requirements.txt',
-        nargs='?'
+        help="Path to the requirements.txt file",
+        default="requirements.txt",
+        nargs="?",
     )
     args = parser.parse_args()
 
@@ -34,16 +35,21 @@ def main():
         requirements = f.read()
 
     noComments = re.sub("^#.*$", "", requirements, 0, re.IGNORECASE | re.MULTILINE)
-    bareRequirements = re.sub("\n+", "\n", noComments, 0, re.IGNORECASE | re.MULTILINE).strip()
+    bareRequirements = re.sub(
+        "\n+", "\n", noComments, 0, re.IGNORECASE | re.MULTILINE
+    ).strip()
 
-    pipPoetryMap = {
-        ">": "^",
-        "=": ""
-    }
+    pipPoetryMap = {">": "^", "=": ""}
 
     reqList = list()
     for line in bareRequirements.splitlines():
-        package, match, version = re.sub(r"^(.*?)\s*([~>=<])=\s*v?([0-9\.\*]+)", r"\1,\2,\3", line, 0, re.IGNORECASE | re.MULTILINE).split(",")
+        package, match, version = re.sub(
+            r"^(.*?)\s*([~>=<])=\s*v?([0-9\.\*]+)",
+            r"\1,\2,\3",
+            line,
+            0,
+            re.IGNORECASE | re.MULTILINE,
+        ).split(",")
         try:
             poetryMatch = pipPoetryMap[match]
         except KeyError:
@@ -56,7 +62,6 @@ def main():
 
     for req in reqList:
         os.system(f"poetry add {req}")
-
 
 
 if __name__ == "__main__":
