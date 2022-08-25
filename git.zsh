@@ -1,4 +1,4 @@
-alias gs='git status -sb'
+alias gs='echo'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gl='git log --decorate'
@@ -71,7 +71,7 @@ gdob () { git diff origin/$(_local_branch) $@ }
 compdef _git-diff gdob
 
 alias ci-status='hub ci-status'
-alias pr='dht git pull-request'
+# alias pr='dht git pull-request'
 alias squash='dht git autosquash'
 
 # Initiate _git which exposes the _git-* completions
