@@ -51,7 +51,6 @@ if s:has_plug == 1
   Plug 'rhysd/git-messenger.vim'
   Plug 'mzlogin/vim-markdown-toc'
   Plug 'junegunn/goyo.vim'
-  Plug 'brooth/far.vim'
   Plug 'glacambre/firenvim'
   Plug 'vim-test/vim-test'
   Plug 'camspiers/lens.vim'
