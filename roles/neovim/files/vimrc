@@ -943,7 +943,7 @@ augroup spec_ft
   autocmd BufNewFile,BufRead *.spec   set syntax=python
   autocmd BufNewFile,BufRead *.dat,*.ldg,*.ledger   setf ledger | comp ledger
 augroup END
-lua <<EOF
+
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
@@ -970,3 +970,12 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
+
+function! s:goyo_enter()
+  set noshowmode
+  set noshowcmd
+  set scrolloff=999
+  set nowrap
+endfunction
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+let g:goyo_width = 102
