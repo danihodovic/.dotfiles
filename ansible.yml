@@ -106,7 +106,6 @@
           - cloc
           - patchelf
           - hcloud-cli
-          - rclone
 
     - name: Install snap packages
       become: true
@@ -250,6 +249,9 @@
 
     - import_role: name=age
       tags: age
+
+    - import_role: name=rclone
+      tags: rclone
 
     - name: Install tanka and jsonnet bundler
       import_role: name=tanka

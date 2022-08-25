@@ -1,0 +1,15 @@
+---
+- name: Fetch the deb
+  shell: >-
+    fetch --repo
+    https://github.com/rclone/rclone
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
+    --release-asset=".*amd64.deb"
+    --tag={{ rclone_tag }} /tmp
+
+- name: Install the deb file
+  vars:
+    ansible_become: true
+  apt:
+    deb: '{{ item }}'
+  with_fileglob: "/tmp/rclone*.deb"
