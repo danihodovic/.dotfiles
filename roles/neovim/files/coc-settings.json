@@ -11,6 +11,7 @@
   "html.format.indentInnerHtml": true,
   "html.format.indentHandlebars": true,
   "coc.source.word.filetypes": ["markdown", "txt"],
+  "tailwindCSS.emmetCompletions": true,
   "yaml.format.enable": true,
   "yaml.format.singleQuote": true,
   "yaml.validate": false
