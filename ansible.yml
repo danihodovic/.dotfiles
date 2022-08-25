@@ -31,10 +31,6 @@
       import_role: name=git
       tags: git
 
-    - name: Install rclone
-      import_role: name=ansible-rclone
-      tags: rclone
-
     - name: Install gotask
       import_role: name=gotask
       tags: gotask
@@ -109,6 +105,16 @@
           - libjpeg8-dev  # required by python pillow
           - cloc
           - patchelf
+          - hcloud-cli
+          - rclone
+
+    - name: Install snap packages
+      become: true
+      tags: helm
+      community.general.snap:
+        name:
+          - helm
+        classic: true
 
     - name: Install system firmware
       tags: [firmware, system]
