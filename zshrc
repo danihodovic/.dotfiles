@@ -35,6 +35,7 @@ export PYTHONBREAKPOINT=pudb.set_trace
 
 # Kube
 export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
+export PATH="${PATH}:${HOME}/.krew/bin"
 
 # Ease of use
 export dotfiles=${HOME}/.dotfiles
