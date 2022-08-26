@@ -247,6 +247,9 @@
     - import_role: name=kubectx
       tags: kubectx
 
+    - import_role: name=k9s
+      tags: k9s
+
     - import_role: name=age
       tags: age
 

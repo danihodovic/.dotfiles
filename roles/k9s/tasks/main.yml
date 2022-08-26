@@ -1,0 +1,24 @@
+---
+- name: Fetch the binary
+  shell: >-
+    fetch --repo https://github.com/derailed/k9s
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
+    --release-asset=".*inux_x86.*"
+    --tag={{ k9s_tag }}
+    /tmp/
+
+- name: Unarchive
+  unarchive:
+    src: '{{ item }}'
+    dest: /tmp/
+    remote_src: true
+    list_files: true
+  with_fileglob: '/tmp/k9s*.tar.gz'
+
+- name: Move the binary
+  become: true
+  copy:
+    src: /tmp/k9s
+    dest: /usr/local/bin/
+    remote_src: true
+    mode: 0755
