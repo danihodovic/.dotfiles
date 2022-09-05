@@ -207,7 +207,7 @@ function tst {
   local output=$(task add $@)
   echo $output
   local task_uuid=$(echo $output | awk -F ' ' '{print $3}' | sed 's/\.//')
-  task start $task_uuid
+  /opt/tasktools/tasktools start $task_uuid
 }
 compdef _task tst
 
