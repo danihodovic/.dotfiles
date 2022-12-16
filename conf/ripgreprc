@@ -8,3 +8,10 @@ web:*.{html,css,js}*
 
 # Because who cares about case!?
 --smart-case
+
+# Glob ignores take precedence over everything else
+--glob=!**/.mypy_cache/*
+--glob=!**/*.pyi
+
+# This is a convenience alias for '--color always --heading --line-number'.
+--pretty
