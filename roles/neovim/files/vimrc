@@ -72,7 +72,6 @@ if s:has_plug == 1
   Plug 'bps/vim-textobj-python'
   Plug 'danihodovic/vim-ansible-vault'
   Plug 'b4b4r07/vim-hcl'
-  Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
   Plug 'ap/vim-css-color'
   Plug 'rhysd/vim-github-actions'
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
