@@ -514,38 +514,9 @@ function! s:show_documentation()
   endif
 endfunction
 
-function! Format()
-py3 <<EOF
-import vim
-import subprocess
-import os
-
-def run():
-  rc = subprocess.run("git rev-parse --is-inside-work-tree", shell=True).returncode
-  if rc != 0:
-    return
-
-  fname = vim.current.buffer.name
-  if "venv/src" in fname:
-    return
-
-  rc = subprocess.run(f"git ls-files --error-unmatch {fname}", shell=True).returncode
-  if rc != 0:
-    return
-
-  if os.getenv("VIM_DISABLE_AUTOFORMAT") == "true":
-    return
-
-  # vim.command("call CocAction('format')")
-  # vim.command("OR")
-run()
-
-EOF
-endfun
-
 augroup FormatFiles
     autocmd FileType python,json
-        \ autocmd! FormatFiles BufWritePost <buffer> call Format()
+        \ autocmd! FormatFiles BufWritePre <buffer> call CocAction('format')
 augroup END
 
 " Remap for rename current word
