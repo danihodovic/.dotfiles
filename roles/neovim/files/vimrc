@@ -392,7 +392,7 @@ endfu
 
 
 function! RipgrepFzf(query, fullscreen, search_hidden)
-  let command_fmt = 'RIPGREP_CONFIG_PATH=~/.ripgreprc rg --column --line-number --no-heading --color=always --smart-case '
+  let command_fmt = 'RIPGREP_CONFIG_PATH=~/.ripgreprc rg --no-heading --smart-case '
   if a:search_hidden
     let command_fmt = command_fmt . '-uu '
   end
