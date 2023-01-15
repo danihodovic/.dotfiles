@@ -4,13 +4,6 @@
   apt:
     name: xsel
 
-- name: Install pip deps
-  delegate_to: localhost
-  pip:
-    executable: /home/dani/.pyenv/shims/pip
-    name: [jmespath, neovim]
-    extra_args: --user
-
 - name: Create directories
   file:
     state: directory
@@ -20,30 +13,20 @@
     - '{{ ansible_env.HOME}}/.config/nvim'
     - '{{ vim_plug_path | dirname }}'
 
-- name: Get latest release
-  uri:
-    url: https://api.github.com/repos/neovim/neovim/releases/tags/nightly
-    timeout: 5
-  register: neovim_latest_release
-  changed_when: false
+- name: Fetch the binary
+  shell: >-
+    fetch
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
+    --repo https://github.com/neovim/neovim
+    --release-asset='nvim.appimage'
+    --tag {{ neovim_version }} /tmp/
 
-- name: Get download url
-  set_fact:
-    neovim_download_url: >
-      {{
-        neovim_latest_release.json.assets |
-        to_json | from_json |
-        json_query(
-          "[?contains(name, 'nvim.appimage')].browser_download_url | [0]"
-        )
-      }}
-
-- name: Download appimage
-  get_url:
-    url: '{{ neovim_download_url }}'
-    dest: '{{ neovim_dest }}'
-    mode: 0770
-    force: true
+- name: Move appimage to path
+  become: true
+  ansible.builtin.copy:
+    src: /tmp/nvim.appimage
+    dest: /usr/local/bin/nvim
+    mode: '0755'
 
 - name: Symlink config files
   include: ./copy_config.yml
