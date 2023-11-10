@@ -55,7 +55,6 @@ if s:has_plug == 1
   Plug 'github/copilot.vim'
   Plug 'stevearc/dressing.nvim'
   Plug 'brooth/far.vim'
-  Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
@@ -259,9 +258,6 @@ highlight SearchFlash guibg=red ctermfg=132 ctermbg=16
 "-----------------------------------------
 set textwidth=100
 set colorcolumn=100
-autocmd FileType html,htmldjango setlocal textwidth=0
-autocmd FileType gitcommit setlocal textwidth=72
-autocmd FileType gitcommit setlocal colorcolumn=72
 " Sets the colorcolumn only in active windows
 augroup BgHighlight
     autocmd!
@@ -280,26 +276,28 @@ autocmd BufNewFile,BufRead nginx.*.j2 set ft=nginx
 "-----------------------------------------
 " `nocindent smartindent` will allow us to omit semicolons and jump to the next line without auto indentation
 " for Javascript/Typescript
-autocmd FileType typescript,javascript,javascriptreact,typescriptreact,terraform,jinja2  setlocal  shiftwidth=2 tabstop=2 expandtab nocindent smartindent
 autocmd FileType coffee                 setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType css,scss,stylus        setlocal  shiftwidth=2 tabstop=2 expandtab
-autocmd FileType vim                    setlocal  shiftwidth=2 tabstop=2 expandtab
-autocmd FileType tex                    setlocal  shiftwidth=2 tabstop=2 expandtab
-autocmd FileType yaml,docker-compose    setlocal  shiftwidth=2 tabstop=2 expandtab
-autocmd FileType json                   setlocal  shiftwidth=2 tabstop=2 expandtab
-autocmd FileType snippets               setlocal  shiftwidth=2 tabstop=2 expandtab
-autocmd FileType jade                   setlocal  shiftwidth=2 tabstop=2 expandtab
-autocmd FileType html,htmldjango        setlocal  shiftwidth=2 tabstop=2 expandtab
-autocmd FileType python                 setlocal  shiftwidth=4 tabstop=4 expandtab
-autocmd FileType go                     setlocal  shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType erlang                 setlocal  shiftwidth=4 tabstop=4 noexpandtab
-autocmd FileType make                   setlocal  shiftwidth=4 tabstop=4 noexpandtab
-autocmd FileType sh,bash,zsh,readline,nginx,conf setlocal  shiftwidth=2 tabstop=2 expandtab nocindent smartindent
-autocmd FileType php                    setlocal  shiftwidth=4 tabstop=4 expandtab
-autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandtab
-autocmd FileType ruby                   setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType gitcommit              setlocal textwidth=72 colorcolumn=72
+autocmd FileType go                     setlocal  shiftwidth=4 tabstop=4 noexpandtab
+autocmd FileType html,htmldjango        setlocal  shiftwidth=2 tabstop=2 expandtab textwidth=0
+autocmd FileType jade                   setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType json                   setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType lua                    setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType make                   setlocal  shiftwidth=4 tabstop=4 noexpandtab
+autocmd FileType markdown               setlocal  shiftwidth=4 tabstop=4 expandtab
+autocmd FileType php                    setlocal  shiftwidth=4 tabstop=4 expandtab
+autocmd FileType python                 setlocal  shiftwidth=4 tabstop=4 expandtab
+autocmd FileType ruby                   setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType sh,bash,zsh,readline,nginx,conf setlocal  shiftwidth=2 tabstop=2 expandtab nocindent smartindent
+autocmd FileType snippets               setlocal  shiftwidth=2 tabstop=2 expandtab
 autocmd FileType sshconfig              setlocal  shiftwidth=4 tabstop=4 expandtab
+autocmd FileType tex                    setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType typescript,javascript,javascriptreact,typescriptreact,terraform,jinja2  setlocal  shiftwidth=2 tabstop=2 expandtab nocindent smartindent
+autocmd FileType vim                    setlocal  shiftwidth=2 tabstop=2 expandtab
+autocmd FileType yaml,docker-compose    setlocal  shiftwidth=2 tabstop=2 expandtab
+
 "-----------------------------------------
 " Plugin specific settings
 "-----------------------------------------
@@ -358,37 +356,6 @@ function! FzfGitChangedFilesFromMaster()
   \})
   call fzf#run(wrapped)
 endfunction
-
-command! -nargs=* Calls :call FindFunctionCalls(<q-args>)
-fu! FindFunctionCalls(query)
-  let fn_name = ''
-  if len(a:query) == ''
-    let fn_name = expand('<cword>')
-  else
-    let fn_name = a:query
-  endif
-
-  let str = printf('%s\s*\(.*', fn_name)
-  call fzf#vim#ag(str)
-endfu
-
-command! -nargs=* LogStatement :call LogStatementFind(<q-args>)
-fu! LogStatementFind(query)
-  let query = a:query
-  if len(query) == ''
-    let query = expand('<cword>')
-  end
-
-  let regex = printf('console.log\(''%s', query)
-  call fzf#vim#ag(regex)
-endfu
-
-command! FocusTest :call FocusTest()
-fu! FocusTest()
-  let regex = '(it\.only)|(describe\.only)|(it\(''=>)|(describe\(''=>)'
-  call fzf#vim#ag(regex)
-endfu
-
 
 function! RipgrepFzf(query, fullscreen, search_hidden)
   let command_fmt = 'RIPGREP_CONFIG_PATH=~/.ripgreprc rg --no-heading --smart-case '
