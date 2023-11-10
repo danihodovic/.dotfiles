@@ -13,13 +13,18 @@ if s:has_plug == 1
   " General plugins
   "-----------------------------------------
   set rtp+=~/.fzf
+  Plug 'AndrewRadev/tagalong.vim'               " Dynamically changes html tags
+  Plug 'FooSoft/vim-argwrap'                    " Collapse or expand arguments for a function
+  Plug 'SirVer/ultisnips'
   Plug 'airblade/vim-gitgutter'                 " Show changed git lines
   Plug 'airblade/vim-rooter'                    " Sets root directory to project (git) directory by default
-  Plug 'neomake/neomake'
+  Plug 'andymass/vim-matchup'                   " even better % 👊 navigate and highlight matching words
+  Plug 'brooth/far.vim'
   Plug 'danihodovic/vim-snippets'               " My own snippets
+  Plug 'easymotion/vim-easymotion'              " Better movement with f/t
   Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
   Plug 'flazz/vim-colorschemes'
-  Plug 'FooSoft/vim-argwrap'                    " Collapse or expand arguments for a function
+  Plug 'github/copilot.vim'
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-easy-align'                " Align code around arbitrary characters =,:
   Plug 'junegunn/vim-oblique'                   " Colors search result and sets nohlsearch on cursor move
@@ -27,56 +32,50 @@ if s:has_plug == 1
   Plug 'kana/vim-textobj-function'              " Add function based text objects
   Plug 'kana/vim-textobj-user'                  " Add additional text objects
   Plug 'kopischke/vim-fetch'                    " Open files at file:line:column
-  Plug 'easymotion/vim-easymotion'              " Better movement with f/t
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'luochen1990/rainbow'                    " Show diff level of parentheses in diff colors
   Plug 'lukas-reineke/indent-blankline.nvim'
-  Plug 'reedes/vim-wordy'                       " Linting for prose
-  Plug 'tomtom/tcomment_vim'
-  Plug 'SirVer/ultisnips'
-  Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
-  Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
+  Plug 'luochen1990/rainbow'                    " Show diff level of parentheses in diff colors
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'neomake/neomake'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'reconquest/vim-pythonx'                 " Allows for snippet aliasing
-  Plug 'AndrewRadev/tagalong.vim'               " Dynamically changes html tags
+  Plug 'reedes/vim-wordy'                       " Linting for prose
+  Plug 'rhysd/git-messenger.vim'                " Vim and Neovim plugin to reveal the commit messages under the cursor 
+  Plug 'sheerun/vim-polyglot'                   " A solid language pack for Vim. 
+  Plug 'stevearc/dressing.nvim'
+  Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
+  Plug 'takac/vim-hardtime'                     " Plugin to help you stop repeating the basic movement keys 
+  Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
+  Plug 'tomtom/tcomment_vim'
   Plug 'tpope/vim-abolish'                      " Change snake case to camelcase and vice versa
+  Plug 'tpope/vim-eunuch'                       " Unix helpers for vim
   Plug 'tpope/vim-fugitive'                     " Various git commands inside vim
   Plug 'tpope/vim-rhubarb'                      " Github commands for Fugitive
   Plug 'tpope/vim-surround'                     " Surround text with (){}<>
-  Plug 'tpope/vim-eunuch'                       " Unix helpers for vim
-  Plug 'wakatime/vim-wakatime'
-  Plug 'vitalk/vim-shebang'                     " Vim filetype detection by the she·bang line at file.
-  Plug 'rhysd/git-messenger.vim'                " Vim and Neovim plugin to reveal the commit messages under the cursor 
-  Plug 'sheerun/vim-polyglot'                   " A solid language pack for Vim. 
-  Plug 'ActivityWatch/aw-watcher-vim'
-  Plug 'takac/vim-hardtime'                     " Plugin to help you stop repeating the basic movement keys 
-  Plug 'andymass/vim-matchup'                   " even better % 👊 navigate and highlight matching words
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'vim-airline/vim-airline'                " lean & mean status/tabline for vim that's light as air 
-  Plug 'github/copilot.vim'
-  Plug 'stevearc/dressing.nvim'
-  Plug 'brooth/far.vim'
+  Plug 'vitalk/vim-shebang'                     " Vim filetype detection by the she·bang line at file.
+  Plug 'wakatime/vim-wakatime'
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
-  Plug 'ledger/vim-ledger'
-  Plug 'tweekmonster/django-plus.vim'
-  Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
-  Plug 'bps/vim-textobj-python'
-  Plug 'danihodovic/vim-ansible-vault'
-  Plug 'b4b4r07/vim-hcl'
-  Plug 'ap/vim-css-color'
-  Plug 'rhysd/vim-github-actions'
-  Plug 'rhysd/vim-grammarous'
-  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-  Plug 'mzlogin/vim-markdown-toc'
   Plug 'Ron89/thesaurus_query.vim'
-  Plug 'preservim/vim-pencil'
-  Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+  Plug 'amadeus/vim-mjml'
+  Plug 'ap/vim-css-color'
+  Plug 'b4b4r07/vim-hcl'
+  Plug 'bps/vim-textobj-python'
+  Plug 'chrisbra/csv.vim'
+  Plug 'danihodovic/vim-ansible-vault'
   Plug 'direnv/direnv.vim'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'google/vim-jsonnet'
-  Plug 'chrisbra/csv.vim'
-  Plug 'amadeus/vim-mjml'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+  Plug 'ledger/vim-ledger'
+  Plug 'mzlogin/vim-markdown-toc'
+  Plug 'preservim/vim-pencil'
+  Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+  Plug 'rhysd/vim-github-actions'
+  Plug 'rhysd/vim-grammarous'
+  Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
+  Plug 'tweekmonster/django-plus.vim'
   call plug#end()
 end
 
