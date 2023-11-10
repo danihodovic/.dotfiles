@@ -483,6 +483,9 @@ nmap <leader>rn <Plug>(coc-rename)
 " Remap for do codeAction of current line
 nmap <leader>ac  <Plug>(coc-codeaction)
 
+augroup SortPythonImports
+  autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports')
+augroup END
 " nnoremap <leader>or :call     CocAction('runCommand', 'editor.action.organizeImport')
 " command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
