@@ -26,7 +26,6 @@ if s:has_plug == 1
   Plug 'junegunn/vim-pseudocl'                  " Required by vim-oblique
   Plug 'kana/vim-textobj-function'              " Add function based text objects
   Plug 'kana/vim-textobj-user'                  " Add additional text objects
-  Plug 'gcmt/wildfire.vim'
   Plug 'kopischke/vim-fetch'                    " Open files at file:line:column
   Plug 'easymotion/vim-easymotion'              " Better movement with f/t
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -39,29 +38,24 @@ if s:has_plug == 1
   Plug 'tmhedberg/matchit'                      " Extended % matching for various languages
   Plug 'reconquest/vim-pythonx'                 " Allows for snippet aliasing
   Plug 'AndrewRadev/tagalong.vim'               " Dynamically changes html tags
-  Plug 'AndrewRadev/linediff.vim'
   Plug 'tpope/vim-abolish'                      " Change snake case to camelcase and vice versa
   Plug 'tpope/vim-fugitive'                     " Various git commands inside vim
   Plug 'tpope/vim-rhubarb'                      " Github commands for Fugitive
   Plug 'tpope/vim-surround'                     " Surround text with (){}<>
   Plug 'tpope/vim-eunuch'                       " Unix helpers for vim
-  Plug 'kamykn/spelunker.vim'
   Plug 'wakatime/vim-wakatime'
-  Plug 'vitalk/vim-shebang'
-  Plug 'rhysd/git-messenger.vim'
-  Plug 'mzlogin/vim-markdown-toc'
-  Plug 'junegunn/goyo.vim'
-  Plug 'glacambre/firenvim'
-  Plug 'vim-test/vim-test'
-  Plug 'camspiers/lens.vim'
-  Plug 'sheerun/vim-polyglot'
+  Plug 'vitalk/vim-shebang'                     " Vim filetype detection by the she·bang line at file.
+  Plug 'rhysd/git-messenger.vim'                " Vim and Neovim plugin to reveal the commit messages under the cursor 
+  Plug 'sheerun/vim-polyglot'                   " A solid language pack for Vim. 
   Plug 'ActivityWatch/aw-watcher-vim'
-  Plug 'takac/vim-hardtime'
-  Plug 'andymass/vim-matchup'
+  Plug 'takac/vim-hardtime'                     " Plugin to help you stop repeating the basic movement keys 
+  Plug 'andymass/vim-matchup'                   " even better % 👊 navigate and highlight matching words
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline'                " lean & mean status/tabline for vim that's light as air 
   Plug 'github/copilot.vim'
   Plug 'stevearc/dressing.nvim'
+  Plug 'brooth/far.vim'
+  Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }
   " -----------------------------------------
   " Lang specific
   " -----------------------------------------
@@ -74,12 +68,17 @@ if s:has_plug == 1
   Plug 'b4b4r07/vim-hcl'
   Plug 'ap/vim-css-color'
   Plug 'rhysd/vim-github-actions'
-  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+  Plug 'rhysd/vim-grammarous'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+  Plug 'mzlogin/vim-markdown-toc'
+  Plug 'Ron89/thesaurus_query.vim'
+  Plug 'preservim/vim-pencil'
   Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
   Plug 'direnv/direnv.vim'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'google/vim-jsonnet'
   Plug 'chrisbra/csv.vim'
+  Plug 'amadeus/vim-mjml'
   call plug#end()
 end
 
