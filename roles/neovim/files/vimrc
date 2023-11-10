@@ -476,10 +476,6 @@ function! s:show_documentation()
   endif
 endfunction
 
-augroup FormatFiles
-    autocmd FileType python,json
-        \ autocmd! FormatFiles BufWritePre <buffer> call CocAction('format')
-augroup END
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)

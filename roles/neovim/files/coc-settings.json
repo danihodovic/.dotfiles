@@ -1,4 +1,5 @@
 {
+  "coc.preferences.formatOnSaveFiletypes": ["python", "javascript", "typescript", "htmldjango", "html"],
   "coc.preferences.formatOnType": false,
   "coc.source.emoji.filetypes": ["markdown", "htmldjango", "html"],
   "coc.source.word.filetypes": ["markdown", "txt"],
@@ -9,9 +10,11 @@
   "jedi.markupKindPreferred": "plaintext",
   "pairs.disableLanguages": ["html", "htmldjango"],
   "pyright.inlayHints.enable": false,
+  "pyright.organizeimports.provider": "isort",
   "python.formatting.blackArgs": ["--diff", "--quiet", "--fast"],
   "python.formatting.provider": "black",
   "python.linting.enabled": false,
+  "python.linting.mypyEnabled": true,
   "suggest.snippetIndicator": "🔨",
   "tailwindCSS.emmetCompletions": true,
   "typescript.validate.enable": false,
