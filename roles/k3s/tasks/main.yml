@@ -1,0 +1,15 @@
+---
+- name: Fetch the binary
+  shell: >-
+    fetch
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
+    --repo https://github.com/k3s-io/k3s
+    --release-asset='k3s'
+    --tag {{ k3s_version }} /tmp/
+
+- name: Move binary to path
+  become: true
+  ansible.builtin.copy:
+    src: /tmp/k3s
+    dest: /usr/local/bin/k3s
+    mode: '0755'

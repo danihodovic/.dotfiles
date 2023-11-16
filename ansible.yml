@@ -264,6 +264,10 @@
       import_role: name=hcloud
       tags: hcloud
 
+    - name: Install k3s
+      import_role: name=k3s
+      tags: k3s
+
     - name: Create symlink parent directories
       tags: symlinks
       file:
