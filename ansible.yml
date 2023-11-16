@@ -260,6 +260,10 @@
       import_role: name=tanka
       tags: tanka
 
+    - name: Install hcloud
+      import_role: name=hcloud
+      tags: hcloud
+
     - name: Create symlink parent directories
       tags: symlinks
       file:

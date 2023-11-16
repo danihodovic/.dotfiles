@@ -1,0 +1,22 @@
+---
+- name: Fetch the binary
+  shell: >-
+    fetch
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
+    --repo https://github.com/hetznercloud/cli
+    --release-asset='hcloud-linux-amd64.tar.gz'
+    --tag {{ hcloud_version }} /tmp/
+
+
+- name: Unarchive the binary
+  unarchive:
+    src: /tmp/hcloud-linux-amd64.tar.gz
+    dest: /tmp/
+    remote_src: true
+
+- name: Move binary to path
+  become: true
+  ansible.builtin.copy:
+    src: /tmp/hcloud
+    dest: /usr/local/bin/hcloud
+    mode: '0755'
