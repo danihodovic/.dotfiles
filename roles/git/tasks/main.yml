@@ -2,6 +2,7 @@
 - name: Fetch the Delta deb pkg
   shell: >-
     fetch --repo https://github.com/dandavison/delta
+    --github-oauth-token={{ lookup("env", "GITHUB_TOKEN") }}
     --release-asset='git-delta_.*amd64.deb'
     --tag={{ delta_version }}
     /tmp/
