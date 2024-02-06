@@ -68,6 +68,7 @@ if s:has_plug == 1
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'google/vim-jsonnet'
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+  Plug 'laytan/tailwind-sorter.nvim', { 'do': 'cd formatter && npm i && npm run build' }
   Plug 'ledger/vim-ledger'
   Plug 'mzlogin/vim-markdown-toc'
   Plug 'preservim/vim-pencil'
@@ -892,6 +893,19 @@ EOF
 " brooth/far.vim
 "-----------------------------------------
 let g:far#enable_undo = 1
+
+"-----------------------------------------
+" laytan/tailwind-sorter.nvim
+"-----------------------------------------
+lua <<EOF
+  require('tailwind-sorter').setup({
+    on_save_enabled = true,
+    on_save_pattern = { '*.html', '*.js', '*.jsx', '*.tsx', '*.twig', '*.hbs', '*.php', '*.heex', '*.astro' },
+    node_path = 'node',
+  })
+EOF
+
+
 
 lua <<EOF
 local leap = require('leap')
