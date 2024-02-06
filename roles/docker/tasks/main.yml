@@ -5,3 +5,11 @@
     name: geerlingguy.docker
   vars:
     docker_users: ['{{ ansible_env.USER }}']
+
+- name: Copy daemon.json
+  become: true
+  copy:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+    remote_src: false
+    mode: 0400
