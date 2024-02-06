@@ -12,3 +12,16 @@
     ansible_become: true
   apt:
     deb: '/tmp/fd_{{ fd_tag }}_amd64.deb'
+
+- name: Create fd config dir
+  file:
+    state: directory
+    path: '{{ ansible_env.HOME }}/.config/fd'
+    recurse: true
+
+- name: Symlink fdignore
+  file:
+    state: link
+    src: '{{ role_path }}/files/fdignore'
+    dest: '{{ ansible_env.HOME }}/.config/fd/ignore'
+    force: true

@@ -1,0 +1,4 @@
+.mypy_cache/
+.git/
+__pycache__/
+*.pyi
