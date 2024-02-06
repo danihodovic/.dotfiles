@@ -21,7 +21,7 @@ if s:has_plug == 1
   Plug 'andymass/vim-matchup'                   " even better % 👊 navigate and highlight matching words
   Plug 'brooth/far.vim'
   Plug 'danihodovic/vim-snippets'               " My own snippets
-  Plug 'easymotion/vim-easymotion'              " Better movement with f/t
+  Plug 'ggandor/leap.nvim'
   Plug 'equalsraf/neovim-gui-shim'              " Shim for nvim-qt that adds commands such as Guifont
   Plug 'flazz/vim-colorschemes'
   Plug 'github/copilot.vim'
@@ -507,22 +507,6 @@ autocmd VimEnter * if exists(":NERDTree") | IndentGuidesEnable
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 "-----------------------------------------
-" EasyMotion
-"-----------------------------------------
-let g:EasyMotion_grouping = 1
-let g:EasyMotion_do_mapping = 0
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_do_shade = 1
-let g:EasyMotion_use_upper = 1
-map f <Plug>(easymotion-bd-fl)
-map t <Plug>(easymotion-bd-tl)
-" map \ <Plug>(easymotion-sn)
-map s <Plug>(easymotion-sn)
-" map l <Plug>(easymotion-lineforward)
-" map j <Plug>(easymotion-j)
-" map k <Plug>(easymotion-k)
-" map h <Plug>(easymotion-linebackward)
-"-----------------------------------------
 " EasyAlign
 "-----------------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -901,13 +885,19 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
 EOF
 
-function! s:goyo_enter()
-  set noshowmode
-  set noshowcmd
-  set scrolloff=999
-  set nowrap
-endfunction
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-let g:goyo_width = 102
+"-----------------------------------------
+" brooth/far.vim
+"-----------------------------------------
+let g:far#enable_undo = 1
+
+lua <<EOF
+local leap = require('leap')
+
+vim.keymap.set({'n', 'v'}, 's', function ()
+  require('leap').leap { target_windows = { vim.api.nvim_get_current_win() } }
+end)
+
+EOF
