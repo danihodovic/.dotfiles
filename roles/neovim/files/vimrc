@@ -530,52 +530,6 @@ command! Gdom Gdiff origin/master
 let g:tcomment_maps = 1
 let g:tcomment_opleader1 = "<Leader>"
 "-----------------------------------------
-" pear-tree
-"-----------------------------------------
-" Disable this as it conflicts with coc.nvim and ultisnips
-let g:pear_tree_map_special_keys = 0
-let g:pear_tree_smart_openers = 1
-let g:pear_tree_smart_closers = 1
-let g:pear_tree_smart_backspace = 1
-let g:pear_tree_timeout = 1
-let g:pear_tree_did_javascript_ftplugin = 1
-"-----------------------------------------
-" NERDTree
-"-----------------------------------------
-let NERDTreeShowHidden=1
-let NERDTreeIgnore = ['\.pyc$', '\.db$']
-noremap <F5> :NERDTreeToggle<CR>
-" Open nerdtree on start
-"autocmd vimenter * NERDTree
-" Open NERDTree on enter and use the non-nerdtree window
-" Go to previous (last accessed) window.
-"autocmd VimEnter * wincmd p
-" When exiting: Close nerdtree if its the only window left
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-" Close all open buffers on entering a window if the only
-" buffer that's left is the NERDTree buffer
-function! s:CloseIfOnlyNerdTreeLeft()
-  if exists("t:NERDTreeBufName")
-    if bufwinnr(t:NERDTreeBufName) != -1
-      if winnr("$") == 1
-        q
-      endif
-    endif
-  endif
-endfunction
-"-----------------------------------------
-" gcmt/wildfire.vim
-"-----------------------------------------
-let g:wildfire_objects = {
-    \ "*" : ["i'", 'i"', "i)", "i]", "i}"],
-    \ "html,xml" : ["at", "it"],
-\ }
-"-----------------------------------------
-let g:lua_complete_omni = 1
-let g:lua_complete_dynamic = 0
-"-----------------------------------------
-autocmd BufNewFile,BufRead *.tf set filetype=terraform
-let g:terraform_fmt_on_save=1
 "-----------------------------------------
 " juliosueiras/vim-terraform-completion
 "-----------------------------------------
