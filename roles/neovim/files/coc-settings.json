@@ -13,8 +13,15 @@
   "pyright.organizeimports.provider": "isort",
   "python.formatting.blackArgs": ["--diff", "--quiet", "--fast"],
   "python.formatting.provider": "black",
-  "python.linting.enabled": false,
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
   "python.linting.mypyEnabled": true,
+  "python.analysis.typeCheckingMode": "off",
+  "pyright.disableDiagnostics": true,
+  "diagnostic.showUnused": false,
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportGeneralTypeIssues": "none"
+  },
   "suggest.snippetIndicator": "🔨",
   "tailwindCSS.emmetCompletions": true,
   "typescript.validate.enable": false,

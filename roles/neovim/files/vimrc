@@ -477,19 +477,9 @@ function! s:show_documentation()
   endif
 endfunction
 
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
-
 augroup SortPythonImports
   autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports')
 augroup END
-" nnoremap <leader>or :call     CocAction('runCommand', 'editor.action.organizeImport')
-" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-" command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 "-----------------------------------------
 " FooSoft/vim-argwrap
 "-----------------------------------------
@@ -534,64 +524,6 @@ nmap <Leader>u <Plug>(GitGutterUndoHunk)
 " Fugitive
 "-----------------------------------------
 command! Gdom Gdiff origin/master
-"-----------------------------------------
-" Neomake
-"-----------------------------------------
-" Remove when https://github.com/neomake/neomake/issues/2108#issuecomment-429153406
-" is resolved.
-let g:neomake_dockerfile_hadolint_uses_stdin = 0
-let g:neomake_list_height = 8
-let g:neomake_open_list = 2
-
-let g:neomake_text_enabled_makers = ['writegood']
-let g:neomake_markdown_enabled_makers = ['markdownlint']
-let g:neomake_python_python_exe = 'python3'
-let g:neomake_python_enabled_makers = ['pylint', 'mypy', 'flake8']
-let g:neomake_jsonnet_jsonnetlint_maker = {
-    \ 'name': 'jsonnetlint',
-    \ 'exe': 'jsonnet-lint',
-    \ 'errorformat': '%m',
-    \ }
-let g:neomake_jsonnet_jsonnetfmt_maker = {
-    \ 'name': 'jsonnetfmt',
-    \ 'exe': 'jsonnetfmt',
-    \ 'args': ['--in-place'],
-    \ }
-let g:neomake_jsonnet_enabled_makers = ['jsonnetfmt']
-
-let g:neomake_htmldjango_jsbeautify_maker = {
-    \ 'name': 'jsbeautify',
-    \ 'exe': 'js-beautify',
-    \ 'args': ['-r', '--type html'],
-    \ }
-let g:neomake_htmldjango_enabled_makers = ['jsbeautify']
-
-let g:neomake_typescript_enabled_makers = ['tsc', 'eslint']
-let g:neomake_typescript_tsx_enabled_makers = neomake_typescript_enabled_makers
-let g:neomake_scss_enabled_makers = ['stylelint']
-let g:neomake_css_enabled_makers = neomake_scss_enabled_makers
-
-let g:neomake_pylint_exe = systemlist('which pylint')[0]
-let g:neomake_mypy_exe = systemlist('which mypy')[0]
-let g:neomake_eslint_exe = systemlist('git rev-parse --show-toplevel')[0].'/'.systemlist('which eslint')[0]
-let g:neomake_stylelint_exe = systemlist('which stylelint')[0]
-let g:neomake_stylelint_exe = systemlist('which stylelint')[0]
-
-let root_dir = finddir('.git/..')
-let gitignore = root_dir.'/.gitignore'
-let g:neomake_eslint_args = ['--fix', '--format=compact', '--ignore-path', gitignore]
-let g:neomake_stylelint_args = ['--fix', '--formatter=compact', '--ignore-path', gitignore]
-call neomake#configure#automake('w')
-" Refresh file after Neomake fixed our errors
-" https://github.com/neomake/neomake/issues/173#issuecomment-335530355
-augroup my_neomake_hooks
-  au!
-  autocmd User *.html NeomakeJobFinished :edit
-  autocmd User NeomakeJobFinished :checktime
-
-augroup END
-
-autocmd BufWritePre * if &ft == 'go' | exec 'GoImports' | endif
 "-----------------------------------------
 " Tcomment
 "-----------------------------------------
