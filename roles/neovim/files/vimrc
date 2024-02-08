@@ -800,4 +800,8 @@ vim.keymap.set({'n', 'v'}, 's', function ()
   require('leap').leap { target_windows = { vim.api.nvim_get_current_win() } }
 end)
 
+leap.opts.labels = 'sfnjklhodweimbuyvrgtaqpcxz/'
+leap.opts.safe_labels = {}
+leap.opts.max_phase_one_targets = 0
+
 EOF
