@@ -1,31 +1,43 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["python", "javascript", "typescript", "htmldjango", "html"],
+  "coc.preferences.formatOnSave": true,
   "coc.preferences.formatOnType": false,
-  "coc.source.emoji.filetypes": ["markdown", "htmldjango", "html"],
-  "coc.source.word.filetypes": ["markdown", "txt"],
-  "diagnostic.locationlist": false,
+  "coc.source.emoji.filetypes": [
+    "markdown",
+    "htmldjango",
+    "html"
+  ],
+  "coc.source.word.filetypes": [
+    "markdown",
+    "txt"
+  ],
+  "diagnostic.enableMessage": "always",
+  "diagnostic.locationlistUpdate": true,
+  "diagnostic.showUnused": false,
   "html.autoClosingTags": true,
   "html.format.indentHandlebars": true,
   "html.format.indentInnerHtml": true,
-  "jedi.markupKindPreferred": "plaintext",
-  "pairs.disableLanguages": ["html", "htmldjango"],
-  "pyright.inlayHints.enable": false,
-  "pyright.organizeimports.provider": "isort",
-  "python.formatting.blackArgs": ["--diff", "--quiet", "--fast"],
-  "python.formatting.provider": "black",
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.linting.mypyEnabled": true,
-  "python.analysis.typeCheckingMode": "off",
+  "pairs.disableLanguages": [
+    "html",
+    "htmldjango"
+  ],
   "pyright.disableDiagnostics": true,
-  "diagnostic.showUnused": false,
+  "pyright.organizeimports.provider": "isort",
   "python.analysis.diagnosticSeverityOverrides": {
     "reportGeneralTypeIssues": "none"
   },
+  "python.analysis.typeCheckingMode": "off",
+  "python.formatting.blackdHTTPHeaders": {
+    "X-Fast-Or-Safe": "fast"
+  },
+  "python.formatting.provider": "blackd",
+  "python.linting.enabled": true,
+  "python.linting.mypyEnabled": false,
+  "python.linting.pylintEnabled": true,
   "suggest.snippetIndicator": "🔨",
   "tailwindCSS.emmetCompletions": true,
   "typescript.validate.enable": false,
-  "yaml.format.enable": true,
-  "yaml.format.singleQuote": true,
+  "workspace.workspaceFolderFallbackCwd": false,
+  "yaml.format.enable": false,
+  "yaml.format.singleQuote": false,
   "yaml.validate": false
 }
