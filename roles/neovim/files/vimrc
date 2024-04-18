@@ -39,8 +39,7 @@ if s:has_plug == 1
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'reconquest/vim-pythonx'                 " Allows for snippet aliasing
   Plug 'reedes/vim-wordy'                       " Linting for prose
-  Plug 'rhysd/git-messenger.vim'                " Vim and Neovim plugin to reveal the commit messages under the cursor 
-  Plug 'sheerun/vim-polyglot'                   " A solid language pack for Vim. 
+  Plug 'rhysd/git-messenger.vim'                " Vim and Neovim plugin to reveal the commit messages under the cursor
   Plug 'stevearc/dressing.nvim'
   Plug 'sunaku/vim-hicterm'                     " Displays cterm colors
   Plug 'takac/vim-hardtime'                     " Plugin to help you stop repeating the basic movement keys 
