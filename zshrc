@@ -155,7 +155,7 @@ alias h="history"
 alias cd-="cd -"
 alias setxkbmapcaps="setxkbmap -option caps:swapescape68"
 alias o='xdg-open'
-alias hledger='hledger --strict'
+alias {hledger,hl}='hledger --strict --infer-costs --infer-equity --infer-market-prices'
 function v() {
   if [[ -z "$1" ]]; then
     nvim $(__fsel)
