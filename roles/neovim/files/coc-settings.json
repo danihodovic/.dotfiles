@@ -1,43 +1,88 @@
 {
-  "coc.preferences.formatOnSave": true,
-  "coc.preferences.formatOnType": false,
-  "coc.source.emoji.filetypes": [
+  "coc.preferences.formatOnSave":true,
+  "coc.preferences.formatOnType":false,
+  "coc.source.emoji.filetypes":[
     "markdown",
     "htmldjango",
     "html"
   ],
-  "coc.source.word.filetypes": [
+  "coc.source.word.filetypes":[
     "markdown",
     "txt"
   ],
-  "diagnostic.enableMessage": "always",
-  "diagnostic.locationlistUpdate": true,
-  "diagnostic.showUnused": false,
-  "html.autoClosingTags": true,
-  "html.format.indentHandlebars": true,
-  "html.format.indentInnerHtml": true,
-  "pairs.disableLanguages": [
+  "diagnostic.autoRefresh":true,
+  "diagnostic.enableHighlightLineNumber":false,
+  "diagnostic.locationlistUpdate":true,
+  "diagnostic.virtualText":true,
+  "diagnostic.virtualTextCurrentLineOnly":false,
+  "diagnostic.virtualTextPrefix":"✗ ",
+  "diagnostic.virtualTextWinCol":80,
+  "html.autoClosingTags":true,
+  "html.format.indentHandlebars":true,
+  "html.format.indentInnerHtml":true,
+  "htmldjango.djlint.addFormatterArgs":[
+    "--max-line-length",
+    "100"
+  ],
+  "htmldjango.formatting.provider":"djlint",
+  "inlayHint.enable":false,
+  "javascript.format.enable":false,
+  "json.format.enable":false,
+  "languageserver":{
+    "terraform":{
+      "command":"terraform-ls",
+      "args":[
+        "serve"
+      ],
+      "filetypes":[
+        "terraform",
+        "tf"
+      ],
+      "initializationOptions":{
+
+      },
+      "settings":{
+
+      }
+    },
+    "jsonnet":{
+      "command":"jsonnet-language-server",
+      "args":[
+        "-t"
+      ],
+      "rootPatterns":[
+        ".git/",
+        "jsonnetfile.json"
+      ],
+      "filetypes":[
+        "jsonnet",
+        "libsonnet"
+      ]
+    }
+  },
+  "pairs.disableLanguages":[
     "html",
     "htmldjango"
   ],
-  "pyright.disableDiagnostics": true,
-  "pyright.organizeimports.provider": "isort",
-  "python.analysis.diagnosticSeverityOverrides": {
-    "reportGeneralTypeIssues": "none"
+  "pyright.disableDiagnostics":true,
+  "pyright.organizeimports.provider":"isort",
+  "python.analysis.diagnosticSeverityOverrides":{
+    "reportGeneralTypeIssues":"none"
   },
-  "python.analysis.typeCheckingMode": "off",
-  "python.formatting.blackdHTTPHeaders": {
-    "X-Fast-Or-Safe": "fast"
+  "python.analysis.typeCheckingMode":"off",
+  "python.formatting.blackdHTTPHeaders":{
+    "X-Fast-Or-Safe":"fast"
   },
-  "python.formatting.provider": "blackd",
-  "python.linting.enabled": true,
-  "python.linting.mypyEnabled": false,
-  "python.linting.pylintEnabled": true,
-  "suggest.snippetIndicator": "🔨",
-  "tailwindCSS.emmetCompletions": true,
-  "typescript.validate.enable": false,
-  "workspace.workspaceFolderFallbackCwd": false,
-  "yaml.format.enable": false,
-  "yaml.format.singleQuote": false,
-  "yaml.validate": false
+  "python.formatting.provider":"blackd",
+  "python.linting.enabled":true,
+  "python.linting.mypyEnabled":false,
+  "python.linting.pylintEnabled":true,
+  "suggest.snippetIndicator":"🔨",
+  "tailwindCSS.emmetCompletions":true,
+  "typescript.format.enable":false,
+  "typescript.validate.enable":false,
+  "workspace.workspaceFolderFallbackCwd":false,
+  "yaml.format.enable":false,
+  "yaml.format.singleQuote":false,
+  "yaml.validate":false
 }
