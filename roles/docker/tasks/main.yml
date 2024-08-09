@@ -4,6 +4,10 @@
   import_role:
     name: geerlingguy.docker
   vars:
+    docker_packages:
+      # Get the package list from `apt-cache madison docker-ce | awk '{ print $3 }'`
+      - docker-ce=5:27.1.1-1~ubuntu.22.04~jammy
+      - docker-ce-cli=5:27.1.1-1~ubuntu.22.04~jammy
     docker_users: ['{{ ansible_env.USER }}']
 
 - name: Copy daemon.json
